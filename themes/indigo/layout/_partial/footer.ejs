@@ -1,0 +1,9 @@
+<footer class="footer">
+    <div class="bottom">
+        <p>
+            <%- partial('plugins/site-visit') %>
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span><%-config.title %> &copy; <%if (theme.since_year && theme.since_year < date(new Date(), 'YYYY')) {%><%- theme.since_year %> - <%}%><%- date(new Date(), 'YYYY') %></span>
+        </p>
+    </div>
+</footer>

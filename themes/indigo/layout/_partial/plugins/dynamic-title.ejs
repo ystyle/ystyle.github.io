@@ -1,0 +1,22 @@
+<% if (theme.title_change) { %>
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '<%- theme.title_change.leave %>';
+            clearTimeout(titleTime);
+        } else {
+            <% if (theme.title_change.normal) { %>
+            document.title = '<%- theme.title_change.normal %>';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },500);
+            <% } else { %>
+                document.title = OriginTitile;
+            <% } %>
+        }
+    });
+})();
+</script>
+<% } %>
