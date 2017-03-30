@@ -3,7 +3,7 @@ title: docker 1.12 的服务自动发现
 permalink: docker-1-12-de-fu-wu-zi-dong-fa-xian
 id: 37
 updated: '2016-09-03 23:12:03'
-date: 2016-08-16 02:26:07
+date: 2016-09-03 02:26:07
 tags: docker
 categories: 系统
 ---

@@ -3,7 +3,7 @@ title: Power designer生成建表语句的设置
 permalink: power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi
 id: 42
 updated: '2016-12-14 12:16:50'
-date: 2016-12-11 18:46:13
+date: 2016-12-12 18:46:13
 tags: 建模
 categories: 编程
 ---

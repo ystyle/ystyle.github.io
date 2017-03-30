@@ -6,7 +6,7 @@ categories: 系统
 permalink: openshiftbu-shu-ghost
 id: 4
 updated: '2016-09-09 10:41:04'
-date: 2015-06-18 07:45:20
+date: 2015-06-17 07:45:20
 ---
 
 ### 简介：
