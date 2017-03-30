@@ -7,7 +7,7 @@ tags:
 categories: 系统
 id: 47
 updated: '2017-02-28 19:27:08'
-date: 2017-02-24 15:14:13
+date: 2017-02-27 15:14:13
 ---
 
 >因为electron下载被墙的原因, electorn很难下载成功, electorn的react, redux的开发插件也装不上, 本文记录了解决这些问题时的方法

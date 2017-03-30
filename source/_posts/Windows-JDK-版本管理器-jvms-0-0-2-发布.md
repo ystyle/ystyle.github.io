@@ -7,7 +7,7 @@ categories: 系统
 permalink: windows-jdk-ban-ben-guan-li-qi-jvms-fa-bu
 id: 27
 updated: '2016-02-22 18:01:35'
-date: 2015-11-09 11:57:21
+date: 2015-12-03 11:57:21
 ---
 
 JDK Version Manager (JVMS) for Windows

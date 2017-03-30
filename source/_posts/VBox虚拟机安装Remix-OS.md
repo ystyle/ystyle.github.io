@@ -7,7 +7,7 @@ categories: 系统
 permalink: vboxxu-ni-ji-an-zhuang-remix-os
 id: 30
 updated: '2016-08-26 10:14:01'
-date: 2016-03-04 23:59:42
+date: 2016-03-25 23:59:42
 ---
 
 ## VBox虚拟机安装Remix OS

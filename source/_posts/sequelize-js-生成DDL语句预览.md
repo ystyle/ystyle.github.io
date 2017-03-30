@@ -3,7 +3,7 @@ title: sequelize.js 生成DDL语句预览
 permalink: sequelize-js-sheng-cheng-ddlyu-ju-yu-lan
 id: 41
 updated: '2016-11-30 17:29:45'
-date: 2016-11-27 14:26:26
+date: 2016-11-30 14:26:26
 tags:
   - Nodejs
   - sequelize

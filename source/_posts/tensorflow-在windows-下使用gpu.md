@@ -7,7 +7,7 @@ categories: 编程
 permalink: tensorflow-zai-windows-xia-shi-yong-gpu
 id: 45
 updated: '2017-02-19 10:52:26'
-date: 2017-01-03 04:49:17
+date: 2017-01-06 04:49:17
 ---
 
 ## tensorflow 在windows 下怎么使用gpu

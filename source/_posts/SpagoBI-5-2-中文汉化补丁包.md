@@ -7,7 +7,7 @@ categories: 系统
 permalink: spagobi-5-2-zhong-wen-yi-hua-bu-ding-bao
 id: 44
 updated: '2017-01-06 19:36:34'
-date: 2016-12-28 05:26:07
+date: 2015-01-05 05:26:07
 ---
 
 ### [SpagoBI 5.2 汉化补丁说明]

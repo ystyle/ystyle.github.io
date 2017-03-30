@@ -5,7 +5,7 @@ categories: 系统
 permalink: shi-yong-docker-1-12-da-jian-duo-zhu-ji-docker-swarmji-qun
 id: 34
 updated: '2016-09-01 20:47:15'
-date: 2016-07-03 07:03:32
+date: 2016-07-02 07:03:32
 ---
 
 ## 使用docker 1.12 搭建多主机docker swarm集群
