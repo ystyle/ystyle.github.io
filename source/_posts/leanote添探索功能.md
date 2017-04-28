@@ -1,5 +1,6 @@
 ---
-title: leanote添探索功能
+title: leanote-Add-the-search-function
+permalink: ParanoiaParanoia
 date: 2017-04-07 16:39:19
 tags:
   - golang
@@ -16,7 +17,7 @@ categories: 编程
 ```shell
 go get github.com/revel/cmd/revel
 go get github.com/ystyle/leanote/app
-mv $GOPATH/github.com/ystyle $GOPATH/github.com/leanote
+mv $GOPATH/src/github.com/ystyle $GOPATH/src/github.com/leanote
 ```
 >注:源码在`$GOPATH/src/github.com/leanote/leanote/`目录
 
