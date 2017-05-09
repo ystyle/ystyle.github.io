@@ -1,6 +1,6 @@
 ---
-title: leanote-Add-the-search-function
-permalink: ParanoiaParanoia
+title: leanote添探索功能
+permalink: leanote-Add-the-search-function
 date: 2017-04-07 16:39:19
 tags:
   - golang
