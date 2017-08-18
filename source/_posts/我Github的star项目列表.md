@@ -4,7 +4,7 @@ tags: github
 categories: 分享
 permalink: awesome-stars
 id: 38
-updated: '2016-09-14 22:35:05'
+updated: '2017-08-18 14:13:05'
 date: 2016-09-14 06:32:49
 ---
 
@@ -15,38 +15,57 @@ date: 2016-09-14 06:32:49
 
 ## Contents
 
+  - [Batchfile](#batchfile)
   - [C](#c)
   - [C++](#c++)
   - [CSS](#css)
+  - [CoffeeScript](#coffeescript)
   - [Go](#go)
   - [HTML](#html)
   - [Hack](#hack)
   - [Java](#java)
   - [JavaScript](#javascript)
+  - [Jupyter Notebook](#jupyter notebook)
   - [Makefile](#makefile)
+  - [Metal](#metal)
   - [Others](#others)
   - [PHP](#php)
+  - [Perl](#perl)
+  - [Protocol Buffer](#protocol buffer)
   - [Python](#python)
+  - [Ruby](#ruby)
   - [Scala](#scala)
   - [Shell](#shell)
+  - [TeX](#tex)
   - [TypeScript](#typescript)
+
+## Batchfile
+
+- [alwsl](https://github.com/alwsl/alwsl) - Install archlinux as the WSL (Windows Subsystem for Linux) host.
 
 ## C
 
+- [nuklear](https://github.com/golang-ui/nuklear) - This project provides Go bindings for nuklear.h — a small ANSI C GUI library.
+- [lab](https://github.com/deepmind/lab) - A customisable 3D platform for agent-based AI research
+- [redis-migrate-tool](https://github.com/vipshop/redis-migrate-tool) - A convenient and useful tool for migrating data between redis group.
+- [openpilot](https://github.com/commaai/openpilot) - open source driving agent
+- [robotjs](https://github.com/octalmage/robotjs) - Node.js Desktop Automation.
+- [seafile](https://github.com/haiwen/seafile) - File syncing and sharing software with file encryption and group sharing, emphasis on reliability and high performance.
 - [write-a-C-interpreter](https://github.com/lotabout/write-a-C-interpreter) - Write a simple interpreter of C. Inspired by c4 and largely based on it.
 - [react-native-code-push](https://github.com/Microsoft/react-native-code-push) - React Native module for CodePush
 - [flinux](https://github.com/wishstudio/flinux) - Foreign LINUX - Run unmodified Linux applications inside Windows.
 - [p2pvc](https://github.com/mofarrell/p2pvc) - A point to point color terminal video chat.
-- [remote-desktop-clients](https://github.com/iiordanov/remote-desktop-clients) - VNC, RDP, SPICE, and oVirt/RHEV/Proxmox Clients for Android and Blackberry 10
 - [duband](https://github.com/baiduwearable/duband) - duband1.0 对应的公版版本为 1.0
 
 ## C++
 
+- [anbox](https://github.com/anbox/anbox) - Anbox is a container-based approach to boot a full Android system on a regular GNU/Linux system
+- [Ray](https://github.com/zakki/Ray) - Computer Go Program. Download:https://github.com/zakki/Ray/releases
 - [tensorflow](https://github.com/tensorflow/tensorflow) - Computation using data flow graphs for scalable machine learning
 - [tfs](https://github.com/alibaba/tfs) - TFS (Taobao File System) is a distributed file system similar to GFS.
 - [electron](https://github.com/electron/electron) - Build cross platform desktop apps with JavaScript, HTML, and CSS
 - [notepad-plus-plus](https://github.com/notepad-plus-plus/notepad-plus-plus) - Notepad++ official repository
-- [nw.js](https://github.com/nwjs/nw.js) - Call all Node.js modules directly from DOM and enable a new way of writing applications with all Web technologies.
+- [nw.js](https://github.com/nwjs/nw.js) - Call all Node.js modules directly from DOM/WebWorker and enable a new way of writing applications with all Web technologies.
 
 ## CSS
 
@@ -55,25 +74,36 @@ date: 2016-09-14 06:32:49
 - [openshift-ghost-quickstart](https://github.com/openshift-quickstart/openshift-ghost-quickstart) - Ghost blog QuickStart for the OpenShift platform
 - [gso](https://github.com/lenbo-ma/gso) - 使用NodeJs编写的谷歌搜索代理程序. 此代码仅供学习，已停止更新，建议使用其他科学上网方案.
 
+## CoffeeScript
+
+- [Hubot-WeChat](https://github.com/KasperDeng/Hubot-WeChat) - This is weixin/wechat adapter for hubot.
+
 ## Go
 
-- [crane](https://github.com/Dataman-Cloud/crane) - Control plane based on docker built-in swarm
+- [dep](https://github.com/golang/dep) - Go dependency management tool
+- [excelize](https://github.com/360EntSecGroup-Skylar/excelize) - Golang library for reading and writing Microsoft Excel™ (XLSX) files.
+- [vice](https://github.com/matryer/vice) - Go channels at horizontal scale (powered by message queues)
+- [material](https://github.com/dskinner/material) - material design for gomobile [DISCONTINUED]
+- [ews](https://github.com/andlabs/ews) - quick and dirty Go package to send emails via Exchange using EWS instead of SMTP
+- [viper](https://github.com/spf13/viper) - Go configuration with fangs
+- [awesome-go](https://github.com/avelino/awesome-go) - A curated list of awesome Go frameworks, libraries and software
+- [color](https://github.com/fatih/color) - Color package for Go (golang)
+- [cli](https://github.com/urfave/cli) - A simple, fast, and fun package for building command line apps in Go
+- [gocrawl](https://github.com/PuerkitoBio/gocrawl) - Polite, slim and concurrent web crawler.
+- [ngrok](https://github.com/inconshreveable/ngrok) - Introspected tunnels to localhost
+- [rsrc](https://github.com/akavel/rsrc) - Tool for embedding binary resources in Go programs.
+- [harbor](https://github.com/vmware/harbor) - An enterprise-class container registry server based on Docker Distribution
+- [crane](https://github.com/Dataman-Cloud/crane) - Yet another control plane based on docker built-in swarmkit
 - [ui](https://github.com/andlabs/ui) - Platform-native GUI library for Go.
 - [gxui](https://github.com/google/gxui) - An experimental Go cross platform UI library.
 - [walk](https://github.com/lxn/walk) - A Windows GUI toolkit for the Go Programming Language
 - [goqt](https://github.com/visualfc/goqt) - Golang bindings to the Qt cross-platform application framework.
 - [etcd](https://github.com/coreos/etcd) - Distributed reliable key-value store for the most critical data of a distributed system
-- [gogs](https://github.com/gogits/gogs) - Gogs (Go Git Service) is a painless self-hosted Git service.
-- [go-rock-libraries-showcases](https://github.com/Unknwon/go-rock-libraries-showcases) - 《Go名库讲解》是一套针对 Google 出品的 Go 语言的第三方库进行评测讲解的集博客、示例与语音视频为一体的综合教程，适合完成学习完成《Go编程基础》教程的学习者。
-- [go-fundamental-programming](https://github.com/Unknwon/go-fundamental-programming) - 《Go编程基础》是一套针对 Google 出品的 Go 语言的视频语音教程，主要面向新手级别的学习者。
-- [go-web-foundation](https://github.com/Unknwon/go-web-foundation) - 《Go Web基础》是一套针对 Google 出品的 Go 语言的视频语音教程，主要面向完成《Go编程基础》教程后希望进一步了解有关 Go Web 开发的学习者。
-- [awesome-go](https://github.com/avelino/awesome-go) - A curated list of awesome Go frameworks, libraries and software
-- [qml](https://github.com/go-qml/qml) - QML support for the Go language
+- [gogs](https://github.com/gogits/gogs) - Gogs is a painless self-hosted Git service.
 
 ## HTML
 
-- [ChatBotCourse](https://github.com/warmheartli/ChatBotCourse) - 自己动手做聊天机器人教程
-- [dockerfiles](https://github.com/codenvy/dockerfiles) -
+- [dockerfiles](https://github.com/codenvy-legacy/dockerfiles) -
 - [walle-web](https://github.com/meolu/walle-web) - A Web Deployment Tool (web代码部署工具)
 - [welog](https://github.com/kevingzhang/welog) - Hands on project for Meteor 101 class
 - [TLCL](https://github.com/billie66/TLCL) - a mirror of The Linux Command Line and My chinese translation
@@ -84,35 +114,61 @@ date: 2016-09-14 06:32:49
 
 ## Java
 
-- [ua-parser](https://github.com/tobie/ua-parser) - A multi-language port of Browserscope's user agent parser.
+- [tensorflow-java](https://github.com/loretoparisi/tensorflow-java) - Tensorflow Java examples
+- [xxl-job](https://github.com/xuxueli/xxl-job) - A lightweight distributed task scheduling framework.（分布式任务调度平台XXL-JOB）
+- [cachecloud](https://github.com/sohutv/cachecloud) - 搜狐视频(sohu tv)Redis私有云平台
 - [uap-java](https://github.com/ua-parser/uap-java) - Java implementation of ua-parser
 - [hackerrank](https://github.com/charles-wangkai/hackerrank) - My HackerRank solutions
 - [ambrose](https://github.com/twitter/ambrose) - A platform for visualization and real-time monitoring of data workflows
 - [weixin-java-tools](https://github.com/chanjarster/weixin-java-tools) - 微信公众号、企业号Java SDK
 - [deeplearning4j](https://github.com/deeplearning4j/deeplearning4j) - Deep Learning for Java, Scala & Clojure on Hadoop & Spark With GPUs - From Skymind
 - [che](https://github.com/eclipse/che) - Eclipse Che: Next-generation Eclipse IDE.  Open source workspace server and cloud IDE.
+- [remote-desktop-clients](https://github.com/iiordanov/remote-desktop-clients) - VNC, RDP, SPICE, and oVirt/RHEV/Proxmox Clients for Android and Blackberry 10
 - [fastjson](https://github.com/alibaba/fastjson) - :bullettrain_side: A fast JSON parser/generator for Java
 
 ## JavaScript
 
-- [react-boilerplate](https://github.com/mxstbr/react-boilerplate) - :fire: A highly scalable, offline-first foundation with the best developer experience and a focus on performance and best practices.
+- [wekan](https://github.com/wekan/wekan) - The open-source Trello-like kanban (built with Meteor)
+- [elm-react-native](https://github.com/stoneWeb/elm-react-native) - A react native app simulating eleme app，run ios and android.
+- [exchange-web-service](https://github.com/vinaybedre/exchange-web-service) - Exchange Web Service APIs for NodeJS
+- [react-native-elements](https://github.com/react-native-training/react-native-elements) - Cross Platform React Native UI Toolkit
+- [element-react](https://github.com/eleme/element-react) - Element UI
+- [get-pixels](https://github.com/scijs/get-pixels) - Reads an image into an ndarray
+- [gitment](https://github.com/imsun/gitment) - A comment system based on GitHub Issues.
+- [store.js](https://github.com/marcuswestin/store.js) - Cross-browser storage for all use cases, used across the web.
+- [electron-react-boilerplate](https://github.com/chentsulin/electron-react-boilerplate) - Live editing development on desktop app
+- [vue-2.0-boilerplate](https://github.com/petervmeijgaard/vue-2.0-boilerplate) - Vue 2.0 boilerplate for developing medium to large single page applications.
+- [breakdance](https://github.com/breakdance/breakdance) - HTML to markdown converter. Highly pluggable, flexible and easy to use. It's time for your markup to get down.
+- [vuex-persistedstate](https://github.com/robinvdvleuten/vuex-persistedstate) - 💾 Persist Vuex state with localStorage.
+- [AriaNg](https://github.com/mayswind/AriaNg) - AriaNg, a modern web frontend making aria2 easier to use.
+- [node-bunyan](https://github.com/trentm/node-bunyan) - a simple and fast JSON logging module for node.js services
+- [testcafe](https://github.com/DevExpress/testcafe) - Automated browser testing for the modern web development stack.
+- [tesseract.js](https://github.com/naptha/tesseract.js) - Pure Javascript OCR for 62 Languages 📖🎉🖥
+- [swagger-ui](https://github.com/swagger-api/swagger-ui) - Swagger UI is a collection of HTML, Javascript, and CSS assets that dynamically generate beautiful documentation from a Swagger-compliant API.
+- [flv.js](https://github.com/Bilibili/flv.js) - HTML5 FLV Player
+- [hustoj](https://github.com/zhblue/hustoj) - HUSTOJ open source latest version
+- [webpack-vue-mui](https://github.com/littleseven007/webpack-vue-mui) - start
+- [LokiJS](https://github.com/techfort/LokiJS) - javascript embeddable / in-memory database
+- [riot-web](https://github.com/vector-im/riot-web) - A glossy Matrix collaboration client for the web.
+- [react-native-redux-zhihudaily](https://github.com/ZevenFang/react-native-redux-zhihudaily) - 使用react-native、redux、codepush重构的知乎日报客户端
+- [react-boilerplate](https://github.com/react-boilerplate/react-boilerplate) - :fire: A highly scalable, offline-first foundation with the best developer experience and a focus on performance and best practices.
 - [example-multipage](https://github.com/requirejs/example-multipage) - Example RequireJS-based project that has multiple pages that share a common set of modules.
 - [gifify](https://github.com/vvo/gifify) - 😻 Convert any video file to an optimized animated GIF.
 - [cobish.github.io](https://github.com/cobish/cobish.github.io) - cobish's blog
-- [docker-swarm-visualizer](https://github.com/ManoMarks/docker-swarm-visualizer) - A visualizer for Docker Swarm using the Docker Remote API, Node.JS, and D3
-- [reactSPA](https://github.com/JasonBai007/reactSPA) - 使用React、ES6、Fetch、Webpack、Ant Design等开发SPA【待续】
-- [validator.js](https://github.com/chriso/validator.js) - String validation and sanitization
+- [docker-swarm-visualizer](https://github.com/dockersamples/docker-swarm-visualizer) - A visualizer for Docker Swarm Mode using the Docker Remote API, Node.JS, and D3
+- [reactSPA](https://github.com/JasonBai007/reactSPA) - A Demo SPA developed with React, ES6, Webpack (2.x), and Antd (1.0.1) 【move to react-seed】
+- [validator.js](https://github.com/chriso/validator.js) - String validation
 - [bpmn](https://github.com/e2ebridge/bpmn) - BPMN 2.0 execution engine
 - [bpmn-js](https://github.com/bpmn-io/bpmn-js) - A BPMN 2.0 rendering toolkit and web modeler.
 - [connect-roles](https://github.com/ForbesLindesay/connect-roles) - Provides dynamic roles based authorisation for node.js connect and express servers.
 - [rbac](https://github.com/seeden/rbac) - Hierarchical Role Based Access Control for NodeJS
-- [redux-basic-example](https://github.com/luozhihao/redux-basic-example) - react+redux+react-router实例
+- [react-redux-demo](https://github.com/luozhihao/react-redux-demo) - react+redux+react-router实例
 - [react-starter-kit](https://github.com/bodyno/react-starter-kit) - 完美使用 React, Redux, and React-Router！最好用的脚手架
 - [redux-tutorial-cn](https://github.com/react-guide/redux-tutorial-cn) - Redux Tutorial 中文翻译
 - [normalizr](https://github.com/paularmstrong/normalizr) - Normalizes nested JSON according to a schema
-- [react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit) - Get started with React, Redux, and React-Router!
+- [react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit) - Get started with React, Redux, and React-Router.
 - [GhosToro](https://github.com/Torone/GhosToro) -
-- [ibird](https://github.com/yinfxs/ibird) - A General Background Solution
+- [ibird](https://github.com/yinfxs/ibird) - Node.js 全栈开发框架✨🚀✨
 - [fe-interview](https://github.com/leftstick/fe-interview) - Retro ansi terminal for front-end interview questions
 - [json-server](https://github.com/typicode/json-server) - Get a full fake REST API with zero coding in less than 30 seconds (seriously)
 - [react-antd-demo](https://github.com/luozhihao/react-antd-demo) - 基于react及antd的demo
@@ -120,8 +176,7 @@ date: 2016-09-14 06:32:49
 - [bootstrap-treeview](https://github.com/jonmiles/bootstrap-treeview) - Tree View for Twitter Bootstrap -
 - [PTHospital.chrome](https://github.com/hustcc/PTHospital.chrome) - :warning: :hospital: Chrome浏览器插件——打开莆田系医院网站，发出警告提醒、显示医院信息。
 - [shipyard](https://github.com/cncodog/shipyard) - Composable Docker Management
-- [p2pspider](https://github.com/dontcontactme/p2pspider) - DHT Spider + BitTorrent Client = P2P Spider
-- [tinycode](https://github.com/2293/tinycode) - Big data, Tiny code! 《小代码》电子期刊
+- [p2pspider](https://github.com/fanpei91/p2pspider) - DHT Spider + BitTorrent Client = P2P Spider
 - [meteor](https://github.com/meteor/meteor) - Meteor, the JavaScript App Platform
 - [redux-demo](https://github.com/JimLiu/redux-demo) - A redux demo
 - [jsoneditor](https://github.com/josdejong/jsoneditor) - A web-based tool to view, edit, format, and validate JSON
@@ -129,10 +184,10 @@ date: 2016-09-14 06:32:49
 - [markdown-plus](https://github.com/tylingsoft/markdown-plus) - Markdown editor with extra features.
 - [Hozz](https://github.com/ppoffice/Hozz) - A better way to manage your hosts.
 - [redis-sentinel-ui](https://github.com/youngsterxyf/redis-sentinel-ui) - 简易的Redis Sentinel集群UI
-- [request](https://github.com/request/request) - Simplified HTTP request client.
+- [request](https://github.com/request/request) - 🏊🏾 Simplified HTTP request client.
 - [superagent](https://github.com/visionmedia/superagent) - Ajax with less suck - (and node.js HTTP client to match)
 - [fetch](https://github.com/github/fetch) - A window.fetch JavaScript polyfill.
-- [electron-packager](https://github.com/electron-userland/electron-packager) - Package and distribute your Electron app with OS-specific bundles (.app, .exe etc) via JS or CLI
+- [electron-packager](https://github.com/electron-userland/electron-packager) - Customize and package your Electron app with OS-specific bundles (.app, .exe, etc.) via JS or CLI
 - [node-webkit-updater](https://github.com/edjafarov/node-webkit-updater) - node-webkit autoupdater
 - [blog](https://github.com/mhbseal/blog) - blog base on express,co,mongoose,react,redux,react-router...
 - [material-ui](https://github.com/callemall/material-ui) - React Components that Implement Google's Material Design.
@@ -143,11 +198,11 @@ date: 2016-09-14 06:32:49
 - [WebFrontEndStack](https://github.com/unruledboy/WebFrontEndStack) - web front end stack: browsers, platforms, libraries, frameworks, tools etc.
 - [avalon](https://github.com/RubyLouvre/avalon) - an elegant efficient express mvvm framework
 - [StarCraft](https://github.com/gloomyson/StarCraft) - HTML5 version of StarCraft game
-- [Ghost](https://github.com/TryGhost/Ghost) - Just a blogging platform
+- [Ghost](https://github.com/TryGhost/Ghost) - A simple, powerful publishing platform
 - [stomp-websocket](https://github.com/jmesnil/stomp-websocket) - Stomp client for Web browsers and node.js apps
 - [stackedit](https://github.com/benweet/stackedit) - In-browser markdown editor
 - [iz](https://github.com/parris/iz) - Basic validation regexs (and such) for javascript
-- [node-lessons](https://github.com/alsotang/node-lessons) - :closed_book:《Node.js 包教不包会》
+- [node-lessons](https://github.com/alsotang/node-lessons) - :closed_book:《Node.js 包教不包会》 by alsotang
 - [Microscope](https://github.com/DiscoverMeteor/Microscope) - The Discover Meteor book's example app.
 - [chromeos-apk](https://github.com/vladikoff/chromeos-apk) - ☢️  Run Android Apps in Chrome OS OR Chrome in OS X, Linux and Windows.
 - [echarts](https://github.com/ecomfe/echarts) - A powerful, interactive charting and visualization library for browser
@@ -156,12 +211,22 @@ date: 2016-09-14 06:32:49
 - [jsoneditor](https://github.com/silenceper/jsoneditor) - A web-based tool to view, edit and format JSON
 - [data.js](https://github.com/yanhaijing/data.js) - data.js 是带有消息通知的数据中心，我称其为会说话的数据。旨在让编程变得简单，世界变得美好。
 
+## Jupyter Notebook
+
+- [tensorflow_cookbook](https://github.com/nfmcclure/tensorflow_cookbook) - Code for Tensorflow Machine Learning Cookbook
+
 ## Makefile
 
 - [hadoop-book](https://github.com/tomwhite/hadoop-book) - Example source code accompanying O'Reilly's "Hadoop: The Definitive Guide" by Tom White
 
+## Metal
+
+- [makegirls.moe_web](https://github.com/makegirlsmoe/makegirls.moe_web) - Create Anime Characters with MakeGirls.moe
+
 ## Others
 
+- [lectures](https://github.com/oxford-cs-deepnlp-2017/lectures) - Oxford Deep NLP 2017 course
+- [gfwlist](https://github.com/gfwlist/gfwlist) - The one and only one gfwlist here
 - [egghead.io_redux_course_notes](https://github.com/tayiorbeii/egghead.io_redux_course_notes) - Notes (and partial transcription) of Dan Abramov's Redux course videos on http://egghead.io
 - [react-router-cn](https://github.com/react-guide/react-router-cn) - React Router 官方文档中文翻译
 - [Rss-IT](https://github.com/Gracker/Rss-IT) - 这个项目记录了个人订阅的一些科技人的Blog地址,欢迎大家推荐,一起来完善! 欢迎自荐......
@@ -178,16 +243,40 @@ date: 2016-09-14 06:32:49
 
 - [Tieba-Cloud-Sign](https://github.com/MoeNetwork/Tieba-Cloud-Sign) - 百度贴吧云签到，在服务器上配置好就无需进行任何操作便可以实现贴吧的全自动签到。配合插件使用还可实现云灌水、点赞、封禁、删帖、审查等功能  http://zhizhe8.net
 
+## Perl
+
+- [ua-parser](https://github.com/tobie/ua-parser) - A multi-language port of Browserscope's user agent parser.
+
+## Protocol Buffer
+
+- [s2client-proto](https://github.com/Blizzard/s2client-proto) - StarCraft II Client - protocol definitions used to communicate with StarCraft II.
+
 ## Python
 
+- [pysc2](https://github.com/deepmind/pysc2) - StarCraft II Learning Environment
+- [StarData](https://github.com/TorchCraft/StarData) - Starcraft AI Research Dataset
+- [universe](https://github.com/openai/universe) - Universe: a software platform for measuring and training an AI's general intelligence across the world's supply of games, websites and other applications.
+- [My-TensorFlow-tutorials](https://github.com/kevin28520/My-TensorFlow-tutorials) - This repo contains all of my TensorFlow tutorials
+- [bilibili_danmu](https://github.com/lyyyuna/bilibili_danmu) - B 站直播弹幕姬 Python 版
+- [BossSensor](https://github.com/Hironsan/BossSensor) - Hide screen when boss is approaching.
+- [XX-Net](https://github.com/XX-net/XX-Net) - a web proxy tool
+- [incubator-superset](https://github.com/apache/incubator-superset) - Apache Superset (incubating) is a modern, enterprise-ready business intelligence web application
+- [httpie](https://github.com/jakubroztocil/httpie) - Modern command line HTTP client – user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, etc.  https://httpie.org
+- [OnlineJudge](https://github.com/QingdaoU/OnlineJudge) - Open source online judge based on Python, Django and Docker. | 开源 Online Judge | 如果您在使用这个系统，请watch或者加入QQ群，这样可以收到最新的更新 | 2.0重构版正在开发
+- [ChatBotCourse](https://github.com/warmheartli/ChatBotCourse) - 自己动手做聊天机器人教程
 - [ansible-playbooks](https://github.com/adithyakhamithkar/ansible-playbooks) - Ansible playbook collection that have been written for Ubuntu. Some of the playbooks are Elasticsearch, Mesos, AWS, MySql, Sensu, Nginx etc..
-- [M-LOOP](https://github.com/michaelhush/M-LOOP) - Machine-learning online optimization package
+- [M-LOOP](https://github.com/michaelhush/M-LOOP) - M-LOOP: Machine-learning online optimization package
 - [huatian-funny](https://github.com/LiuRoy/huatian-funny) - 科学地分析自己的择偶观
 - [RocAlphaGo](https://github.com/Rochester-NRT/RocAlphaGo) - An independent, student-led replication of DeepMind's 2016 Nature publication, "Mastering the game of Go with deep neural networks and tree search" (Nature 529, 484-489, 28 Jan 2016), details of which can be found on their website https://deepmind.com/publications.html.
 - [flocker](https://github.com/ClusterHQ/flocker) - Container data volume manager for your Dockerized application
-- [FeelUOwn](https://github.com/cosven/FeelUOwn) - nothing but the alternate
+- [FeelUOwn](https://github.com/cosven/FeelUOwn) - trying to be a hackable music player
 - [shadowsocks](https://github.com/shadowsocks/shadowsocks) -
 - [bcloud](https://github.com/LiuLang/bcloud) - 百度网盘的linux桌面客户端
+
+## Ruby
+
+- [bugspots](https://github.com/igrigorik/bugspots) - Implementation of simple bug prediction hotspot heuristic
+- [Portus](https://github.com/SUSE/Portus) - Authorization service and frontend for Docker registry (v2)
 
 ## Scala
 
@@ -195,12 +284,18 @@ date: 2016-09-14 06:32:49
 
 ## Shell
 
+- [scripts](https://github.com/xdtianyu/scripts) - scripts for work
 - [droidReverse](https://github.com/Juude/droidReverse) - reverse engineering tools for android（android 逆向工程工具集）
 - [docker-oracle-xe-11g](https://github.com/wnameless/docker-oracle-xe-11g) - Dockerfile of Oracle Database Express Edition 11g Release 2
 
+## TeX
+
+- [deeplearningbook-chinese](https://github.com/exacity/deeplearningbook-chinese) - Deep Learning Book Chinese Translation
+
 ## TypeScript
 
-- [electron-builder](https://github.com/electron-userland/electron-builder) - Complete solution to package and deploy Electron apps
+- [deeplearnjs](https://github.com/PAIR-code/deeplearnjs) - A hardware-accelerated deep learning library for the web.
+- [electron-builder](https://github.com/electron-userland/electron-builder) - A complete solution to package and build a ready for distribution Electron app with “auto update” support out of the box
 
 
 ## License
