@@ -96,6 +96,7 @@ cnzz: false
 
 # 百度统计，如要开启，改为你的 key
 baidu_tongji: 10658703a526f24446a8cbedef8d287f
+baidu_push: true
 
 # 腾讯分析，如要开启，输入站点id
 tajs: false

@@ -16,3 +16,7 @@
 })();
 </script>
 <% } %>
+
+_.filter(list, function(o) {
+    return _.lowerCase(o.AIRPORT_ENAME).indexOf('airport')
+})
