@@ -89,364 +89,310 @@ output {
 ### 集成到java web项目
 以Jedis为例， 配置redis过程略
 
-- LogEvent日志对象
->toString 方法依赖了fastjson,为了在elk中的日志有结构，如果 没有使用fastjson的可以换成自己在使用的
+- log4j to redis Appender
+>依赖 Jedis, 为了从JedisPool取出连接
 
 ```java
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.annotation.JSONField;
 
-import java.io.Serializable;
-import java.util.Date;
+import org.apache.log4j.AppenderSkeleton;
+import org.apache.log4j.helpers.LogLog;
+import org.apache.log4j.spi.LoggingEvent;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
-public class LogEvent implements Serializable {
-    private long timeStamp; //时间戳
-    private String level;// 日志级别
-    private String threadName;// 线程名
-    private String className;// 类名
-    private String method;// 方法名
-    private String fileName;// 文件名
-    private Integer lineNumber;// 行号
-    private String title;// 标题
-    private String type;// 日志类型
-    private String message;// 消息
-    private Object params;// 参数
-    private String exception;//异常
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    private Date logTime;// 记录日志时间
+public class RedisAppender extends AppenderSkeleton{
+    private static final String DEFAULT_KEYTYPE = "channel";
+    private static final String DEFAULT_KEY = "logstash-log";
+    String host = "127.0.0.1";
+    int port = 6379;
+    String password;
+    String keyType = DEFAULT_KEYTYPE;
+    String key = DEFAULT_KEY;
+    int timeout = 2000;
 
-    public LogEvent() {
-    }
+    // 连接池设置
+    private long minEvictableIdleTimeMillis = 60000L;
+    private long timeBetweenEvictionRunsMillis = 30000L;
+    private int numTestsPerEvictionRun = -1;
+    private int maxTotal = 8;
+    private int maxIdle = 0;
+    private int minIdle = 0;
+    private boolean blockWhenExhaused = false;
+    private String evictionPolicyClassName;
+    private boolean lifo = false;
+    private boolean testOnBorrow = false;
+    private boolean testWhileIdle = false;
+    private boolean testOnReturn = false;
 
-    public long getTimeStamp() {
-        return timeStamp;
-    }
+    static private JedisPool jedisPool;
 
-    public void setTimeStamp(long timeStamp) {
-        this.timeStamp = timeStamp;
-    }
+    @Override
+    public void activateOptions() {
+        super.activateOptions();
+        JedisPoolConfig poolConfig = new JedisPoolConfig();
+        if (lifo) {
+            poolConfig.setLifo(lifo);
+        }
+        if (testOnBorrow) {
+            poolConfig.setTestOnBorrow(testOnBorrow);
+        }
+        if (testWhileIdle) {
+            poolConfig.setTestWhileIdle(testWhileIdle);
+        }
+        if (testOnReturn) {
+            poolConfig.setTestOnReturn(testOnReturn);
+        }
+        if (timeBetweenEvictionRunsMillis > 0) {
+            poolConfig.setTimeBetweenEvictionRunsMillis(timeBetweenEvictionRunsMillis);
+        }
+        if (evictionPolicyClassName != null && evictionPolicyClassName.length() > 0) {
+            poolConfig.setEvictionPolicyClassName(evictionPolicyClassName);
+        }
+        if (blockWhenExhaused) {
+            poolConfig.setBlockWhenExhausted(blockWhenExhaused);
+        }
+        if (minIdle > 0) {
+            poolConfig.setMinIdle(minIdle);
+        }
+        if (maxIdle > 0) {
+            poolConfig.setMaxIdle(maxIdle);
+        }
+        if (numTestsPerEvictionRun > 0) {
+            poolConfig.setNumTestsPerEvictionRun(numTestsPerEvictionRun);
+        }
+        if (maxTotal != 8) {
+            poolConfig.setMaxTotal(maxTotal);
+        }
+        if (minEvictableIdleTimeMillis > 0) {
+            poolConfig.setMinEvictableIdleTimeMillis(minEvictableIdleTimeMillis);
+        }
 
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public String getThreadName() {
-        return threadName;
-    }
-
-    public void setThreadName(String threadName) {
-        this.threadName = threadName;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
-    public String getMethod() {
-        return method;
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Object getParams() {
-        return params;
-    }
-
-    public void setParams(Object params) {
-        this.params = params;
+        if (password != null && password.length() > 0) {
+            jedisPool = new JedisPool(poolConfig, host, port, timeout, password);
+        } else {
+            jedisPool = new JedisPool(poolConfig, host, port, timeout);
+        }
+        // 配置连接实验
+        try {
+            Jedis jedis = jedisPool.getResource();
+            jedis.ping();
+        } catch (Exception e) {
+            LogLog.error("Redis is can not connected: " +  e.getMessage());
+        }
     }
 
     @Override
-    public String toString() {
-        return JSON.toJSONString(this);
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public Integer getLineNumber() {
-        return lineNumber;
-    }
-
-    public void setLineNumber(Integer lineNumber) {
-        this.lineNumber = lineNumber;
-    }
-
-    public String getException() {
-        return exception;
-    }
-
-    public void setException(String exception) {
-        this.exception = exception;
-    }
-
-    public Date getLogTime() {
-        return logTime;
-    }
-
-    public void setLogTime(Date logTime) {
-        this.logTime = logTime;
-    }
-}
-```
-
-- LogUtils日志工具类
->依赖 Spring core, 为了从JedisPool取出连接，可以用静态类，或单例工具类代替
-
-```java
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import redis.clients.jedis.Jedis;
-
-import java.util.Date;
-
-/**
- * 打印日志到ELK
- */
-public class LogUtils {
-
-    private static JedisPool jedisPool = SpringContextHolder.getBean(JedisPool.class);
-    private static int STACKINDEX = 4;
-    private static String LOGCHANNEL = "logstash-log";
-
-    /**
-     * 日志对象
-     */
-    private static Logger logger = LoggerFactory.getLogger(LogUtils.class);
-
-
-    private LogUtils() {
-    }
-
-    /**
-     * 记录日志
-     * @param level 日志级别
-     * @param title 标题
-     * @param message 消息
-     * @param params 参数
-     * @param exception 异常
-     */
-    private static void log(String level, String title, String message, Object params, Exception exception) {
-        StackTraceElement stack[] = Thread.currentThread().getStackTrace();
-        StackTraceElement stackTraceElement = stack[STACKINDEX];
-        LogEvent event = new LogEvent();
-        event.setTimeStamp(System.currentTimeMillis());
-        event.setLevel(level);
-        event.setThreadName(Thread.currentThread().getName());
-        event.setClassName(stackTraceElement.getClassName());
-        event.setMethod(stackTraceElement.getMethodName());
-        event.setFileName(stackTraceElement.getFileName());
-        event.setLineNumber(stackTraceElement.getLineNumber());
-        event.setTitle(title);
-        event.setMessage(message);
-        event.setParams(params);
-        event.setLogTime(new Date());
-        if (exception != null){
-            event.setException(Exceptions.getStackTraceAsString(exception));
-        }
-        publish(event);
-    }
-
-    private static void publish(LogEvent event){
-        Jedis resource = jedisPool.getResource();
+    protected void append(LoggingEvent event) {
+        Jedis resource = null;
         try {
-            resource.publish(LOGCHANNEL,event.toString());
-            logger.debug(event.toString());
-        } finally {
-            resource.close();
+            if (jedisPool == null){
+                return;
+            }
+            resource = jedisPool.getResource();
+            String format = getLayout().format(event);
+            if (DEFAULT_KEYTYPE.equals(keyType)){
+                resource.publish(key,format);
+            }else {
+                resource.lpush(key,format);
+            }
+        }catch (Exception e){
+
+        }finally {
+            if (resource != null){
+                resource.close();
+            }
         }
     }
 
-    /**
-     * 记录日志
-     * @param title 标题
-     * @param message 消息
-     * @param params 参数
-     * @param exception 异常
-     */
-    public static void debug(String title, String message, Object params, Exception exception) {
-        log("DEBUG", title, message, params, exception);
+    @Override
+    public void close() {
+        if (jedisPool!=null){
+            jedisPool.destroy();
+        }
     }
 
-    /**
-     * 记录日志
-     * @param message 消息
-     */
-    public static void debug(String message) {
-        log("DEBUG", null, message, null, null);
+    @Override
+    public boolean requiresLayout() {
+        return true;
     }
 
-    /**
-     * 记录日志
-     * @param title 标题
-     * @param message 消息
-     */
-    public static void debug(String title,String message) {
-        log("DEBUG", title, message, null, null);
+    public String getHost() {
+        return host;
     }
 
-    /**
-     * 记录日志
-     * @param message 消息
-     * @param exception 异常
-     */
-    public static void debug(String message, Exception exception) {
-        log("DEBUG", null, message, null, exception);
+    public void setHost(String host) {
+        this.host = host;
     }
 
-    /**
-     * 记录日志
-     * @param title 标题
-     * @param message 消息
-     * @param params 参数
-     * @param exception 异常
-     */
-    public static void info(String title, String message, Object params, Exception exception) {
-        log("INFO", title, message, params, exception);
+    public int getPort() {
+        return port;
     }
 
-    /**
-     * 记录日志
-     * @param message 消息
-     */
-    public static void info(String message) {
-        log("INFO", null, message, null, null);
+    public void setPort(int port) {
+        this.port = port;
     }
 
-    /**
-     * 记录日志
-     * @param title 标题
-     * @param message 消息
-     */
-    public static void info(String title,String message) {
-        log("INFO", title, message, null, null);
+    public String getPassword() {
+        return password;
     }
 
-    public static void info(String message, Exception exception) {
-        log("INFO", null, message, null, exception);
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    /**
-     * 记录日志
-     * @param title 标题
-     * @param message 消息
-     * @param params 参数
-     * @param exception 异常
-     */
-    public static void warn(String title, String message, Object params, Exception exception) {
-        log("WARN", title, message, params, exception);
+    public String getKeyType() {
+        return keyType;
     }
 
-    /**
-     * 记录日志
-     * @param message 消息
-     */
-    public static void warn(String message) {
-        log("WARN", null, message, null, null);
+    public void setKeyType(String keyType) {
+        this.keyType = keyType;
     }
 
-    /**
-     * 记录日志
-     * @param title 标题
-     * @param message 消息
-     */
-    public static void warn(String title,String message) {
-        log("WARN", title, message, null, null);
+    public String getKey() {
+        return key;
     }
 
-    /**
-     * 记录日志
-     * @param message 消息
-     * @param exception 异常
-     */
-    public static void warn(String message, Exception exception) {
-        log("WARN", null, message, null, exception);
+    public void setKey(String key) {
+        this.key = key;
     }
 
-    /**
-     * 记录日志
-     * @param title 标题
-     * @param message 消息
-     * @param params 参数
-     * @param exception 异常
-     */
-    public static void error(String title, String message, Object params, Exception exception) {
-        log("ERROR", title, message, params, exception);
+    public int getTimeout() {
+        return timeout;
     }
 
-    /**
-     * 记录日志
-     * @param message 消息
-     */
-    public static void error(String message) {
-        log("ERROR", null, message, null, null);
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
     }
 
-    /**
-     * 记录日志
-     * @param title 标题
-     * @param message 消息
-     */
-    public static void error(String title,String message) {
-        log("ERROR", title, message, null, null);
+    public long getMinEvictableIdleTimeMillis() {
+        return minEvictableIdleTimeMillis;
     }
 
-    /**
-     * 记录日志
-     * @param message 消息
-     * @param exception 异常
-     */
-    public static void error(String message, Exception exception) {
-        log("ERROR", null, message, null, exception);
+    public void setMinEvictableIdleTimeMillis(long minEvictableIdleTimeMillis) {
+        this.minEvictableIdleTimeMillis = minEvictableIdleTimeMillis;
+    }
+
+    public long getTimeBetweenEvictionRunsMillis() {
+        return timeBetweenEvictionRunsMillis;
+    }
+
+    public void setTimeBetweenEvictionRunsMillis(long timeBetweenEvictionRunsMillis) {
+        this.timeBetweenEvictionRunsMillis = timeBetweenEvictionRunsMillis;
+    }
+
+    public int getNumTestsPerEvictionRun() {
+        return numTestsPerEvictionRun;
+    }
+
+    public void setNumTestsPerEvictionRun(int numTestsPerEvictionRun) {
+        this.numTestsPerEvictionRun = numTestsPerEvictionRun;
+    }
+
+    public int getMaxTotal() {
+        return maxTotal;
+    }
+
+    public void setMaxTotal(int maxTotal) {
+        this.maxTotal = maxTotal;
+    }
+
+    public int getMaxIdle() {
+        return maxIdle;
+    }
+
+    public void setMaxIdle(int maxIdle) {
+        this.maxIdle = maxIdle;
+    }
+
+    public int getMinIdle() {
+        return minIdle;
+    }
+
+    public void setMinIdle(int minIdle) {
+        this.minIdle = minIdle;
+    }
+
+    public boolean isBlockWhenExhaused() {
+        return blockWhenExhaused;
+    }
+
+    public void setBlockWhenExhaused(boolean blockWhenExhaused) {
+        this.blockWhenExhaused = blockWhenExhaused;
+    }
+
+    public String getEvictionPolicyClassName() {
+        return evictionPolicyClassName;
+    }
+
+    public void setEvictionPolicyClassName(String evictionPolicyClassName) {
+        this.evictionPolicyClassName = evictionPolicyClassName;
+    }
+
+    public boolean isLifo() {
+        return lifo;
+    }
+
+    public void setLifo(boolean lifo) {
+        this.lifo = lifo;
+    }
+
+    public boolean isTestOnBorrow() {
+        return testOnBorrow;
+    }
+
+    public void setTestOnBorrow(boolean testOnBorrow) {
+        this.testOnBorrow = testOnBorrow;
+    }
+
+    public boolean isTestWhileIdle() {
+        return testWhileIdle;
+    }
+
+    public void setTestWhileIdle(boolean testWhileIdle) {
+        this.testWhileIdle = testWhileIdle;
+    }
+
+    public boolean isTestOnReturn() {
+        return testOnReturn;
+    }
+
+    public void setTestOnReturn(boolean testOnReturn) {
+        this.testOnReturn = testOnReturn;
     }
 }
-
 ```
 
 - 使用方法
 
+```properties
+# 在log4j.rootLogger添加logstash
+log4j.rootLogger=WARN, Console, RollingFile, logstash
+
+# log4j to redis 配置
+log4j.appender.logstash=RedisAppender #上面RedisAppender的类名
+log4j.appender.logstash.host=127.0.0.1
+log4j.appender.logstash.port=6379
+log4j.appender.logstash.password=123456
+log4j.appender.logstash.keyType=channel #支持 channe与list
+log4j.appender.logstash.key=logstash-log
+log4j.appender.logstash.layout=net.logstash.log4j.JSONEventLayoutV1
+log4j.appender.logstash.layout.locationInfo=true
+```
+
+- 官方的json layout, 在pom文件添加以下内容
+```xml
+<dependency>
+    <groupId>net.logstash.log4j</groupId>
+    <artifactId>jsonevent-layout</artifactId>
+    <version>1.7</version>
+</dependency>
+```
+
 ```java
-LogUtils.debug("用户模块","查询异常");
-LogUtils.error("用户模块","查询异常",flightSyncLog,new Exception("查询SQL语法错误"));
+Logger logger = LoggerFactory.getLogger(getClass());
+MDC.put("title","用户验证模块"); // 让后续log带上入口信息，详情百度搜索 log4j mdc
+logger.debug("用户名验证失败！");
 ```
 
 ### 预览结果
