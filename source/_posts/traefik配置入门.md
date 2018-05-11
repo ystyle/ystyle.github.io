@@ -46,7 +46,7 @@ readOnly = true
 [web.auth.basic]
 users = ["test:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/"] #test/test 登陆名/密码 可用openssl生成
 
-# 使用文件盏方式
+# 使用文件方式
 [file]
 directory = "/etc/traefik/rules" # 在指定目录查找配置文件
 watch = true
