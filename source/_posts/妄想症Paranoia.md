@@ -14,10 +14,12 @@ categories: 音乐
 ### 简介
 >"我所描绘的一切或许并非真实，然而我的感受绝无虚假。"当妄想变成了现实，关于记忆与执着的狂想曲就此拉开帷幕。
 
-### 剧情设定及小说
-- [妄想症Paranoia](https://www.iqing.in/book/24846/)
+### 剧情设定及小说、游戏
+- [妄想症Paranoia - 小说](https://www.iqing.in/book/24846/)
+- [妄想症：Deliver Me - 游戏](https://store.steampowered.com/app/779640/?snr=1_wishlist_4__wishlist-capsule) 、 [预售](http://m.tb.cn/h.32IVCwF)
 
 ### 专辑与PV
+- [专辑购买](http://t.cn/RCUkCoj)
 - [专辑PV](http://space.bilibili.com/358606/#!/channel/detail?cid=3289)
 - [专辑歌单](http://music.163.com/#/m/album?id=3411281)
 

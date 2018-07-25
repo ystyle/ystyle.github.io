@@ -1,5 +1,5 @@
 ---
-title: "手工申请Let's Encrypt 证书"
+title: "手工申请Let&#180;s Encrypt 证书"
 date: 2018-05-11 11:30:48
 tags:
 - ssl
@@ -74,4 +74,4 @@ s.serve_forever()"
 返回之前的窗口按回车，如果证书成功创建，会出现下面的提示：
  - Congratulations! Your certificate and chain have been saved at ...
 
-然后在`/etc/letsencrypt/archive/`目录就能看到申请域名的证书了， 查看把[privkey.pem转成pkcs1格式](./Lets-Encrypt-convert-to-pkcs1)
+然后在`/etc/letsencrypt/archive/`目录就能看到申请域名的证书了， 查看把[privkey.pem转成pkcs1格式](/2018/05/11/Lets-Encrypt-convert-to-pkcs1/)
