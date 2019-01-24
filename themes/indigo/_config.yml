@@ -116,8 +116,8 @@ less:
 disqus_shortname: false
 # 是否开启友言评论, 填写友言用户id
 uyan_uid: false
-# 是否使用 gitment，https://github.com/imsun/gitment
-gitment:
+# 是否使用 gitalk://github.com/gitalk/gitalk
+gitalk:
   owner: ystyle
   repo: ystyle.github.io
   client_id: 1f887c79a8b9b9fbec12
