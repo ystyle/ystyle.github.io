@@ -22,7 +22,7 @@ date: 2017-01-06 04:49:17
 ### 安装 Visual C++ 2015 64 bit
 [下载地址](https://www.microsoft.com/zh-cn/download/details.aspx?id=48145)
 点页面中间的下载， 然后选择64位
-![下载Visual C++ 2015](http://osloqpukl.bkt.clouddn.com/201717161118-r.png)
+![下载Visual C++ 2015](https://dl.ystyle.top/qiniu//201717161118-r.png)
 下载后双击安装就好了
 
 ### 安装tensorflow-gpu
@@ -41,7 +41,7 @@ pip install tensorflow-gpu
 ### 安装cuDNN
 - [cuDNN下载地址](https://developer.nvidia.com/cudnn) 点页面中间的`Download`按钮 然后登陆后点击`I Agree To the Terms of the cuDNN Software License Agreement`就能下载了
 
-![cuDNN](http://osloqpukl.bkt.clouddn.com/201717271824-W.png)
+![cuDNN](https://dl.ystyle.top/qiniu//201717271824-W.png)
 
 - 解压
 

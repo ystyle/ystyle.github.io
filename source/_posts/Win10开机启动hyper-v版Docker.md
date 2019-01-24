@@ -21,10 +21,10 @@ permalink: Win10-auto-start-hyper-v-version-of-Docker
   - 选择开始菜单的局势方式也行` "C:\ProgramData\Microsoft\Windows\Start Menu\Docker for Windows.lnk" ` 引号也要复制
 
 ### 详细步骤图
-![](http://osloqpukl.bkt.clouddn.com/20180123/0946-u.png)
+![](https://dl.ystyle.top/qiniu//20180123/0946-u.png)
 
-![](http://osloqpukl.bkt.clouddn.com/20180123/0947-b.png)
+![](https://dl.ystyle.top/qiniu//20180123/0947-b.png)
 
-![](http://osloqpukl.bkt.clouddn.com/20180123/0947-x.png)
+![](https://dl.ystyle.top/qiniu//20180123/0947-x.png)
 
-![](http://osloqpukl.bkt.clouddn.com/20180123/0948-Y.png)
+![](https://dl.ystyle.top/qiniu//20180123/0948-Y.png)

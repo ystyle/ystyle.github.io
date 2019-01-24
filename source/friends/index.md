@@ -12,14 +12,6 @@ comments: false
 
 - [FindSpace](http://www.findspace.name/)
 
-- [冯尧的博客](http://yaoel.com/)
-
-- [Daniel Yin|博客](http://www.yinfxs.com/)
-
 - [遥遥工作室](http://yygzs.org)
-
-- [RainyNight](http://blog.rainynight.top/)
-
-- [Yanhao's Blog](http://www.yanhao.site/)
 
 <style>.post-content a{font-size: 1.5rem;}</style>

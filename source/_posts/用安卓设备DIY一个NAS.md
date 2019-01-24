@@ -68,11 +68,11 @@ permalink: diy-a-nas-with-android-device
 
   - 执行 `screenfetch`打印系统信息
 
-  ![](http://osloqpukl.bkt.clouddn.com/201717300131-3.png)
+  ![](https://dl.ystyle.top/qiniu//201717300131-3.png)
 
 - 用htop查看系统负载信息
 
-  ![](http://osloqpukl.bkt.clouddn.com/201717300130-p.png)
+  ![](https://dl.ystyle.top/qiniu//201717300130-p.png)
 
 - 配置aria2 下载器
 ```shell
