@@ -31,7 +31,7 @@ docker-machine.exe create -d virtualbox swarm-node2
 
 创建swarm-master
 
-```
+```shell
 eval $(docker-machine.exe env swarm-master)
 docker run -d -p 3376:3376 -t \
 -v /var/lib/boot2docker:/carts:ro swarm manage \

@@ -98,7 +98,7 @@ chmod 777 -R /mnt/remix/data
 
 安装grub引导
 
-```
+```shell
 grub-install --root-directory=/mnt/remix /dev/sda
 # 新建grub.cfg文件, 添加启动项
 vim /mnt/remix/boot/grub/grub.cfg
@@ -106,7 +106,7 @@ vim /mnt/remix/boot/grub/grub.cfg
 
 文本如下
 
-```
+```text
 set default=0
 set timeout=3
 set gfxmode=1024x768
@@ -123,7 +123,7 @@ menuentry 'Remix OS For PC' --class android-x86 {
 
 安装好后目录是这样的
 
-```
+```shell
 cd /mnt/remix
 ls
 ```

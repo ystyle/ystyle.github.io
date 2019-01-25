@@ -28,7 +28,7 @@ cat /etc/sysconfig/iptables
 ```
 
 发现内容如下
-```
+```shell
 *filter
 :INPUT ACCEPT [0:0]
 :FORWARD ACCEPT [0:0]
@@ -54,7 +54,7 @@ cat /etc/sysconfig/iptables
 所以马上去看了下自己系统里的iptables的文件，
 
 内容如下
-```
+```shell
 *nat
 :PREROUTING ACCEPT [27:11935]
 :INPUT ACCEPT [0:0]
@@ -87,7 +87,7 @@ COMMIT
 ```
 
 对比后以去掉不相关的规则，以现`*nat`规则里有以下的对于docker的配置
-```
+```shell
 *nat
 :PREROUTING ACCEPT [27:11935]
 :INPUT ACCEPT [0:0]
@@ -100,7 +100,7 @@ COMMIT
 ```
 
 `*filter` 规则里对docker的配置如下
-```
+```shell
 *filter
 :INPUT ACCEPT [139291:461018923]
 :FORWARD ACCEPT [0:0]
@@ -114,7 +114,7 @@ COMMIT
 ```
 
 去掉不相关规则后的配置文件如下(可以直接用)：
-```
+```shell
 *nat
 :PREROUTING ACCEPT [27:11935]
 :INPUT ACCEPT [0:0]
@@ -147,7 +147,7 @@ COMMIT
 systemctl restart iptables.service
 ```
 两次启动对应docker容器，
-```
+```shell
 docker run -d -p 2181:2181 -p 2888:2888 -p 3888:3888 garland/zookeeper
 ```
 发现容器启动成功，虽然有警告，但并不影响容器的使用  

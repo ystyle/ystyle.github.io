@@ -66,7 +66,7 @@ cibuo8zqp78z1xb8cu3v4pkmj  my-web.2      daocloud.io/nginx:alpine  swarm-manager
 ```
 
 在一个网络上有哪些容器可以在network inspect的Containers节点看到
-```
+```shell
 [root@swarm-manager ~]# docker network inspect docker-net
 [
     {

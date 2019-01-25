@@ -10,7 +10,7 @@ permalink: lx-subsystem-installation-uninstall-or-maintenance-operation-is-not-c
 ---
 ### 出错表现
 输入 `lxrun /uninstall /full /y` 出现以下内容
-```
+```cmd
 PS D:\Code\linux\WSL-Distribution-Switcher> lxrun /uninstall /full /y
 这将在 Windows 中卸载 Ubuntu。
 这将删除 Ubuntu 环境以及任何修改、新应用程序和用户数据。

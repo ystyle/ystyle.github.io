@@ -22,7 +22,7 @@ mv $GOPATH/src/github.com/ystyle $GOPATH/src/github.com/leanote
 >注:源码在`$GOPATH/src/github.com/leanote/leanote/`目录
 
 - 编译文件
-```
+```shell
 revel run github.com/leanote/leanote dev 9000
 ### 访问http://localhost:9000 触发build
 bin/release.sh

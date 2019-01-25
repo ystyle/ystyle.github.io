@@ -20,7 +20,7 @@ permalink: install-flitter-without-android-studio
 ![explorer_2019-01-23_17-26-32.png](https://dl.ystyle.top/images/2019-01/explorer_2019-01-23_17-26-32.png)
 
 在`android-sdk-windows`目录打开终端(按着shift 右键打开命令行)
-```
+```cmd
 .\tools\bin\sdkmanager.bat --licenses
 .\tools\bin\sdkmanager.bat "build-tools;28.0.3"
 .\tools\bin\sdkmanager.bat "platforms;android-28"

@@ -7,12 +7,12 @@ categories: 系统
 permalink: Lets-Encrypt-convert-to-pkcs1
 ---
 ### Let's Encrypt 证书转 PKCS1 (传统私钥格式)
-```
+```shell
 openssl rsa -in privkey1.pem -out pkcs1.pem
 ```
 
 privkey1.pem 文件格式
-```
+```text
 -----BEGIN PRIVATE KEY-----
 MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALkFbpP0ZVpob96k
 YOM+ljfA3QOsG342iO/GQSClR04DGAB6mp4ZtKq1cB34w44FsfEg4TCsUL2y2TKl
@@ -32,7 +32,7 @@ wgkm05RNhx+HXg==
 ```
 
 pkcs1.pem文件格式
-```
+```text
 -----BEGIN RSA PRIVATE KEY-----
 MIICXAIBAAKBgQC5BW6T9GVaaG/epGDjPpY3wN0DrBt+NojvxkEgpUdOAxgAepqe
 GbSqtXAd+MOOBbHxIOEwrFC9stkypQgxrB49tXDI+4Jj8MuKI15HEmI8k7+tRDOl

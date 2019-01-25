@@ -38,7 +38,7 @@ date: 2017-02-27 15:14:13
 ps: 如果复制的`fmkadmapgofadopljbjfkapdkoienihi`这种目录下有版本号, 要把版本号目录里边的东西剪切到和版本号目录同级
 
 安装好的目录结构是这样的:
-```
+```shell
  ~/AppData/Roaming/Electron/extensions
 $ tree . -L 2
 .

@@ -243,7 +243,7 @@ docker service create --replicas 2 --name whoami -p 8080:80 daocloud.io/nginx:al
 ```
 
 访问服务(可以多执行几次)
-```
+```shell
 # 访问地址格式: swarm-manager.ip + (-p映射的端口)
 curl -v 192.168.99.101:8080
 ```

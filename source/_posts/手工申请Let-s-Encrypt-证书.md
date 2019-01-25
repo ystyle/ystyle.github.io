@@ -18,13 +18,13 @@ cd letsencrypt
 ```
 
 ### 申请证书
-```
+```shell
 ./letsencrypt-auto certonly --manual --email lxy5266@live.com -d web.ystyle.top
 ```
 
 出现以下内容时，打开一个新的终端
 
-```
+```text
 Saving debug log to /var/log/letsencrypt/letsencrypt.log
 Plugins selected: Authenticator manual, Installer None
 Obtaining a new certificate

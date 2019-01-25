@@ -7,7 +7,7 @@ tags:
 ---
 
 ### HTML
-```
+```html
 <div class="table-container">
     <table>
         <thead>

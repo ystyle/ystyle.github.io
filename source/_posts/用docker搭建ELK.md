@@ -50,7 +50,7 @@ docker-compose up -d
 docker exec -ti elk_elk_1 bash
 ```
 删除`/etc/logstash/conf.d/`下的文件，并新增`log4j.conf`, 写入以下内容, 然后重启elk
-```
+```text
 input {
   redis {
     host => "127.0.0.1"

@@ -10,14 +10,14 @@ date: 2015-06-29 07:02:49
 ---
 
 ### 查看commit_id
-```
+```shell
 git log $filename
 ```
 ### 重置文件
-```
+```shell
 git reset $commit_id
 ```
 ### 恢复文件
-```
+```shell
 git checkout $filename
 ```

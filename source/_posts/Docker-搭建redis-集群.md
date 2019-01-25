@@ -31,7 +31,7 @@ sed -i 's/# slaveof <masterip> <masterport>/slaveof redis-master 6379/g' redis.c
 
 ### 启动服务
 启动`redis-master`、 `redis-slave1`、 `redis-slave2`、 `redis-slave3`
-```
+```shell
 docker run --name redis-master -p 6379:6379 -d redis
 
 docker run --link redis-master:redis-master -v /data/docker/redis/redis.conf:/usr/local/etc/redis/redis.conf --name redis-slave1 -d redis redis-server /usr/local/etc/redis/redis.conf
@@ -43,7 +43,7 @@ docker run --link redis-master:redis-master -v /data/docker/redis/redis.conf:/us
 
 ### 测试
 用本地的redis-cli 连接到 master
-```
+```shell
 redis-cli
 127.0.0.1:6379> info # 查看详细信息
 ```

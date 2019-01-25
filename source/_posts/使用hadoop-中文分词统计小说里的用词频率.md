@@ -28,7 +28,7 @@ date: 2016-02-22 14:24:16
 
 2.设置环境变量
 vim ~/.bashrc
-```
+```shell
 export HADOOP_INSTALL=/home/ystyle/Applications/hadoop-2.7.0
 export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 ```
@@ -143,7 +143,7 @@ public class WordCount {
 
 ### 部分结果如下
 两字词语
-```
+```text
 在这	9889
 此刻	9000
 一个	8819
@@ -157,7 +157,7 @@ public class WordCount {
 ```
 
 四字词语
-```
+```text
 与此同时	1443
 中年男子	1089
 轰的一声	1048
