@@ -6,7 +6,7 @@
     <script>
         var id = location.pathname
         if (location.pathname.length > 50) {
-          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '')
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
         }
         const gitalk = new Gitalk({
           clientID: '<%- theme.gitalk.client_id %>',
