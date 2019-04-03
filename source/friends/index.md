@@ -18,6 +18,6 @@ comments: false
 
 - [雨落秋垣](https://tencent.xn--vuq861b/)
 
-- [lift](http://oscer.net/)
+- [life](http://oscer.net/)
 
 <style>.post-content a{font-size: 1.5rem;}</style>
