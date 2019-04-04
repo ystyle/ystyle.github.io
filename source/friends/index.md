@@ -20,4 +20,6 @@ comments: false
 
 - [life](http://oscer.net/)
 
+- [深夜猿](https://chenguoji.com/)
+
 <style>.post-content a{font-size: 1.5rem;}</style>
