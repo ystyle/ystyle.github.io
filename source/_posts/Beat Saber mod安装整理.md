@@ -9,7 +9,7 @@ permalink: beat-saber-mod-install
 ---
 
 ### 必装的mod(原library)
-- [BS IPA](https://github.com/nike4613/BeatSaber-IPA-Reloaded/releases/download/3.12.5/Release.zip)
+- [BS IPA](https://github.com/nike4613/BeatSaber-IPA-Reloaded/releases/download/3.12.5/Release.zip) - 安装后双击`ipa.exe`
 - [Newtonsoft JSON](https://beatmods.com/uploads/5ca577e2723eb30bd7190103/universal/NewtonSoft%20JSON-12.0.1.zip)
 - [Harmony](https://beatmods.com/uploads/5ca57778723eb30bd7190102/universal/Harmony-1.2.0.zip)
 - [CustomUI](https://beatmods.com/uploads/5ca6aa02317fa3777c3327d5/universal/CustomUI-1.4.1.zip)
