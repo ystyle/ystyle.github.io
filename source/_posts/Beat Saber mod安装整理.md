@@ -29,7 +29,7 @@ permalink: beat-saber-mod-install
 ### 其它可选插件
 - [Custom Colors](https://beatmods.com/uploads/5ca6a2fe317fa3777c3327c1/universal/Custom%20Colors-1.11.3.zip) - 自定义颜色
 - [Custom Avatars](https://beatmods.com/uploads/5ca6a77e317fa3777c3327d1/universal/Custom%20Avatars-4.6.1.zip) - 自定义人物
-- [Camera+](https://bsaber.com/mods/camera-plus-3.2.6.zip) - 第一/三人称切换
+- [~~Camera+~~](https://bsaber.com/mods/camera-plus-3.2.6.zip) - ~~第一/三人称切换~~ 有冲突，不建议安装
 
 ### 安装方法
 >把下载的压缩包打开，把里边的东西播放到游戏安装目录
