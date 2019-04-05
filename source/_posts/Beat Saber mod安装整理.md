@@ -38,3 +38,13 @@ permalink: beat-saber-mod-install
 ![](https://dl.ystyle.top/images/2019-04/7zFM_2019-04-05_16-33-02.png)
 
 >这三个一起复制到游戏目录， 然后双击`IPA.exe`
+
+
+### 网站
+- [第三方曲谱](https://beatsaver.com/browse/newest)
+- [排名网站](https://scoresaber.com/global)
+- [bsaber](https://bsaber.com/) 
+   - [Beat drop](https://bsaber.com/beatdrop/) 以后新版的mod管理器会这个的2.0版本, 目前还没更新
+   - 这里能下载歌曲、光剑、舞台、人物
+   - 播放列表也是这网站做的
+- [Beat saber的wiki(英文)](https://wiki.assistant.moe/) 里边有mod的安装方法之类的
