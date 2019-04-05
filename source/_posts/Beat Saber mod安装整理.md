@@ -32,7 +32,7 @@ permalink: beat-saber-mod-install
 - [~~Camera+~~](https://bsaber.com/mods/camera-plus-3.2.6.zip) - ~~第一/三人称切换~~ 有冲突，不建议安装
 
 ### 安装方法
->把下载的压缩包打开，把里边的东西播放到游戏安装目录
+>把下载的压缩包打开，把里边的东西拖放到游戏安装目录
 ![](https://dl.ystyle.top/images/2019-04/7zFM_2019-04-05_16-11-53.png)
 ![](https://dl.ystyle.top/images/2019-04/7zFM_2019-04-05_16-13-06.png)
 ![](https://dl.ystyle.top/images/2019-04/7zFM_2019-04-05_16-33-02.png)
