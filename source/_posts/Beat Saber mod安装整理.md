@@ -9,18 +9,18 @@ permalink: beat-saber-mod-install
 ---
 
 ### 必装的mod(原library)
-- [BS IPA](https://github.com/nike4613/BeatSaber-IPA-Reloaded/releases/download/3.12.5/Release.zip) - 安装后双击`ipa.exe`
-- [Newtonsoft JSON](https://beatmods.com/uploads/5ca577e2723eb30bd7190103/universal/NewtonSoft%20JSON-12.0.1.zip)
+- [BS IPA](https://github.com/nike4613/BeatSaber-IPA-Reloaded/releases/download/3.12.7/Release.zip) - 安装后双击`ipa.exe`
+- [NewtonSoft JSON](https://beatmods.com/uploads/5ca577e2723eb30bd7190103/universal/NewtonSoft%20JSON-12.0.1.zip)
 - [Harmony](https://beatmods.com/uploads/5ca57778723eb30bd7190102/universal/Harmony-1.2.0.zip)
 - [CustomUI](https://beatmods.com/uploads/5ca6aa02317fa3777c3327d5/universal/CustomUI-1.4.1.zip)
-- [ini-parser](https://beatmods.com/uploads/5ca574a1723eb30bd71900ff/universal/Ini%20Parser-2.5.2.zip)
-- [BS-Utils](https://beatmods.com/uploads/5ca575ba723eb30bd7190101/universal/BS%20Utils-1.2.2.zip)
+- [Ini Parser](https://beatmods.com/uploads/5ca574a1723eb30bd71900ff/universal/Ini%20Parser-2.5.2.zip)
+- [BS Utils](https://beatmods.com/uploads/5ca82bc098ef0e6a459f47e6/universal/BS%20Utils-1.2.3.zip)
 
 ### 最小化安装需要的mod
 - [SongLoader](https://beatmods.com/uploads/5ca66ce135796b56f2d26506/universal/SongLoader-6.10.1.zip) - 自定义歌曲加载
 - ScoreSaber - 分数上传(要下载对应的平台)
-  - [Steam](https://beatmods.com/uploads/5ca6d9d449385c17f7b99462/steam/ScoreSaber-2.1.1.zip)
-  - [Oculus](https://beatmods.com/uploads/5ca6d9d449385c17f7b99462/oculus/ScoreSaber-2.1.1.zip)
+  - [steam](https://beatmods.com/uploads/5ca6d9d449385c17f7b99462/steam/ScoreSaber-2.1.1.zip)
+  - [oculus](https://beatmods.com/uploads/5ca6d9d449385c17f7b99462/oculus/ScoreSaber-2.1.1.zip)
 - [Counters+](https://beatmods.com/uploads/5ca63f3219d43054ead90482/universal/Counters+-1.5.3.zip) - 游戏内统计插件
 - [BeatSaverDownloader](https://beatmods.com/uploads/5ca6d35f35d1831554693a75/universal/BeatSaverDownloader-3.3.1.zip) - 游戏内歌曲下载插件
 - [Custom Sabers](https://beatmods.com/uploads/5ca6a143317fa3777c3327b9/universal/Custom%20Sabers-2.8.3.zip) - 自定义光剑
@@ -47,4 +47,5 @@ permalink: beat-saber-mod-install
    - [Beat drop](https://bsaber.com/beatdrop/) 以后新版的mod管理器会这个的2.0版本, 目前还没更新
    - 这里能下载歌曲、光剑、舞台、人物
    - 播放列表也是这网站做的
+- [新的mod网站](https://beatmods.com)
 - [Beat saber的wiki(英文)](https://wiki.assistant.moe/) 里边有mod的安装方法之类的
