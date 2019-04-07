@@ -9,6 +9,8 @@ categories: 软件
 permalink: beat-saber-mod-install
 ---
 
+### 一定要先把Plugins目录删掉
+
 ### 必装的mod(原library)
 - [BS IPA](https://github.com/nike4613/BeatSaber-IPA-Reloaded/releases/download/3.12.8/Release.zip) - 安装后双击`ipa.exe`
 - [NewtonSoft JSON](https://beatmods.com/uploads/5ca577e2723eb30bd7190103/universal/NewtonSoft%20JSON-12.0.1.zip)
