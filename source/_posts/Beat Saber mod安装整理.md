@@ -25,6 +25,7 @@ mod 名称| 说明
 :----|:----
 SongLoader|自定义歌曲加载
 ScoreSaber|分数上传
+SongBrowser|歌曲排序过滤
 Counters+|游戏内统计插件
 BeatSaverDownloader|游戏内歌曲下载插件
 Custom Sabers|自定义光剑
