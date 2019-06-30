@@ -20,6 +20,8 @@ permalink: beat-saber-mod-install
   ![](http://ww1.sinaimg.cn/large/5e53d68bly1g4jhedb4waj20z60jtta7.jpg)
 - 选择需要的mod然后点右下角的`Install or Update`
   ![](http://ww1.sinaimg.cn/large/5e53d68bly1g4jheo7zy0j20z60jtacn.jpg)
+- 至于设置，不设置也可以，但我是这么选择的
+  ![](http://ww1.sinaimg.cn/large/5e53d68bly1g4jhgkokosj20z60jtdgd.jpg)
 
 ### 最简安装需要的mod
 mod 名称| 说明 
