@@ -1,7 +1,7 @@
 ---
 title: Beat Saber mod安装方法
 date: 2019-04-05 14:46:26
-updated: 2019-04-13 13:50:26
+updated: 2019-06-30 13:50:26
 tags:
 - Beat Saber
 - VR
@@ -11,15 +11,16 @@ permalink: beat-saber-mod-install
 
 ### 一定要先把Plugins目录删掉
 
-### 下载安装Beatdrop 2.0 以后新版的mod管理器
- - 下载连接: https://bsaber.com/beatdrop/
- - 选择游戏安装目录， 和游戏平台
- ![](https://dl.ystyle.top/images/2019-04/beatdrop_2019-04-13_12-44-44.png)
- - 右键可下载mod
- ![](https://dl.ystyle.top/images/2019-04/beatdrop_2019-04-13_13-13-19.png)
- - 在已安装的上面右键可以： 卸载、停用
- ![](https://dl.ystyle.top/images/2019-04/beatdrop_2019-04-13_13-14-30.png) 
+### 下载安装ModAssistant 新版的mod管理器
+ - 下载连接: https://github.com/Assistant/ModAssistant/releases/latest
+ - 不要用BeatDrop了， bug太多了
  
+### 使用方法
+- 点击`I Agree`同意
+  ![](http://ww1.sinaimg.cn/large/5e53d68bly1g4jhedb4waj20z60jtta7.jpg)
+- 选择需要的mod然后点右下角的`Install or Update`
+  ![](http://ww1.sinaimg.cn/large/5e53d68bly1g4jheo7zy0j20z60jtacn.jpg)
+
 ### 最简安装需要的mod
 mod 名称| 说明 
 :----|:----
