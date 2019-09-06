@@ -72,6 +72,7 @@ CMD maple -h
 
 
 ### 编译
+>第一次编译安装依赖会慢点， 之后因为docker缓存每次编译会跳过依赖安装从复制源码开始
 ```shell
 docker build -t ark:latest . 
 ```
