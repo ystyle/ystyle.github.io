@@ -10,7 +10,7 @@ categories: 系统
 permalink: donot-restart-kde-after-update-system
 ---
 
->用Archlinux经常更新系统， 如果遇到kde更新了的话，不重启系统的话很多kde的应用会打不开， 如果不想重启应该怎么办？
+>用Archlinux经常更新系统， 如果遇到kde更新了的话，不重启系统的话很多kde的应用会打不开， 如果不想重启系统应该怎么办？
 
 
 ### 不重启系统情况下重启KDE5
