@@ -12,8 +12,8 @@ permalink: how-to-use-storm-db
 >storm是一个使用BoltDB的上层orm框架
 
 ### 地址:
-- [数据查看工具]: https://github.com/br0xen/boltbrowser
-- [驱动]: https://github.com/asdine/storm
+- [数据查看工具](https://github.com/br0xen/boltbrowser): https://github.com/br0xen/boltbrowser
+- [驱动](https://github.com/asdine/storm): https://github.com/asdine/storm
 
 ### 初始化
 ```go
