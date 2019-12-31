@@ -76,11 +76,3 @@ d:/TmdTextEpub.ex e-filename d:/ebbok.txt -match "Chapter .{1,8}"
   d:/kindlegen.exe d:/全职法师.mobi
   ```
 3. 在d盘就能找到mobi文件了，复制到kindle的documents目录下，打开kindle就能看到小说了
-
-### 手工构建
-```$xslt
-go build -ldflags "-s -w" -o TmdTextEpub.exe main.go
-```
-快捷方法:
-- windows: 在`build.ps1`上右键选择`以 Power Shell 运行`
-- linux: 在本项目源码目录执行 `./build.sh`
