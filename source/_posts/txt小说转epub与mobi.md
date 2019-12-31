@@ -26,7 +26,7 @@ date: 2019-12-31 13:02:49
 
 ### 使用方法
 ```$xslt
-Usage of E:\Code\Go\bin\TmdTextEpub.exe:
+Usage of D:\TmdTextEpub.exe:
   -author string
         作者 (default "YSTYLE")
   -bookname string
@@ -34,7 +34,9 @@ Usage of E:\Code\Go\bin\TmdTextEpub.exe:
   -filename string
         txt 文件名
   -match string
-        匹配标题的正则表达式, 例: -match 第.{1,8}章 表示第和章字之间可以有1-8个任意文字 (default "第.{1,8}章")
+        匹配标题的正则表达式, 不写可以自动识别, 如果没生成章节就参考教程。例: -match 第.{1,8}章 表示第和章字之间可以有1-8个任意文字 (default "自动匹配,可自定义")
+  -tips
+        添加本软件教程 (default true)
 ```
 
 ### 示例
