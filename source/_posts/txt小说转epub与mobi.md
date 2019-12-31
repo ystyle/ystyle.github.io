@@ -65,7 +65,7 @@ d:/TmdTextEpub.exe -filename d:/ebbok.txt -match "Section \d+"
 自定义章节匹配, 章节格式为`Chapter xxx`: 
 ```shell
 cd d:/
-d:/TmdTextEpub.ex e-filename d:/ebbok.txt -match "Chapter .{1,8}"
+d:/TmdTextEpub.exe -filename d:/ebbok.txt -match "Chapter .{1,8}"
 ```
 
 ### 把书转为kindle的mobi格式
