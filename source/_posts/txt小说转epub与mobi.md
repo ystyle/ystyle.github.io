@@ -34,7 +34,7 @@ date: 2019-12-31 13:02:49
     - 按`win + x + i` 输入以下命令
 ```shell
 cd d:/
-d:/TmdTextEpub.exe -filename d:/全职法师.txt
+d:/TmdTextEpub.exe -filename d:/异常生物见闻录.txt
 ```
 
 全部参数为：
@@ -51,6 +51,9 @@ Usage of D:\TmdTextEpub.exe:
   -tips
         添加本软件教程 (default true)
 ```
+
+### 效果
+![异常生物见闻录](https://github.com/ystyle/TmdTextEpub/raw/master/2020-01-21_12-02.png)
 
 ### 更多示例
 >该全部示例都可以自动识别，用上面的例子就行了
@@ -84,7 +87,7 @@ d:/TmdTextEpub.exe -filename d:/ebbok.txt -match "Chapter .{1,8}"
 2. 上面第1步只需要做一次，以后可以把小说放任意目录，都可以很简单执行转换，每次转换小说的按下面操作，
    - 打开小说在的文件夹, 按住`Shift键`不放，鼠标右击文件夹空白位置
    - 在右键菜单选择 `用命令行打开` 或 `以PowerShell打开`
-   - 执行`TmdTextEpub.exe -filename 全职法师.txt`,  现在可以不用写盘符了
+   - 执行`TmdTextEpub.exe -filename 异常生物见闻录.txt`,  现在可以不用写盘符了
 
 ### 手动把书转为kindle的mobi格式
 >新版如果检测到有kindlegen程序时会自动转为mobi
