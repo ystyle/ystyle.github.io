@@ -10,7 +10,6 @@ updated: '2020-02-21 15:11:48'
 date: 2020-02-21 15:11:48
 ---
 
-## KDE添加右键菜单
 ### 文件存放位置
 - $HOME/.local/share/kservices5/
 - /usr/share/kservices5/
