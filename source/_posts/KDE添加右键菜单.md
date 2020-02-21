@@ -11,8 +11,10 @@ date: 2020-02-21 15:11:48
 ---
 
 ### 文件存放位置
-- $HOME/.local/share/kservices5/
-- /usr/share/kservices5/
+- 位置
+  - `$HOME/.local/share/kservices5/ `
+  - `/usr/share/kservices5/`
+- 文件后缀: `.desktop`
 
 ### 示例
 ```xml
