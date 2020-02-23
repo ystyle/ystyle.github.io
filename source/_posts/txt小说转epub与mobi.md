@@ -14,9 +14,10 @@ date: 2019-12-31 13:02:49
 
 ## TmdTextEpub
 
-> 把txt文本转成epub电子书的命令行工具
+> 把txt文本转成epub电子书的工具, 傻瓜式操作并附带高级模式(命令行版可自定义标题格式)
 
 ### 功能
+- 傻瓜模式操作(把txt文件拖到`TmdTextEpub.exe`上面自动转换)
 - 自动识别书名和章节(示例中所有用法都会自动识别)
 - 自动识别字符编码(自动解决中文乱码)
 - 自定义章节匹配
@@ -29,16 +30,15 @@ date: 2019-12-31 13:02:49
 ### 使用方法
 1. [点击下载](https://github.com/ystyle/TmdTextEpub/releases/latest)
    - [百度网盘 `https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w`](https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w) 提取码：`h4np`
-1. 把小说、 `TmdTextEpub.exe` 和 `kindlegen.exe` 放到`D`盘
-1. 按以下其中一种方法打开命令行
-    - 按`win + r` 输入 `cmd` 然后输入以下命令
-    - 按`win + x + i` 输入以下命令
-```shell
-cd d:/
-d:/TmdTextEpub.exe -filename d:/异常生物见闻录.txt
-```
+1. 解压, 把小说直接拖到 `TmdTextEpub.exe` 文件上面
+1. 等转换完，目录下会生成epub和mobi文件
 
-全部参数为：
+### 效果
+![异常生物见闻录](https://github.com/ystyle/TmdTextEpub/raw/master/2020-01-21_12-02.png)
+
+### 命令行模式
+
+命令行全部参数为：
 ```$xslt
 Usage of D:\TmdTextEpub.exe:
   -author string
@@ -53,17 +53,15 @@ Usage of D:\TmdTextEpub.exe:
         添加本软件教程 (default true)
 ```
 
-### 效果
-![异常生物见闻录](https://github.com/ystyle/TmdTextEpub/raw/master/2020-01-21_12-02.png)
-
-### 更多示例
->该全部示例都可以自动识别，用上面的例子就行了
-
 把`全职法师.txt`生成epub, 并设置作者名为`乱`
 ```shell
 cd d:/
 d:/TmdTextEpub.exe -author 乱 -filename d:/全职法师.txt
 ```
+
+>以下全部示例都可以自动识别，不需要自己设定标题格式了， 一般用上用上面的例子就行了
+
+>要自定义标题格式参考以几个例子
 
 自定义章节匹配, 章节格式为`第x节`: 
 ```shell
