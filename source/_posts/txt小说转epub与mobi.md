@@ -28,6 +28,7 @@ date: 2019-12-31 13:02:49
 
 ### 使用方法
 1. [点击下载](https://github.com/ystyle/TmdTextEpub/releases/latest)
+   - [百度网盘 `https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w`](https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w) 提取码：`h4np`
 1. 把小说、 `TmdTextEpub.exe` 和 `kindlegen.exe` 放到`D`盘
 1. 按以下其中一种方法打开命令行
     - 按`win + r` 输入 `cmd` 然后输入以下命令
