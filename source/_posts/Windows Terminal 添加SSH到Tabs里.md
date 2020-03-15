@@ -12,11 +12,10 @@ permalink: add-ssh-command-to-windows-terminal-tab
 >注意替换路径
 
 ### 用git-bash带的SSH
->命令一定要用转义的双引号包起来, key的路径用git bash的路径方式，没key的话，删掉-i好就好，但每次都要输入密码
+>命令一定要用转义的双引号包起来, key的路径用git bash的路径方式，没key的话，删掉-i后面的就好，但每次都要输入密码. key登陆百度搜索SSH免密登陆
 
 ```json
 {
-    // Make changes here to the powershell.exe profile
     "guid": "{43d5c880-802b-42c7-aeaf-21b112a3569b}",
     "name": "腾讯云",
     "icon":"E:\\Images\\tx.ico",
@@ -66,4 +65,4 @@ Windows Registry Editor Version 5.00
 ```
 
 ### 效果预览
-![](https://dl.ystyle.top/images/2020-03/WindowsTerminal_2020-03-15_16-32-44.png)
+![](https://dl.ystyle.top/images/2020-03/WindowsTerminal_2020-03-15_16-55-40.png)
