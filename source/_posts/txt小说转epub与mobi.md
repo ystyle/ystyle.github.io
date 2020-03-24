@@ -25,7 +25,7 @@ date: 2019-12-31 13:02:49
 
 功能|TmdTextEpub|KAF
 :--|:--|:-----
-支持平台|windows、liux、mac|Android
+支持平台|windows、linux、mac|Android
 自动识别书名和章节|支持|支持
 自动识别字符编码(自动解决中文乱码)|支持|支持
 自动给章节正文生成加粗居中的标题|支持|支持
