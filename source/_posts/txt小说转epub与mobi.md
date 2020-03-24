@@ -8,33 +8,66 @@ tags:
 categories: 软件
 permalink: txt-converto-epub-and-mobi
 id: 14
-updated: '2019-12-31 13:02:49'
+updated: '2020-03-24 13:02:49'
 date: 2019-12-31 13:02:49
 ---
 
-## TmdTextEpub
+> 把txt文本转成epub、mobi电子书的工具, 支持电脑和安卓APP
 
-> 把txt文本转成epub电子书的工具, 傻瓜式操作并附带高级模式(命令行版可自定义标题格式)
 
-### 功能
-- 傻瓜模式操作(把txt文件拖到`TmdTextEpub.exe`上面自动转换)
-- 自动识别书名和章节(示例中所有用法都会自动识别)
-- 自动识别字符编码(自动解决中文乱码)
-- 自定义章节匹配
-- 自动给章节正文生成加粗居中的标题
-- 段落自动识别
-- 段落自动缩进
-- 超快速(130章/s以上速度, 4000章30s不到)
-- 自动转为mobi格式
-
-### 使用方法
+### 下载
 1. [点击下载](https://github.com/ystyle/TmdTextEpub/releases/latest)
    - [百度网盘 `https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w`](https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w) 提取码：`h4np`
-1. 解压, 把小说直接拖到 `TmdTextEpub.exe` 文件上面
-1. 等转换完，目录下会生成epub和mobi文件
+2. 微信扫码下载
+   ![](https://dl.ystyle.top/images/2020-03/qrcode.jpeg)
+
+### 功能
+
+功能|TmdTextEpub|KAF
+:--|:--|:-----
+支持平台|windows、liux、mac|Android
+自动识别书名和章节|支持|支持
+自动识别字符编码(自动解决中文乱码)|支持|支持
+自动给章节正文生成加粗居中的标题|支持|支持
+段落自动识别|支持|支持
+段落自动缩进|支持|支持
+自定义书名作者|支持|支持
+自定义章节标题识别规则|支持|支持
+自定义章节标题对齐方式| |支持
+自定义段落缩进字数| |支持
+WIFI传书| |支持
+
+
+### 使用方法
+- 电脑版
+  1. 解压, 把小说直接拖到 `TmdTextEpub.exe` 文件上面
+  1. 等转换完，目录下会生成epub和mobi文件
+  1. 如果没有生成mobi，则复制`kindlegen`到`C:\windows`下面，重试
+- 安卓版
+![](https://dl.ystyle.top/images/2020-03/kaf1.jpg)
+
+![](https://dl.ystyle.top/images/2020-03/kaf2.jpg)
+
+![](https://dl.ystyle.top/images/2020-03/kaf5.jpg)
+
+![](https://dl.ystyle.top/images/2020-03/kaf6.jpg)
 
 ### 效果
+
 ![异常生物见闻录](https://github.com/ystyle/TmdTextEpub/raw/master/2020-01-21_12-02.png)
+
+![](https://dl.ystyle.top/images/2020-03/550b751ed21b0ef466cae53fcac451da80cb3efe.jpg)
+
+### 手动把书转为kindle的mobi格式
+>新版如果检测到有kindlegen程序时会自动转为mobi
+
+1. 在官网下载[kindlegen](https://www.amazon.com/gp/feature.html?ie=UTF8&docId=1000765211)
+2. 同样放到`d:`盘根目录下， 执行以下命令转换
+  ```shell
+  cd d:/
+  d:/kindlegen.exe d:/全职法师.epub
+  ```
+3. 在d盘就能找到mobi文件了，复制到kindle的documents目录下，打开kindle就能看到小说了
 
 ### 命令行模式
 
@@ -52,6 +85,13 @@ Usage of D:\TmdTextEpub.exe:
   -tips
         添加本软件教程 (default true)
 ```
+
+### 在任意位置执行命令
+1. 把`TmdTextEpub.exe` 和 `kindlegen.exe` 放`c:/windows/`下边
+2. 上面第1步只需要做一次，以后可以把小说放任意目录，都可以很简单执行转换，每次转换小说的按下面操作，
+   - 打开小说在的文件夹, 按住`Shift键`不放，鼠标右击文件夹空白位置
+   - 在右键菜单选择 `用命令行打开` 或 `以PowerShell打开`
+   - 执行`TmdTextEpub.exe -filename 异常生物见闻录.txt`,  现在可以不用写盘符了
 
 把`全职法师.txt`生成epub, 并设置作者名为`乱`
 ```shell
@@ -81,21 +121,5 @@ cd d:/
 d:/TmdTextEpub.exe -filename d:/ebbok.txt -match "Chapter .{1,8}"
 ```
 
-### 在任意位置执行命令
-1. 把`TmdTextEpub.exe` 和 `kindlegen.exe` 放`c:/windows/`下边
-2. 上面第1步只需要做一次，以后可以把小说放任意目录，都可以很简单执行转换，每次转换小说的按下面操作，
-   - 打开小说在的文件夹, 按住`Shift键`不放，鼠标右击文件夹空白位置
-   - 在右键菜单选择 `用命令行打开` 或 `以PowerShell打开`
-   - 执行`TmdTextEpub.exe -filename 异常生物见闻录.txt`,  现在可以不用写盘符了
 
-### 手动把书转为kindle的mobi格式
->新版如果检测到有kindlegen程序时会自动转为mobi
-
-1. 在官网下载[kindlegen](https://www.amazon.com/gp/feature.html?ie=UTF8&docId=1000765211)
-2. 同样放到`d:`盘根目录下， 执行以下命令转换
-  ```shell
-  cd d:/
-  d:/kindlegen.exe d:/全职法师.epub
-  ```
-3. 在d盘就能找到mobi文件了，复制到kindle的documents目录下，打开kindle就能看到小说了
 
