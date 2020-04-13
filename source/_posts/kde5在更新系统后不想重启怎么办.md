@@ -16,10 +16,10 @@ permalink: donot-restart-kde-after-update-system
 ### 不重启系统情况下重启KDE5
 在更新系统完成后输入: 
 ```shell
-# kquitapp5 plasmashell && kstarts plasmashell
+# kquitapp5 plasmashell && kstart5 plasmashell
 ```
 太长了不好记建议在.zshrc添加以下内容: 
 ```shell
-alias kr="kquitapp5 plasmashell && kstarts plasmashell"
+alias kr="kquitapp5 plasmashell && kstart5 plasmashell"
 ```
 以后更新完后输入`kr`就好了， kde重启后还会有日志输出，直接把终端关了就好了
