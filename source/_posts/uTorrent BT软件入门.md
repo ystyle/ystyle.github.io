@@ -20,7 +20,7 @@ permalink: getting-start-utorrent
   ![](https://dl.ystyle.top/images/2020-04/uTorrent_2020-04-25_21-59-01.png)
   
 - 任务设置
-  - DHT和UDP tracler一定要勾上
+  - DHT和UDP tracker一定要勾上
   - 传出连接选择强制, 去掉[允许传入旧式中接]
   - 建议按我的设置
   ![](https://dl.ystyle.top/images/2020-04/uTorrent_2020-04-25_22-07-54.png)
