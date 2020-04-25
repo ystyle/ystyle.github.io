@@ -33,6 +33,15 @@ permalink: getting-start-utorrent
   ![](https://dl.ystyle.top/images/2020-04/uTorrent_2020-04-25_22-11-06.png)
 
 ### 下载任务设置
+> 主要是开DHT,和设置tracker, DHT开在连接上面的任务里说过了
+
+- Tracker是什么
+  >一般下载文件是用http/ftp/smb无协议的域名或ip来明确指向文件存放在哪个IP的服务器上， 但BT是用识别码来标识文件，而没有明确的文件地址。 所以为了找到文件就需要有一个机制来确定目标文件在哪些机器上能下载到。 DHT和Tracker服务器都能做到文件寻址。
+
+  - DHT: 是内嵌在BT软件里边的，会和电脑能识别并能连接上的BT网络进行数据交换和查询，从而找到文件需要到哪个IP去下载。
+  - Tracker: 是运行在别人搭建好的服务器上，你只需要在下载时填写别人提供的Tracker连接就好了，BT软件会连接服务器进行文件查询并取到下载文件的IP地址
+
+
 - 设置Tracker
   - 在任务上右键-属性
   - 打开[`https://github.com/ngosang/trackerslist`](https://github.com/ngosang/trackerslist)
