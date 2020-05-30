@@ -32,3 +32,5 @@ Windows Registry Editor Version 5.00
   - `-p \"Windows PowerShell\"` 是新页签需要用的的shell，可以是windows terminal的配置中的 name或guid
   - `micro.exe \"%1\"` 是需要执行的命令， `\"%1\"`是当前右键的文件占位符
   
+### 效果
+![](https://dl.ystyle.top/images/2020-05/qimgv_2020-05-30_22-44-29.png)
