@@ -11,6 +11,8 @@ date: 2020-05-31 22:11:48
 
 >应用场景: 在文件右键打开windows terminal， 并在执行的命令中以选择的文件为参数运行。 
 
+>本示例为在windows terminal使用micro编辑器打开选中文件
+
 ### 先创建一个右键菜单项
 ```
 Windows Registry Editor Version 5.00
@@ -34,3 +36,5 @@ Windows Registry Editor Version 5.00
   
 ### 效果
 ![](https://dl.ystyle.top/images/2020-05/qimgv_2020-05-30_22-44-29.png)
+
+![](https://dl.ystyle.top/images/2020-05/WindowsTerminal_2020-05-30_22-52-28.png)
