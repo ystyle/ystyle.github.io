@@ -28,8 +28,8 @@ RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list && \
     apt-get -y install libasound2-dev
 
 # 在国内请反注释下行, 因为容器也是个单独的系统，所以别用127.0.0.1
-ENV http_proxy=http://192.168.3.81:1081 \ 
-    https_proxy=http://192.168.3.81:1081
+#ENV http_proxy=http://192.168.3.81:1081 \ 
+#    https_proxy=http://192.168.3.81:1081
 
 ENV PATH=/java-se-7u75-ri/bin:${PATH}
 
@@ -53,8 +53,8 @@ RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list && \
         libssl-dev openjdk-8-jdk-headless unzip python-minimal python3
 
 # 在国内请反注释下行, 因为容器也是个单独的系统，所以别用127.0.0.1
-ENV http_proxy=http://192.168.3.81:1081 \ 
-    https_proxy=http://192.168.3.81:1081
+#ENV http_proxy=http://192.168.3.81:1081 \ 
+#    https_proxy=http://192.168.3.81:1081
 
 # copy source
 COPY . /maple_engine
