@@ -10,12 +10,12 @@ permalink: dokcer-compile-maple-engine
 ---
 
 ### 文档
-- [官网发布方舟引擎公告](https://gitee.com/harmonyos/OpenArkCompiler/issues/I1OHE5)
-- [方舟引擎编辑说明](https://gitee.com/openarkcompiler-incubator/maple_engine)
-- [构建Java 核心库官方文档](https://gitee.com/openarkcompiler-incubator/maple_engine/blob/master/maple_build/doc/build_OpenJDK8.md)
+- [方舟引擎发布公告](https://gitee.com/harmonyos/OpenArkCompiler/issues/I1OHE5)
+- [官方文档 - 方舟引擎编译说明](https://gitee.com/openarkcompiler-incubator/maple_engine)
+- [官方文档 - 构建Java 核心库](https://gitee.com/openarkcompiler-incubator/maple_engine/blob/master/maple_build/doc/build_OpenJDK8.md)
 
 ### Docker 文件
->复制到方舟引擎代码根目录文件名为Dockerfile
+>复制到方舟引擎代码根目录, 文件名为Dockerfile
 
 ```dockerfile
 FROM ubuntu:16.04 AS build-jdk-env
