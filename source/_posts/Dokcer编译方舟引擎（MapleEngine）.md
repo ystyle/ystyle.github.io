@@ -74,6 +74,8 @@ RUN ["/bin/bash", "-c", "source ./envsetup.sh && ./maple_build/tools/build-maple
 ```
 
 ### 编译方舟引擎
+>方舟编译器，也会一起编译
+
 ```shell
 docker build -t ystyle:maple_engine .
 ```
