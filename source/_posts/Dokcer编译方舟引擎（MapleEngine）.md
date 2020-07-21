@@ -74,11 +74,14 @@ RUN ["/bin/bash", "-c", "source ./envsetup.sh && ./maple_build/tools/build-maple
 ```
 
 ### 编译方舟引擎
->方舟编译器，也会一起编译
+>方舟编译器，也会一起编译，注意： 编译libjava时会占用25G左右的内存，不足25G建议添加swap分区
+
+>本人机器是16G内存，20G的SSD swap分区
 
 ```shell
 docker build -t ystyle:maple_engine .
 ```
+![编译占用](https://dl.ystyle.top/images/2020-07/44F09FD9B6FF040264D4D5D02EBD079E.jpg)
 
 ### 测试
 ```
@@ -94,3 +97,7 @@ $MAPLE_BUILD_TOOLS/asm2so.sh HelloWorld.s
 # 运行软件
 $MAPLE_BUILD_TOOLS/run-app.sh -classpath ./HelloWorld.so HelloWorld
 ```
+
+![编译执行结果](https://dl.ystyle.top/images/2020-07/FF718ECF5856FE19B7D07C86D99F83E9.jpg)
+
+![编译结果文件](https://dl.ystyle.top/images/2020-07/E7D14260FCF1A255812B3FE5E4954F79.jpg)
