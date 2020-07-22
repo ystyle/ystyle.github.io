@@ -76,7 +76,7 @@ RUN ["/bin/bash", "-c", "source ./envsetup.sh && ./maple_build/tools/build-maple
 >本人机器是16G内存，20G的SSD swap分区
 
 ```shell
-docker build -t ystyle:maple_engine .
+docker build -t ystyle:maple-engine .
 ```
 ![编译占用](https://dl.ystyle.top/images/2020-07/44F09FD9B6FF040264D4D5D02EBD079E.jpg)
 
@@ -85,7 +85,7 @@ docker build -t ystyle:maple_engine .
 
 ```
 # 镜像已经推送到docker hub, 可以直接使用下面的镜像编译hello world或其它软件
-docker run --rm -ti ystyle:maple_engine bash
+docker run --rm -ti ystyle:maple-engine bash
 # 设备基础环境
 source ./envsetup.sh
 # 编译java hello world
