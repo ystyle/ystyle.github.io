@@ -49,7 +49,7 @@ MAINTAINER https://www.openarkcompiler.cn
 # Setting up the build environment
 RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list && \
     apt-get -y update && \
-    apt install --no-install-recommends -y build-essential git wget clang cmake libffi-dev libelf-dev libunwind-dev \
+    apt install --no-cache -y build-essential git wget clang cmake libffi-dev libelf-dev libunwind-dev \
         libssl-dev openjdk-8-jdk-headless unzip python-minimal python3 && \
     rm -rf /var/lib/apt/lists/*
 
@@ -67,11 +67,7 @@ COPY --from=build-jdk-env /root/my_opejdk8/build/linux-x86_64-normal-server-rele
 COPY --from=build-jdk-env /root/my_opejdk8/build/linux-x86_64-normal-server-release/images/lib/charsets.jar /maple_engine/maple_build/jar/
 
 # compile
-RUN ["/bin/bash", "-c", "source ./envsetup.sh && ./maple_build/tools/build-maple.sh && ./maple_build/tools/build-libcore.sh"]
-# clean unneed files
-RUN rm /maple_engine/maple_build/out/x86_64/*.s && \
-    rm /maple_engine/maple_build/out/x86_64/libcore.VtableImpl.mpl && \
-    rm /maple_engine/maple_build/out/x86_64/libcore.mpl.mir.mpl
+RUN ["/bin/bash", "-c", "source ./envsetup.sh && ./maple_build/tools/build-maple.sh && ./maple_build/tools/build-libcore.sh && cd /maple_engine/maple_build/out/x86_64/ && rm *.s && rm libcore.VtableImpl.mpl libcore.mpl.mir.mpl"]
 ```
 
 ### 编译方舟引擎
