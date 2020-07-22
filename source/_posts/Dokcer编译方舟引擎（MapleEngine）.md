@@ -49,7 +49,7 @@ MAINTAINER https://www.openarkcompiler.cn
 # Setting up the build environment
 RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list && \
     apt-get -y update && \
-    apt install --no-cache -y build-essential git wget clang cmake libffi-dev libelf-dev libunwind-dev \
+    apt install --no-install-recommends -y build-essential git wget clang cmake libffi-dev libelf-dev libunwind-dev \
         libssl-dev openjdk-8-jdk-headless unzip python-minimal python3 && \
     rm -rf /var/lib/apt/lists/*
 
