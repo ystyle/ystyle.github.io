@@ -28,8 +28,8 @@ RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list && \
     apt-get -y install libasound2-dev
 
 # 在国内请反注释下行, 因为容器也是个单独的系统，所以别用127.0.0.1
-#ENV http_proxy=http://192.168.3.81:1081 \ 
-#    https_proxy=http://192.168.3.81:1081
+ENV http_proxy=http://192.168.3.81:1081 \ 
+    https_proxy=http://192.168.3.81:1081
 
 ENV PATH=/java-se-7u75-ri/bin:${PATH}
 
@@ -54,8 +54,8 @@ RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list && \
     rm -rf /var/lib/apt/lists/*
 
 # 在国内请反注释下行, 因为容器也是个单独的系统，所以别用127.0.0.1
-#ENV http_proxy=http://192.168.3.81:1081 \ 
-#    https_proxy=http://192.168.3.81:1081
+ENV http_proxy=http://192.168.3.81:1081 \ 
+    https_proxy=http://192.168.3.81:1081
 
 # copy source
 COPY . /maple_engine
@@ -68,7 +68,10 @@ COPY --from=build-jdk-env /root/my_opejdk8/build/linux-x86_64-normal-server-rele
 
 # compile
 RUN ["/bin/bash", "-c", "source ./envsetup.sh && ./maple_build/tools/build-maple.sh && ./maple_build/tools/build-libcore.sh"]
-
+# clean unneed files
+RUN rm /maple_engine/maple_build/out/x86_64/*.s && \
+    rm /maple_engine/maple_build/out/x86_64/libcore.VtableImpl.mpl && \
+    rm /maple_engine/maple_build/out/x86_64/libcore.mpl.mir.mpl
 ```
 
 ### 编译方舟引擎
