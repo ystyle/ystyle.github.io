@@ -64,9 +64,6 @@ COPY --from=build-jdk-env /root/my_opejdk8/build/linux-x86_64-normal-server-rele
 COPY --from=build-jdk-env /root/my_opejdk8/build/linux-x86_64-normal-server-release/images/lib/jce.jar /maple_engine/maple_build/jar/
 COPY --from=build-jdk-env /root/my_opejdk8/build/linux-x86_64-normal-server-release/images/lib/jsse.jar /maple_engine/maple_build/jar/
 COPY --from=build-jdk-env /root/my_opejdk8/build/linux-x86_64-normal-server-release/images/lib/charsets.jar /maple_engine/maple_build/jar/
-COPY --from=build-jdk-env /root/my_opejdk8/build/linux-x86_64-normal-server-release/jdk/lib/amd64/libjava.so /maple_engine/maple_runtime/lib/x86_64/
-COPY --from=build-jdk-env /root/my_opejdk8/build/linux-x86_64-normal-server-release/jdk/lib/amd64/server/libjvm.so /maple_engine/maple_runtime/lib/x86_64/
-COPY --from=build-jdk-env /root/my_opejdk8/build/linux-x86_64-normal-server-release/jdk/lib/amd64/libverify.so /maple_engine/maple_runtime/lib/x86_64/
 
 # compile
 RUN ["/bin/bash", "-c", "source ./envsetup.sh && ./maple_build/tools/build-maple.sh && ./maple_build/tools/build-libcore.sh"]
