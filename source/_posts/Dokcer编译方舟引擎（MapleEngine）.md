@@ -87,7 +87,7 @@ docker build -t ystyle:maple_engine .
 >目前因为不知道要提取哪些文件， 所以里边打包了整个编译环境， 现在镜像非常大。 以后熟悉了再做个精简镜像。
 
 ```
-# 镜像已经推送到docker hub, 如果出现core-dump的话，等方舟更新并重新编译
+# 镜像已经推送到docker hub, 可以直接使用下面的镜像编译hello world或其它软件
 docker run --rm -ti ystyle:maple_engine bash
 # 设备基础环境
 source ./envsetup.sh
@@ -100,6 +100,4 @@ $MAPLE_BUILD_TOOLS/asm2so.sh HelloWorld.s
 $MAPLE_BUILD_TOOLS/run-app.sh -classpath ./HelloWorld.so HelloWorld
 ```
 
-![编译执行结果](https://dl.ystyle.top/images/2020-07/FF718ECF5856FE19B7D07C86D99F83E9.jpg)
-
-![编译结果文件](https://dl.ystyle.top/images/2020-07/E7D14260FCF1A255812B3FE5E4954F79.jpg)
+![编译执行结果](https://dl.ystyle.top/images/2020-07/2020-07-22_10-35.png)
