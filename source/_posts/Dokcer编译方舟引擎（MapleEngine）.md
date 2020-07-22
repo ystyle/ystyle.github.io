@@ -67,7 +67,7 @@ COPY --from=build-jdk-env /root/my_opejdk8/build/linux-x86_64-normal-server-rele
 COPY --from=build-jdk-env /root/my_opejdk8/build/linux-x86_64-normal-server-release/images/lib/charsets.jar /maple_engine/maple_build/jar/
 
 # compile
-RUN ["/bin/bash", "-c", "source ./envsetup.sh && ./maple_build/tools/build-maple.sh && ./maple_build/tools/build-libcore.sh && cd /maple_engine/maple_build/out/x86_64/ && rm *.s && rm libcore.VtableImpl.mpl libcore.mpl.mir.mpl"]
+RUN ["/bin/bash", "-c", "source ./envsetup.sh && ./maple_build/tools/build-maple.sh && ./maple_build/tools/build-libcore.sh && cd /maple_engine/maple_build/out/x86_64/ && rm `ls * |egrep -v '(libcore.mpl|libcore.mplt|mrt_module_init.o|orig-libcore.mplt)'` && rm libcore.mpl.mir.mpl"]
 ```
 
 ### 编译方舟引擎
