@@ -81,7 +81,6 @@ docker build -t ystyle/maple-engine .
 ![编译占用](https://dl.ystyle.top/images/2020-07/44F09FD9B6FF040264D4D5D02EBD079E.jpg)
 
 ### 测试
->目前因为不知道要提取哪些文件， 所以里边打包了整个编译环境， 现在镜像非常大。 以后熟悉了再做个精简镜像。
 
 ```
 # 镜像已经推送到docker hub, 可以直接使用下面的镜像编译hello world或其它软件
