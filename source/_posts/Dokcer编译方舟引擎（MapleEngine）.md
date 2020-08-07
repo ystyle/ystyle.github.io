@@ -1,7 +1,7 @@
 ---
 title: Dokcer编译方舟引擎（MapleEngine）
 date: 2020-07-21 10:46:26
-updated: 2020-07-22 15:08:26
+updated: 2020-08-6 15:08:26
 tags:
 - 编译器
 - 方舟
@@ -20,28 +20,26 @@ permalink: dokcer-compile-maple-engine
 ```dockerfile
 FROM ubuntu:16.04 AS build-jdk-env
 MAINTAINER https://www.openarkcompiler.cn
+
+
 RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list && \
     apt-get -y update && \
-    apt-get -y install curl mercurial build-essential cpio unzip zip libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev && \
-    apt-get -y install libcups2-dev && \
-    apt-get -y install libfreetype6-dev libfreetype6 && \
-    apt-get -y install libasound2-dev
+    apt-get -y install openjdk-8-jdk-headless mercurial curl
 
 # 在国内请反注释下行, 因为容器也是个单独的系统，所以别用127.0.0.1
 #ENV http_proxy=http://192.168.3.81:1081 \ 
 #    https_proxy=http://192.168.3.81:1081
 
-ENV PATH=/java-se-7u75-ri/bin:${PATH}
-
-RUN curl -OL https://download.java.net/openjdk/jdk7u75/ri/openjdk-7u75-b13-linux-x64-18_dec_2014.tar.gz && \
-    tar zxf openjdk-7u75-b13-linux-x64-18_dec_2014.tar.gz && \
-    hg clone http://hg.openjdk.java.net/jdk8/jdk8 ~/my_opejdk8 && \
+RUN hg clone http://hg.openjdk.java.net/jdk8u/jdk8u -r jdk8u252-b09 ~/my_opejdk8 && \
     cd ~/my_opejdk8 && bash ./get_source.sh && \
-    ln -s /usr/include/freetype2/ft2build.h /usr/include/ && \
-    sed -i '/public class Object {/a\long reserved_1; int reserved_2;' ~/my_opejdk8/jdk/src/share/classes/java/lang/Object.java && \
-    sed -i '67cs/ -\([^ I][^ ]*\)j/ -\1 -j/' hotspot/make/linux/makefiles/adjust-mflags.sh
+    sed -i '/public class Object {/a\long reserved_1; int reserved_2;' ~/my_opejdk8/jdk/src/share/classes/java/lang/Object.java
 
-RUN cd ~/my_opejdk8 && bash ./configure && export DISABLE_HOTSPOT_OS_VERSION_CHECK=ok; make all
+RUN mkdir out && cd out && \
+    bash -c "cp /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/{rt.jar,jce.jar,jsse.jar,charsets.jar} . " && \
+    mkdir -p java/lang/ && \
+    cp ~/my_opejdk8/jdk/src/share/classes/java/lang/Object.java java/lang/ && \
+    javac -target 1.8 -g java/lang/Object.java && \
+    jar uf rt.jar java/lang/Object.class
 
 FROM ubuntu:16.04 AS build-env
 MAINTAINER https://www.openarkcompiler.cn
@@ -61,10 +59,8 @@ RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list && \
 COPY . /maple_engine
 WORKDIR /maple_engine
 
-COPY --from=build-jdk-env /root/my_opejdk8/build/linux-x86_64-normal-server-release/images/lib/rt.jar /maple_engine/maple_build/jar/
-COPY --from=build-jdk-env /root/my_opejdk8/build/linux-x86_64-normal-server-release/images/lib/jce.jar /maple_engine/maple_build/jar/
-COPY --from=build-jdk-env /root/my_opejdk8/build/linux-x86_64-normal-server-release/images/lib/jsse.jar /maple_engine/maple_build/jar/
-COPY --from=build-jdk-env /root/my_opejdk8/build/linux-x86_64-normal-server-release/images/lib/charsets.jar /maple_engine/maple_build/jar/
+COPY --from=build-jdk-env /out/*.jar /maple_engine/maple_build/jar/
+
 
 # compile
 RUN ["/bin/bash", "-c", "source ./envsetup.sh && ./maple_build/tools/build-maple.sh && ./maple_build/tools/build-libcore.sh && cd /maple_engine/maple_build/out/x86_64/ && rm `ls * |egrep -v '(libcore.mpl|libcore.mplt|mrt_module_init.o|orig-libcore.mplt)'` && rm libcore.mpl.mir.mpl"]
@@ -85,7 +81,7 @@ docker build -t ystyle/maple-engine .
 ```
 # 镜像已经推送到docker hub, 可以直接使用下面的镜像编译hello world或其它软件
 docker run --rm -ti ystyle/maple-engine bash
-# 设备基础环境
+# 设置基础环境
 source ./envsetup.sh
 # 编译java hello world
 cd ./maple_build/examples/HelloWorld
