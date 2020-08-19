@@ -61,9 +61,9 @@ docker build -t ystyle/maple-engine .
 ![编译占用](https://dl.ystyle.top/images/2020-07/44F09FD9B6FF040264D4D5D02EBD079E.jpg)
 
 ### 测试
+>[镜像](https://hub.docker.com/r/ystyle/maple-engine)已经推送到[docker hub](https://hub.docker.com/r/ystyle/maple-engine), 可以直接使用下面的镜像编译hello world或其它软件
 
 ```
-# 镜像已经推送到docker hub, 可以直接使用下面的镜像编译hello world或其它软件
 docker run --rm -ti ystyle/maple-engine bash
 # 设置基础环境
 source ./envsetup.sh
