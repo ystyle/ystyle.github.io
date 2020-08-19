@@ -18,52 +18,36 @@ permalink: dokcer-compile-maple-engine
 >复制到方舟引擎代码根目录, 文件名为Dockerfile
 
 ```dockerfile
-FROM ubuntu:16.04 AS build-jdk-env
-MAINTAINER https://www.openarkcompiler.cn
-
-
-RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list && \
-    apt-get -y update && \
-    apt-get -y install openjdk-8-jdk-headless mercurial curl
-
-# 在国内请反注释下行, 因为容器也是个单独的系统，所以别用127.0.0.1
-#ENV http_proxy=http://192.168.3.81:1081 \ 
-#    https_proxy=http://192.168.3.81:1081
-
-RUN hg clone http://hg.openjdk.java.net/jdk8u/jdk8u -r jdk8u252-b09 ~/my_opejdk8 && \
-    cd ~/my_opejdk8 && bash ./get_source.sh && \
-    sed -i '/public class Object {/a\long reserved_1; int reserved_2;' ~/my_opejdk8/jdk/src/share/classes/java/lang/Object.java
-
-RUN mkdir out && cd out && \
-    bash -c "cp /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/{rt.jar,jce.jar,jsse.jar,charsets.jar} . " && \
-    mkdir -p java/lang/ && \
-    cp ~/my_opejdk8/jdk/src/share/classes/java/lang/Object.java java/lang/ && \
-    javac -target 1.8 -g java/lang/Object.java && \
-    jar uf rt.jar java/lang/Object.class
-
-FROM ubuntu:16.04 AS build-env
+FROM ubuntu:16.04
 MAINTAINER https://www.openarkcompiler.cn
 
 # Setting up the build environment
 RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list && \
     apt-get -y update && \
     apt install --no-install-recommends -y build-essential git wget clang cmake libffi-dev libelf-dev libunwind-dev \
-        libssl-dev openjdk-8-jdk-headless unzip python-minimal python3 && \
+        libssl-dev openjdk-8-jdk-headless unzip python-minimal python3 curl && \
     rm -rf /var/lib/apt/lists/*
 
 # 在国内请反注释下行, 因为容器也是个单独的系统，所以别用127.0.0.1
-#ENV http_proxy=http://192.168.3.81:1081 \ 
-#    https_proxy=http://192.168.3.81:1081
+ENV http_proxy=http://192.168.3.81:1081 \ 
+    https_proxy=http://192.168.3.81:1081
 
 # copy source
 COPY . /maple_engine
 WORKDIR /maple_engine
 
-COPY --from=build-jdk-env /out/*.jar /maple_engine/maple_build/jar/
-
+# custom java/lang/Object.java
+RUN cd /maple_engine/maple_build/jar/ && \
+    bash -c "cp /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/{rt.jar,jce.jar,jsse.jar,charsets.jar} . " && \
+    mkdir -p java/lang/ && \
+    curl -L http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/raw-file/jdk8u265-b01/src/share/classes/java/lang/Object.java > java/lang/Object.java && \
+    sed -i '/public class Object {/a\long reserved_1; int reserved_2;' java/lang/Object.java && \
+    javac -target 1.8 -g java/lang/Object.java && \
+    jar uf rt.jar java/lang/Object.class && \
+    rm -rf java
 
 # compile
-RUN ["/bin/bash", "-c", "source ./envsetup.sh && ./maple_build/tools/build-maple.sh && ./maple_build/tools/build-libcore.sh && cd /maple_engine/maple_build/out/x86_64/ && rm `ls * |egrep -v '(libcore.mpl|libcore.mplt|mrt_module_init.o|orig-libcore.mplt)'` && rm libcore.mpl.mir.mpl"]
+RUN bash -c "source ./envsetup.sh && ./maple_build/tools/build-maple.sh && ./maple_build/tools/build-libcore.sh && rm -rf /maple_engine/maple_build/out/*"
 ```
 
 ### 编译方舟引擎
