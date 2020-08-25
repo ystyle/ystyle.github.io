@@ -77,3 +77,23 @@ $MAPLE_BUILD_TOOLS/run-app.sh -classpath ./HelloWorld.so HelloWorld
 ```
 
 ![编译执行结果](https://dl.ystyle.top/images/2020-07/2020-07-22_10-35.png)
+
+
+### 调试应用程序
+- [方舟调试器介绍](https://gitee.com/openarkcompiler-incubator/maple_engine/wikis/%E6%96%B9%E8%88%9F%E5%A4%9A%E8%AF%AD%E8%A8%80%E8%B0%83%E8%AF%95%E5%99%A8?sort_id=2711073)
+- [方舟调试器项目说明](https://gitee.com/openarkcompiler-incubator/maple_engine/tree/master/maple_debugger)
+- [方舟调试器用户手册](https://gitee.com/openarkcompiler-incubator/maple_engine/blob/master/maple_debugger/UserReference.md)
+
+
+```
+docker run --rm -ti ystyle/maple-engine:gdb bash
+# 设置基础环境
+source ./envsetup.sh
+# 编译java hello world
+cd ./maple_build/examples/HelloWorld
+$MAPLE_BUILD_TOOLS/java2asm.sh HelloWorld.java
+# 生成把.s文件编译为.so
+$MAPLE_BUILD_TOOLS/asm2so.sh HelloWorld.s
+# 调试应用程序
+"$MAPLE_BUILD_TOOLS"/run-app.sh -gdb -classpath ./HelloWorld.so HelloWorld
+```
