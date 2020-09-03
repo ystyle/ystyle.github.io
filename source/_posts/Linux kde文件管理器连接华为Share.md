@@ -17,6 +17,7 @@ permalink: kde-dolphin-smb
 - 打开共享至电脑选项
 
 ### Linux 设置 
+- 检查文件夹没有就创建一个
 ```shell
 mkdir ~/.smb
 vim ~/.smb/smb.conf
