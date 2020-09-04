@@ -37,6 +37,7 @@ https://www.dmzj.com/view/benghuai3rd/101570.html
 https://zh.nyahentai.site/g/326699/
 ```
 - 然后把文件拖到comic-cli里边就会自动把漫画转为mobi格式
+- 如果没有生成则把`kindlegen.exe`放到`c:/windows`里再试试
 
 ### 其它工具
 - [txt文件转epub和mobi的工具TmdTextEpub和kaf](https://ystyle.top/2019/12/31/txt-converto-epub-and-mobi/)
