@@ -16,10 +16,8 @@ date: 2019-12-31 13:02:49
 
 
 ### 下载
-1. [点击下载](https://github.com/ystyle/TmdTextEpub/releases/latest)
+- [点击下载](https://github.com/ystyle/TmdTextEpub/releases/latest)
    - [百度网盘 `https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w`](https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w) 提取码：`h4np`
-2. 微信扫码下载
-   ![](https://dl.ystyle.top/images/2020-03/qrcode.jpeg)
 
 ### 功能
 
