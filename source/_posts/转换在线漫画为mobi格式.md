@@ -18,7 +18,7 @@ permalink: comic-cli
 
 ### 使用方法
 - 必需安装`谷歌浏览器chrome`
-- 下载[comic-cli](https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w): https://pan.baidu.com/s/1NGWA0OI7FthHpDg671WT7w, 提取码:h4np
+- 下载[comic-cli: https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w](https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w), 提取码:h4np
 - 新建一个文件文件
 ```text
 # 注释:  以#号或//开头的行会被忽略，空行也会被忽略
