@@ -41,6 +41,9 @@ https://zh.nyahentai.site/g/326699/
 
 ![图文教程](https://dl.ystyle.top/images/2020-09/WindowsTerminal_2020-09-05_12-04-06.png)
 
+### 目前存在的问题
+- 转换工程文件到mobi格式时，可能失败，kindlegen没输出原因和错误内容，目前无法解决， 只能多次重试了。
+
 ### 其它工具
 - [txt文件转epub和mobi的工具TmdTextEpub和kaf](https://ystyle.top/2019/12/31/txt-converto-epub-and-mobi/)
 - 喵同人在线转换为mobi格式[hcc](https://hcc.ystyle.top/)
