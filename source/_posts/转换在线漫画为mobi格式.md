@@ -39,6 +39,8 @@ https://zh.nyahentai.site/g/326699/
 - 然后把文件拖到comic-cli里边就会自动把漫画转为mobi格式
 - 如果没有生成则把`kindlegen.exe`放到`c:/windows`里再试试
 
+![图文教程](https://dl.ystyle.top/images/2020-09/WindowsTerminal_2020-09-05_12-04-06.png)
+
 ### 其它工具
 - [txt文件转epub和mobi的工具TmdTextEpub和kaf](https://ystyle.top/2019/12/31/txt-converto-epub-and-mobi/)
 - 喵同人在线转换为mobi格式[hcc](https://hcc.ystyle.top/)
