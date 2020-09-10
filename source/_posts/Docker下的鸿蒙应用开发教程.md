@@ -105,6 +105,8 @@ docker run --rm \
 
 ### 本文所使用Docker镜像的dockerfile文件
 >参考`@keithyau`[所写的Dockerfile](https://openharmony.gitee.com/keithyau/build_lite/blob/master/Dockerfile20.04)修改而来
+
+
 ```dockerfile
 FROM ubuntu:20.04 AS build-env
 LABEL version=2020-09-10
