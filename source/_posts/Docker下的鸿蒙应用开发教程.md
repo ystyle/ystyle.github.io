@@ -104,7 +104,7 @@ docker run --rm \
 - 其它驱动开发或系统组件开发也可以用挂载的方式把工程目录映射到容器，开发并编译
 
 ### 本文所使用Docker镜像的dockerfile文件
->参考[keithyau所写的Docker修改而来](https://openharmony.gitee.com/keithyau/build_lite/blob/master/Dockerfile20.04)
+>参考`@keithyau`[所写的Dockerfile](https://openharmony.gitee.com/keithyau/build_lite/blob/master/Dockerfile20.04)修改而来
 ```dockerfile
 FROM ubuntu:20.04 AS build-env
 LABEL version=2020-09-10
