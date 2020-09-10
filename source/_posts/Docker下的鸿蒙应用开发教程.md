@@ -84,12 +84,19 @@ docker run --rm \
   ystyle/open-harmony
 ```
 
-> 编译后的代码在out目录
+> 编译后的文件在out目录
+```
+.
+├── APP_BUILD.gn
+├── BUILD.gn
+├── hello_world.c
+└── out
+    └── wifiiot
+```
 
-－ 如果项目大的话，建议直接替换掉 整个`/OpenHarmony/applications/sample/wifi-iot/app/` 目录, 下面的都是示例代码
 
 ### 其它问题
-
+- 如果实际开发，建议直接替换掉 整个`/OpenHarmony/applications/sample/wifi-iot/app/` 目录, 目录里边的都是示例代码.
 - 如果要修改启动编译的命令的话，可以写好shell 脚本， run时指定cmd命令
   - 构建命令为: `python build.py ${HARDWARE} -b debug`
   - `docker run --rm -v ${PWD}/mybuild.sh:/OpenHarmony/mybuild.sh ystyle/open-harmony /OpenHarmony/mybuild.sh`
