@@ -1,5 +1,5 @@
 ---
-title: 使用Docker开发鸿蒙应用教程
+title: 使用Docker快速上手鸿蒙
 date: 2020-09-11 01:00:26
 updated: 2020-09-11 01:00:26
 tags:
