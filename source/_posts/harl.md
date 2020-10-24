@@ -8,8 +8,8 @@ tags:
 categories: 软件
 permalink: harl
 ---
-### harl
-> 鸿蒙应用开发实机热更新工具
+
+[鸿蒙应用开发实机热更新工具](https://gitee.com/ystyle/harl/)
 
 ### 依赖
 - debug 版本的hi3516镜像(release版本不支持shell)
