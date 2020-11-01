@@ -24,12 +24,12 @@ permalink: harl
 ### USAGE
 
 ```shell
-E:\Code\Go\harl>harl
+➜ harl.exe
 NAME:
    harl - Open Harmony OS Dev tools
 
 USAGE:
-   harl [global options] command [command options] [arguments...]
+   harl.exe [global options] command [command options] [arguments...]
 
 VERSION:
    v0.1.2
@@ -46,39 +46,49 @@ COMMANDS:
 GLOBAL OPTIONS:
    --help, -h     show help (default: false)
    --version, -v  print the version (default: false)
-
 ```
 - [下载应用](https://gitee.com/ystyle/harl/releases)
 - `cd /your-project-dir` 切换到项目目录
 - `harl init` 初始化配置文件
 - `harl w` 监听项目文件修改
   - 监听时支持输入命令, 若看不到提示符请在调试日志暂停打印时按回车
+  - 可以用`^run [command name]`的方式执行command里定义的脚本
+    - 如执行示例配置文件的setup脚本， `^run setup`
 - 目前命令只支持在项目目录执行
 
 ### 配置文件
 >.harl.yaml
 ```yaml
-build:
-  buildtype: smartVision # 项目编译类型，会自动生成
-  excludes: # 排除监听的目录
+watch: # 监听文件修改并自动编译、安装的参数
+  excludes: # 排除的文件
   - .gradle
   - .idea
   - gradle
   - entry/build
   - entry/node_modules
-  includes: # 监听的文件类型，不能为空
+  includes: # 监听的文件类型
   - .css
   - .hml
   - .js
   - .hap
   - .json
-  nfsdir: Y:/dde # nfs 的挂载目录
   delay: 100 # 监听频率，单位ms
-reload:
-  dir: /nfs/dde # nfs 在开发板上的目录
+nfs: # nfs 配置
+  ldir: H:/bin # 本地nfs挂载目录 
+  rdir: /nfs # 远程nfs(开发板)挂载目录
+shell: # 开发板连接参数
   com: COM5 # 串口号
-  bundlename: top.ystyle.jianmu # 项目id，init时自动生成
-  abilityname: default # 项目起始界面，init时自动生成
+command: # 定义常用命令, 在shell或watch里可执行
+  setup: # 命令执行方式: ^run setup
+    - dhclient eth0 # 命令一行一个, 顺序执行错误不会中断
+    - mkdir /nfs
+    - mount 192.168.3.12:/nfsshare /nfs nfs
+  kill: # 关闭应用
+    - cd /nfs
+    - ./aa terminate -p top.ystyle.ohos.js.testapp
+  start: # 启动应用
+    - cd /nfs
+    - ./aa start -p top.ystyle.ohos.js.testapp -n default
 ```
 
 ### 支持情况
