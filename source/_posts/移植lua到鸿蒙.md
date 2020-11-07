@@ -13,6 +13,10 @@ permalink: porting-Lua-to-openharmony
 ### 惯例先放hello world
 ![hello world](https://dl.ystyle.top/images/2020-11/WindowsTerminal_2020-11-07_23-28-08.png)
 
+- 本项目地址: https://gitee.com/ystyle/lua
+- [下载二进制文件](https://gitee.com/ystyle/lua/releases/v5.4.2)
+
+
 ### 准备环境
 - 安装 docker
 - docker pull ystyle/open-harmony
