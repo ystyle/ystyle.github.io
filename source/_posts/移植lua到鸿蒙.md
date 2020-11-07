@@ -1,5 +1,5 @@
 ---
-title: 移植lua到鸿蒙 - 鸿蒙首个个人移植成功的编程语言
+title: 移植lua到鸿蒙 - 首个移植成功的编程语言
 date: 2020-11-07 23:52:26
 updated: 2020-11-07 23:52:26
 tags:
@@ -138,6 +138,15 @@ cp ./out/ipcamera_hi3516dv300/bin/camera_app ./bin/lua
 tar -zcf lua-5.4.2-ohos.tar.gz ./bin
 echo 'build success!'
 ```
+与鸿蒙一起编译，这里使用我之前的[docker镜像](https://ystyle.top/2020/09/10/compile-openharmony-indokcer/)
+```shell
+cd ~/code/ohos/lua
+./build-ohos.sh
+# 看到 ohos ipcamera_hi3516dv300 build success! build success! 就编译成功了。
+
+```
+
+
 
 >编译后软件在鸿蒙的 ./out/ipcamera_hi3516dv300/bin/camera_app  
 >脚本会把lua单独打包出来  
