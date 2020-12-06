@@ -25,7 +25,7 @@ permalink: quest2
   - 更新系统后，可以切回wifi+http代理方式玩(wifi连接输入密码，下边点高级，可以填入http代理)
   ![](https://dl.ystyle.top/images/2020-12/Netch_2020-12-06_16-44-00.png)
   ![](https://dl.ystyle.top/images/2020-12/explorer_2020-12-06_16-35-08.png)
-  ![](https://dl.ystyle.top/images/2020-12/chrome_2020-12-06_16-35-57.png)
+  ![](https://dl.ystyle.top/images/2020-12/chrome_2020-12-06_20-40-12.png)
   
 ### 开发者模式
   - [注册开发者帐号](ttps://dashboard.oculus.com)或进入别人的开发者团队
