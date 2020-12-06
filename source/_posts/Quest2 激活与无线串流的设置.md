@@ -13,7 +13,9 @@ permalink: quest2
 
 ### 连网激活
 > 需要可上网，与tcp、udp转发， 激活更新系统时需要udp转发才能正常更新系统, 本方法完美支持，不需要路由插件什么的， 其它支持udp的方法是需要一个root的安卓， 支持安装插件的路由器，详情看参考里的第二个链接《使用指南》
-  - Netch： socket5、ss、vmess(v2ray) 转wifi
+
+
+  - [Netch](https://github.com/NetchX/Netch)： socket5、ss、vmess(v2ray) 转wifi
     - 打不开可能需要安装`.NET Framework 4.8`和`Visual C++ 运行库`
   - 安装[TAP-Windows](https://build.openvpn.net/downloads/releases/tap-windows-9.21.2.exe) 虚拟网卡驱动
   - 打开Netch, 添代理，然后选择tun/tap 绕过局域网， 启动
@@ -21,6 +23,9 @@ permalink: quest2
   - 在网络适配器管理界面，把带tap的网卡，右键属性-切换到分享， 把第一个勾上，下拉选择wifi热点的网卡
   - 在quest2连接热点，等一会后，联网界面下的确定按钮亮了之后，会进入系统更新
   - 更新系统后，可以切回wifi+http代理方式玩(wifi连接输入密码，下边点高级，可以填入http代理)
+  ![](https://dl.ystyle.top/images/2020-12/explorer_2020-12-06_16-35-08.png)
+  ![](https://dl.ystyle.top/images/2020-12/chrome_2020-12-06_16-35-57.png)
+  
 ### 开发者模式
   - [注册开发者帐号](ttps://dashboard.oculus.com)或进入别人的开发者团队
   - [下载adb驱动](https://developer.oculus.com/downloads/package/oculus-adb-drivers), 解压后右键【androidwinusb.inf】选择安装即可。
@@ -33,6 +38,7 @@ permalink: quest2
   - 在电脑上安装`virtual desktop streamer`串流软件， [官方网站](https://www.vrdesktop.net/)直接免费下载
   - 用数据线连接电脑
   - 安装[sidequest](https://sidequestvr.com/setup-howto), 用它给quest2安装串流插件`virtual desktop vr patch`
+  
 ### 购买virtual desktop
   - 注册paypal
   - 绑定支持银联的银行卡(我用的是邮政的储蓄卡，只有银联，没其它标识)
