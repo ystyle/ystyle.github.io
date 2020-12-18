@@ -1,5 +1,5 @@
 ---
-title: 鸿蒙开发析HI3516用命令行连接wifi
+title: 鸿蒙开发板HI3516用命令行连接wifi
 tags:
   - 鸿蒙
   - wifi
@@ -10,8 +10,7 @@ updated: '2020-12-18 20:11:48'
 date: 2020-12-18 20:11:48
 ---
 
-
-    鸿蒙的HI3516编译里已经有wpa_supplicant相关工程了，但编译时没有包进去, 所以只要修改配置文件后就能编译出来了
+>鸿蒙的HI3516编译里已经有wpa_supplicant相关工程了，但编译时没有包进去, 所以只要修改配置文件后就能编译出来了
 
 主要修改文件: [communication/BUILD.gn#L17-18](https://gitee.com/openharmony/applications_sample_camera/blob/master/communication/BUILD.gn#L17-18) 行之间添加， 以下第2行
 ```gn
