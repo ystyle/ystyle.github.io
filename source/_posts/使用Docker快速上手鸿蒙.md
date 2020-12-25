@@ -88,7 +88,7 @@ python build.py ${HARDWARE} -b debug
 docker run --rm \
   -e HARDWARE=wifiiot \
   -v ${PWD}/out:/OpenHarmony/out \
-  -v ${PWD}/APP_BUILD.gn:/OpenHarmony/applications/sample/wifi-iot/app/python build.py ${HARDWARE} -b debugAPP_BUILD.gn \
+  -v ${PWD}/APP_BUILD.gn:/OpenHarmony/applications/sample/wifi-iot/app/APP_BUILD.gn \
   -v ${PWD}:/OpenHarmony/applications/sample/wifi-iot/app/my_first_app \
   ystyle/open-harmony
 ```
