@@ -1,7 +1,7 @@
 ---
 title: 使用Docker快速上手鸿蒙
 date: 2020-09-11 01:00:26
-updated: 2020-09-11 01:00:26
+updated: 2020-12-25 16:40:26
 tags:
 - 鸿蒙
 - docker
@@ -25,6 +25,15 @@ docker run --rm -ti -v ${PWD}/out:/OpenHarmony/out ystyle/open-harmony
 
 - 编译成功后各镜像在out目录下面, 默认编译的是`Hi3861`开发板的系统镜像, 可自行烧录到固定测试
 - 如果要编译其它板子可以设置dokcer镜像的环境变量`HARDWARE` 目前支持: `wifiiot`、`ipcamera_hi3516dv300`、`ipcamera_hi3518ev300`
+
+### 更新代码并编译
+```
+mkdir ~/OpenHarmony
+cd ~/OpenHarmony
+docker run --rm -ti -e HARDWARE=ipcamera_hi3516dv300 -v ${PWD}/out:/OpenHarmony/out ystyle/open-harmony bash
+repo sync -c
+python build.py ${HARDWARE} -b debug
+```
 
 ### 编写应用程序
 
@@ -79,7 +88,7 @@ docker run --rm -ti -v ${PWD}/out:/OpenHarmony/out ystyle/open-harmony
 docker run --rm \
   -e HARDWARE=wifiiot \
   -v ${PWD}/out:/OpenHarmony/out \
-  -v ${PWD}/APP_BUILD.gn:/OpenHarmony/applications/sample/wifi-iot/app/APP_BUILD.gn \
+  -v ${PWD}/APP_BUILD.gn:/OpenHarmony/applications/sample/wifi-iot/app/python build.py ${HARDWARE} -b debugAPP_BUILD.gn \
   -v ${PWD}:/OpenHarmony/applications/sample/wifi-iot/app/my_first_app \
   ystyle/open-harmony
 ```
@@ -109,7 +118,7 @@ docker run --rm \
 
 ```dockerfile
 FROM ubuntu:20.04 AS build-env
-LABEL version=2020-09-10
+LABEL version=2020-10-15
 
 # Set your hardware
 ENV HARDWARE=wifiiot
@@ -125,7 +134,7 @@ RUN sed -i 's/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/source
     apt-get install git curl build-essential libdbus-glib-1-dev libgirepository1.0-dev -y && \
     apt-get install zip libncurses5-dev pkg-config -y && \
     apt-get install python3-pip -y && \
-    apt-get install scons dosfstools mtools -y && \
+    apt-get install scons dosfstools mtools mtd-utils default-jdk default-jre -y && \
     rm -rf /var/lib/apt/lists/*
 
 # Setup python
@@ -144,7 +153,7 @@ RUN rm -rf /bin/sh && \
 ENV PATH /tools/gn:$PATH
 RUN mkdir /tools && \
     cd /tools && \
-    curl -LO http://tools.harmonyos.com/mirrors/gn/1523/linux/gn.1523.tar && \
+    curl -LO https://repo.huaweicloud.com/harmonyos/compiler/gn/1523/linux/gn.1523.tar && \
     tar xvf /tools/gn.1523.tar && \
     rm -rf /tools/gn.1523.tar
 
@@ -152,21 +161,102 @@ RUN mkdir /tools && \
 #ADD ./llvm-linux-9.0.0-34042.tar /tools
 ENV PATH /tools/llvm/bin:$PATH
 RUN cd /tools && \
-    curl -LO http://tools.harmonyos.com/mirrors/clang/9.0.0-34042/linux/llvm-linux-9.0.0-34042.tar && \
+    curl -LO https://repo.huaweicloud.com/harmonyos/compiler/clang/9.0.0-34042/linux/llvm-linux-9.0.0-34042.tar && \
     tar xvf /tools/llvm-linux-9.0.0-34042.tar && \
     rm -rf /tools/llvm-linux-9.0.0-34042.tar
 
 #Setup hc-gen
 ENV PATH /tools/hc-gen:$PATH
 RUN cd /tools && \
-    curl -LO http://tools.harmonyos.com/mirrors/hc-gen/0.64/linux/hc-gen-0.64-linux.tar && \
-    tar xvf /tools/hc-gen-0.64-linux.tar && \
-    rm -rf /tools/hc-gen-0.64-linux.tar
+    curl -LO https://repo.huaweicloud.com/harmonyos/compiler/hc-gen/0.65/linux/hc-gen-0.65-linux.tar && \
+    tar xvf /tools/hc-gen-0.65-linux.tar && \
+    rm -rf /tools/hc-gen-0.65-linux.tar
+    
+    
+#Setup hmos_app_packing_tool and hapsigntool // 必需是这目录，编译脚本写死了
+ENV PATH /root/developtools/:$PATH
+RUN mkdir /root/developtools/ && cd /root/developtools/ && \
+    curl -LO https://repo.huaweicloud.com/harmonyos/develop_tools/hmos_app_packing_tool.jar && \
+    curl -LO https://repo.huaweicloud.com/harmonyos/develop_tools/hapsigntoolv2.jar
 
 #Setup gcc_riscv32
 ENV PATH /tools/gcc_riscv32/bin:$PATH
 RUN cd /tools && \
-    curl -LO http://tools.harmonyos.com/mirrors/gcc_riscv32/7.3.0/linux/gcc_riscv32-linux-7.3.0.tar.gz && \
+    curl -LO http://tools.harmonyos.com/mirrors/gcc_riscv32/7.3.0/linux/gFROM ubuntu:20.04 AS build-env
+112
+LABEL version=2020-09-10
+113
+​
+114
+# Set your hardware
+115
+ENV HARDWARE=wifiiot
+116
+# Prevent interactive
+117
+ENV DEBIAN_FRONTEND=noninteractive
+118
+​
+119
+# Setting up the build environment
+120
+RUN sed -i 's/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list && \
+121
+    sed -i 's/security.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list && \
+122
+    apt-get clean -y && \
+123
+    apt-get -y update && \
+124
+    apt-get remove python* -y && \
+125
+    apt-get install git curl build-essential libdbus-glib-1-dev libgirepository1.0-dev -y && \
+126
+    apt-get install zip libncurses5-dev pkg-config -y && \
+127
+    apt-get install python3-pip -y && \
+128
+    apt-get install scons dosfstools mtools -y && \
+129
+    rm -rf /var/lib/apt/lists/*
+130
+​
+131
+# Setup python
+132
+# Make sure python install on the right python version path
+133
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1 && \
+134
+    pip3 install --upgrade pip -i https://mirrors.aliyun.com/pypi/simple && \
+135
+    pip3 install ninja kconfiglib pycryptodome ecdsa -i https://mirrors.aliyun.com/pypi/simple && \
+136
+    pip3 install six --upgrade --ignore-installed six -i https://pypi.tuna.tsinghua.edu.cn/simple && \
+137
+    rm -rf /var/cache/apt/archives
+138
+​
+139
+#Fix Dash
+140
+RUN rm -rf /bin/sh && \
+141
+    ln -s /bin/bash /bin/sh
+142
+​
+143
+#Setup gn
+144
+ENV PATH /tools/gn:$PATH
+145
+RUN mkdir /tools && \
+146
+    cd /tools && \
+147
+    curl -LO http://tools.harmonyos.com/mirrors/gn/1523/linux/gn.1523.tar && \
+148
+    tar xvf /tools/gn.1523.tar && \cc_riscv32-linux-7.3.0.tar.gz && \
     tar xvf /tools/gcc_riscv32-linux-7.3.0.tar.gz && \
     rm -rf /tools/gcc_riscv32-linux-7.3.0.tar.gz
 
@@ -193,4 +283,5 @@ ENV LANGUAGE en
 ENV LANG en_US.utf-8
 RUN export|grep LANG
 CMD ["/bin/bash", "-c", "python build.py ${HARDWARE} -b debug"]
+
 ```
