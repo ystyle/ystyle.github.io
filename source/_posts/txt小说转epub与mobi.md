@@ -16,8 +16,8 @@ date: 2019-12-31 13:02:49
 
 
 ### 下载
-- [点击下载](https://github.com/ystyle/TmdTextEpub/releases/latest)
-   - [百度网盘 `https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w`](https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w) 提取码：`h4np`
+- [Github点击下载](https://github.com/ystyle/TmdTextEpub/releases/latest)
+- [百度网盘下载 `https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w`](https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w) 提取码：`h4np`
 
 ### 功能
 
@@ -71,15 +71,19 @@ WIFI传书| |支持
 
 命令行全部参数为：
 ```$xslt
-Usage of D:\TmdTextEpub.exe:
+Usage of E:\Code\Go\bin\TmdTextEpub.exe:
   -author string
         作者 (default "YSTYLE")
   -bookname string
         书名: 默认为txt文件名
   -filename string
         txt 文件名
+  -lang string
+        设置语言: en,de,fr,it,es,zh,ja,pt,ru,nl (default "zh")
   -match string
         匹配标题的正则表达式, 不写可以自动识别, 如果没生成章节就参考教程。例: -match 第.{1,8}章 表示第和章字之间可以有1-8个任意文字 (default "自动匹配,可自定义")
+  -max uint
+        标题最大字数 (default 35)
   -tips
         添加本软件教程 (default true)
 ```
