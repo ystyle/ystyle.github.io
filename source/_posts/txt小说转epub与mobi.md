@@ -16,7 +16,8 @@ date: 2019-12-31 13:02:49
 
 
 ### 下载
-- [Github下载](https://github.com/ystyle/TmdTextEpub/releases/latest)
+- [Github电脑版下载](https://github.com/ystyle/TmdTextEpub/releases/latest)
+- [Github手机版下载](https://github.com/ystyle/TmdTextEpub/releases/tag/android)
 - [百度网盘下载 `https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w`](https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w) 提取码：`h4np`
 
 ### 功能
