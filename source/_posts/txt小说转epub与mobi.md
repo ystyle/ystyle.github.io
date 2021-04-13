@@ -5,6 +5,7 @@ tags:
   - kindle
   - epub
   - mobi
+  - kaf-cli
 categories: 软件
 permalink: txt-converto-epub-and-mobi
 id: 14
@@ -12,19 +13,18 @@ updated: '2020-03-24 13:02:49'
 date: 2019-12-31 13:02:49
 ---
 
-> 把txt文本转成epub、mobi电子书的工具, 支持电脑和安卓APP
+> 把txt文本转成epub、mobi电子书的工具, 支持电脑和安卓APP。
 
 
 ### 下载
-- [Github电脑版下载](https://github.com/ystyle/TmdTextEpub/releases/latest)
-- [Github手机版下载](https://github.com/ystyle/TmdTextEpub/releases/tag/android)
+- [Github电脑版下载](https://github.com/ystyle/kaf-cli/releases/latest)
+- [Github手机版下载](https://github.com/ystyle/kaf-cli/releases/tag/android)
 - [百度网盘下载 `https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w`](https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w) 提取码：`h4np`
-- Archlinux 可以在aur上安装 `yay -S kaf-cli` 然后以下命令全换成`kaf-cli`
-   - 例子 `kaf-cli -author 乱 -filename d:/全职法师.txt`
+- Archlinux 可以在aur上安装 [`yay -S kaf-cli`](https://aur.archlinux.org/packages/kaf-cli/)
 
 ### 功能
 
-功能|TmdTextEpub|KAF
+功能|kaf-cli|KAF
 :--|:--|:-----
 支持平台|windows、linux、mac|Android
 自动识别书名和章节|支持|支持
@@ -41,7 +41,7 @@ WIFI传书| |支持
 
 ### 使用方法
 - 电脑版
-  1. 解压, 把小说直接拖到 `TmdTextEpub.exe` 文件上面
+  1. 解压, 把小说直接拖到 `kaf-cli.exe` 文件上面
   1. 等转换完，目录下会生成epub和mobi文件
   1. 如果没有生成mobi，则复制`kindlegen`到`C:\windows`下面，重试
 - 安卓版
@@ -55,7 +55,7 @@ WIFI传书| |支持
 
 ### 效果
 
-![异常生物见闻录](https://github.com/ystyle/TmdTextEpub/raw/master/2020-01-21_12-02.png)
+![异常生物见闻录](https://github.com/ystyle/kaf-cli/raw/master/2020-01-21_12-02.png)
 
 ![](https://dl.ystyle.top/images/2020-03/550b751ed21b0ef466cae53fcac451da80cb3efe.jpg)
 
@@ -74,7 +74,7 @@ WIFI传书| |支持
 
 命令行全部参数为：
 ```$xslt
-Usage of E:\Code\Go\bin\TmdTextEpub.exe:
+Usage of E:\Code\Go\bin\kaf-cli.exe:
   -author string
         作者 (default "YSTYLE")
   -bookname string
@@ -92,16 +92,16 @@ Usage of E:\Code\Go\bin\TmdTextEpub.exe:
 ```
 
 ### 在任意位置执行命令
-1. 把`TmdTextEpub.exe` 和 `kindlegen.exe` 放`c:/windows/`下边
+1. 把`kaf-cli.exe` 和 `kindlegen.exe` 放`c:/windows/`下边
 2. 上面第1步只需要做一次，以后可以把小说放任意目录，都可以很简单执行转换，每次转换小说的按下面操作，
    - 打开小说在的文件夹, 按住`Shift键`不放，鼠标右击文件夹空白位置
    - 在右键菜单选择 `用命令行打开` 或 `以PowerShell打开`
-   - 执行`TmdTextEpub.exe -filename 异常生物见闻录.txt`,  现在可以不用写盘符了
+   - 执行`kaf-cli.exe -filename 异常生物见闻录.txt`,  现在可以不用写盘符了
 
 把`全职法师.txt`生成epub, 并设置作者名为`乱`
 ```shell
 cd d:/
-d:/TmdTextEpub.exe -author 乱 -filename d:/全职法师.txt
+d:/kaf-cli.exe -author 乱 -filename d:/全职法师.txt
 ```
 
 >以下全部示例都可以自动识别，不需要自己设定标题格式了， 一般用上用上面的例子就行了
@@ -111,19 +111,19 @@ d:/TmdTextEpub.exe -author 乱 -filename d:/全职法师.txt
 自定义章节匹配, 章节格式为`第x节`: 
 ```shell
 cd d:/
-d:/TmdTextEpub.exe -filename d:/ebbok.txt -match "第.{1,8}节"
+d:/kaf-cli.exe -filename d:/ebbok.txt -match "第.{1,8}节"
 ```
 
 自定义章节匹配, 章节格式为`Section 1` ~ `Section 100`: 
 ```shell
 cd d:/
-d:/TmdTextEpub.exe -filename d:/ebbok.txt -match "Section \d+"
+d:/kaf-cli.exe -filename d:/ebbok.txt -match "Section \d+"
 ```
 
 自定义章节匹配, 章节格式为`Chapter xxx`: 
 ```shell
 cd d:/
-d:/TmdTextEpub.exe -filename d:/ebbok.txt -match "Chapter .{1,8}"
+d:/kaf-cli.exe -filename d:/ebbok.txt -match "Chapter .{1,8}"
 ```
 
 
