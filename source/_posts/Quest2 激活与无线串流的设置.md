@@ -11,6 +11,8 @@ permalink: quest2
 
 # Quest2 激活与无线串流的设置
 
+### 更新后自带Airlink串流，不需要买virtual desktop了
+
 ### 连网激活
 > 需要可上网，与tcp、udp转发， 激活更新系统时需要udp转发才能正常更新系统, 本方法完美支持，不需要路由插件什么的， 其它支持udp的方法是需要一个root的安卓， 支持安装插件的路由器，详情看参考里的第二个链接《使用指南》
 
@@ -33,9 +35,23 @@ permalink: quest2
   - 安装手机[oculus app](https://rawapk.com/oculus-apk-download/)
   - 用数据线连接quest2和电脑
   - 在手机oculus app上连接quest2, 并在设置开启开发者模板
+  - 在电脑上安装sidequest， 可以下载一些第三方游戏。
   ![](https://dl.ystyle.top/images/2020-12/BE9BEC5F78EDD4C97982C8353CFE1D13.jpg)
   ![](https://dl.ystyle.top/images/2020-12/27EDA36DBCB42C960E77A19FB20F1557.jpg)
-  
+
+### 自带的Airlink串流
+- 电脑上安装或升级oculus home到最新版
+- 登陆帐号后到`设置-公测版`打开`Airlink`设置
+- 更新quest2系统到最新版
+- 在实验室打开Airlink
+- 之后在设置-快捷操作-Airlink搜索电脑，连接上后点启动， 就进入电脑版的操作台了。
+
+
+<details>
+<summary>展开查看 virtual desktop 串流</summary>### 更新后自带Airlink串流，不需要买virtual desktop了
+15
+
+
 ### virtual desktop
   - 在quest2上购买`virtual desktop`
     - `virtual desktop`必需买，sidequest上的只是个串流用的插件
@@ -59,7 +75,9 @@ permalink: quest2
   - 这时会显示一个巨大的电脑屏幕， 打开支持`steam vr`或`oculus home`的游戏，会自动串流到quest2里
     - 这时可以愉快的玩耍了
 ![](https://dl.ystyle.top/images/2020-12/VirtualDesktop.Streamer_2020-12-06_16-38-19.png)
-
+</details>
+  
+  
 ### 参考
  - [Oculus Quest / Quest2 如何设置 VirtualDesktop 实现无线串流【详细教程】_kasaiki的博客-CSDN博客](https://blog.csdn.net/kasaiki/article/details/109145902)
  - [Oculus Quest 国内玩家无障碍使用指南 - VR42](http://vr42.com/t/187)
