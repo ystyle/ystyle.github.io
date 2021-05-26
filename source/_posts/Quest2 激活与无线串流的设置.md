@@ -48,9 +48,7 @@ permalink: quest2
 
 
 <details>
-<summary>展开查看 virtual desktop 串流</summary>### 更新后自带Airlink串流，不需要买virtual desktop了
-15
-
+<summary>展开查看 virtual desktop 串流</summary>
 
 ### virtual desktop
   - 在quest2上购买`virtual desktop`
