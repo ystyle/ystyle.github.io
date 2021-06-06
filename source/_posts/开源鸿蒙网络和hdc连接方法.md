@@ -14,6 +14,7 @@ date: 2021-06-06 18:10:13
 ### 鸿蒙连接本地有线网络
 - 插入有线网线
 - 在hitool串口中连接上hi3516后执行
+  - `/system/xbin/su` 获取root权限
   - `ifconfig eth0 192.168.3.197 netmask 255.255.255.0` 网络IP要换成自己的网段
 ![](https://dl.ystyle.top/images/2021-06/HiTool_2021-06-06_18-29-05.png)
 
