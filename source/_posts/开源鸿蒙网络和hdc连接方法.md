@@ -7,6 +7,10 @@ permalink: openharmonyos-hdc-and-network
 date: 2021-06-06 18:10:13
 ---
 
+### hdc下载
+- 如果下载在源码，可以在源码目录找到: developtools/hdc_standard/prebuilt/windows/hdc_std.exe
+- 远程仓库地址： https://gitee.com/openharmony/developtools_hdc_standard
+
 ### 鸿蒙连接本地有线网络
 - 插入有线网线
 - 在hitool串口中连接上hi3516后执行
