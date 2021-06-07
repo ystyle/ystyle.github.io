@@ -20,7 +20,15 @@ date: 2021-06-06 18:10:13
 
 ![](https://dl.ystyle.top/images/2021-06/HiTool_2021-06-06_18-29-05.png)
 
-### 用hdc连接鸿蒙
+### 通过usb连接鸿蒙
+- 通过hi3516背面的type-c口连接电脑, 目前只有这口能传数据， 底下的口不行
+- 打开终端， 输入`hdc list targets`列出设备
+
+![](https://dl.ystyle.top/images/2021-06/mmc_2021-06-07_19-52-37.png)
+![](https://dl.ystyle.top/images/2021-06/WindowsTerminal_2021-06-07_19-53-25.png)
+
+
+### 用hdc通过tcp连接鸿蒙
 - 在连接hitool串口后执行`hdcd -t`
 - 在自己电脑主机上打开终端执行 `hdc tconn 192.168.3.197:10178` 显示 `Connect OK` 就表示连接上了
   - 执行`hdc list targets -v` 显示设备
