@@ -33,9 +33,8 @@ date: 2021-06-06 18:10:13
 - 在连接hitool串口后执行`hdcd -t`
 - 在自己电脑主机上打开终端执行 `hdc tconn 192.168.3.197:10178` 显示 `Connect OK` 就表示连接上了
   - 执行`hdc list targets -v` 显示设备
-  - 执行`hdc -t 192.168.3.197:10178 shell` 连接鸿蒙系统的shell， 注： 要用-t指定连接的ip:端口
+  - 执行`hdc -t 192.168.3.197:10178 shell` 连接鸿蒙系统的shell， 注： tcp连接时要用-t指定连接的ip:端口
   - 执行`hdc -t 192.168.3.197:10178 file send localfile remotefile` 发送文件
-  - 只有tcp连接才需要`-t ip:port`
   - 其实命令请查看使用手册
 
 ![](https://dl.ystyle.top/images/2021-06/HiTool_2021-06-06_18-19-47.png)
