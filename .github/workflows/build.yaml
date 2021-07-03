@@ -16,7 +16,7 @@ jobs:
           node-version: '7.9.0'
       - name: 3. install hexo...
         run: |
-          npm install hexo-cli -g
+          npm install hexo-cli@4.2.0 -g
           npm install
       - name: 4. hexo generate public files...
         run: |
