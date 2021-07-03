@@ -9,9 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 1. git checkout...
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: 2. setup nodejs...
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
+        with:
+          node-version: '7.9.0'
       - name: 3. install hexo...
         run: |
           npm install hexo-cli -g
@@ -21,8 +23,9 @@ jobs:
           hexo clean
           hexo g
       - name: 5. publish
-        run: |
-          git config user.name "ystyle"
-          git config user.email "lxy5266@live.com"
-          sed -i "s/gh_token/${{ secrets.GITHUB_TOKEN }}/g" ./_config.yml
-          hexo deploy
+        uses: heowc/action-hexo@main
+        env:
+          EMAIL: lxy5266@live.com
+          NAME: ystyle
+        with:
+          args: master
