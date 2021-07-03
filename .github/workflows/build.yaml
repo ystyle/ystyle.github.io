@@ -21,9 +21,8 @@ jobs:
           hexo clean
           hexo g
       - name: 5. publish
-        uses: y4code/hexo-deploy-action@master
-        env:
-          PERSONAL_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          PUBLISH_REPOSITORY: ystyle/ystyle.github.io # The repository the action should deploy to.
-          BRANCH: master  # The branch the action should deploy to.
-          PUBLISH_DIR: ./public # The folder the action should deploy.
+        run: |
+          git config user.name "ystyle"
+          git config user.email "lxy5266@live.com"
+          sed -i "s/gh_token/${{ secrets.GITHUB_TOKEN }}/g" ./_config.yml
+          hexo deploy
