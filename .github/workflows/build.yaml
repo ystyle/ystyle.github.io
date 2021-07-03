@@ -1,0 +1,28 @@
+name: GitHub Actions Build and Deploy
+on:
+  push:
+    branches:
+      - hexo
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. git checkout...
+        uses: actions/checkout@v1
+      - name: 2. setup nodejs...
+        uses: actions/setup-node@v1
+      - name: 3. install hexo...
+        run: |
+          npm install hexo-cli -g
+          npm install
+      - name: 4. hexo generate public files...
+        run: |
+          hexo clean
+          hexo g
+      - name: 5. publish
+        run: |
+          git config user.name "ystyle"
+          git config user.email "lxy5266@live.com"
+          sed -i "s/gh_token/${{ secrets.ACCESS_TOKEN }}/g" ./_config.yml
+          hexo deploy
