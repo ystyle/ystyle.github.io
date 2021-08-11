@@ -27,3 +27,10 @@ jobs:
           PUBLISH_REPOSITORY: ystyle/ystyle.github.io # The repository the action should deploy to.
           BRANCH: master  # The branch the action should deploy to.
           PUBLISH_DIR: ./public # The folder the action should deploy.
+      - name: 6. Fresh Huawei Cloud CDN Cache
+        uses: ystyle/hwcdn-cache@master
+        env:
+          ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+          SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
+          TYPE: directory
+          URLS: https://ystyle.top/
