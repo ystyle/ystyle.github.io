@@ -1,7 +1,7 @@
 ---
 title: Quest2 激活与无线串流的设置
 date: 2020-12-06 01:30:26
-updated: 2020-12-06 01:30:26
+updated: 2021-11-05 19:30:26
 tags:
 - quest2
 - 工具
@@ -18,9 +18,8 @@ permalink: quest2
 
 
   - [Netch](https://github.com/NetchX/Netch)： socket5、ss、vmess(v2ray) 转wifi
-    - 打不开可能需要安装`.NET Framework 4.8`和`Visual C++ 运行库`
-  - 安装[TAP-Windows](https://build.openvpn.net/downloads/releases/tap-windows-9.21.2.exe) 虚拟网卡驱动
-  - 打开Netch, 添代理，然后选择tun/tap 绕过局域网， 启动
+    - 安装[`.NET Desktop runtime 5.0 x64`](https://aka.ms/dotnet/5.0/windowsdesktop-runtime-win-x64.exe)和`Visual C++ 运行库`
+  - 打开Netch, 添你的代理，然后选择`ByPass LAN and China`， 启动
   - 在win10开启wifi移动热点
   - 在网络适配器管理界面，把带tap的网卡，右键属性-切换到分享， 把第一个勾上，下拉选择wifi热点的网卡
   - 在quest2连接热点，等一会后，联网界面下的确定按钮亮了之后，会进入系统更新
@@ -28,7 +27,14 @@ permalink: quest2
   ![](https://dl.ystyle.top/images/2020-12/Netch_2020-12-06_16-44-00.png)
   ![](https://dl.ystyle.top/images/2020-12/explorer_2020-12-06_16-35-08.png)
   ![](https://dl.ystyle.top/images/2020-12/chrome_2020-12-06_20-40-12.png)
-  
+
+### Airlink串流
+- 电脑上安装或升级oculus home到最新版
+- 登陆帐号后到`设置-公测版`打开`Airlink`设置
+- 更新quest2系统到最新版
+- 在实验室打开Airlink
+- 之后在设置-快捷操作-Airlink搜索电脑，连接上后点启动， 就进入电脑版的操作台了。
+
 ### 开发者模式
   - [注册开发者帐号](ttps://dashboard.oculus.com)或进入别人的开发者团队
   - [下载adb驱动](https://developer.oculus.com/downloads/package/oculus-adb-drivers), 解压后右键【androidwinusb.inf】选择安装即可。
@@ -39,12 +45,6 @@ permalink: quest2
   ![](https://dl.ystyle.top/images/2020-12/BE9BEC5F78EDD4C97982C8353CFE1D13.jpg)
   ![](https://dl.ystyle.top/images/2020-12/27EDA36DBCB42C960E77A19FB20F1557.jpg)
 
-### 自带的Airlink串流
-- 电脑上安装或升级oculus home到最新版
-- 登陆帐号后到`设置-公测版`打开`Airlink`设置
-- 更新quest2系统到最新版
-- 在实验室打开Airlink
-- 之后在设置-快捷操作-Airlink搜索电脑，连接上后点启动， 就进入电脑版的操作台了。
 
 
 <details>
