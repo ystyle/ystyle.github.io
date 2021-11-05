@@ -1,5 +1,5 @@
 ---
-title: Quest2 激活与无线串流的设置
+title: Quest2 使用Netch激活与无线串流的设置
 date: 2020-12-06 01:30:26
 updated: 2021-11-05 19:30:26
 tags:
@@ -14,7 +14,8 @@ permalink: quest2
 ### 更新后自带Airlink串流，不需要买virtual desktop了
 
 ### 连网激活
-> 需要可上网，与tcp、udp转发， 激活更新系统时需要udp转发才能正常更新系统, 本方法完美支持，不需要路由插件什么的， 其它支持udp的方法是需要一个root的安卓， 支持安装插件的路由器，详情看参考里的第二个链接《使用指南》
+
+> 需要可上网，与tcp、udp转发， 激活更新系统时需要udp转发才能正常更新系统, 本方法完美支持，只需要有支持wifi网卡的电脑
 
 
   - [Netch](https://github.com/NetchX/Netch)： socket5、ss、vmess(v2ray) 转wifi
@@ -36,7 +37,7 @@ permalink: quest2
 - 之后在设置-快捷操作-Airlink搜索电脑，连接上后点启动， 就进入电脑版的操作台了。
 
 ### 开发者模式
-  - [注册开发者帐号](ttps://dashboard.oculus.com)或进入别人的开发者团队
+  - [注册开发者帐号](https://dashboard.oculus.com)或进入别人的开发者团队
   - [下载adb驱动](https://developer.oculus.com/downloads/package/oculus-adb-drivers), 解压后右键【androidwinusb.inf】选择安装即可。
   - 安装手机[oculus app](https://rawapk.com/oculus-apk-download/)
   - 用数据线连接quest2和电脑
