@@ -26,7 +26,7 @@ Start-Process -FilePath aliyundrive-webdav.exe -ArgumentList ("--port=8080") -Wa
 
 脚本配置说明:
 
-- `$env:REFRESH_TOKEN`: 为阿里云网盘登陆后的token
+- `$env:REFRESH_TOKEN`: 为阿里云网盘登陆后的token, 必需改为自己的
   - [获取阿里云网盘REFRESH_TOKEN的方法](https://github.com/messense/aliyundrive-webdav#%E8%8E%B7%E5%8F%96-refresh_token)
 - `$env:WEBDAV_AUTH_USER`： webdav用户名
 - `$env:WEBDAV_AUTH_PASSWORD`: webdav密码
@@ -43,7 +43,7 @@ Start-Process -FilePath aliyundrive-webdav.exe -ArgumentList ("--port=8080") -Wa
   ![](https://dl.ystyle.top/images/2022-01/mmc_2022-01-01_23-13-35.png)
 - 下一步选择: 启动程序
   - 下一步： 在【程序或者脚本】写: `powershell.exe`
-  - 在【添加参数】填写: -WindowStyle Hidden -file run.ps1
+  - 在【添加参数】填写: `-WindowStyle Hidden -file run.ps1`
   - 在【起始于】填写：存放`run.ps1`和 `aliyundrive-webdav`的目录
   ![](https://dl.ystyle.top/images/2022-01/mmc_2022-01-01_23-13-52.png)
   
