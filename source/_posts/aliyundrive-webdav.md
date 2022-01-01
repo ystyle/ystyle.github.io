@@ -38,15 +38,15 @@ Start-Process -FilePath aliyundrive-webdav.exe -ArgumentList ("--port=8080") -Wa
 - `win + s`搜索`任务计划程序`打开
 - 在打开界面选择`任务计划程序库`
 - 在右边点创建基本任务，输入名字: `aliyundrive-webdav` (名字可以随意写)
-  ![](https://dl.ystyle.top/images/2022-01/mmc_2022-01-01_23-12-57.png
+  ![](https://dl.ystyle.top/images/2022-01/mmc_2022-01-01_23-12-57.png)
 - 下一步选择: 计算机启动时
-  ![](https://dl.ystyle.top/images/2022-01/mmc_2022-01-01_23-13-35.png
+  ![](https://dl.ystyle.top/images/2022-01/mmc_2022-01-01_23-13-35.png)
 - 下一步选择: 启动程序
   - 下一步： 在【程序或者脚本】写: `powershell.exe`
   - 在【添加参数】填写: -WindowStyle Hidden -file run.ps1
   - 在【起始于】填写：存放`run.ps1`和 `aliyundrive-webdav`的目录
   ![](https://dl.ystyle.top/images/2022-01/mmc_2022-01-01_23-13-52.png)
-  ![](https://dl.ystyle.top/images/2022-01/chrome_2022-01-01_23-15-31.png
+  ![](https://dl.ystyle.top/images/2022-01/chrome_2022-01-01_23-15-31.png)
 - 下一步点击：完成
   ![](https://dl.ystyle.top/images/2022-01/mmc_2022-01-01_23-16-10.png)
 - 启动服务: 在服务列表选择`aliyundrive-webdav`并在右边选项里选择启动
