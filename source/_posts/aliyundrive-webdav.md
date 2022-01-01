@@ -32,7 +32,7 @@ Start-Process -FilePath aliyundrive-webdav.exe -ArgumentList ("--port=8080") -Wa
 - `$env:WEBDAV_AUTH_PASSWORD`: webdav密码
 - `--port=8080` 为webdav的访问端口，被占用时可以换成其它的
 
-![](https://dl.ystyle.top/images/2022-01/kate_2022-01-01_23-18-47.png)
+  ![](https://dl.ystyle.top/images/2022-01/kate_2022-01-01_23-18-47.png)
 
 ### 设计开机启动
 - `win + s`搜索`任务计划程序`打开
@@ -46,7 +46,9 @@ Start-Process -FilePath aliyundrive-webdav.exe -ArgumentList ("--port=8080") -Wa
   - 在【添加参数】填写: -WindowStyle Hidden -file run.ps1
   - 在【起始于】填写：存放`run.ps1`和 `aliyundrive-webdav`的目录
   ![](https://dl.ystyle.top/images/2022-01/mmc_2022-01-01_23-13-52.png)
+  
   ![](https://dl.ystyle.top/images/2022-01/chrome_2022-01-01_23-15-31.png)
+  
 - 下一步点击：完成
   ![](https://dl.ystyle.top/images/2022-01/mmc_2022-01-01_23-16-10.png)
 - 启动服务: 在服务列表选择`aliyundrive-webdav`并在右边选项里选择启动
@@ -57,6 +59,8 @@ Start-Process -FilePath aliyundrive-webdav.exe -ArgumentList ("--port=8080") -Wa
   ![](https://dl.ystyle.top/images/2022-01/explorer_2022-01-01_23-22-35.png)
 - 在弹窗选择一个盘符，并在文件夹填写: `http://127.0.0.1:8080`, 点完成，在弹窗输入用户名和密码
   ![](https://dl.ystyle.top/images/2022-01/explorer_2022-01-01_23-23-39.png)
+  
   ![](https://dl.ystyle.top/images/2022-01/chrome_2022-01-01_23-25-44.png)
+  
   ![](https://dl.ystyle.top/images/2022-01/explorer_2022-01-01_23-25-13.png)
   
