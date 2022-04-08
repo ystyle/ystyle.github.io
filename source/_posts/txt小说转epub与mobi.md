@@ -67,16 +67,6 @@ WIFI传书|[kaf-wifi电脑版](https://github.com/ystyle/kaf-wifi)|支持
 
 ![](https://dl.ystyle.top/images/2020-03/550b751ed21b0ef466cae53fcac451da80cb3efe.jpg)
 
-### 手动把书转为kindle的mobi格式
->新版如果检测到有kindlegen程序时会自动转为mobi
-
-1. 在官网下载[kindlegen](https://www.amazon.com/gp/feature.html?ie=UTF8&docId=1000765211)
-2. 同样放到`d:`盘根目录下， 执行以下命令转换
-  ```shell
-  cd d:/
-  d:/kindlegen.exe d:/全职法师.epub
-  ```
-3. 在d盘就能找到mobi文件了，复制到kindle的documents目录下，打开kindle就能看到小说了
 
 ### 命令行模式
 
@@ -170,10 +160,10 @@ d:/kaf-cli.exe -filename d:/ebbok.txt -match "Chapter .{1,8}"
 >新版如果检测到有kindlegen程序时会自动转为mobi
 
 1. 下载[kindlegen](https://github.com/ystyle/kaf-cli/releases/kindlegen/) (github备份，官网已经不提供下载)
-2. 同样放到`d:`盘根目录下， 把epub拖拽到kindlegen.exe上面， 或执行以下命令转换
+2. 同样放到`d:`盘根目录下， 把epub拖拽到kindlegen.exe上面， 或执行以下命令转换, 参数`-dont_append_source` 可以减少大概一半的mobi文件大小
   ```shell
   cd d:/
-  d:/kindlegen.exe d:/全职法师.epub
+  d:/kindlegen.exe -dont_append_source d:/全职法师.epub
   ```
 3. 在d盘就能找到mobi文件，复制到kindle的documents目录下，打开kindle就能看到小说了
 
