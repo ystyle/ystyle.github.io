@@ -39,22 +39,26 @@ Start-Process -FilePath aliyundrive-webdav.exe -ArgumentList ("--port=8080") -Wa
 - 在打开界面选择`任务计划程序库`
 - 在右边点创建基本任务，输入名字: `aliyundrive-webdav` (名字可以随意写)
   ![](https://dl.ystyle.top/images/2022-01/mmc_2022-01-01_23-12-57.png)
+
 - 下一步选择: 计算机启动时
   ![](https://dl.ystyle.top/images/2022-01/mmc_2022-01-01_23-13-35.png)
+
 - 下一步选择: 启动程序
   - 下一步： 在【程序或者脚本】写: `powershell.exe`
   - 在【添加参数】填写: `-WindowStyle Hidden -file run.ps1`
   - 在【起始于】填写：存放`run.ps1`和 `aliyundrive-webdav`的目录
   ![](https://dl.ystyle.top/images/2022-01/mmc_2022-01-01_23-13-52.png)
-  
+
   ![](https://dl.ystyle.top/images/2022-01/chrome_2022-01-01_23-15-31.png)
-  
+
 - 下一步点击：完成
   ![](https://dl.ystyle.top/images/2022-01/mmc_2022-01-01_23-16-10.png)
 - 启动服务: 在服务列表选择`aliyundrive-webdav`并在右边选项里选择启动
   ![](https://dl.ystyle.top/images/2022-01/mmc_2022-01-01_23-20-07.png)
 
 ### 映射本地硬盘
+- 修改注册表，以支持webdav的http协议
+  ![image](https://user-images.githubusercontent.com/4478635/166304882-bd9852a9-081d-4420-9818-e6ba864bac27.png)
 - 打开文件管理器，在此电脑右键-选择映射网络驱动器
   ![](https://dl.ystyle.top/images/2022-01/explorer_2022-01-01_23-22-35.png)
 - 在弹窗选择一个盘符，并在文件夹填写: `http://127.0.0.1:8080`, 点完成，在弹窗输入用户名和密码
