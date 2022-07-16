@@ -25,9 +25,9 @@ permalink: quest2
   - 在网络适配器管理界面，把带tap的网卡，右键属性-切换到分享， 把第一个勾上，下拉选择wifi热点的网卡
   - 在quest2连接热点，等一会后，联网界面下的确定按钮亮了之后，会进入系统更新
   - 更新系统后，可以切回wifi+http代理方式玩(wifi连接输入密码，下边点高级，可以填入http代理)
-  ![](https://dl.ystyle.top/images/2020-12/Netch_2020-12-06_16-44-00.png)
-  ![](https://dl.ystyle.top/images/2020-12/explorer_2020-12-06_16-35-08.png)
-  ![](https://dl.ystyle.top/images/2020-12/chrome_2020-12-06_20-40-12.png)
+  ![](https://dll.ystyle.top/images/2020-12/Netch_2020-12-06_16-44-00.png)
+  ![](https://dll.ystyle.top/images/2020-12/explorer_2020-12-06_16-35-08.png)
+  ![](https://dll.ystyle.top/images/2020-12/chrome_2020-12-06_20-40-12.png)
 
 ### Airlink串流
 - 电脑上安装或升级oculus home到最新版
@@ -43,8 +43,8 @@ permalink: quest2
   - 用数据线连接quest2和电脑
   - 在手机oculus app上连接quest2, 并在设置开启开发者模板
   - 在电脑上安装sidequest， 可以下载一些第三方游戏。
-  ![](https://dl.ystyle.top/images/2020-12/BE9BEC5F78EDD4C97982C8353CFE1D13.jpg)
-  ![](https://dl.ystyle.top/images/2020-12/27EDA36DBCB42C960E77A19FB20F1557.jpg)
+  ![](https://dll.ystyle.top/images/2020-12/BE9BEC5F78EDD4C97982C8353CFE1D13.jpg)
+  ![](https://dll.ystyle.top/images/2020-12/27EDA36DBCB42C960E77A19FB20F1557.jpg)
 
 
 
@@ -57,7 +57,7 @@ permalink: quest2
   - 在电脑上安装`virtual desktop streamer`串流软件， [官方网站](https://www.vrdesktop.net/)直接免费下载
   - 用数据线连接电脑
   - 安装[sidequest](https://sidequestvr.com/setup-howto), 用它给quest2安装串流插件`virtual desktop vr patch`
-  ![](https://dl.ystyle.top/images/2020-12/SideQuest_2020-12-06_16-41-36.png)
+  ![](https://dll.ystyle.top/images/2020-12/SideQuest_2020-12-06_16-41-36.png)
   
 ### 购买virtual desktop
   - 注册paypal
@@ -73,7 +73,7 @@ permalink: quest2
   - 在quest2上打开`virtual desktop`软件
   - 这时会显示一个巨大的电脑屏幕， 打开支持`steam vr`或`oculus home`的游戏，会自动串流到quest2里
     - 这时可以愉快的玩耍了
-![](https://dl.ystyle.top/images/2020-12/VirtualDesktop.Streamer_2020-12-06_16-38-19.png)
+![](https://dll.ystyle.top/images/2020-12/VirtualDesktop.Streamer_2020-12-06_16-38-19.png)
 </details>
   
   
