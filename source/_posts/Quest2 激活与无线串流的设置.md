@@ -1,7 +1,7 @@
 ---
-title: Quest2 激活与无线串流的设置
+title: Quest2 使用Netch激活与无线串流的设置
 date: 2020-12-06 01:30:26
-updated: 2020-12-06 01:30:26
+updated: 2021-11-05 19:30:26
 tags:
 - quest2
 - 工具
@@ -14,37 +14,38 @@ permalink: quest2
 ### 更新后自带Airlink串流，不需要买virtual desktop了
 
 ### 连网激活
-> 需要可上网，与tcp、udp转发， 激活更新系统时需要udp转发才能正常更新系统, 本方法完美支持，不需要路由插件什么的， 其它支持udp的方法是需要一个root的安卓， 支持安装插件的路由器，详情看参考里的第二个链接《使用指南》
+
+> 需要可上网，与tcp、udp转发， 激活更新系统时需要udp转发才能正常更新系统, 本方法完美支持，只需要有支持wifi网卡的电脑
 
 
   - [Netch](https://github.com/NetchX/Netch)： socket5、ss、vmess(v2ray) 转wifi
-    - 打不开可能需要安装`.NET Framework 4.8`和`Visual C++ 运行库`
-  - 安装[TAP-Windows](https://build.openvpn.net/downloads/releases/tap-windows-9.21.2.exe) 虚拟网卡驱动
-  - 打开Netch, 添代理，然后选择tun/tap 绕过局域网， 启动
+    - 安装[`.NET Desktop runtime 5.0 x64`](https://aka.ms/dotnet/5.0/windowsdesktop-runtime-win-x64.exe)和`Visual C++ 运行库`
+  - 打开Netch, 添你的代理，然后选择`ByPass LAN and China`， 启动
   - 在win10开启wifi移动热点
   - 在网络适配器管理界面，把带tap的网卡，右键属性-切换到分享， 把第一个勾上，下拉选择wifi热点的网卡
   - 在quest2连接热点，等一会后，联网界面下的确定按钮亮了之后，会进入系统更新
   - 更新系统后，可以切回wifi+http代理方式玩(wifi连接输入密码，下边点高级，可以填入http代理)
-  ![](https://dll.ystyle.top/images/2020-12/Netch_2020-12-06_16-44-00.png)
-  ![](https://dll.ystyle.top/images/2020-12/explorer_2020-12-06_16-35-08.png)
-  ![](https://dll.ystyle.top/images/2020-12/chrome_2020-12-06_20-40-12.png)
-  
-### 开发者模式
-  - [注册开发者帐号](ttps://dashboard.oculus.com)或进入别人的开发者团队
-  - [下载adb驱动](https://developer.oculus.com/downloads/package/oculus-adb-drivers), 解压后右键【androidwinusb.inf】选择安装即可。
-  - 安装手机[oculus app](https://rawapk.com/oculus-apk-download/)
-  - 用数据线连接quest2和电脑
-  - 在手机oculus app上连接quest2, 并在设置开启开发者模板
-  - 在电脑上安装sidequest， 可以下载一些第三方游戏。
-  ![](https://dll.ystyle.top/images/2020-12/BE9BEC5F78EDD4C97982C8353CFE1D13.jpg)
-  ![](https://dll.ystyle.top/images/2020-12/27EDA36DBCB42C960E77A19FB20F1557.jpg)
+  ![](https://dl.ystyle.top/images/2020-12/Netch_2020-12-06_16-44-00.png)
+  ![](https://dl.ystyle.top/images/2020-12/explorer_2020-12-06_16-35-08.png)
+  ![](https://dl.ystyle.top/images/2020-12/chrome_2020-12-06_20-40-12.png)
 
-### 自带的Airlink串流
+### Airlink串流
 - 电脑上安装或升级oculus home到最新版
 - 登陆帐号后到`设置-公测版`打开`Airlink`设置
 - 更新quest2系统到最新版
 - 在实验室打开Airlink
 - 之后在设置-快捷操作-Airlink搜索电脑，连接上后点启动， 就进入电脑版的操作台了。
+
+### 开发者模式
+  - [注册开发者帐号](https://dashboard.oculus.com)或进入别人的开发者团队
+  - [下载adb驱动](https://developer.oculus.com/downloads/package/oculus-adb-drivers), 解压后右键【androidwinusb.inf】选择安装即可。
+  - 安装手机[oculus app](https://rawapk.com/oculus-apk-download/)
+  - 用数据线连接quest2和电脑
+  - 在手机oculus app上连接quest2, 并在设置开启开发者模板
+  - 在电脑上安装sidequest， 可以下载一些第三方游戏。
+  ![](https://dl.ystyle.top/images/2020-12/BE9BEC5F78EDD4C97982C8353CFE1D13.jpg)
+  ![](https://dl.ystyle.top/images/2020-12/27EDA36DBCB42C960E77A19FB20F1557.jpg)
+
 
 
 <details>
@@ -56,7 +57,7 @@ permalink: quest2
   - 在电脑上安装`virtual desktop streamer`串流软件， [官方网站](https://www.vrdesktop.net/)直接免费下载
   - 用数据线连接电脑
   - 安装[sidequest](https://sidequestvr.com/setup-howto), 用它给quest2安装串流插件`virtual desktop vr patch`
-  ![](https://dll.ystyle.top/images/2020-12/SideQuest_2020-12-06_16-41-36.png)
+  ![](https://dl.ystyle.top/images/2020-12/SideQuest_2020-12-06_16-41-36.png)
   
 ### 购买virtual desktop
   - 注册paypal
@@ -72,7 +73,7 @@ permalink: quest2
   - 在quest2上打开`virtual desktop`软件
   - 这时会显示一个巨大的电脑屏幕， 打开支持`steam vr`或`oculus home`的游戏，会自动串流到quest2里
     - 这时可以愉快的玩耍了
-![](https://dll.ystyle.top/images/2020-12/VirtualDesktop.Streamer_2020-12-06_16-38-19.png)
+![](https://dl.ystyle.top/images/2020-12/VirtualDesktop.Streamer_2020-12-06_16-38-19.png)
 </details>
   
   

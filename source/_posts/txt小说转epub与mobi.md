@@ -19,8 +19,9 @@ date: 2019-12-31 13:02:49
 ### 下载
 - 电脑版kaf-cli: [Github下载](https://github.com/ystyle/kaf-cli/releases/latest)
 - 手机版kaf: [Github下载](https://github.com/ystyle/kaf-cli/releases/tag/android)
+  - 原服务器已过期，新的服务器地址为: `ws://kas.ystyle.top/ws`
 - 电脑版wifi传书kaf-wifi: [Github下载](https://github.com/ystyle/kaf-wifi/releases/latest)
-- 全部软件 [百度网盘下载 `https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w`](https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w) 提取码：`h4np`
+- 全部软件 [百度网盘下载 `https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w?pwd=h4np`](https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w?pwd=h4np)
 - Archlinux 可以在aur上安装 [`yay -S kaf-cli kaf-wifi`](https://aur.archlinux.org/packages/kaf-cli/)
 
 ### 功能
@@ -66,16 +67,6 @@ WIFI传书|[kaf-wifi电脑版](https://github.com/ystyle/kaf-wifi)|支持
 
 ![](https://dll.ystyle.top/images/2020-03/550b751ed21b0ef466cae53fcac451da80cb3efe.jpg)
 
-### 手动把书转为kindle的mobi格式
->新版如果检测到有kindlegen程序时会自动转为mobi
-
-1. 在官网下载[kindlegen](https://www.amazon.com/gp/feature.html?ie=UTF8&docId=1000765211)
-2. 同样放到`d:`盘根目录下， 执行以下命令转换
-  ```shell
-  cd d:/
-  d:/kindlegen.exe d:/全职法师.epub
-  ```
-3. 在d盘就能找到mobi文件了，复制到kindle的documents目录下，打开kindle就能看到小说了
 
 ### 命令行模式
 
@@ -169,10 +160,10 @@ d:/kaf-cli.exe -filename d:/ebbok.txt -match "Chapter .{1,8}"
 >新版如果检测到有kindlegen程序时会自动转为mobi
 
 1. 下载[kindlegen](https://github.com/ystyle/kaf-cli/releases/kindlegen/) (github备份，官网已经不提供下载)
-2. 同样放到`d:`盘根目录下， 把epub拖拽到kindlegen.exe上面， 或执行以下命令转换
+2. 同样放到`d:`盘根目录下， 把epub拖拽到kindlegen.exe上面， 或执行以下命令转换, 参数`-dont_append_source` 可以减少大概一半的mobi文件大小
   ```shell
   cd d:/
-  d:/kindlegen.exe d:/全职法师.epub
+  d:/kindlegen.exe -dont_append_source d:/全职法师.epub
   ```
 3. 在d盘就能找到mobi文件，复制到kindle的documents目录下，打开kindle就能看到小说了
 
