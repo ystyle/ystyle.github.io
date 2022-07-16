@@ -65,4 +65,4 @@ Windows Registry Editor Version 5.00
 ```
 
 ### 效果预览
-![](https://dl.ystyle.top/images/2020-03/WindowsTerminal_2020-03-15_16-55-40.png)
+![](https://dll.ystyle.top/images/2020-03/WindowsTerminal_2020-03-15_16-55-40.png)

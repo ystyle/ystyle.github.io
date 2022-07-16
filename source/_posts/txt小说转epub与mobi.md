@@ -52,19 +52,19 @@ WIFI传书|[kaf-wifi电脑版](https://github.com/ystyle/kaf-wifi)|支持
      在拖拽模式下, 如果目录下有`cover.png`文件会自动添加为封面、支持jpg、png格式， 如果需要指定其它文件或jpg格式需要使用命令行模式   
   1. 其它自定义功能请用命令行模式
 - 安卓版
-![](https://dl.ystyle.top/images/2020-03/kaf1.jpg)
+![](https://dll.ystyle.top/images/2020-03/kaf1.jpg)
 
-![](https://dl.ystyle.top/images/2020-03/kaf2.jpg)
+![](https://dll.ystyle.top/images/2020-03/kaf2.jpg)
 
-![](https://dl.ystyle.top/images/2020-03/kaf5.jpg)
+![](https://dll.ystyle.top/images/2020-03/kaf5.jpg)
 
-![](https://dl.ystyle.top/images/2020-03/kaf6.jpg)
+![](https://dll.ystyle.top/images/2020-03/kaf6.jpg)
 
 ### 效果
 
 ![异常生物见闻录](https://github.com/ystyle/kaf-cli/raw/master/2020-01-21_12-02.png)
 
-![](https://dl.ystyle.top/images/2020-03/550b751ed21b0ef466cae53fcac451da80cb3efe.jpg)
+![](https://dll.ystyle.top/images/2020-03/550b751ed21b0ef466cae53fcac451da80cb3efe.jpg)
 
 ### 手动把书转为kindle的mobi格式
 >新版如果检测到有kindlegen程序时会自动转为mobi

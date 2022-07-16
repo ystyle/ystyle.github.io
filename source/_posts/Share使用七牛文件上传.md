@@ -10,7 +10,7 @@ categories:
 ---
 - ShareX界面
 
-![](https://dl.ystyle.top/qiniu//201717051546-t.png)
+![](https://dll.ystyle.top/qiniu//201717051546-t.png)
 
 
 ### 配置文件
@@ -37,7 +37,7 @@ categories:
     "file": "$input$"
   },
   "ResponseType": "Text",
-  "URL": "https://dl.ystyle.top/qiniu//$json:key$"
+  "URL": "https://dll.ystyle.top/qiniu//$json:key$"
 }
 ```
 

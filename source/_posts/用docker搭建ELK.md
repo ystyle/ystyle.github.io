@@ -82,7 +82,7 @@ output {
 
 ### kibana设置
 进去会让设置一个index ,可以设置为上面Logstash配置文件`log4j.conf` output的elasticsearch中的index前缀就行了，然后在首页就能查询到了
-![](https://dl.ystyle.top/qiniu//201717291743-N.png)
+![](https://dll.ystyle.top/qiniu//201717291743-N.png)
 
 
 
@@ -396,6 +396,6 @@ logger.debug("用户名验证失败！");
 ```
 
 ### 预览结果
-![](https://dl.ystyle.top/qiniu//201717291744-B.png)
+![](https://dll.ystyle.top/qiniu//201717291744-B.png)
 
-![](https://dl.ystyle.top/qiniu//201717291744-R.png)
+![](https://dll.ystyle.top/qiniu//201717291744-R.png)

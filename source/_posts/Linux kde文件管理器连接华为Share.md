@@ -32,5 +32,5 @@ client min protocol = NT1
 - 在弹窗填写用户名和密码
 - 右键添加到标签(下次直接在标签点击就能访问了)
 
-![访问华为Share](https://dl.ystyle.top/images/2020-09/2020-09-03_14-33.png)
-![修改标签名称](https://dl.ystyle.top/images/2020-09/2020-09-03_14-31.png)
+![访问华为Share](https://dll.ystyle.top/images/2020-09/2020-09-03_14-33.png)
+![修改标签名称](https://dll.ystyle.top/images/2020-09/2020-09-03_14-31.png)

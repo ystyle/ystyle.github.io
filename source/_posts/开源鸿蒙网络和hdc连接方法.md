@@ -18,8 +18,8 @@ date: 2021-06-06 18:10:13
   - 如果成功，可以在电脑 `设备管理-用串行总线设备`下面看到`HDC Device`
 - 打开终端， 输入`hdc list targets`列出设备
 
-![](https://dl.ystyle.top/images/2021-06/mmc_2021-06-07_19-52-37.png)
-![](https://dl.ystyle.top/images/2021-06/WindowsTerminal_2021-06-07_19-53-25.png)
+![](https://dll.ystyle.top/images/2021-06/mmc_2021-06-07_19-52-37.png)
+![](https://dll.ystyle.top/images/2021-06/WindowsTerminal_2021-06-07_19-53-25.png)
 
 ### 鸿蒙连接本地有线网络
 - 插入有线网线
@@ -27,7 +27,7 @@ date: 2021-06-06 18:10:13
   - `/system/xbin/su` 获取root权限
   - `ifconfig eth0 192.168.3.197 netmask 255.255.255.0` 网络IP要换成自己的网段
 
-![](https://dl.ystyle.top/images/2021-06/HiTool_2021-06-06_18-29-05.png)
+![](https://dll.ystyle.top/images/2021-06/HiTool_2021-06-06_18-29-05.png)
 
 ### 用hdc通过tcp连接鸿蒙
 - 在连接hitool串口后执行`hdcd -t`
@@ -37,5 +37,5 @@ date: 2021-06-06 18:10:13
   - 执行`hdc -t 192.168.3.197:10178 file send localfile remotefile` 发送文件
   - 其实命令请查看使用手册
 
-![](https://dl.ystyle.top/images/2021-06/HiTool_2021-06-06_18-19-47.png)
-![](https://dl.ystyle.top/images/2021-06/WindowsTerminal_2021-06-06_18-30-29.png)
+![](https://dll.ystyle.top/images/2021-06/HiTool_2021-06-06_18-19-47.png)
+![](https://dll.ystyle.top/images/2021-06/WindowsTerminal_2021-06-06_18-30-29.png)

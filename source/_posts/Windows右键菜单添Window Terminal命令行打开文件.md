@@ -35,6 +35,6 @@ Windows Registry Editor Version 5.00
   - `micro.exe \"%1\"` 是需要执行的命令， `\"%1\"`是当前右键的文件占位符
   
 ### 效果
-![](https://dl.ystyle.top/images/2020-05/qimgv_2020-05-30_22-44-29.png)
+![](https://dll.ystyle.top/images/2020-05/qimgv_2020-05-30_22-44-29.png)
 
-![](https://dl.ystyle.top/images/2020-05/WindowsTerminal_2020-05-30_22-52-28.png)
+![](https://dll.ystyle.top/images/2020-05/WindowsTerminal_2020-05-30_22-52-28.png)

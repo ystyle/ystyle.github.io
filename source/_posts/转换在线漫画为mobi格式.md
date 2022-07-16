@@ -39,7 +39,7 @@ https://zh.nyahentai.site/g/326699/
 - 然后把文件拖到comic-cli里边就会自动把漫画转为mobi格式
 - 如果没有生成则把`kindlegen.exe`放到`c:/windows`里再试试
 
-![图文教程](https://dl.ystyle.top/images/2020-09/WindowsTerminal_2020-09-05_12-04-06.png)
+![图文教程](https://dll.ystyle.top/images/2020-09/WindowsTerminal_2020-09-05_12-04-06.png)
 
 ### 目前存在的问题
 - 转换工程文件到mobi格式时，可能失败，kindlegen没输出原因和错误内容，目前无法解决， 只能多次重试了。

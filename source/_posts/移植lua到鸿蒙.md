@@ -11,7 +11,7 @@ permalink: porting-Lua-to-openharmony
 ---
 
 ### 惯例先放hello world
-![hello world](https://dl.ystyle.top/images/2020-11/WindowsTerminal_2020-11-07_23-28-08.png)
+![hello world](https://dll.ystyle.top/images/2020-11/WindowsTerminal_2020-11-07_23-28-08.png)
 
 - 本项目地址: https://gitee.com/ystyle/lua
 - [下载二进制文件](https://gitee.com/ystyle/lua/releases/v5.4.2)
@@ -153,10 +153,10 @@ cd ~/code/ohos/lua
 >单独的lua可执行文件在bin目录 
 
 ### 演示
-![io操作](https://dl.ystyle.top/images/2020-11/WindowsTerminal_2020-11-07_23-46-45.png)
+![io操作](https://dll.ystyle.top/images/2020-11/WindowsTerminal_2020-11-07_23-46-45.png)
 
-![官方测试用例1](https://dl.ystyle.top/images/2020-11/WindowsTerminal_2020-11-07_23-48-58.png)
+![官方测试用例1](https://dll.ystyle.top/images/2020-11/WindowsTerminal_2020-11-07_23-48-58.png)
 
-![官方测试用例2](https://dl.ystyle.top/images/2020-11/WindowsTerminal_2020-11-07_23-50-10.png)
+![官方测试用例2](https://dll.ystyle.top/images/2020-11/WindowsTerminal_2020-11-07_23-50-10.png)
 
-![官方测试用例3](https://dl.ystyle.top/images/2020-11/WindowsTerminal_2020-11-07_23-51-01.png)
+![官方测试用例3](https://dll.ystyle.top/images/2020-11/WindowsTerminal_2020-11-07_23-51-01.png)
