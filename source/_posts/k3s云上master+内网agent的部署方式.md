@@ -1,5 +1,5 @@
 ---
-title: k3s云上master+内网agent的部署方式.
+title: k3s云上master+内网agent的部署方式
 date: 2023-03-11 21:02:26
 updated: 2023-03-11 21:02:26
 tags:
