@@ -22,6 +22,7 @@ permalink: k3s-master-in-cloud-agent-in-local-intranet
 
 ### 在云上安装master
 >需要替换下面的master_public_ip为master公网ip, 能正常起来一般就没问题了
+
 ```shell
 export INSTALL_KAS_EXEC="--node-external-ip=master_public_ip --flannel-backend=wireguard-native --flannel-external-ip"
 curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
