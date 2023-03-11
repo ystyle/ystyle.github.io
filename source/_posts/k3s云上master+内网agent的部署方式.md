@@ -42,5 +42,12 @@ curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIR
 >只需要添加`--node-external-ip`参数就能启用`wireguard-native`功能了 。 如果没加这参数，是普通的节点，公网master和内网agent就不能正常通信
 
 ### 验证方法
-1. 用nodeSelector分别在master和内网机器上部署nginx的deploy， 再分别创建对应的service
-2. 再在其中一个deploy的pod里执行curl 另一个deploy的service名称，如果能请求到nginx默认界面，说明是通的
+1. 先查看节点是否正常，不需要重启master或agent的服务，如果重启后才看到的话，可能没安装成功
+	```
+	 $ kubelct get node
+	NAME                      STATUS   ROLES                  AGE    VERSION
+	ubuntu-20.04   Ready    control-plane,master   14d    v1.25.6+k3s1
+	archlinux-rpi             Ready    <none>                 156m   v1.25.6+k3s1
+	```
+2. 用nodeSelector分别在master和内网机器上部署nginx的deploy， 再分别创建对应的service
+3. 再在其中一个deploy的pod里执行curl 另一个deploy的service名称，如果能请求到nginx默认界面，说明是通的
