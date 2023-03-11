@@ -21,7 +21,9 @@ permalink: k3s-master-in-cloud-agent-in-local-intranet
 - 如果内网有防火墙，需要开放master公网ip的`6443`和`51820`端口
 
 ### 在云上安装master
+
 >需要替换下面的master_public_ip为master公网ip, 能正常起来一般就没问题了
+
 
 ```shell
 export INSTALL_KAS_EXEC="--node-external-ip=master_public_ip --flannel-backend=wireguard-native --flannel-external-ip"
