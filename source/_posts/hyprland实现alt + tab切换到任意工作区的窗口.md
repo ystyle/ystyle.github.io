@@ -13,6 +13,7 @@ permalink: hyprland-alt-tab-switch-to-any-widnow
 
 ### 依赖
 >一键安装 `yay -S jq rofi-lbonn-wayland-git`
+
 - jq
 - rofi
 
@@ -31,4 +32,6 @@ bind = ALT, Tab, exec, ${HOME}/.config/hypr/scripts/switch_windows
 ```
 
 ### 效果
+>按`alt + tab`后，在弹出的窗口选择对应窗口的标题， 可以自动跳转到对应的窗口
+
 ![截图_2023-10-13_160749](https://github.com/ystyle/ystyle.github.io/assets/4478635/bf28c244-a9ad-4463-92a6-d06b5329c749)
