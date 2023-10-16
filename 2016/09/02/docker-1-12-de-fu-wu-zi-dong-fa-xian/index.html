@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>docker 1.12 的服务自动发现 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="docker">
+    <meta name="description" content="介绍 docker 1.12 的swarm 集群的自动发现有两种方式, virtual IP address (VIP) 与 DNS round-robin, 本文使用的是VIP的方式  准备 安装docker 1.12 以上版本 初始化swarm集群 创建一个名为docker-net 的overlay网络 开放7946 TCP/UDP , 4789 UDP 端口 初始化swarm集群部份可看我之">
+<meta name="keywords" content="docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker 1.12 的服务自动发现">
+<meta property="og:url" content="http://ystyle.top/2016/09/02/docker-1-12-de-fu-wu-zi-dong-fa-xian/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="介绍 docker 1.12 的swarm 集群的自动发现有两种方式, virtual IP address (VIP) 与 DNS round-robin, 本文使用的是VIP的方式  准备 安装docker 1.12 以上版本 初始化swarm集群 创建一个名为docker-net 的overlay网络 开放7946 TCP/UDP , 4789 UDP 端口 初始化swarm集群部份可看我之">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2016-09-03T15:12:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker 1.12 的服务自动发现">
+<meta name="twitter:description" content="介绍 docker 1.12 的swarm 集群的自动发现有两种方式, virtual IP address (VIP) 与 DNS round-robin, 本文使用的是VIP的方式  准备 安装docker 1.12 以上版本 初始化swarm集群 创建一个名为docker-net 的overlay网络 开放7946 TCP/UDP , 4789 UDP 端口 初始化swarm集群部份可看我之">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">docker 1.12 的服务自动发现</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">docker 1.12 的服务自动发现</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-09-02T18:26:07.000Z" itemprop="datePublished" class="page-time">
+  2016-09-03
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">介绍</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#准备"><span class="post-toc-number">2.</span> <span class="post-toc-text">准备</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建overlay网络"><span class="post-toc-number">3.</span> <span class="post-toc-text">创建overlay网络</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在swarm上用overlay-网络创建一个服务"><span class="post-toc-number">4.</span> <span class="post-toc-text">在swarm上用overlay 网络创建一个服务</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#演示使用服务名访问nginx"><span class="post-toc-number">5.</span> <span class="post-toc-text">演示使用服务名访问nginx</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#结语"><span class="post-toc-number">6.</span> <span class="post-toc-text">结语</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-docker-1-12-de-fu-wu-zi-dong-fa-xian"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">docker 1.12 的服务自动发现</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-09-03 02:26:07" datetime="2016-09-02T18:26:07.000Z"  itemprop="datePublished">2016-09-03</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><blockquote>
+<p>docker 1.12 的swarm 集群的自动发现有两种方式, virtual IP address (VIP) 与 DNS round-robin, 本文使用的是VIP的方式</p>
+</blockquote>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ol>
+<li>安装docker 1.12 以上版本</li>
+<li>初始化swarm集群</li>
+<li>创建一个名为<code>docker-net</code> 的overlay网络</li>
+<li>开放<code>7946 TCP/UDP</code> , <code>4789 UDP</code> 端口<blockquote>
+<p>初始化swarm集群部份可看我之前的博客<a href="http://www.lxy520.net/2016/07/02/shi-yong-docker-1-12-da-jian-duo-zhu-ji-docker-swarmji-qun/" target="_blank" rel="noopener">使用docker 1.12 搭建多主机docker swarm集群</a></p>
+</blockquote>
+</li>
+</ol>
+<h3 id="创建overlay网络"><a href="#创建overlay网络" class="headerlink" title="创建overlay网络"></a>创建overlay网络</h3><p>查看当前的网络<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@swarm-manager ~]# docker network ls</span><br><span class="line">NETWORK ID          NAME                DRIVER              SCOPE</span><br><span class="line">376f5b337bfc        bridge              bridge              local                                    </span><br><span class="line">166bd71f7d0e        host                host                local               </span><br><span class="line">9gr6bfff1rv9        ingress             overlay             swarm</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><code>ingress</code> 也是一个overlay网络, 可以跨主机通信, 本教程会创建一个新的</p>
+</blockquote>
+<p>创建网络<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker network create \</span><br><span class="line">  --driver overlay \</span><br><span class="line">  --opt encrypted \ ## 是否使用加密</span><br><span class="line">  my-network</span><br></pre></td></tr></table></figure></p>
+<p>查看<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@swarm-manager ~]# docker network ls</span><br><span class="line">NETWORK ID          NAME                DRIVER              SCOPE</span><br><span class="line">376f5b337bfc        bridge              bridge              local                                    </span><br><span class="line">166bd71f7d0e        host                host                local               </span><br><span class="line">9gr6bfff1rv9        ingress             overlay             swarm       </span><br><span class="line">aoqs3p835s5g        docker-net          overlay             swarm</span><br></pre></td></tr></table></figure></p>
+<h3 id="在swarm上用overlay-网络创建一个服务"><a href="#在swarm上用overlay-网络创建一个服务" class="headerlink" title="在swarm上用overlay 网络创建一个服务"></a>在swarm上用overlay 网络创建一个服务</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker service create \</span><br><span class="line">  --replicas 3 \</span><br><span class="line">  --name my-web \ # 服务名为my-web</span><br><span class="line">  --network docker-net \</span><br><span class="line">  daocloud.io/nginx:alpine # 使用国内的镜像, alpine版的体积很小,下载会快点</span><br></pre></td></tr></table></figure>
+<p>查看服务<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 本次只起了一个manager节点, 所以容器都跑在这台机器上了</span><br><span class="line">[root@swarm-manager ~]# docker service ps my-web</span><br><span class="line">ID                         NAME          IMAGE                     NODE           DESIRED STATE  CURRENT STATE            ERROR</span><br><span class="line">bavjn0xhxi35nx6n9kn33yfga  my-web.1      daocloud.io/nginx:alpine  swarm-manager  Running        Running 31 minutes ago   </span><br><span class="line">cibuo8zqp78z1xb8cu3v4pkmj  my-web.2      daocloud.io/nginx:alpine  swarm-manager  Running        Running 31 minutes ago   </span><br><span class="line">0pkg1eoa0onku71cbp1hqtcv5  my-web.3      daocloud.io/nginx:alpine  swarm-manager  Running        Running 31 minutes ago</span><br></pre></td></tr></table></figure></p>
+<p>在一个网络上有哪些容器可以在network inspect的Containers节点看到<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@swarm-manager ~]# docker network inspect docker-net</span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        "Name": "docker-net",</span><br><span class="line">        "Id": "aoqs3p835s5glx69hi46ou2dw",</span><br><span class="line">        ....</span><br><span class="line">        "Containers": &#123;</span><br><span class="line">            "1c87aae81449b448983924017fc4037b7b1e9e1eaa03bc55745b0167ab4e495b": &#123;</span><br><span class="line">                "Name": "my-web.1.bavjn0xhxi35nx6n9kn33yfga",</span><br><span class="line">                "EndpointID": "2ab6c7e698ce69ec318a211dd0386533de1a0d8f2070bd4ee6cdc43cb94dcd0a",</span><br><span class="line">                "MacAddress": "02:42:0a:00:09:03",</span><br><span class="line">                "IPv4Address": "10.0.9.3/24",</span><br><span class="line">                "IPv6Address": ""</span><br><span class="line">            &#125;,</span><br><span class="line">            .....</span><br><span class="line">        &#125;,</span><br><span class="line">        .....</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>查看服务使用的vip<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@swarm-manager ~]#  docker service inspect --format='&#123;&#123;.Endpoint.VirtualIPs&#125;&#125;'   my-web</span><br><span class="line">[&#123;aoqs3p835s5glx69hi46ou2dw 10.0.9.2/24&#125;]</span><br></pre></td></tr></table></figure></p>
+<h3 id="演示使用服务名访问nginx"><a href="#演示使用服务名访问nginx" class="headerlink" title="演示使用服务名访问nginx"></a>演示使用服务名访问nginx</h3><p>先创建一个同样使用docker-net的overlay网络 的服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker service create \</span><br><span class="line">  --name my-busybox \</span><br><span class="line">  --network docker-net \</span><br><span class="line">  busybox \</span><br><span class="line">  sleep 3000</span><br></pre></td></tr></table></figure>
+<p>等待服务启动后, 用docker exec 连接进busybox的容器里</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@swarm-manager ~]# docker service ps my-busybox</span><br><span class="line">ID                         NAME              IMAGE    NODE           DESIRED STATE  CURRENT STATE                ERROR</span><br><span class="line">7ftv4wj1g3vu8g7mfghx8du65  my-busybox.1      busybox  swarm-manager  Running        Running about a minute ago   </span><br><span class="line">[root@swarm-manager ~]# docker exec -ti my-busybox.1.7ftv4wj1g3vu8g7mfghx8du65 sh</span><br></pre></td></tr></table></figure>
+<p>在busybox容器. 向DNS查询nginx服务的vip<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@swarm-manager ~]# docker exec -ti my-busybox.1.7ftv4wj1g3vu8g7mfghx8du65 sh</span><br><span class="line">/ # nslookup my-web</span><br><span class="line">Server:    127.0.0.11</span><br><span class="line">Address 1: 127.0.0.11</span><br><span class="line"></span><br><span class="line">Name:      my-web</span><br><span class="line">Address 1: 10.0.9.2 10.0.9.2 # 和在外面看到的一样</span><br></pre></td></tr></table></figure></p>
+<p>在busybox容器. 向DNS查询nginx服务所有容器的ip地址<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/ # nslookup tasks.my-web</span><br><span class="line">Server:    127.0.0.11</span><br><span class="line">Address 1: 127.0.0.11</span><br><span class="line"></span><br><span class="line">Name:      tasks.my-web</span><br><span class="line">Address 1: 10.0.9.5 my-web.3.0pkg1eoa0onku71cbp1hqtcv5.docker-net</span><br><span class="line">Address 2: 10.0.9.4 my-web.2.cibuo8zqp78z1xb8cu3v4pkmj.docker-net</span><br><span class="line">Address 3: 10.0.9.3 my-web.1.bavjn0xhxi35nx6n9kn33yfga.docker-net</span><br></pre></td></tr></table></figure></p>
+<p>在busybox容器, 通过服务名访问nginx<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/ # wget -O- my-web</span><br><span class="line">Connecting to my-web (10.0.9.2:80)</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;title&gt;Welcome to nginx!&lt;/title&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">    body &#123;</span><br><span class="line">        width: 35em;</span><br><span class="line">        margin: 0 auto;</span><br><span class="line">        font-family: Tahoma, Verdana, Arial, sans-serif;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;</span><br><span class="line">&lt;p&gt;If you see this page, the nginx web server is successfully installed and</span><br><span class="line">working. Further configuration is required.&lt;/p&gt;</span><br><span class="line">.....</span><br></pre></td></tr></table></figure></p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>通过实验可以看出, 在swarm集群中使用overlay网络时, 不同服务之间可以使用服务名(docker service name)互相访问</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2016-09-03T15:12:03.000Z" itemprop="dateUpdated">2016-09-03 23:12:03</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/09/02/docker-1-12-de-fu-wu-zi-dong-fa-xian/" target="_blank" rel="external">http://ystyle.top/2016/09/02/docker-1-12-de-fu-wu-zi-dong-fa-xian/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2016/09/02/docker-1-12-de-fu-wu-zi-dong-fa-xian/&title=《docker 1.12 的服务自动发现》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2016/09/02/docker-1-12-de-fu-wu-zi-dong-fa-xian/&title=《docker 1.12 的服务自动发现》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2016/09/02/docker-1-12-de-fu-wu-zi-dong-fa-xian/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《docker 1.12 的服务自动发现》 — 东方星痕&url=http://ystyle.top/2016/09/02/docker-1-12-de-fu-wu-zi-dong-fa-xian/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2016/09/02/docker-1-12-de-fu-wu-zi-dong-fa-xian/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/09/13/awesome-stars/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">我Github的star项目列表</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/08/18/maven-xiang-mu-zhuan-wei-gradle-xiang-mu/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">maven 项目转为gradle 项目</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2016/09/02/docker-1-12-de-fu-wu-zi-dong-fa-xian/&title=《docker 1.12 的服务自动发现》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2016/09/02/docker-1-12-de-fu-wu-zi-dong-fa-xian/&title=《docker 1.12 的服务自动发现》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2016/09/02/docker-1-12-de-fu-wu-zi-dong-fa-xian/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《docker 1.12 的服务自动发现》 — 东方星痕&url=http://ystyle.top/2016/09/02/docker-1-12-de-fu-wu-zi-dong-fa-xian/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2016/09/02/docker-1-12-de-fu-wu-zi-dong-fa-xian/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsklEQVR42u3aUU5rMQwFwO5/0/D9VNGeYyeUJ839QnBJPUGKg+3HI36+Xj7P7+S/m6/2vPKxBw8PD+9DoefrP/80jzOPGQ8PD+82L1kuCTcP5fVG5PG8seDh4eH9AV7+nVn6SZIKHh4e3v/Fa79uA5qtj4eHh/f7vPbIngW3L2dcrLXg4eHhxbxZCfWzX1/p7+Hh4eGtu+qbAzc56JOy7ypaPDw8vFvTTdGB245G5eNTsyt18SYeHh7eUV7Swm9TRQvLRw2SksQ/q+Hh4eFd4LWNpWS5WXZKtm9YmMDDw8O7wNsc67OyQlt3bbcGDw8P7x4vP4hngDzNbI7+H9/Ew8PDu8Y7223fDGy1mx719/Dw8PCO8toW1CwZbEq3BxIJHh4e3lHepqEVNZ/K8sEsqfwYPx4eHt4FXn6gR//8l62yfUm3iBwPDw/vKK9tdCVpYFa6zdNJsSYeHh7eUV5bom0v4rNRgFMFXzw8PLwbvE1jPr86z95shwmGSDw8PLySl4wOtGWI13s5G0GYlTDw8PDwbvD2+SS/KM+uvHmqeDN0hYeHh3eN115nZ2MHm42oI8HDw8M7ymt7ZUlZYVNa3RRko78bHh4e3lFegtyPT+UJI4nzTSR4eHh4F3j5cEBbwN1cl9u01G4WHh4e3p7XjqK2e5a3wfJPL5pkeHh4eJd5bSm2PcrzZDAbnB329/Dw8PAWvNnRvClPrO7+SQx4eHh4R3lf5TO7Is/GDpJNebMmHh4e3gXevmeUf2RezsiHGB6nHjw8PLySt1k6P6bzokP7/TeR4OHh4V3jbRpjsyJv3qU6kNPw8PDwPspr35mVbpPyR1SkwMPDw/sDvORKPbumt/ioaIuHh4d3jdc28jdFhPygP9AYw8PDw7vVcy/+o0+WyAu7+UX5YiEDDw8PL/2sbzNgDQF3gBKUAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

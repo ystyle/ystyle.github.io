@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>使用dat代替resilio sync分享数据 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="dat,resilio sync">
+    <meta name="description" content="用btsync/resilio sync绝大部分原因就是用来做文件分享，只要简单添加个文件夹，把key复制出去就好了，同步用户数上来后甚至可以把软件关掉也不会影响分享   在我看来btsync/resilio sync是个绝佳的分享软件，后来那些号称代替它的都只是同步软件或者网盘，核心并不是用来分享也不太适合用来做分享  windows 安装方法 下载安装Node.js 然后按win + s 搜">
+<meta name="keywords" content="dat,resilio sync">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用dat代替resilio sync分享数据">
+<meta property="og:url" content="http://ystyle.top/2018/12/03/Use-dat-instead-of-resilio-sync-to-share-data/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="用btsync/resilio sync绝大部分原因就是用来做文件分享，只要简单添加个文件夹，把key复制出去就好了，同步用户数上来后甚至可以把软件关掉也不会影响分享   在我看来btsync/resilio sync是个绝佳的分享软件，后来那些号称代替它的都只是同步软件或者网盘，核心并不是用来分享也不太适合用来做分享  windows 安装方法 下载安装Node.js 然后按win + s 搜">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://dll.ystyle.top/images/2018-11/screenshot.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2018-12/explorer_2018-12-04_10-21-44.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2018-12/powershell_2018-12-04_10-27-04.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2018-12/powershell_2018-12-04_10-27-59.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2018-12/powershell_2018-12-04_10-28-39.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2018-12/chrome_2018-12-04_10-30-08.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2018-12/powershell_2018-12-04_10-36-59.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2018-12/explorer_2018-12-04_10-38-02.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2018-12/powershell_2018-12-04_10-40-34.png">
+<meta property="og:updated_time" content="2023-10-16T08:04:08.520Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用dat代替resilio sync分享数据">
+<meta name="twitter:description" content="用btsync/resilio sync绝大部分原因就是用来做文件分享，只要简单添加个文件夹，把key复制出去就好了，同步用户数上来后甚至可以把软件关掉也不会影响分享   在我看来btsync/resilio sync是个绝佳的分享软件，后来那些号称代替它的都只是同步软件或者网盘，核心并不是用来分享也不太适合用来做分享  windows 安装方法 下载安装Node.js 然后按win + s 搜">
+<meta name="twitter:image" content="https://dll.ystyle.top/images/2018-11/screenshot.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">使用dat代替resilio sync分享数据</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">使用dat代替resilio sync分享数据</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-03T07:57:33.000Z" itemprop="datePublished" class="page-time">
+  2018-12-03
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/软件/">软件</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#windows-安装方法"><span class="post-toc-number">1.</span> <span class="post-toc-text">windows 安装方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#linux-和-mac-安装方法"><span class="post-toc-number">2.</span> <span class="post-toc-text">linux 和 mac 安装方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分享文件"><span class="post-toc-number">3.</span> <span class="post-toc-text">分享文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在线查看分享的文件列表"><span class="post-toc-number">4.</span> <span class="post-toc-text">在线查看分享的文件列表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#下载别人分享的文件"><span class="post-toc-number">5.</span> <span class="post-toc-text">下载别人分享的文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#与别人分享的文件保持同步"><span class="post-toc-number">6.</span> <span class="post-toc-text">与别人分享的文件保持同步</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Use-dat-instead-of-resilio-sync-to-share-data"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">使用dat代替resilio sync分享数据</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-03 15:57:33" datetime="2018-12-03T07:57:33.000Z"  itemprop="datePublished">2018-12-03</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/软件/">软件</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>用btsync/resilio sync绝大部分原因就是用来做文件分享，只要简单添加个文件夹，把key复制出去就好了，同步用户数上来后甚至可以把软件关掉也不会影响分享</p>
+</blockquote>
+<blockquote>
+<p>在我看来btsync/resilio sync是个绝佳的分享软件，后来那些号称代替它的都只是同步软件或者网盘，核心并不是用来分享也不太适合用来做分享</p>
+</blockquote>
+<h3 id="windows-安装方法"><a href="#windows-安装方法" class="headerlink" title="windows 安装方法"></a>windows 安装方法</h3><ul>
+<li>下载安装<a href="http://nodejs.cn/download/" target="_blank" rel="noopener">Node.js</a></li>
+<li>然后按<code>win + s</code> 搜索<code>powershell</code> 打开</li>
+<li>执行<code>npm install -g dat</code></li>
+</ul>
+<h3 id="linux-和-mac-安装方法"><a href="#linux-和-mac-安装方法" class="headerlink" title="linux 和 mac 安装方法"></a>linux 和 mac 安装方法</h3><blockquote>
+<p>linux 和 mac 有桌面版, 当然也可以用windows的安装方法， 但有界面更好操作</p>
+<ul>
+<li><a href="https://github.com/dat-land/dat-desktop/releases/download/v2.0.0/dat-desktop-2.0.0.dmg" target="_blank" rel="noopener">mac</a></li>
+<li><a href="https://github.com/dat-land/dat-desktop/releases/download/v2.0.0/dat-desktop-2.0.0-x86_64.AppImage" target="_blank" rel="noopener">linux</a></li>
+</ul>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2018-11/screenshot.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="分享文件"><a href="#分享文件" class="headerlink" title="分享文件"></a>分享文件</h3><ul>
+<li>在要分享的文件夹按着<code>shift</code> 点击右键 - <code>在此处打开powerShell窗口</code>(也可能是命令行窗口)都可以<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2018-12/explorer_2018-12-04_10-21-44.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
+<li>方法一<ul>
+<li>在窗口输入命令 <code>dat create</code> 以创建共享文件夹<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2018-12/powershell_2018-12-04_10-27-04.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
+<li>在窗口输入命令 <code>dat share</code> 共享文件夹， 等待进度知完成， 按<code>ctrl + c</code> 结束<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2018-12/powershell_2018-12-04_10-27-59.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
+</ul>
+</li>
+<li>即时修改文件<ul>
+<li>在窗口输入命令 <code>dat sync</code> 在共享目录删除、修改、新增文件时会自动分享， 这个可以一直挂着， 要结束可以按<code>ctrl + c</code><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2018-12/powershell_2018-12-04_10-28-39.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<blockquote>
+<p>注意看我选中的那行 <code>dat://0406903bdf62a99da7edb01ccb0c950f33d5c099f444be22afaeb6bb24ffa8a5</code><br>分享的文件只有自己机器上能修改， 别人下载后是无法修改的， 相当于resilio sync的只读分享</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="在线查看分享的文件列表"><a href="#在线查看分享的文件列表" class="headerlink" title="在线查看分享的文件列表"></a>在线查看分享的文件列表</h3><ul>
+<li>打开网站<a href="https://datbase.org" target="_blank" rel="noopener">https://datbase.org</a></li>
+<li>在左上角搜索 <code>dat create</code>、<code>dat share</code>、 <code>dat sync</code>、或者<code>dat status</code>打印出来的以 <code>dat://xxx</code>开头的地址<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2018-12/chrome_2018-12-04_10-30-08.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
+</ul>
+<h3 id="下载别人分享的文件"><a href="#下载别人分享的文件" class="headerlink" title="下载别人分享的文件"></a>下载别人分享的文件</h3><ul>
+<li>在要保存文件的文件夹按着<code>shift</code> 点击右键 - <code>在此处打开powerShell窗口</code></li>
+<li>执行 <code>dat clone dat://0406903bdf62a99da7edb01ccb0c950f33d5c099f444be22afaeb6bb24ffa8a5 测试2</code></li>
+<li>结尾的<code>测试2</code>为存放的文件名字，如果没写，文件夹的名称为那串很长的key<br><img src="https://dll.ystyle.top/images/2018-12/powershell_2018-12-04_10-36-59.png" alt=""><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2018-12/explorer_2018-12-04_10-38-02.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
+</ul>
+<h3 id="与别人分享的文件保持同步"><a href="#与别人分享的文件保持同步" class="headerlink" title="与别人分享的文件保持同步"></a>与别人分享的文件保持同步</h3><ul>
+<li>在已经下载的文件夹按着<code>shift</code> 点击右键 - <code>在此处打开powerShell窗口</code></li>
+<li>输入 <code>dat sync</code> 开启同步<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2018-12/powershell_2018-12-04_10-40-34.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2023-10-16T08:04:08.520Z" itemprop="dateUpdated">2023-10-16 16:04:08</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2018/12/03/Use-dat-instead-of-resilio-sync-to-share-data/" target="_blank" rel="external">http://ystyle.top/2018/12/03/Use-dat-instead-of-resilio-sync-to-share-data/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dat/">dat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/resilio-sync/">resilio sync</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2018/12/03/Use-dat-instead-of-resilio-sync-to-share-data/&title=《使用dat代替resilio sync分享数据》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2018/12/03/Use-dat-instead-of-resilio-sync-to-share-data/&title=《使用dat代替resilio sync分享数据》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2018/12/03/Use-dat-instead-of-resilio-sync-to-share-data/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用dat代替resilio sync分享数据》 — 东方星痕&url=http://ystyle.top/2018/12/03/Use-dat-instead-of-resilio-sync-to-share-data/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2018/12/03/Use-dat-instead-of-resilio-sync-to-share-data/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/01/23/install-flitter-without-android-studio/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">安装flutter</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/11/01/Windows-10-open-with-wsl-Archlinux/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">windows 10 右键用子系统Archlinux打开文件</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2018/12/03/Use-dat-instead-of-resilio-sync-to-share-data/&title=《使用dat代替resilio sync分享数据》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2018/12/03/Use-dat-instead-of-resilio-sync-to-share-data/&title=《使用dat代替resilio sync分享数据》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2018/12/03/Use-dat-instead-of-resilio-sync-to-share-data/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用dat代替resilio sync分享数据》 — 东方星痕&url=http://ystyle.top/2018/12/03/Use-dat-instead-of-resilio-sync-to-share-data/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2018/12/03/Use-dat-instead-of-resilio-sync-to-share-data/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsklEQVR42u3aUU5rMQwFwO5/07xfpAftOXZSQJr7VdE29QQpjmw/HvHz8elJPvndt56vsPnu6sHDw8NbhP7/k//Yd395vtp3n8nxL1bAw8PDu8ZLlnueJDZBJxuXJAk8PDy8v8LbrPB8I56nFjw8PLy/wpsd68lFud0gPDw8vJ/lJcWIeulResg38XCtBQ8PD29SGXhsDuh3vr7S38PDw8Nbd9U3ramkoJAc+qto8fDw8C7w8gM3HwJ4HvpmoKqNEw8PD+/9vJaUr9MOY81SCB4eHt47efkRP0sk7WhC24R7JBg8PDy8EW/T1spDmZUz2uTx4jKNh4eHd4GXJ4wckw8NXOnm4eHh4V3jtVfb5JPJFrTX8TyFfNHfw8PDwzvEa4/stm3fbtY+kUQlCTw8PLwFry2etg2qfWmjTUt4eHh4P8ubFU+flzBeXH9HLbeos4eHh4d3gZcXDvJCQ55s8u0u1sfDw8O7zJsNOeU/Nnu37XCt/kt4eHh4MS8v3eZF1fZwb2/CSfx4eHh493izcatNGTcpScwSxheTEXh4eHhHeTlsVqJtz+fZSEGxHXh4eHiHeHkom3c3PanZhRsPDw/vHq9tVuVFirZssQHg4eHhvZ+3p7bt/30Bt00qeHh4eGd5STm1LRa0oefJpi0K4+Hh4Z3l5cd0fhx/LJ58zWMXaDw8PLwFbxZKPmSQfGvzK19sDR4eHt5lXn66thfrfGwrjypKcnh4eHhHeWcvu7N2VFvMLRIGHh4e3gXe7MDNr7P5Qb9Z+cCDh4eHt5hBagcCZkWHWfFiNnaAh4eHd4+XNPXbkazZoX/4wcPDw/s1vM3KyTbl5Y8XseHh4eH9Mt6pUPJrfTtkgIeHh3ePd2rpNujNgEJUBMHDw8O7wGsvx0kyaBtgeQmjvbjj4eHhHeX9A7rP5CkoqCA1AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

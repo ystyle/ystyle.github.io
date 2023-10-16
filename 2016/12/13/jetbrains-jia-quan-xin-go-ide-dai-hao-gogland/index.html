@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>JetBrains 家全新Go IDE 代号GogLand | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Golang">
+    <meta name="description" content="简介我们很高兴地告诉你，今天JetBrains宣布IntelliJ家族新添成员：Gogland，一个全新的Go IDE。 Gogland仍然在开发中，但我们正在开放其私人EAP，并邀请您加入！在这里你可以阅读Gogland背后的故事，或跳转到下载链接。 三年前，我们做出了一个战略决策，贡献go-lang-idea-plugin，这是一个旨在为Go构建IntellIJ插件的开源计划。 在这三年里，我">
+<meta name="keywords" content="Golang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JetBrains 家全新Go IDE 代号GogLand">
+<meta property="og:url" content="http://ystyle.top/2016/12/13/jetbrains-jia-quan-xin-go-ide-dai-hao-gogland/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="简介我们很高兴地告诉你，今天JetBrains宣布IntelliJ家族新添成员：Gogland，一个全新的Go IDE。 Gogland仍然在开发中，但我们正在开放其私人EAP，并邀请您加入！在这里你可以阅读Gogland背后的故事，或跳转到下载链接。 三年前，我们做出了一个战略决策，贡献go-lang-idea-plugin，这是一个旨在为Go构建IntellIJ插件的开源计划。 在这三年里，我">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2016-12-15T22:40:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JetBrains 家全新Go IDE 代号GogLand">
+<meta name="twitter:description" content="简介我们很高兴地告诉你，今天JetBrains宣布IntelliJ家族新添成员：Gogland，一个全新的Go IDE。 Gogland仍然在开发中，但我们正在开放其私人EAP，并邀请您加入！在这里你可以阅读Gogland背后的故事，或跳转到下载链接。 三年前，我们做出了一个战略决策，贡献go-lang-idea-plugin，这是一个旨在为Go构建IntellIJ插件的开源计划。 在这三年里，我">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">JetBrains 家全新Go IDE 代号GogLand</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">JetBrains 家全新Go IDE 代号GogLand</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-12-13T22:53:18.000Z" itemprop="datePublished" class="page-time">
+  2016-12-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#试用版下载"><span class="post-toc-number">2.</span> <span class="post-toc-text">试用版下载</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关注"><span class="post-toc-number">3.</span> <span class="post-toc-text">关注</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-jetbrains-jia-quan-xin-go-ide-dai-hao-gogland"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">JetBrains 家全新Go IDE 代号GogLand</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-12-14 06:53:18" datetime="2016-12-13T22:53:18.000Z"  itemprop="datePublished">2016-12-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>我们很高兴地告诉你，今天JetBrains宣布IntelliJ家族新添成员：Gogland，一个全新的Go IDE。</p>
+<p>Gogland仍然在开发中，但我们正在开放其私人EAP，并邀请您加入！在这里你可以阅读Gogland背后的故事，或跳转到下载链接。</p>
+<p>三年前，我们做出了一个战略决策，贡献<a href="https://github.com/go-lang-plugin-org/go-lang-idea-plugin/" target="_blank" rel="noopener">go-lang-idea-plugin</a>，这是一个旨在为Go构建IntellIJ插件的开源计划。</p>
+<p>在这三年里，我们相信我们的努力（总共提交3,000次）已经帮助重建了插件，为用户提供了更稳定，可扩展和功能丰富的开发体验。</p>
+<p>去年，我们开始跟踪插件的唯一用户数。这个数字在去年单月增加了一倍，达到每月活跃用户30,000。</p>
+<p>这个事实，以及许多用户要求我们把IntelliJ类似的编码体验带到Go，说服了我们半年前去fork <a href="https://github.com/go-lang-plugin-org/go-lang-idea-plugin/" target="_blank" rel="noopener">go-lang-idea-plugin</a>，并生成我们自己的IDE。<br>我们组建了一个专门的团队，致力于改进Go工具支持和总体开发体验。</p>
+<h3 id="试用版下载"><a href="#试用版下载" class="headerlink" title="试用版下载"></a>试用版下载</h3><p>要试用新的IDE，请通过单击以下链接之一下载EAP构建：</p>
+<ul>
+<li><a href="http://download.jetbrains.com/go/gogland-163.10154.18.exe" target="_blank" rel="noopener">windows</a></li>
+<li><a href="http://download.jetbrains.com/go/gogland-163.10154.18.dmg" target="_blank" rel="noopener">Mac OSX</a></li>
+<li><a href="http://download.jetbrains.com/go/gogland-163.10154.18.tar.gz" target="_blank" rel="noopener">Linux</a></li>
+<li><a href="https://www.jetbrains.com/go/" target="_blank" rel="noopener">官网</a></li>
+</ul>
+<p>要了解有关Gogland的更多信息并获取进一步的EAP构建，请访问其官方网站并<a href="https://www.jetbrains.com/go" target="_blank" rel="noopener">注册EAP</a>。</p>
+<p>要快速开始使用Gogland，<a href="https://www.jetbrains.com/help/go/" target="_blank" rel="noopener">请参阅文档</a>。</p>
+<h3 id="关注"><a href="#关注" class="headerlink" title="关注"></a>关注</h3><p>我们非常感谢您对Gogland的反馈，因为它对帮助我们使产品更好是至关重要的。</p>
+<p>请注意，Gogland是代号，而不是最终产品名称。也给我们你对产品名字的想法和建议！</p>
+<p>对于你提交到<a href="https://github.com/go-lang-plugin-org/go-lang-idea-plugin/issues" target="_blank" rel="noopener">go-lang-idea-plugin</a>的每个未解决的问题，我们在新的<a href="https://youtrack.jetbrains.com/issues/GO" target="_blank" rel="noopener">Goglan</a>d问题跟踪器中创建了一个问题。以下是这些问题的列表：</p>
+<ul>
+<li><a href="https://youtrack.jetbrains.com/issue/GO-1191" target="_blank" rel="noopener">GO-1191</a> archlinux无法设置go sdk（<a href="https://github.com/go-lang-plugin-org/go-lang-idea-plugin/issues/1191" target="_blank" rel="noopener">＃1191</a>）</li>
+</ul>
+<p>要跟踪这些问题的进度，请使用上面的链接注册并添加自己作为观察者。</p>
+<p>如果您有任何问题，只需给我们发电子邮件。还请考虑阅读<a href="https://www.jetbrains.com/help/go/faq.html" target="_blank" rel="noopener">常见问题</a>。</p>
+<p>感谢您成为JetBrains社区的一员，并愉快地发展！</p>
+<p>不用担心，你不会得到任何进一步的电子邮件关于这个问题，除非你自己选择。</p>
+<p>Gogland IDE团队</p>
+<p>开发的动力</p>
+<p><a href="https://www.jetbrains.com/go/" target="_blank" rel="noopener">https://www.jetbrains.com/go/</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2016-12-15T22:40:18.000Z" itemprop="dateUpdated">2016-12-16 06:40:18</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/12/13/jetbrains-jia-quan-xin-go-ide-dai-hao-gogland/" target="_blank" rel="external">http://ystyle.top/2016/12/13/jetbrains-jia-quan-xin-go-ide-dai-hao-gogland/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Golang/">Golang</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2016/12/13/jetbrains-jia-quan-xin-go-ide-dai-hao-gogland/&title=《JetBrains 家全新Go IDE 代号GogLand》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2016/12/13/jetbrains-jia-quan-xin-go-ide-dai-hao-gogland/&title=《JetBrains 家全新Go IDE 代号GogLand》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2016/12/13/jetbrains-jia-quan-xin-go-ide-dai-hao-gogland/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JetBrains 家全新Go IDE 代号GogLand》 — 东方星痕&url=http://ystyle.top/2016/12/13/jetbrains-jia-quan-xin-go-ide-dai-hao-gogland/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2016/12/13/jetbrains-jia-quan-xin-go-ide-dai-hao-gogland/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/01/05/tensorflow-zai-windows-xia-shi-yong-gpu/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">tensorflow 在windows 下使用gpu</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/12/12/power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Power designer生成建表语句的设置</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2016/12/13/jetbrains-jia-quan-xin-go-ide-dai-hao-gogland/&title=《JetBrains 家全新Go IDE 代号GogLand》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2016/12/13/jetbrains-jia-quan-xin-go-ide-dai-hao-gogland/&title=《JetBrains 家全新Go IDE 代号GogLand》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2016/12/13/jetbrains-jia-quan-xin-go-ide-dai-hao-gogland/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JetBrains 家全新Go IDE 代号GogLand》 — 东方星痕&url=http://ystyle.top/2016/12/13/jetbrains-jia-quan-xin-go-ide-dai-hao-gogland/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2016/12/13/jetbrains-jia-quan-xin-go-ide-dai-hao-gogland/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrUlEQVR42u3a0Y4aMQwFUP7/p7evrSrgXjuhVDrzhFhmJicrxZbtxyO+fn67nn3z+t6/P7/+68+T63HjwsPDw1ss/dnjcl6yoOSNyTZFT8DDw8O7xmsP9PY0bs/t2Xrw8PDwvpP3LEi8hr0OIclK8PDw8P5fXn6gt4lyu8V4eHh4/5aXFCPaAm4bNvJtulJrwcPDw5tUSh+bA/qTn6/09/Dw8PDWXfW2GTYLM226XKwWDw8P7wIvP3DbckObOudNsnqdeHh4eJd5m7GqzYE+25poJXh4eHgXeLNhqRmgTcTbJP7YLBgeHh5e3PpKmvGzpbQJ8WY9eHh4eLd5+3S5fUIbNg507fDw8PCO8m4kvnkYaMNDsU14eHh4F3j5K2cF31king8W1IEEDw8Pb83L21H5IvLhqnYLklXh4eHhfQOvTV7blv9m2OtNeMDDw8O7wNsMS50q/uZpels0wcPDw/sMb1ZaTVpiedjYd7iivcTDw8M7xDv1yn1xIS9zvHk+Hh4e3lFemxzn1z4kzLb4j9/j4eHhXeC1sOhBs5mFMgU/MEaAh4eHt+DNmlj7YYLNCFcxLoaHh4d3gdcOP81aYnkJuC0T4+Hh4X2etwkAbWm1HTLIm2pPf4+Hh4d3gdce05sC66ZhNvsGDw8P7wbv1AhUW85IkvI80R/OMuDh4eEd4iWBoU2jN02vVZKNh4eHd42X3HC2bNEOac0CEh4eHt5Z3k95zUoG+YBC25bDw8PD+zxvFU8WL56NGiRp+rCAgoeHh1fy2kfnldJZ6aFNxN+8Fw8PD+8ar110ntTm3+wj2NPAgIeHh/cFvPxYn21Ejn+zTjw8PLwv4A2Hn0bP3Ixt4eHh4d3mbZpeSaFhVsZN/hlv7sLDw8O7wNsf6G2JIR/z2pRF8PDw8C7wfgGZMHOooHrTXQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>k3s云上master+内网agent的部署方式 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="k3s,kubernetes,wireguard-native,wireguard">
+    <meta name="description" content="公网master和内网agent使用wireguard-native通信， 只要在所有节点上安装了wireguard模块，k3s会自动处理所有通信流量  准备 在云端master开放 tcp 6443 端口， udp 51820 端口   先在所有机器上安装wireguard-native， 点击查看安装命令 如果内网有防火墙，需要开放master公网ip的6443和51820端口  在云上安装">
+<meta name="keywords" content="k3s,kubernetes,wireguard-native,wireguard">
+<meta property="og:type" content="article">
+<meta property="og:title" content="k3s云上master+内网agent的部署方式">
+<meta property="og:url" content="http://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="公网master和内网agent使用wireguard-native通信， 只要在所有节点上安装了wireguard模块，k3s会自动处理所有通信流量  准备 在云端master开放 tcp 6443 端口， udp 51820 端口   先在所有机器上安装wireguard-native， 点击查看安装命令 如果内网有防火墙，需要开放master公网ip的6443和51820端口  在云上安装">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2023-03-11T13:02:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="k3s云上master+内网agent的部署方式">
+<meta name="twitter:description" content="公网master和内网agent使用wireguard-native通信， 只要在所有节点上安装了wireguard模块，k3s会自动处理所有通信流量  准备 在云端master开放 tcp 6443 端口， udp 51820 端口   先在所有机器上安装wireguard-native， 点击查看安装命令 如果内网有防火墙，需要开放master公网ip的6443和51820端口  在云上安装">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">k3s云上master+内网agent的部署方式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">k3s云上master+内网agent的部署方式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2023-03-11T13:02:26.000Z" itemprop="datePublished" class="page-time">
+  2023-03-11
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/运维/">运维</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#准备"><span class="post-toc-number">1.</span> <span class="post-toc-text">准备</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在云上安装master"><span class="post-toc-number">2.</span> <span class="post-toc-text">在云上安装master</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在内网安装agent"><span class="post-toc-number">3.</span> <span class="post-toc-text">在内网安装agent</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#验证方法"><span class="post-toc-number">4.</span> <span class="post-toc-text">验证方法</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-k3s-master-in-cloud-agent-in-local-intranet"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">k3s云上master+内网agent的部署方式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2023-03-11 21:02:26" datetime="2023-03-11T13:02:26.000Z"  itemprop="datePublished">2023-03-11</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/运维/">运维</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>公网master和内网agent使用<code>wireguard-native</code>通信， 只要在所有节点上安装了<code>wireguard</code>模块，k3s会自动处理所有通信流量</p>
+</blockquote>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
+<li>在云端master开放<ul>
+<li><code>tcp</code> <code>6443</code> 端口，</li>
+<li><code>udp</code> <code>51820</code> 端口</li>
+</ul>
+</li>
+<li>先在所有机器上安装<code>wireguard-native</code>， <a href="https://www.wireguard.com/install/" target="_blank" rel="noopener">点击查看安装命令</a></li>
+<li>如果内网有防火墙，需要开放master公网ip的<code>6443</code>和<code>51820</code>端口</li>
+</ul>
+<h3 id="在云上安装master"><a href="#在云上安装master" class="headerlink" title="在云上安装master"></a>在云上安装master</h3><blockquote>
+<p>需要替换下面的master_public_ip为master公网ip, 能正常起来一般就没问题了</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export INSTALL_KAS_EXEC="--node-external-ip=master_public_ip --flannel-backend=wireguard-native --flannel-external-ip"</span><br><span class="line">curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>INSTALL_KAS_EXEC的参数是最少的开启<code>wireguard-native</code>功能的参数</p>
+</blockquote>
+<blockquote>
+<p>在msater上执行<code>cat /var/lib/rancher/k3s/server/node-token</code>获取token, 等下子节点需要用</p>
+</blockquote>
+<h3 id="在内网安装agent"><a href="#在内网安装agent" class="headerlink" title="在内网安装agent"></a>在内网安装agent</h3><blockquote>
+<p>我是在树苺派上安装的。<br>下面的token需要换成上一步获取的， 然后把x.x.x.x换成上面的<code>master_public_ip</code>的master公网ip</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export TOKEN=K1004a306bd3e78de0bfb4e9a485659e847dd16be3192b5b16407f53f991dc7d7f7::server:58dcf4e6e4fd7c6023976c331d1xxxxxx</span><br><span class="line">curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn K3S_URL=https://x.x.x.x:6443 K3S_TOKEN=$&#123;TOKEN&#125; sh -s - --docker --node-external-ip=x.x.x.x</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>只需要添加<code>--node-external-ip</code>参数就能启用<code>wireguard-native</code>功能了 。 如果没加这参数，是普通的节点，公网master和内网agent就不能正常通信</p>
+</blockquote>
+<h3 id="验证方法"><a href="#验证方法" class="headerlink" title="验证方法"></a>验证方法</h3><ol>
+<li><p>先查看节点是否正常，不需要重启master或agent的服务，如果重启后才看到的话，可能没安装成功</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> $ kubelct get node</span><br><span class="line">NAME                      STATUS   ROLES                  AGE    VERSION</span><br><span class="line">ubuntu-20.04   Ready    control-plane,master   14d    v1.25.6+k3s1</span><br><span class="line">archlinux-rpi             Ready    &lt;none&gt;                 156m   v1.25.6+k3s1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用nodeSelector分别在master和内网机器上部署nginx的deploy， 再分别创建对应的service</p>
+</li>
+<li>再在其中一个deploy的pod里执行curl 另一个deploy的service名称，如果能请求到nginx默认界面，说明是通的</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2023-03-11T13:02:26.000Z" itemprop="dateUpdated">2023-03-11 21:02:26</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/" target="_blank" rel="external">http://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k3s/">k3s</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kubernetes/">kubernetes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wireguard/">wireguard</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wireguard-native/">wireguard-native</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/&title=《k3s云上master+内网agent的部署方式》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/&title=《k3s云上master+内网agent的部署方式》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《k3s云上master+内网agent的部署方式》 — 东方星痕&url=http://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2023/07/19/push-loongarch64-app-to-archlinux-aur/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">在archlinux aur上提交龙芯loongarch的软件包</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2022/01/01/aliyundrive-webdav/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">阿里云网盘映射本地硬盘</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/&title=《k3s云上master+内网agent的部署方式》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/&title=《k3s云上master+内网agent的部署方式》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《k3s云上master+内网agent的部署方式》 — 东方星痕&url=http://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtklEQVR42u3aSW7DMAwF0Nz/0um2RTN8DsoAPK+KJrH1tKBokpdLfF3/Xfc+/f2fe/d5/JTqPRcuPDw8vPHS7906eUD1btU750/Bw8PDO81LblcN8Tkg+Wbz4MHDw8P7MF5+ePTC+uOjBQ8PD+9beL3FJYlydQ14eHh47+Ul5YNe0Tbfpt4htFZrwcPDw4t5eRfpc/4+0t/Dw8PDG3fVk3S5l4L3ihrl1eLh4eEd4OUBdwKuFnaT1DxZJx4eHt453qRgmrf8J8NY1VEwPDw8vHO8vCA7X2i16JAfG1HrCw8PD2+Jl3ypWibIRw3miXu5AYaHh4e3yusdEskStwYUFjp4eHh4eGPeVhKcFFKrQwCTg+FPMQIPDw9vlZens48XV02Xe7/NR8HKHTw8PDy8fjReC9D5snppfVL2xcPDwzvByxtap8sQ8829sTY8PDy8A7wkqe2NCOSBfjJAEM2U4eHh4a3yJi//k5ZVvkG9Y6PMwMPDw2vxktCfbEG1RFstExfSdDw8PLxjvHxQoNq+qi56a2tulHHx8PDwlnj5KEB1dGBytOS9uyg1x8PDw1vlbRUd8oZZtWg7KqDg4eHhHeDNS7pJuM+De++JeHh4eK/n5alzNaXORw3yckN5g/Dw8PAO8JIX+7xcm0TmvKCQJ/dPyr54eHh4q7xJObW6KXkLrTdA0HxXwMPDw2vx5oG7ly7nR0LyWzw8PLz38vLC626gjxadU/Hw8PBWedfitRXc5w2wqEmGh4eHd4DXC7hJSaIa6KupeXM+Ag8PD2+JN0mp87JstWGWs598ioeHh3eM13tM9cHJcTK/8PDw8L6Fl5cGqgWF6uhVczICDw8P7yW8pAjbS9nzoa4nRwseHh7eMV51oCrhVVtivaGrJ4cNHh4e3gFe+fW+ddPe1iwsHQ8PD2+T9wOROnOoStXM0wAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

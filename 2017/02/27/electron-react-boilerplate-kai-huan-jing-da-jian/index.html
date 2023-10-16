@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>electron-react-boilerplate 开环境搭建 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="electron,react">
+    <meta name="description" content="因为electron下载被墙的原因, electorn很难下载成功, electorn的react, redux的开发插件也装不上, 本文记录了解决这些问题时的方法  安装electron 在淘宝镜像上下载package.json对应版本的electron-vx.x.xx-win32-x64.zip文件与SHASUMS256.txt文件 windows 64位一般下载electron-vx.x.">
+<meta name="keywords" content="electron,react">
+<meta property="og:type" content="article">
+<meta property="og:title" content="electron-react-boilerplate 开环境搭建">
+<meta property="og:url" content="http://ystyle.top/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="因为electron下载被墙的原因, electorn很难下载成功, electorn的react, redux的开发插件也装不上, 本文记录了解决这些问题时的方法  安装electron 在淘宝镜像上下载package.json对应版本的electron-vx.x.xx-win32-x64.zip文件与SHASUMS256.txt文件 windows 64位一般下载electron-vx.x.">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2017-02-28T11:27:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="electron-react-boilerplate 开环境搭建">
+<meta name="twitter:description" content="因为electron下载被墙的原因, electorn很难下载成功, electorn的react, redux的开发插件也装不上, 本文记录了解决这些问题时的方法  安装electron 在淘宝镜像上下载package.json对应版本的electron-vx.x.xx-win32-x64.zip文件与SHASUMS256.txt文件 windows 64位一般下载electron-vx.x.">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">electron-react-boilerplate 开环境搭建</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">electron-react-boilerplate 开环境搭建</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-02-27T07:14:13.000Z" itemprop="datePublished" class="page-time">
+  2017-02-27
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装electron"><span class="post-toc-number">1.</span> <span class="post-toc-text">安装electron</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装electron的开发插件-React-Developer-Tools-Redux-DevTools"><span class="post-toc-number">2.</span> <span class="post-toc-text">安装electron的开发插件[React Developer Tools, Redux DevTools]</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装依赖并启动"><span class="post-toc-number">3.</span> <span class="post-toc-text">安装依赖并启动</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-electron-react-boilerplate-kai-huan-jing-da-jian"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">electron-react-boilerplate 开环境搭建</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-02-27 15:14:13" datetime="2017-02-27T07:14:13.000Z"  itemprop="datePublished">2017-02-27</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>因为electron下载被墙的原因, electorn很难下载成功, electorn的react, redux的开发插件也装不上, 本文记录了解决这些问题时的方法</p>
+</blockquote>
+<h3 id="安装electron"><a href="#安装electron" class="headerlink" title="安装electron"></a>安装electron</h3><ol>
+<li>在<a href="https://npm.taobao.org/mirrors/electron/" target="_blank" rel="noopener">淘宝镜像</a>上下载<code>package.json</code>对应版本的<code>electron-vx.x.xx-win32-x64.zip</code>文件与<code>SHASUMS256.txt</code>文件</li>
+<li>windows 64位一般下载electron-vx.x.xx-win32-x64.zip的包</li>
+<li>下载的<code>electron-vx.x.xx-win32-x64.zip</code>包放到用户目录<code>~/.electron</code>下面</li>
+<li><p><code>SHASUMS256.txt</code> 同上, 并把文件名改为<code>SHASUMS256.txt-x.x.xx</code> x.x.xx为package.json里的对应版本</p>
+<blockquote>
+<p>随便说一下: chromedriver如果npm没安装成功, 可以在<a href="https://npm.taobao.org/mirrors/chromedriver" target="_blank" rel="noopener">淘宝镜像</a>上下载放到用户目录<code>~/.electron</code>下面</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="安装electron的开发插件-React-Developer-Tools-Redux-DevTools"><a href="#安装electron的开发插件-React-Developer-Tools-Redux-DevTools" class="headerlink" title="安装electron的开发插件[React Developer Tools, Redux DevTools]"></a>安装electron的开发插件[React Developer Tools, Redux DevTools]</h3><p>把插件解压并复制到<code>~/AppData/Roaming/Electron/extensions</code>目录下</p>
+<ul>
+<li><p>方式一</p>
+<blockquote>
+<p>下载chrome官方插件<br><a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi" target="_blank" rel="noopener">React Developer Tools</a><br>和 <a href="https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd" target="_blank" rel="noopener">Redux DevTools</a></p>
+</blockquote>
+</li>
+<li><p>方式二</p>
+<blockquote>
+<p>复制chrome安装后的插件目录, 使用全盘搜索 <code>fmkadmapgofadopljbjfkapdkoienihi</code>,<code>lmhkpmbekcpmknklioeibfkpmmfibljd</code> 然后复制到electron的插件目录</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li>方式三<blockquote>
+<p>直接从githut上clone后自己构建<a href="https://github.com/facebook/react-devtools" target="_blank" rel="noopener">React Developer Tools</a> <a href="https://github.com/zalmoxisus/redux-devtools-extension" target="_blank" rel="noopener">Redux DevTools</a></p>
+</blockquote>
+</li>
+</ul>
+<p>ps: 如果复制的<code>fmkadmapgofadopljbjfkapdkoienihi</code>这种目录下有版本号, 要把版本号目录里边的东西剪切到和版本号目录同级</p>
+<p>安装好的目录结构是这样的:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> ~/AppData/Roaming/Electron/extensions</span><br><span class="line"><span class="meta">$</span> tree . -L 2</span><br><span class="line">.</span><br><span class="line">|-- IDMap.json</span><br><span class="line">|-- fmkadmapgofadopljbjfkapdkoienihi</span><br><span class="line">|   | ......</span><br><span class="line">|   |-- manifest.json</span><br><span class="line">|   `-- panel.html</span><br><span class="line">`-- lmhkpmbekcpmknklioeibfkpmmfibljd</span><br><span class="line">    |-- _metadata</span><br><span class="line">    |-- ......</span><br><span class="line">    |-- remote.html</span><br><span class="line">    `-- manifest.json</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装依赖并启动"><a href="#安装依赖并启动" class="headerlink" title="安装依赖并启动"></a>安装依赖并启动</h3><ul>
+<li>安装依赖: npm install</li>
+<li>启动: 执行electron-react-boilerplate提供的命令npm run dev</li>
+<li>如果再webpack打包和electron启动分开可以分别在两个终端执行<code>npm run hot-server</code>, <code>npm run start-hot</code></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2017-02-28T11:27:08.000Z" itemprop="dateUpdated">2017-02-28 19:27:08</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/" target="_blank" rel="external">http://ystyle.top/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/electron/">electron</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/&title=《electron-react-boilerplate 开环境搭建》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/&title=《electron-react-boilerplate 开环境搭建》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《electron-react-boilerplate 开环境搭建》 — 东方星痕&url=http://ystyle.top/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/04/07/Paranoia/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">妄想症Paranoia</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/01/05/tensorflow-zai-windows-xia-shi-yong-gpu/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">tensorflow 在windows 下使用gpu</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/&title=《electron-react-boilerplate 开环境搭建》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/&title=《electron-react-boilerplate 开环境搭建》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《electron-react-boilerplate 开环境搭建》 — 东方星痕&url=http://ystyle.top/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACq0lEQVR42u3aQW7DMAwEwPz/0+2lt8Dprii5LjA+Ba6jeFxApEm+XvHx9Xa8n7+6vj1/tf77t7YdeHh4eONbv/qZ5HNyJLDJb+Hh4eHdw7vaUZOlP2/9nwPJ5+vzay7P4+Hh4T2Y9znxTZLjnI2Hh4f3X3h5UWBtu28fMR4eHt7f8pJiRFsayDFtoeFIrQUPDw8v5uVdpOd8PtLfw8PDwxt31fPyQd64SgLJvMH28y08PDy8A7y10YHJOFS7/lohAw8PD+80bwLIG2N54XgymIWHh4d3mpe3/9utf17USELFL3eFh4eHdwtvcrt5oaEtcCyOfOHh4eEd4601wPKbzsu1+cp4eHh4z+Gt/cCkpNv+tXhAeHh4eAd4u5pSyWjUWmDYMJKFh4eHt5U3GbraFUK2JdDJ/w0PDw9vK68dC5gEgzwFXys0X44O4OHh4Y157fhUO4Iw+VYeiqJCBh4eHt4mXpK2ti2xPP1tW2XtmAIeHh7eOd5kFCBvdE3KE+34Ah4eHt6dvPlrf36jSSlk9Cjx8PDwDvPalthkrGqxXhIPNODh4eGd4+Ubcdvmbzf6fFhhsVWGh4eHt4mXJ7UbtuayxbXWfsPDw8M7zUtKpfmVLbstE+epPx4eHt49vHzRvGSwluNPHmvR5cPDw8Mb89pNOS+8JkNdbWutaJLh4eHh3cjblSjn6+dpd13MxcPDwzvGaxPi9kw7mPVaOvDw8PDO8b7Ko0hkBwWLPKj88ljx8PDwDvDarXZX+psEg7XixWI4wcPDwyt5k2Cw1uBv10yuv1wBDw8P7xiv7RwlwWBOGlVZ8PDw8B7Dy8EtYC1IRCk1Hh4e3mN4+Vv/2khBm6DXVWQ8PDy8Aa8dh9rFztP3etwKDw8P7xivfcmfh4S2qTZKqfHw8PB28r4BxjysmWJD5wAAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

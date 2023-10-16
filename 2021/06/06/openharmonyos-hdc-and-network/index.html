@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>开源鸿蒙网络和hdc连接方法 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="鸿蒙">
+    <meta name="description" content="hdc下载 如果下载了源码，可以在源码目录找到: developtools/hdc_standard/prebuilt/windows/hdc_std.exe 远程仓库地址： https://gitee.com/openharmony/developtools_hdc_standard hdc使用手册: https://gitee.com/openharmony/docs/blob/master/">
+<meta name="keywords" content="鸿蒙">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开源鸿蒙网络和hdc连接方法">
+<meta property="og:url" content="http://ystyle.top/2021/06/06/openharmonyos-hdc-and-network/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="hdc下载 如果下载了源码，可以在源码目录找到: developtools/hdc_standard/prebuilt/windows/hdc_std.exe 远程仓库地址： https://gitee.com/openharmony/developtools_hdc_standard hdc使用手册: https://gitee.com/openharmony/docs/blob/master/">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://dll.ystyle.top/images/2021-06/mmc_2021-06-07_19-52-37.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2021-06/WindowsTerminal_2021-06-07_19-53-25.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2021-06/HiTool_2021-06-06_18-29-05.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2021-06/HiTool_2021-06-06_18-19-47.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2021-06/WindowsTerminal_2021-06-06_18-30-29.png">
+<meta property="og:updated_time" content="2023-10-16T08:04:08.520Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="开源鸿蒙网络和hdc连接方法">
+<meta name="twitter:description" content="hdc下载 如果下载了源码，可以在源码目录找到: developtools/hdc_standard/prebuilt/windows/hdc_std.exe 远程仓库地址： https://gitee.com/openharmony/developtools_hdc_standard hdc使用手册: https://gitee.com/openharmony/docs/blob/master/">
+<meta name="twitter:image" content="https://dll.ystyle.top/images/2021-06/mmc_2021-06-07_19-52-37.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">开源鸿蒙网络和hdc连接方法</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">开源鸿蒙网络和hdc连接方法</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-06-06T10:10:13.000Z" itemprop="datePublished" class="page-time">
+  2021-06-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#hdc下载"><span class="post-toc-number">1.</span> <span class="post-toc-text">hdc下载</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#通过usb连接鸿蒙"><span class="post-toc-number">2.</span> <span class="post-toc-text">通过usb连接鸿蒙</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#鸿蒙连接本地有线网络"><span class="post-toc-number">3.</span> <span class="post-toc-text">鸿蒙连接本地有线网络</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用hdc通过tcp连接鸿蒙"><span class="post-toc-number">4.</span> <span class="post-toc-text">用hdc通过tcp连接鸿蒙</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-openharmonyos-hdc-and-network"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">开源鸿蒙网络和hdc连接方法</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-06-06 18:10:13" datetime="2021-06-06T10:10:13.000Z"  itemprop="datePublished">2021-06-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="hdc下载"><a href="#hdc下载" class="headerlink" title="hdc下载"></a>hdc下载</h3><ul>
+<li>如果下载了源码，可以在源码目录找到: developtools/hdc_standard/prebuilt/windows/hdc_std.exe</li>
+<li>远程仓库地址： <a href="https://gitee.com/openharmony/developtools_hdc_standard" target="_blank" rel="noopener">https://gitee.com/openharmony/developtools_hdc_standard</a></li>
+<li>hdc使用手册: <a href="https://gitee.com/openharmony/docs/blob/master/zh-cn/device-dev/subsystems/hdc_std-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%AF%BC.md" target="_blank" rel="noopener">https://gitee.com/openharmony/docs/blob/master/zh-cn/device-dev/subsystems/hdc_std-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%AF%BC.md</a></li>
+</ul>
+<h3 id="通过usb连接鸿蒙"><a href="#通过usb连接鸿蒙" class="headerlink" title="通过usb连接鸿蒙"></a>通过usb连接鸿蒙</h3><ul>
+<li>通过hi3516背面的type-c口连接电脑, 目前只有这口能传数据， 底下的口不行<ul>
+<li>如果成功，可以在电脑 <code>设备管理-用串行总线设备</code>下面看到<code>HDC Device</code></li>
+</ul>
+</li>
+<li>打开终端， 输入<code>hdc list targets</code>列出设备</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2021-06/mmc_2021-06-07_19-52-37.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2021-06/WindowsTerminal_2021-06-07_19-53-25.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="鸿蒙连接本地有线网络"><a href="#鸿蒙连接本地有线网络" class="headerlink" title="鸿蒙连接本地有线网络"></a>鸿蒙连接本地有线网络</h3><ul>
+<li>插入有线网线</li>
+<li>在hitool串口中连接上hi3516后执行<ul>
+<li><code>/system/xbin/su</code> 获取root权限</li>
+<li><code>ifconfig eth0 192.168.3.197 netmask 255.255.255.0</code> 网络IP要换成自己的网段</li>
+</ul>
+</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2021-06/HiTool_2021-06-06_18-29-05.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="用hdc通过tcp连接鸿蒙"><a href="#用hdc通过tcp连接鸿蒙" class="headerlink" title="用hdc通过tcp连接鸿蒙"></a>用hdc通过tcp连接鸿蒙</h3><ul>
+<li>在连接hitool串口后执行<code>hdcd -t</code></li>
+<li>在自己电脑主机上打开终端执行 <code>hdc tconn 192.168.3.197:10178</code> 显示 <code>Connect OK</code> 就表示连接上了<ul>
+<li>执行<code>hdc list targets -v</code> 显示设备</li>
+<li>执行<code>hdc -t 192.168.3.197:10178 shell</code> 连接鸿蒙系统的shell， 注： tcp连接时要用-t指定连接的ip:端口</li>
+<li>执行<code>hdc -t 192.168.3.197:10178 file send localfile remotefile</code> 发送文件</li>
+<li>其实命令请查看使用手册</li>
+</ul>
+</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2021-06/HiTool_2021-06-06_18-19-47.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2021-06/WindowsTerminal_2021-06-06_18-30-29.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2023-10-16T08:04:08.520Z" itemprop="dateUpdated">2023-10-16 16:04:08</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2021/06/06/openharmonyos-hdc-and-network/" target="_blank" rel="external">http://ystyle.top/2021/06/06/openharmonyos-hdc-and-network/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/鸿蒙/">鸿蒙</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2021/06/06/openharmonyos-hdc-and-network/&title=《开源鸿蒙网络和hdc连接方法》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2021/06/06/openharmonyos-hdc-and-network/&title=《开源鸿蒙网络和hdc连接方法》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2021/06/06/openharmonyos-hdc-and-network/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《开源鸿蒙网络和hdc连接方法》 — 东方星痕&url=http://ystyle.top/2021/06/06/openharmonyos-hdc-and-network/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2021/06/06/openharmonyos-hdc-and-network/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/06/22/go-mod-gogs-private/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">go mod 拉取 gogs 私有仓库</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/12/18/hi3516-connect-wifi/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">鸿蒙开发板HI3516用命令行连接wifi</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2021/06/06/openharmonyos-hdc-and-network/&title=《开源鸿蒙网络和hdc连接方法》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2021/06/06/openharmonyos-hdc-and-network/&title=《开源鸿蒙网络和hdc连接方法》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2021/06/06/openharmonyos-hdc-and-network/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《开源鸿蒙网络和hdc连接方法》 — 东方星痕&url=http://ystyle.top/2021/06/06/openharmonyos-hdc-and-network/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2021/06/06/openharmonyos-hdc-and-network/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACHElEQVR42u3aQW5DIQwFwN7/0qnUbRT6bJOqgWEVJR8+w8LBmK+vuD1+2vPn9TfPvZ6fTMbf1jAwMD6W8Vi2ZFpJ31e91oxkfAwMjHsYeRDMwXnAXS/Wem4YGBgYyQuSMLrG5CNgYGBg9Bg9am8hMDAwbmb0EtHkZUkKmvM25OIYGBgfyJgUBt79+Y/qGxgYGP+Y8Wi1vJA5CceF+WBgYBzNyA/OksS1V8KslkujXBwDA+M4xt4XVFPT3sYUAwPjHkZ1oOp0k2CdL+jLvhgYGBcw1pgcsHf7WJgPBgbGNYxdm8LkEka1MLDh1BADA+PDGfOtXn5gl4fywpMYGBjXM3olhOS4bbIcUS6OgYFxBKNXnqwGzb0T/WX5MDAwjmPkA1UnmiTDSTiOAjQGBsbRjOpRV/UGx64Fit6IgYFxDSO/HlHttffYDgMD4x5GNU2dPF8NowU2BgbG0YzqMf38qkS1bJAvDQYGxqmMXljsJZzVsiUGBgZGMpXeMdyc3QvrGBgYpzKqV7uqNzgmpcqkXIqBgXEDoxpwJ1cuqsvXC9AYGBjnMR7F1gvWu4J4IRfHwMA4iJG3ScHgHTk3BgbGbYwkyM5T2V44Xi9K4d8DAwPjCEaelE5+rSbG+YYSAwMDI09WqwE3R2JgYGBMEtf1aJOiQiELx8DAuICRh7/8gD4vLfQWZZSLY2BgfBSjVxjIB0oC9yRhxsDAOJrxDQsKW9H+7ErJAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

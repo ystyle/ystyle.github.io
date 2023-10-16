@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>ActiveMQ 入门 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="nodejs">
+    <meta name="description" content="ActiveMQ 入门下载与安装官方下载地址 解压，运行bin/win[32|64]/activemq[.bat] 启动服务 环境信息控制台: http://localhost:8161 默认端口:8161服务地址:     host: localhostport: 61613  代码例子基本信息：  语言：Node.js客户端：stompjs  消息发布者: 123456789101112131">
+<meta name="keywords" content="nodejs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ActiveMQ 入门">
+<meta property="og:url" content="http://ystyle.top/2015/07/30/activemq-ru-men/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="ActiveMQ 入门下载与安装官方下载地址 解压，运行bin/win[32|64]/activemq[.bat] 启动服务 环境信息控制台: http://localhost:8161 默认端口:8161服务地址:     host: localhostport: 61613  代码例子基本信息：  语言：Node.js客户端：stompjs  消息发布者: 123456789101112131">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2015-09-24T10:11:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ActiveMQ 入门">
+<meta name="twitter:description" content="ActiveMQ 入门下载与安装官方下载地址 解压，运行bin/win[32|64]/activemq[.bat] 启动服务 环境信息控制台: http://localhost:8161 默认端口:8161服务地址:     host: localhostport: 61613  代码例子基本信息：  语言：Node.js客户端：stompjs  消息发布者: 123456789101112131">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">ActiveMQ 入门</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">ActiveMQ 入门</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-07-30T15:34:38.000Z" itemprop="datePublished" class="page-time">
+  2015-07-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ActiveMQ-入门"><span class="post-toc-number">1.</span> <span class="post-toc-text">ActiveMQ 入门</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#下载与安装"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">下载与安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#环境信息"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">环境信息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码例子"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">代码例子</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Queue与Topic的比较"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">Queue与Topic的比较</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-activemq-ru-men"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">ActiveMQ 入门</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015-07-30 23:34:38" datetime="2015-07-30T15:34:38.000Z"  itemprop="datePublished">2015-07-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="ActiveMQ-入门"><a href="#ActiveMQ-入门" class="headerlink" title="ActiveMQ 入门"></a>ActiveMQ 入门</h2><h3 id="下载与安装"><a href="#下载与安装" class="headerlink" title="下载与安装"></a>下载与安装</h3><p><a href="http://activemq.apache.org/download-archives.html" target="_blank" rel="noopener"><code>官方下载地址</code></a></p>
+<p>解压，运行bin/win[32|64]/activemq[.bat] 启动服务</p>
+<h3 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h3><p>控制台: <code>http://localhost:8161</code> 默认端口:<code>8161</code><br>服务地址:   </p>
+<blockquote>
+<p>host: <code>localhost</code><br>port: <code>61613</code></p>
+</blockquote>
+<h3 id="代码例子"><a href="#代码例子" class="headerlink" title="代码例子"></a>代码例子</h3><p>基本信息：</p>
+<blockquote>
+<p>语言：Node.js<br>客户端：<a href="https://github.com/jmesnil/stomp-websocket" target="_blank" rel="noopener">stompjs</a></p>
+</blockquote>
+<p>消息发布者:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Publisher.js</span></span><br><span class="line"><span class="keyword">var</span> Stomp = <span class="built_in">require</span>(<span class="string">'stompjs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Use raw TCP sockets</span></span><br><span class="line"><span class="keyword">var</span> client = Stomp.overTCP(<span class="string">'localhost'</span>, <span class="number">61613</span>);</span><br><span class="line"><span class="comment">// uncomment to print out the STOMP frames</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//client.debug = console.log;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> connectCallback = <span class="function"><span class="keyword">function</span>(<span class="params">frame</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log (<span class="string">'Connected! sending some message'</span>);</span><br><span class="line">  setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>().toLocaleString();</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"sending:"</span>+date);</span><br><span class="line">      client.send(<span class="string">'/queue/FirstQueue'</span>, &#123;&#125;, <span class="string">"queue:"</span> + date);</span><br><span class="line">      client.send(<span class="string">'/topic/FirstQueue'</span>, &#123;&#125;, <span class="string">"topic:"</span> + date);</span><br><span class="line">  &#125;,<span class="number">10000</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> errorCallback = <span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error.headers.message);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">client.connect(<span class="string">'admin'</span>, <span class="string">'admin'</span>, connectCallback,connectCallback);</span><br></pre></td></tr></table></figure>
+<p>Queue消息消费者</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Consumer_queue.js</span></span><br><span class="line"><span class="keyword">var</span> Stomp = <span class="built_in">require</span>(<span class="string">'stompjs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Use raw TCP sockets</span></span><br><span class="line"><span class="keyword">var</span> client = Stomp.overTCP(<span class="string">'localhost'</span>, <span class="number">61613</span>);</span><br><span class="line"><span class="comment">// uncomment to print out the STOMP frames</span></span><br><span class="line"><span class="comment">// client.debug = console.log;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> connectCallback = <span class="function"><span class="keyword">function</span>(<span class="params">frame</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> subscription = client.subscribe(<span class="string">'/queue/FirstQueue'</span>, onMessage);</span><br><span class="line">    <span class="comment">//subscription.unsubscribe();</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> onMessage = <span class="function"><span class="keyword">function</span>(<span class="params">message</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (message.body) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"got message with body "</span> + message.body)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"got empty message"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> errorCallback = <span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error.headers.message);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">client.connect(<span class="string">'admin'</span>, <span class="string">'admin'</span>, connectCallback,connectCallback);</span><br></pre></td></tr></table></figure>
+<p>Topic消息消费者</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Consumer_topics.js</span></span><br><span class="line"><span class="keyword">var</span> Stomp = <span class="built_in">require</span>(<span class="string">'stompjs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Use raw TCP sockets</span></span><br><span class="line"><span class="keyword">var</span> client = Stomp.overTCP(<span class="string">'localhost'</span>, <span class="number">61613</span>);</span><br><span class="line"><span class="comment">// uncomment to print out the STOMP frames</span></span><br><span class="line"><span class="comment">// client.debug = console.log;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> connectCallback = <span class="function"><span class="keyword">function</span>(<span class="params">frame</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> subscription = client.subscribe(<span class="string">'/topic/FirstQueue'</span>, onMessage);</span><br><span class="line">    <span class="comment">//subscription.unsubscribe();</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> onMessage = <span class="function"><span class="keyword">function</span>(<span class="params">message</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (message.body) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"got message with body "</span> + message.body)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"got empty message"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> errorCallback = <span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error.headers.message);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">client.connect(<span class="string">'admin'</span>, <span class="string">'admin'</span>, connectCallback,connectCallback);</span><br></pre></td></tr></table></figure>
+<p>注： Queue、Topic消息消费者分别启动两个，再启动消息发布者，观察Queue、Topic消息消费者接收到的消息有什么区别  </p>
+<h3 id="Queue与Topic的比较"><a href="#Queue与Topic的比较" class="headerlink" title="Queue与Topic的比较"></a>Queue与Topic的比较</h3><p>1、JMS Queue执行load balancer语义：<br>一条消息仅能被一个consumer收到。如果在message发送的时候没有可用的consumer，那么它将被保存一直到能处理该message的consumer可用。如果一个consumer收到一条message后却不响应它，那么这条消息将被转到另一个consumer那儿。一个Queue可以有很多consumer，并且在多个可用的consumer中负载均衡。</p>
+<p>2、Topic实现publish和subscribe语义：<br>一条消息被publish时，它将发到所有感兴趣的订阅者，所以零到多个subscriber将接收到消息的一个拷贝。但是在消息代理接收到消息时，只有激活订阅的subscriber能够获得消息的一个拷贝。</p>
+<p>3、分别对应两种消息模式：<br>Point-to-Point (点对点),Publisher/Subscriber Model (发布/订阅者)<br>其中在Publicher/Subscriber 模式下又有Nondurable subscription（非持久订阅）和durable subscription (持久化订阅)2种消息处理方式。</p>
+<p>总结：Topic就是游戏里的日常任务，只要在线都能接。Queue是小说里的神位传承，只有通过了测试的唯一一个 人才能得到</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2015-09-24T10:11:51.000Z" itemprop="dateUpdated">2015-09-24 18:11:51</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2015/07/30/activemq-ru-men/" target="_blank" rel="external">http://ystyle.top/2015/07/30/activemq-ru-men/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2015/07/30/activemq-ru-men/&title=《ActiveMQ 入门》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2015/07/30/activemq-ru-men/&title=《ActiveMQ 入门》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2015/07/30/activemq-ru-men/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ActiveMQ 入门》 — 东方星痕&url=http://ystyle.top/2015/07/30/activemq-ru-men/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2015/07/30/activemq-ru-men/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/08/05/githubxie-zhu-gong-zuo-liu/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">Github协助工作流</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/07/16/docker-install-oracle/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">docker 安装oracle 数据库</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2015/07/30/activemq-ru-men/&title=《ActiveMQ 入门》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2015/07/30/activemq-ru-men/&title=《ActiveMQ 入门》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2015/07/30/activemq-ru-men/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ActiveMQ 入门》 — 东方星痕&url=http://ystyle.top/2015/07/30/activemq-ru-men/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2015/07/30/activemq-ru-men/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLUlEQVR42u3aS26DQBAFQN//0s7WUgR+r4dEYihWUYLNFItO/16v+Hp/XJ+/+f3XozvP7//9rNdfXBgYGLdlvE+v5J78WPmLyM+GgYHxHMZRBDt/ZHv/+WfPw/qXM2NgYGAE6VobuPOkEwMDA2OdcZiuxWlf+1wMDIxnMpJAmX9qFnbztBIDA+NpjLzr/v8//8l8AwMD41aMlXA5G3AmL6g+FQYGxtaMWStttpwRFaIr58HAwHgkY2W1Im/AnQOK14eBgfEARt76bwcGycpFviJ2yMbAwNia0X5RuxC2EsTr5BIDA2M7Rj4UPCfNli1mmd5h+YqBgbEpIw+as9J0NkJYafNhYGDsx1gfW842Itoi+cupMDAwtmYk1W07BsiXJ2YFc50gYmBg3JzRBrKlNzRqzEUvFAMDY2tG3lBrH9AOLNtFMQwMDIxZey4fcM5Sw2LZAgMDYyPGevHZ9upnieBSEYuBgXFzxvraRJL2zcJokiZiYGBg5OsR+bFmgDq3xcDA2JTxuvTKB5/tZtfhyTEwMB7AaAcDs1HlytIYBgYGRr4AkYfLfLTQBvEL9jgwMDBuwniX12zlIil9Z0UvBgbGExhXFaWzcNm2/ovlMAwMjO0Ys8FkUV6Wqd4w4GJgYDyA0bbMrkoE2/8Ah6EfAwMDIw6ss7WwPHv90nTDwMDAGD145VNJuMfAwHgOI19jXWnx599cF8AYGBhbM/KPtQG0LX2vSlgxMDA2YvwA+Qz6CIn83zEAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

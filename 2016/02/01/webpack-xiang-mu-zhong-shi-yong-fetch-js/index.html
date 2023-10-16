@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Webpack 项目中使用fetch.js | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="nodejs,webpack,fetch">
+    <meta name="description" content="安装依赖12npm i imports-loader exports-loader --save-devnpm i whatwg-fetch --save 方法一: webpack配置修改webpack.config.js 文件12345plugins: [       new webpack.ProvidePlugin(&amp;#123;           &apos;fetch&apos;: &apos;imports?thi">
+<meta name="keywords" content="nodejs,webpack,fetch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Webpack 项目中使用fetch.js">
+<meta property="og:url" content="http://ystyle.top/2016/02/01/webpack-xiang-mu-zhong-shi-yong-fetch-js/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="安装依赖12npm i imports-loader exports-loader --save-devnpm i whatwg-fetch --save 方法一: webpack配置修改webpack.config.js 文件12345plugins: [       new webpack.ProvidePlugin(&amp;#123;           &apos;fetch&apos;: &apos;imports?thi">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2016-02-22T09:58:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Webpack 项目中使用fetch.js">
+<meta name="twitter:description" content="安装依赖12npm i imports-loader exports-loader --save-devnpm i whatwg-fetch --save 方法一: webpack配置修改webpack.config.js 文件12345plugins: [       new webpack.ProvidePlugin(&amp;#123;           &apos;fetch&apos;: &apos;imports?thi">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Webpack 项目中使用fetch.js</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Webpack 项目中使用fetch.js</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-02-01T03:36:09.000Z" itemprop="datePublished" class="page-time">
+  2016-02-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装依赖"><span class="post-toc-number">1.</span> <span class="post-toc-text">安装依赖</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#方法一-webpack配置"><span class="post-toc-number">2.</span> <span class="post-toc-text">方法一: webpack配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#方法二-import"><span class="post-toc-number">3.</span> <span class="post-toc-text">方法二: import</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-webpack-xiang-mu-zhong-shi-yong-fetch-js"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Webpack 项目中使用fetch.js</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-02-01 11:36:09" datetime="2016-02-01T03:36:09.000Z"  itemprop="datePublished">2016-02-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm i imports-loader exports-loader --save-dev</span><br><span class="line">npm i whatwg-fetch --save</span><br></pre></td></tr></table></figure>
+<h3 id="方法一-webpack配置"><a href="#方法一-webpack配置" class="headerlink" title="方法一: webpack配置"></a>方法一: webpack配置</h3><p>修改<code>webpack.config.js</code> 文件<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">       <span class="keyword">new</span> webpack.ProvidePlugin(&#123;</span><br><span class="line">           <span class="string">'fetch'</span>: <span class="string">'imports?this=&gt;global!exports?global.fetch!whatwg-fetch'</span></span><br><span class="line">       &#125;),</span><br><span class="line">   ],</span><br></pre></td></tr></table></figure></p>
+<h3 id="方法二-import"><a href="#方法二-import" class="headerlink" title="方法二: import"></a>方法二: import</h3><p>在需要使用的文件中import<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'imports?this=&gt;global!exports?global.fetch!whatwg-fetch'</span>;</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2016-02-22T09:58:49.000Z" itemprop="dateUpdated">2016-02-22 17:58:49</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/02/01/webpack-xiang-mu-zhong-shi-yong-fetch-js/" target="_blank" rel="external">http://ystyle.top/2016/02/01/webpack-xiang-mu-zhong-shi-yong-fetch-js/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fetch/">fetch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2016/02/01/webpack-xiang-mu-zhong-shi-yong-fetch-js/&title=《Webpack 项目中使用fetch.js》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2016/02/01/webpack-xiang-mu-zhong-shi-yong-fetch-js/&title=《Webpack 项目中使用fetch.js》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2016/02/01/webpack-xiang-mu-zhong-shi-yong-fetch-js/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Webpack 项目中使用fetch.js》 — 东方星痕&url=http://ystyle.top/2016/02/01/webpack-xiang-mu-zhong-shi-yong-fetch-js/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2016/02/01/webpack-xiang-mu-zhong-shi-yong-fetch-js/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/02/22/shi-yong-hadoop-zhong-wen-fen-ci-tong-ji-xiao-shuo-li-de-yong-ci-pin-lu/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">使用hadoop+中文分词统计小说里的用词频率</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/12/03/windows-jdk-ban-ben-guan-li-qi-jvms-fa-bu/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Windows JDK 版本管理器 jvms 0.0.2 发布</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2016/02/01/webpack-xiang-mu-zhong-shi-yong-fetch-js/&title=《Webpack 项目中使用fetch.js》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2016/02/01/webpack-xiang-mu-zhong-shi-yong-fetch-js/&title=《Webpack 项目中使用fetch.js》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2016/02/01/webpack-xiang-mu-zhong-shi-yong-fetch-js/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Webpack 项目中使用fetch.js》 — 东方星痕&url=http://ystyle.top/2016/02/01/webpack-xiang-mu-zhong-shi-yong-fetch-js/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2016/02/01/webpack-xiang-mu-zhong-shi-yong-fetch-js/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsElEQVR42u3aQY4iMQwFUO5/aWbbI5Hm244ZRnpZISgqebVIXLYfj3g8f4zqlc/D+Pnr6fPp18sDDw8Pb7D03xeR807f5Ozf75ysGQ8PD2+bl9wumSzfmefHRvJw8fDw8L6Nd4LljN4seHh4eP8Xrxdq9xIc/+BgwMPDw4t51dA2CaDzWRLkeq4FDw8Pr3Ofx2SD/uTnlfoeHh4e3riqXk035GF60iLQO1r++i8eHh7eAi/fcKsh7DyBW01bHK/Ew8PDu8qbN1ElV/ZSsdUExIs74+Hh4a3xEsBkW88D6ySkLhwbeHh4eAu8+at+Xgyrtgj0krzHWfDw8PAu8fIpk2C3Wr6aNCiUq3Z4eHh4V3l5CrW69HnAndy5nIzAw8PDu8qrhsjVJoBqg8Lk4MHDw8Pb41Uzn70jpFr6yottb7LUeHh4eGu8BDO/pncI5UfFsTMCDw8P7xJvUpJP0rLzFHCejMDDw8P7DC9PsN4qX+VFtXw9zTcGPDw8vAHv1oae/JqkG/Kj6I0CDw8Pb4HXe8mvpiTmd8ibw95cj4eHhzfm5Q1Mk60/D9OrJbE368TDw8Nb4N1tlsobC8rtU3GjQ2FiPDw8vBZvzugVyfJHUE1J4OHh4W3zqmWw+aKrDyiZsdkZgYeHhzfm5QFu9dioLnR+fzw8PLzP8+6Ojfas0fR4eHh4C7wkqdrb6Cdhd++/eHh4eHu83u7aK2vNE8TlgwEPDw/vEu9ZHHnImwfNeVI4OWZe9JTh4eHhXeXdeqPPD55JSmLemIWHh4d3i1ctNU3SBNWDJE9tHFeFh4eHt8bLN/Rq4Jtv6CtFODw8PLwv4FWTFL3U7eTh4uHh4X0bbxJM3yqJFZIjeHh4eGu8XiF/wsgD8d4a8PDw8PZ4vTf66hKTR5AfA+sJCzw8PLzX4w86HH2C93yjqwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

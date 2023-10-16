@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>txt小说转epub与mobi | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="小说,kindle,epub,mobi,kaf-cli">
+    <meta name="description" content="把txt文本转成epub、mobi电子书的工具, 支持电脑和安卓APP。  下载 电脑版kaf-cli: Github下载 手机版kaf: Github下载 原服务器已过期，新的服务器地址为: ws://kas.ystyle.top/ws   电脑版wifi传书kaf-wifi: Github下载 全部软件 百度网盘下载 https://pan.baidu.com/s/1EPkLJ7WIJYdY">
+<meta name="keywords" content="小说,kindle,epub,mobi,kaf-cli">
+<meta property="og:type" content="article">
+<meta property="og:title" content="txt小说转epub与mobi">
+<meta property="og:url" content="http://ystyle.top/2019/12/31/txt-converto-epub-and-mobi/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="把txt文本转成epub、mobi电子书的工具, 支持电脑和安卓APP。  下载 电脑版kaf-cli: Github下载 手机版kaf: Github下载 原服务器已过期，新的服务器地址为: ws://kas.ystyle.top/ws   电脑版wifi传书kaf-wifi: Github下载 全部软件 百度网盘下载 https://pan.baidu.com/s/1EPkLJ7WIJYdY">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://dll.ystyle.top/images/2020-03/kaf1.jpg">
+<meta property="og:image" content="https://dll.ystyle.top/images/2020-03/kaf2.jpg">
+<meta property="og:image" content="https://dll.ystyle.top/images/2020-03/kaf5.jpg">
+<meta property="og:image" content="https://dll.ystyle.top/images/2020-03/kaf6.jpg">
+<meta property="og:image" content="https://github.com/ystyle/kaf-cli/raw/master/2020-01-21_12-02.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2020-03/550b751ed21b0ef466cae53fcac451da80cb3efe.jpg">
+<meta property="og:updated_time" content="2021-04-13T05:02:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="txt小说转epub与mobi">
+<meta name="twitter:description" content="把txt文本转成epub、mobi电子书的工具, 支持电脑和安卓APP。  下载 电脑版kaf-cli: Github下载 手机版kaf: Github下载 原服务器已过期，新的服务器地址为: ws://kas.ystyle.top/ws   电脑版wifi传书kaf-wifi: Github下载 全部软件 百度网盘下载 https://pan.baidu.com/s/1EPkLJ7WIJYdY">
+<meta name="twitter:image" content="https://dll.ystyle.top/images/2020-03/kaf1.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">txt小说转epub与mobi</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">txt小说转epub与mobi</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-31T05:02:49.000Z" itemprop="datePublished" class="page-time">
+  2019-12-31
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/软件/">软件</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#下载"><span class="post-toc-number">1.</span> <span class="post-toc-text">下载</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#功能"><span class="post-toc-number">2.</span> <span class="post-toc-text">功能</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用方法"><span class="post-toc-number">3.</span> <span class="post-toc-text">使用方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#效果"><span class="post-toc-number">4.</span> <span class="post-toc-text">效果</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#命令行模式"><span class="post-toc-number">5.</span> <span class="post-toc-text">命令行模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#命令行模式说明"><span class="post-toc-number">6.</span> <span class="post-toc-text">命令行模式说明</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自定义章节匹配规则"><span class="post-toc-number">7.</span> <span class="post-toc-text">自定义章节匹配规则</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在任意位置执行命令"><span class="post-toc-number">8.</span> <span class="post-toc-text">在任意位置执行命令</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#手动把书转为kindle的mobi格式"><span class="post-toc-number">9.</span> <span class="post-toc-text">手动把书转为kindle的mobi格式</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-txt-converto-epub-and-mobi"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">txt小说转epub与mobi</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-31 13:02:49" datetime="2019-12-31T05:02:49.000Z"  itemprop="datePublished">2019-12-31</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/软件/">软件</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>把txt文本转成epub、mobi电子书的工具, 支持电脑和安卓APP。</p>
+</blockquote>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><ul>
+<li>电脑版kaf-cli: <a href="https://github.com/ystyle/kaf-cli/releases/latest" target="_blank" rel="noopener">Github下载</a></li>
+<li>手机版kaf: <a href="https://github.com/ystyle/kaf-cli/releases/tag/android" target="_blank" rel="noopener">Github下载</a><ul>
+<li>原服务器已过期，新的服务器地址为: <code>ws://kas.ystyle.top/ws</code></li>
+</ul>
+</li>
+<li>电脑版wifi传书kaf-wifi: <a href="https://github.com/ystyle/kaf-wifi/releases/latest" target="_blank" rel="noopener">Github下载</a></li>
+<li>全部软件 <a href="https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w?pwd=h4np" target="_blank" rel="noopener">百度网盘下载 <code>https://pan.baidu.com/s/1EPkLJ7WIJYdYtRHBEMqw0w?pwd=h4np</code></a></li>
+<li>Archlinux 可以在aur上安装 <a href="https://aur.archlinux.org/packages/kaf-cli/" target="_blank" rel="noopener"><code>yay -S kaf-cli kaf-wifi</code></a></li>
+</ul>
+<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">功能</th>
+<th style="text-align:left">kaf-cli</th>
+<th style="text-align:left">KAF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">支持平台</td>
+<td style="text-align:left">windows、linux、mac</td>
+<td style="text-align:left">Android</td>
+</tr>
+<tr>
+<td style="text-align:left">自动识别书名和章节</td>
+<td style="text-align:left">支持</td>
+<td style="text-align:left">支持</td>
+</tr>
+<tr>
+<td style="text-align:left">自定义封面</td>
+<td style="text-align:left">支持</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">自动识别字符编码(自动解决中文乱码)</td>
+<td style="text-align:left">支持</td>
+<td style="text-align:left">支持</td>
+</tr>
+<tr>
+<td style="text-align:left">自动给章节正文生成加粗居中的标题</td>
+<td style="text-align:left">支持</td>
+<td style="text-align:left">支持</td>
+</tr>
+<tr>
+<td style="text-align:left">段落自动识别</td>
+<td style="text-align:left">支持</td>
+<td style="text-align:left">支持</td>
+</tr>
+<tr>
+<td style="text-align:left">段落自动缩进</td>
+<td style="text-align:left">支持</td>
+<td style="text-align:left">支持</td>
+</tr>
+<tr>
+<td style="text-align:left">自定义书名作者</td>
+<td style="text-align:left">支持</td>
+<td style="text-align:left">支持</td>
+</tr>
+<tr>
+<td style="text-align:left">自定义章节标题识别规则</td>
+<td style="text-align:left">支持</td>
+<td style="text-align:left">支持</td>
+</tr>
+<tr>
+<td style="text-align:left">自定义章节标题对齐方式</td>
+<td style="text-align:left">支持</td>
+<td style="text-align:left">支持</td>
+</tr>
+<tr>
+<td style="text-align:left">自定义段落缩进字数</td>
+<td style="text-align:left">支持</td>
+<td style="text-align:left">支持</td>
+</tr>
+<tr>
+<td style="text-align:left">自定义段落间距</td>
+<td style="text-align:left">支持</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">自定义书籍语言</td>
+<td style="text-align:left">支持</td>
+<td style="text-align:left">支持</td>
+</tr>
+<tr>
+<td style="text-align:left">WIFI传书</td>
+<td style="text-align:left"><a href="https://github.com/ystyle/kaf-wifi" target="_blank" rel="noopener">kaf-wifi电脑版</a></td>
+<td style="text-align:left">支持</td>
+</tr>
+</tbody>
+</table>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><ul>
+<li>电脑版<ol>
+<li>解压, 把小说直接拖到 <code>kaf-cli.exe</code> 文件上面</li>
+<li>等转换完，目录下会生成epub、azw3、mobi文件<ul>
+<li>mobi格式需要有kindlegen才会生成(windows、mac版本已经自带)</li>
+</ul>
+</li>
+<li>自定义封面功能<br>在拖拽模式下, 如果目录下有<code>cover.png</code>文件会自动添加为封面、支持jpg、png格式， 如果需要指定其它文件或jpg格式需要使用命令行模式   </li>
+<li>其它自定义功能请用命令行模式</li>
+</ol>
+</li>
+<li>安卓版<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2020-03/kaf1.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2020-03/kaf2.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2020-03/kaf5.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2020-03/kaf6.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://github.com/ystyle/kaf-cli/raw/master/2020-01-21_12-02.png" alt="异常生物见闻录" title="">
+                </div>
+                <div class="image-caption">异常生物见闻录</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2020-03/550b751ed21b0ef466cae53fcac451da80cb3efe.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="命令行模式"><a href="#命令行模式" class="headerlink" title="命令行模式"></a>命令行模式</h3><p>命令行全部参数为：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Usage of kaf-cli.exe:</span><br><span class="line">  -align string</span><br><span class="line">        标题对齐方式: left、center、righ (default "center")</span><br><span class="line">  -author string</span><br><span class="line">        作者 (default "YSTYLE")</span><br><span class="line">  -bookname string</span><br><span class="line">        书名: 默认为txt文件名</span><br><span class="line">  -bottom string</span><br><span class="line">        段落间距(单位可以为em、px) (default "1em")</span><br><span class="line">  -cover string</span><br><span class="line">        封面图片 (default "cover.png")</span><br><span class="line">  -filename string</span><br><span class="line">        txt 文件名</span><br><span class="line">  -format string</span><br><span class="line">        书籍格式: both、epub、mobi (default "both")</span><br><span class="line">  -indent uint</span><br><span class="line">        段落缩进字数 (default 2)</span><br><span class="line">  -lang string</span><br><span class="line">        设置语言: en,de,fr,it,es,zh,ja,pt,ru,nl。 支持使用环境变量KAF-CLI-LANG设置 (default "zh")</span><br><span class="line">  -match string</span><br><span class="line">        匹配标题的正则表达式, 不写可以自动识别, 如果没生成章节就参考教程。例: -match 第.&#123;1,8&#125;章 表示第和章字之间可以有1-8个任意文字 (default "自动匹配,可自定义")</span><br><span class="line">  -max uint</span><br><span class="line">        标题最大字数 (default 35)</span><br><span class="line">  -tips</span><br><span class="line">        添加本软件教程 (default true)</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>PS: 在darwin(mac)上<code>-tips</code>参数要设置为false的方法 <code>kaf-cli -filename 小说.txt -tips=0</code></p>
+</blockquote>
+<h3 id="命令行模式说明"><a href="#命令行模式说明" class="headerlink" title="命令行模式说明"></a>命令行模式说明</h3><p>转换<code>全职法师.txt</code>, 并设置作者名为<code>乱</code><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> windows 10: win + s 搜索powershell </span><br><span class="line">cd d:/</span><br><span class="line">d:/kaf-cli.exe -author 乱 -filename d:/全职法师.txt</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> linux / mac下, 把kaf-cli-linux/kaf-cli-darwin重命名为kaf-cli, 放到用户目录</span><br><span class="line"><span class="meta">#</span> 把小说和kaf-cli放到用户目录下,  打开终端执行</span><br><span class="line">cd ~</span><br><span class="line">./kaf-cli -author 乱 -filename ./全职法师.txt</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 如果kaf-cli放到path里了, 或者在aur安装的可以执行:</span><br><span class="line">kaf-cli -author 乱 -filename ~/全职法师.txt</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 命令行的简单模式（功能和拖拽模式一样）</span><br><span class="line">kaf-cli ~/全职法师.txt</span><br></pre></td></tr></table></figure></p>
+<h3 id="自定义章节匹配规则"><a href="#自定义章节匹配规则" class="headerlink" title="自定义章节匹配规则"></a>自定义章节匹配规则</h3><blockquote>
+<p>以下全部示例都可以自动识别，不需要自己设定标题格式了， 一般用上用上面的例子就行了</p>
+</blockquote>
+<blockquote>
+<p>规则支持<a href="http://deerchao.net/tutorials/regex/regex.htm" target="_blank" rel="noopener">正则表达式</a>， 要自定义标题格式参考以下几个例子, 以下例子小说都在D盘</p>
+</blockquote>
+<p>自定义章节匹配, 章节格式为<code>第x节</code>:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d:/kaf-cli.exe -filename d:/ebbok.txt -match "第.&#123;1,8&#125;节"</span><br></pre></td></tr></table></figure></p>
+<p>自定义章节匹配, 章节格式为<code>Section 1</code> ~ <code>Section 100</code>:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d:/kaf-cli.exe -filename d:/ebbok.txt -match "Section \d+"</span><br></pre></td></tr></table></figure></p>
+<p>自定义章节匹配, 章节格式为<code>Chapter xxx</code>:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d:/kaf-cli.exe -filename d:/ebbok.txt -match "Chapter .&#123;1,8&#125;"</span><br></pre></td></tr></table></figure></p>
+<h3 id="在任意位置执行命令"><a href="#在任意位置执行命令" class="headerlink" title="在任意位置执行命令"></a>在任意位置执行命令</h3><ul>
+<li>windows<ul>
+<li>把<code>kaf-cli.exe</code> 和 <code>kindlegen.exe</code> 放<code>c:/windows/</code>下边</li>
+<li>以后可以把小说放任意目录，都可以很简单执行转换， 第一步只需要做一次， 以下为每次转换小说的操作，<ul>
+<li>打开小说在的文件夹, 按住<code>Shift键</code>不放，鼠标右击文件夹空白位置</li>
+<li>在右键菜单选择 <code>用命令行打开</code> 或 <code>以PowerShell打开</code></li>
+<li>以上命令可以改为 <code>kaf-cli.exe -filename 全职法师.txt</code>,  现在可以不用写盘符了</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>linux(理论上mac也可以是这样的)<ul>
+<li>软件可以放任意地方, 比如<code>~/application/kaf-cli</code>，在<code>~/.bashrc</code> 或 <code>~/.zshrc</code> 最后一行添加 <code>export PATH=$HOME/application:$PATH</code></li>
+<li>打开终端, 执行命令为: <code>kaf-cli -filename ~/全职法师.txt</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="手动把书转为kindle的mobi格式"><a href="#手动把书转为kindle的mobi格式" class="headerlink" title="手动把书转为kindle的mobi格式"></a>手动把书转为kindle的mobi格式</h3><blockquote>
+<p>新版如果检测到有kindlegen程序时会自动转为mobi</p>
+</blockquote>
+<ol>
+<li>下载<a href="https://github.com/ystyle/kaf-cli/releases/kindlegen/" target="_blank" rel="noopener">kindlegen</a> (github备份，官网已经不提供下载)</li>
+<li><p>同样放到<code>d:</code>盘根目录下， 把epub拖拽到kindlegen.exe上面， 或执行以下命令转换, 参数<code>-dont_append_source</code> 可以减少大概一半的mobi文件大小</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd d:/</span><br><span class="line">d:/kindlegen.exe -dont_append_source d:/全职法师.epub</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在d盘就能找到mobi文件，复制到kindle的documents目录下，打开kindle就能看到小说了</p>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-04-13T05:02:49.000Z" itemprop="dateUpdated">2021-04-13 13:02:49</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2019/12/31/txt-converto-epub-and-mobi/" target="_blank" rel="external">http://ystyle.top/2019/12/31/txt-converto-epub-and-mobi/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/epub/">epub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kaf-cli/">kaf-cli</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kindle/">kindle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mobi/">mobi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小说/">小说</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2019/12/31/txt-converto-epub-and-mobi/&title=《txt小说转epub与mobi》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2019/12/31/txt-converto-epub-and-mobi/&title=《txt小说转epub与mobi》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2019/12/31/txt-converto-epub-and-mobi/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《txt小说转epub与mobi》 — 东方星痕&url=http://ystyle.top/2019/12/31/txt-converto-epub-and-mobi/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2019/12/31/txt-converto-epub-and-mobi/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/02/21/add-custom-context-menu-to-kde-dolphin/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">KDE添加右键菜单</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/22/how-to-use-storm-db/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">嵌入式数据库storm的使用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2019/12/31/txt-converto-epub-and-mobi/&title=《txt小说转epub与mobi》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2019/12/31/txt-converto-epub-and-mobi/&title=《txt小说转epub与mobi》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2019/12/31/txt-converto-epub-and-mobi/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《txt小说转epub与mobi》 — 东方星痕&url=http://ystyle.top/2019/12/31/txt-converto-epub-and-mobi/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2019/12/31/txt-converto-epub-and-mobi/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACK0lEQVR42u3aS27jMBAE0Nz/0s52gInlqqYSQOTjSpD18dOiwf58fcXr9c96d+b/69+deXf87sxtCwMD47GM1+W6viZ/ccLO3/vDczAwMA5gXAfNNoDmnyBhJAEdAwMDI/nTCTsPrBgYGBj3BtzrULuSGGNgYGC0Sex66W12fHMujoGB8UBGXnX/++Nf6W9gYGA8ivEq13V4XS+0Df8VBgbG1oxZA3Jl5GI2fhE1RDEwMDZltCWzvDSWBNl8mOzDEzAwMA5gzIpZs3tnI2gfmhMYGBgHMPJyfD480TYp22ELDAyM0xhtQa0dnrirUVqMWWBgYGzHyNPIleJaW3RLkmEMDIwTGG3SOGs65i2EfCsZFd0wMDA2YuQNgDwcrzyhvQsDA2NvRlv2astn65vCaJuIgYFxACPfAubp5WwUox3CwMDAOIExC3/5Bq4t97fpa7HDxcDAeCyjTUpnG8QksM4+DQYGxgmM9XbmLHFNrs/DNwYGxgmM9cL9ykawLd59CLUYGBhbM2bjFMl2rW0wtCkxBgbGOYw2LM4an21SWpzHwMA4kjF7XJ6aJklvkQBjYGBsylhpA8yCb04tPhAGBsbWjJVgl6SsbYqbfKZoOAwDA2M7xizIJmfaBucsecbAwDiH0Sacya93pb7DgTAMDAyM4K42ZZ09HwMDAyMfyPi9UBul0BgYGAcw8rGJNlzO2gD1BhEDA2NrRn5bHjTzIbAZYKm/gYGB8STGNz5ef62wyUQ/AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>用docker搭建ELK | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="docker,elk">
+    <meta name="description" content="logstash-input-tcp 可用，但log4j会把对象序列化，在kibana看到的会是乱码 logstash-input-log4j 不可用，官方已废弃该插件， log4j连接不上该插件 logstash-input-redis 可用，配置简洁，有安全保障    本篇以 logstash-input-redis插件配置elk  下载sebp/elk镜像1docker pull seb">
+<meta name="keywords" content="docker,elk">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用docker搭建ELK">
+<meta property="og:url" content="http://ystyle.top/2017/09/27/use-docker-to-build-ELKStack/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="logstash-input-tcp 可用，但log4j会把对象序列化，在kibana看到的会是乱码 logstash-input-log4j 不可用，官方已废弃该插件， log4j连接不上该插件 logstash-input-redis 可用，配置简洁，有安全保障    本篇以 logstash-input-redis插件配置elk  下载sebp/elk镜像1docker pull seb">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://dll.ystyle.top/qiniu//201717291743-N.png">
+<meta property="og:image" content="https://dll.ystyle.top/qiniu//201717291744-B.png">
+<meta property="og:image" content="https://dll.ystyle.top/qiniu//201717291744-R.png">
+<meta property="og:updated_time" content="2023-10-16T08:04:08.520Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用docker搭建ELK">
+<meta name="twitter:description" content="logstash-input-tcp 可用，但log4j会把对象序列化，在kibana看到的会是乱码 logstash-input-log4j 不可用，官方已废弃该插件， log4j连接不上该插件 logstash-input-redis 可用，配置简洁，有安全保障    本篇以 logstash-input-redis插件配置elk  下载sebp/elk镜像1docker pull seb">
+<meta name="twitter:image" content="https://dll.ystyle.top/qiniu//201717291743-N.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">用docker搭建ELK</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">用docker搭建ELK</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-09-27T01:05:31.000Z" itemprop="datePublished" class="page-time">
+  2017-09-27
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#下载sebp-elk镜像"><span class="post-toc-number">1.</span> <span class="post-toc-text">下载sebp/elk镜像</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#启动容器"><span class="post-toc-number">2.</span> <span class="post-toc-text">启动容器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置Logstash虚拟日志条目"><span class="post-toc-number">3.</span> <span class="post-toc-text">配置Logstash虚拟日志条目</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试"><span class="post-toc-number">4.</span> <span class="post-toc-text">测试</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#kibana设置"><span class="post-toc-number">5.</span> <span class="post-toc-text">kibana设置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#集成到java-web项目"><span class="post-toc-number">6.</span> <span class="post-toc-text">集成到java web项目</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#预览结果"><span class="post-toc-number">7.</span> <span class="post-toc-text">预览结果</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-use-docker-to-build-ELKStack"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">用docker搭建ELK</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-09-27 09:05:31" datetime="2017-09-27T01:05:31.000Z"  itemprop="datePublished">2017-09-27</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<ol>
+<li><code>logstash-input-tcp</code> 可用，但log4j会把对象序列化，在kibana看到的会是乱码</li>
+<li><code>logstash-input-log4j</code> 不可用，官方已废弃该插件， log4j连接不上该插件</li>
+<li><code>logstash-input-redis</code> 可用，配置简洁，有安全保障</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>本篇以 <code>logstash-input-redis</code>插件配置elk</p>
+</blockquote>
+<h3 id="下载sebp-elk镜像"><a href="#下载sebp-elk镜像" class="headerlink" title="下载sebp/elk镜像"></a>下载sebp/elk镜像</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull sebp/elk</span><br></pre></td></tr></table></figure>
+<h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><ul>
+<li><p>创建docker-compose.yml文件</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  elk:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">sebp/elk</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">"5601:5601"</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">"9200:9200"</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">"5044:5044"</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置主机的虚拟内存</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -w vm.max_map_count=262144</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="配置Logstash虚拟日志条目"><a href="#配置Logstash虚拟日志条目" class="headerlink" title="配置Logstash虚拟日志条目"></a>配置Logstash虚拟日志条目</h3><ul>
+<li>进入容器<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -ti elk_elk_1 bash</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>删除<code>/etc/logstash/conf.d/</code>下的文件，并新增<code>log4j.conf</code>, 写入以下内容, 然后重启elk<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">input &#123;</span><br><span class="line">  redis &#123;</span><br><span class="line">    host =&gt; &quot;127.0.0.1&quot;</span><br><span class="line">    port =&gt; 6379</span><br><span class="line">    password =&gt; &quot;123456&quot;</span><br><span class="line">    type =&gt; &quot;redis-logs&quot;</span><br><span class="line">    data_type =&gt; &quot;channel&quot;</span><br><span class="line">    key =&gt; &quot;logstash-log&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">output &#123;</span><br><span class="line">    elasticsearch &#123;</span><br><span class="line">        hosts =&gt; [&quot;localhost&quot;]</span><br><span class="line">        index =&gt; &quot;logstash-%&#123;type&#125;-%&#123;+YYYY.MM.dd&#125;&quot;</span><br><span class="line">        document_type =&gt; &quot;%&#123;type&#125;&quot;</span><br><span class="line">        flush_size =&gt; 20000</span><br><span class="line">        idle_flush_time =&gt; 10</span><br><span class="line">        sniffing =&gt; true</span><br><span class="line">        template_overwrite =&gt; true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>output 说明 Logstash 会努力攒到 20000 条数据一次性发送出去，但是如果 10 秒钟内也没攒够 20000 条，Logstash 还是会以当前攒到的数据量发一次。</p>
+</blockquote>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><ol>
+<li>用任意Redis client连接到redis, 执行 <code>publish logstash-log &quot;debug message !!!!&quot;</code></li>
+<li>过10秒后可以在kibana界面上看到,<code>debug message !!!!</code>的日志</li>
+</ol>
+<h3 id="kibana设置"><a href="#kibana设置" class="headerlink" title="kibana设置"></a>kibana设置</h3><p>进去会让设置一个index ,可以设置为上面Logstash配置文件<code>log4j.conf</code> output的elasticsearch中的index前缀就行了，然后在首页就能查询到了<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/qiniu//201717291743-N.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h3 id="集成到java-web项目"><a href="#集成到java-web项目" class="headerlink" title="集成到java web项目"></a>集成到java web项目</h3><p>以Jedis为例， 配置redis过程略</p>
+<ul>
+<li>log4j to redis Appender<blockquote>
+<p>依赖 Jedis, 为了从JedisPool取出连接</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.log4j.AppenderSkeleton;</span><br><span class="line"><span class="keyword">import</span> org.apache.log4j.helpers.LogLog;</span><br><span class="line"><span class="keyword">import</span> org.apache.log4j.spi.LoggingEvent;</span><br><span class="line"><span class="keyword">import</span> redis.clients.jedis.Jedis;</span><br><span class="line"><span class="keyword">import</span> redis.clients.jedis.JedisPool;</span><br><span class="line"><span class="keyword">import</span> redis.clients.jedis.JedisPoolConfig;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisAppender</span> <span class="keyword">extends</span> <span class="title">AppenderSkeleton</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_KEYTYPE = <span class="string">"channel"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_KEY = <span class="string">"logstash-log"</span>;</span><br><span class="line">    String host = <span class="string">"127.0.0.1"</span>;</span><br><span class="line">    <span class="keyword">int</span> port = <span class="number">6379</span>;</span><br><span class="line">    String password;</span><br><span class="line">    String keyType = DEFAULT_KEYTYPE;</span><br><span class="line">    String key = DEFAULT_KEY;</span><br><span class="line">    <span class="keyword">int</span> timeout = <span class="number">2000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 连接池设置</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> minEvictableIdleTimeMillis = <span class="number">60000L</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> timeBetweenEvictionRunsMillis = <span class="number">30000L</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> numTestsPerEvictionRun = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> maxTotal = <span class="number">8</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> maxIdle = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> minIdle = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> blockWhenExhaused = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">private</span> String evictionPolicyClassName;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> lifo = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> testOnBorrow = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> testWhileIdle = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> testOnReturn = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">private</span> JedisPool jedisPool;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">activateOptions</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.activateOptions();</span><br><span class="line">        JedisPoolConfig poolConfig = <span class="keyword">new</span> JedisPoolConfig();</span><br><span class="line">        <span class="keyword">if</span> (lifo) &#123;</span><br><span class="line">            poolConfig.setLifo(lifo);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (testOnBorrow) &#123;</span><br><span class="line">            poolConfig.setTestOnBorrow(testOnBorrow);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (testWhileIdle) &#123;</span><br><span class="line">            poolConfig.setTestWhileIdle(testWhileIdle);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (testOnReturn) &#123;</span><br><span class="line">            poolConfig.setTestOnReturn(testOnReturn);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (timeBetweenEvictionRunsMillis &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            poolConfig.setTimeBetweenEvictionRunsMillis(timeBetweenEvictionRunsMillis);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (evictionPolicyClassName != <span class="keyword">null</span> &amp;&amp; evictionPolicyClassName.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            poolConfig.setEvictionPolicyClassName(evictionPolicyClassName);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (blockWhenExhaused) &#123;</span><br><span class="line">            poolConfig.setBlockWhenExhausted(blockWhenExhaused);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (minIdle &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            poolConfig.setMinIdle(minIdle);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (maxIdle &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            poolConfig.setMaxIdle(maxIdle);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (numTestsPerEvictionRun &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            poolConfig.setNumTestsPerEvictionRun(numTestsPerEvictionRun);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (maxTotal != <span class="number">8</span>) &#123;</span><br><span class="line">            poolConfig.setMaxTotal(maxTotal);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (minEvictableIdleTimeMillis &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            poolConfig.setMinEvictableIdleTimeMillis(minEvictableIdleTimeMillis);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (password != <span class="keyword">null</span> &amp;&amp; password.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            jedisPool = <span class="keyword">new</span> JedisPool(poolConfig, host, port, timeout, password);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            jedisPool = <span class="keyword">new</span> JedisPool(poolConfig, host, port, timeout);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 配置连接实验</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Jedis jedis = jedisPool.getResource();</span><br><span class="line">            jedis.ping();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            LogLog.error(<span class="string">"Redis is can not connected: "</span> +  e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">append</span><span class="params">(LoggingEvent event)</span> </span>&#123;</span><br><span class="line">        Jedis resource = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (jedisPool == <span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            resource = jedisPool.getResource();</span><br><span class="line">            String format = getLayout().format(event);</span><br><span class="line">            <span class="keyword">if</span> (DEFAULT_KEYTYPE.equals(keyType))&#123;</span><br><span class="line">                resource.publish(key,format);</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                resource.lpush(key,format);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (resource != <span class="keyword">null</span>)&#123;</span><br><span class="line">                resource.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (jedisPool!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            jedisPool.destroy();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">requiresLayout</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getHost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> host;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setHost</span><span class="params">(String host)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.host = host;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getPort</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> port;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPort</span><span class="params">(<span class="keyword">int</span> port)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.port = port;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.password = password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getKeyType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> keyType;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setKeyType</span><span class="params">(String keyType)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.keyType = keyType;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getKey</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> key;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setKey</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.key = key;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getTimeout</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> timeout;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTimeout</span><span class="params">(<span class="keyword">int</span> timeout)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.timeout = timeout;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getMinEvictableIdleTimeMillis</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> minEvictableIdleTimeMillis;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMinEvictableIdleTimeMillis</span><span class="params">(<span class="keyword">long</span> minEvictableIdleTimeMillis)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.minEvictableIdleTimeMillis = minEvictableIdleTimeMillis;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getTimeBetweenEvictionRunsMillis</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> timeBetweenEvictionRunsMillis;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTimeBetweenEvictionRunsMillis</span><span class="params">(<span class="keyword">long</span> timeBetweenEvictionRunsMillis)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.timeBetweenEvictionRunsMillis = timeBetweenEvictionRunsMillis;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNumTestsPerEvictionRun</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> numTestsPerEvictionRun;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNumTestsPerEvictionRun</span><span class="params">(<span class="keyword">int</span> numTestsPerEvictionRun)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.numTestsPerEvictionRun = numTestsPerEvictionRun;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getMaxTotal</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> maxTotal;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMaxTotal</span><span class="params">(<span class="keyword">int</span> maxTotal)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.maxTotal = maxTotal;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getMaxIdle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> maxIdle;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMaxIdle</span><span class="params">(<span class="keyword">int</span> maxIdle)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.maxIdle = maxIdle;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getMinIdle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> minIdle;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMinIdle</span><span class="params">(<span class="keyword">int</span> minIdle)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.minIdle = minIdle;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isBlockWhenExhaused</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> blockWhenExhaused;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBlockWhenExhaused</span><span class="params">(<span class="keyword">boolean</span> blockWhenExhaused)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.blockWhenExhaused = blockWhenExhaused;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getEvictionPolicyClassName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> evictionPolicyClassName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEvictionPolicyClassName</span><span class="params">(String evictionPolicyClassName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.evictionPolicyClassName = evictionPolicyClassName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isLifo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> lifo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLifo</span><span class="params">(<span class="keyword">boolean</span> lifo)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.lifo = lifo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isTestOnBorrow</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> testOnBorrow;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTestOnBorrow</span><span class="params">(<span class="keyword">boolean</span> testOnBorrow)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.testOnBorrow = testOnBorrow;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isTestWhileIdle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> testWhileIdle;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTestWhileIdle</span><span class="params">(<span class="keyword">boolean</span> testWhileIdle)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.testWhileIdle = testWhileIdle;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isTestOnReturn</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> testOnReturn;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTestOnReturn</span><span class="params">(<span class="keyword">boolean</span> testOnReturn)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.testOnReturn = testOnReturn;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 在log4j.rootLogger添加logstash</span><br><span class="line">log4j.rootLogger=WARN, Console, RollingFile, logstash</span><br><span class="line"></span><br><span class="line"># log4j to redis 配置</span><br><span class="line">log4j.appender.logstash=RedisAppender #上面RedisAppender的类名</span><br><span class="line">log4j.appender.logstash.host=127.0.0.1</span><br><span class="line">log4j.appender.logstash.port=6379</span><br><span class="line">log4j.appender.logstash.password=123456</span><br><span class="line">log4j.appender.logstash.keyType=channel #支持 channe与list</span><br><span class="line">log4j.appender.logstash.key=logstash-log</span><br><span class="line">log4j.appender.logstash.layout=net.logstash.log4j.JSONEventLayoutV1</span><br><span class="line">log4j.appender.logstash.layout.locationInfo=true</span><br></pre></td></tr></table></figure>
+<ul>
+<li>官方的json layout, 在pom文件添加以下内容<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.logstash.log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jsonevent-layout<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Logger logger = LoggerFactory.getLogger(getClass());</span><br><span class="line">MDC.put(<span class="string">"title"</span>,<span class="string">"用户验证模块"</span>); <span class="comment">// 让后续log带上入口信息，详情百度搜索 log4j mdc</span></span><br><span class="line">logger.debug(<span class="string">"用户名验证失败！"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="预览结果"><a href="#预览结果" class="headerlink" title="预览结果"></a>预览结果</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/qiniu//201717291744-B.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/qiniu//201717291744-R.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2023-10-16T08:04:08.520Z" itemprop="dateUpdated">2023-10-16 16:04:08</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2017/09/27/use-docker-to-build-ELKStack/" target="_blank" rel="external">http://ystyle.top/2017/09/27/use-docker-to-build-ELKStack/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/elk/">elk</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2017/09/27/use-docker-to-build-ELKStack/&title=《用docker搭建ELK》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2017/09/27/use-docker-to-build-ELKStack/&title=《用docker搭建ELK》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2017/09/27/use-docker-to-build-ELKStack/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用docker搭建ELK》 — 东方星痕&url=http://ystyle.top/2017/09/27/use-docker-to-build-ELKStack/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2017/09/27/use-docker-to-build-ELKStack/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/11/27/lx-subsystem-installation-uninstall-or-maintenance-operation-is-not-completed/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">解决手动删除lxss文件夹后提示LX 子系统有安装、卸载或维护操作未完成的问题</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/08/01/git-download-the-specified-directory/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">git下载指定目录</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2017/09/27/use-docker-to-build-ELKStack/&title=《用docker搭建ELK》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2017/09/27/use-docker-to-build-ELKStack/&title=《用docker搭建ELK》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2017/09/27/use-docker-to-build-ELKStack/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用docker搭建ELK》 — 东方星痕&url=http://ystyle.top/2017/09/27/use-docker-to-build-ELKStack/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2017/09/27/use-docker-to-build-ELKStack/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKklEQVR42u3aQY4CMQwEQP7/afa60oqh24GVJqmc0IgMKQ6WHfvxiNfz13r15O/3r/f+/fzqyccWBgbGbRnPy5Ucuv2t5Az52TAwMM5hJEHz+ieT0Jzsug7HL59jYGBgjKgJDwMDA+N7AXclscsLYwwMDIy2iL1+0XWJm1+6fb0Wx8DAuCGjvSb7z89f6W9gYGDcivEsV16g5qVpsuvNqTAwMLZm5AEuKVDzhuV6wMXAwMBoL8jW25yzUP7IN2NgYGzByC+zinRtuT1QXPlhYGAcw7gOnbPW4/U3Z8MWGBgY5zDao8zAbVhPwvebahgDA2M7Rp5+tWE0uYBrQ3k9x4GBgbERI0nI8nK0bSSs7MLAwNib0V7u5xf9/wPAwMA4gTEblWhDbZ4mzhqrGBgYezPaze01XBtM8z8UAwPjHEY71rCS3uUtzPyyr67FMTAwbshYSQRnBfBs/KJILjEwMLZmJKstXFcK3SRNxMDAOJnRHm42zJFjZoMdGBgYOzGSVG+9kfDZdmk9bIGBgbEdY3a5Not+s6I0CrgYGBibMpInnwrKbSX95u/DwMDYlPEsV/7qvDHQvjMatsDAwNiIMQt2j4WVvKEN7hgYGCcwkiDbjp/mDYB2yKzIHDEwMLZjtIFvlizml3rDUhYDAwPjktE2IJO3FWklBgYGRnzodoxsVtZ+IOBiYGDckJEUsUlJ2TYY1psHGBgYJzDaC/02ELfTH/lzDAyMAxg/RLFBzxml7NMAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

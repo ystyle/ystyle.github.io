@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Power designer生成建表语句的设置 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="建模">
+    <meta name="description" content="oracle去年字段的引号DataBase - Edit Current DBMS 修改 ORA11GR1::Script\Sql\Format\CaseSensitivityUsingQuote改为No oracle生成的字段注释不换行DataBase - Edit Current DBMS 修改ORA11GR1::Script\Objects\Column\ColumnComment 的值为">
+<meta name="keywords" content="建模">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Power designer生成建表语句的设置">
+<meta property="og:url" content="http://ystyle.top/2016/12/12/power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="oracle去年字段的引号DataBase - Edit Current DBMS 修改 ORA11GR1::Script\Sql\Format\CaseSensitivityUsingQuote改为No oracle生成的字段注释不换行DataBase - Edit Current DBMS 修改ORA11GR1::Script\Objects\Column\ColumnComment 的值为">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2016-12-14T04:16:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Power designer生成建表语句的设置">
+<meta name="twitter:description" content="oracle去年字段的引号DataBase - Edit Current DBMS 修改 ORA11GR1::Script\Sql\Format\CaseSensitivityUsingQuote改为No oracle生成的字段注释不换行DataBase - Edit Current DBMS 修改ORA11GR1::Script\Objects\Column\ColumnComment 的值为">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Power designer生成建表语句的设置</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Power designer生成建表语句的设置</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-12-12T10:46:13.000Z" itemprop="datePublished" class="page-time">
+  2016-12-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#oracle去年字段的引号"><span class="post-toc-number">1.</span> <span class="post-toc-text">oracle去年字段的引号</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#oracle生成的字段注释不换行"><span class="post-toc-number">2.</span> <span class="post-toc-text">oracle生成的字段注释不换行</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#oracle生成的表名注释不换行"><span class="post-toc-number">3.</span> <span class="post-toc-text">oracle生成的表名注释不换行</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mysql生成的字段去掉national"><span class="post-toc-number">4.</span> <span class="post-toc-text">mysql生成的字段去掉national</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Power designer生成建表语句的设置</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-12-12 18:46:13" datetime="2016-12-12T10:46:13.000Z"  itemprop="datePublished">2016-12-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="oracle去年字段的引号"><a href="#oracle去年字段的引号" class="headerlink" title="oracle去年字段的引号"></a>oracle去年字段的引号</h3><p>DataBase - Edit Current DBMS</p>
+<p>修改 <code>ORA11GR1::Script\Sql\Format\CaseSensitivityUsingQuote</code>改为<code>No</code></p>
+<h3 id="oracle生成的字段注释不换行"><a href="#oracle生成的字段注释不换行" class="headerlink" title="oracle生成的字段注释不换行"></a>oracle生成的字段注释不换行</h3><p>DataBase - Edit Current DBMS</p>
+<p>修改<code>ORA11GR1::Script\Objects\Column\ColumnComment</code> 的值为 <code>comment on column [%QUALIFIER%]%TABLE%.%COLUMN% is %.q:COMMENT%</code></p>
+<h3 id="oracle生成的表名注释不换行"><a href="#oracle生成的表名注释不换行" class="headerlink" title="oracle生成的表名注释不换行"></a>oracle生成的表名注释不换行</h3><p>DataBase - Edit Current DBMS</p>
+<p>修改<code>ORA11GR1::Script\Objects\Table\TableComment</code> 的值为<code>comment on table [%QUALIFIER%]%TABLE% is %.q:COMMENT%</code></p>
+<h3 id="mysql生成的字段去掉national"><a href="#mysql生成的字段去掉national" class="headerlink" title="mysql生成的字段去掉national"></a>mysql生成的字段去掉national</h3><p>修改<code>MYSQL50::Script\Objects\Column\Add</code> 去掉值里的<code>[%National%?national ]</code></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2016-12-14T04:16:50.000Z" itemprop="dateUpdated">2016-12-14 12:16:50</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/12/12/power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi/" target="_blank" rel="external">http://ystyle.top/2016/12/12/power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/建模/">建模</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2016/12/12/power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi/&title=《Power designer生成建表语句的设置》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2016/12/12/power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi/&title=《Power designer生成建表语句的设置》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2016/12/12/power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Power designer生成建表语句的设置》 — 东方星痕&url=http://ystyle.top/2016/12/12/power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2016/12/12/power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/12/13/jetbrains-jia-quan-xin-go-ide-dai-hao-gogland/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">JetBrains 家全新Go IDE 代号GogLand</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/11/30/sequelize-js-sheng-cheng-ddlyu-ju-yu-lan/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">sequelize.js 生成DDL语句预览</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2016/12/12/power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi/&title=《Power designer生成建表语句的设置》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2016/12/12/power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi/&title=《Power designer生成建表语句的设置》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2016/12/12/power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Power designer生成建表语句的设置》 — 东方星痕&url=http://ystyle.top/2016/12/12/power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2016/12/12/power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsklEQVR42u3aQXLjMAwEQP//09nrViV2ZgDS8aF1Ssklia2DwAzweMTH13/H9zPfzz+76tmd8yc+bhx4eHh4i6W/XnTyyOTX5ImvX0RxBzw8PLxrvOR2CSB5HclCZ0UCDw8P7zN5M0a+191sr/Hw8PA+k5dvgtu4YVac8PDw8P6Kl4QR+RLbuGFWGA5nLXh4eHiTpPSx+UC/8+8r/T08PDy8dVe9LRL7uGFTbH54Ch4eHt4FXr7cfHEtOAlq2+ADDw8P7zYvD2pfj1i1m+B2jOBYGwwPDw9vwZtd3BaG5GXlo1fFavHw8PAu85IFzSKGtsC02+s6hsDDw8Nb8GbRw/5T3paKK908PDw8vENjAW10u2mStVHF7JXh4eHhneXlH+I2cm1j2bzAFJExHh4e3mVeHo+e3RzvO3hPr8LDw8O7wNtsdmdDVLNBhHxAoYhx8fDw8Ba8s4/Mz88+9/VwGB4eHt4FXtvOP7Xtzhv/s8AXDw8P7528dqwq/0zPxrM2ETAeHh7eDV5yu1MNs81ownBcDA8PD+8ybx+htgvaNLei8oOHh4d3lJcvqAhMR6212aDVL+fx8PDwLvDyEHYW+LavIA98i2vx8PDwLvBObYjb7W9blvJtff3m8PDw8Ea8TRyQ/5osaD8COxwjwMPDw4t5+YjArKHVtv/z+xdlAA8PD+8arw1wk+Gn2TjCJsJ4Whjw8PDwrvEScF4MkteR37lusOHh4eEd5X2VR07N22an2mM/PAsPDw/vAm/T3MpbWW0hycvG49SBh4eHV/I2m91Z8DobBWgLDx4eHt5tXrJdbq/dtLsO1zQ8PDy8P+W1I1ObV/D6KVGogYeHh/eRvH0UOxtBiJ6Oh4eHd42X3zr5uM+KxH5o4JfJCDw8PLxDvP1/9Pm2OC8wb+rs4eHh4XW8f35e7gNfl+LtAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Windows右键菜单添以Window Terminal命令行打开文件 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="windows,Window Terminal">
+    <meta name="description" content="应用场景: 在文件右键打开windows terminal， 并在执行的命令中以选择的文件为参数运行。    本示例为在windows terminal使用micro编辑器打开选中文件  先创建一个右键菜单项1234567Windows Registry Editor Version 5.00[HKEY_CLASSES_ROOT\*\shell\Open with Micro]&amp;quot;Ico">
+<meta name="keywords" content="windows,Window Terminal">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows右键菜单添以Window Terminal命令行打开文件">
+<meta property="og:url" content="http://ystyle.top/2020/05/31/open-file-with-windows-terminal-command/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="应用场景: 在文件右键打开windows terminal， 并在执行的命令中以选择的文件为参数运行。    本示例为在windows terminal使用micro编辑器打开选中文件  先创建一个右键菜单项1234567Windows Registry Editor Version 5.00[HKEY_CLASSES_ROOT\*\shell\Open with Micro]&amp;quot;Ico">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://dll.ystyle.top/images/2020-05/qimgv_2020-05-30_22-44-29.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2020-05/WindowsTerminal_2020-05-30_22-52-28.png">
+<meta property="og:updated_time" content="2020-05-31T14:11:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Windows右键菜单添以Window Terminal命令行打开文件">
+<meta name="twitter:description" content="应用场景: 在文件右键打开windows terminal， 并在执行的命令中以选择的文件为参数运行。    本示例为在windows terminal使用micro编辑器打开选中文件  先创建一个右键菜单项1234567Windows Registry Editor Version 5.00[HKEY_CLASSES_ROOT\*\shell\Open with Micro]&amp;quot;Ico">
+<meta name="twitter:image" content="https://dll.ystyle.top/images/2020-05/qimgv_2020-05-30_22-44-29.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Windows右键菜单添以Window Terminal命令行打开文件</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Windows右键菜单添以Window Terminal命令行打开文件</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-05-31T14:11:48.000Z" itemprop="datePublished" class="page-time">
+  2020-05-31
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#先创建一个右键菜单项"><span class="post-toc-number">1.</span> <span class="post-toc-text">先创建一个右键菜单项</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#键的说明"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">键的说明</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#效果"><span class="post-toc-number">2.</span> <span class="post-toc-text">效果</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-open-file-with-windows-terminal-command"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Windows右键菜单添以Window Terminal命令行打开文件</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-05-31 22:11:48" datetime="2020-05-31T14:11:48.000Z"  itemprop="datePublished">2020-05-31</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>应用场景: 在文件右键打开windows terminal， 并在执行的命令中以选择的文件为参数运行。 </p>
+</blockquote>
+<blockquote>
+<p>本示例为在windows terminal使用micro编辑器打开选中文件</p>
+</blockquote>
+<h3 id="先创建一个右键菜单项"><a href="#先创建一个右键菜单项" class="headerlink" title="先创建一个右键菜单项"></a>先创建一个右键菜单项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\*\shell\Open with Micro]</span><br><span class="line">&quot;Icon&quot;=&quot;E:\\Code\\Go\\bin\\micro-logo-mark.ico&quot;</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\*\shell\Open with Micro\command]</span><br><span class="line">@=&quot;C:\\Users\\Administrator\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe new-tab -p \&quot;Windows PowerShell\&quot;  micro.exe \&quot;%1\&quot;&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="键的说明"><a href="#键的说明" class="headerlink" title="键的说明"></a>键的说明</h4><ul>
+<li><code>[HKEY_CLASSES_ROOT\*\shell\Open with Micro]</code> 中的 <code>Open with Micro</code>为右键菜单名</li>
+<li>Icon 是右键菜单项的图标</li>
+<li>command 里的是菜单项点击后要执行的命令</li>
+<li><code>wt.exe new-tab -p \&quot;Windows PowerShell\&quot;  micro.exe &#39;%1&#39;</code> <ul>
+<li>wt 必需要写全路径，不写会弹出【选择打开文件需要的应用】那个窗口</li>
+<li><code>new-tab</code> 是打开一个新的windows terminal 页签(不过在我电脑会打开新的一个应用实例)</li>
+<li><code>-p \&quot;Windows PowerShell\&quot;</code> 是新页签需要用的的shell，可以是windows terminal的配置中的 name或guid</li>
+<li><code>micro.exe \&quot;%1\&quot;</code> 是需要执行的命令， <code>\&quot;%1\&quot;</code>是当前右键的文件占位符</li>
+</ul>
+</li>
+</ul>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2020-05/qimgv_2020-05-30_22-44-29.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2020-05/WindowsTerminal_2020-05-30_22-52-28.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-05-31T14:11:48.000Z" itemprop="dateUpdated">2020-05-31 22:11:48</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2020/05/31/open-file-with-windows-terminal-command/" target="_blank" rel="external">http://ystyle.top/2020/05/31/open-file-with-windows-terminal-command/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Window-Terminal/">Window Terminal</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows/">windows</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2020/05/31/open-file-with-windows-terminal-command/&title=《Windows右键菜单添以Window Terminal命令行打开文件》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2020/05/31/open-file-with-windows-terminal-command/&title=《Windows右键菜单添以Window Terminal命令行打开文件》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2020/05/31/open-file-with-windows-terminal-command/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Windows右键菜单添以Window Terminal命令行打开文件》 — 东方星痕&url=http://ystyle.top/2020/05/31/open-file-with-windows-terminal-command/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2020/05/31/open-file-with-windows-terminal-command/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/07/21/dokcer-compile-maple-engine/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">Dokcer编译方舟引擎（MapleEngine）</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/04/25/getting-start-utorrent/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">uTorrent BT软件入门</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2020/05/31/open-file-with-windows-terminal-command/&title=《Windows右键菜单添以Window Terminal命令行打开文件》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2020/05/31/open-file-with-windows-terminal-command/&title=《Windows右键菜单添以Window Terminal命令行打开文件》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2020/05/31/open-file-with-windows-terminal-command/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Windows右键菜单添以Window Terminal命令行打开文件》 — 东方星痕&url=http://ystyle.top/2020/05/31/open-file-with-windows-terminal-command/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2020/05/31/open-file-with-windows-terminal-command/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACnElEQVR42u3awW4jIRAEUP//T2evK0W2q7rBsqI3p8iZAR4HGhU8HvHz89/T/vK7nWe/tK0de/Dw8PAWQ//9PHsnH+6MnU/us17w8PDwbvOeNZp3X3ccM/Lx4OHh4X0nL1/okxbydvDw8PD+Ei9f6JMl/usKAx4eHt4ijEgW6/zbZFP+0awFDw8Pb54JPNoi8fm/r5zv4eHh4a1P1ZMF9/U7bQvJdrkYLR4eHt4FXr7g5uw8tsi3wqv4Aw8PD+8oL/9g9t98QX/95qwdPDw8vM/wZper2sHlV7Xag7o3/8DDw8Nb8/JoIOns9gFYWx7w8PDw7vE2pBYw214fOLvDw8PDO8rLF/r2OtQ+5shLyJsjNDw8PLwLvNlamg+63ShvrnwdKxV4eHh4Zdo5O5Tax8TtJNabbzw8PLwLvNkUbCYoobYFDA8PD+8GL1nW2w5ydvJt/j4eHh7eZ3j7uLYNXvMeNwd4j7YzPDw8vJiXd7zZauelpQ2I34wWDw8P7wKvPb7abKBb9myKoxqIh4eHd4j3Uz75gNpLBu2Fg2g68PDw8I7yNhFAG0YkU3A9ksDDw8M7GubODvuTwDcvNrNCgoeHh/cZXnuZaV8qNkNvg2M8PDy8G7z8g9lmuo0qZtcX8PDw8D7Pyw+Z8qP9PAKesc+lFHh4eHhz3n5Bz4+s2gusx1IWPDw8vKO8ZBvdDrRtYX8MhoeHh3ebd/ai1SwCzr+tx4OHh4d3gbcPLPZBRltIDldFPDw8vBHv1EWoUzM6C3Pf3MbFw8PDu8Bru0kmaBPsHq5peHh4eF/Am0UD7TQlgcWbkeDh4eF9DW8Trb7+JSkw+aYfDw8P7x5v1vRqyY5H0n6Fh4eHd5u3OeDPN77thYMDg8bDw8M7z/sHO3sgtR5Mls8AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

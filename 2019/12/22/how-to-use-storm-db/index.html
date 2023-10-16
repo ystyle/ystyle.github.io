@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>嵌入式数据库storm的使用 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="go,BoltDB,storm">
+    <meta name="description" content="storm是一个使用BoltDB的上层orm框架  地址: 数据查看工具: https://github.com/br0xen/boltbrowser 驱动: https://github.com/asdine/storm  初始化12db, err := storm.Open(&quot;my.db&quot;)defer db.Close() 定义对象模型1234567type User struct &amp;#12">
+<meta name="keywords" content="go,BoltDB,storm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="嵌入式数据库storm的使用">
+<meta property="og:url" content="http://ystyle.top/2019/12/22/how-to-use-storm-db/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="storm是一个使用BoltDB的上层orm框架  地址: 数据查看工具: https://github.com/br0xen/boltbrowser 驱动: https://github.com/asdine/storm  初始化12db, err := storm.Open(&quot;my.db&quot;)defer db.Close() 定义对象模型1234567type User struct &amp;#12">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2023-10-16T08:04:08.520Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="嵌入式数据库storm的使用">
+<meta name="twitter:description" content="storm是一个使用BoltDB的上层orm框架  地址: 数据查看工具: https://github.com/br0xen/boltbrowser 驱动: https://github.com/asdine/storm  初始化12db, err := storm.Open(&quot;my.db&quot;)defer db.Close() 定义对象模型1234567type User struct &amp;#12">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">嵌入式数据库storm的使用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">嵌入式数据库storm的使用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-22T06:46:26.000Z" itemprop="datePublished" class="page-time">
+  2019-12-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/软件/">软件</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#地址"><span class="post-toc-number">1.</span> <span class="post-toc-text">地址:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#初始化"><span class="post-toc-number">2.</span> <span class="post-toc-text">初始化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#定义对象模型"><span class="post-toc-number">3.</span> <span class="post-toc-text">定义对象模型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#保存数据"><span class="post-toc-number">4.</span> <span class="post-toc-text">保存数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#修改"><span class="post-toc-number">5.</span> <span class="post-toc-text">修改</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#删除数据"><span class="post-toc-number">6.</span> <span class="post-toc-text">删除数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#表管理操作"><span class="post-toc-number">7.</span> <span class="post-toc-text">表管理操作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简单查询"><span class="post-toc-number">8.</span> <span class="post-toc-text">简单查询</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#高级查询"><span class="post-toc-number">9.</span> <span class="post-toc-text">高级查询</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#事务"><span class="post-toc-number">10.</span> <span class="post-toc-text">事务</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#不同的数据编码方式"><span class="post-toc-number">11.</span> <span class="post-toc-text">不同的数据编码方式</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-how-to-use-storm-db"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">嵌入式数据库storm的使用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-22 14:46:26" datetime="2019-12-22T06:46:26.000Z"  itemprop="datePublished">2019-12-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/软件/">软件</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>storm是一个使用BoltDB的上层orm框架</p>
+</blockquote>
+<h3 id="地址"><a href="#地址" class="headerlink" title="地址:"></a>地址:</h3><ul>
+<li><a href="https://github.com/br0xen/boltbrowser" target="_blank" rel="noopener">数据查看工具</a>: <a href="https://github.com/br0xen/boltbrowser" target="_blank" rel="noopener">https://github.com/br0xen/boltbrowser</a></li>
+<li><a href="https://github.com/asdine/storm" target="_blank" rel="noopener">驱动</a>: <a href="https://github.com/asdine/storm" target="_blank" rel="noopener">https://github.com/asdine/storm</a></li>
+</ul>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db, err := storm.Open(<span class="string">"my.db"</span>)</span><br><span class="line"><span class="keyword">defer</span> db.Close()</span><br></pre></td></tr></table></figure>
+<h3 id="定义对象模型"><a href="#定义对象模型" class="headerlink" title="定义对象模型"></a>定义对象模型</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">  ID <span class="keyword">int</span> <span class="comment">// primary key</span></span><br><span class="line">  Group <span class="keyword">string</span> <span class="string">`storm:"index"`</span> <span class="comment">// this field will be indexed</span></span><br><span class="line">  Email <span class="keyword">string</span> <span class="string">`storm:"unique"`</span> <span class="comment">// this field will be indexed with a unique constraint</span></span><br><span class="line">  Name <span class="keyword">string</span> <span class="comment">// this field will not be indexed</span></span><br><span class="line">  Age <span class="keyword">int</span> <span class="string">`storm:"index"`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>自增可以在主键上添加tag: <code>storm:&quot;id,increment=2&quot;</code> =2是自增步长</p>
+</blockquote>
+<h3 id="保存数据"><a href="#保存数据" class="headerlink" title="保存数据"></a>保存数据</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">user := User&#123;</span><br><span class="line">  ID: <span class="number">10</span>,</span><br><span class="line">  Group: <span class="string">"staff"</span>,</span><br><span class="line">  Email: <span class="string">"john@provider.com"</span>,</span><br><span class="line">  Name: <span class="string">"John"</span>,</span><br><span class="line">  Age: <span class="number">21</span>,</span><br><span class="line">  CreatedAt: time.Now(),</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">err := db.Save(&amp;user)</span><br><span class="line"><span class="comment">// err == nil</span></span><br><span class="line"></span><br><span class="line">user.ID++</span><br><span class="line">err = db.Save(&amp;user)</span><br><span class="line"><span class="comment">// err == storm.ErrAlreadyExists</span></span><br></pre></td></tr></table></figure>
+<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Update multiple fields</span></span><br><span class="line">err := db.Update(&amp;User&#123;ID: <span class="number">10</span>, Name: <span class="string">"Jack"</span>, Age: <span class="number">45</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Update a single field</span></span><br><span class="line">err := db.UpdateField(&amp;User&#123;ID: <span class="number">10</span>&#125;, <span class="string">"Age"</span>, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">err := db.DeleteStruct(&amp;user)</span><br></pre></td></tr></table></figure>
+<h3 id="表管理操作"><a href="#表管理操作" class="headerlink" title="表管理操作"></a>表管理操作</h3><ul>
+<li>初始化索引 <code>err := db.Init(&amp;User{})</code></li>
+<li>重建索引: <code>err := db.ReIndex(&amp;User{})</code></li>
+<li>删表: <code>err := db.Drop(&amp;User)</code> 或 <code>err := db.Drop(&quot;User&quot;)</code></li>
+</ul>
+<h3 id="简单查询"><a href="#简单查询" class="headerlink" title="简单查询"></a>简单查询</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> user User</span><br><span class="line">err := db.One(<span class="string">"Email"</span>, <span class="string">"john@provider.com"</span>, &amp;user)</span><br><span class="line"><span class="comment">// err == nil</span></span><br><span class="line"></span><br><span class="line">err = db.One(<span class="string">"Name"</span>, <span class="string">"John"</span>, &amp;user)</span><br><span class="line"><span class="comment">// err == nil</span></span><br><span class="line"></span><br><span class="line">err = db.One(<span class="string">"Name"</span>, <span class="string">"Jack"</span>, &amp;user)</span><br><span class="line"><span class="comment">// err == storm.ErrNotFound</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Fetch multiple objects</span></span><br><span class="line"><span class="keyword">var</span> users []User</span><br><span class="line">err := db.Find(<span class="string">"Group"</span>, <span class="string">"staff"</span>, &amp;users)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Fetch all objects</span></span><br><span class="line"><span class="keyword">var</span> users []User</span><br><span class="line">err := db.All(&amp;users)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Fetch all objects sorted by index</span></span><br><span class="line"><span class="keyword">var</span> users []User</span><br><span class="line">err := db.AllByIndex(<span class="string">"CreatedAt"</span>, &amp;users)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Fetch a range of objects</span></span><br><span class="line"><span class="keyword">var</span> users []User</span><br><span class="line">err := db.Range(<span class="string">"Age"</span>, <span class="number">10</span>, <span class="number">21</span>, &amp;users)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Fetch objects by prefix</span></span><br><span class="line"><span class="keyword">var</span> users []User</span><br><span class="line">err := db.Prefix(<span class="string">"Name"</span>, <span class="string">"Jo"</span>, &amp;users)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Skip, Limit and Reverse</span></span><br><span class="line"><span class="keyword">var</span> users []User</span><br><span class="line">err := db.Find(<span class="string">"Group"</span>, <span class="string">"staff"</span>, &amp;users, storm.Skip(<span class="number">10</span>))</span><br><span class="line">err = db.Find(<span class="string">"Group"</span>, <span class="string">"staff"</span>, &amp;users, storm.Limit(<span class="number">10</span>))</span><br><span class="line">err = db.Find(<span class="string">"Group"</span>, <span class="string">"staff"</span>, &amp;users, storm.Reverse())</span><br><span class="line">err = db.Find(<span class="string">"Group"</span>, <span class="string">"staff"</span>, &amp;users, storm.Limit(<span class="number">10</span>), storm.Skip(<span class="number">10</span>), storm.Reverse())</span><br><span class="line"></span><br><span class="line">err = db.All(&amp;users, storm.Limit(<span class="number">10</span>), storm.Skip(<span class="number">10</span>), storm.Reverse())</span><br><span class="line">err = db.AllByIndex(<span class="string">"CreatedAt"</span>, &amp;users, storm.Limit(<span class="number">10</span>), storm.Skip(<span class="number">10</span>), storm.Reverse())</span><br><span class="line">err = db.Range(<span class="string">"Age"</span>, <span class="number">10</span>, <span class="number">21</span>, &amp;users, storm.Limit(<span class="number">10</span>), storm.Skip(<span class="number">10</span>), storm.Reverse())</span><br></pre></td></tr></table></figure>
+<h3 id="高级查询"><a href="#高级查询" class="headerlink" title="高级查询"></a>高级查询</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Equality</span></span><br><span class="line">q.Eq(<span class="string">"Name"</span>, John)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Strictly greater than</span></span><br><span class="line">q.Gt(<span class="string">"Age"</span>, <span class="number">7</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Lesser than or equal to</span></span><br><span class="line">q.Lte(<span class="string">"Age"</span>, <span class="number">77</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Regex with name that starts with the letter D</span></span><br><span class="line">q.Re(<span class="string">"Name"</span>, <span class="string">"^D"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// In the given slice of values</span></span><br><span class="line">q.In(<span class="string">"Group"</span>, []<span class="keyword">string</span>&#123;<span class="string">"Staff"</span>, <span class="string">"Admin"</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Comparing fields</span></span><br><span class="line">q.EqF(<span class="string">"FieldName"</span>, <span class="string">"SecondFieldName"</span>)</span><br><span class="line">q.LtF(<span class="string">"FieldName"</span>, <span class="string">"SecondFieldName"</span>)</span><br><span class="line">q.GtF(<span class="string">"FieldName"</span>, <span class="string">"SecondFieldName"</span>)</span><br><span class="line">q.LteF(<span class="string">"FieldName"</span>, <span class="string">"SecondFieldName"</span>)</span><br><span class="line">q.GteF(<span class="string">"FieldName"</span>, <span class="string">"SecondFieldName"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Match if all match</span></span><br><span class="line">q.And(</span><br><span class="line">  q.Gt(<span class="string">"Age"</span>, <span class="number">7</span>),</span><br><span class="line">  q.Re(<span class="string">"Name"</span>, <span class="string">"^D"</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Matchers can also be combined with And, Or and Not:</span></span><br><span class="line"><span class="comment">// Match if one matches</span></span><br><span class="line">q.Or(</span><br><span class="line">  q.Re(<span class="string">"Name"</span>, <span class="string">"^A"</span>),</span><br><span class="line">  q.Not(</span><br><span class="line">    q.Re(<span class="string">"Name"</span>, <span class="string">"^B"</span>)</span><br><span class="line">  ),</span><br><span class="line">  q.Re(<span class="string">"Name"</span>, <span class="string">"^C"</span>),</span><br><span class="line">  q.In(<span class="string">"Group"</span>, []<span class="keyword">string</span>&#123;<span class="string">"Staff"</span>, <span class="string">"Admin"</span>&#125;),</span><br><span class="line">  q.And(</span><br><span class="line">    q.StrictEq(<span class="string">"Password"</span>, []<span class="keyword">byte</span>(password)),</span><br><span class="line">    q.Eq(<span class="string">"Registered"</span>, <span class="literal">true</span>)</span><br><span class="line">  )</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">query := db.Select(q.Gte(<span class="string">"Age"</span>, <span class="number">7</span>), q.Lte(<span class="string">"Age"</span>, <span class="number">77</span>))</span><br><span class="line"><span class="comment">// Calls can also be chained</span></span><br><span class="line">query = query.Limit(<span class="number">10</span>).Skip(<span class="number">20</span>).OrderBy(<span class="string">"Age"</span>).Reverse()</span><br><span class="line"></span><br><span class="line"><span class="comment">// But also to specify how to fetch them.</span></span><br><span class="line"><span class="keyword">var</span> users []User</span><br><span class="line">err = query.Find(&amp;users)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> user User</span><br><span class="line">err = query.First(&amp;user)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// demo</span></span><br><span class="line"><span class="comment">// Examples with Select:</span></span><br><span class="line"></span><br><span class="line">/ Find all users with an ID between <span class="number">10</span> and <span class="number">100</span></span><br><span class="line">err = db.Select(q.Gte(<span class="string">"ID"</span>, <span class="number">10</span>), q.Lte(<span class="string">"ID"</span>, <span class="number">100</span>)).Find(&amp;users)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Nested matchers</span></span><br><span class="line">err = db.Select(q.Or(</span><br><span class="line">  q.Gt(<span class="string">"ID"</span>, <span class="number">50</span>),</span><br><span class="line">  q.Lt(<span class="string">"Age"</span>, <span class="number">21</span>),</span><br><span class="line">  q.And(</span><br><span class="line">    q.Eq(<span class="string">"Group"</span>, <span class="string">"admin"</span>),</span><br><span class="line">    q.Gte(<span class="string">"Age"</span>, <span class="number">21</span>),</span><br><span class="line">  ),</span><br><span class="line">)).Find(&amp;users)</span><br><span class="line"></span><br><span class="line">query := db.Select(q.Gte(<span class="string">"ID"</span>, <span class="number">10</span>), q.Lte(<span class="string">"ID"</span>, <span class="number">100</span>)).Limit(<span class="number">10</span>).Skip(<span class="number">5</span>).Reverse().OrderBy(<span class="string">"Age"</span>, <span class="string">"Name"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Find multiple records</span></span><br><span class="line">err = query.Find(&amp;users)</span><br><span class="line"><span class="comment">// or</span></span><br><span class="line">err = db.Select(q.Gte(<span class="string">"ID"</span>, <span class="number">10</span>), q.Lte(<span class="string">"ID"</span>, <span class="number">100</span>)).Limit(<span class="number">10</span>).Skip(<span class="number">5</span>).Reverse().OrderBy(<span class="string">"Age"</span>, <span class="string">"Name"</span>).Find(&amp;users)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Find first record</span></span><br><span class="line">err = query.First(&amp;user)</span><br><span class="line"><span class="comment">// or</span></span><br><span class="line">err = db.Select(q.Gte(<span class="string">"ID"</span>, <span class="number">10</span>), q.Lte(<span class="string">"ID"</span>, <span class="number">100</span>)).Limit(<span class="number">10</span>).Skip(<span class="number">5</span>).Reverse().OrderBy(<span class="string">"Age"</span>, <span class="string">"Name"</span>).First(&amp;user)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Delete all matching records</span></span><br><span class="line">err = query.Delete(<span class="built_in">new</span>(User))</span><br><span class="line"></span><br><span class="line"><span class="comment">// Fetching records one by one (useful when the bucket contains a lot of records)</span></span><br><span class="line">query = db.Select(q.Gte(<span class="string">"ID"</span>, <span class="number">10</span>),q.Lte(<span class="string">"ID"</span>, <span class="number">100</span>)).OrderBy(<span class="string">"Age"</span>, <span class="string">"Name"</span>)</span><br><span class="line"></span><br><span class="line">err = query.Each(<span class="built_in">new</span>(User), <span class="function"><span class="keyword">func</span><span class="params">(record <span class="keyword">interface</span>&#123;&#125;)</span> <span class="title">error</span>)</span> &#123;</span><br><span class="line">  u := record.(*User)</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">tx, err := db.Begin(<span class="literal">true</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> err</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">defer</span> tx.Rollback()</span><br><span class="line"></span><br><span class="line">accountA.Amount -= <span class="number">100</span></span><br><span class="line">accountB.Amount += <span class="number">100</span></span><br><span class="line"></span><br><span class="line">err = tx.Save(accountA)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">err = tx.Save(accountB)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> tx.Commit()</span><br></pre></td></tr></table></figure>
+<h3 id="不同的数据编码方式"><a href="#不同的数据编码方式" class="headerlink" title="不同的数据编码方式"></a>不同的数据编码方式</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">  <span class="string">"github.com/asdine/storm/v3"</span></span><br><span class="line">  <span class="string">"github.com/asdine/storm/v3/codec/gob"</span></span><br><span class="line">  <span class="string">"github.com/asdine/storm/v3/codec/json"</span></span><br><span class="line">  <span class="string">"github.com/asdine/storm/v3/codec/sereal"</span></span><br><span class="line">  <span class="string">"github.com/asdine/storm/v3/codec/protobuf"</span></span><br><span class="line">  <span class="string">"github.com/asdine/storm/v3/codec/msgpack"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> gobDb, _ = storm.Open(<span class="string">"gob.db"</span>, storm.Codec(gob.Codec))</span><br><span class="line"><span class="keyword">var</span> jsonDb, _ = storm.Open(<span class="string">"json.db"</span>, storm.Codec(json.Codec))</span><br><span class="line"><span class="keyword">var</span> serealDb, _ = storm.Open(<span class="string">"sereal.db"</span>, storm.Codec(sereal.Codec))</span><br><span class="line"><span class="keyword">var</span> protobufDb, _ = storm.Open(<span class="string">"protobuf.db"</span>, storm.Codec(protobuf.Codec))</span><br><span class="line"><span class="keyword">var</span> msgpackDb, _ = storm.Open(<span class="string">"msgpack.db"</span>, storm.Codec(msgpack.Codec))</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2023-10-16T08:04:08.520Z" itemprop="dateUpdated">2023-10-16 16:04:08</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2019/12/22/how-to-use-storm-db/" target="_blank" rel="external">http://ystyle.top/2019/12/22/how-to-use-storm-db/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BoltDB/">BoltDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/storm/">storm</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2019/12/22/how-to-use-storm-db/&title=《嵌入式数据库storm的使用》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2019/12/22/how-to-use-storm-db/&title=《嵌入式数据库storm的使用》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2019/12/22/how-to-use-storm-db/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《嵌入式数据库storm的使用》 — 东方星痕&url=http://ystyle.top/2019/12/22/how-to-use-storm-db/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2019/12/22/how-to-use-storm-db/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/12/31/txt-converto-epub-and-mobi/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">txt小说转epub与mobi</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/12/donot-restart-kde-after-update-system/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">kde在更新系统后不想重启怎么办</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2019/12/22/how-to-use-storm-db/&title=《嵌入式数据库storm的使用》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2019/12/22/how-to-use-storm-db/&title=《嵌入式数据库storm的使用》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2019/12/22/how-to-use-storm-db/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《嵌入式数据库storm的使用》 — 东方星痕&url=http://ystyle.top/2019/12/22/how-to-use-storm-db/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2019/12/22/how-to-use-storm-db/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3awY6DMAxFUf7/p+m2Ugu6z04rEd+sRoiBHBau7fg48Drf1vuVq3s+77y6cvWc4xdLhgwZj2Wct4sw+Lautkjee/8WGTJkTGBcPZpsJUWmwfp+bzJkyJDBt5UGbrJ1GTJkyKgx0ENxGcwTUBkyZMjgQZC320gi2AnuMmTImMPgXff///2T8w0ZMmQ8irGqEE2PMDuB+8tbZMiQsTWjU4L27+8EXBkyZMxhkNcEIQ8MXtwjSbkbd/tkyJDxcAZpb/F2W+3JtQGOL1dkyJCxKWNVcEy3yzeNkksZMmRszUgHGtI0sRbE0/acDBkyJjB4I4wXurWErxZ2ZciQsTeDvLjTLOONM/IhUBErQ4aMTRm1BDENoOlGg8AtQ4aMAQwCSEvWVUknKnFlyJAxgNFp7qctuTSwFs9gZciQsREjHWtI2bx91jkolSFDxhxGmgLWjjnRhmonGzJkyBjA6LTV0rNF/oF4CJYhQ8YEBg+aHUz6aYLxCxkyZAxg8GGINK3sl8SoPSdDhowBjHRIa0GIxJ+JfEQZMmTMYfBULz347AxeoFagDBkyNmWc4aqRagNhQcEsQ4aMrRl8rRrt4oeX5MkxTIYMGY9l1A4AVg1JdEro4NdDhgwZWzDStC/9387wGfqtkCFDhoyw0c/TQdT0lyFDhowGI62Pa/U0SkBlyJAxgEGKWH6dh+baIagMGTKmMdLScVV6V9tK61BThgwZz2O8ANzW2xmiw7T8AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

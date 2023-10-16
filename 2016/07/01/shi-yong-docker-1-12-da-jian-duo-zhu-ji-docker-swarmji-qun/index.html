@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>使用docker 1.12 搭建多主机docker swarm集群 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="docker">
+    <meta name="description" content="使用docker 1.12 搭建多主机docker swarm集群准备  准备至少两台的centos 7 主机(全新最小安装, 可以使用虚拟机安装) 开放端口2377 tcp端口, 7946 4789 tcp udp 端口 本文使用192.168.99.101(hostname:centos-node4) 作为swarm manager 192.168.99.102(hostname:centos">
+<meta name="keywords" content="docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用docker 1.12 搭建多主机docker swarm集群">
+<meta property="og:url" content="http://ystyle.top/2016/07/01/shi-yong-docker-1-12-da-jian-duo-zhu-ji-docker-swarmji-qun/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="使用docker 1.12 搭建多主机docker swarm集群准备  准备至少两台的centos 7 主机(全新最小安装, 可以使用虚拟机安装) 开放端口2377 tcp端口, 7946 4789 tcp udp 端口 本文使用192.168.99.101(hostname:centos-node4) 作为swarm manager 192.168.99.102(hostname:centos">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2016-09-01T12:47:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用docker 1.12 搭建多主机docker swarm集群">
+<meta name="twitter:description" content="使用docker 1.12 搭建多主机docker swarm集群准备  准备至少两台的centos 7 主机(全新最小安装, 可以使用虚拟机安装) 开放端口2377 tcp端口, 7946 4789 tcp udp 端口 本文使用192.168.99.101(hostname:centos-node4) 作为swarm manager 192.168.99.102(hostname:centos">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">使用docker 1.12 搭建多主机docker swarm集群</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">使用docker 1.12 搭建多主机docker swarm集群</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-07-01T23:03:32.000Z" itemprop="datePublished" class="page-time">
+  2016-07-02
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用docker-1-12-搭建多主机docker-swarm集群"><span class="post-toc-number">1.</span> <span class="post-toc-text">使用docker 1.12 搭建多主机docker swarm集群</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#准备"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">准备</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装docker-engine-1-12"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">安装docker engine 1.12</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#新版docker-swarm-命令详情"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">新版docker swarm 命令详情</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建swarm-集群"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">创建swarm 集群</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建一个overlay-跨主机网络"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">创建一个overlay 跨主机网络</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在新的跨主机overlay-网络-docker-net-上创建应用"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">在新的跨主机overlay 网络(docker-net)上创建应用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试两个主机的网络是否能互通"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">测试两个主机的网络是否能互通</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#dokcer-swarm自带的负载均衡"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">dokcer swarm自带的负载均衡</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-shi-yong-docker-1-12-da-jian-duo-zhu-ji-docker-swarmji-qun"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">使用docker 1.12 搭建多主机docker swarm集群</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-07-02 07:03:32" datetime="2016-07-01T23:03:32.000Z"  itemprop="datePublished">2016-07-02</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="使用docker-1-12-搭建多主机docker-swarm集群"><a href="#使用docker-1-12-搭建多主机docker-swarm集群" class="headerlink" title="使用docker 1.12 搭建多主机docker swarm集群"></a>使用docker 1.12 搭建多主机docker swarm集群</h2><h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><blockquote>
+<ol>
+<li>准备至少两台的centos 7 主机(全新最小安装, 可以使用虚拟机安装)</li>
+<li>开放端口2377 tcp端口, 7946 4789 tcp udp 端口</li>
+<li>本文使用192.168.99.101(hostname:centos-node4) 作为swarm manager</li>
+<li>192.168.99.102(hostname:centos-node5) 作为swarm agent1</li>
+</ol>
+</blockquote>
+<h3 id="安装docker-engine-1-12"><a href="#安装docker-engine-1-12" class="headerlink" title="安装docker engine 1.12"></a>安装docker engine 1.12</h3><p>在每台机器上执行以下命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> sudo tee /etc/yum.repos.d/docker.repo &lt;&lt;-'EOF'</span><br><span class="line">[dockerrepo]</span><br><span class="line">name=Docker Repository</span><br><span class="line">baseurl=https://yum.dockerproject.org/repo/main/centos/7/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=https://yum.dockerproject.org/gpg</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> sudo yum install docker-engine</span><br><span class="line"><span class="meta">#</span> sudo systemctl enable docker</span><br><span class="line"><span class="meta">#</span> sudo systemctl start docker</span><br></pre></td></tr></table></figure></p>
+<p>安装完后查看docker 版本<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@centos-node4 ~]# docker version</span><br><span class="line">Client:</span><br><span class="line"> Version:      1.12.0</span><br><span class="line"> API version:  1.24</span><br><span class="line"> Go version:   go1.6.3</span><br><span class="line"> Git commit:   8eab29e</span><br><span class="line"> Built:        </span><br><span class="line"> OS/Arch:      linux/amd64</span><br><span class="line"></span><br><span class="line">Server:</span><br><span class="line"> Version:      1.12.0</span><br><span class="line"> API version:  1.24</span><br><span class="line"> Go version:   go1.6.3</span><br><span class="line"> Git commit:   8eab29e</span><br><span class="line"> Built:        </span><br><span class="line"> OS/Arch:      linux/amd64</span><br></pre></td></tr></table></figure></p>
+<p>开放端口相关命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=2377/tcp --permanent</span><br><span class="line">firewall-cmd --zone=public --add-port=7946/tcp --permanent</span><br><span class="line">firewall-cmd --zone=public --add-port=7946/udp --permanent</span><br><span class="line">firewall-cmd --zone=public --add-port=4789/tcp --permanent</span><br><span class="line">firewall-cmd --zone=public --add-port=4789/udp --permanent</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure></p>
+<h3 id="新版docker-swarm-命令详情"><a href="#新版docker-swarm-命令详情" class="headerlink" title="新版docker swarm 命令详情"></a>新版docker swarm 命令详情</h3><p>有关集群的docker命令如下：</p>
+<ol>
+<li>docker swarm：集群管理，子命令有init, join,join-token, leave, update</li>
+<li>docker node：节点管理，子命令有demote, inspect,ls, promote, rm, ps, update</li>
+<li>docker service：服务管理，子命令有create, inspect, ps, ls ,rm , scale, update</li>
+<li>docker stack/deploy：试验特性，用于多应用部署</li>
+</ol>
+<h3 id="创建swarm-集群"><a href="#创建swarm-集群" class="headerlink" title="创建swarm 集群"></a>创建swarm 集群</h3><ul>
+<li>查看docker swarm 命令说明</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@centos-node4 ~]# docker swarm -h</span><br><span class="line">Flag shorthand -h has been deprecated, please use --help</span><br><span class="line"></span><br><span class="line">Usage:	docker swarm COMMAND</span><br><span class="line"></span><br><span class="line">Manage Docker Swarm</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">      --help   Print usage</span><br><span class="line"></span><br><span class="line">Commands:</span><br><span class="line">  init        Initialize a swarm</span><br><span class="line">  join        Join a swarm as a node and/or manager</span><br><span class="line">  join-token  Manage join tokens</span><br><span class="line">  update      Update the swarm</span><br><span class="line">  leave       Leave a swarm</span><br><span class="line"></span><br><span class="line">Run 'docker swarm COMMAND --help' for more information on a command.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在swarm manager(centos-node4:192.168.99.101)初始化swarm集群</li>
+</ul>
+<p>用<code>--listen-addr</code>指定监听的ip与端口<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>命令格式: docker swarm init --listen-addr &lt;MANAGER-IP&gt;:&lt;PORT&gt;</span><br><span class="line">[root@centos-node4 ~]# docker swarm init --listen-addr 192.168.99.101:2377</span><br><span class="line">Swarm initialized: current node (a60d5c3ttymvtozr46uvk17q4) is now a manager.</span><br></pre></td></tr></table></figure></p>
+<p>查看结果</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@centos-node4 ~]# docker node ls</span><br><span class="line">ID                           HOSTNAME      MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS</span><br><span class="line">a60d5c3ttymvtozr46uvk17q4 *  centos-node4  Accepted    Ready   Active        Leader</span><br></pre></td></tr></table></figure>
+<ul>
+<li>把swarm-agent1(centos-node5: 192.168.99.102)添加到swarm集群</li>
+</ul>
+<p>在swarm-agent1上执行:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>命令格式: docker swarm join &lt;MANAGER-IP&gt;:&lt;PORT&gt;</span><br><span class="line">[root@centos-node5 ~]# docker swarm join 192.168.99.101:2377</span><br><span class="line">This node joined a Swarm as a worker.</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>在swarm manager查看结果</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@centos-node4 ~]# docker node ls</span><br><span class="line">ID                           HOSTNAME      MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS</span><br><span class="line">0ypcw58hjlcvr0xqbtizmau62    centos-node5  Accepted    Ready   Active</span><br><span class="line">a60d5c3ttymvtozr46uvk17q4 *  centos-node4  Accepted    Ready   Active        Leader</span><br></pre></td></tr></table></figure>
+<h3 id="创建一个overlay-跨主机网络"><a href="#创建一个overlay-跨主机网络" class="headerlink" title="创建一个overlay 跨主机网络"></a>创建一个overlay 跨主机网络</h3><ul>
+<li>查看原有网络</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@centos-node4 ~]# docker network ls</span><br><span class="line">NETWORK ID          NAME                DRIVER              SCOPE</span><br><span class="line">abec77415f48        bridge              bridge              local</span><br><span class="line">e2fff9d572a6        docker_gwbridge     bridge              local</span><br><span class="line">166bd71f7d0e        host                host                local</span><br><span class="line">9gr6bfff1rv9        ingress             overlay             swarm</span><br><span class="line">1d2bfc590294        none                null                local</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可以看到在swarm上默认已有一个名为ingress的overlay 网络,默认在swarm里使用，本文会创建一个新的</p>
+</blockquote>
+<ul>
+<li>创建一个新的overlay网络</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> [root@centos-node4 ~]# docker network create --driver overlay docker-net</span><br><span class="line">aoqs3p835s5glx69hi46ou2dw</span><br><span class="line"> [root@centos-node4 ~]# docker network ls</span><br><span class="line">NETWORK ID          NAME                DRIVER              SCOPE</span><br><span class="line">abec77415f48        bridge              bridge              local</span><br><span class="line">aoqs3p835s5g        docker-net          overlay             swarm</span><br><span class="line">e2fff9d572a6        docker_gwbridge     bridge              local</span><br><span class="line">166bd71f7d0e        host                host                local</span><br><span class="line">9gr6bfff1rv9        ingress             overlay             swarm</span><br><span class="line">1d2bfc590294        none                null                local</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>新的网络(docker-net)已创建</p>
+</blockquote>
+<h3 id="在新的跨主机overlay-网络-docker-net-上创建应用"><a href="#在新的跨主机overlay-网络-docker-net-上创建应用" class="headerlink" title="在新的跨主机overlay 网络(docker-net)上创建应用"></a>在新的跨主机overlay 网络(docker-net)上创建应用</h3><ul>
+<li>部署</li>
+</ul>
+<p>用<code>alpine</code>镜像在<code>docker-net</code>网络上启动两个实例, 并编排为一组服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@centos-node4 ~]# docker service create --replicas 2 --name helloworld --network=docker-net  alpine ping docker.com</span><br><span class="line">5lgdq3ihiez0o7h2uegu4fgd3</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看部署结果</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@centos-node4 ~]# docker service ls</span><br><span class="line">ID            NAME        REPLICAS  IMAGE   COMMAND</span><br><span class="line">5lgdq3ihiez0  helloworld  0/2       alpine  ping docker.com</span><br><span class="line">[root@centos-node4 ~]# docker service tasks helloworld</span><br><span class="line">ID                         NAME          SERVICE     IMAGE   LAST STATE          DESIRED STATE  NODE</span><br><span class="line">eul3bus45qz3b555wekotdmo5  helloworld.1  helloworld  alpine  Running 14 seconds  Running        centos-node5</span><br><span class="line">55uhq6xxcv53xlkqv2f0be9b9  helloworld.2  helloworld  alpine  Running 14 seconds  Running        centos-node4</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可以看到两个实例分别运行在两个节点上</p>
+</blockquote>
+<h3 id="测试两个主机的网络是否能互通"><a href="#测试两个主机的网络是否能互通" class="headerlink" title="测试两个主机的网络是否能互通"></a>测试两个主机的网络是否能互通</h3><ul>
+<li>分别查看两个实例的名称</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 在swarm-manager 上执行</span><br><span class="line">[root@centos-node4 ~]# docker ps -a</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                    PORTS               NAMES</span><br><span class="line">f4a197abdb0b        alpine:latest       "ping docker.com"        42 minutes ago      Up 42 minutes                                 helloworld.2.55uhq6xxcv53xlkqv2f0be9b9</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 在swarm-agnet1 上执行</span><br><span class="line">[root@centos-node5 ~]# docker ps -a</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</span><br><span class="line">39cc35cd54b5        alpine:latest       "ping docker.com"   50 seconds ago      Up 49 seconds                           helloworld.1.eul3bus45qz3b555wekotdmo5</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在swarm-manager 上测试</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@centos-node4 ~]# docker exec -ti helloworld.2.55uhq6xxcv53xlkqv2f0be9b9 sh</span><br><span class="line">/ # ping helloworld.1.eul3bus45qz3b555wekotdmo5</span><br><span class="line">PING helloworld.1.eul3bus45qz3b555wekotdmo5 (10.0.9.3): 56 data bytes</span><br><span class="line">64 bytes from 10.0.9.3: seq=0 ttl=64 time=0.514 ms</span><br><span class="line">64 bytes from 10.0.9.3: seq=1 ttl=64 time=0.508 ms</span><br><span class="line">64 bytes from 10.0.9.3: seq=2 ttl=64 time=0.381 ms</span><br><span class="line">64 bytes from 10.0.9.3: seq=3 ttl=64 time=0.408 ms</span><br><span class="line">^C</span><br><span class="line">--- helloworld.1.eul3bus45qz3b555wekotdmo5 ping statistics ---</span><br><span class="line">4 packets transmitted, 4 packets received, 0% packet loss</span><br><span class="line">round-trip min/avg/max = 0.381/0.452/0.514 ms</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在swarm-agent1 上测试</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@centos-node5 ~]# docker ps -a</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</span><br><span class="line">39cc35cd54b5        alpine:latest       "ping docker.com"   50 seconds ago      Up 49 seconds                           helloworld.1.eul3bus45qz3b555wekotdmo5</span><br><span class="line">[root@centos-node5 ~]# docker exec -ti  helloworld.1.eul3bus45qz3b555wekotdmo5 sh</span><br><span class="line">/ # ping helloworld.2.55uhq6xxcv53xlkqv2f0be9b9</span><br><span class="line">PING helloworld.2.55uhq6xxcv53xlkqv2f0be9b9 (10.0.9.4): 56 data bytes</span><br><span class="line">64 bytes from 10.0.9.4: seq=0 ttl=64 time=0.892 ms</span><br><span class="line">64 bytes from 10.0.9.4: seq=1 ttl=64 time=0.463 ms</span><br><span class="line">64 bytes from 10.0.9.4: seq=2 ttl=64 time=0.462 ms</span><br><span class="line">64 bytes from 10.0.9.4: seq=3 ttl=64 time=0.478 ms</span><br><span class="line">64 bytes from 10.0.9.4: seq=4 ttl=64 time=0.468 ms</span><br><span class="line">64 bytes from 10.0.9.4: seq=5 ttl=64 time=0.459 ms</span><br><span class="line">^C</span><br><span class="line">--- helloworld.2.55uhq6xxcv53xlkqv2f0be9b9 ping statistics ---</span><br><span class="line">6 packets transmitted, 6 packets received, 0% packet loss</span><br><span class="line">round-trip min/avg/max = 0.459/0.537/0.892 ms</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>现在新版的docker swarm 管理非常简单, 可以快速的搭建起一个跨主机的集群并部署应用</p>
+</blockquote>
+<h3 id="dokcer-swarm自带的负载均衡"><a href="#dokcer-swarm自带的负载均衡" class="headerlink" title="dokcer swarm自带的负载均衡"></a>dokcer swarm自带的负载均衡</h3><p>创建一组服务<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker service create --replicas 2 --name whoami -p 8080:80 daocloud.io/nginx:alpine</span><br></pre></td></tr></table></figure></p>
+<p>访问服务(可以多执行几次)<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 访问地址格式: swarm-manager.ip + (-p映射的端口)</span><br><span class="line">curl -v 192.168.99.101:8080</span><br></pre></td></tr></table></figure></p>
+<p>然后用docker logs 查看容器中nginx的访问日志, 可以现两个容器都有访问记录</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2016-09-01T12:47:15.000Z" itemprop="dateUpdated">2016-09-01 20:47:15</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/07/01/shi-yong-docker-1-12-da-jian-duo-zhu-ji-docker-swarmji-qun/" target="_blank" rel="external">http://ystyle.top/2016/07/01/shi-yong-docker-1-12-da-jian-duo-zhu-ji-docker-swarmji-qun/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2016/07/01/shi-yong-docker-1-12-da-jian-duo-zhu-ji-docker-swarmji-qun/&title=《使用docker 1.12 搭建多主机docker swarm集群》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2016/07/01/shi-yong-docker-1-12-da-jian-duo-zhu-ji-docker-swarmji-qun/&title=《使用docker 1.12 搭建多主机docker swarm集群》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2016/07/01/shi-yong-docker-1-12-da-jian-duo-zhu-ji-docker-swarmji-qun/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用docker 1.12 搭建多主机docker swarm集群》 — 东方星痕&url=http://ystyle.top/2016/07/01/shi-yong-docker-1-12-da-jian-duo-zhu-ji-docker-swarmji-qun/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2016/07/01/shi-yong-docker-1-12-da-jian-duo-zhu-ji-docker-swarmji-qun/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/07/30/windowszui-xiao-hua-da-jian-react-nativehuan-jing/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">windows最小化搭建react-native环境</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/04/16/docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">docker + jenkins + git + maven自动化构建与部署</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2016/07/01/shi-yong-docker-1-12-da-jian-duo-zhu-ji-docker-swarmji-qun/&title=《使用docker 1.12 搭建多主机docker swarm集群》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2016/07/01/shi-yong-docker-1-12-da-jian-duo-zhu-ji-docker-swarmji-qun/&title=《使用docker 1.12 搭建多主机docker swarm集群》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2016/07/01/shi-yong-docker-1-12-da-jian-duo-zhu-ji-docker-swarmji-qun/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用docker 1.12 搭建多主机docker swarm集群》 — 东方星痕&url=http://ystyle.top/2016/07/01/shi-yong-docker-1-12-da-jian-duo-zhu-ji-docker-swarmji-qun/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2016/07/01/shi-yong-docker-1-12-da-jian-duo-zhu-ji-docker-swarmji-qun/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADJ0lEQVR42u3azW4qMQwGUN7/pbnSXVWqgM/2UBFzskJ0mslJF65/brd43f+vn59/rt/PPNrh+e/+3uEer9s7FjY2NvYh7GS7/JW9Iybvev589ZzY2NjY+9jJUZLw9vyb58fNn8+fefg9NjY29leyk4Rk8j9/8i5sbGxs7GvZCTK5pl4qgo2NjY09DzBJapED8iTnT2tp2NjY2B/P7jV6P/Pz2/vb2NjY2B/GvrdWNSxVd0jSlYkCGxsbexN7kjYkYaNH7T1TLoFhY2Njr2D3Ak9OqhaSqqGrOcqDjY2NvZSdvKyaPFRHOedt3ajNgI2Njb2InR8xymlaiU21FTE/DzY2Nva3sfP0Y3Jx1QQmCWPlwR1sbGzsA9l5qf2qFGKe3iR/vajFi42Njb2U3RvErLZmq2Wsi3+KjY2NvY7da9P2Upde+ama9rzYExsbG3sdO09IqklLvkaMeFgnKiphY2NjH8ie9BPmYS8Jb3lzIkqusLGxsdex83JSHiSSb5JLnIzjYGNjY38De9JqzQd9qvj5883SEjY2Nvax7Lyh22v3XpV49BoS1fCMjY2NfRa7WqbpXVM1NM4D5ws8NjY29jp2ctBeAjAvXeWDPoVAiI2Njb2IXcXk//rnaUn+u9XRn3JRCRsbG/tA9qRkMw9deWEof3sSmLGxsbG/h90btclD0cUjOHkBCxsbG3sROymyVz/Pi0e9y+3tiY2Njb2D3Ru1qRaA8kJ/csXzxAYbGxt7BzvftBfqes3XXumq0N7AxsbGXsfOQ1E+OlNtzVabwaNUBBsbG3sRu1eg75Xpe1eWJyG9gR5sbGzs09l54OklJ+8oNuVX8GJkBxsbG3sFu8e4qknQS356QbQcvbGxsbEPYd+Lq5p+5EWfPAhVm8Tl9gA2Njb2Uex8VVu5+Z7zCNxMPLCxsbEXsavt3iTATJrEkwGgwp8EGxsbex272o6tphNJOOy1IqrBDxsbGxs7GYXsNQZ6SVFzBBMbGxv7K9nzQJKnLpOEJHojNjY29jp2XlTqtVHnJf5JI+FhKoKNjY29gj0JP/mYZt42qI5yzs+DjY2NfSz7H/ZHjOAMWT0bAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

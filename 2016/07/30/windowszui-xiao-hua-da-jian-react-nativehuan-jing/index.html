@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>windows最小化搭建react-native环境 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="react,react-native">
+    <meta name="description" content="准备 git for windows java gradle node.js react-native-cli android-sdk  安装git下载git 安装java配置好JAVA_HOME环境变量,并把JAVA_HOME/bin添加到path里 JDK版本管理工具 安装gradle下载gradle: (若安装过idea之类的工具可以看看~/.gradle/wrapper/dists目录下有">
+<meta name="keywords" content="react,react-native">
+<meta property="og:type" content="article">
+<meta property="og:title" content="windows最小化搭建react-native环境">
+<meta property="og:url" content="http://ystyle.top/2016/07/30/windowszui-xiao-hua-da-jian-react-nativehuan-jing/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="准备 git for windows java gradle node.js react-native-cli android-sdk  安装git下载git 安装java配置好JAVA_HOME环境变量,并把JAVA_HOME/bin添加到path里 JDK版本管理工具 安装gradle下载gradle: (若安装过idea之类的工具可以看看~/.gradle/wrapper/dists目录下有">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2016-08-18T02:11:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="windows最小化搭建react-native环境">
+<meta name="twitter:description" content="准备 git for windows java gradle node.js react-native-cli android-sdk  安装git下载git 安装java配置好JAVA_HOME环境变量,并把JAVA_HOME/bin添加到path里 JDK版本管理工具 安装gradle下载gradle: (若安装过idea之类的工具可以看看~/.gradle/wrapper/dists目录下有">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">windows最小化搭建react-native环境</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">windows最小化搭建react-native环境</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-07-30T14:09:37.000Z" itemprop="datePublished" class="page-time">
+  2016-07-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#准备"><span class="post-toc-number">1.</span> <span class="post-toc-text">准备</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装git"><span class="post-toc-number">2.</span> <span class="post-toc-text">安装git</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装java"><span class="post-toc-number">3.</span> <span class="post-toc-text">安装java</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装gradle"><span class="post-toc-number">4.</span> <span class="post-toc-text">安装gradle</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装node-js"><span class="post-toc-number">5.</span> <span class="post-toc-text">安装node.js</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装react-native-cli"><span class="post-toc-number">6.</span> <span class="post-toc-text">安装react-native-cli</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装android-sdk"><span class="post-toc-number">7.</span> <span class="post-toc-text">安装android-sdk</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试"><span class="post-toc-number">8.</span> <span class="post-toc-text">测试</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置调试环境"><span class="post-toc-number">9.</span> <span class="post-toc-text">配置调试环境</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注意事项"><span class="post-toc-number">10.</span> <span class="post-toc-text">注意事项</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-windowszui-xiao-hua-da-jian-react-nativehuan-jing"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">windows最小化搭建react-native环境</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-07-30 22:09:37" datetime="2016-07-30T14:09:37.000Z"  itemprop="datePublished">2016-07-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
+<li><a href="#git">git for windows</a></li>
+<li><a href="#java">java</a></li>
+<li><a href="#gradle">gradle</a></li>
+<li><a href="#nodejs">node.js</a></li>
+<li><a href="#reactnativecli">react-native-cli</a></li>
+<li><a href="#androidsdk">android-sdk</a></li>
+</ul>
+<h3 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h3><p><a href="https://git-scm.com/download" target="_blank" rel="noopener">下载git</a></p>
+<h3 id="安装java"><a href="#安装java" class="headerlink" title="安装java"></a>安装java</h3><p>配置好<code>JAVA_HOME</code>环境变量,并把<code>JAVA_HOME/bin</code>添加到<code>path</code>里</p>
+<p><a href="http://www.lxy520.net/2015/12/02/windows-jdk-ban-ben-guan-li-qi-jvms-fa-bu/" target="_blank" rel="noopener">JDK版本管理工具</a></p>
+<h3 id="安装gradle"><a href="#安装gradle" class="headerlink" title="安装gradle"></a>安装gradle</h3><p><a href="https://services.gradle.org/distributions/gradle-2.14.1-all.zip" target="_blank" rel="noopener">下载gradle</a>: (若安装过idea之类的工具可以看看<code>~/.gradle/wrapper/dists</code>目录下有没有)</p>
+<p>配置<code>GRADLE_HOME</code>环境变量, 并把<code>GRADLE_HOME/bin</code>添加到<code>path</code>里</p>
+<h3 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h3><p><a href="https://nodejs.org/dist/v4.4.7/node-v4.4.7-x64.msi" target="_blank" rel="noopener">下载Node.js</a></p>
+<p><a href="https://github.com/coreybutler/nvm-windows" target="_blank" rel="noopener">nvm node版本管理工具</a></p>
+<h3 id="安装react-native-cli"><a href="#安装react-native-cli" class="headerlink" title="安装react-native-cli"></a>安装react-native-cli</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 打开git bash</span><br><span class="line">npm isntall -g react-native-cli</span><br></pre></td></tr></table></figure>
+<h3 id="安装android-sdk"><a href="#安装android-sdk" class="headerlink" title="安装android-sdk"></a>安装android-sdk</h3><ul>
+<li><p><a href="http://sdk.android-studio.org/" target="_blank" rel="noopener">下载地址</a></p>
+</li>
+<li><p>配置<code>ANDROID_HOME</code>环境变量, 并把<code>%ANDROID_HOME%/tools</code> <code>%ANDROID_HOME%/platform-tools</code>添加到<code>path</code>里</p>
+</li>
+<li><p>打开sdk-manager下载以下组件</p>
+<ul>
+<li>Tools/Android SDK toll</li>
+<li>Tools/Android SDK Platform-tools</li>
+<li>Tools/Adnroid SDK Build-tools 23.0.1</li>
+<li>Android 6.0(API 23)/SDK Platform 23</li>
+<li>Android 6.0(API 23)/Google APIs</li>
+<li>Extras/Android Support Repository 35</li>
+<li>Extras/Google USB Driver<blockquote>
+<p><a href="http://mirrors.neusoft.edu.cn/more.we#android" target="_blank" rel="noopener">换android 的源</a> 看最后一段</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><ol>
+<li>用USB连接手机</li>
+<li>打开<code>git bash</code> 初始化项目<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">react-native init demo</span><br><span class="line">cd demo</span><br><span class="line">react-native start</span><br><span class="line">react-natve run-android</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>然后用喜欢的编辑器或IDE 打开项目开发即可</p>
+<h3 id="配置调试环境"><a href="#配置调试环境" class="headerlink" title="配置调试环境"></a>配置调试环境</h3><p>用chrome 浏览器打开, <code>http://localhost:8081/debugger-ui</code></p>
+<p>按F12 打开开发控制台</p>
+<p>拿走打机摇一摇, 在弹出的开发者菜单上选择<code>Debug JS Remotely</code></p>
+<blockquote>
+<p>启用代码热更新, 如果想电脑上改js,手机限时生效可以把<code>Enable live Reload</code> 和 <code>Enable Hot Reloading</code> 打开</p>
+</blockquote>
+<p>再次打开手机的开发者菜单, 选择<code>reload</code></p>
+<p>如果网页上最后一行显示为: <code>Status: Debugger session #0 active.</code> 时说明已经连接上了调试环境.</p>
+<p>转到chrome开发者控制台Rouces页签上,在左边debuggerWorker.js 下载找到要调试的js文件,<br>加上断点,即可调试</p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol>
+<li><p>若一开始就显示红屏, 不能下载js之类的, 在手机可以打开react-native应用的开发者菜单(摇一摇手机), 选择<code>dev setting</code>, 在最后一项设置电脑的ip与端口.</p>
+</li>
+<li><p>若手机是android 5.0以上红屏的话,在<code>git bash</code>上执行<code>adb reverse tcp:8081 tcp:8081</code></p>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2016-08-18T02:11:50.000Z" itemprop="dateUpdated">2016-08-18 10:11:50</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/07/30/windowszui-xiao-hua-da-jian-react-nativehuan-jing/" target="_blank" rel="external">http://ystyle.top/2016/07/30/windowszui-xiao-hua-da-jian-react-nativehuan-jing/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react-native</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2016/07/30/windowszui-xiao-hua-da-jian-react-nativehuan-jing/&title=《windows最小化搭建react-native环境》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2016/07/30/windowszui-xiao-hua-da-jian-react-nativehuan-jing/&title=《windows最小化搭建react-native环境》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2016/07/30/windowszui-xiao-hua-da-jian-react-nativehuan-jing/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《windows最小化搭建react-native环境》 — 东方星痕&url=http://ystyle.top/2016/07/30/windowszui-xiao-hua-da-jian-react-nativehuan-jing/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2016/07/30/windowszui-xiao-hua-da-jian-react-nativehuan-jing/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/08/18/maven-xiang-mu-zhuan-wei-gradle-xiang-mu/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">maven 项目转为gradle 项目</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/07/01/shi-yong-docker-1-12-da-jian-duo-zhu-ji-docker-swarmji-qun/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">使用docker 1.12 搭建多主机docker swarm集群</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2016/07/30/windowszui-xiao-hua-da-jian-react-nativehuan-jing/&title=《windows最小化搭建react-native环境》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2016/07/30/windowszui-xiao-hua-da-jian-react-nativehuan-jing/&title=《windows最小化搭建react-native环境》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2016/07/30/windowszui-xiao-hua-da-jian-react-nativehuan-jing/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《windows最小化搭建react-native环境》 — 东方星痕&url=http://ystyle.top/2016/07/30/windowszui-xiao-hua-da-jian-react-nativehuan-jing/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2016/07/30/windowszui-xiao-hua-da-jian-react-nativehuan-jing/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsElEQVR42u3aQW5iMRAEUO5/aWYbaQao6raTjPS8ihL4+BnJ7lT78YjH88vIX/8ox9d3/f2Js2fi4eHh3eA9346E9+qv+XTb5ydzxsPDw7vNS7bpV69PFuX9JBJ2ckjg4eHh/U5eXrUmh0Q+aTw8PLz/l5cUx3k80R4SeHh4eL+Hl4QRSRmdHwazkv1i1oKHh4cX82atqZ/9+Up/Dw8PD2/dVU/ChTzAbTf9A7PFw8PDu8DLN9wNvi2pNxe58PDw8L6ft7kW0E5rtgRtsw0PDw/vLC+PUzeF7yzG/fCdJEuMh4eHd4GXM2alc740eSurLe7x8PDw7vFmm3Ub7LaXFQ709PDw8PCO8mZBQ7v1txPNc5S6v4eHh4e35r0vcPP/6/evbw+VYhHx8PDwjvI2sWzb4po1/tuF+0cDDA8PD+8ory1k29cUV6OCePc978Ny4+Hh4R3itQ2nTViQXMmaRb0vn4mHh4d3jdc2789iZiV7UUbj4eHhHeXlUcLZKwLt8bC6qoWHh4f37bx8m54dIaeijagNhoeHh7fmJQVxcsWqDSlONbc+RCR4eHh4F3h5aZv8ZtP02jTD8sMJDw8P7xQvn3SyEZ8KL/IFwsPDw/sp3iaczZ9Tt68WXwAeHh7ePV5SZM8aVPl088+aLSgeHh7eWV473Tx02IfC+Xvr6BYPDw/vAi8PF9pn5lcKZgFxdDDg4eHhrXmrunvU8s+L9Xbg4eHh3eM9y7G5ELC//FrPBw8PD+8Cb9Ynmm3o+bTORsZ4eHh4N3jt1YEZe1aO56HtsUtXeHh4eDFvE8W2bapkIWYn24erA3h4eHg/xGun2F6xmuFffhYeHh7eL+Alk5sFDcnhUbfr8PDw8K7x8kdvwtl8CfbHDB4eHt49XhuztjFEfpkgD20PDzw8PLx0/AFmk+QpuKnGhwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

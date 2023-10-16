@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Quest2 使用Netch激活与无线串流的设置 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="quest2,工具">
+    <meta name="description" content="Quest2 激活与无线串流的设置更新后自带Airlink串流，不需要买virtual desktop了连网激活 需要可上网，与tcp、udp转发， 激活更新系统时需要udp转发才能正常更新系统, 本方法完美支持，只需要有支持wifi网卡的电脑   Netch： socket5、ss、vmess(v2ray) 转wifi 安装.NET Desktop runtime 5.0 x64和Visual">
+<meta name="keywords" content="quest2,工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Quest2 使用Netch激活与无线串流的设置">
+<meta property="og:url" content="http://ystyle.top/2020/12/05/quest2/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="Quest2 激活与无线串流的设置更新后自带Airlink串流，不需要买virtual desktop了连网激活 需要可上网，与tcp、udp转发， 激活更新系统时需要udp转发才能正常更新系统, 本方法完美支持，只需要有支持wifi网卡的电脑   Netch： socket5、ss、vmess(v2ray) 转wifi 安装.NET Desktop runtime 5.0 x64和Visual">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://dll.ystyle.top/images/2020-12/Netch_2020-12-06_16-44-00.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2020-12/explorer_2020-12-06_16-35-08.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2020-12/chrome_2020-12-06_20-40-12.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2020-12/BE9BEC5F78EDD4C97982C8353CFE1D13.jpg">
+<meta property="og:image" content="https://dll.ystyle.top/images/2020-12/27EDA36DBCB42C960E77A19FB20F1557.jpg">
+<meta property="og:image" content="https://dll.ystyle.top/images/2020-12/SideQuest_2020-12-06_16-41-36.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2020-12/VirtualDesktop.Streamer_2020-12-06_16-38-19.png">
+<meta property="og:updated_time" content="2021-11-05T11:30:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Quest2 使用Netch激活与无线串流的设置">
+<meta name="twitter:description" content="Quest2 激活与无线串流的设置更新后自带Airlink串流，不需要买virtual desktop了连网激活 需要可上网，与tcp、udp转发， 激活更新系统时需要udp转发才能正常更新系统, 本方法完美支持，只需要有支持wifi网卡的电脑   Netch： socket5、ss、vmess(v2ray) 转wifi 安装.NET Desktop runtime 5.0 x64和Visual">
+<meta name="twitter:image" content="https://dll.ystyle.top/images/2020-12/Netch_2020-12-06_16-44-00.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Quest2 使用Netch激活与无线串流的设置</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Quest2 使用Netch激活与无线串流的设置</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-12-05T17:30:26.000Z" itemprop="datePublished" class="page-time">
+  2020-12-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/软件/">软件</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Quest2-激活与无线串流的设置"><span class="post-toc-number">1.</span> <span class="post-toc-text">Quest2 激活与无线串流的设置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#更新后自带Airlink串流，不需要买virtual-desktop了"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">更新后自带Airlink串流，不需要买virtual desktop了</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#连网激活"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">连网激活</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Airlink串流"><span class="post-toc-number">1.0.3.</span> <span class="post-toc-text">Airlink串流</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#开发者模式"><span class="post-toc-number">1.0.4.</span> <span class="post-toc-text">开发者模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#参考"><span class="post-toc-number">1.0.5.</span> <span class="post-toc-text">参考</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-quest2"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Quest2 使用Netch激活与无线串流的设置</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-12-06 01:30:26" datetime="2020-12-05T17:30:26.000Z"  itemprop="datePublished">2020-12-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/软件/">软件</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Quest2-激活与无线串流的设置"><a href="#Quest2-激活与无线串流的设置" class="headerlink" title="Quest2 激活与无线串流的设置"></a>Quest2 激活与无线串流的设置</h1><h3 id="更新后自带Airlink串流，不需要买virtual-desktop了"><a href="#更新后自带Airlink串流，不需要买virtual-desktop了" class="headerlink" title="更新后自带Airlink串流，不需要买virtual desktop了"></a>更新后自带Airlink串流，不需要买virtual desktop了</h3><h3 id="连网激活"><a href="#连网激活" class="headerlink" title="连网激活"></a>连网激活</h3><blockquote>
+<p>需要可上网，与tcp、udp转发， 激活更新系统时需要udp转发才能正常更新系统, 本方法完美支持，只需要有支持wifi网卡的电脑</p>
+</blockquote>
+<ul>
+<li><a href="https://github.com/NetchX/Netch" target="_blank" rel="noopener">Netch</a>： socket5、ss、vmess(v2ray) 转wifi<ul>
+<li>安装<a href="https://aka.ms/dotnet/5.0/windowsdesktop-runtime-win-x64.exe" target="_blank" rel="noopener"><code>.NET Desktop runtime 5.0 x64</code></a>和<code>Visual C++ 运行库</code></li>
+</ul>
+</li>
+<li>打开Netch, 添你的代理，然后选择<code>ByPass LAN and China</code>， 启动</li>
+<li>在win10开启wifi移动热点</li>
+<li>在网络适配器管理界面，把带tap的网卡，右键属性-切换到分享， 把第一个勾上，下拉选择wifi热点的网卡</li>
+<li>在quest2连接热点，等一会后，联网界面下的确定按钮亮了之后，会进入系统更新</li>
+<li>更新系统后，可以切回wifi+http代理方式玩(wifi连接输入密码，下边点高级，可以填入http代理)<br><img src="https://dll.ystyle.top/images/2020-12/Netch_2020-12-06_16-44-00.png" alt=""><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2020-12/explorer_2020-12-06_16-35-08.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2020-12/chrome_2020-12-06_20-40-12.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
+</ul>
+<h3 id="Airlink串流"><a href="#Airlink串流" class="headerlink" title="Airlink串流"></a>Airlink串流</h3><ul>
+<li>电脑上安装或升级oculus home到最新版</li>
+<li>登陆帐号后到<code>设置-公测版</code>打开<code>Airlink</code>设置</li>
+<li>更新quest2系统到最新版</li>
+<li>在实验室打开Airlink</li>
+<li>之后在设置-快捷操作-Airlink搜索电脑，连接上后点启动， 就进入电脑版的操作台了。</li>
+</ul>
+<h3 id="开发者模式"><a href="#开发者模式" class="headerlink" title="开发者模式"></a>开发者模式</h3><ul>
+<li><a href="https://dashboard.oculus.com" target="_blank" rel="noopener">注册开发者帐号</a>或进入别人的开发者团队</li>
+<li><a href="https://developer.oculus.com/downloads/package/oculus-adb-drivers" target="_blank" rel="noopener">下载adb驱动</a>, 解压后右键【androidwinusb.inf】选择安装即可。</li>
+<li>安装手机<a href="https://rawapk.com/oculus-apk-download/" target="_blank" rel="noopener">oculus app</a></li>
+<li>用数据线连接quest2和电脑</li>
+<li>在手机oculus app上连接quest2, 并在设置开启开发者模板</li>
+<li>在电脑上安装sidequest， 可以下载一些第三方游戏。<br><img src="https://dll.ystyle.top/images/2020-12/BE9BEC5F78EDD4C97982C8353CFE1D13.jpg" alt=""><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2020-12/27EDA36DBCB42C960E77A19FB20F1557.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
+</ul>
+<details><br><summary>展开查看 virtual desktop 串流</summary><br><br>### virtual desktop<br>  - 在quest2上购买<code>virtual desktop</code><br>    - <code>virtual desktop</code>必需买，sidequest上的只是个串流用的插件<br>  - 在电脑上安装<code>virtual desktop streamer</code>串流软件， <a href="https://www.vrdesktop.net/" target="_blank" rel="noopener">官方网站</a>直接免费下载<br>  - 用数据线连接电脑<br>  - 安装<a href="https://sidequestvr.com/setup-howto" target="_blank" rel="noopener">sidequest</a>, 用它给quest2安装串流插件<code>virtual desktop vr patch</code><br>  <img src="https://dll.ystyle.top/images/2020-12/SideQuest_2020-12-06_16-41-36.png" alt=""><br><br>### 购买virtual desktop<br>  - 注册paypal<br>  - 绑定支持银联的银行卡(我用的是邮政的储蓄卡，只有银联，没其它标识)<br>  - 在<code>oculus home</code>、<code>oculus网站</code>、或<code>手机oculus app</code>绑定paypal<br>  - 在上述软件中搜索<code>virtual desktop</code>点购买，如果出现执行查询出现错误就<code>更换代理节点</code>(我用美国节点的会出现这个)<br>    - 按汇率，卡里需要<code>137RMB</code><br>    - steam 里的<code>virtual desktop</code>不支持quest2<br><br>### 串流设置<br>  - 连接到与电脑同wifi（激活时用的热点也可以用的）<br>  - 打开电脑上的<code>virtual desktop streamer</code>，并在username填写自己的oculus帐户名<br>  - 在quest2上打开<code>virtual desktop</code>软件<br>  - 这时会显示一个巨大的电脑屏幕， 打开支持<code>steam vr</code>或<code>oculus home</code>的游戏，会自动串流到quest2里<br>    - 这时可以愉快的玩耍了<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2020-12/VirtualDesktop.Streamer_2020-12-06_16-38-19.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br></details>
+
+
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://blog.csdn.net/kasaiki/article/details/109145902" target="_blank" rel="noopener">Oculus Quest / Quest2 如何设置 VirtualDesktop 实现无线串流【详细教程】_kasaiki的博客-CSDN博客</a></li>
+<li><a href="http://vr42.com/t/187" target="_blank" rel="noopener">Oculus Quest 国内玩家无障碍使用指南 - VR42</a><ul>
+<li>本文的Netch是此文中方案4的Sstap替代品，sstap已经多年不更新了</li>
+</ul>
+</li>
+<li><a href="https://b23.tv/9rEP0A" target="_blank" rel="noopener">【干货】Oculus quest 2电脑连接串流教程｜有线+无线_哔哩哔哩 (゜-゜)つロ 干杯~-bilibili</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-11-05T11:30:26.000Z" itemprop="dateUpdated">2021-11-05 19:30:26</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2020/12/05/quest2/" target="_blank" rel="external">http://ystyle.top/2020/12/05/quest2/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/quest2/">quest2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具/">工具</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2020/12/05/quest2/&title=《Quest2 使用Netch激活与无线串流的设置》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2020/12/05/quest2/&title=《Quest2 使用Netch激活与无线串流的设置》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2020/12/05/quest2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Quest2 使用Netch激活与无线串流的设置》 — 东方星痕&url=http://ystyle.top/2020/12/05/quest2/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2020/12/05/quest2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/12/18/hi3516-connect-wifi/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">鸿蒙开发板HI3516用命令行连接wifi</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/11/07/porting-Lua-to-openharmony/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">移植lua到鸿蒙 - 首个移植成功的编程语言</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2020/12/05/quest2/&title=《Quest2 使用Netch激活与无线串流的设置》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2020/12/05/quest2/&title=《Quest2 使用Netch激活与无线串流的设置》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2020/12/05/quest2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Quest2 使用Netch激活与无线串流的设置》 — 东方星痕&url=http://ystyle.top/2020/12/05/quest2/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2020/12/05/quest2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABwklEQVR42u3ay2rEMAwF0Pn/n06hq8KAcyU/ksLxKpRMc5LFxZL8+cTr+l3f1707rz/rs2Ph4uJOc6/hSohjSn49NuDi4p7nJpH0fef4nvGv8sjDxcV9MzcJoOrr4eLi/ndudRu0qkzCxcV9iptQVm10kv+/oFbDxcWd4M40TFddH+rv4uLiTk8lqs3Tapu1/HRcXNwj3GrRUm2G5qVR4VVxcXE3c3ulTl4O9Ua2NxGGi4u7mZsflupFUtLmqA5gcHFxd3PXNjXmy6ebz4eLi3uEO38koofobZVwcXGf4lYDK98e9TZG5S4OLi7uNDd/8NqmRjMKcXFxj3DnUzBvufYKp5suDi4u7mZu9WRUNZ6SF+sd48DFxV3LnS9Iqk2N8ZcrjFJwcXG3cZMRSK910gu4wvwHFxd3G/emkxqEUbLdmTmigYuL+xS3WqJUB7FJ4RR9LFxc3IPcfFUnGr2/R3ZcXNxt3Gqg5KGWPH5VcYWLi7uDW22L9IamMwPaQvri4uIu5ebhVb0neVZhrIuLi/sy7o5Q2xhkuLi4B7lJG3TV5gYXF/dZbmHYGW9fkgirRicuLu4Zbq9huvZ+XFzc13B/AOMyBhyqsNJjAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

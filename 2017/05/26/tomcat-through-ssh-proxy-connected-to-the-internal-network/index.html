@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>tomcat通过ssh代理连接到内网数据库服务器 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="ssh,代理,tomcat,java">
+    <meta name="description" content="项目的测试数据库服务器是在某内网的，现在要通过ssh的代理隧道，连接到内网的数据库  解决方法： 用xshell连接到ssh服务器 打开查看-隧道窗体 新建转移规则 类型： Local(Outgoing) 源主机： localhost(自己开发电脑的ip) 侦听端口： 1521 目标主机： 192.168.101.102(ssh的局域网ip都可以) 目标端口： 1521   这一步linux可以">
+<meta name="keywords" content="ssh,代理,tomcat,java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tomcat通过ssh代理连接到内网数据库服务器">
+<meta property="og:url" content="http://ystyle.top/2017/05/26/tomcat-through-ssh-proxy-connected-to-the-internal-network/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="项目的测试数据库服务器是在某内网的，现在要通过ssh的代理隧道，连接到内网的数据库  解决方法： 用xshell连接到ssh服务器 打开查看-隧道窗体 新建转移规则 类型： Local(Outgoing) 源主机： localhost(自己开发电脑的ip) 侦听端口： 1521 目标主机： 192.168.101.102(ssh的局域网ip都可以) 目标端口： 1521   这一步linux可以">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2023-10-16T08:04:08.520Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tomcat通过ssh代理连接到内网数据库服务器">
+<meta name="twitter:description" content="项目的测试数据库服务器是在某内网的，现在要通过ssh的代理隧道，连接到内网的数据库  解决方法： 用xshell连接到ssh服务器 打开查看-隧道窗体 新建转移规则 类型： Local(Outgoing) 源主机： localhost(自己开发电脑的ip) 侦听端口： 1521 目标主机： 192.168.101.102(ssh的局域网ip都可以) 目标端口： 1521   这一步linux可以">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">tomcat通过ssh代理连接到内网数据库服务器</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">tomcat通过ssh代理连接到内网数据库服务器</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-05-26T04:58:54.000Z" itemprop="datePublished" class="page-time">
+  2017-05-26
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决方法："><span class="post-toc-number">1.</span> <span class="post-toc-text">解决方法：</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-tomcat-through-ssh-proxy-connected-to-the-internal-network"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">tomcat通过ssh代理连接到内网数据库服务器</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-05-26 12:58:54" datetime="2017-05-26T04:58:54.000Z"  itemprop="datePublished">2017-05-26</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>项目的测试数据库服务器是在某内网的，<br>现在要通过ssh的代理隧道，连接到内网的数据库</p>
+</blockquote>
+<h3 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h3><ul>
+<li>用xshell连接到ssh服务器</li>
+<li>打开查看-隧道窗体</li>
+<li>新建转移规则<ul>
+<li>类型： Local(Outgoing)</li>
+<li>源主机： localhost(自己开发电脑的ip)</li>
+<li>侦听端口： 1521</li>
+<li>目标主机： 192.168.101.102(ssh的局域网ip都可以)</li>
+<li>目标端口： 1521</li>
+</ul>
+</li>
+<li>这一步linux可以直接执行：<code>ssh -L 1521:192.168.101.102:1521 sshserverip</code> -L代表本地转移到远程</li>
+<li>java的数据库连接配置改<code>jdbc:oracle:thin:@localhost:1521:orcl</code></li>
+<li>启动项目连接成功</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2023-10-16T08:04:08.520Z" itemprop="dateUpdated">2023-10-16 16:04:08</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2017/05/26/tomcat-through-ssh-proxy-connected-to-the-internal-network/" target="_blank" rel="external">http://ystyle.top/2017/05/26/tomcat-through-ssh-proxy-connected-to-the-internal-network/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/">ssh</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代理/">代理</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2017/05/26/tomcat-through-ssh-proxy-connected-to-the-internal-network/&title=《tomcat通过ssh代理连接到内网数据库服务器》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2017/05/26/tomcat-through-ssh-proxy-connected-to-the-internal-network/&title=《tomcat通过ssh代理连接到内网数据库服务器》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2017/05/26/tomcat-through-ssh-proxy-connected-to-the-internal-network/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《tomcat通过ssh代理连接到内网数据库服务器》 — 东方星痕&url=http://ystyle.top/2017/05/26/tomcat-through-ssh-proxy-connected-to-the-internal-network/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2017/05/26/tomcat-through-ssh-proxy-connected-to-the-internal-network/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/07/05/share-the-use-of-qiniu-file-upload/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">ShareX使用七牛文件上传</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/04/07/leanote-Add-the-search-function/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">leanote添探索功能</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2017/05/26/tomcat-through-ssh-proxy-connected-to-the-internal-network/&title=《tomcat通过ssh代理连接到内网数据库服务器》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2017/05/26/tomcat-through-ssh-proxy-connected-to-the-internal-network/&title=《tomcat通过ssh代理连接到内网数据库服务器》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2017/05/26/tomcat-through-ssh-proxy-connected-to-the-internal-network/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《tomcat通过ssh代理连接到内网数据库服务器》 — 东方星痕&url=http://ystyle.top/2017/05/26/tomcat-through-ssh-proxy-connected-to-the-internal-network/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2017/05/26/tomcat-through-ssh-proxy-connected-to-the-internal-network/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADJ0lEQVR42u3aQW7jQAwEwPz/097rAllru0kFscelk6HYkmoSpE1yvr7i4/HX8ezM9Wevz3y/5vd7JU9184GNjY39JuzH5dG+5xkvuUK+xNevk7tgY2Njn8e+Dp59qOQxc81I2EmIYmNjY2NvyoZkUZIyo707NjY2NvYM/wiOdml+IcCwsbGxX56dN4zy+EmKk3bwcFfrChsbG/sk9qzR85qvf2S+jY2Njf3C7Mf6mLWNks+2VyueGRsbG/sgdt5kn4VH3r5vr3ZDQYKNjY19BHv2pb/9adtgyhtP+YahG+oqbGxs7Jdkz4Jn1srPx8DtIubs6K8AGxsb+63Y+W02xUm+TPlAd3MeGxsb+yT2dQumDaR2o88sGjdtrKe9NGxsbOyD2Mkl8sDYj3v3g2FsbGzsT2AnMTZrA83GErOIymMYGxsb+xPY+1DZR1o7Em5DERsbG/sMdlsqbAKsbVdtRg5R+YGNjY19BLtt2bTRlY+NE1JSbBRDBWxsbOwj2D/RGNrETALOl/7peWxsbOzj2O2D5iXKfitPEkhtowobGxv7JHbe3J+19WcB1sZnPgyu34qNjY39tux7GfsBbc6uN+5gY2NjH8Rub5lHUb4ZqL3ObLsPNjY29knsZD32j9WWDW0g5ffFxsbGPo+dwPKyYVNC5MuxWQJsbGzsU9n1cDR+T7sdJy9j2qbYfwa92NjY2G/Lrv/dxyE022ozGxu0IYeNjY19Knv2pX+zjWazEHms/kOBjY2NfRC7jYR2kDAbyrZj5nbAjI2NjX0SezZebUltIG3GD/VIABsbG/vN2fuL5gOGPGBmn81Hv9jY2NgnsWcX2mzWaantcDdSYGNjYx/EbguJPFpmQ9l9vVCELjY2NvYR7Ed5RAPUsnl0V+sqfz82Njb2SexZAOTtpNmQOF+sWTMLGxsb+zx2HlrJ0iTn2yFBG4RRgGFjY2Mfx541dO4qY2ZD4tVmIGxsbOyPZG/a+vXUYlRFFc+JjY2N/ZHsPJaSCNyXN6stR9jY2NjHsTewtjG0b0u1v6R6yo2NjY39Vuz2gZLCYBZjsyAcNpWwsbGxT2D/AWuUHF88YafAAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

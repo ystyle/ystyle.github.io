@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>使用泛型设计gorm扩展字段 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="go,gorm,泛型">
+    <meta name="description" content="大型项目经常需要在标准的用户表或员工表加些扩展字段，如果你有一套标准的用户管理系统的话，要么每个项目复制过来改一遍或者添加十几个固定的自定义字段Def1~Def10， 现在可以用在gorm定义模型时使用泛型来解决这个问题  gorm embeded嵌入字段使用gorm:&amp;quot;embedded&amp;quot;定义嵌入字段 1234567891011type User struct &amp;#123;">
+<meta name="keywords" content="go,gorm,泛型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用泛型设计gorm扩展字段">
+<meta property="og:url" content="http://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="大型项目经常需要在标准的用户表或员工表加些扩展字段，如果你有一套标准的用户管理系统的话，要么每个项目复制过来改一遍或者添加十几个固定的自定义字段Def1~Def10， 现在可以用在gorm定义模型时使用泛型来解决这个问题  gorm embeded嵌入字段使用gorm:&amp;quot;embedded&amp;quot;定义嵌入字段 1234567891011type User struct &amp;#123;">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2023-09-25T09:37:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用泛型设计gorm扩展字段">
+<meta name="twitter:description" content="大型项目经常需要在标准的用户表或员工表加些扩展字段，如果你有一套标准的用户管理系统的话，要么每个项目复制过来改一遍或者添加十几个固定的自定义字段Def1~Def10， 现在可以用在gorm定义模型时使用泛型来解决这个问题  gorm embeded嵌入字段使用gorm:&amp;quot;embedded&amp;quot;定义嵌入字段 1234567891011type User struct &amp;#123;">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">使用泛型设计gorm扩展字段</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">使用泛型设计gorm扩展字段</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2023-09-25T09:37:26.000Z" itemprop="datePublished" class="page-time">
+  2023-09-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/软件/">软件</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#gorm-embeded嵌入字段"><span class="post-toc-number">1.</span> <span class="post-toc-text">gorm embeded嵌入字段</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用泛型定义可扩展的模型"><span class="post-toc-number">2.</span> <span class="post-toc-text">使用泛型定义可扩展的模型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#可扩展的子表"><span class="post-toc-number">3.</span> <span class="post-toc-text">可扩展的子表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用类型别名简化泛型类型"><span class="post-toc-number">4.</span> <span class="post-toc-text">使用类型别名简化泛型类型</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-design_gorm_extension_fields_using_generics"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">使用泛型设计gorm扩展字段</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2023-09-25 17:37:26" datetime="2023-09-25T09:37:26.000Z"  itemprop="datePublished">2023-09-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/软件/">软件</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>大型项目经常需要在标准的用户表或员工表加些扩展字段，如果你有一套标准的用户管理系统的话，要么每个项目复制过来改一遍或者添加十几个固定的自定义字段Def1~Def10， 现在可以用在gorm定义模型时使用泛型来解决这个问题</p>
+</blockquote>
+<h3 id="gorm-embeded嵌入字段"><a href="#gorm-embeded嵌入字段" class="headerlink" title="gorm embeded嵌入字段"></a>gorm embeded嵌入字段</h3><p>使用<code>gorm:&quot;embedded&quot;</code>定义嵌入字段</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">	gorm.Model</span><br><span class="line">	Username <span class="keyword">string</span></span><br><span class="line">	Password <span class="keyword">string</span></span><br><span class="line">	Extend   UserExtendField <span class="string">`gorm:"embedded"`</span> <span class="comment">// 添加embed tag</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> UserExtendField <span class="keyword">struct</span> &#123;</span><br><span class="line">	OpenID <span class="keyword">string</span></span><br><span class="line">	UnionID <span class="keyword">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的model等价于这个, 两个生成的表结构是一致的<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">	gorm.Model</span><br><span class="line">	Username <span class="keyword">string</span></span><br><span class="line">	Password <span class="keyword">string</span></span><br><span class="line">	OpenID <span class="keyword">string</span></span><br><span class="line">	UnionID <span class="keyword">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面两个模型都会生成同样的ddl sql, 如下<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">users</span></span><br><span class="line">(</span><br><span class="line">    <span class="keyword">id</span>         <span class="built_in">bigint</span> <span class="keyword">unsigned</span> auto_increment</span><br><span class="line">        primary <span class="keyword">key</span>,</span><br><span class="line">    created_at datetime(<span class="number">3</span>) <span class="literal">null</span>,</span><br><span class="line">    updated_at datetime(<span class="number">3</span>) <span class="literal">null</span>,</span><br><span class="line">    deleted_at datetime(<span class="number">3</span>) <span class="literal">null</span>,</span><br><span class="line">	  username   longtext    <span class="literal">null</span>,</span><br><span class="line">    <span class="keyword">password</span>   longtext    <span class="literal">null</span>,</span><br><span class="line">    org_id     longtext    <span class="literal">null</span>,</span><br><span class="line">    open_id    longtext    <span class="literal">null</span>,</span><br><span class="line">    union_id   longtext    <span class="literal">null</span>   </span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用泛型定义可扩展的模型"><a href="#使用泛型定义可扩展的模型" class="headerlink" title="使用泛型定义可扩展的模型"></a>使用泛型定义可扩展的模型</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User[ExtendField any] <span class="keyword">struct</span> &#123;</span><br><span class="line">	gorm.Model</span><br><span class="line">	Username <span class="keyword">string</span></span><br><span class="line">	Password <span class="keyword">string</span></span><br><span class="line">	Extend   ExtendField <span class="string">`gorm:"embedded"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 需要自定义表名，否则gorm识别到的泛型的表名是不符合数据库标准的，建表会错误</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(User[Extend, Item])</span> <span class="title">TableName</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">"ma_users"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义扩展字段结构</span></span><br><span class="line"><span class="keyword">type</span> ExtendUserField <span class="keyword">struct</span> &#123;</span><br><span class="line">	OrgID   <span class="keyword">string</span></span><br><span class="line">	OpenID  <span class="keyword">string</span></span><br><span class="line">	UnionID <span class="keyword">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用方法<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生成数据库表结构</span></span><br><span class="line">db.AutoMigrate(User[ExtendUserField])</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查找</span></span><br><span class="line"><span class="keyword">var</span> list []User[ExtendUserField]</span><br><span class="line">db.model(&amp;User[ExtendUserField]).Find(&amp;list)</span><br></pre></td></tr></table></figure></p>
+<h3 id="可扩展的子表"><a href="#可扩展的子表" class="headerlink" title="可扩展的子表"></a>可扩展的子表</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User[ExtendField any,Item any] <span class="keyword">struct</span> &#123;</span><br><span class="line">	gorm.Model</span><br><span class="line">	Username <span class="keyword">string</span></span><br><span class="line">	Password <span class="keyword">string</span></span><br><span class="line">	Extend   ExtendField <span class="string">`gorm:"embedded"`</span></span><br><span class="line">	Items    Item <span class="string">`gorm:"foreignKey:user_id"`</span> <span class="comment">// 这里需要写外键</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 需要自定义表名，否则gorm识别到的泛型的表名是不符合数据库标准的，建表会错误</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(User[Extend, Item])</span> <span class="title">TableName</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">"ma_users"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> UserItem <span class="keyword">struct</span> &#123;</span><br><span class="line">	gorm.Model</span><br><span class="line">	UserID  <span class="keyword">uint</span></span><br><span class="line">	Product <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义扩展字段结构</span></span><br><span class="line"><span class="keyword">type</span> ExtendUserField <span class="keyword">struct</span> &#123;</span><br><span class="line">	OrgID   <span class="keyword">string</span></span><br><span class="line">	OpenID  <span class="keyword">string</span></span><br><span class="line">	UnionID <span class="keyword">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用方法<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查找</span></span><br><span class="line"><span class="keyword">var</span> list []User[ExtendUserField, UserItem]</span><br><span class="line">db.model(&amp;User[ExtendUserField, UserItem]).Find(&amp;list)</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用类型别名简化泛型类型"><a href="#使用类型别名简化泛型类型" class="headerlink" title="使用类型别名简化泛型类型"></a>使用类型别名简化泛型类型</h3><blockquote>
+<p>使用类型别名， 可以把上面的泛型代码简化<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyUser = User[ExUserField, UserItem]</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> list []MyUser</span><br><span class="line">db.model(&amp;MyUser).Find(&amp;list)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2023-09-25T09:37:26.000Z" itemprop="dateUpdated">2023-09-25 17:37:26</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2023/09/25/design_gorm_extension_fields_using_generics/" target="_blank" rel="external">http://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gorm/">gorm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/泛型/">泛型</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/&title=《使用泛型设计gorm扩展字段》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/&title=《使用泛型设计gorm扩展字段》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用泛型设计gorm扩展字段》 — 东方星痕&url=http://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2023/10/13/hyprland-alt-tab-switch-to-any-widnow/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">hypyland实现alt + tab切换到任意工作区的窗口</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2023/07/20/install-loongarch64-archlinux-qemu/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">使用qemu8.0安装龙芯loongarch64版本archlinux</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/&title=《使用泛型设计gorm扩展字段》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/&title=《使用泛型设计gorm扩展字段》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用泛型设计gorm扩展字段》 — 东方星痕&url=http://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACqElEQVR42u3aQW4CMQwF0N7/0q1UdTvlfztBLN6sEAyZPBaxsf31FV/fv9fT66dPk3eeVkvWOXbh4eHhjbb+dD0xct7/d7bv53vGw8PDu81LgkF+xOdHecvI94yHh4f3Cbw8Xz0bTtr94OHh4X0a7zF5HR30+Ubx8PDwPo2XHPGbYkEbGPKQc6zWgoeHhxfz9g2w979+a38PDw8PLw4JeYkhL7bm4WSzz78V8PDw8C7wZk2mTdssb6S1KXLxjwEPDw9vwTtVYkiGBvIxgjb8PCbfeHh4eBd4efTYHNCbBLod7XoRTvDw8PDWvLbBnxzcZwsWs3EBPDw8vNu8/GuzkJA8ZUYaRjk8PDy8o7z2T36erZ8akMqbZHh4eHjv4c0CxqmyQvuUF/fg4eHhXeDljahZK2vWMJuNGhQ7xMPDw1vwktLtLLGuD+vy/mg1PDw8vAu89mFts6otws6+tcLj4eHhlbyzpdU2Id402OoyLh4eHt5R3qahtd/0qZT9RTECDw8P7wJvtsTs/c3Ya/E+Hh4e3mVe3r7al4CTUkK+wuP9eHh4eJd5bcN+v63ZOsV38fDw8K7x2iQ430Sbms92UjTA8PDw8I7y8oLsJtnNy7gJKSpG4OHh4R3l5Q2nTVNqE1raQjAeHh7ebV5edGiLCJvW2qYAgYeHh/cJvLxAcLZo+//RH+0WDw8P7wJvc/TnR3abmufr4+Hh4b2f911e+wb/pt2VpOwv+nt4eHh4a97m8M3Dxiw5Tpptm/ECPDw8vA0vCQbthlpSu4fiJ8bDw8O7xmuDQTuY1Y4FzAa2io/x8PDw3sJrCxPtoMDsR3yR7uPh4eF9AG82XnBqKCEv9eLh4eHd5rXFiLwdNfvhThV/8fDw8G7wNoNNpx45W23YzcPDw8Ob834Ab3LFOhgJR9AAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

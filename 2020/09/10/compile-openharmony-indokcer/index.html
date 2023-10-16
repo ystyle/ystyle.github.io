@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>使用Docker快速上手鸿蒙 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="docker,鸿蒙">
+    <meta name="description" content="准备 在机器上安装好Docker  编译鸿蒙系统镜像 打开终端执行以下命令  123mkdir ~/OpenHarmonycd ~/OpenHarmonydocker run --rm -ti -v $&amp;#123;PWD&amp;#125;/out:/OpenHarmony/out ystyle/open-harmony  编译成功后各镜像在out目录下面, 默认编译的是Hi3861开发板的系统镜像, 可">
+<meta name="keywords" content="docker,鸿蒙">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Docker快速上手鸿蒙">
+<meta property="og:url" content="http://ystyle.top/2020/09/10/compile-openharmony-indokcer/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="准备 在机器上安装好Docker  编译鸿蒙系统镜像 打开终端执行以下命令  123mkdir ~/OpenHarmonycd ~/OpenHarmonydocker run --rm -ti -v $&amp;#123;PWD&amp;#125;/out:/OpenHarmony/out ystyle/open-harmony  编译成功后各镜像在out目录下面, 默认编译的是Hi3861开发板的系统镜像, 可">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2020-12-25T08:40:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Docker快速上手鸿蒙">
+<meta name="twitter:description" content="准备 在机器上安装好Docker  编译鸿蒙系统镜像 打开终端执行以下命令  123mkdir ~/OpenHarmonycd ~/OpenHarmonydocker run --rm -ti -v $&amp;#123;PWD&amp;#125;/out:/OpenHarmony/out ystyle/open-harmony  编译成功后各镜像在out目录下面, 默认编译的是Hi3861开发板的系统镜像, 可">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">使用Docker快速上手鸿蒙</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">使用Docker快速上手鸿蒙</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-09-10T17:00:26.000Z" itemprop="datePublished" class="page-time">
+  2020-09-11
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#准备"><span class="post-toc-number">1.</span> <span class="post-toc-text">准备</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编译鸿蒙系统镜像"><span class="post-toc-number">2.</span> <span class="post-toc-text">编译鸿蒙系统镜像</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#更新代码并编译"><span class="post-toc-number">3.</span> <span class="post-toc-text">更新代码并编译</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编写应用程序"><span class="post-toc-number">4.</span> <span class="post-toc-text">编写应用程序</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编译代码"><span class="post-toc-number">5.</span> <span class="post-toc-text">编译代码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其它问题"><span class="post-toc-number">6.</span> <span class="post-toc-text">其它问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#本文所使用Docker镜像的dockerfile文件"><span class="post-toc-number">7.</span> <span class="post-toc-text">本文所使用Docker镜像的dockerfile文件</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-compile-openharmony-indokcer"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">使用Docker快速上手鸿蒙</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-09-11 01:00:26" datetime="2020-09-10T17:00:26.000Z"  itemprop="datePublished">2020-09-11</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
+<li>在机器上安装好Docker</li>
+</ul>
+<h3 id="编译鸿蒙系统镜像"><a href="#编译鸿蒙系统镜像" class="headerlink" title="编译鸿蒙系统镜像"></a>编译鸿蒙系统镜像</h3><ul>
+<li>打开终端执行以下命令</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/OpenHarmony</span><br><span class="line">cd ~/OpenHarmony</span><br><span class="line">docker run --rm -ti -v $&#123;PWD&#125;/out:/OpenHarmony/out ystyle/open-harmony</span><br></pre></td></tr></table></figure>
+<ul>
+<li>编译成功后各镜像在out目录下面, 默认编译的是<code>Hi3861</code>开发板的系统镜像, 可自行烧录到固定测试</li>
+<li>如果要编译其它板子可以设置dokcer镜像的环境变量<code>HARDWARE</code> 目前支持: <code>wifiiot</code>、<code>ipcamera_hi3516dv300</code>、<code>ipcamera_hi3518ev300</code></li>
+</ul>
+<h3 id="更新代码并编译"><a href="#更新代码并编译" class="headerlink" title="更新代码并编译"></a>更新代码并编译</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/OpenHarmony</span><br><span class="line">cd ~/OpenHarmony</span><br><span class="line">docker run --rm -ti -e HARDWARE=ipcamera_hi3516dv300 -v $&#123;PWD&#125;/out:/OpenHarmony/out ystyle/open-harmony bash</span><br><span class="line">repo sync -c</span><br><span class="line">python build.py $&#123;HARDWARE&#125; -b debug</span><br></pre></td></tr></table></figure>
+<h3 id="编写应用程序"><a href="#编写应用程序" class="headerlink" title="编写应用程序"></a>编写应用程序</h3><ul>
+<li>示例在这<a href="https://openharmony.gitee.com/openharmony/docs/blob/master/quick-start/Hi3861%E5%BC%80%E5%8F%91%E6%9D%BF%E7%AC%AC%E4%BA%8C%E4%B8%AA%E7%A4%BA%E4%BE%8B%E7%A8%8B%E5%BA%8F.md" target="_blank" rel="noopener">Hi3861开发板第二个示例程序</a></li>
+<li>创建一个代码目录: <code>my_first_app</code></li>
+<li><p>新建文件<code>hello_world.c</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ohos_init.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ohos_types.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HelloWorld</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"[DEMO] Hello world.\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line">SYS_RUN(HelloWorld);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建文件<code>BUILD.gn</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">static_library(<span class="string">"myapp"</span>) &#123;</span><br><span class="line">  sources = [</span><br><span class="line">      <span class="string">"hello_world.c"</span></span><br><span class="line">  ]</span><br><span class="line">  include_dirs = [</span><br><span class="line">      <span class="string">"//utils/native/liteos/include"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建文件<code>APP_BUILD.gn</code></p>
+</li>
+<li><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>(<span class="string">"//build/lite/config/component/lite_component.gni"</span>)</span><br><span class="line"></span><br><span class="line">lite_component(<span class="string">"app"</span>) &#123;</span><br><span class="line">    features = [</span><br><span class="line">        <span class="string">"my_first_app:myapp"</span>,</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>现在的目录结构为</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── APP_BUILD.gn</span><br><span class="line">├── BUILD.gn</span><br><span class="line">└── hello_world.c</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="编译代码"><a href="#编译代码" class="headerlink" title="编译代码"></a>编译代码</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm \</span><br><span class="line">  -e HARDWARE=wifiiot \</span><br><span class="line">  -v $&#123;PWD&#125;/out:/OpenHarmony/out \</span><br><span class="line">  -v $&#123;PWD&#125;/APP_BUILD.gn:/OpenHarmony/applications/sample/wifi-iot/app/APP_BUILD.gn \</span><br><span class="line">  -v $&#123;PWD&#125;:/OpenHarmony/applications/sample/wifi-iot/app/my_first_app \</span><br><span class="line">  ystyle/open-harmony</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>编译后的文件在out目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── APP_BUILD.gn</span><br><span class="line">├── BUILD.gn</span><br><span class="line">├── hello_world.c</span><br><span class="line">└── out</span><br><span class="line">    └── wifiiot</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="其它问题"><a href="#其它问题" class="headerlink" title="其它问题"></a>其它问题</h3><ul>
+<li>如果实际开发，建议直接替换掉 整个<code>/OpenHarmony/applications/sample/wifi-iot/app/</code> 目录, 目录里边的都是示例代码.</li>
+<li>如果要修改启动编译的命令的话，可以写好shell 脚本， run时指定cmd命令<ul>
+<li>构建命令为: <code>python build.py ${HARDWARE} -b debug</code></li>
+<li><code>docker run --rm -v ${PWD}/mybuild.sh:/OpenHarmony/mybuild.sh ystyle/open-harmony /OpenHarmony/mybuild.sh</code></li>
+</ul>
+</li>
+<li>更新鸿蒙代码: 用修改镜像启动命令的方法，在<code>/OpenHarmony</code>目录执行<code>repo sync -c</code> 命令</li>
+<li>其它驱动开发或系统组件开发也可以用挂载的方式把工程目录映射到容器，开发并编译</li>
+</ul>
+<h3 id="本文所使用Docker镜像的dockerfile文件"><a href="#本文所使用Docker镜像的dockerfile文件" class="headerlink" title="本文所使用Docker镜像的dockerfile文件"></a>本文所使用Docker镜像的dockerfile文件</h3><blockquote>
+<p>参考<code>@keithyau</code><a href="https://openharmony.gitee.com/keithyau/build_lite/blob/master/Dockerfile20.04" target="_blank" rel="noopener">所写的Dockerfile</a>修改而来</p>
+</blockquote>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">20.04</span> AS build-<span class="keyword">env</span></span><br><span class="line"><span class="keyword">LABEL</span> version=2020-10-15</span><br><span class="line"></span><br><span class="line"># Set your hardware</span><br><span class="line">ENV HARDWARE=wifiiot</span><br><span class="line"># Prevent interactive</span><br><span class="line">ENV DEBIAN_FRONTEND=noninteractive</span><br><span class="line"></span><br><span class="line"># Setting up the build environment</span><br><span class="line">RUN sed -i 's/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list &amp;&amp; \</span><br><span class="line">    sed -i 's/security.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list &amp;&amp; \</span><br><span class="line">    apt-get clean -y &amp;&amp; \</span><br><span class="line">    apt-get -y update &amp;&amp; \</span><br><span class="line">    apt-get remove python* -y &amp;&amp; \</span><br><span class="line">    apt-get install git curl build-essential libdbus-glib-1-dev libgirepository1.0-dev -y &amp;&amp; \</span><br><span class="line">    apt-get install zip libncurses5-dev pkg-config -y &amp;&amp; \</span><br><span class="line">    apt-get install python3-pip -y &amp;&amp; \</span><br><span class="line">    apt-get install scons dosfstools mtools mtd-utils default-jdk default-jre -y &amp;&amp; \</span><br><span class="line">    rm -rf /var/lib/apt/lists/*</span><br><span class="line"></span><br><span class="line"># Setup python</span><br><span class="line"># Make sure python install on the right python version path</span><br><span class="line">RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1 &amp;&amp; \</span><br><span class="line">    pip3 install --upgrade pip -i https://mirrors.aliyun.com/pypi/simple &amp;&amp; \</span><br><span class="line">    pip3 install ninja kconfiglib pycryptodome ecdsa -i https://mirrors.aliyun.com/pypi/simple &amp;&amp; \</span><br><span class="line">    pip3 install six --upgrade --ignore-installed six -i https://pypi.tuna.tsinghua.edu.cn/simple &amp;&amp; \</span><br><span class="line">    rm -rf /var/cache/apt/archives</span><br><span class="line"></span><br><span class="line">#Fix Dash</span><br><span class="line">RUN rm -rf /bin/sh &amp;&amp; \</span><br><span class="line">    ln -s /bin/bash /bin/sh</span><br><span class="line"></span><br><span class="line">#Setup gn</span><br><span class="line">ENV PATH /tools/gn:$PATH</span><br><span class="line">RUN mkdir /tools &amp;&amp; \</span><br><span class="line">    cd /tools &amp;&amp; \</span><br><span class="line">    curl -LO https://repo.huaweicloud.com/harmonyos/compiler/gn/1523/linux/gn.1523.tar &amp;&amp; \</span><br><span class="line">    tar xvf /tools/gn.1523.tar &amp;&amp; \</span><br><span class="line">    rm -rf /tools/gn.1523.tar</span><br><span class="line"></span><br><span class="line">#Setup LLVM</span><br><span class="line">#ADD ./llvm-linux-9.0.0-34042.tar /tools</span><br><span class="line">ENV PATH /tools/llvm/bin:$PATH</span><br><span class="line">RUN cd /tools &amp;&amp; \</span><br><span class="line">    curl -LO https://repo.huaweicloud.com/harmonyos/compiler/clang/9.0.0-34042/linux/llvm-linux-9.0.0-34042.tar &amp;&amp; \</span><br><span class="line">    tar xvf /tools/llvm-linux-9.0.0-34042.tar &amp;&amp; \</span><br><span class="line">    rm -rf /tools/llvm-linux-9.0.0-34042.tar</span><br><span class="line"></span><br><span class="line">#Setup hc-gen</span><br><span class="line">ENV PATH /tools/hc-gen:$PATH</span><br><span class="line">RUN cd /tools &amp;&amp; \</span><br><span class="line">    curl -LO https://repo.huaweicloud.com/harmonyos/compiler/hc-gen/0.65/linux/hc-gen-0.65-linux.tar &amp;&amp; \</span><br><span class="line">    tar xvf /tools/hc-gen-0.65-linux.tar &amp;&amp; \</span><br><span class="line">    rm -rf /tools/hc-gen-0.65-linux.tar</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">#Setup hmos_app_packing_tool and hapsigntool // 必需是这目录，编译脚本写死了</span><br><span class="line">ENV PATH /root/developtools/:$PATH</span><br><span class="line">RUN mkdir /root/developtools/ &amp;&amp; cd /root/developtools/ &amp;&amp; \</span><br><span class="line">    curl -LO https://repo.huaweicloud.com/harmonyos/develop_tools/hmos_app_packing_tool.jar &amp;&amp; \</span><br><span class="line">    curl -LO https://repo.huaweicloud.com/harmonyos/develop_tools/hapsigntoolv2.jar</span><br><span class="line"></span><br><span class="line">#Setup gcc_riscv32</span><br><span class="line">ENV PATH /tools/gcc_riscv32/bin:$PATH</span><br><span class="line">RUN cd /tools &amp;&amp; \</span><br><span class="line">    curl -LO http://tools.harmonyos.com/mirrors/gcc_riscv32/7.3.0/linux/gcc_riscv32-linux-7.3.0.tar.gz &amp;&amp; \</span><br><span class="line">    tar xvf /tools/gcc_riscv32-linux-7.3.0.tar.gz &amp;&amp; \</span><br><span class="line">    rm -rf /tools/gcc_riscv32-linux-7.3.0.tar.gz</span><br><span class="line"></span><br><span class="line">#Create work dir</span><br><span class="line">RUN mkdir /OpenHarmony</span><br><span class="line">WORKDIR /OpenHarmony</span><br><span class="line"></span><br><span class="line"># Gitee Repo tool and download</span><br><span class="line"># Make sure requests install at the right location</span><br><span class="line">RUN curl https://gitee.com/oschina/repo/raw/fork_flow/repo-py3 &gt; /usr/bin/repo &amp;&amp; \</span><br><span class="line">    chmod a+x /usr/bin/repo &amp;&amp; \</span><br><span class="line">    pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple requests</span><br><span class="line"></span><br><span class="line">#Download source, update to your info</span><br><span class="line">RUN git config --global user.email "lxy5266@live.com" &amp;&amp; \</span><br><span class="line">    git config --global user.name "ystyle" &amp;&amp; \</span><br><span class="line">    git config --global color.ui false &amp;&amp; \</span><br><span class="line">    git config --global credential.helper store &amp;&amp; \</span><br><span class="line">    repo init -u https://gitee.com/openharmony/manifest.git -b master --repo-branch=stable --no-repo-verify &amp;&amp; \</span><br><span class="line">    repo sync -c</span><br><span class="line"></span><br><span class="line"># compile</span><br><span class="line">ENV LANGUAGE en</span><br><span class="line">ENV LANG en_US.utf-8</span><br><span class="line">RUN export|grep LANG</span><br><span class="line">CMD ["/bin/bash", "-c", "python build.py $&#123;HARDWARE&#125; -b debug"]</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-12-25T08:40:26.000Z" itemprop="dateUpdated">2020-12-25 16:40:26</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2020/09/10/compile-openharmony-indokcer/" target="_blank" rel="external">http://ystyle.top/2020/09/10/compile-openharmony-indokcer/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/鸿蒙/">鸿蒙</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2020/09/10/compile-openharmony-indokcer/&title=《使用Docker快速上手鸿蒙》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2020/09/10/compile-openharmony-indokcer/&title=《使用Docker快速上手鸿蒙》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2020/09/10/compile-openharmony-indokcer/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用Docker快速上手鸿蒙》 — 东方星痕&url=http://ystyle.top/2020/09/10/compile-openharmony-indokcer/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2020/09/10/compile-openharmony-indokcer/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/10/24/harl/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">harl-鸿蒙应用开发实机热更新工具</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/09/04/comic-cli/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">转换在线漫画为mobi格式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2020/09/10/compile-openharmony-indokcer/&title=《使用Docker快速上手鸿蒙》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2020/09/10/compile-openharmony-indokcer/&title=《使用Docker快速上手鸿蒙》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2020/09/10/compile-openharmony-indokcer/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用Docker快速上手鸿蒙》 — 东方星痕&url=http://ystyle.top/2020/09/10/compile-openharmony-indokcer/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2020/09/10/compile-openharmony-indokcer/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3aQZLCMAwFUe5/6XAAxqG/5aEqUmdFUcHxy0JIll4vfF0fF7nz83uy2v36pUuGDBmPZVy31/2DCYxvnTx3+UQZMmQMYKwenAZBQk0Z93uTIUOGDELa2yhZX4YMGTIqDI65Xz8NzTJkyJjM4AGRpIbpQRt5ZcdqcRkyZDyQkW7ul5//pb8hQ4aMRzGu8OJFaVrclnYlQ4aM1gwe4PaSRZIm7gVcGTJkzGGkIw5pkckP2njL4Y87ZciQ0ZpB6kGy6NmhCn7kt8TIkCGjNYMctKVhsVISpyFbhgwZ/RiVx5xKIiuvTIYMGXMY6WAEGtIqNEdTvAwZMnozeEuSh2C+obS4Ra9PhgwZ7RjkpvpGK02CoIiVIUPGMAb5npSsaVKYjosF25UhQ0YLxqlBB3KElyaCqHCVIUNGUwYn7Q1v8XSTf4NqcRkyZDRi8NCZNjJ5YN0rYmXIkDGNkR6lVcraelv0S09DhgwZ7Rg8jUvbBnyF9PXxNFSGDBmdGPxwnwRQ8ivyOV1ZhgwZ0xil+TK8xUoiiAKuDBkyxjAqrQLebUxTVRkyZMxhXOFFgmA6bJG2OZdJoQwZMpoyjsXswm/3it4DTQIZMmQ8ipEG2VPjFCn7ywoyZMgYwEiPzNJxisrgBfqvkCFDhoxw5HSv9D2QvcqQIUNG+GCC2WshLNsDMmTIaM3gR/l79/AwTTAyZMiYxtjLu9JDt0qrgIdvGTJktGO8ATan2xnuE9WKAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

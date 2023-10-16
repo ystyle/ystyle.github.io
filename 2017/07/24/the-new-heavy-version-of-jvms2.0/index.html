@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>全新的重制版jvms2.0 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="JAVA,jvms">
+    <meta name="description" content="介绍JDK Version Manager (JVMS) for Windows Windows下JDK多版本管理器，类似 nvm, nvmw, rvm jvms下载地址 这对JDK不同版本之间切换是非常有用的。例如，如果你想测试一个项目你想使用最新最前沿的版本,却不想卸载JDK的稳定版，这个工具可以很好的解决。 请注意，您需要删掉以前的JAVA_HOME环境变量再安装JVMS。 安装 Downl">
+<meta name="keywords" content="JAVA,jvms">
+<meta property="og:type" content="article">
+<meta property="og:title" content="全新的重制版jvms2.0">
+<meta property="og:url" content="http://ystyle.top/2017/07/24/the-new-heavy-version-of-jvms2.0/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="介绍JDK Version Manager (JVMS) for Windows Windows下JDK多版本管理器，类似 nvm, nvmw, rvm jvms下载地址 这对JDK不同版本之间切换是非常有用的。例如，如果你想测试一个项目你想使用最新最前沿的版本,却不想卸载JDK的稳定版，这个工具可以很好的解决。 请注意，您需要删掉以前的JAVA_HOME环境变量再安装JVMS。 安装 Downl">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://github.com/ystyle/jvms/raw/new/images/powershell_2017-07-23_00-38-13.png">
+<meta property="og:image" content="https://github.com/ystyle/jvms/raw/new/images/powershell_2017-07-23_01-26-40.png">
+<meta property="og:updated_time" content="2023-10-16T08:04:08.520Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="全新的重制版jvms2.0">
+<meta name="twitter:description" content="介绍JDK Version Manager (JVMS) for Windows Windows下JDK多版本管理器，类似 nvm, nvmw, rvm jvms下载地址 这对JDK不同版本之间切换是非常有用的。例如，如果你想测试一个项目你想使用最新最前沿的版本,却不想卸载JDK的稳定版，这个工具可以很好的解决。 请注意，您需要删掉以前的JAVA_HOME环境变量再安装JVMS。 安装 Downl">
+<meta name="twitter:image" content="https://github.com/ystyle/jvms/raw/new/images/powershell_2017-07-23_00-38-13.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">全新的重制版jvms2.0</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">全新的重制版jvms2.0</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-07-24T01:22:49.000Z" itemprop="datePublished" class="page-time">
+  2017-07-24
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">介绍</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装"><span class="post-toc-number">2.</span> <span class="post-toc-text">安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用"><span class="post-toc-number">3.</span> <span class="post-toc-text">使用</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-the-new-heavy-version-of-jvms2.0"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">全新的重制版jvms2.0</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-07-24 09:22:49" datetime="2017-07-24T01:22:49.000Z"  itemprop="datePublished">2017-07-24</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>JDK Version Manager (JVMS) for Windows</p>
+<p>Windows下JDK多版本管理器，类似 nvm, nvmw, rvm</p>
+<p><a href="https://github.com/ystyle/jvms/releases" target="_blank" rel="noopener">jvms下载地址</a></p>
+<p>这对JDK不同版本之间切换是非常有用的。例如，如果你想测试一个项目你想使用最新最前沿的版本,却不想卸载JDK的稳定版，这个工具可以很好的解决。</p>
+<p>请注意，您需要删掉以前的JAVA_HOME环境变量再安装JVMS。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
+<li><a href="https://github.com/ystyle/jvms/releases" target="_blank" rel="noopener">Download Now</a></li>
+<li>解压 jvms.zip</li>
+<li>用管理员身份运行<code>cmd</code> 或者 <code>powershell</code> (powershell在win10快捷键为<code>win + X + A</code>)</li>
+<li>cd 到解压目录</li>
+<li>执行 <code>./jvms.exe init</code></li>
+<li>安装成功！<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://github.com/ystyle/jvms/raw/new/images/powershell_2017-07-23_00-38-13.png" alt="安装方法" title="">
+                </div>
+                <div class="image-caption">安装方法</div>
+            </figure>
+</li>
+</ul>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">NAME:</span><br><span class="line">   jvms - JDK Version Manager (JVMS) for Windows</span><br><span class="line"></span><br><span class="line">USAGE:</span><br><span class="line">   jvms.exe [global options] command [command options] [arguments...]</span><br><span class="line"></span><br><span class="line">VERSION:</span><br><span class="line">   2.0.0</span><br><span class="line"></span><br><span class="line">COMMANDS:</span><br><span class="line">     init        Initialize config file</span><br><span class="line">     list, ls    List the JDK installations.</span><br><span class="line">     install, i  Install remote available jdk</span><br><span class="line">     switch, s   Switch to use the specified version.</span><br><span class="line">     remove, rm  Remove a specific version.</span><br><span class="line">     rls         Show a list of versions available for download.</span><br><span class="line">     proxy       Set a proxy to use for downloads.</span><br><span class="line">     help, h     Shows a list of commands or help for one command</span><br><span class="line"></span><br><span class="line">GLOBAL OPTIONS:</span><br><span class="line">   --help, -h     show help</span><br><span class="line">   --version, -v  print the version</span><br></pre></td></tr></table></figure>
+<p>以安装jdk 1.8.0_31为例</p>
+<ul>
+<li>用管理员身份运行<code>cmd</code> 或者 <code>powershell</code>(<code>win + X + A</code>)</li>
+<li><code>jvms rls</code> 列出可以在线安装的jdk版本</li>
+<li><code>jvms install 1.8.0_31</code> 安装 jdk 1.8.0_31</li>
+<li><code>jvms ls</code> 列出本地已安装的jdk版本</li>
+<li><code>jvms switch 1.8.0_31</code> 切换jdk 版本为 1.8.0_31</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://github.com/ystyle/jvms/raw/new/images/powershell_2017-07-23_01-26-40.png" alt="切换jdk" title="">
+                </div>
+                <div class="image-caption">切换jdk</div>
+            </figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2023-10-16T08:04:08.520Z" itemprop="dateUpdated">2023-10-16 16:04:08</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2017/07/24/the-new-heavy-version-of-jvms2.0/" target="_blank" rel="external">http://ystyle.top/2017/07/24/the-new-heavy-version-of-jvms2.0/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/">JAVA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jvms/">jvms</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2017/07/24/the-new-heavy-version-of-jvms2.0/&title=《全新的重制版jvms2.0》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2017/07/24/the-new-heavy-version-of-jvms2.0/&title=《全新的重制版jvms2.0》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2017/07/24/the-new-heavy-version-of-jvms2.0/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《全新的重制版jvms2.0》 — 东方星痕&url=http://ystyle.top/2017/07/24/the-new-heavy-version-of-jvms2.0/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2017/07/24/the-new-heavy-version-of-jvms2.0/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/08/01/git-download-the-specified-directory/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">git下载指定目录</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/07/05/share-the-use-of-qiniu-file-upload/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">ShareX使用七牛文件上传</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2017/07/24/the-new-heavy-version-of-jvms2.0/&title=《全新的重制版jvms2.0》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2017/07/24/the-new-heavy-version-of-jvms2.0/&title=《全新的重制版jvms2.0》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2017/07/24/the-new-heavy-version-of-jvms2.0/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《全新的重制版jvms2.0》 — 东方星痕&url=http://ystyle.top/2017/07/24/the-new-heavy-version-of-jvms2.0/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2017/07/24/the-new-heavy-version-of-jvms2.0/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMElEQVR42u3aS3LCMBAFQO5/abLJIqmAeTODqVhqryiwhdoL1fxut/i6/7iSX/9+Pv7172q3My4MDIzLMu6H17N7jp+dvIhk/QfrYGBgbMB4tnRyLCav4BiTPPtizxgYGBiH4Vqy0Xy7GBgYGOcxCmHc4SGOgYGBMUliq0v3im6n5+IYGBgXZORV989/PqW/gYGBcSnGvXhVi/h5Wtvbz/ezGBgYSzPyA64anOX39A5cDAwMjGpRLCn9Vwt8ScszWhQDA+PijEgZ//qu7DJvEvyKcDEwMBZlVDfRCxbnKfHotWJgYFyckT9cLcPlpbTqeMeLHiwGBsZyjKSM1Sux9UYiqq8GAwNjH0Z+67zc3yvSJcNqGBgYqzLyAYjPlNXy/30wM4KBgbEo413NxUkg2GudvvgvDAyMhRjVI7L6TTL41SuxYWBg7Maolt2rqekkiIxSYgwMjG0YvfGsvGFZOEB7wxYYGBiLMuYBXzUNftc6GBgYuzF6wV+S6Ob3VBsAhckRDAyMJRi5NW9MJi8lx0dJMgYGxgaMvFifJ655azMv2L04cDEwMJZmFCLHAD8ftig/hYGBsSij10pMMNWhjTw9Hs2MYGBgXJBRPeYmxfpeOzMPUjEwMNZm9EayckwvZCyMhWFgYGzDqG4rHyNLNjFJnjEwMDB6kWa+xdFUCAYGBkarVTlPYpOdnBIaYmBg/HtGtZQ/H0KdHOsYGBi7MapxV5KC9pqU1dYCBgbGBowvpiYsujxV0+cAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>KDE添加右键菜单 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="linux,kde">
+    <meta name="description" content="文件存放位置 位置 $HOME/.local/share/kservices5/ /usr/share/kservices5/   文件后缀: .desktop  示例1234567891011[Desktop Entry]Actions=OptimisePNG;MimeType=image/png;Type=ServiceX-KDE-ServiceTypes=KonqPopupMenu/Plug">
+<meta name="keywords" content="linux,kde">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KDE添加右键菜单">
+<meta property="og:url" content="http://ystyle.top/2020/02/21/add-custom-context-menu-to-kde-dolphin/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="文件存放位置 位置 $HOME/.local/share/kservices5/ /usr/share/kservices5/   文件后缀: .desktop  示例1234567891011[Desktop Entry]Actions=OptimisePNG;MimeType=image/png;Type=ServiceX-KDE-ServiceTypes=KonqPopupMenu/Plug">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2020-02-21T07:11:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="KDE添加右键菜单">
+<meta name="twitter:description" content="文件存放位置 位置 $HOME/.local/share/kservices5/ /usr/share/kservices5/   文件后缀: .desktop  示例1234567891011[Desktop Entry]Actions=OptimisePNG;MimeType=image/png;Type=ServiceX-KDE-ServiceTypes=KonqPopupMenu/Plug">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">KDE添加右键菜单</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">KDE添加右键菜单</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-02-21T07:11:48.000Z" itemprop="datePublished" class="page-time">
+  2020-02-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件存放位置"><span class="post-toc-number">1.</span> <span class="post-toc-text">文件存放位置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#示例"><span class="post-toc-number">2.</span> <span class="post-toc-text">示例</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#说明"><span class="post-toc-number">3.</span> <span class="post-toc-text">说明</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-add-custom-context-menu-to-kde-dolphin"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">KDE添加右键菜单</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-02-21 15:11:48" datetime="2020-02-21T07:11:48.000Z"  itemprop="datePublished">2020-02-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="文件存放位置"><a href="#文件存放位置" class="headerlink" title="文件存放位置"></a>文件存放位置</h3><ul>
+<li>位置<ul>
+<li><code>$HOME/.local/share/kservices5/</code></li>
+<li><code>/usr/share/kservices5/</code></li>
+</ul>
+</li>
+<li>文件后缀: <code>.desktop</code></li>
+</ul>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Actions=OptimisePNG;</span><br><span class="line">MimeType=image/png;</span><br><span class="line">Type=Service</span><br><span class="line">X-KDE-ServiceTypes=KonqPopupMenu/Plugin</span><br><span class="line">Icon=tools-wizard.png</span><br><span class="line"></span><br><span class="line">[Desktop Action OptimisePNG]</span><br><span class="line">Name=Optimise PNG Image</span><br><span class="line">Icon=tools-wizard.png</span><br><span class="line">Exec=optipng -o7 %f</span><br></pre></td></tr></table></figure>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><ul>
+<li>[Desktop Entry]<ul>
+<li><code>Actions</code>: 在该菜单中的菜单项，多个用英文分号隔开</li>
+<li><code>MimeType</code>: 在指定的文件类型中启动该菜单<ul>
+<li><code>inode/directory</code> 在目录中启用</li>
+<li><code>image/png</code> 只在png图片启用</li>
+<li><code>all/allfiles</code>在所有文件中启用（不包括文件夹）</li>
+<li><code>image/allfiles</code> 在所有图片启用</li>
+</ul>
+</li>
+<li>Type=Service: 表示服务，不会在开始菜单中显示， 改为Application表示应用，会显示在开始菜单</li>
+<li><code>X-KDE-ServiceTypes=KonqPopupMenu/Plugin</code>: 只在kde中支持，  表示显示在<code>右键-动作</code>下边</li>
+<li><code>X-KDE-Priority=TopLevel</code> 表示显示在顶级菜单中，右键直接显示</li>
+<li><code>Icon</code> Type=Service 时图标不会显示</li>
+</ul>
+</li>
+<li>[Desktop Action OptimisePNG]<ul>
+<li><code>OptimisePNG</code>为自定义的动作，填写在上边的<code>Actions</code>里</li>
+<li><code>Name</code>菜单项名称</li>
+<li><code>Icon</code>菜单显示图标</li>
+<li><code>Exec</code>点击菜单时执行的命令<ul>
+<li>%f 文件列表。用于可一次打开多个本地文件的应用程序。每个文件都作为单独的参数传递给可执行程序。</li>
+<li>%F 即使选择了多个文件，也只有一个文件名（包括路径）。读取桌面条目的系统应认识到所讨论的程序无法处理多个文件参数，并且如果该程序无法处理其他文件参数，则应该为每个选定文件生成并执行该程序的多个副本。如果文件不在本地文件系统上（即，在HTTP或FTP位置），则文件将被复制到本地文件系统，%f并将展开以指向临时文件。用于不了解URL语法的程序。</li>
+</ul>
+</li>
+<li><code>[Desktop Action XXXX]</code> 的条目在一个文件中可以有多个</li>
+</ul>
+</li>
+<li>如果新建无误后显示不出来的话， 执行一下<code>kbuildsycoca5</code>如果有错误会有提示`</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-02-21T07:11:48.000Z" itemprop="dateUpdated">2020-02-21 15:11:48</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2020/02/21/add-custom-context-menu-to-kde-dolphin/" target="_blank" rel="external">http://ystyle.top/2020/02/21/add-custom-context-menu-to-kde-dolphin/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kde/">kde</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2020/02/21/add-custom-context-menu-to-kde-dolphin/&title=《KDE添加右键菜单》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2020/02/21/add-custom-context-menu-to-kde-dolphin/&title=《KDE添加右键菜单》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2020/02/21/add-custom-context-menu-to-kde-dolphin/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《KDE添加右键菜单》 — 东方星痕&url=http://ystyle.top/2020/02/21/add-custom-context-menu-to-kde-dolphin/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2020/02/21/add-custom-context-menu-to-kde-dolphin/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/03/15/add-ssh-command-to-windows-terminal-tab/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">Windows Terminal 添加SSH到Tabs里</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/31/txt-converto-epub-and-mobi/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">txt小说转epub与mobi</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2020/02/21/add-custom-context-menu-to-kde-dolphin/&title=《KDE添加右键菜单》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2020/02/21/add-custom-context-menu-to-kde-dolphin/&title=《KDE添加右键菜单》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2020/02/21/add-custom-context-menu-to-kde-dolphin/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《KDE添加右键菜单》 — 东方星痕&url=http://ystyle.top/2020/02/21/add-custom-context-menu-to-kde-dolphin/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2020/02/21/add-custom-context-menu-to-kde-dolphin/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACs0lEQVR42u3a247rMAgF0P7/T/dI53nibsDMRVp5GkUZ1yuVDAVer/h6/7/O998P13mFp3We1nxtXHh4eHitrU82lz9zBlT3c34GDw8Pb5s3P6yT5/NPfPoCyivg4eHh/SgvB5+P8knAwMPDw/tbvPz3fnKs5+kyHh4e3u/kzX/894oF5zvz9fHw8PA2eL3C68/+vdjfw8PDwxt01fNjvZf4np+sBqcv9omHh4e3wMsLrNXG2CSxPu+nPNaAh4eHt8xLPqY3OtDbei+xfgwMeHh4eGPexpDT5Mk8RBWSaTw8PLyrvOoS+WE9wVTvjyrTeHh4eGPe5J+TMJOPAlTvR3g8PDy8BV611ZQHiWq6XC06l79DPDw8vBYvOYK3k+ZeKaEc5fDw8PAWePkzvfZVwkgCT94qw8PDw9vgzVtZvWJu9cne+AIeHh7eHu/u8OjT/aScMRnhKsxH4OHh4V3iVVPePGmuDgFU8R+CGR4eHt5VXt7Oz1PqSTE3QRZeGR4eHt4Cr1c8nRRzq4EhL4gUUmo8PDy8Aa9XTr1VUKgGkvIQAx4eHt4CLz/ue0WHyThXL8n+0ADDw8PDG/OSw7rats9fQbUoXA4VeHh4eAu83o//+SjA+eqFkHKtBQ8PD+8qb5IE5yskK0/CCR4eHt4er3pwJ8XWanKcBJU8yX5Fw2Z4eHh4fd7dRlSvnJGPLOSFXTw8PLzv5CWwaupcbWhNwhUeHh7eHu9dvKohYfTWi93/L3aIh4eHt8DrfXxSSpiPYSVjB9XiCB4eHt4t3t1g0EvQ58WOx93i4eHhrfGqwWByiOcl3QuhCw8PD+/X8PJSb2/UoNf6Koxb4eHh4X0LL09kq6XhyWv9sCYeHh7eGi8pRlSb/Tk4fynNCjQeHh7eVd7kp/6kjNsrH09Sdjw8PLwx7x/k30rfS1aqyQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

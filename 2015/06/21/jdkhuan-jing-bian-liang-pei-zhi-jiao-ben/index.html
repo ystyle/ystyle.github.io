@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>JDK环境变量配置脚本 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="JAVA">
+    <meta name="description" content="复制到jdk安装目录,右键以powershell运行 123456789101112131415161718192021222324252627282930313233343536373839404142#region 强制以管理员权限运行$currentWi = [Security.Principal.WindowsIdentity]::GetCurrent()$currentWp = [Sec">
+<meta name="keywords" content="JAVA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDK环境变量配置脚本">
+<meta property="og:url" content="http://ystyle.top/2015/06/21/jdkhuan-jing-bian-liang-pei-zhi-jiao-ben/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="复制到jdk安装目录,右键以powershell运行 123456789101112131415161718192021222324252627282930313233343536373839404142#region 强制以管理员权限运行$currentWi = [Security.Principal.WindowsIdentity]::GetCurrent()$currentWp = [Sec">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2015-11-02T08:40:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JDK环境变量配置脚本">
+<meta name="twitter:description" content="复制到jdk安装目录,右键以powershell运行 123456789101112131415161718192021222324252627282930313233343536373839404142#region 强制以管理员权限运行$currentWi = [Security.Principal.WindowsIdentity]::GetCurrent()$currentWp = [Sec">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">JDK环境变量配置脚本</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">JDK环境变量配置脚本</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-06-21T13:16:17.000Z" itemprop="datePublished" class="page-time">
+  2015-06-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+<article id="post-jdkhuan-jing-bian-liang-pei-zhi-jiao-ben"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">JDK环境变量配置脚本</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015-06-21 21:16:17" datetime="2015-06-21T13:16:17.000Z"  itemprop="datePublished">2015-06-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>复制到jdk安装目录,右键以powershell运行</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#region 强制以管理员权限运行</span></span><br><span class="line"><span class="variable">$currentWi</span> = [Security.Principal.WindowsIdentity]::GetCurrent()</span><br><span class="line"><span class="variable">$currentWp</span> = [Security.Principal.WindowsPrincipal]<span class="variable">$currentWi</span></span><br><span class="line"><span class="keyword">if</span>( <span class="nomarkup">-not</span> <span class="variable">$currentWp</span>.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$boundPara</span> = (<span class="variable">$MyInvocation</span>.BoundParameters.Keys | <span class="keyword">foreach</span>&#123;<span class="string">'-&#123;0&#125; &#123;1&#125;'</span> -f  <span class="variable">$_</span> ,<span class="variable">$MyInvocation</span>.BoundParameters[<span class="variable">$_</span>]&#125; ) -join <span class="string">' '</span></span><br><span class="line">    <span class="variable">$currentFile</span> = <span class="variable">$MyInvocation</span>.MyCommand.Definition</span><br><span class="line">    <span class="variable">$fullPara</span> = <span class="variable">$boundPara</span> + <span class="string">' '</span> + <span class="variable">$args</span> -join <span class="string">' '</span></span><br><span class="line">    <span class="built_in">Start-Process</span> <span class="string">"<span class="variable">$psHome</span>\powershell.exe"</span>   -ArgumentList <span class="string">"<span class="variable">$currentFile</span> <span class="variable">$fullPara</span>"</span> -verb runas</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#endregion</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#region 初始化应用</span></span><br><span class="line"><span class="variable">$currPath</span> = <span class="built_in">Split-Path</span> -Parent <span class="variable">$MyInvocation</span>.MyCommand.Definition</span><br><span class="line">cd <span class="variable">$currPath</span></span><br><span class="line"><span class="variable">$isJDKJavac</span> = <span class="built_in">Test-Path</span> <span class="string">"./bin/javac.exe"</span></span><br><span class="line"><span class="variable">$isJREJava</span> = <span class="built_in">Test-Path</span> <span class="string">"./bin/java.exe"</span></span><br><span class="line"><span class="variable">$path</span> = [environment]::GetEnvironmentvariable(<span class="string">"path"</span>, <span class="string">"Machine"</span>)</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$path</span>.Length&gt;<span class="number">0</span>)&#123;</span><br><span class="line">    <span class="variable">$temp</span> = <span class="string">";"</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="variable">$temp</span> = <span class="string">""</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#endregion</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#region 配置环境变量</span></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$isJDKJavac</span>)&#123;</span><br><span class="line">    echo <span class="string">"检测到./bin/javac编译器..."</span></span><br><span class="line">    echo <span class="string">"设置环境变量：JAVA_HOME = <span class="variable">$currPath</span>"</span></span><br><span class="line">    [environment]::SetEnvironmentvariable(<span class="string">"JAVA_HOME"</span>, <span class="variable">$currPath</span>, <span class="string">"Machine"</span>)</span><br><span class="line">    echo <span class="string">"设置环境变量：PATH = %JAVA_HOME%\bin;"</span></span><br><span class="line">    [environment]::SetEnvironmentvariable(<span class="string">"path"</span>, <span class="variable">$path</span> + <span class="variable">$temp</span> + <span class="string">"%JAVA_HOME%\bin;"</span>, <span class="string">"Machine"</span>)</span><br><span class="line">&#125;<span class="keyword">elseif</span>(<span class="variable">$isJREJava</span>)&#123;</span><br><span class="line">    echo <span class="string">"检测到./jre/java运行环境..."</span></span><br><span class="line">    echo <span class="string">"设置环境变量：PATH = <span class="variable">$currPath</span>\bin"</span></span><br><span class="line">    [environment]::SetEnvironmentvariable(<span class="string">"path"</span>, <span class="variable">$path</span> + <span class="variable">$temp</span> + <span class="variable">$currPath</span>+<span class="string">"\bin;"</span>, <span class="string">"Machine"</span>)</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    echo <span class="string">"没有检测到JAVA环境"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#endregion</span></span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>复制到文件另存为run.sp1</p>
+<p>网盘下载：<a href="http://pan.baidu.com/s/1jG07KFk" target="_blank" rel="noopener"><code>链接</code></a> 密码：<code>27uj</code></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2015-11-02T08:40:22.000Z" itemprop="dateUpdated">2015-11-02 16:40:22</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2015/06/21/jdkhuan-jing-bian-liang-pei-zhi-jiao-ben/" target="_blank" rel="external">http://ystyle.top/2015/06/21/jdkhuan-jing-bian-liang-pei-zhi-jiao-ben/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/">JAVA</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2015/06/21/jdkhuan-jing-bian-liang-pei-zhi-jiao-ben/&title=《JDK环境变量配置脚本》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2015/06/21/jdkhuan-jing-bian-liang-pei-zhi-jiao-ben/&title=《JDK环境变量配置脚本》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2015/06/21/jdkhuan-jing-bian-liang-pei-zhi-jiao-ben/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JDK环境变量配置脚本》 — 东方星痕&url=http://ystyle.top/2015/06/21/jdkhuan-jing-bian-liang-pei-zhi-jiao-ben/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2015/06/21/jdkhuan-jing-bian-liang-pei-zhi-jiao-ben/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/06/23/mei-ri-xiao-2/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">每日一笑</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/06/21/ghost-flatzhu-ti-you-hua/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Ghost-flat主题优化</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2015/06/21/jdkhuan-jing-bian-liang-pei-zhi-jiao-ben/&title=《JDK环境变量配置脚本》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2015/06/21/jdkhuan-jing-bian-liang-pei-zhi-jiao-ben/&title=《JDK环境变量配置脚本》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2015/06/21/jdkhuan-jing-bian-liang-pei-zhi-jiao-ben/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JDK环境变量配置脚本》 — 东方星痕&url=http://ystyle.top/2015/06/21/jdkhuan-jing-bian-liang-pei-zhi-jiao-ben/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2015/06/21/jdkhuan-jing-bian-liang-pei-zhi-jiao-ben/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACv0lEQVR42u3awY7iMBAEUP7/p1lpTyvNEqq6HYbDywkxCfHzSHGn2o9HfDz/Hj8///vNq3N+/vX6qp9nvrrvsQMPDw9vNPRXx6tzkttf/9r19LXjeTk2PDw8vNt4yWJwzct/czYR1xP08ns8PDy8X+XlJfXsd/bX4uHh4X0nr702Kd/zxQMPDw/ve3jJy/8+tJ0N90NZCx4eHl7M2zTAfuvzh/p7eHh4eGVXPSl892V0EhY/RwceHh7eHby2wT8LC9ptB7MSuXhjwMPDw1vw9kFtsgmgnYi8Qn4TjuDh4eHdxpstCcVtykf/sRAZDw8P7zZem3xuCt9k4UkmLopF8PDw8G7jnSpw22Uj33aQl9ePdoXBw8PDK3l54ds+3GeP+HZaIzAeHh7eDbxZi2v/HM7DiGQZK/4leHh4eAte28SabZAq4oM48K1Tajw8PLxDvLMBa/t9Qm0XKjw8PLzP8K6Hlb/kf2bQdZyBh4eHd5SXt/zb8LT9PGt3vVmK8PDw8G7g3VEoz0KKzZaFaN3Dw8PDO8Qr2u1xCLtpmM3K8SilxsPDwzvE24cFs5igPSffgoCHh4f3GV7SlBr20EbTsena4eHh4d3NS0rhopMWtKzOFtB17Y+Hh4d3lJeEsG0YsWme1Wn0bE8EHh4e3jxxHTbsixb+6Jfbgr5YPPDw8PBGvLzwnUWopxpjs/Hg4eHhfZK3KYUf5bHZ1PXmvnh4eHg38GYh7z5iaKd4M048PDy8s7xneZzdOtC2u/KIOXpjwMPDwxvxNovE5sab4OPw9gI8PDy8EW+/GLSztSmv6/4eHh4e3m28vAWVT8G+LJ6FEXh4eHjfw0tuef3Qb7cItAvSf87Ew8PD+wLe2fi1Lazza/Hw8PDu5u2DgCSEnRXTybS+Kanx8PDwjvJm7f+8MdZun0oe96tuHh4eHt6c9wf11lS5sgCTYwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

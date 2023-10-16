@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>ShareX使用七牛文件上传 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="ShareX,软件">
+    <meta name="description" content="ShareX界面                                                                                                             配置文件 token字段得自己在七牛的其它工具生成， 本文后面提供一个我制作的小工具 上传的文件名格式为 20171705/1546-t.png,  -后面的为随机">
+<meta name="keywords" content="ShareX,软件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ShareX使用七牛文件上传">
+<meta property="og:url" content="http://ystyle.top/2017/07/05/share-the-use-of-qiniu-file-upload/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="ShareX界面                                                                                                             配置文件 token字段得自己在七牛的其它工具生成， 本文后面提供一个我制作的小工具 上传的文件名格式为 20171705/1546-t.png,  -后面的为随机">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://dll.ystyle.top/qiniu//201717051546-t.png">
+<meta property="og:updated_time" content="2023-10-16T08:04:08.516Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ShareX使用七牛文件上传">
+<meta name="twitter:description" content="ShareX界面                                                                                                             配置文件 token字段得自己在七牛的其它工具生成， 本文后面提供一个我制作的小工具 上传的文件名格式为 20171705/1546-t.png,  -后面的为随机">
+<meta name="twitter:image" content="https://dll.ystyle.top/qiniu//201717051546-t.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">ShareX使用七牛文件上传</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">ShareX使用七牛文件上传</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-07-05T06:06:26.000Z" itemprop="datePublished" class="page-time">
+  2017-07-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/软件/">软件</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置文件"><span class="post-toc-number">1.</span> <span class="post-toc-text">配置文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#qiniu-token-获取工具"><span class="post-toc-number">2.</span> <span class="post-toc-text">qiniu token 获取工具</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-share-the-use-of-qiniu-file-upload"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">ShareX使用七牛文件上传</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-07-05 14:06:26" datetime="2017-07-05T06:06:26.000Z"  itemprop="datePublished">2017-07-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/软件/">软件</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <ul>
+<li>ShareX界面</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/qiniu//201717051546-t.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><ul>
+<li>token字段得自己在七牛的其它工具生成， 本文后面提供一个<a href="/2017/07/05/share-the-use-of-qiniu-file-upload/#qiniu-token-获取工具">我制作的小工具</a></li>
+<li>上传的文件名格式为 <code>20171705/1546-t.png</code>,  <code>-</code>后面的为随机数字或字母。</li>
+<li>URL字段在七牛存储空间的内容管理页面的<code>外链默认域名</code> 下拉菜单能找到</li>
+<li><a href="https://91p7joo70y.codesandbox.io/" target="_blank" rel="noopener">在线配置生成工具</a></li>
+<li>在配置页面填写好<code>存储区域、token、域名</code> 下载配置导入ShareX</li>
+<li><del>文件保存为 <code>qiniu.sxcu</code> 然后在上图所示界面导入</del></li>
+<li><del><code>RequestURL</code> 可能因为每个对象存储的区域不一样， 华东，华北，华南，北美 的地址分别为 <code>http://up-z0.qiniu.com/</code> <code>http://up-z1.qiniu.com/</code> <code>http://up-z2.qiniu.com/</code> <code>http://up-na0.qiniu.com/</code></del></li>
+</ul>
+<p>配置文件示例：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"Name"</span>: <span class="string">"qiniu"</span>,</span><br><span class="line">  <span class="attr">"DestinationType"</span>: <span class="string">"ImageUploader, FileUploader"</span>,</span><br><span class="line">  <span class="attr">"RequestType"</span>: <span class="string">"POST"</span>,</span><br><span class="line">  <span class="attr">"RequestURL"</span>: <span class="string">"http://up-z2.qiniu.com/"</span>,</span><br><span class="line">  <span class="attr">"FileFormName"</span>: <span class="string">"file"</span>,</span><br><span class="line">  <span class="attr">"Arguments"</span>: &#123;</span><br><span class="line">    <span class="attr">"token"</span>: <span class="string">"这个填写自己的"</span>,</span><br><span class="line">    <span class="attr">"key"</span>: <span class="string">"%y%yy%d%h%mi-%ra.png"</span>,</span><br><span class="line">    <span class="attr">"file"</span>: <span class="string">"$input$"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"ResponseType"</span>: <span class="string">"Text"</span>,</span><br><span class="line">  <span class="attr">"URL"</span>: <span class="string">"https://dll.ystyle.top/qiniu//$json:key$"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="qiniu-token-获取工具"><a href="#qiniu-token-获取工具" class="headerlink" title="qiniu token 获取工具"></a>qiniu token 获取工具</h3><p>本工具支持 windows, linux, osx , 使用方法如下</p>
+<p>参数说明：</p>
+<ul>
+<li>ak ACCESS_KEY 在七牛个人中心密钥管理界面获取</li>
+<li>sk SECRET_KEY 在七牛个人中心密钥管理界面获取</li>
+<li>bk bucket name 存储空间的免名称</li>
+<li>ex Expires time , token过期时间 默认 <code>3600 * 24 * 180</code>(180天)</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> qiniutoken -h</span><br><span class="line">Usage of qiniutoken:</span><br><span class="line">  -ak string</span><br><span class="line">        ACCESS_KEY</span><br><span class="line">  -bk string</span><br><span class="line">        bucket name</span><br><span class="line">  -ex uint</span><br><span class="line">        Expires (default 15552000)</span><br><span class="line">  -sk string</span><br><span class="line">        SECRET_KEY</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> windows使用示例: 按着shift 右键文件夹空白打开命令行，输入以下命令， 把ak sk bk换成自己的</span><br><span class="line">qiniutoken.exe -ak=lPNn5sBYjqUhn_DhMOkHzoznYM3KwUt2sE1W21F1 -sk=E45Ox_RlUdrz0YOtasiuerLtKZxALiX9-7NduzHT -bk=images</span><br></pre></td></tr></table></figure>
+<p>下载地址：链接：<a href="http://pan.baidu.com/s/1pKIo0R5" target="_blank" rel="noopener">http://pan.baidu.com/s/1pKIo0R5</a> 密码：<code>wfew</code></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2023-10-16T08:04:08.516Z" itemprop="dateUpdated">2023-10-16 16:04:08</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2017/07/05/share-the-use-of-qiniu-file-upload/" target="_blank" rel="external">http://ystyle.top/2017/07/05/share-the-use-of-qiniu-file-upload/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ShareX/">ShareX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/软件/">软件</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2017/07/05/share-the-use-of-qiniu-file-upload/&title=《ShareX使用七牛文件上传》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2017/07/05/share-the-use-of-qiniu-file-upload/&title=《ShareX使用七牛文件上传》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2017/07/05/share-the-use-of-qiniu-file-upload/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ShareX使用七牛文件上传》 — 东方星痕&url=http://ystyle.top/2017/07/05/share-the-use-of-qiniu-file-upload/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2017/07/05/share-the-use-of-qiniu-file-upload/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/07/24/the-new-heavy-version-of-jvms2.0/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">全新的重制版jvms2.0</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/05/26/tomcat-through-ssh-proxy-connected-to-the-internal-network/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">tomcat通过ssh代理连接到内网数据库服务器</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2017/07/05/share-the-use-of-qiniu-file-upload/&title=《ShareX使用七牛文件上传》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2017/07/05/share-the-use-of-qiniu-file-upload/&title=《ShareX使用七牛文件上传》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2017/07/05/share-the-use-of-qiniu-file-upload/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ShareX使用七牛文件上传》 — 东方星痕&url=http://ystyle.top/2017/07/05/share-the-use-of-qiniu-file-upload/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2017/07/05/share-the-use-of-qiniu-file-upload/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsElEQVR42u3aQW7jMBAEQP//01lgTwsElrtnRK8OpVOgGBKLB86oydcrvn7+Xr/v/Hv/953rJ7z7zfX1OnHh4eHhjYZ+/bh8cNfPT56WjKGYAjw8PLxjvOvhzgaX8JIn5xOEh4eH9zTe9dDftd15Yz2bFDw8PLwn8/ZDzBl4eHh4z+clYUQSDcxy1EdkLXh4eHgHdpGe8/fB/T08PDy89VZ9svi2i/6sRa5HiIeHh3eAlzTE7RDbWKGNg+tjDXh4eHi38trP/vy4VXsIoMVH48HDw8P7Im8Wm+bNdMLYhyZ4eHh43+clkUHbNCeYPGj4MB14eHh4B3irhjUONWZxcDJ9ERUPDw/vMC8PavcLfTt97Vvw8PDwTvCSuGGzbZ806zk7/wwo0hQ8PDy8kpcXhqRszI4F5It+HvjWdQ8PDw9vxMu3l9pysgfMwgs8PDy8E7zZMr05StUeVsg35D6EEXh4eHi38tpYYb/0J/+dtfVvvxXw8PDwbuLNotLkzuyoQU5Kfo+Hh4d3jnfvllVSQvK37Lfu8PDw8M7xksZ6H87mW2L5/SilxsPDwzvAax/aNr5tSNG28kVLjYeHh3frmrlpkfPDBLP4OEfi4eHhneNtIoA8JtgfRGgPZr2tfnh4eHg38dqSkBSMNqht2cMYFw8PD+8m3l2D3hyfarfW2nKFh4eHdy9vH7PO4oMW326G4eHh4Z3mJS1vuz3WtuyrmpYnKHh4eHgL3k95zba72inO3/WhFOHh4eEd4M2Kx75g5NORsG8rIXh4eHgxb18M8nZ8E87mhQEPDw/vO7xZMcjv51HFrILh4eHhPZmXL9zFcaj4ve2BAzw8PLz/y2uDgzzwbae1OBCGh4eHd4yXhBH7JX72lhs2t/Dw8PBu5W02wDabVe0hgLzw4OHh4R3j/QFAq5KXyu2uKAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

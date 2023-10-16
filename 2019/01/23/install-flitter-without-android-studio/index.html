@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>安装flutter | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="android,flutter">
+    <meta name="description" content="安装flutter 因为不想安装Android Studio， 所以只安装了安装Android sdk  安装安卓sdk到https://developer.android.google.cn/studio/ 下载 Android-sdk-tools命令行工具">
+<meta name="keywords" content="android,flutter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安装flutter">
+<meta property="og:url" content="http://ystyle.top/2019/01/23/install-flitter-without-android-studio/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="安装flutter 因为不想安装Android Studio， 所以只安装了安装Android sdk  安装安卓sdk到https://developer.android.google.cn/studio/ 下载 Android-sdk-tools命令行工具">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://dll.ystyle.top/images/2019-01/chrome_2019-01-23_17-25-00.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2019-01/explorer_2019-01-23_17-26-32.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2019-01/powershell_2019-01-23_17-30-42.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2019-01/explorer_2019-01-23_17-45-01.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2019-01/SystemPropertiesAdvanced_2019-01-23_17-45-44.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2019-01/Boostnote_2019-01-23_17-47-12.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2019-01/powershell_2019-01-23_18-14-17.png">
+<meta property="og:image" content="https://dll.ystyle.top/images/2019-01/powershell_2019-01-23_18-43-50.png">
+<meta property="og:updated_time" content="2023-10-16T08:04:08.520Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安装flutter">
+<meta name="twitter:description" content="安装flutter 因为不想安装Android Studio， 所以只安装了安装Android sdk  安装安卓sdk到https://developer.android.google.cn/studio/ 下载 Android-sdk-tools命令行工具">
+<meta name="twitter:image" content="https://dll.ystyle.top/images/2019-01/chrome_2019-01-23_17-25-00.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">安装flutter</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">安装flutter</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-01-23T10:47:21.000Z" itemprop="datePublished" class="page-time">
+  2019-01-23
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装flutter"><span class="post-toc-number">1.</span> <span class="post-toc-text">安装flutter</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装安卓sdk"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">安装安卓sdk</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装fluter"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">安装fluter</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#设置环境变量"><span class="post-toc-number">1.0.3.</span> <span class="post-toc-text">设置环境变量</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#gradle-换源"><span class="post-toc-number">1.0.4.</span> <span class="post-toc-text">gradle 换源</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试"><span class="post-toc-number">1.0.5.</span> <span class="post-toc-text">测试</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编译测试"><span class="post-toc-number">1.0.6.</span> <span class="post-toc-text">编译测试</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-install-flitter-without-android-studio"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">安装flutter</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-01-23 18:47:21" datetime="2019-01-23T10:47:21.000Z"  itemprop="datePublished">2019-01-23</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="安装flutter"><a href="#安装flutter" class="headerlink" title="安装flutter"></a>安装flutter</h1><blockquote>
+<p>因为不想安装Android Studio， 所以只安装了安装Android sdk</p>
+</blockquote>
+<h3 id="安装安卓sdk"><a href="#安装安卓sdk" class="headerlink" title="安装安卓sdk"></a>安装安卓sdk</h3><p>到<a href="https://developer.android.google.cn/studio/" target="_blank" rel="noopener">https://developer.android.google.cn/studio/</a> 下载 Android-sdk-tools命令行工具</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2019-01/chrome_2019-01-23_17-25-00.png" alt="chrome_2019-01-23_17-25-00.png" title="">
+                </div>
+                <div class="image-caption">chrome_2019-01-23_17-25-00.png</div>
+            </figure>
+<p>下载后直接解压就行了，如图。 解压后其实只有<code>tools</code>一个文件夹, 我已经执行过安装其它工具的命令了，所以有那么多文件夹</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2019-01/explorer_2019-01-23_17-26-32.png" alt="explorer_2019-01-23_17-26-32.png" title="">
+                </div>
+                <div class="image-caption">explorer_2019-01-23_17-26-32.png</div>
+            </figure>
+<p>在<code>android-sdk-windows</code>目录打开终端(按着shift 右键打开命令行)<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.\tools\bin\sdkmanager.bat --licenses</span><br><span class="line">.\tools\bin\sdkmanager.bat "build-tools;<span class="number">28</span>.<span class="number">0</span>.<span class="number">3</span>"</span><br><span class="line">.\tools\bin\sdkmanager.bat "platforms;android-<span class="number">28</span>"</span><br><span class="line">.\tools\bin\sdkmanager.bat "platform-tools"</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>如果需要代理在每句命令后面加上<code>--no_https --proxy=http --proxy_host=mirrors.neusoft.edu.cn --proxy_port=80</code></p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2019-01/powershell_2019-01-23_17-30-42.png" alt="powershell_2019-01-23_17-30-42.png" title="">
+                </div>
+                <div class="image-caption">powershell_2019-01-23_17-30-42.png</div>
+            </figure>
+<p>过程中有提示确认的全部输入<code>y</code>再按回车键</p>
+<h3 id="安装fluter"><a href="#安装fluter" class="headerlink" title="安装fluter"></a>安装fluter</h3><p>到官网<a href="https://flutter.io/docs/get-started/install/windows" target="_blank" rel="noopener">Windows install - Flutter</a>下载安装包，然后直接解压就行</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2019-01/explorer_2019-01-23_17-45-01.png" alt="explorer_2019-01-23_17-45-01.png" title="">
+                </div>
+                <div class="image-caption">explorer_2019-01-23_17-45-01.png</div>
+            </figure>
+<h3 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h3><ul>
+<li>设置<code>ANDROID_HOME</code>变量<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2019-01/SystemPropertiesAdvanced_2019-01-23_17-45-44.png" alt="SystemPropertiesAdvanced_2019-01-23_17-45-44.png" title="">
+                </div>
+                <div class="image-caption">SystemPropertiesAdvanced_2019-01-23_17-45-44.png</div>
+            </figure></li>
+<li>设置flutter的变量<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2019-01/Boostnote_2019-01-23_17-47-12.png" alt="Boostnote_2019-01-23_17-47-12.png" title="">
+                </div>
+                <div class="image-caption">Boostnote_2019-01-23_17-47-12.png</div>
+            </figure>
+</li>
+</ul>
+<h3 id="gradle-换源"><a href="#gradle-换源" class="headerlink" title="gradle 换源"></a>gradle 换源</h3><ul>
+<li>放一个init.gradle 文件到USER_HOME/.gradle/目录下</li>
+<li>放一个后缀是.gradle的文件到 USER_HOME/.gradle/init.d/ 目录下.</li>
+<li>放一个后缀是.gradle的文件到 GRADLE_HOME/init.d/ 目录下.</li>
+<li><p><code>init.gradle</code>如下</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">allprojects</span> &#123;</span><br><span class="line">    <span class="keyword">repositories</span> &#123;</span><br><span class="line">        mavenLocal()</span><br><span class="line">        maven &#123; url <span class="string">'http://maven.aliyun.com/nexus/content/repositories/central/'</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>另一个方法是在当前项目下修改build.gradle</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">repositories</span> &#123;</span><br><span class="line">    mavenLocal()</span><br><span class="line"></span><br><span class="line">    maven &#123; url <span class="string">'http://maven.aliyun.com/nexus/content/repositories/central/'</span> &#125;</span><br><span class="line"></span><br><span class="line">    mavenCentral()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>然后打包时会自动执行项目下的<code>./gradlew</code>, 会启用上面的源。如果没安装gradle的话会自动下载， 下载很慢， 可以自己去Gradle官网下载然解压配置到环境变量</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2019-01/powershell_2019-01-23_18-14-17.png" alt="powershell_2019-01-23_18-14-17.png" title="">
+                </div>
+                <div class="image-caption">powershell_2019-01-23_18-14-17.png</div>
+            </figure>
+<p>如图，安装编译工具链已经安装完成，！号的表示可选操作安装</p>
+<p>之后就可以用喜欢的编辑器或IDE开发fluter了， 而不需要安装android stuiod,<br>特别是只做编译一下的</p>
+<h3 id="编译测试"><a href="#编译测试" class="headerlink" title="编译测试"></a>编译测试</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://dll.ystyle.top/images/2019-01/powershell_2019-01-23_18-43-50.png" alt="powershell_2019-01-23_18-43-50.png" title="">
+                </div>
+                <div class="image-caption">powershell_2019-01-23_18-43-50.png</div>
+            </figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2023-10-16T08:04:08.520Z" itemprop="dateUpdated">2023-10-16 16:04:08</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2019/01/23/install-flitter-without-android-studio/" target="_blank" rel="external">http://ystyle.top/2019/01/23/install-flitter-without-android-studio/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/flutter/">flutter</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2019/01/23/install-flitter-without-android-studio/&title=《安装flutter》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2019/01/23/install-flitter-without-android-studio/&title=《安装flutter》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2019/01/23/install-flitter-without-android-studio/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《安装flutter》 — 东方星痕&url=http://ystyle.top/2019/01/23/install-flitter-without-android-studio/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2019/01/23/install-flitter-without-android-studio/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/04/05/beat-saber-mod-install/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">Beat Saber mod安装方法</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/03/Use-dat-instead-of-resilio-sync-to-share-data/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">使用dat代替resilio sync分享数据</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2019/01/23/install-flitter-without-android-studio/&title=《安装flutter》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2019/01/23/install-flitter-without-android-studio/&title=《安装flutter》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2019/01/23/install-flitter-without-android-studio/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《安装flutter》 — 东方星痕&url=http://ystyle.top/2019/01/23/install-flitter-without-android-studio/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2019/01/23/install-flitter-without-android-studio/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACv0lEQVR42u3awW7rMAwEwPz/T+cBPRXFc7wkxSSH8clwk0jjg6Qu+XjE1/Pn+n3/+7r6ZPL86veTsY5deHh4eK2pX13JpKvgZ/FK2JevAA8PD2+Nly/WyVL+ellP7vNfuLHg4eHhfZSXT+X1FlI9WCd/xcPDw/tO3mtqfsytfgYPDw/vO3lJEPD6eR77zo/RK1kLHh4eXszrFcA+e79e38PDw8NrVdUnZaokdKhGG+X54OHh4S3w8glV19tq+SrfAPJiGB4eHt4GL1nWJ01U1VeZRxvRoR8PDw9vjZcP3Cv5915TdfTLwzQeHh7eUd6pn+5FrnnTQPN/BTw8PLwFXq8hID/yzmOLXqSLh4eHt8frLfG92Lf33d52ctlZhoeHh3eIlw85P3b3wt/RTPDw8PAWePmynh+Ue1PvHaknmxYeHh5elTeJG/JGgcmCXm3AOjA8Hh4e3mAbmDSbVreK16McC0rw8PDwDvGShb6H7IW5k83pJmvBw8PDG/PyRXbSz9WLcZOt4uaV4eHh4S3wkiHz43U1us2n3guX8fDw8DZ484pZHiJU33Q1Gv7PEzw8PLw1XrmMlO8zwSeT7ad3yMbDw8Pb4PXi116scCquzY/meHh4eBu86sCTQKE6xfzoHBXA8PDw8A7x8ilWg91TzQF5xFyu8uHh4eENeJNSfTWwyF9KHkZEMQoeHh7eUd7Zdqu8fSphJzO8KZvh4eHhvZGXRwbJUl4taFW3Hzw8PLz38J7FKx8mn1wSiOTxx03TFR4eHt6YV22xah5q4zasJBCpzgcPDw9vg5fHrPOItlcMG5Xc8PDw8NZ4vYaq6iJejYwnWxceHh7ed/Im7QL5dyfbCR4eHt5neZNjbnXqvRAEDw8P7528PFCoxhD50j8pvz2quw0eHh7egDcpgFUnnTRdVdsIFut7eHh4eH+f/AP+xJKXW35LCgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

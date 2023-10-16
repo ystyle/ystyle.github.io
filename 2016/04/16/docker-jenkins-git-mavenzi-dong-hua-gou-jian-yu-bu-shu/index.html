@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>docker + jenkins + git + maven自动化构建与部署 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="docker,GIT,Jenkins,Maven">
+    <meta name="description" content="docker + jenkins + git + maven自动化构建与部署准备工作 安装好最新docker docker 分别pull 以下镜像 jenkins:2.0-beta-1 tomcat mysql(mysql只用来做测试项目的数据库,有其它数据库服务器的可以不下载) 下载maven 解压mkdir -p /dockerworkspace/maven &amp;amp;&amp;amp; tar zx">
+<meta name="keywords" content="docker,GIT,Jenkins,Maven">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker + jenkins + git + maven自动化构建与部署">
+<meta property="og:url" content="http://ystyle.top/2016/04/16/docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="docker + jenkins + git + maven自动化构建与部署准备工作 安装好最新docker docker 分别pull 以下镜像 jenkins:2.0-beta-1 tomcat mysql(mysql只用来做测试项目的数据库,有其它数据库服务器的可以不下载) 下载maven 解压mkdir -p /dockerworkspace/maven &amp;amp;&amp;amp; tar zx">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://ystyle.top/images/2016/04/----20160416195200.png">
+<meta property="og:image" content="http://ystyle.top/images/2016/04/----20160416195403.png">
+<meta property="og:image" content="http://ystyle.top/images/2016/04/----20160416200122.png">
+<meta property="og:image" content="http://ystyle.top/images/2016/04/----20160416200505.png">
+<meta property="og:image" content="http://ystyle.top/images/2016/04/----20160416200756.png">
+<meta property="og:image" content="http://ystyle.top/images/2016/04/----20160416200935.png">
+<meta property="og:image" content="http://ystyle.top/images/2016/04/11111.png">
+<meta property="og:image" content="http://ystyle.top/images/2016/04/----20160416202529.png">
+<meta property="og:image" content="http://ystyle.top/images/2016/04/----20160416214719.png">
+<meta property="og:image" content="http://ystyle.top/images/2016/04/----20160416214926.png">
+<meta property="og:image" content="http://ystyle.top/images/2016/04/----20160416215408.png">
+<meta property="og:updated_time" content="2016-07-03T05:11:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker + jenkins + git + maven自动化构建与部署">
+<meta name="twitter:description" content="docker + jenkins + git + maven自动化构建与部署准备工作 安装好最新docker docker 分别pull 以下镜像 jenkins:2.0-beta-1 tomcat mysql(mysql只用来做测试项目的数据库,有其它数据库服务器的可以不下载) 下载maven 解压mkdir -p /dockerworkspace/maven &amp;amp;&amp;amp; tar zx">
+<meta name="twitter:image" content="http://ystyle.top/images/2016/04/----20160416195200.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">docker + jenkins + git + maven自动化构建与部署</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">docker + jenkins + git + maven自动化构建与部署</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-04-16T10:37:15.000Z" itemprop="datePublished" class="page-time">
+  2016-04-16
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#docker-jenkins-git-maven自动化构建与部署"><span class="post-toc-number">1.</span> <span class="post-toc-text">docker + jenkins + git + maven自动化构建与部署</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#准备工作"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">准备工作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装jenkins"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">安装jenkins</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置Jenkins"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">配置Jenkins</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#新建测试项目"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">新建测试项目</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#tomcat-服务器配置"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">tomcat 服务器配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">测试</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">docker + jenkins + git + maven自动化构建与部署</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-04-16 18:37:15" datetime="2016-04-16T10:37:15.000Z"  itemprop="datePublished">2016-04-16</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="docker-jenkins-git-maven自动化构建与部署"><a href="#docker-jenkins-git-maven自动化构建与部署" class="headerlink" title="docker + jenkins + git + maven自动化构建与部署"></a>docker + jenkins + git + maven自动化构建与部署</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
+<li>安装好最新docker</li>
+<li>docker 分别pull 以下镜像 <code>jenkins:2.0-beta-1</code> <code>tomcat</code> <code>mysql</code>(mysql只用来做测试项目的数据库,有其它数据库服务器的可以不下载)</li>
+<li>下载<a href="http://mirrors.cnnic.cn/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz" target="_blank" rel="noopener"><code>maven</code></a> 解压<code>mkdir -p /dockerworkspace/maven &amp;&amp; tar zxf apache-maven-3.3.9-bin.tar.gz -C /dockerworkspace/maven</code>    </li>
+<li>下载<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener"><code>jdk</code></a> <code>tar zxf jdk*.tar.gz -C /dockerworkspace/java/ &amp;&amp; mv /dockerworkspace/java/jdk* /dockerworkspace/java/jdk</code></li>
+</ol>
+<blockquote>
+<p>本教程所有工具和数据目录存放于<code>/dockerworkspace</code>目录下</p>
+</blockquote>
+<h3 id="安装jenkins"><a href="#安装jenkins" class="headerlink" title="安装jenkins"></a>安装jenkins</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name jenkins</span><br><span class="line">    -p 8080:8080</span><br><span class="line">    -p 50000:50000</span><br><span class="line">    -v /dockerworkspace/jenkins:/var/jenkins_home</span><br><span class="line">    -v /dockerworkspace/maven/apache-maven-3.3.9:/usr/local/maven</span><br><span class="line">    -v /dockerworkspace/java/jdk:/usr/local/jdk</span><br><span class="line">    jenkins:2.0-beta-1</span><br></pre></td></tr></table></figure>
+<p>访问jenkins:8080(jenkins改成服务器地址) ,然后输入以下查看到的密码Unlock Jenkins<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /dockerworkspace/jenkins/secrets/initialAdminPassword</span><br></pre></td></tr></table></figure></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/2016/04/----20160416195200.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p><code>Customize Jenkins</code>步骤时选择左边的<code>Install suggested plugins</code><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/2016/04/----20160416195403.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>等待插件安装完成, 然后填写管理员信息</p>
+<h3 id="配置Jenkins"><a href="#配置Jenkins" class="headerlink" title="配置Jenkins"></a>配置Jenkins</h3><ol>
+<li><p>登陆jenkins, 进入<code>系统管理-插件管理-可选插件</code> 搜索<code>ssh plugin</code> 然后安装, 安装界面选择安装好后重启jenkins</p>
+</li>
+<li><p>进入<code>系统管理-系统管理-可选插件 - SSH remote hosts</code> 填写部署tomcat项目的host信息<br><img src="/images/2016/04/----20160416200122.png" alt=""></p>
+</li>
+<li><p>设置邮件发送服务器</p>
+<ol>
+<li>进入<code>系统管理-系统管理-Jenkins Location</code> 中 <code>系统管理员邮件地址</code></li>
+<li><code>邮件通知</code> 中QQ企业邮箱设置如下(发件人的邮箱地址要和上面<code>系统管理员邮件地址一致</code>不然会报错)<br><img src="/images/2016/04/----20160416200505.png" alt=""></li>
+</ol>
+</li>
+<li><p>JDK配置</p>
+<ol>
+<li>进入<code>系统管理-Global Tool Configuration - jdk</code></li>
+<li>点新增JDK,别名:<code>jdk</code> <code>JAVA_HOME</code>填写<code>/usr/local/jdk</code>(我截图里用的是ibm家的jdk)<br><img src="/images/2016/04/----20160416200756.png" alt=""></li>
+</ol>
+</li>
+<li><p>Maven配置</p>
+<ol>
+<li>进入<code>系统管理-Global Tool Configuration - Maven</code></li>
+<li>点新增Maven,别名:<code>maven</code> <code>MAVEN_HOME</code>填写<code>/usr/local/maven</code><br><img src="/images/2016/04/----20160416200935.png" alt=""></li>
+</ol>
+</li>
+</ol>
+<h3 id="新建测试项目"><a href="#新建测试项目" class="headerlink" title="新建测试项目"></a>新建测试项目</h3><p>本教程中git管理端用的是<code>gogs</code></p>
+<ol>
+<li><p>创建jenkins中的maven 项目</p>
+<ol>
+<li><p>在jenkins首页点击新建选择<code>构建一个maven项目</code> 填写项目名称<code>test_tomcat</code></p>
+<blockquote>
+<p>(如果没有这项请安装插件<code>Maven Integration plugin</code>)</p>
+</blockquote>
+</li>
+<li><p>源码管理中选择git, 填写项目的git信息(Credentials点新增可以添加git的认证信息,支持<code>帐户名密码</code>,<code>ssh key</code> 等方式. <code>源码浏览器</code>在构建项目时的<code>修改记录</code>可以直接连接到git平台)<br><img src="/images/2016/04/11111.png" alt=""><br><img src="/images/2016/04/----20160416202529.png" alt=""></p>
+</li>
+</ol>
+</li>
+<li><p>构建触发器</p>
+<ol>
+<li><code>身份验证令牌</code> 可以随意填写一个任意长度的字符串, 也可以填写uuid之类的, 并记录下来, 以后会用到</li>
+</ol>
+</li>
+<li><p>Post Steps (部署部份配合主机上的一人脚本使用,脚本内容往下看)</p>
+<ol>
+<li>选择<code>Run only if build succeeds</code>只在构建成功时运行</li>
+<li><code>Add post-build step</code> 选择<code>Execute shell script on remote host using ssh</code> 然后选择服务器和执行脚本信息<br><img src="/images/2016/04/----20160416214719.png" alt=""></li>
+</ol>
+</li>
+<li>在gogs上创建git hook (这一步在gitlab或github应该也有相应的方法)<ol>
+<li>进入上面构建的git项目<code>首页-仓库设置-管理git钩子-post-update</code></li>
+<li>填写以下脚本 (请把环境变量改为自己相应的服务器信息)<br><img src="/images/2016/04/----20160416214926.png" alt=""><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line"><span class="meta">#</span> 请修改以下环境变量</span><br><span class="line"></span><br><span class="line">SERVER=http://127.0.0.1:8080 #jenkins服务器地址</span><br><span class="line">TOKEN=jenkins1270018080hosttesttomcat #jenkins项目的 身份验证令牌</span><br><span class="line">JENKINS_USER=admin #jenkins用户</span><br><span class="line">JENKINS_PWD=admin # jenkins用户密码</span><br><span class="line">JENKINS_PROJECT=test_tomcat # jenkins项目名</span><br><span class="line"></span><br><span class="line">echo "Startting Build War File On  Jenkins's Server"</span><br><span class="line">echo "Setting Token On The Jenkins's Server......"</span><br><span class="line">CRUMB=$(curl -s --user $JENKINS_USER:$JENKINS_PWD \</span><br><span class="line">    $SERVER/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\))</span><br><span class="line">echo "Trigger Jenkins's Server Start Building......"</span><br><span class="line">curl -s --user $JENKINS_USER:$JENKINS_PWD -H "$CRUMB" $SERVER/job/$JENKINS_PROJECT/build?token=$TOKEN</span><br><span class="line">echo "Jenkins's Server Build Success!"</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="tomcat-服务器配置"><a href="#tomcat-服务器配置" class="headerlink" title="tomcat 服务器配置"></a>tomcat 服务器配置</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run -d</span><br><span class="line">    --name test_tomcat</span><br><span class="line">    -p 8888:8080</span><br><span class="line">    -v /dockerworkspace/tomcat/webapps:/usr/local/tomcat/webapps</span><br><span class="line">    -v /dockerworkspace/java/jdk:/usr/local/jdk</span><br><span class="line">    -e "JAVA_HOME=/usr/local/jdk"</span><br><span class="line">    tomcat</span><br></pre></td></tr></table></figure>
+<p>测试用mysql服务器<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=admin -d mysql</span><br></pre></td></tr></table></figure></p>
+<p>创建一个脚本文件<code>vim /dockerworkspace/tomcat/deploy.sh</code> 内容如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line">SERVER=http://127.0.0.1:8080 #jenkins服务器地址</span><br><span class="line">TOKEN=jenkins1270018080hosttesttomcat #jenkins项目的 身份验证令牌</span><br><span class="line">JENKINS_USER=admin #jenkins用户</span><br><span class="line">JENKINS_PWD=admin # jenkins用户密码</span><br><span class="line">JENKINS_PROJECT=test_tomcat # jenkins项目名</span><br><span class="line">MAVEN_GROUPID=net.lxy520.test_tomcat #maven项目pom.xml的groupId</span><br><span class="line">MAVEN_NAME=ROOT #maven项目pom.xml的groupId</span><br><span class="line">MAVEN_VERSION=1.2.6 #maven项目pom.xml的groupId</span><br><span class="line">CONTAINER=test_tomcat #tomcat docker 的容器id或名称</span><br><span class="line"></span><br><span class="line">echo "设置Jenkins服务器为$SERVER"</span><br><span class="line">echo "向服务器请求token"</span><br><span class="line">CRUMB=$(curl -s --user $JENKINS_USER:$JENKINS_PWD \</span><br><span class="line">    $SERVER/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\))</span><br><span class="line">echo "下载war文件......"</span><br><span class="line">curl -s --user $JENKINS_USER:$JENKINS_PWD -H "$CRUMB" "$SERVER/job/$JENKINS_PROJECT/lastStableBuild/$&#123;MAVEN_GROUPID&#125;\$$&#123;MAVEN_NAME&#125;/artifact/$MAVEN_GROUPID/$MAVEN_NAME/$MAVEN_VERSION/$&#123;MAVEN_NAME&#125;-$&#123;MAVEN_VERSION&#125;.war" -o $&#123;MAVEN_NAME&#125;-$&#123;MAVEN_VERSION&#125;.war</span><br><span class="line">echo "下载完成!"</span><br><span class="line">CURRENT=`pwd`</span><br><span class="line">echo "临时存放路径:$CURRENT/$&#123;MAVEN_NAME&#125;-$&#123;MAVEN_VERSION&#125;.war"</span><br><span class="line">echo "暂停Tomcat服务..."</span><br><span class="line">docker stop $CONTAINER</span><br><span class="line">echo "覆盖项目..."</span><br><span class="line">rm -rf /dockerworkspace/tomcat/webapps/ROOT.war /dockerworkspace/tomcat/webapps/ROOT</span><br><span class="line">mv $&#123;MAVEN_NAME&#125;-$&#123;MAVEN_VERSION&#125;.war /dockerworkspace/tomcat/webapps/ROOT.war</span><br><span class="line">echo "重启Tomcat服务..."</span><br><span class="line">docker start $CONTAINER</span><br><span class="line">echo "Tomcat启动成功."</span><br></pre></td></tr></table></figure>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>在本地项目中git push, 查看jenkins会不会自动构建,然后检查docker中的容器是否正确部署<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/2016/04/----20160416215408.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2016-07-03T05:11:13.000Z" itemprop="dateUpdated">2016-07-03 13:11:13</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/04/16/docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu/" target="_blank" rel="external">http://ystyle.top/2016/04/16/docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GIT/">GIT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jenkins/">Jenkins</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/">Maven</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2016/04/16/docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu/&title=《docker + jenkins + git + maven自动化构建与部署》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2016/04/16/docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu/&title=《docker + jenkins + git + maven自动化构建与部署》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2016/04/16/docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《docker + jenkins + git + maven自动化构建与部署》 — 东方星痕&url=http://ystyle.top/2016/04/16/docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2016/04/16/docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/07/01/shi-yong-docker-1-12-da-jian-duo-zhu-ji-docker-swarmji-qun/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">使用docker 1.12 搭建多主机docker swarm集群</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/25/vboxxu-ni-ji-an-zhuang-remix-os/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">VBox虚拟机安装Remix OS</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2016/04/16/docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu/&title=《docker + jenkins + git + maven自动化构建与部署》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2016/04/16/docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu/&title=《docker + jenkins + git + maven自动化构建与部署》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2016/04/16/docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《docker + jenkins + git + maven自动化构建与部署》 — 东方星痕&url=http://ystyle.top/2016/04/16/docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2016/04/16/docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACqElEQVR42u3aS24cMQwFQN//0s4BnO55TxSBWVSvgqA/KhkgOaR+fuLr9/X6e+ffp57uyZ99eurChYeHh7ew9HdSsujk2XfA+3oe34CHh4e3xkte18bhhJcng2Q9eHh4eN/JywFtKH/C5+U1Hh4e3vfzzqjJ178iMeDh4eG98tqQnSxo3sjIU9GFXgseHh5ezGsX/Q3/Xpnv4eHh4Y2n6vOA2zYdkgMHxWrx8PDwFnh5wJ2M9ieldv71xzvx8PDwlnmTVPHeMpi0GCaDNzw8PLwNXhv6Jw3f+VDtsEmBh4eHd5WXJ4D8M/mBrcmo7MJ8Dw8PD2/Aaw8znbViNw4rHM7u8PDw8Ma8SXqoWwPB/79/Jd8mPDw8vLu8vHGQJ4M8CeWtkLy8jh7Dw8PDG/DmxW4+oDpDti0JPDw8vG3e5Mf//BhBO2yrExgeHh7eAi8f2+fhe9KSaNNMVILj4eHhLfDyVuwkTLfN33lywsPDw9vg3WrUzgG3jlv9J+Ph4eHhXeUVxejRnW3ZPW9GfLgfDw8Pb8xrmw5n+1e3DMrGx+N24OHh4S3wzormtqhtGxxts+PCAQI8PDy8mJe0Hs6SR94myOv99j14eHh4e7yzRU8K8XkySIpsPDw8vA3erUMD7SAq36D2gNeH3w14eHh4l3j5i9rB2FljIk85F1ICHh4e3oCXh/u2IXtWXrebG3Wp8fDw8JZ5+ZVvQXv/fG14eHh4d3m/5XUGq0N5vNoPfzA8PDy8Bd4kxrbFcV6O322O4OHh4W3wNl59NkKbjOKKARgeHh7eJV4+ypqE9WT7bqUxPDw8vO/hTWDt6Ov969HW4OHh4X0Bry21N0ZiReMYDw8Pb403KYjnk/r2nqLFjIeHh7fAa3/eJ8E9D/2T4dnl+R4eHh7e5+sfIv+ccVWa7tgAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

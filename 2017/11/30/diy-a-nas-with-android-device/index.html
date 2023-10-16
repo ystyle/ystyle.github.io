@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>用安卓设备DIY一个NAS | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="linux,android,nas">
+    <meta name="description" content="网站地址 以安卓IP地址192.168.1.7为例 ssh连接地址: ssh ystyle@192.168.1.7 supervisor 管理地址： http://192.168.1.7:9001/ aria2 web ui http://webui-aria2.ghostry.cn/ 设置-连接设置填写aria2 的rpc地址 aria2 rpc地址： 192.168.1.7:6800 sync">
+<meta name="keywords" content="linux,android,nas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用安卓设备DIY一个NAS">
+<meta property="og:url" content="http://ystyle.top/2017/11/30/diy-a-nas-with-android-device/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="网站地址 以安卓IP地址192.168.1.7为例 ssh连接地址: ssh ystyle@192.168.1.7 supervisor 管理地址： http://192.168.1.7:9001/ aria2 web ui http://webui-aria2.ghostry.cn/ 设置-连接设置填写aria2 的rpc地址 aria2 rpc地址： 192.168.1.7:6800 sync">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://dll.ystyle.top/qiniu//201717300131-3.png">
+<meta property="og:image" content="https://dll.ystyle.top/qiniu//201717300130-p.png">
+<meta property="og:updated_time" content="2023-10-16T08:04:08.520Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用安卓设备DIY一个NAS">
+<meta name="twitter:description" content="网站地址 以安卓IP地址192.168.1.7为例 ssh连接地址: ssh ystyle@192.168.1.7 supervisor 管理地址： http://192.168.1.7:9001/ aria2 web ui http://webui-aria2.ghostry.cn/ 设置-连接设置填写aria2 的rpc地址 aria2 rpc地址： 192.168.1.7:6800 sync">
+<meta name="twitter:image" content="https://dll.ystyle.top/qiniu//201717300131-3.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">用安卓设备DIY一个NAS</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">用安卓设备DIY一个NAS</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-11-30T01:11:33.000Z" itemprop="datePublished" class="page-time">
+  2017-11-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#网站地址"><span class="post-toc-number">1.</span> <span class="post-toc-text">网站地址</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安卓设置需要安装的软件"><span class="post-toc-number">2.</span> <span class="post-toc-text">安卓设置需要安装的软件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Linux系统安装软件"><span class="post-toc-number">3.</span> <span class="post-toc-text">Linux系统安装软件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安卓部署Linux记录"><span class="post-toc-number">4.</span> <span class="post-toc-text">安卓部署Linux记录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装linux-软件"><span class="post-toc-number">5.</span> <span class="post-toc-text">安装linux 软件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用示例"><span class="post-toc-number">6.</span> <span class="post-toc-text">使用示例</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-diy-a-nas-with-android-device"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">用安卓设备DIY一个NAS</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-11-30 09:11:33" datetime="2017-11-30T01:11:33.000Z"  itemprop="datePublished">2017-11-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="网站地址"><a href="#网站地址" class="headerlink" title="网站地址"></a>网站地址</h3><ul>
+<li>以安卓IP地址<code>192.168.1.7</code>为例</li>
+<li>ssh连接地址: <code>ssh ystyle@192.168.1.7</code></li>
+<li>supervisor 管理地址： <a href="http://192.168.1.7:9001/" target="_blank" rel="noopener">http://192.168.1.7:9001/</a></li>
+<li>aria2 web ui <a href="http://webui-aria2.ghostry.cn/" target="_blank" rel="noopener">http://webui-aria2.ghostry.cn/</a> 设置-连接设置填写aria2 的rpc地址</li>
+<li>aria2 rpc地址： <a href="192.168.1.7:6800" target="_blank" rel="noopener">192.168.1.7:6800</a></li>
+<li>syncthing 管理页面：<a href="http://127.0.0.1:8384/" target="_blank" rel="noopener">http://127.0.0.1:8384/</a></li>
+</ul>
+<h3 id="安卓设置需要安装的软件"><a href="#安卓设置需要安装的软件" class="headerlink" title="安卓设置需要安装的软件"></a>安卓设置需要安装的软件</h3><ul>
+<li><code>kingroot</code> 设备需要<code>root</code></li>
+<li><code>linux deploy</code> 安装linux</li>
+</ul>
+<h3 id="Linux系统安装软件"><a href="#Linux系统安装软件" class="headerlink" title="Linux系统安装软件"></a>Linux系统安装软件</h3><ul>
+<li>bash completion</li>
+<li>screenfetch</li>
+<li>htop</li>
+<li>vim</li>
+<li>supervisor</li>
+<li>aria2</li>
+<li>syncthing</li>
+</ul>
+<h3 id="安卓部署Linux记录"><a href="#安卓部署Linux记录" class="headerlink" title="安卓部署Linux记录"></a>安卓部署Linux记录</h3><ul>
+<li>获取root权限</li>
+<li>安装linux deploy</li>
+<li>点右下角的图标进去配置界面<ul>
+<li>选择好linux发行版与版本<ul>
+<li>架构用默认的就好，手机64位的可选择arm64之类的</li>
+</ul>
+</li>
+<li>设置用户名和密码</li>
+<li>本地化选择zh_CN.UTF-8</li>
+<li>启用SSH(若喜欢图形界面可以选择桌面环境和VNC的组合)</li>
+<li>退出设置到主界面</li>
+</ul>
+</li>
+<li>点右上角三点 选择 安装</li>
+<li>等待系统安装完毕。其中过程出现 fail,download fail之类的重新执行安装过程<ul>
+<li>重新安装需要点击主界面的停止，卸载已挂载的文件系统，再点右上菜单的清空</li>
+<li>继续执行安装操作</li>
+</ul>
+</li>
+<li><code>&gt;&gt;&gt; deploy ... &lt;&lt;&lt; deploy</code>之间没出现错误说明安装完成</li>
+<li>点击主界面的启动，出现<code>&gt;&gt;&gt; start ... ... &lt;&lt;&lt; start</code>则启动完成<ul>
+<li>若启动过程出现 extra/ssh fail 之类的，执行重新安装操作</li>
+</ul>
+</li>
+<li>左边三横线新建配置文件后，若需要安装其它系统/或切换系统，则要先点主界面的停止按钮<ul>
+<li>若要配置多个系统，右下属性里<code>安装路径</code>的*.img换成其它名字</li>
+</ul>
+</li>
+</ul>
+<h3 id="安装linux-软件"><a href="#安装linux-软件" class="headerlink" title="安装linux 软件"></a>安装linux 软件</h3><ul>
+<li>在电脑上或手机上安装ssh 客户端<ul>
+<li>电脑用<code>xshell</code>、<code>git bash ssh</code>、 <code>linux/osx</code> 自带的ssh</li>
+<li>安桌下载 <code>JuiceSSH</code></li>
+<li>在安卓设备上wifi设置里查看ip</li>
+<li>用ssh客户端连接 ip:22 用户名/密码为在配置文件设置的<ul>
+<li>若登陆不了，用户名试试 android</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>以安装的ubuntu为例</li>
+<li><code>apt install bash-completion screenfetch htop vim supervisor aria2</code></li>
+<li><p>执行 <code>sudo systemctl enable supervisor</code>设置自动启动supervisor</p>
+<ul>
+<li>若出现问题则执行<code>/lib/systemd/systemd-sysv-install enable supervisor</code></li>
+<li>如果重启<code>linux deploy</code>没自动启动supervisor则手工执行<code>sudo supervisord</code></li>
+</ul>
+<h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3></li>
+</ul>
+<ul>
+<li><p>执行 <code>screenfetch</code>打印系统信息</p>
+<p><img src="https://dll.ystyle.top/qiniu//201717300131-3.png" alt=""></p>
+</li>
+</ul>
+<ul>
+<li><p>用htop查看系统负载信息</p>
+<p><img src="https://dll.ystyle.top/qiniu//201717300130-p.png" alt=""></p>
+</li>
+<li><p>配置aria2 下载器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /etc/aria2    #新建文件夹  </span><br><span class="line">sudo touch /etc/aria2/aria2.session    #新建session文件</span><br><span class="line">sudo chmod 777 /etc/aria2/aria2.session    #设置aria2.session可写</span><br><span class="line">sudo vim /etc/aria2/aria2.conf    #创建配置文件</span><br></pre></td></tr></table></figure>
+<ul>
+<li>aria2.conf文件配置</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line">## &apos;#&apos;开头为注释内容, 选项都有相应的注释说明, 根据需要修改 ##</span><br><span class="line">## 被注释的选项填写的是默认值, 建议在需要修改时再取消注释  ##</span><br><span class="line"></span><br><span class="line">## 基本选项 ##</span><br><span class="line"></span><br><span class="line"># 文件的保存路径(可使用绝对路径或相对路径), 默认: 当前启动位置</span><br><span class="line">dir=~/downloads</span><br><span class="line"># 启用磁盘缓存, 0为禁用缓存, 需1.16以上版本, 默认:16M</span><br><span class="line">disk-cache=32M</span><br><span class="line"># 文件预分配方式, 能有效降低磁盘碎片, 默认:prealloc</span><br><span class="line"># 预分配所需时间: none &lt; falloc ? trunc &lt; prealloc</span><br><span class="line"># falloc和trunc则需要文件系统和内核支持</span><br><span class="line"># NTFS建议使用falloc, EXT3/4建议trunc, MAC 下需要注释此项</span><br><span class="line">file-allocation=none</span><br><span class="line"># 断点续传，目前只支持 HTTP/HTTPS/FTP 协议</span><br><span class="line">continue=true</span><br><span class="line">#检查文件完整性，默认：false</span><br><span class="line">check-intergrity=false</span><br><span class="line">#帮助信息分类</span><br><span class="line">#一个标签以#开头</span><br><span class="line">#可用标签: #basic, #advanced, #http, #https, #ftp, #metalink, #bittorrent, #cookie, #hook, #file, #rpc, #checksum, #experimental, #deprecated, #help, #all Default: #basic</span><br><span class="line">#默认为#basic</span><br><span class="line">help=#basic</span><br><span class="line"></span><br><span class="line">## 下载连接相关 ##</span><br><span class="line"></span><br><span class="line"># 最大同时下载任务数, 运行时可修改, 默认:5</span><br><span class="line">max-concurrent-downloads=1</span><br><span class="line"># 同一服务器连接数, 添加时可指定, 默认:1</span><br><span class="line">max-connection-per-server=5</span><br><span class="line"># 最小文件分片大小, 添加时可指定, 取值范围1M -1024M, 默认:20M</span><br><span class="line"># 假定size=10M, 文件为20MiB 则使用两个来源下载; 文件为15MiB 则使用一个来源下载</span><br><span class="line">min-split-size=10M</span><br><span class="line"># 单个任务最大线程数, 添加时可指定, 默认:5</span><br><span class="line">split=5</span><br><span class="line"># 整体下载速度限制, 运行时可修改, 默认:0</span><br><span class="line">#max-overall-download-limit=0</span><br><span class="line"># 单个任务下载速度限制, 默认:0</span><br><span class="line">#max-download-limit=0</span><br><span class="line"># 整体上传速度限制, 运行时可修改, 默认:0</span><br><span class="line">#max-overall-upload-limit=0</span><br><span class="line"># 单个任务上传速度限制, 默认:0</span><br><span class="line">#max-upload-limit=0</span><br><span class="line"># 禁用IPv6, 默认:false</span><br><span class="line">disable-ipv6=true</span><br><span class="line"></span><br><span class="line">## 进度保存相关 ##</span><br><span class="line"></span><br><span class="line"># 从会话文件中读取下载任务</span><br><span class="line">input-file=/etc/aria2/aria2.session</span><br><span class="line"># 在Aria2退出时保存`错误/未完成`的下载任务到会话文件</span><br><span class="line">save-session=/etc/aria2/aria2.session</span><br><span class="line"># 定时保存会话, 0为退出时才保存, 需1.16.1以上版本, 默认:0</span><br><span class="line">#save-session-interval=60</span><br><span class="line"></span><br><span class="line">## RPC相关设置 ##</span><br><span class="line"></span><br><span class="line"># 启用RPC, 默认:false</span><br><span class="line">enable-rpc=true</span><br><span class="line"># 允许所有来源, 默认:false</span><br><span class="line">rpc-allow-origin-all=true</span><br><span class="line"># 允许非外部访问, 默认:false</span><br><span class="line">rpc-listen-all=true</span><br><span class="line"># 事件轮询方式, 取值:[epoll, kqueue, port, poll, select], 不同系统默认值不同</span><br><span class="line">#event-poll=select</span><br><span class="line"># RPC监听端口, 端口被占用时可以修改, 默认:6800</span><br><span class="line">#rpc-listen-port=6800</span><br><span class="line"># 设置的RPC授权令牌, v1.18.4新增功能, 取代 --rpc-user 和 --rpc-passwd 选项</span><br><span class="line">#rpc-secret=&lt;TOKEN&gt;</span><br><span class="line"># 设置的RPC访问用户名, 此选项新版已废弃, 建议改用 --rpc-secret 选项</span><br><span class="line">#rpc-user=&lt;USER&gt;</span><br><span class="line"># 设置的RPC访问密码, 此选项新版已废弃, 建议改用 --rpc-secret 选项</span><br><span class="line">#rpc-passwd=&lt;PASSWD&gt;</span><br><span class="line"></span><br><span class="line">## BT/PT下载相关 ##</span><br><span class="line"></span><br><span class="line"># 当下载的是一个种子(以.torrent结尾)时, 自动开始BT任务, 默认:true</span><br><span class="line">#follow-torrent=true</span><br><span class="line"># BT监听端口, 当端口被屏蔽时使用, 默认:6881-6999</span><br><span class="line">listen-port=51413</span><br><span class="line"># 单个种子最大连接数, 默认:55</span><br><span class="line">#bt-max-peers=55</span><br><span class="line"># 打开DHT功能, PT需要禁用, 默认:true</span><br><span class="line">enable-dht=false</span><br><span class="line"># 打开IPv6 DHT功能, PT需要禁用</span><br><span class="line">#enable-dht6=false</span><br><span class="line"># DHT网络监听端口, 默认:6881-6999</span><br><span class="line">#dht-listen-port=6881-6999</span><br><span class="line"># 本地节点查找, PT需要禁用, 默认:false</span><br><span class="line">#bt-enable-lpd=false</span><br><span class="line"># 种子交换, PT需要禁用, 默认:true</span><br><span class="line">enable-peer-exchange=false</span><br><span class="line"># 每个种子限速, 对少种的PT很有用, 默认:50K</span><br><span class="line">#bt-request-peer-speed-limit=50K</span><br><span class="line"># 客户端伪装, PT需要</span><br><span class="line">peer-id-prefix=-TR2770-</span><br><span class="line">user-agent=Transmission/2.77</span><br><span class="line"># 当种子的分享率达到这个数时, 自动停止做种, 0为一直做种, 默认:1.0</span><br><span class="line">seed-ratio=0</span><br><span class="line"># 强制保存会话, 话即使任务已经完成, 默认:false</span><br><span class="line"># 较新的版本开启后会在任务完成后依然保留.aria2文件</span><br><span class="line">#force-save=false</span><br><span class="line"># BT校验相关, 默认:true</span><br><span class="line">#bt-hash-check-seed=true</span><br><span class="line"># 继续之前的BT任务时, 无需再次校验, 默认:false</span><br><span class="line">bt-seed-unverified=true</span><br><span class="line"># 保存磁力链接元数据为种子文件(.torrent文件), 默认:false</span><br><span class="line">bt-save-metadata=true</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>配置aria2守护进程</p>
+<ul>
+<li><p><code>vim /etc/supervisor/conf.d/aria2.conf</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[program:aria2]</span><br><span class="line">command=aria2c --conf-path=/etc/aria2/aria2.conf</span><br><span class="line">autostart=true</span><br><span class="line">autorestart=true</span><br><span class="line">startsecs=10</span><br><span class="line">directory=/etc/aria2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>sudo supervisorctl reload</code></p>
+</li>
+<li><p><code>sudo vim /etc/supervisor/supervisord.conf</code> 修改<code>[inet_http_server]</code>节点为以下内容，<code>sudo supervisorctl reload</code> 重载配置, 然后访问 <code>ip:9001</code> 可以管理重启/停止 aria2 进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[inet_http_server]</span><br><span class="line">port=0.0.0.0:9001</span><br><span class="line">username=user</span><br><span class="line">password=123456</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入[<a href="http://webui-aria2.ghostry.cn/]" target="_blank" rel="noopener">http://webui-aria2.ghostry.cn/]</a> <code>设置-连接设置</code> 配置rpc地址为： <code>ip:6800</code></p>
+</li>
+<li>点<code>添加-使用连接</code>可以下载文件，<code>使用metelink</code>可以下载磁力链, <code>使用种子可以下载</code> 种子</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>安装syncthing同步工具</p>
+<ul>
+<li><a href="https://github.com/syncthing/syncthing/releases/latest" target="_blank" rel="noopener">官方下载地址</a> 下载 <code>syncthing-linux-arm-vx.xx.xx-.tar.gz</code> arm版本的</li>
+<li>示例：右键复制地址 <code>wget https://github.com/syncthing/syncthing/releases/download/v0.14.40/syncthing-linux-arm-v0.14.40.tar.gz</code> 下载，建议下载最新版</li>
+<li>解压 <code>tar -czf syncthing-linux-arm-v0.14.40.tar.gz</code></li>
+<li><code>cd syncthing-linux-arm-v0.14.40 &amp;&amp; cp syncthing /usr/bin/syncthing</code></li>
+<li>运行 syncthing 启动完成后按<code>ctrl +  c</code>结束掉</li>
+<li><p><code>vim cat /etc/supervisor/conf.d/syncthing.conf</code> 配置syncthing守护进程, 建议把以下配置的<code>syncthing</code>目录或用户名换成自己配置的用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[program:syncthing]</span><br><span class="line">command = syncthing -no-browser -home=&quot;/home/syncthing/.config/syncthing&quot;</span><br><span class="line">directory = /home/syncthing/</span><br><span class="line">autorestart = True</span><br><span class="line">user = syncthing</span><br><span class="line">environment = STNORESTART=&quot;1&quot;, HOME=&quot;/home/syncthing&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行<code>vim /home/syncthing/.config/syncthing/config.xml</code> 找到以下内容，把[address]中的地址改为0.0.0.0</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">gui</span> <span class="attr">enabled</span>=<span class="string">"true"</span> <span class="attr">tls</span>=<span class="string">"false"</span> <span class="attr">debugging</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">address</span>&gt;</span>0.0.0.0:8384<span class="tag">&lt;/<span class="name">address</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">user</span>&gt;</span>ystyle<span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">password</span>&gt;</span>$2a$10$ZhHTlk3OwM2s7hbFigI/quti97wNT0Y3fpciNE3ngIkJYVmLcyw76<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">apikey</span>&gt;</span>SvgmE6D6i2hNzX6WGh5ZKnDNi6KriMqS<span class="tag">&lt;/<span class="name">apikey</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">theme</span>&gt;</span>dark<span class="tag">&lt;/<span class="name">theme</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">gui</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>sudo supervisorctl reload</code> 重载配置，</li>
+<li>访问 <a href="http://127.0.0.1:8384/" target="_blank" rel="noopener">http://127.0.0.1:8384/</a> 可以管理同步设备与目录<ul>
+<li>第一次访问需要设置用户名和密码，会有提示</li>
+<li>右上设置-显示id 可以复制添加到其它设备的syncthing【远程设备】中，两设备的目录可以互相同步</li>
+<li>简单的使用技巧： aria2 下载文件，syncthing 同步下载目录到 pc, pc同步完成后剪切到其它目录，安卓上的会同步删除</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2023-10-16T08:04:08.520Z" itemprop="dateUpdated">2023-10-16 16:04:08</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2017/11/30/diy-a-nas-with-android-device/" target="_blank" rel="external">http://ystyle.top/2017/11/30/diy-a-nas-with-android-device/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nas/">nas</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2017/11/30/diy-a-nas-with-android-device/&title=《用安卓设备DIY一个NAS》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2017/11/30/diy-a-nas-with-android-device/&title=《用安卓设备DIY一个NAS》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2017/11/30/diy-a-nas-with-android-device/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用安卓设备DIY一个NAS》 — 东方星痕&url=http://ystyle.top/2017/11/30/diy-a-nas-with-android-device/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2017/11/30/diy-a-nas-with-android-device/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/12/07/oracle-generate-random-numbers/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">oracle生成随机数</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/11/27/lx-subsystem-installation-uninstall-or-maintenance-operation-is-not-completed/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">解决手动删除lxss文件夹后提示LX 子系统有安装、卸载或维护操作未完成的问题</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2017/11/30/diy-a-nas-with-android-device/&title=《用安卓设备DIY一个NAS》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2017/11/30/diy-a-nas-with-android-device/&title=《用安卓设备DIY一个NAS》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2017/11/30/diy-a-nas-with-android-device/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用安卓设备DIY一个NAS》 — 东方星痕&url=http://ystyle.top/2017/11/30/diy-a-nas-with-android-device/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2017/11/30/diy-a-nas-with-android-device/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJ0lEQVR42u3aQW7DMAwEwPz/0+m1QGtnl2oKRBqfgsJVNBdG1PLxiJ/nt+f7X67e+fnm1f9erfN4x4OBgfGxjOftM2MkvPtvz/eGgYFxDuOqgr3jc1us7/eGgYGBkRzmVkrnyndhYGBgJMu16ySNMQYGBsZKE5tfwM0u3f6pF8fAwPhARn7r/v+f35JvYGBgfBTjWT4JLymaK3v4ZTUMDIytGW2DOtvcXzW9L9bHwMA4jNEGink8kASZszcxMDB2ZayXvFmoOQsALjEYGBgHMGZN7KytzY+YxeESAwPjAEZyKEwK8f37bQy5NC2CgYGxKSPZ+qxorgeWL9gYGBjHMJIvy4OBpKFthznqoyEGBsYWjJU2Mr8+Ww8Jor1hYGBsysibzJWLszZOqBtsDAyMAxgrh7ZZtNAeBKNhCwwMjE0Z68MTbdyYHxDz4yYGBsbejDYYaOOEWYNah6YYGBgHM+qaPTpKtrFl0YtjYGBswZgNVSTxQHv11h4QMTAwTmPkpTMvyu0gxaw0X/56YGBgHMBog8aVsYz1VhYDA+McRruVFrwyeBHtEwMDY1PGbFSibWL/qoi/6L8xMDA2ZbTFsUXOAoYcX8MwMDA+ltGWy7b1XYkHMDAwMGYX+rNWMx/syNcfRpgYGBgHMNaPdMm26pAAAwMDIx6GaAPRWSRwGQ9gYGBszUg2l5fd2WhXcnl3+SYGBsbWjHYwYnYqm4133G8dAwPjAMYX2ND6CJH4XlsAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

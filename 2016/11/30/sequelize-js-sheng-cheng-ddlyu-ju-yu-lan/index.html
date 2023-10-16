@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>sequelize.js 生成DDL语句预览 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Nodejs,sequelize">
+    <meta name="description" content="因为想做一个直接生成建表语句的工具。 又不想连接到数据库(懒得让数据库一直启动着)看了下sequelize.js的测试代码， 找到了以下方法可以实现  12345678910111213141516var Sequelize = require(&apos;sequelize&apos;);// 因为没有连接到数据库， 用户名什么的可以随意写var sequelize = new Sequelize(&apos;test&apos;,">
+<meta name="keywords" content="Nodejs,sequelize">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sequelize.js 生成DDL语句预览">
+<meta property="og:url" content="http://ystyle.top/2016/11/30/sequelize-js-sheng-cheng-ddlyu-ju-yu-lan/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="因为想做一个直接生成建表语句的工具。 又不想连接到数据库(懒得让数据库一直启动着)看了下sequelize.js的测试代码， 找到了以下方法可以实现  12345678910111213141516var Sequelize = require(&apos;sequelize&apos;);// 因为没有连接到数据库， 用户名什么的可以随意写var sequelize = new Sequelize(&apos;test&apos;,">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2016-11-30T09:29:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sequelize.js 生成DDL语句预览">
+<meta name="twitter:description" content="因为想做一个直接生成建表语句的工具。 又不想连接到数据库(懒得让数据库一直启动着)看了下sequelize.js的测试代码， 找到了以下方法可以实现  12345678910111213141516var Sequelize = require(&apos;sequelize&apos;);// 因为没有连接到数据库， 用户名什么的可以随意写var sequelize = new Sequelize(&apos;test&apos;,">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">sequelize.js 生成DDL语句预览</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">sequelize.js 生成DDL语句预览</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-11-30T06:26:26.000Z" itemprop="datePublished" class="page-time">
+  2016-11-30
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+<article id="post-sequelize-js-sheng-cheng-ddlyu-ju-yu-lan"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">sequelize.js 生成DDL语句预览</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-11-30 14:26:26" datetime="2016-11-30T06:26:26.000Z"  itemprop="datePublished">2016-11-30</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>因为想做一个直接生成建表语句的工具。 又不想连接到数据库(懒得让数据库一直启动着)<br>看了下sequelize.js的测试代码， 找到了以下方法可以实现</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Sequelize = <span class="built_in">require</span>(<span class="string">'sequelize'</span>);</span><br><span class="line"><span class="comment">// 因为没有连接到数据库， 用户名什么的可以随意写</span></span><br><span class="line"><span class="keyword">var</span> sequelize = <span class="keyword">new</span> Sequelize(<span class="string">'test'</span>, <span class="string">'root'</span>, <span class="string">'root'</span>, &#123;</span><br><span class="line">    dialect: <span class="string">"mysql"</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> User = sequelize.define(<span class="string">'User'</span>, &#123;</span><br><span class="line">    username: Sequelize.STRING,</span><br><span class="line">    password: Sequelize.STRING</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> sql = sequelize.dialect.QueryGenerator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ddlsql = sql.createTableQuery(User.getTableName(), sql.attributesToSQL(User.rawAttributes), &#123; &#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(ddlsql);</span><br></pre></td></tr></table></figure>
+<p>生成DDL建表语句<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> node test.js</span><br><span class="line">CREATE TABLE IF NOT EXISTS `Users` (`id` INTEGER NOT NULL auto_increment , `username` VARCHAR(255), `password` VARCHAR</span><br><span class="line">(255), `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2016-11-30T09:29:45.000Z" itemprop="dateUpdated">2016-11-30 17:29:45</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/11/30/sequelize-js-sheng-cheng-ddlyu-ju-yu-lan/" target="_blank" rel="external">http://ystyle.top/2016/11/30/sequelize-js-sheng-cheng-ddlyu-ju-yu-lan/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nodejs/">Nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sequelize/">sequelize</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2016/11/30/sequelize-js-sheng-cheng-ddlyu-ju-yu-lan/&title=《sequelize.js 生成DDL语句预览》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2016/11/30/sequelize-js-sheng-cheng-ddlyu-ju-yu-lan/&title=《sequelize.js 生成DDL语句预览》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2016/11/30/sequelize-js-sheng-cheng-ddlyu-ju-yu-lan/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《sequelize.js 生成DDL语句预览》 — 东方星痕&url=http://ystyle.top/2016/11/30/sequelize-js-sheng-cheng-ddlyu-ju-yu-lan/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2016/11/30/sequelize-js-sheng-cheng-ddlyu-ju-yu-lan/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/12/12/power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">Power designer生成建表语句的设置</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/10/30/nodejs-yarnhuan-tao-bao-yuan/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Nodejs yarn换淘宝源</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2016/11/30/sequelize-js-sheng-cheng-ddlyu-ju-yu-lan/&title=《sequelize.js 生成DDL语句预览》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2016/11/30/sequelize-js-sheng-cheng-ddlyu-ju-yu-lan/&title=《sequelize.js 生成DDL语句预览》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2016/11/30/sequelize-js-sheng-cheng-ddlyu-ju-yu-lan/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《sequelize.js 生成DDL语句预览》 — 东方星痕&url=http://ystyle.top/2016/11/30/sequelize-js-sheng-cheng-ddlyu-ju-yu-lan/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2016/11/30/sequelize-js-sheng-cheng-ddlyu-ju-yu-lan/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACwElEQVR42u3aQW7CQAwFUO5/abqt1CZ82+NCpZcVAhLmzWJsbD8e8fX8dv185/79q+v793++Tj49duHh4eENlp4sOv+x+2dePfn+afma8fDw8LZ5yeOS47u6cfdhprq5eHh4eJ/Jy1PnXvhJ2Hh4eHj/kdcLAMmCkoCEh4eH9wm8yZFdTa/nBYuVWgseHh5e/6x+5EHiXa9X+nt4eHh44656tRl2/848fS+vFg8PD2+BNxkC6I0dVFP2ZGteJO54eHh4a7zq4pJHJyXa/LeS7//yu3h4eHhHeaf+9uftsVOwZFQLDw8P71286hDA/N4k/ER34eHh4S3wqn/+q4Xa6vBBb2uasQsPDw/v0EBA9XDvDVH1EvE8MFwWI/Dw8PDGvGpI6B3l1cR98oRRxMPDw8MLeHnLatLcyocG8k+jrcHDw8Nb4+WFg7yscKrc0AsV5dEBPDw8vFY/q9qer5YYes/JBw5erAEPDw9vgZcXI3rF3Enjv7qeZq8PDw8P7xAvWWJ+oFfDTzWNjsB4eHh4A15vyKmX1BbKr3nv7j4Rx8PDw1vmJTf0igj5gEJekojCAx4eHt4aL196PihwKjWfFFDw8PDwtnnVQ/l+m3qtqV5J93Kz8PDw8NZ4vbS41/KvliR6ifWjukQ8PDy8mNdLkatF1fydXlIejSDg4eHhHeUlqXO1kLpXyGgOp+Lh4eEt8CYHcfL96uZO7noxeoWHh4e3wJsUW5tt/rysUL3w8PDwjvKexavaypoXi6vtscv+Hh4eHt4hXu+MnZRuT4WKY1ERDw8Pr8VLgsFknLRX1DhWzMXDw8Nb41U7R0lanGxT3oTrlVfw8PDwPoeXN67yMkcvLL3YFDw8PLyP4fV6TL3nVLcJDw8P7294vYGq6jhCNXjkZeLLu/Dw8PAWeOW/98WfzEcK8qLt4QsPDw8vvb4Af77kKTRzq3wAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
