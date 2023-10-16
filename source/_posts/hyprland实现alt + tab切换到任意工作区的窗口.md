@@ -9,9 +9,10 @@ categories: 系统
 permalink: hyprland-alt-tab-switch-to-any-widnow
 ---
 
->hypyland使用过程中，遇到开了很多工作区和很多窗口时，找指定的窗口会比较麻烦，
+>hypyland使用过程中，遇到开了很多工作区和很多窗口时，找指定的窗口会比较麻烦
 
 ### 依赖
+>一键安装 `yay -S jq rofi-lbonn-wayland-git`
 - jq
 - rofi
 
