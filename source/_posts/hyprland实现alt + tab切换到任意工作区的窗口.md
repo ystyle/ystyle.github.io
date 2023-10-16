@@ -1,7 +1,7 @@
 ---
 title: hypyland实现alt + tab切换到任意工作区的窗口
-date: 2020-07-21 10:46:26
-updated: 2020-08-6 15:08:26
+date: 2023-10-13 10:46:26
+updated: 2023-10-13 15:08:26
 tags:
 - hyprland
 - wayland
