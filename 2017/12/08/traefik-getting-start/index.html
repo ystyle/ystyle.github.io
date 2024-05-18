@@ -50,7 +50,7 @@
 <meta property="og:site_name" content="东方星痕">
 <meta property="og:description" content="添加 /etc/traefik/traefik.toml 配置文件 traefik会在/etc/traefik 、 $HOME/.traefik/ 或 当前目录查找 traefik.toml 文件。所以本文的配置文件都放/etc/traefik下面  12345678910111213141516171819202122232425262728293031323334353637logLevel">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2023-10-16T08:04:08.520Z">
+<meta property="og:updated_time" content="2024-05-18T10:28:19.987Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="traefik配置入门">
 <meta name="twitter:description" content="添加 /etc/traefik/traefik.toml 配置文件 traefik会在/etc/traefik 、 $HOME/.traefik/ 或 当前目录查找 traefik.toml 文件。所以本文的配置文件都放/etc/traefik下面  12345678910111213141516171819202122232425262728293031323334353637logLevel">
@@ -237,7 +237,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2023-10-16T08:04:08.520Z" itemprop="dateUpdated">2023-10-16 16:04:08</time>
+    Last updated: <time datetime="2024-05-18T10:28:19.987Z" itemprop="dateUpdated">2024-05-18 18:28:19</time>
 </span><br>
 
 
@@ -347,6 +347,30 @@
 
 
 
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+          clientID: '1f887c79a8b9b9fbec12',
+          clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+          repo: 'ystyle.github.io',
+          owner: 'ystyle',
+          admin: ['ystyle'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
 
 
 
@@ -362,7 +386,7 @@
             
 
             <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
-            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span>东方星痕 &copy; 2015 - 2024</span>
             <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
             <div style="width:300px;margin:0 auto; padding:20px 0;">
               <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">

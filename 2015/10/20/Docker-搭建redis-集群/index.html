@@ -41,9 +41,9 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="docker,redis">
+    <meta name="keywords" content="redis,docker">
     <meta name="description" content="Docker 搭建redis 集群准备工作创建一个目录用保存redis-slave的配置文件123mkdir/data/docker/redis/wget https://raw.githubusercontent.com/antirez/redis/3.0/redis.conf \-O /data/docker/redis/redis.conf 安装redis1docker pull redis">
-<meta name="keywords" content="docker,redis">
+<meta name="keywords" content="redis,docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker 搭建redis 集群">
 <meta property="og:url" content="http://ystyle.top/2015/10/20/Docker-搭建redis-集群/index.html">
@@ -340,6 +340,30 @@
 
 
 
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+          clientID: '1f887c79a8b9b9fbec12',
+          clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+          repo: 'ystyle.github.io',
+          owner: 'ystyle',
+          admin: ['ystyle'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
 
 
 
@@ -355,7 +379,7 @@
             
 
             <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
-            <span>东方星痕 &copy; 2015 - 2023</span>
+            <span>东方星痕 &copy; 2015 - 2024</span>
             <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
             <div style="width:300px;margin:0 auto; padding:20px 0;">
               <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
