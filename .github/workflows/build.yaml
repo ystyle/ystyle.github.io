@@ -21,11 +21,12 @@ jobs:
           hexo clean
           hexo g
       - name: 5. publish
-        uses: yrpang/github-actions-hexo@v1.3
+        uses: sma11black/hexo-action@v1.0.3
         with:
-          deploykey: ${{secrets.DEPLOY_KEY}}
-          username: ystyle
-          email: lxy5266@live.com
+          deploy_key: ${{ secrets.DEPLOY_KEY }}
+          user_name: ystyle
+          user_email: lxy5266@live.com
+          commit_msg: ${{ github.event.head_commit.message }}
       - name: 6. Refresh Huawei Cloud CDN Cache
         uses: ystyle/hwcdn-cache@master
         env:
