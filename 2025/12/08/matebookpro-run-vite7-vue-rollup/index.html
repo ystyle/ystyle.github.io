@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>鸿蒙pc上Vite 7 + Rollup原生模块问题的解决方案 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="鸿蒙,鸿蒙PC,vite,vue3,Rollup,matebook pro">
+    <meta name="description" content="环境信息 操作系统：HarmonyOS HongMeng Kernel 1.11.0 (OpenHarmony) Node.js版本：22.7.0 Vite版本：7.2.6 Rollup版本：4.53.3 项目类型：Vue 3 + TypeScript + Vite  问题描述在鸿蒙系统上运行npm run dev时出现以下错误：1Error: Cannot find module @rollup">
+<meta name="keywords" content="鸿蒙,鸿蒙PC,vite,vue3,Rollup,matebook pro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="鸿蒙pc上Vite 7 + Rollup原生模块问题的解决方案">
+<meta property="og:url" content="http://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="环境信息 操作系统：HarmonyOS HongMeng Kernel 1.11.0 (OpenHarmony) Node.js版本：22.7.0 Vite版本：7.2.6 Rollup版本：4.53.3 项目类型：Vue 3 + TypeScript + Vite  问题描述在鸿蒙系统上运行npm run dev时出现以下错误：1Error: Cannot find module @rollup">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2025-12-08T13:00:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="鸿蒙pc上Vite 7 + Rollup原生模块问题的解决方案">
+<meta name="twitter:description" content="环境信息 操作系统：HarmonyOS HongMeng Kernel 1.11.0 (OpenHarmony) Node.js版本：22.7.0 Vite版本：7.2.6 Rollup版本：4.53.3 项目类型：Vue 3 + TypeScript + Vite  问题描述在鸿蒙系统上运行npm run dev时出现以下错误：1Error: Cannot find module @rollup">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">鸿蒙pc上Vite 7 + Rollup原生模块问题的解决方案</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">鸿蒙pc上Vite 7 + Rollup原生模块问题的解决方案</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2025-12-08T13:00:00.000Z" itemprop="datePublished" class="page-time">
+  2025-12-08
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/软件/">软件</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#环境信息"><span class="post-toc-number">1.</span> <span class="post-toc-text">环境信息</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题描述"><span class="post-toc-number">2.</span> <span class="post-toc-text">问题描述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#错误分析"><span class="post-toc-number">3.</span> <span class="post-toc-text">错误分析</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解决方案"><span class="post-toc-number">4.</span> <span class="post-toc-text">解决方案</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-修改Rollup的native-js文件"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">1. 修改Rollup的native.js文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-package-json配置"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">2. package.json配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#完整操作步骤"><span class="post-toc-number">5.</span> <span class="post-toc-text">完整操作步骤</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#步骤1：清理并安装依赖"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">步骤1：清理并安装依赖</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#步骤2：修改Rollup文件"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">步骤2：修改Rollup文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#步骤3：运行项目"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">步骤3：运行项目</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#验证结果"><span class="post-toc-number">6.</span> <span class="post-toc-text">验证结果</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#技术原理"><span class="post-toc-number">7.</span> <span class="post-toc-text">技术原理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Rollup原生模块加载机制"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">Rollup原生模块加载机制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#修改的作用"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">修改的作用</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#注意事项"><span class="post-toc-number">8.</span> <span class="post-toc-text">注意事项</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-持久性问题"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">1. 持久性问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-性能影响"><span class="post-toc-number">8.2.</span> <span class="post-toc-text">2. 性能影响</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-版本兼容性"><span class="post-toc-number">8.3.</span> <span class="post-toc-text">3. 版本兼容性</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#替代方案"><span class="post-toc-number">9.</span> <span class="post-toc-text">替代方案</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#方案A：降级Vite到6-x"><span class="post-toc-number">9.1.</span> <span class="post-toc-text">方案A：降级Vite到6.x</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#方案B：升级Node-js"><span class="post-toc-number">9.2.</span> <span class="post-toc-text">方案B：升级Node.js</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#方案C：使用环境变量"><span class="post-toc-number">9.3.</span> <span class="post-toc-text">方案C：使用环境变量</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#故障排除"><span class="post-toc-number">10.</span> <span class="post-toc-text">故障排除</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题1：修改后仍然报错"><span class="post-toc-number">10.1.</span> <span class="post-toc-text">问题1：修改后仍然报错</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题2：Vite启动失败"><span class="post-toc-number">10.2.</span> <span class="post-toc-text">问题2：Vite启动失败</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题3：其他依赖冲突"><span class="post-toc-number">10.3.</span> <span class="post-toc-text">问题3：其他依赖冲突</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#长期建议"><span class="post-toc-number">11.</span> <span class="post-toc-text">长期建议</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#成功标志"><span class="post-toc-number">12.</span> <span class="post-toc-text">成功标志</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-matebookpro-run-vite7-vue-rollup"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">鸿蒙pc上Vite 7 + Rollup原生模块问题的解决方案</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2025-12-08 21:00:00" datetime="2025-12-08T13:00:00.000Z"  itemprop="datePublished">2025-12-08</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/软件/">软件</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h2><ul>
+<li><strong>操作系统</strong>：HarmonyOS HongMeng Kernel 1.11.0 (OpenHarmony)</li>
+<li><strong>Node.js版本</strong>：22.7.0</li>
+<li><strong>Vite版本</strong>：7.2.6</li>
+<li><strong>Rollup版本</strong>：4.53.3</li>
+<li><strong>项目类型</strong>：Vue 3 + TypeScript + Vite</li>
+</ul>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在鸿蒙系统上运行<code>npm run dev</code>时出现以下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: Cannot find module @rollup/rollup-openharmony-arm64. npm has a bug related to optional dependencies (https://github.com/npm/cli/issues/4828). Please try `npm i` again after removing both package-lock.json and node_modules directory.</span><br></pre></td></tr></table></figure></p>
+<h2 id="错误分析"><a href="#错误分析" class="headerlink" title="错误分析"></a>错误分析</h2><ol>
+<li><strong>Rollup原生模块问题</strong>：Rollup 4.53.3为鸿蒙系统提供了原生模块<code>@rollup/rollup-openharmony-arm64</code>，但在当前鸿蒙环境无法正确加载</li>
+<li><strong>Node.js版本警告</strong>：Vite 7需要Node.js 22.12+，当前是22.7.0，但Vite仍可运行</li>
+<li><strong>npm可选依赖bug</strong>：npm在处理可选依赖时存在问题</li>
+</ol>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="1-修改Rollup的native-js文件"><a href="#1-修改Rollup的native-js文件" class="headerlink" title="1. 修改Rollup的native.js文件"></a>1. 修改Rollup的native.js文件</h3><p>文件位置：<code>node_modules/rollup/dist/native.js</code></p>
+<p>在文件开头添加以下代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; platform &#125; = <span class="built_in">require</span>(<span class="string">'node:process'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 鸿蒙系统使用JavaScript版本</span></span><br><span class="line"><span class="keyword">if</span> (platform === <span class="string">'openharmony'</span>) &#123;</span><br><span class="line">  <span class="comment">// 返回一个简单的实现，避免抛出错误</span></span><br><span class="line">  <span class="built_in">module</span>.exports.parse = <span class="function"><span class="keyword">function</span>(<span class="params">input, allowReturnOutsideFunction = false, jsx = false</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 返回一个简单的AST结构</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      type: <span class="string">'Program'</span>,</span><br><span class="line">      body: [],</span><br><span class="line">      sourceType: <span class="string">'module'</span>,</span><br><span class="line">      comments: []</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="built_in">module</span>.exports.parseAsync = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params">input, allowReturnOutsideFunction = false, jsx = false, signal</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      type: <span class="string">'Program'</span>,</span><br><span class="line">      body: [],</span><br><span class="line">      sourceType: <span class="string">'module'</span>,</span><br><span class="line">      comments: []</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="built_in">module</span>.exports.xxhashBase64Url = <span class="function"><span class="keyword">function</span>(<span class="params">input</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'xxhash_base64_url_stub'</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="built_in">module</span>.exports.xxhashBase36 = <span class="function"><span class="keyword">function</span>(<span class="params">input</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'xxhash_base36_stub'</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="built_in">module</span>.exports.xxhashBase16 = <span class="function"><span class="keyword">function</span>(<span class="params">input</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'xxhash_base16_stub'</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-package-json配置"><a href="#2-package-json配置" class="headerlink" title="2. package.json配置"></a>2. package.json配置</h3><p>确保使用Vite 7及相关插件：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"devDependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"@vitejs/plugin-vue"</span>: <span class="string">"^6.0.0"</span>,</span><br><span class="line">    <span class="attr">"@vitejs/plugin-vue-jsx"</span>: <span class="string">"^5.0.0"</span>,</span><br><span class="line">    <span class="attr">"vite"</span>: <span class="string">"^7.0.0"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="完整操作步骤"><a href="#完整操作步骤" class="headerlink" title="完整操作步骤"></a>完整操作步骤</h2><h3 id="步骤1：清理并安装依赖"><a href="#步骤1：清理并安装依赖" class="headerlink" title="步骤1：清理并安装依赖"></a>步骤1：清理并安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 清理旧依赖</span></span><br><span class="line">rm -rf node_modules package-lock.json</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装依赖（使用legacy-peer-deps避免peer依赖冲突）</span></span><br><span class="line">npm install --legacy-peer-deps</span><br></pre></td></tr></table></figure>
+<h3 id="步骤2：修改Rollup文件"><a href="#步骤2：修改Rollup文件" class="headerlink" title="步骤2：修改Rollup文件"></a>步骤2：修改Rollup文件</h3><ol>
+<li>打开<code>node_modules/rollup/dist/native.js</code></li>
+<li>在文件开头添加上述代码</li>
+<li>保存文件</li>
+</ol>
+<h3 id="步骤3：运行项目"><a href="#步骤3：运行项目" class="headerlink" title="步骤3：运行项目"></a>步骤3：运行项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br><span class="line"><span class="comment"># 或直接运行</span></span><br><span class="line">npx vite</span><br></pre></td></tr></table></figure>
+<h2 id="验证结果"><a href="#验证结果" class="headerlink" title="验证结果"></a>验证结果</h2><ul>
+<li><strong>Vite版本</strong>：7.2.6 ✓</li>
+<li><strong>开发服务器</strong>：成功启动在 <a href="http://localhost:5175/" target="_blank" rel="noopener">http://localhost:5175/</a> ✓</li>
+<li><p><strong>控制台输出</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">VITE v7.2.6  ready in 1742 ms</span><br><span class="line">➜  Local:   http://localhost:5175/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>警告信息</strong>（可忽略）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">You are using Node.js 22.7.0. Vite requires Node.js version 20.19+ or 22.12+. Please upgrade your Node.js version.</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="技术原理"><a href="#技术原理" class="headerlink" title="技术原理"></a>技术原理</h2><h3 id="Rollup原生模块加载机制"><a href="#Rollup原生模块加载机制" class="headerlink" title="Rollup原生模块加载机制"></a>Rollup原生模块加载机制</h3><ol>
+<li>Rollup根据平台和架构加载对应的原生模块</li>
+<li>鸿蒙系统对应<code>openharmony-arm64</code></li>
+<li>当原生模块加载失败时，Rollup应回退到JavaScript实现</li>
+<li>我们的修改强制在鸿蒙系统上使用JavaScript实现</li>
+</ol>
+<h3 id="修改的作用"><a href="#修改的作用" class="headerlink" title="修改的作用"></a>修改的作用</h3><ol>
+<li><strong>提前返回</strong>：在鸿蒙系统上直接返回模块导出，跳过原生模块加载</li>
+<li><strong>简单实现</strong>：提供基本的函数实现，避免运行时错误</li>
+<li><strong>兼容性</strong>：确保Vite和其他工具能正常调用这些函数</li>
+</ol>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><h3 id="1-持久性问题"><a href="#1-持久性问题" class="headerlink" title="1. 持久性问题"></a>1. 持久性问题</h3><ul>
+<li>对<code>node_modules</code>的修改在重新安装依赖后会丢失</li>
+<li>解决方案：<ul>
+<li>使用<code>patch-package</code>创建永久补丁</li>
+<li>在<code>postinstall</code>脚本中自动应用修改</li>
+<li>记录修改步骤，需要时重新应用</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-性能影响"><a href="#2-性能影响" class="headerlink" title="2. 性能影响"></a>2. 性能影响</h3><ul>
+<li>使用JavaScript实现可能比原生模块慢</li>
+<li>但对于开发服务器影响不大</li>
+<li>生产构建可能受影响，但鸿蒙系统通常用于移动端，Vite主要用于开发</li>
+</ul>
+<h3 id="3-版本兼容性"><a href="#3-版本兼容性" class="headerlink" title="3. 版本兼容性"></a>3. 版本兼容性</h3><ul>
+<li><strong>Node.js</strong>：22.7.0（低于Vite 7要求的22.12+）</li>
+<li><strong>Vite</strong>：7.2.6 ✓</li>
+<li><strong>Rollup</strong>：4.53.3 ✓</li>
+<li>相关插件需要匹配Vite 7版本</li>
+</ul>
+<h2 id="替代方案"><a href="#替代方案" class="headerlink" title="替代方案"></a>替代方案</h2><h3 id="方案A：降级Vite到6-x"><a href="#方案A：降级Vite到6-x" class="headerlink" title="方案A：降级Vite到6.x"></a>方案A：降级Vite到6.x</h3><ul>
+<li>优点：完全兼容Node.js 22.7.0</li>
+<li>缺点：无法使用Vite 7新特性</li>
+<li>操作：修改package.json中Vite版本为<code>^6.0.0</code>， 然后一样修改Rollup的native.js文件</li>
+</ul>
+<h3 id="方案B：升级Node-js"><a href="#方案B：升级Node-js" class="headerlink" title="方案B：升级Node.js"></a>方案B：升级Node.js</h3><ul>
+<li>优点：完全符合Vite 7要求</li>
+<li>缺点：鸿蒙系统无法升级Node.js</li>
+<li>操作：将Node.js升级到22.12+</li>
+</ul>
+<h3 id="方案C：使用环境变量"><a href="#方案C：使用环境变量" class="headerlink" title="方案C：使用环境变量"></a>方案C：使用环境变量</h3><p>尝试过但未成功：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROLLUP_NATIVE=<span class="literal">false</span> npm run dev</span><br></pre></td></tr></table></figure></p>
+<h2 id="故障排除"><a href="#故障排除" class="headerlink" title="故障排除"></a>故障排除</h2><h3 id="问题1：修改后仍然报错"><a href="#问题1：修改后仍然报错" class="headerlink" title="问题1：修改后仍然报错"></a>问题1：修改后仍然报错</h3><ul>
+<li>检查修改是否正确应用</li>
+<li>确保在文件最开头添加代码</li>
+<li>检查platform是否为<code>&#39;openharmony&#39;</code></li>
+</ul>
+<h3 id="问题2：Vite启动失败"><a href="#问题2：Vite启动失败" class="headerlink" title="问题2：Vite启动失败"></a>问题2：Vite启动失败</h3><ul>
+<li>检查Node.js版本：<code>node --version</code></li>
+<li>检查Vite版本：<code>npx vite --version</code></li>
+<li>清理缓存：<code>rm -rf node_modules/.vite</code></li>
+</ul>
+<h3 id="问题3：其他依赖冲突"><a href="#问题3：其他依赖冲突" class="headerlink" title="问题3：其他依赖冲突"></a>问题3：其他依赖冲突</h3><ul>
+<li>使用<code>npm ls</code>检查依赖树</li>
+<li>使用<code>--legacy-peer-deps</code>安装</li>
+<li>检查package.json中的版本范围</li>
+</ul>
+<h2 id="长期建议"><a href="#长期建议" class="headerlink" title="长期建议"></a>长期建议</h2><ol>
+<li><strong>向Rollup提交Issue</strong>：报告鸿蒙系统原生模块问题</li>
+<li><strong>关注Vite更新</strong>：后续版本可能改善兼容性</li>
+<li><strong>考虑Docker</strong>：在容器中运行开发环境避免系统差异</li>
+<li><strong>文档化</strong>：团队共享此解决方案</li>
+</ol>
+<h2 id="成功标志"><a href="#成功标志" class="headerlink" title="成功标志"></a>成功标志</h2><ul>
+<li>✅ Vite开发服务器正常启动</li>
+<li>✅ 浏览器可访问本地开发地址</li>
+<li>✅ HMR（热模块替换）正常工作</li>
+<li>✅ 控制台无原生模块相关错误</li>
+<li>✅ 项目可正常开发和调试</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2025-12-08T13:00:00.000Z" itemprop="dateUpdated">2025-12-08 21:00:00</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2025/12/08/matebookpro-run-vite7-vue-rollup/" target="_blank" rel="external">http://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Rollup/">Rollup</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/matebook-pro/">matebook pro</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vite/">vite</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue3/">vue3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/鸿蒙/">鸿蒙</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/鸿蒙PC/">鸿蒙PC</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/&title=《鸿蒙pc上Vite 7 + Rollup原生模块问题的解决方案》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/&title=《鸿蒙pc上Vite 7 + Rollup原生模块问题的解决方案》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《鸿蒙pc上Vite 7 + Rollup原生模块问题的解决方案》 — 东方星痕&url=http://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2023/10/13/hyprland-alt-tab-switch-to-any-widnow/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">hypyland实现alt + tab切换到任意工作区的窗口</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+          clientID: '1f887c79a8b9b9fbec12',
+          clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+          repo: 'ystyle.github.io',
+          owner: 'ystyle',
+          admin: ['ystyle'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2025</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/&title=《鸿蒙pc上Vite 7 + Rollup原生模块问题的解决方案》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/&title=《鸿蒙pc上Vite 7 + Rollup原生模块问题的解决方案》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《鸿蒙pc上Vite 7 + Rollup原生模块问题的解决方案》 — 东方星痕&url=http://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJklEQVR42u3aQXKDMBAEwPz/0841VQ54RoJUkFonysZYzWFAu/r6isfrxzj/9v3M80/er3n0LxcMDAyMxzJep6Od6NG02nPyuWFgYOzDOEqw5JyxwM0Z53PDwMDAODrOJ51gkmMMDAyMNnDHpntt0GNgYOzGSGJ05jWuvf6Na3EMDIwHMvKq+98f39LfwMDAeBTjVY75Bmdyg+pZYWBgLM3IA25sY8T5+e3i9sN8MDAwlmbMl+bztkELqG8fBgbGooy2xNYG7n3lvF+eGxgYGIsyzluPM63KdtNY3mzAwMDYkzFWPsvZbQMgiXgMDIwdGHlha2wRO9YcbW8NBgbGDoyx0MxbmzMhHi1rMTAwlmbkeTVY/LpoilHDAAMDY1HGTHTmBf32mnnx7oInAAYGxr9n5EE50xKYaVLWzUsMDIzlGEmpa34zRNvCrEMZAwNjG8YMpn2ZaxfAHx4GGBgYGzDagtd8ezIvvRWbLTAwMBZl3N10TBoP+a6JYjMHBgbGcoy2KD/WnryqwfBhswUGBsbSjLFYnLkFM+MwcDEwMLZhzL9pJp+3C+MPtwMDA2NRxqscSRAnhbNkC1rxKwwMjKUZ7avYVLG+DNZiswUGBsYGjDxkx6gtbHCLBgYGxgaMPPjGmpQzMR1FPwYGBsZFx/mWjraQh4GBgZGEY7tAnVnWXhy4GBgYD2Hc18K8+wURAwNjB0b+s/Y4KaXl8X1BUxMDA+N5jG8orZNh23v/sAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
