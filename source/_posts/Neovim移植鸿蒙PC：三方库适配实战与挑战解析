@@ -13,6 +13,7 @@ categories: 软件
 permalink: matebookpro-port-nvim-deps
 ---
 
+
 # Neovim移植鸿蒙PC：三方库适配实战与挑战解析
 
 > 本文记录将Neovim编辑器移植到HarmonyOS PC过程中，对11个核心依赖库的适配实战经验，涵盖平台差异分析、API限制处理、构建系统改造等关键问题。
