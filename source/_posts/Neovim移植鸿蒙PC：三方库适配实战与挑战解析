@@ -1,7 +1,7 @@
 ---
 title: 鸿蒙PC Matebook Pro上安装仓颉编译器每日构建版
-date: 2025-12-27 15:00:00
-updated: 2025-12-27 15:00:00
+date: 2025-12-27 19:00:00
+updated: 2025-12-27 19:00:00
 tags:
 - 鸿蒙
 - 鸿蒙PC
@@ -10,7 +10,7 @@ tags:
 - luajit
 - matebook pro
 categories: 软件
-permalink: matebookpro-run-cangjie-compiler
+permalink: matebookpro-port-nvim-deps
 ---
 
 # Neovim移植鸿蒙PC：三方库适配实战与挑战解析
