@@ -13,6 +13,8 @@ categories: 软件
 permalink: matebookpro-run-cangjie-compiler
 ---
 
+![使用示例](https://dll.ystyle.top/images/2025-12/5e398f57bb264562850d933612e65a3d.png)
+
 ## 准备工作
 - 在鸿蒙PC上使用应用商店安装CodeArts IDE
 - 下载仓颉编译器每日构建版本: [cangjie-sdk-ohos-aarch64-1.1.0-alpha.2025xxxxxxxxxxxxx.tar.gz](https://gitcode.com/Cangjie/nightly_build/releases)
