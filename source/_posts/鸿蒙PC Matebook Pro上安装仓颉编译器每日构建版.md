@@ -22,9 +22,13 @@ permalink: matebookpro-run-cangjie-compiler
 ## 从CodeArts IDE提取签名工具
 打开IDE, 随便创建一个项目打开，在终端执行以下命令
 ```shell
+# 复制签名工具
 cp /data/app/toolchains.org/toolchains_1.0/lib//binary-sign-tool .
+# 对签名工具签名
 binary-sign-tool sign -inFile "./binary-sign-tool" -outFile "./binary-sign-tool-signed" -selfSign 1
+# 添加可执行权限
 chmod +x binary-sign-tool-signed
+# 测试，如果没弹授权弹窗和帮忙输出，需要重新签名和添加可执行权限
 ./binary-sign-tool-signed
 
 # 复制到用户安装目录
