@@ -155,7 +155,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -186,6 +186,63 @@
 <div class="container body-wrap">
 
     <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-use-docker-to-build-ELKStack"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-09-27 09:05:31" datetime="2017-09-27T01:05:31.000Z"  itemprop="datePublished">2017-09-27</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/09/27/use-docker-to-build-ELKStack/">用docker搭建ELK</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        
+
+logstash-input-tcp 可用，但log4j会把对象序列化，在kibana看到的会是乱码
+logstash-input-log4j 不可用，官方已废弃该插件， log4j连接不上该插件
+logstash-input-redis 可用，配置简洁，有安全保障
+
+
+
+本篇以 logstash-input-redis插件配置elk
+
+下载sebp/elk镜像1docker pull ...
+    
+
+        <a href="/2017/09/27/use-docker-to-build-ELKStack/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/elk/">elk</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
     
         <li class="post-list-item fade">
             <article id="post-git-download-the-specified-directory"
@@ -223,7 +280,7 @@ Git1.7.0以后加入了Sparse Checkout模式，这使得Check Out指定文件或
     
 
         <a href="/2017/08/01/git-download-the-specified-directory/" class="post-more waves-effect waves-button">
-            阅读全文…
+            Continue reading...
         </a>
     </div>
     
@@ -276,7 +333,7 @@ Do...
     
 
         <a href="/2017/07/24/the-new-heavy-version-of-jvms2.0/" class="post-more waves-effect waves-button">
-            阅读全文…
+            Continue reading...
         </a>
     </div>
     
@@ -335,7 +392,7 @@ token字段得自己在七牛的其它工具生成， 本文后面提供一个�
     
 
         <a href="/2017/07/05/share-the-use-of-qiniu-file-upload/" class="post-more waves-effect waves-button">
-            阅读全文…
+            Continue reading...
         </a>
     </div>
     
@@ -396,13 +453,65 @@ token字段得自己在七牛的其它工具生成， 本文后面提供一个�
     
 
         <a href="/2017/05/26/tomcat-through-ssh-proxy-connected-to-the-internal-network/" class="post-more waves-effect waves-button">
-            阅读全文…
+            Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/">ssh</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代理/">代理</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-leanote-Add-the-search-function"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-04-07 16:39:19" datetime="2017-04-07T08:39:19.000Z"  itemprop="datePublished">2017-04-07</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/04/07/leanote-Add-the-search-function/">leanote添探索功能</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        leanote 编译打包
+配置本地环境
+
+设置GOPATH环境变量为工作区目录然后执行:123go get github.com/revel/cmd/revelgo get github.com/ystyle/leanote/appmv $GOPATH/src/github.com/ystyle $GOPATH/src/github.com/leanote
+
+注:源码在$GOPATH/src...
+    
+
+        <a href="/2017/04/07/leanote-Add-the-search-function/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/golang/">golang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leanote/">leanote</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/探索/">探索</a></li></ul>
 
     </div>
     
@@ -461,65 +570,13 @@ NOVA [音乐  PV]
     
 
         <a href="/2017/04/07/Paranoia/" class="post-more waves-effect waves-button">
-            阅读全文…
+            Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/乐正绫/">乐正绫</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/妄想症/">妄想症</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/洛天依/">洛天依</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/音乐/">音乐</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-leanote-Add-the-search-function"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-04-07 16:39:19" datetime="2017-04-07T08:39:19.000Z"  itemprop="datePublished">2017-04-07</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/04/07/leanote-Add-the-search-function/">leanote添探索功能</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        leanote 编译打包
-配置本地环境
-
-设置GOPATH环境变量为工作区目录然后执行:123go get github.com/revel/cmd/revelgo get github.com/ystyle/leanote/appmv $GOPATH/src/github.com/ystyle $GOPATH/src/github.com/leanote
-
-注:源码在$GOPATH/src...
-    
-
-        <a href="/2017/04/07/leanote-Add-the-search-function/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/golang/">golang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leanote/">leanote</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/探索/">探索</a></li></ul>
 
     </div>
     
@@ -565,7 +622,7 @@ windows 64位一般下载electron-vx...
     
 
         <a href="/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/" class="post-more waves-effect waves-button">
-            阅读全文…
+            Continue reading...
         </a>
     </div>
     
@@ -621,7 +678,7 @@ Visual C++ 2015 64 bit
     
 
         <a href="/2017/01/05/tensorflow-zai-windows-xia-shi-yong-gpu/" class="post-more waves-effect waves-button">
-            阅读全文…
+            Continue reading...
         </a>
     </div>
     
@@ -671,63 +728,13 @@ Gogland仍然在开发中，但我们正在开放其私人EAP，并邀请您加�
     
 
         <a href="/2016/12/13/jetbrains-jia-quan-xin-go-ide-dai-hao-gogland/" class="post-more waves-effect waves-button">
-            阅读全文…
+            Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Golang/">Golang</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2016-12-12 18:46:13" datetime="2016-12-12T10:46:13.000Z"  itemprop="datePublished">2016-12-12</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/12/12/power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi/">Power designer生成建表语句的设置</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        oracle去年字段的引号DataBase - Edit Current DBMS
-修改 ORA11GR1::Script\Sql\Format\CaseSensitivityUsingQuote改为No
-oracle生成的字段注释不换行DataBase - Edit Current DBMS
-修改ORA11GR1::Script\Objects\Column\ColumnComment 的...
-    
-
-        <a href="/2016/12/12/power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/建模/">建模</a></li></ul>
 
     </div>
     
