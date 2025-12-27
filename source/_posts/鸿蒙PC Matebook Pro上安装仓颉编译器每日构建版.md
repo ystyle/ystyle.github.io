@@ -62,10 +62,10 @@ cp ./binary-sign-tool-signed ~/.local/bin/binary-sign-tool
 ## 使用仓颉编译器
 现在就可以按仓颉教程的两种方法使用仓颉了
 - 第一种，临时使用
-  - 打开终端 `source ~/.cangjie/envsetupo.sh` 然后就可以在当前终端窗口执行`cjc -v`
+  - 打开终端 `source ~/.cangjie/envsetup.sh` 然后就可以在当前终端窗口执行`cjc -v`
 
 - 第二种，永远使用
-  - 把`source $HOME/.cangjie/envsetuo.sh` 添加到 `~/.zshrc` 里，之后打开的新终端都可以使用仓颉命令了
+  - 把`source $HOME/.cangjie/envsetup.sh` 添加到 `~/.zshrc` 里，之后打开的新终端都可以使用仓颉命令了
 
 ## 编译并执行项目
 - 写一个`hello_world.cj`
