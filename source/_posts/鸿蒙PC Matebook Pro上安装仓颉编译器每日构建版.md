@@ -62,7 +62,8 @@ cp ./binary-sign-tool-signed ~/.local/bin/binary-sign-tool
 	done
 	```
 - 在终端切换到`cangjie`目录下，执行`chmod +x sign-cangjie.sh` 并执行 `./sign-cangjie.sh`
-- 切换到`third_party/llvm/bin` 目录执行 `rm ld.lld && cp lld ld.lld`
+- 终端切换到`third_party/llvm/bin` 目录， 执行 `rm ld.lld && cp lld ld.lld`
+  - 这一步是为了解决 cjc 编译过程中找不到`ld.lld`的问题， 原因是仓颉编译器看不到软链接的 `ld.lld`
 
 
 ## 使用仓颉编译器
