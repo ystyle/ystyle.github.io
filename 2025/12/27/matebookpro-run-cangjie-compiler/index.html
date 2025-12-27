@@ -159,7 +159,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -242,7 +242,10 @@
 </li>
 <li><p>在终端切换到<code>cangjie</code>目录下，执行<code>chmod +x sign-cangjie.sh</code> 并执行 <code>./sign-cangjie.sh</code></p>
 </li>
-<li>切换到<code>third_party/llvm/bin</code> 目录执行 <code>rm ld.lld &amp;&amp; cp lld ld.lld</code></li>
+<li>终端切换到<code>third_party/llvm/bin</code> 目录， 执行 <code>rm ld.lld &amp;&amp; cp lld ld.lld</code><ul>
+<li>这一步是为了解决 cjc 编译过程中找不到<code>ld.lld</code>的问题， 原因是仓颉编译器看不到软链接的 <code>ld.lld</code></li>
+</ul>
+</li>
 </ul>
 <h2 id="使用仓颉编译器"><a href="#使用仓颉编译器" class="headerlink" title="使用仓颉编译器"></a>使用仓颉编译器</h2><p>现在就可以按仓颉教程的两种方法使用仓颉了</p>
 <ul>
@@ -274,7 +277,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2025-12-27T07:00:00.000Z" itemprop="dateUpdated">2025-12-27 15:00:00</time>
+    Last updated: <time datetime="2025-12-27T07:00:00.000Z" itemprop="dateUpdated">2025-12-27 15:00:00</time>
 </span><br>
 
 
