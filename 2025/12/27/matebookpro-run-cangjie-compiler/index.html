@@ -41,9 +41,9 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="鸿蒙,鸿蒙PC,matebook pro,仓颉,cangjie,cangjie-lang">
+    <meta name="keywords" content="鸿蒙,鸿蒙PC,仓颉,cangjie,cangjie-lang,matebook pro">
     <meta name="description" content="准备工作 在鸿蒙PC上使用应用商店安装CodeArts IDE 下载仓颉编译器每日构建版本: cangjie-sdk-ohos-aarch64-1.1.0-alpha.2025xxxxxxxxxxxxx.tar.gz  从CodeArts IDE提取签名工具打开IDE, 随便创建一个项目打开，在终端执行以下命令12345678cp /data/app/toolchains.org/toolchai">
-<meta name="keywords" content="鸿蒙,鸿蒙PC,matebook pro,仓颉,cangjie,cangjie-lang">
+<meta name="keywords" content="鸿蒙,鸿蒙PC,仓颉,cangjie,cangjie-lang,matebook pro">
 <meta property="og:type" content="article">
 <meta property="og:title" content="鸿蒙PC Matebook Pro上安装仓颉编译器每日构建版">
 <meta property="og:url" content="http://ystyle.top/2025/12/27/matebookpro-run-cangjie-compiler/index.html">
@@ -157,7 +157,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -222,14 +222,14 @@
 <li>在鸿蒙PC上使用应用商店安装CodeArts IDE</li>
 <li>下载仓颉编译器每日构建版本: <a href="https://gitcode.com/Cangjie/nightly_build/releases" target="_blank" rel="noopener">cangjie-sdk-ohos-aarch64-1.1.0-alpha.2025xxxxxxxxxxxxx.tar.gz</a></li>
 </ul>
-<h2 id="从CodeArts-IDE提取签名工具"><a href="#从CodeArts-IDE提取签名工具" class="headerlink" title="从CodeArts IDE提取签名工具"></a>从CodeArts IDE提取签名工具</h2><p>打开IDE, 随便创建一个项目打开，在终端执行以下命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cp /data/app/toolchains.org/toolchains_1.0/lib//binary-sign-tool .</span><br><span class="line">binary-sign-tool sign -inFile "./binary-sign-tool" -outFile "./binary-sign-tool-signed" -selfSign 1</span><br><span class="line">chmod +x binary-sign-tool-signed</span><br><span class="line">./binary-sign-tool-signed</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 复制到用户安装目录</span></span><br><span class="line">mkdir -p ~/.local/bin</span><br><span class="line">cp ./binary-sign-tool-signed ~/.local/bin/binary-sign-tool</span><br></pre></td></tr></table></figure></p>
+<h2 id="从CodeArts-IDE提取签名工具"><a href="#从CodeArts-IDE提取签名工具" class="headerlink" title="从CodeArts IDE提取签名工具"></a>从CodeArts IDE提取签名工具</h2><p>打开IDE, 随便创建一个项目打开，在终端执行以下命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cp /data/app/toolchains.org/toolchains_1.0/lib//binary-sign-tool .</span><br><span class="line">binary-sign-tool sign -inFile "./binary-sign-tool" -outFile "./binary-sign-tool-signed" -selfSign 1</span><br><span class="line">chmod +x binary-sign-tool-signed</span><br><span class="line">./binary-sign-tool-signed</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 复制到用户安装目录</span><br><span class="line">mkdir -p ~/.local/bin</span><br><span class="line">cp ./binary-sign-tool-signed ~/.local/bin/binary-sign-tool</span><br></pre></td></tr></table></figure></p>
 <p>最后在<code>~/.zshrc</code>添加<code>export PATH=$HOME/.local/bin:$PATH</code></p>
 <h2 id="安装仓颉编译器"><a href="#安装仓颉编译器" class="headerlink" title="安装仓颉编译器"></a>安装仓颉编译器</h2><ul>
 <li>把下载的仓颉编译器复制到个人目录(文件管器和下载目录同级)</li>
 <li>打开终端解压 <code>tar -xzf cangjie-sdk-ohos-aarch64-1.1.0-alpha.2025xxxxxxxxxxxxx.tar.gz</code> 换自己下载的版本</li>
 <li>打开<code>cangjie/envsetup.sh</code>把首行的<code>#!/bin/bash</code>换成<code>#!/bin/sh</code></li>
 <li><p>把以下脚本保存为<code>sign-cangjie.sh</code>并复制到<code>cangjie</code>目录下和<code>envsetup.sh</code>同级</p>
-  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 递归查询当前目录及其子目录下的所有文件</span></span><br><span class="line">find . -type f | while read -r file; do</span><br><span class="line"><span class="meta">	#</span><span class="bash"> 使用 file 命令检查文件类型</span></span><br><span class="line">	if file "$file" | grep "shared object"; then</span><br><span class="line">		echo "Found executable or shared object: $file"</span><br><span class="line"></span><br><span class="line"><span class="meta">		#</span><span class="bash"> 确保文件具有可执行权限</span></span><br><span class="line">		chmod +x "$file"</span><br><span class="line"></span><br><span class="line"><span class="meta">		#</span><span class="bash"> 签名文件</span></span><br><span class="line">		echo "Signing file: $file"</span><br><span class="line">		binary-sign-tool sign -inFile "$file" -outFile "$file" -selfSign 1</span><br><span class="line">	fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 递归查询当前目录及其子目录下的所有文件</span><br><span class="line">find . -type f | while read -r file; do</span><br><span class="line"><span class="meta">	#</span> 使用 file 命令检查文件类型</span><br><span class="line">	if file "$file" | grep "shared object"; then</span><br><span class="line">		echo "Found executable or shared object: $file"</span><br><span class="line"></span><br><span class="line"><span class="meta">		#</span> 确保文件具有可执行权限</span><br><span class="line">		chmod +x "$file"</span><br><span class="line"></span><br><span class="line"><span class="meta">		#</span> 签名文件</span><br><span class="line">		echo "Signing file: $file"</span><br><span class="line">		binary-sign-tool sign -inFile "$file" -outFile "$file" -selfSign 1</span><br><span class="line">	fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在终端切换到<code>cangjie</code>目录下，执行<code>chmod +x sign-cangjie.sh</code> 并执行 <code>./sign-cangjie.sh</code></p>
 </li>
@@ -239,12 +239,12 @@
 <ul>
 <li><p>第一种，临时使用</p>
 <ul>
-<li>打开终端 <code>source ~/.cangjie/envsetupo.sh</code> 然后就可以在当前终端窗口执行<code>cjc -v</code></li>
+<li>打开终端 <code>source ~/.cangjie/envsetup.sh</code> 然后就可以在当前终端窗口执行<code>cjc -v</code></li>
 </ul>
 </li>
 <li><p>第二种，永远使用</p>
 <ul>
-<li>把<code>source $HOME/.cangjie/envsetuo.sh</code> 添加到 <code>~/.zshrc</code> 里，之后打开的新终端都可以使用仓颉命令了</li>
+<li>把<code>source $HOME/.cangjie/envsetup.sh</code> 添加到 <code>~/.zshrc</code> 里，之后打开的新终端都可以使用仓颉命令了</li>
 </ul>
 </li>
 </ul>
@@ -265,7 +265,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2025-12-27T07:00:00.000Z" itemprop="dateUpdated">2025-12-27 15:00:00</time>
+    Last updated: <time datetime="2025-12-27T07:00:00.000Z" itemprop="dateUpdated">2025-12-27 15:00:00</time>
 </span><br>
 
 
