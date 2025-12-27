@@ -1,5 +1,5 @@
 ---
-title: 鸿蒙PC Matebook Pro上安装仓颉编译器每日构建版
+title: Neovim移植鸿蒙PC：三方库适配实战与挑战解析
 date: 2025-12-27 19:00:00
 updated: 2025-12-27 19:00:00
 tags:
