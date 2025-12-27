@@ -163,7 +163,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -251,7 +251,7 @@
 <h3 id="编译脚本"><a href="#编译脚本" class="headerlink" title="编译脚本"></a>编译脚本</h3><p>创建编译脚本<code>build-ohos.sh</code>文件</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/code/ohos/lua</span><br><span class="line">touch build-ohos.sh</span><br><span class="line">chmod +x build-ohos.sh</span><br></pre></td></tr></table></figure>
 <p>文件内容如下<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">set -e</span><br><span class="line">rm -rf ./out ./bin</span><br><span class="line">docker run --rm -ti \</span><br><span class="line">  -e HARDWARE=ipcamera_hi3516dv300 \</span><br><span class="line">  -v $&#123;PWD&#125;/out:/OpenHarmony/out \</span><br><span class="line">  -v $&#123;PWD&#125;:/OpenHarmony/applications/sample/camera/app \</span><br><span class="line">  ystyle/open-harmony</span><br><span class="line">mkdir -p ./bin</span><br><span class="line">cp ./out/ipcamera_hi3516dv300/bin/camera_app ./bin/lua</span><br><span class="line">tar -zcf lua-5.4.2-ohos.tar.gz ./bin</span><br><span class="line">echo 'build success!'</span><br></pre></td></tr></table></figure></p>
-<p>与鸿蒙一起编译，这里使用我之前的<a href="https://ystyle.top/2020/09/10/compile-openharmony-indokcer/">docker镜像</a><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/code/ohos/lua</span><br><span class="line">./build-ohos.sh</span><br><span class="line"><span class="meta">#</span><span class="bash"> 看到 ohos ipcamera_hi3516dv300 build success! build success! 就编译成功了。</span></span><br></pre></td></tr></table></figure></p>
+<p>与鸿蒙一起编译，这里使用我之前的<a href="https://ystyle.top/2020/09/10/compile-openharmony-indokcer/">docker镜像</a><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/code/ohos/lua</span><br><span class="line">./build-ohos.sh</span><br><span class="line"><span class="meta">#</span> 看到 ohos ipcamera_hi3516dv300 build success! build success! 就编译成功了。</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>编译后软件在鸿蒙的 ./out/ipcamera_hi3516dv300/bin/camera_app<br>脚本会把lua单独打包出来<br>单独的lua可执行文件在bin目录 </p>
 </blockquote>
@@ -290,7 +290,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-11-07T15:52:26.000Z" itemprop="dateUpdated">2020-11-07 23:52:26</time>
+    最後更新時間：<time datetime="2020-11-07T15:52:26.000Z" itemprop="dateUpdated">2020-11-07 23:52:26</time>
 </span><br>
 
 

@@ -159,7 +159,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -231,7 +231,7 @@
 <li>在鸿蒙PC上使用应用商店安装CodeArts IDE</li>
 <li>下载仓颉编译器每日构建版本: <a href="https://gitcode.com/Cangjie/nightly_build/releases" target="_blank" rel="noopener">cangjie-sdk-ohos-aarch64-1.1.0-alpha.2025xxxxxxxxxxxxx.tar.gz</a></li>
 </ul>
-<h2 id="从CodeArts-IDE提取签名工具"><a href="#从CodeArts-IDE提取签名工具" class="headerlink" title="从CodeArts IDE提取签名工具"></a>从CodeArts IDE提取签名工具</h2><p>打开IDE, 随便创建一个项目打开，在终端执行以下命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cp /data/app/toolchains.org/toolchains_1.0/lib//binary-sign-tool .</span><br><span class="line">binary-sign-tool sign -inFile "./binary-sign-tool" -outFile "./binary-sign-tool-signed" -selfSign 1</span><br><span class="line">chmod +x binary-sign-tool-signed</span><br><span class="line">./binary-sign-tool-signed</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 复制到用户安装目录</span><br><span class="line">mkdir -p ~/.local/bin</span><br><span class="line">cp ./binary-sign-tool-signed ~/.local/bin/binary-sign-tool</span><br></pre></td></tr></table></figure></p>
+<h2 id="从CodeArts-IDE提取签名工具"><a href="#从CodeArts-IDE提取签名工具" class="headerlink" title="从CodeArts IDE提取签名工具"></a>从CodeArts IDE提取签名工具</h2><p>打开IDE, 随便创建一个项目打开，在终端执行以下命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 复制签名工具</span><br><span class="line">cp /data/app/toolchains.org/toolchains_1.0/lib//binary-sign-tool .</span><br><span class="line"><span class="meta">#</span> 对签名工具签名</span><br><span class="line">binary-sign-tool sign -inFile "./binary-sign-tool" -outFile "./binary-sign-tool-signed" -selfSign 1</span><br><span class="line"><span class="meta">#</span> 添加可执行权限</span><br><span class="line">chmod +x binary-sign-tool-signed</span><br><span class="line"><span class="meta">#</span> 测试，如果没弹授权弹窗和帮忙输出，需要重新签名和添加可执行权限</span><br><span class="line">./binary-sign-tool-signed</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 复制到用户安装目录</span><br><span class="line">mkdir -p ~/.local/bin</span><br><span class="line">cp ./binary-sign-tool-signed ~/.local/bin/binary-sign-tool</span><br></pre></td></tr></table></figure></p>
 <p>最后在<code>~/.zshrc</code>添加<code>export PATH=$HOME/.local/bin:$PATH</code></p>
 <h2 id="安装仓颉编译器"><a href="#安装仓颉编译器" class="headerlink" title="安装仓颉编译器"></a>安装仓颉编译器</h2><ul>
 <li>把下载的仓颉编译器复制到个人目录(文件管器和下载目录同级)</li>
@@ -274,7 +274,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2025-12-27T07:00:00.000Z" itemprop="dateUpdated">2025-12-27 15:00:00</time>
+    最後更新時間：<time datetime="2025-12-27T07:00:00.000Z" itemprop="dateUpdated">2025-12-27 15:00:00</time>
 </span><br>
 
 
