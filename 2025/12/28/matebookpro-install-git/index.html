@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>鸿蒙PC Matebook Pro上安装GIT | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="git,鸿蒙,鸿蒙PC,matebook pro">
+    <meta name="description" content="在鸿蒙PC上全局安装git准备工作 在鸿蒙应用商店安装 CodeArts IDE  从CodeArts IDE提取签名工具打开IDE, 随便创建一个项目打开，在终端执行以下命令123456789101112# 复制签名工具cp /data/app/toolchains.org/toolchains_1.0/lib//binary-sign-tool .# 对签名工具签名binary-sign-to">
+<meta name="keywords" content="git,鸿蒙,鸿蒙PC,matebook pro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="鸿蒙PC Matebook Pro上安装GIT">
+<meta property="og:url" content="http://ystyle.top/2025/12/28/matebookpro-install-git/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="在鸿蒙PC上全局安装git准备工作 在鸿蒙应用商店安装 CodeArts IDE  从CodeArts IDE提取签名工具打开IDE, 随便创建一个项目打开，在终端执行以下命令123456789101112# 复制签名工具cp /data/app/toolchains.org/toolchains_1.0/lib//binary-sign-tool .# 对签名工具签名binary-sign-to">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2025-12-28T02:30:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="鸿蒙PC Matebook Pro上安装GIT">
+<meta name="twitter:description" content="在鸿蒙PC上全局安装git准备工作 在鸿蒙应用商店安装 CodeArts IDE  从CodeArts IDE提取签名工具打开IDE, 随便创建一个项目打开，在终端执行以下命令123456789101112# 复制签名工具cp /data/app/toolchains.org/toolchains_1.0/lib//binary-sign-tool .# 对签名工具签名binary-sign-to">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">鸿蒙PC Matebook Pro上安装GIT</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">鸿蒙PC Matebook Pro上安装GIT</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2025-12-28T02:30:00.000Z" itemprop="datePublished" class="page-time">
+  2025-12-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/软件/">软件</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#在鸿蒙PC上全局安装git"><span class="post-toc-number">1.</span> <span class="post-toc-text">在鸿蒙PC上全局安装git</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备工作"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">准备工作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#从CodeArts-IDE提取签名工具"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">从CodeArts IDE提取签名工具</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#保存签名脚本"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">保存签名脚本</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#从CodeArts-IDE提取git"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">从CodeArts IDE提取git</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置git环境"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">配置git环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">测试</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-matebookpro-install-git"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">鸿蒙PC Matebook Pro上安装GIT</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2025-12-28 10:30:00" datetime="2025-12-28T02:30:00.000Z"  itemprop="datePublished">2025-12-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/软件/">软件</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="在鸿蒙PC上全局安装git"><a href="#在鸿蒙PC上全局安装git" class="headerlink" title="在鸿蒙PC上全局安装git"></a>在鸿蒙PC上全局安装git</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li>在鸿蒙应用商店安装 CodeArts IDE</li>
+</ul>
+<h2 id="从CodeArts-IDE提取签名工具"><a href="#从CodeArts-IDE提取签名工具" class="headerlink" title="从CodeArts IDE提取签名工具"></a>从CodeArts IDE提取签名工具</h2><p>打开IDE, 随便创建一个项目打开，在终端执行以下命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 复制签名工具</span><br><span class="line">cp /data/app/toolchains.org/toolchains_1.0/lib//binary-sign-tool .</span><br><span class="line"><span class="meta">#</span> 对签名工具签名</span><br><span class="line">binary-sign-tool sign -inFile "./binary-sign-tool" -outFile "./binary-sign-tool-signed" -selfSign 1</span><br><span class="line"><span class="meta">#</span> 添加可执行权限</span><br><span class="line">chmod +x binary-sign-tool-signed</span><br><span class="line"><span class="meta">#</span> 测试，如果没弹授权弹窗和帮忙输出，需要重新签名和添加可执行权限</span><br><span class="line">./binary-sign-tool-signed</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 复制到用户安装目录</span><br><span class="line">mkdir -p ~/.local/bin</span><br><span class="line">cp ./binary-sign-tool-signed ~/.local/bin/binary-sign-tool</span><br></pre></td></tr></table></figure></p>
+<p>最后在<code>~/.zshrc</code>添加<code>export PATH=$HOME/.local/bin:$PATH</code></p>
+<h2 id="保存签名脚本"><a href="#保存签名脚本" class="headerlink" title="保存签名脚本"></a>保存签名脚本</h2><p>把以下保存为<code>~/.local/bin/hm-sign-all.sh</code>， 并执行<code>chmod +x ~/.local/bin/hm-sign-all.sh</code><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 递归查询当前目录及其子目录下的所有文件</span><br><span class="line">find . -type f | while read -r file; do</span><br><span class="line">    # 使用 file 命令检查文件类型</span><br><span class="line">    if file "$file" | grep "shared object"; then</span><br><span class="line">        echo "Found executable or shared object: $file"</span><br><span class="line">        </span><br><span class="line">        # 确保文件具有可执行权限</span><br><span class="line">        chmod +x "$file"</span><br><span class="line">        </span><br><span class="line">        # 签名文件</span><br><span class="line">        echo "Signing file: $file"</span><br><span class="line">        binary-sign-tool sign -inFile "$file" -outFile "$file" -selfSign 1</span><br><span class="line">    fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<h2 id="从CodeArts-IDE提取git"><a href="#从CodeArts-IDE提取git" class="headerlink" title="从CodeArts IDE提取git"></a>从CodeArts IDE提取git</h2><p>打开IDE, 随便创建一个项目打开，在终端执行以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 创建安装目录</span><br><span class="line">mkdir -p ~/.local/opt</span><br><span class="line"></span><br><span class="line"># 切换到安装目录， 并复制git</span><br><span class="line">cd ~/.local/opt</span><br><span class="line">cp -r /data/app/git.org/git_1.2/ . </span><br><span class="line"></span><br><span class="line"># 对git可执行文件签名</span><br><span class="line">hm-sign-all.sh</span><br><span class="line"></span><br><span class="line"># 创建bin的软件链接</span><br><span class="line">ln -s $HOME/.local/opt/git_1.2/bin/git $HOME/.local/bin/ </span><br><span class="line">ln -s $HOME/Users/currentUser/.local/opt/git_1.2/bin/git-lfs $HOME/.local/bin/</span><br></pre></td></tr></table></figure></p>
+<h2 id="配置git环境"><a href="#配置git环境" class="headerlink" title="配置git环境"></a>配置git环境</h2><p>在<code>~/.zshrc</code>添加以下内容<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> git</span><br><span class="line">export GIT_EXEC_PATH=$HOME/.local/opt/git_1.2/libexec/git-core</span><br><span class="line">export GIT_TEMPLATE_DIR=$HOME/.local/opt/git_1.2/share/git-core/templates</span><br></pre></td></tr></table></figure></p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>可以看到，可以正常clone仓库<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">➜ cd Documents/DevEcoStudioProjects 																																																																																																																																														✓</span><br><span class="line">YSTYLE ❯ [10:35] ❯ ~/Documents/DevEcoStudioProjects</span><br><span class="line">➜ git clone https://github.com/ystyle/paimon.git																																																																																																																																		✓</span><br><span class="line">Cloning into 'paimon'...</span><br><span class="line">remote: Enumerating objects: 99, done.</span><br><span class="line">remote: Counting objects: 100% (99/99), done.</span><br><span class="line">remote: Compressing objects: 100% (68/68), done.</span><br><span class="line">remote: Total 99 (delta 19), reused 94 (delta 16), pack-reused 0 (from 0)</span><br><span class="line">Receiving objects: 100% (99/99), 2.59 MiB | 3.19 MiB/s, done.</span><br><span class="line">Resolving deltas: 100% (19/19), done.</span><br><span class="line">YSTYLE ❯ [10:36] ❯ ~/Documents/DevEcoStudioProjects</span><br><span class="line">➜ cd paimon 																																																																																																																																																																						✓</span><br><span class="line">YSTYLE ❯ [10:47] ❯ ~/Documents/DevEcoStudioProjects/paimon</span><br><span class="line">➜ git status																																																																																																																																																																						✓</span><br><span class="line">fatal: detected dubious ownership in repository at '/storage/Users/currentUser/Documents/DevEcoStudioProjects/paimon'</span><br><span class="line">To add an exception for this directory, call:</span><br><span class="line"></span><br><span class="line">								git config --global --add safe.directory /storage/Users/currentUser/Documents/DevEcoStudioProjects/paimon</span><br><span class="line">YSTYLE ❯ [10:47] ❯ ~/Documents/DevEcoStudioProjects/paimon</span><br><span class="line">➜ git config --global --add safe.directory /storage/Users/currentUser/Documents/DevEcoStudioProjects/paimon																																																																			✗ 128</span><br><span class="line">YSTYLE ❯ [10:47] ❯ ~/Documents/DevEcoStudioProjects/paimon</span><br><span class="line">➜ git status																																																																																																																																																																						✓</span><br><span class="line">On branch master</span><br><span class="line">Your branch is up to date with 'origin/master'.</span><br><span class="line"></span><br><span class="line">nothing to commit, working tree clean</span><br><span class="line">YSTYLE ❯ [10:47] ❯ ~/Documents/DevEcoStudioProjects/paimon</span><br><span class="line">➜ git log  																																																																																																																																																																							✓</span><br><span class="line">error: cannot run less: No such file or directory</span><br><span class="line">commit a0dffbac91fab1d1da50709d9e4b34f5a1ef0771 (HEAD -&gt; master, tag: 2025-10-20, origin/master, origin/HEAD)</span><br><span class="line">Author: ystyle &lt;lxy5266@live.com&gt;</span><br><span class="line">Date:   Mon Oct 20 14:06:30 2025 +0800</span><br><span class="line"></span><br><span class="line">    feat: 优化代码</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2025-12-28T02:30:00.000Z" itemprop="dateUpdated">2025-12-28 10:30:00</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2025/12/28/matebookpro-install-git/" target="_blank" rel="external">http://ystyle.top/2025/12/28/matebookpro-install-git/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/matebook-pro/">matebook pro</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/鸿蒙/">鸿蒙</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/鸿蒙PC/">鸿蒙PC</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2025/12/28/matebookpro-install-git/&title=《鸿蒙PC Matebook Pro上安装GIT》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2025/12/28/matebookpro-install-git/&title=《鸿蒙PC Matebook Pro上安装GIT》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2025/12/28/matebookpro-install-git/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《鸿蒙PC Matebook Pro上安装GIT》 — 东方星痕&url=http://ystyle.top/2025/12/28/matebookpro-install-git/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2025/12/28/matebookpro-install-git/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2025/12/27/matebookpro-port-nvim-deps/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Neovim移植鸿蒙PC：三方库适配实战与挑战解析</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+          clientID: '1f887c79a8b9b9fbec12',
+          clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+          repo: 'ystyle.github.io',
+          owner: 'ystyle',
+          admin: ['ystyle'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2025</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2025/12/28/matebookpro-install-git/&title=《鸿蒙PC Matebook Pro上安装GIT》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2025/12/28/matebookpro-install-git/&title=《鸿蒙PC Matebook Pro上安装GIT》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2025/12/28/matebookpro-install-git/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《鸿蒙PC Matebook Pro上安装GIT》 — 东方星痕&url=http://ystyle.top/2025/12/28/matebookpro-install-git/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2025/12/28/matebookpro-install-git/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNUlEQVR42u3awY6DMAxF0f7/TzPbSm3gPpuphHOzqhAtOSxcx/brhdfxsdJ73q+sPq+u3LZkyJDxWMZxuj7vWW2ljzx/7sVTZMiQsQFj9WASFjmSvILz5y6vy5AhQwb+aR64+XUZMmTIqDHIw86DdZqAypAhQ0aaotUSvn4gvuEsLkOGjAcyeNX995//pb8hQ4aMRzGOcPFyP28bkMTxYlcyZMgYzeABjm+C398JuDJkyNiH8ZtwiYpl+Kj85U4ZMmSMZqSpXi0s1n6Zl/xkyJAxm9Ep39fGMs5/odgclSFDxmhGkGy1mwfp/0D6ymTIkDGVUfsaGYbop4/8SCxDhox9GDxoBg8ASWGaUF4EXBkyZIxj3DtnlY5NdJqa6PXJkCFjBCMNoCSVrB1603bmclpEhgwZ4xidFDAd0agV4IIerAwZMjZgpMdRPubFi3ppNwPNuMmQIePhjPSYWmsh8NDM08cvh1gZMmQMZXRqcrUt8qNyHIJlyJCxASMtb3USRJ448uRShgwZ+zDSQj9vW/JhjhsCrgwZMoYyasfL/jEVDXiRb8mQIWMDRjpNxotrvNBPNh0cYmXIkDGCcYSrVjLrh/ILtgwZMkYz7orZfLQrHeYIZkZkyJAxmsGDLN8of0+8ISFDhgwZaeDjKSO5M2WjsTAZMmTIwOMXfLyMj24EvQUZMmRszKiFztp5GhX7ZMiQsQGDNwM4IG2O1hJEGTJk7MCoFcU6Tcd0LIO/FBkyZIxj/AGWpYmHyNqwbAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
