@@ -1,5 +1,5 @@
 ---
-title: 鸿蒙PC Matebook Pro上安装GIT
+title: 鸿蒙PC Matebook Pro上全局安装GIT
 date: 2025-12-28 10:30:00
 updated: 2025-12-28 10:30:00
 tags:
@@ -10,8 +10,6 @@ tags:
 categories: 软件
 permalink: matebookpro-install-git
 ---
-
-# 在鸿蒙PC上全局安装git
 
 ## 准备工作
 - 在鸿蒙应用商店安装 CodeArts IDE
