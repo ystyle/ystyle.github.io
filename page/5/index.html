@@ -155,7 +155,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -186,6 +186,63 @@
 <div class="container body-wrap">
 
     <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-oracle-generate-random-numbers"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-12-07 09:53:53" datetime="2017-12-07T01:53:53.000Z"  itemprop="datePublished">2017-12-07</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/12/07/oracle-generate-random-numbers/">oracle生成随机数</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        
+小数( 0 ~ 1)
+1select dbms_random.value from dual;
+
+指定范围内的小数 ( 0 ~ 100 )
+1select dbms_random.value(0,100) from dual;
+
+指定范围内的整数 ( 0 ~ 100 )
+1select trunc(dbms_random.value(0,100)) from dual;
+
+长度为20的随机...
+    
+
+        <a href="/2017/12/07/oracle-generate-random-numbers/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oracle/">oracle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随机数/">随机数</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
     
         <li class="post-list-item fade">
             <article id="post-diy-a-nas-with-android-device"
@@ -226,7 +283,7 @@ s...
     
 
         <a href="/2017/11/30/diy-a-nas-with-android-device/" class="post-more waves-effect waves-button">
-            阅读全文…
+            Continue reading...
         </a>
     </div>
     
@@ -273,7 +330,7 @@ s...
     
 
         <a href="/2017/11/27/lx-subsystem-installation-uninstall-or-maintenance-operation-is-not-completed/" class="post-more waves-effect waves-button">
-            阅读全文…
+            Continue reading...
         </a>
     </div>
     
@@ -330,7 +387,7 @@ logstash-input-redis 可用，配置简洁，有安全保障
     
 
         <a href="/2017/09/27/use-docker-to-build-ELKStack/" class="post-more waves-effect waves-button">
-            阅读全文…
+            Continue reading...
         </a>
     </div>
     
@@ -380,7 +437,7 @@ Git1.7.0以后加入了Sparse Checkout模式，这使得Check Out指定文件或
     
 
         <a href="/2017/08/01/git-download-the-specified-directory/" class="post-more waves-effect waves-button">
-            阅读全文…
+            Continue reading...
         </a>
     </div>
     
@@ -433,7 +490,7 @@ Do...
     
 
         <a href="/2017/07/24/the-new-heavy-version-of-jvms2.0/" class="post-more waves-effect waves-button">
-            阅读全文…
+            Continue reading...
         </a>
     </div>
     
@@ -492,7 +549,7 @@ token字段得自己在七牛的其它工具生成， 本文后面提供一个�
     
 
         <a href="/2017/07/05/share-the-use-of-qiniu-file-upload/" class="post-more waves-effect waves-button">
-            阅读全文…
+            Continue reading...
         </a>
     </div>
     
@@ -553,65 +610,13 @@ token字段得自己在七牛的其它工具生成， 本文后面提供一个�
     
 
         <a href="/2017/05/26/tomcat-through-ssh-proxy-connected-to-the-internal-network/" class="post-more waves-effect waves-button">
-            阅读全文…
+            Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/">ssh</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代理/">代理</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-leanote-Add-the-search-function"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-04-07 16:39:19" datetime="2017-04-07T08:39:19.000Z"  itemprop="datePublished">2017-04-07</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/04/07/leanote-Add-the-search-function/">leanote添探索功能</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        leanote 编译打包
-配置本地环境
-
-设置GOPATH环境变量为工作区目录然后执行:123go get github.com/revel/cmd/revelgo get github.com/ystyle/leanote/appmv $GOPATH/src/github.com/ystyle $GOPATH/src/github.com/leanote
-
-注:源码在$GOPATH/src...
-    
-
-        <a href="/2017/04/07/leanote-Add-the-search-function/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/golang/">golang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leanote/">leanote</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/探索/">探索</a></li></ul>
 
     </div>
     
@@ -670,7 +675,7 @@ NOVA [音乐  PV]
     
 
         <a href="/2017/04/07/Paranoia/" class="post-more waves-effect waves-button">
-            阅读全文…
+            Continue reading...
         </a>
     </div>
     
@@ -685,14 +690,14 @@ NOVA [音乐  PV]
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-electron-react-boilerplate-kai-huan-jing-da-jian"
+            <article id="post-leanote-Add-the-search-function"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2017-02-27 15:14:13" datetime="2017-02-27T07:14:13.000Z"  itemprop="datePublished">2017-02-27</time>
+        <time class="post-time" title="2017-04-07 16:39:19" datetime="2017-04-07T08:39:19.000Z"  itemprop="datePublished">2017-04-07</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
 
 
 
@@ -703,7 +708,7 @@ NOVA [音乐  PV]
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/">electron-react-boilerplate 开环境搭建</a>
+      <a class="post-title-link" href="/2017/04/07/leanote-Add-the-search-function/">leanote添探索功能</a>
     </h3>
   
 
@@ -713,22 +718,22 @@ NOVA [音乐  PV]
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        
-因为electron下载被墙的原因, electorn很难下载成功, electorn的react, redux的开发插件也装不上, 本文记录了解决这些问题时的方法
+        leanote 编译打包
+配置本地环境
 
-安装electron
-在淘宝镜像上下载package.json对应版本的electron-vx.x.xx-win32-x64.zip文件与SHASUMS256.txt文件
-windows 64位一般下载electron-vx...
+设置GOPATH环境变量为工作区目录然后执行:123go get github.com/revel/cmd/revelgo get github.com/ystyle/leanote/appmv $GOPATH/src/github.com/ystyle $GOPATH/src/github.com/leanote
+
+注:源码在$GOPATH/src...
     
 
-        <a href="/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/" class="post-more waves-effect waves-button">
-            阅读全文…
+        <a href="/2017/04/07/leanote-Add-the-search-function/" class="post-more waves-effect waves-button">
+            Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/electron/">electron</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/golang/">golang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leanote/">leanote</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/探索/">探索</a></li></ul>
 
     </div>
     
@@ -754,7 +759,7 @@ windows 64位一般下载electron-vx...
             
 
             <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
-            <span>东方星痕 &copy; 2015 - 2025</span>
+            <span>东方星痕 &copy; 2015 - 2026</span>
             <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
             <div style="width:300px;margin:0 auto; padding:20px 0;">
               <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
