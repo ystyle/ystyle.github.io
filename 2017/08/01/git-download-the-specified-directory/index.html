@@ -50,7 +50,7 @@
 <meta property="og:site_name" content="东方星痕">
 <meta property="og:description" content="Git1.7.0以后加入了Sparse Checkout模式，这使得Check Out指定文件或者文件夹成为可能。  具体实现如下1234567891011121314#照常创建新项目mkdir project_namecd project_namegit initgit remote add origin &amp;lt;url&amp;gt;#接下来，在Config中允许使用Sparse Checkout模">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2026-04-03T15:19:19.747Z">
+<meta property="og:updated_time" content="2026-04-03T16:16:50.665Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git下载指定目录">
 <meta name="twitter:description" content="Git1.7.0以后加入了Sparse Checkout模式，这使得Check Out指定文件或者文件夹成为可能。  具体实现如下1234567891011121314#照常创建新项目mkdir project_namecd project_namegit initgit remote add origin &amp;lt;url&amp;gt;#接下来，在Config中允许使用Sparse Checkout模">
@@ -157,7 +157,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -221,7 +221,7 @@
             <blockquote>
 <p>Git1.7.0以后加入了Sparse Checkout模式，这使得Check Out指定文件或者文件夹成为可能。</p>
 </blockquote>
-<h3 id="具体实现如下"><a href="#具体实现如下" class="headerlink" title="具体实现如下"></a>具体实现如下</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>照常创建新项目</span><br><span class="line">mkdir project_name</span><br><span class="line">cd project_name</span><br><span class="line">git init</span><br><span class="line">git remote add origin &lt;url&gt;</span><br><span class="line"><span class="meta">#</span>接下来，在Config中允许使用Sparse Checkout模式</span><br><span class="line">git config core.sparsecheckout true</span><br><span class="line"><span class="meta">#</span>比较只需要下载src目录与README.md 文件</span><br><span class="line">echo "src" &gt;&gt; .git/info/sparse-checkout</span><br><span class="line">echo "README.md" &gt;&gt; .git/info/sparse-checkout</span><br><span class="line"><span class="meta">#</span>不下载src/test目录</span><br><span class="line">echo "!src/test" &gt;&gt; .git/info/sparse-checkout</span><br><span class="line"><span class="meta">#</span>最后拉取项目</span><br><span class="line">git pull origin master</span><br></pre></td></tr></table></figure>
+<h3 id="具体实现如下"><a href="#具体实现如下" class="headerlink" title="具体实现如下"></a>具体实现如下</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">照常创建新项目</span></span><br><span class="line">mkdir project_name</span><br><span class="line">cd project_name</span><br><span class="line">git init</span><br><span class="line">git remote add origin &lt;url&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash">接下来，在Config中允许使用Sparse Checkout模式</span></span><br><span class="line">git config core.sparsecheckout true</span><br><span class="line"><span class="meta">#</span><span class="bash">比较只需要下载src目录与README.md 文件</span></span><br><span class="line">echo "src" &gt;&gt; .git/info/sparse-checkout</span><br><span class="line">echo "README.md" &gt;&gt; .git/info/sparse-checkout</span><br><span class="line"><span class="meta">#</span><span class="bash">不下载src/<span class="built_in">test</span>目录</span></span><br><span class="line">echo "!src/test" &gt;&gt; .git/info/sparse-checkout</span><br><span class="line"><span class="meta">#</span><span class="bash">最后拉取项目</span></span><br><span class="line">git pull origin master</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -229,7 +229,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2026-04-03T15:19:19.747Z" itemprop="dateUpdated">2026-04-03 23:19:19</time>
+    Last updated: <time datetime="2026-04-03T16:16:50.665Z" itemprop="dateUpdated">2026-04-04 00:16:50</time>
 </span><br>
 
 

@@ -157,7 +157,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -220,7 +220,7 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <h2 id="Docker-搭建redis-集群"><a href="#Docker-搭建redis-集群" class="headerlink" title="Docker 搭建redis 集群"></a>Docker 搭建redis 集群</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>创建一个目录用保存redis-slave的配置文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir/data/docker/redis/</span><br><span class="line">wget https://raw.githubusercontent.com/antirez/redis/3.0/redis.conf \</span><br><span class="line">-O /data/docker/redis/redis.conf</span><br></pre></td></tr></table></figure></p>
 <h3 id="安装redis"><a href="#安装redis" class="headerlink" title="安装redis"></a>安装redis</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull redis</span><br></pre></td></tr></table></figure>
-<h3 id="修改redis-slave配置文件"><a href="#修改redis-slave配置文件" class="headerlink" title="修改redis-slave配置文件"></a>修改redis-slave配置文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 修改 /data/docker/redis/redis.conf 的slaveof属性为redis-master 6379</span><br><span class="line">cd /data/docker/redis/</span><br><span class="line">sed -i 's/# slaveof &lt;masterip&gt; &lt;masterport&gt;/slaveof redis-master 6379/g' redis.conf</span><br></pre></td></tr></table></figure>
+<h3 id="修改redis-slave配置文件"><a href="#修改redis-slave配置文件" class="headerlink" title="修改redis-slave配置文件"></a>修改redis-slave配置文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 修改 /data/docker/redis/redis.conf 的slaveof属性为redis-master 6379</span></span><br><span class="line">cd /data/docker/redis/</span><br><span class="line">sed -i 's/# slaveof &lt;masterip&gt; &lt;masterport&gt;/slaveof redis-master 6379/g' redis.conf</span><br></pre></td></tr></table></figure>
 <h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><p>启动<code>redis-master</code>、 <code>redis-slave1</code>、 <code>redis-slave2</code>、 <code>redis-slave3</code><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run --name redis-master -p 6379:6379 -d redis</span><br><span class="line"></span><br><span class="line">docker run --link redis-master:redis-master -v /data/docker/redis/redis.conf:/usr/local/etc/redis/redis.conf --name redis-slave1 -d redis redis-server /usr/local/etc/redis/redis.conf</span><br><span class="line"></span><br><span class="line">docker run --link redis-master:redis-master -v /data/docker/redis/redis.conf:/usr/local/etc/redis/redis.conf --name redis-slave2 -d redis redis-server /usr/local/etc/redis/redis.conf</span><br><span class="line"></span><br><span class="line">docker run --link redis-master:redis-master -v /data/docker/redis/redis.conf:/usr/local/etc/redis/redis.conf --name redis-slave3 -d redis redis-server /usr/local/etc/redis/redis.conf</span><br></pre></td></tr></table></figure></p>
 <h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>用本地的redis-cli 连接到 master<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis-cli</span><br><span class="line">127.0.0.1:6379&gt; info # 查看详细信息</span><br></pre></td></tr></table></figure></p>
 
@@ -230,7 +230,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2015-11-09T12:48:43.000Z" itemprop="dateUpdated">2015-11-09 20:48:43</time>
+    Last updated: <time datetime="2015-11-09T12:48:43.000Z" itemprop="dateUpdated">2015-11-09 20:48:43</time>
 </span><br>
 
 

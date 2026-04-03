@@ -157,7 +157,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -240,10 +240,10 @@
 <p>在<code>Git bash</code> 执行:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh xxxx@xxx-xxxx.rhcloud.com #如： ssh 5581340d50044601a3000167@ghost-ystyle.rhcloud.com</span><br></pre></td></tr></table></figure>
 <p>远程到openshift后(可以用其它工具连接如<code>xshell</code>)</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>安装主题 其它主题下载：http://marketplace.ghost.org/</span><br><span class="line">cd $&#123;OPENSHIFT_REPO_DIR&#125;/themes/</span><br><span class="line">git clone https://github.com/fabienwang/Ghost-Flat.git</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>配置Ghost博客</span><br><span class="line">cd $&#123;OPENSHIFT_REPO_DIR&#125;</span><br><span class="line">vim  config.js #按i进入编辑模式，修改第一页和下几页的production下的url为自己的域名 如：http://www.lxy520.net 然后按Esc输入:wq 按回车退出</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>实现openshift自动重启</span><br><span class="line">cd $&#123;OPENSHIFT_REPO_DIR&#125;.openshift/cron/hourly</span><br><span class="line">wget http://dl-cystc.qiniudn.com/openshift/restart.sh</span><br><span class="line">chmod 711 restart.sh</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>重启应用, 安装主题与修改config.js 时需要重启应用</span><br><span class="line">ctl_all restart</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">安装主题 其它主题下载：http://marketplace.ghost.org/</span></span><br><span class="line">cd $&#123;OPENSHIFT_REPO_DIR&#125;/themes/</span><br><span class="line">git clone https://github.com/fabienwang/Ghost-Flat.git</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">配置Ghost博客</span></span><br><span class="line">cd $&#123;OPENSHIFT_REPO_DIR&#125;</span><br><span class="line">vim  config.js #按i进入编辑模式，修改第一页和下几页的production下的url为自己的域名 如：http://www.lxy520.net 然后按Esc输入:wq 按回车退出</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">实现openshift自动重启</span></span><br><span class="line">cd $&#123;OPENSHIFT_REPO_DIR&#125;.openshift/cron/hourly</span><br><span class="line">wget http://dl-cystc.qiniudn.com/openshift/restart.sh</span><br><span class="line">chmod 711 restart.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">重启应用, 安装主题与修改config.js 时需要重启应用</span></span><br><span class="line">ctl_all restart</span><br></pre></td></tr></table></figure>
 <hr>
 <p>###四、初始化博客</p>
 <p>用自己的域名进入博客，在地址栏加上<code>/ghost</code></p>
@@ -256,7 +256,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2016-09-09T02:41:04.000Z" itemprop="dateUpdated">2016-09-09 10:41:04</time>
+    Last updated: <time datetime="2016-09-09T02:41:04.000Z" itemprop="dateUpdated">2016-09-09 10:41:04</time>
 </span><br>
 
 

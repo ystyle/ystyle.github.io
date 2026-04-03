@@ -35,24 +35,25 @@
     
     
     
-    <title>No title | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <title>仓颉语言 Neovim 开发环境配置指南 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="">
-    <meta name="description" content="仓颉语言 Neovim 开发环境配置指南本文档介绍如何在 openEuler (aarch64) 系统上配置 Neovim (AstroNvim) 开发环境，用于仓颉语言开发。 目录 系统要求 安装仓颉 SDK 安装 Cangjie STDX 环境变量配置 Neovim 配置 常见问题  系统要求 操作系统：openEuler 2403 SP1 (aarch64) GCC 版本：12.3.1 或更">
+    <meta name="keywords" content="Cangjie,Neovim,AstroNvim,openEuler">
+    <meta name="description" content="本文档介绍如何在 openEuler (aarch64) 系统上配置 Neovim (AstroNvim) 开发环境，用于仓颉语言开发。 目录 系统要求 安装仓颉 SDK 安装 Cangjie STDX 环境变量配置 Neovim 配置 常见问题  系统要求 操作系统：openEuler 2403 SP1 (aarch64) GCC 版本：12.3.1 或更高 Neovim 版本：0.9.0 或更">
+<meta name="keywords" content="Cangjie,Neovim,AstroNvim,openEuler">
 <meta property="og:type" content="article">
-<meta property="og:title" content="No title">
-<meta property="og:url" content="http://ystyle.top/2026/04/03/仓颉语言Neovim开发环境配置指南/index.html">
+<meta property="og:title" content="仓颉语言 Neovim 开发环境配置指南">
+<meta property="og:url" content="http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/index.html">
 <meta property="og:site_name" content="东方星痕">
-<meta property="og:description" content="仓颉语言 Neovim 开发环境配置指南本文档介绍如何在 openEuler (aarch64) 系统上配置 Neovim (AstroNvim) 开发环境，用于仓颉语言开发。 目录 系统要求 安装仓颉 SDK 安装 Cangjie STDX 环境变量配置 Neovim 配置 常见问题  系统要求 操作系统：openEuler 2403 SP1 (aarch64) GCC 版本：12.3.1 或更">
+<meta property="og:description" content="本文档介绍如何在 openEuler (aarch64) 系统上配置 Neovim (AstroNvim) 开发环境，用于仓颉语言开发。 目录 系统要求 安装仓颉 SDK 安装 Cangjie STDX 环境变量配置 Neovim 配置 常见问题  系统要求 操作系统：openEuler 2403 SP1 (aarch64) GCC 版本：12.3.1 或更高 Neovim 版本：0.9.0 或更">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2026-04-03T15:19:19.748Z">
+<meta property="og:updated_time" content="2026-04-03T16:16:50.664Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="No title">
-<meta name="twitter:description" content="仓颉语言 Neovim 开发环境配置指南本文档介绍如何在 openEuler (aarch64) 系统上配置 Neovim (AstroNvim) 开发环境，用于仓颉语言开发。 目录 系统要求 安装仓颉 SDK 安装 Cangjie STDX 环境变量配置 Neovim 配置 常见问题  系统要求 操作系统：openEuler 2403 SP1 (aarch64) GCC 版本：12.3.1 或更">
+<meta name="twitter:title" content="仓颉语言 Neovim 开发环境配置指南">
+<meta name="twitter:description" content="本文档介绍如何在 openEuler (aarch64) 系统上配置 Neovim (AstroNvim) 开发环境，用于仓颉语言开发。 目录 系统要求 安装仓颉 SDK 安装 Cangjie STDX 环境变量配置 Neovim 配置 常见问题  系统要求 操作系统：openEuler 2403 SP1 (aarch64) GCC 版本：12.3.1 或更高 Neovim 版本：0.9.0 或更">
     
         <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
     
@@ -150,13 +151,13 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis"></div>
+        <div class="flex-col header-title ellipsis">仓颉语言 Neovim 开发环境配置指南</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -172,13 +173,15 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title"></h1>
+        <h1 class="title">仓颉语言 Neovim 开发环境配置指南</h1>
         <h5 class="subtitle">
             
-                <time datetime="2026-04-03T15:19:19.748Z" itemprop="datePublished" class="page-time">
+                <time datetime="2026-04-03T15:30:00.000Z" itemprop="datePublished" class="page-time">
   2026-04-03
 </time>
 
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
 
             
         </h5>
@@ -194,26 +197,28 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#仓颉语言-Neovim-开发环境配置指南"><span class="post-toc-number">1.</span> <span class="post-toc-text">仓颉语言 Neovim 开发环境配置指南</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目录"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">目录</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#系统要求"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">系统要求</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装仓颉-SDK"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">安装仓颉 SDK</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装-Cangjie-STDX"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">安装 Cangjie STDX</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#环境变量配置"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">环境变量配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建-GCC-运行时库符号链接"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">创建 GCC 运行时库符号链接</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Neovim-配置"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">Neovim 配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-安装-AstroNvim"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">1. 安装 AstroNvim</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-配置仓颉-LSP-插件"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">2. 配置仓颉 LSP 插件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-启动-Neovim-并安装插件"><span class="post-toc-number">1.6.3.</span> <span class="post-toc-text">3. 启动 Neovim 并安装插件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常见问题"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">常见问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-链接错误：cannot-find-crtbeginS-o"><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">1. 链接错误：cannot find crtbeginS.o</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-LSP-不工作"><span class="post-toc-number">1.7.2.</span> <span class="post-toc-text">2. LSP 不工作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-找不到-STDX"><span class="post-toc-number">1.7.3.</span> <span class="post-toc-text">3. 找不到 STDX</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-快速事件上下文错误"><span class="post-toc-number">1.7.4.</span> <span class="post-toc-text">4. 快速事件上下文错误</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#键位映射"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">键位映射</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考链接"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">参考链接</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目录"><span class="post-toc-number">1.</span> <span class="post-toc-text">目录</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#系统要求"><span class="post-toc-number">2.</span> <span class="post-toc-text">系统要求</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装仓颉-SDK"><span class="post-toc-number">3.</span> <span class="post-toc-text">安装仓颉 SDK</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装-Cangjie-STDX"><span class="post-toc-number">4.</span> <span class="post-toc-text">安装 Cangjie STDX</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#环境变量配置"><span class="post-toc-number">5.</span> <span class="post-toc-text">环境变量配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建-GCC-运行时库符号链接"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">创建 GCC 运行时库符号链接</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Neovim-配置"><span class="post-toc-number">6.</span> <span class="post-toc-text">Neovim 配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-安装-AstroNvim"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">1. 安装 AstroNvim</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-配置仓颉-LSP-插件"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">2. 配置仓颉 LSP 插件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-启动-Neovim-并安装插件"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">3. 启动 Neovim 并安装插件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常见问题"><span class="post-toc-number">7.</span> <span class="post-toc-text">常见问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-链接错误：cannot-find-crtbeginS-o"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">1. 链接错误：cannot find crtbeginS.o</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-LSP-不工作"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">2. LSP 不工作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-找不到-STDX"><span class="post-toc-number">7.3.</span> <span class="post-toc-text">3. 找不到 STDX</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-快速事件上下文错误"><span class="post-toc-number">7.4.</span> <span class="post-toc-text">4. 快速事件上下文错误</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#键位映射"><span class="post-toc-number">8.</span> <span class="post-toc-text">键位映射</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考链接"><span class="post-toc-number">9.</span> <span class="post-toc-text">参考链接</span></a></li></ol>
         </nav>
     </aside>
     
-<article id="post-仓颉语言Neovim开发环境配置指南"
+<article id="post-cangjie-neovim-dev-setup"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title"></h1>
+        <h1 class="post-card-title">仓颉语言 Neovim 开发环境配置指南</h1>
         <div class="post-meta">
-            <time class="post-time" title="2026-04-03 23:19:19" datetime="2026-04-03T15:19:19.748Z"  itemprop="datePublished">2026-04-03</time>
+            <time class="post-time" title="2026-04-03 23:30:00" datetime="2026-04-03T15:30:00.000Z"  itemprop="datePublished">2026-04-03</time>
 
             
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
+
 
 
             
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="仓颉语言-Neovim-开发环境配置指南"><a href="#仓颉语言-Neovim-开发环境配置指南" class="headerlink" title="仓颉语言 Neovim 开发环境配置指南"></a>仓颉语言 Neovim 开发环境配置指南</h1><p>本文档介绍如何在 openEuler (aarch64) 系统上配置 Neovim (AstroNvim) 开发环境，用于仓颉语言开发。</p>
+            <p>本文档介绍如何在 openEuler (aarch64) 系统上配置 Neovim (AstroNvim) 开发环境，用于仓颉语言开发。</p>
 <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
 <li><a href="#系统要求">系统要求</a></li>
 <li><a href="#安装仓颉-sdk">安装仓颉 SDK</a></li>
@@ -349,12 +354,12 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2026-04-03T15:19:19.748Z" itemprop="dateUpdated">2026-04-03 23:19:19</time>
+    Last updated: <time datetime="2026-04-03T16:16:50.664Z" itemprop="dateUpdated">2026-04-04 00:16:50</time>
 </span><br>
 
 
         
-        本文链接：<a href="/2026/04/03/仓颉语言Neovim开发环境配置指南/" target="_blank" rel="external">http://ystyle.top/2026/04/03/仓颉语言Neovim开发环境配置指南/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        本文链接：<a href="/2026/04/03/cangjie-neovim-dev-setup/" target="_blank" rel="external">http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
         
     </div>
     <footer>
@@ -370,6 +375,8 @@
 
         <div class="post-footer">
             
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AstroNvim/">AstroNvim</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Neovim/">Neovim</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openEuler/">openEuler</a></li></ul>
+
 
             
 <div class="page-share-wrap">
@@ -378,7 +385,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2026/04/03/仓颉语言Neovim开发环境配置指南/&title=东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/&title=《仓颉语言 Neovim 开发环境配置指南》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -388,22 +395,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2026/04/03/仓颉语言Neovim开发环境配置指南/&title=东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/&title=《仓颉语言 Neovim 开发环境配置指南》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2026/04/03/仓颉语言Neovim开发环境配置指南/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=东方星痕&url=http://ystyle.top/2026/04/03/仓颉语言Neovim开发环境配置指南/&via=http://ystyle.top" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《仓颉语言 Neovim 开发环境配置指南》 — 东方星痕&url=http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/&via=http://ystyle.top" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2026/04/03/仓颉语言Neovim开发环境配置指南/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -512,7 +519,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2026/04/03/仓颉语言Neovim开发环境配置指南/&title=《No title》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/&title=《仓颉语言 Neovim 开发环境配置指南》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -522,22 +529,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2026/04/03/仓颉语言Neovim开发环境配置指南/&title=《No title》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/&title=《仓颉语言 Neovim 开发环境配置指南》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2026/04/03/仓颉语言Neovim开发环境配置指南/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《No title》 — 东方星痕&url=http://ystyle.top/2026/04/03/仓颉语言Neovim开发环境配置指南/&via=http://ystyle.top" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《仓颉语言 Neovim 开发环境配置指南》 — 东方星痕&url=http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/&via=http://ystyle.top" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2026/04/03/仓颉语言Neovim开发环境配置指南/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -548,7 +555,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvUlEQVR42u3aQWojQQwFUN//0h4YZhEw7fwvdXm8eLUKJunWq0BJVunxiNfz7/r5889Prj5/vqyr33/9q+QJty08PDy8UehXKwn9NayrT95vUPuu9zHj4eHhneblyWCWEvIj/n2SyGPGw8PD+wZecrgnqSVJKm08eHh4eN/M2xfTeWGNh4eH9828/ODeNy/y0Ns0g4eHh/cZ3uwC7P/+fPx+Dw8PD290q54f5Ukp3KafTZz/noOHh4d3gJcPP901pDW7bMubvNE3Bjw8PLwFL2865A/dYNr/zC/FNx4eHt4B3mxQINmUtjk7K7uLbcXDw8O7lZcPAcwK301qyQe8Lt+Ih4eHdyuvvWpKGrv5MEGbcvJI+oobDw8P707eZkxq39JdNSbw8PDwjvHyFkB7rO9HDZLfvPxbPDw8vGO82WvaYazNpswax3h4eHinebOL/FnpvBmoylsVeHh4eCd4CSkPrk0YeeE+ayjj4eHhneDlB3ReBM+q2bbZETVN8PDw8A7wkpWPZLVhba7T9g0RPDw8vA0v/5LflsJJmb6/6PolEjw8PLyP8zYXVEX+ibegThV4eHh4t/JmTdj8ZXmayRNMkbTw8PDwDvNm5Wx+xLcNhdmoAR4eHt5neO0I1Kwl0Y4azNLM6tYODw8Pb/TlPz/EkyK7HRSYxRY9GQ8PD+8mXnKUt1dZbaqYFe71TBkeHh7eMV7bQm2f8H6DklRUxICHh4d3gLdpvM5arpsxhc0VGh4eHt5dvGe58vJ6g2nbvnh4eHif5G0O37aBmweav2s2XoCHh4e35+XJIC+UN62HdlOG8xF4eHh4a16eDGbF8WxzN1uGh4eH9w28DSlvYbQDBNE0GR4eHt4X8GZBty2JTasXDw8P7zRv1ozIR6byIYNZgX4ZFR4eHt4B3mawad+w2G/fY7/w8PDwUt4fdmaxhkrwpSkAAAAASUVORK5CYII=" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNklEQVR42u3a3a6CQAxFYd7/pTm3JsfBtVs0obO4MqgwHyZ1+nMc+Dhfjuvz/Mz/16sztx0yZMh4LOO8PK4Z5MbkOuS+q8/IkCFjHwa5PQnE1+H1Gka+uzwvQ4YMGY3NH79m+vhkyJAhgwTN/oay/zhkyJCxDyPdoqUJLSm6/SgXlyFDxgMZvOr++9df6W/IkCHjUYwzPO5qcHbW8GZVMmTIGM3gAa7DqzUb4uEPGTJkjGaQ4lcn4UwTXR7KkU+GDBmDGJ2bpW0AsqxOyU+GDBnzGLyJWBu/IIE4bX+iiqAMGTLGMXjCWdsspg2AeAREhgwZQxlktIIs994OapwYy5AhYxvGXVMNaVAm734I3zJkyBjN6Hz03jCdJrEffgAZMmRswKg1FNNBitqgBvqTkCFDxiBGrdvZaRXw13wNMmTImM3gjcxaLOeFs7Q5scTIkCFjKCNNMvml+QaxNoJ2pE9UhgwZD2Skhf5aUtopqBV/BxkyZAxi9Ld9nfI9D99o5EKGDBmjGbX0FYW/UnmOP/s3G0QZMmRsw0hLZulwWH8jiAKuDBkyxjGCNmE4ilEbtoi3kjJkyBjKOMMjXW5/OBWNZciQIWM0oxbsvtHUTJPeIkaGDBmPZaSL46V8HqDTgCtDhow9GWnCSbZ9pP2Z/gMsryxDhgwZYRuyU4Zr7V5lyJAhA3w+HZtI09rlo5EhQ8YGjNrYRG3Agl+HfEuGDBk7MNJ9FwmdZJuYhuBO6itDhozHMv4AMlJLqRKSmqoAAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 

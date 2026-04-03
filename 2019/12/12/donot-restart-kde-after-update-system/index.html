@@ -157,7 +157,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -221,7 +221,7 @@
             <blockquote>
 <p>用Archlinux经常更新系统， 如果遇到kde更新了的话，不重启系统的话很多kde的应用会打不开， 如果不想重启系统应该怎么办？</p>
 </blockquote>
-<h3 id="不重启系统情况下重启KDE5"><a href="#不重启系统情况下重启KDE5" class="headerlink" title="不重启系统情况下重启KDE5"></a>不重启系统情况下重启KDE5</h3><p>在更新系统完成后输入:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> kquitapp5 plasmashell &amp;&amp; kstart5 plasmashell</span><br></pre></td></tr></table></figure></p>
+<h3 id="不重启系统情况下重启KDE5"><a href="#不重启系统情况下重启KDE5" class="headerlink" title="不重启系统情况下重启KDE5"></a>不重启系统情况下重启KDE5</h3><p>在更新系统完成后输入:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> kquitapp5 plasmashell &amp;&amp; kstart5 plasmashell</span></span><br></pre></td></tr></table></figure></p>
 <p>太长了不好记建议在.zshrc添加以下内容:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias kr="kquitapp5 plasmashell &amp;&amp; kstart5 plasmashell"</span><br></pre></td></tr></table></figure></p>
 <p>以后更新完后输入<code>kr</code>就好了， kde重启后还会有日志输出，直接把终端关了就好了</p>
 
@@ -231,7 +231,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2020-04-13T07:24:26.000Z" itemprop="dateUpdated">2020-04-13 15:24:26</time>
+    Last updated: <time datetime="2020-04-13T07:24:26.000Z" itemprop="dateUpdated">2020-04-13 15:24:26</time>
 </span><br>
 
 

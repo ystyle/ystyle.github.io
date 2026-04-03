@@ -159,7 +159,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -230,7 +230,7 @@
 <li>jq</li>
 <li>rofi</li>
 </ul>
-<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p>把以下脚本存放到<code>~/.config/hypr/scripts/switch_windows</code><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/usr/bin/env bash</span><br><span class="line">NAME=`hyprctl clients -j | jq -r '.[] | select(.title != "") | .title' | rofi -dmenu`</span><br><span class="line">WINDOW=`hyprctl clients -j | jq -r ".[] | select(.title == \"$&#123;NAME&#125;\") | .address"`</span><br><span class="line">hyprctl dispatch focuswindow address:$&#123;WINDOW&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p>把以下脚本存放到<code>~/.config/hypr/scripts/switch_windows</code><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/env bash</span></span><br><span class="line">NAME=`hyprctl clients -j | jq -r '.[] | select(.title != "") | .title' | rofi -dmenu`</span><br><span class="line">WINDOW=`hyprctl clients -j | jq -r ".[] | select(.title == \"$&#123;NAME&#125;\") | .address"`</span><br><span class="line">hyprctl dispatch focuswindow address:$&#123;WINDOW&#125;</span><br></pre></td></tr></table></figure></p>
 <p>添加快捷键<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bind = ALT, Tab, exec, $&#123;HOME&#125;/.config/hypr/scripts/switch_windows</span><br></pre></td></tr></table></figure></p>
 <h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><blockquote>
 <p>按<code>alt + tab</code>后，在弹出的窗口选择对应窗口的标题， 可以自动跳转到对应的窗口</p>
@@ -249,7 +249,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2023-10-13T07:08:26.000Z" itemprop="dateUpdated">2023-10-13 15:08:26</time>
+    Last updated: <time datetime="2023-10-13T07:08:26.000Z" itemprop="dateUpdated">2023-10-13 15:08:26</time>
 </span><br>
 
 

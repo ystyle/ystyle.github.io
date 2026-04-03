@@ -157,7 +157,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -211,7 +211,7 @@
 <p>因为想做一个直接生成建表语句的工具。 又不想连接到数据库(懒得让数据库一直启动着)<br>看了下sequelize.js的测试代码， 找到了以下方法可以实现</p>
 </blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Sequelize = <span class="built_in">require</span>(<span class="string">'sequelize'</span>);</span><br><span class="line"><span class="comment">// 因为没有连接到数据库， 用户名什么的可以随意写</span></span><br><span class="line"><span class="keyword">var</span> sequelize = <span class="keyword">new</span> Sequelize(<span class="string">'test'</span>, <span class="string">'root'</span>, <span class="string">'root'</span>, &#123;</span><br><span class="line">    dialect: <span class="string">"mysql"</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> User = sequelize.define(<span class="string">'User'</span>, &#123;</span><br><span class="line">    username: Sequelize.STRING,</span><br><span class="line">    password: Sequelize.STRING</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> sql = sequelize.dialect.QueryGenerator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ddlsql = sql.createTableQuery(User.getTableName(), sql.attributesToSQL(User.rawAttributes), &#123; &#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(ddlsql);</span><br></pre></td></tr></table></figure>
-<p>生成DDL建表语句<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> node test.js</span><br><span class="line">CREATE TABLE IF NOT EXISTS `Users` (`id` INTEGER NOT NULL auto_increment , `username` VARCHAR(255), `password` VARCHAR</span><br><span class="line">(255), `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;</span><br></pre></td></tr></table></figure></p>
+<p>生成DDL建表语句<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> node test.js</span></span><br><span class="line">CREATE TABLE IF NOT EXISTS `Users` (`id` INTEGER NOT NULL auto_increment , `username` VARCHAR(255), `password` VARCHAR</span><br><span class="line">(255), `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;</span><br></pre></td></tr></table></figure></p>
 
         </div>
 
@@ -219,7 +219,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2016-11-30T09:29:45.000Z" itemprop="dateUpdated">2016-11-30 17:29:45</time>
+    Last updated: <time datetime="2016-11-30T09:29:45.000Z" itemprop="dateUpdated">2016-11-30 17:29:45</time>
 </span><br>
 
 
