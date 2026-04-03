@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="鸿蒙,鸿蒙PC,Matebook Pro,StratoVirt,OzoneC,融合开发引擎">
+    <meta name="description" content="鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式 本文深入解析鸿蒙PC融合开发引擎的技术架构，揭示其如何通过StratoVirt虚拟化和OzoneC容器技术实现Linux应用兼容。  背景鸿蒙PC（HarmonyOS PC）采用了独特的架构设计来实现Linux应用兼容。作为用户，我在使用过程中发现系统提供了一个”融合开发引擎”功能，可以在其中运行openEuler环境。本文将解析这个融合开发引擎的">
+<meta name="keywords" content="鸿蒙,鸿蒙PC,Matebook Pro,StratoVirt,OzoneC,融合开发引擎">
+<meta property="og:type" content="article">
+<meta property="og:title" content="鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式">
+<meta property="og:url" content="http://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/index.html">
+<meta property="og:site_name" content="东方星痕">
+<meta property="og:description" content="鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式 本文深入解析鸿蒙PC融合开发引擎的技术架构，揭示其如何通过StratoVirt虚拟化和OzoneC容器技术实现Linux应用兼容。  背景鸿蒙PC（HarmonyOS PC）采用了独特的架构设计来实现Linux应用兼容。作为用户，我在使用过程中发现系统提供了一个”融合开发引擎”功能，可以在其中运行openEuler环境。本文将解析这个融合开发引擎的">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2026-04-03T13:30:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式">
+<meta name="twitter:description" content="鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式 本文深入解析鸿蒙PC融合开发引擎的技术架构，揭示其如何通过StratoVirt虚拟化和OzoneC容器技术实现Linux应用兼容。  背景鸿蒙PC（HarmonyOS PC）采用了独特的架构设计来实现Linux应用兼容。作为用户，我在使用过程中发现系统提供了一个”融合开发引擎”功能，可以在其中运行openEuler环境。本文将解析这个融合开发引擎的">
+    
+        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ystyle" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/512308314" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/atom.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                订阅
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2026-04-03T13:30:00.000Z" itemprop="datePublished" class="page-time">
+  2026-04-03
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/软件/">软件</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式"><span class="post-toc-number">1.</span> <span class="post-toc-text">鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#架构探秘"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">架构探秘</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#初次接触"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">初次接触</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#架构层次"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">架构层次</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关键证据"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">关键证据</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-虚拟机特征"><span class="post-toc-number">1.2.3.1.</span> <span class="post-toc-text">1. 虚拟机特征</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-容器特征"><span class="post-toc-number">1.2.3.2.</span> <span class="post-toc-text">2. 容器特征</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-内核分析"><span class="post-toc-number">1.2.3.3.</span> <span class="post-toc-text">3. 内核分析</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#StratoVirt：企业级虚拟化平台"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">StratoVirt：企业级虚拟化平台</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#项目介绍"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">项目介绍</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关键特性"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">关键特性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#运行模式"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">运行模式</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OzoneC：容器运行时"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">OzoneC：容器运行时</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#项目定位"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">项目定位</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#技术特点"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">技术特点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#核心功能"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">核心功能</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#架构优势"><span class="post-toc-number">1.4.4.</span> <span class="post-toc-text">架构优势</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#与StratoVirt的协作"><span class="post-toc-number">1.4.5.</span> <span class="post-toc-text">与StratoVirt的协作</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#融合开发引擎的工作原理"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">融合开发引擎的工作原理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#启动流程"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">启动流程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Linux兼容层（HSLd）"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">Linux兼容层（HSLd）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#容器环境"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">容器环境</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#技术优势"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">技术优势</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-安全隔离"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">1. 安全隔离</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-性能优化"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">2. 性能优化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-灵活部署"><span class="post-toc-number">1.6.3.</span> <span class="post-toc-text">3. 灵活部署</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实际应用"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">实际应用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#开发环境"><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">开发环境</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用限制"><span class="post-toc-number">1.7.2.</span> <span class="post-toc-text">使用限制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决方案"><span class="post-toc-number">1.7.3.</span> <span class="post-toc-text">解决方案</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#与传统方案的对比"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">与传统方案的对比</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#对比WSL"><span class="post-toc-number">1.8.1.</span> <span class="post-toc-text">对比WSL</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#对比传统虚拟机"><span class="post-toc-number">1.8.2.</span> <span class="post-toc-text">对比传统虚拟机</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">总结</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-matebookpro-fusion-dev-engine-architecture"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2026-04-03 21:30:00" datetime="2026-04-03T13:30:00.000Z"  itemprop="datePublished">2026-04-03</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/软件/">软件</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式"><a href="#鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式" class="headerlink" title="鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式"></a>鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式</h1><blockquote>
+<p>本文深入解析鸿蒙PC融合开发引擎的技术架构，揭示其如何通过StratoVirt虚拟化和OzoneC容器技术实现Linux应用兼容。</p>
+</blockquote>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>鸿蒙PC（HarmonyOS PC）采用了独特的架构设计来实现Linux应用兼容。作为用户，我在使用过程中发现系统提供了一个”融合开发引擎”功能，可以在其中运行openEuler环境。本文将解析这个融合开发引擎的技术架构。</p>
+<h2 id="架构探秘"><a href="#架构探秘" class="headerlink" title="架构探秘"></a>架构探秘</h2><h3 id="初次接触"><a href="#初次接触" class="headerlink" title="初次接触"></a>初次接触</h3><p>在鸿蒙PC的融合开发引擎环境中，我尝试运行各种Linux工具时发现：</p>
+<ol>
+<li><strong>文件系统特征</strong>：使用overlay文件系统，路径包含<code>/var/lib/OzoneC/overlay2/</code></li>
+<li><strong>进程信息</strong>：cgroup显示典型的容器特征</li>
+<li><strong>内核版本</strong>：Linux 6.6.0，带有特殊的init进程</li>
+</ol>
+<p>通过一系列探测，我逐渐揭示了其架构。</p>
+<h3 id="架构层次"><a href="#架构层次" class="headerlink" title="架构层次"></a>架构层次</h3><p>经过分析，鸿蒙PC融合开发引擎采用的是<strong>三层架构</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">鸿蒙PC（HarmonyOS 微内核）</span><br><span class="line">    ↓</span><br><span class="line">StratoVirt 虚拟机（运行Linux）</span><br><span class="line">    ↓</span><br><span class="line">OzoneC 容器（隔离Linux应用环境）</span><br><span class="line">    ↓</span><br><span class="line">用户环境（openEuler容器）</span><br></pre></td></tr></table></figure>
+<h3 id="关键证据"><a href="#关键证据" class="headerlink" title="关键证据"></a>关键证据</h3><h4 id="1-虚拟机特征"><a href="#1-虚拟机特征" class="headerlink" title="1. 虚拟机特征"></a>1. 虚拟机特征</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看固件信息</span></span><br><span class="line">ls -la /sys/firmware/</span><br><span class="line"><span class="comment"># 输出包含：qemu_fw_cfg - 这是QEMU/StratoVirt虚拟机的特征</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看内核启动参数</span></span><br><span class="line">cat /proc/cmdline</span><br><span class="line"><span class="comment"># 输出：console=hvc0 root=/dev/vda ro reboot=k panic=1 init=/usr/sbin/HSLd</span></span><br><span class="line"><span class="comment"># - hvc0是virtio虚拟机控制台</span></span><br><span class="line"><span class="comment"># - /dev/vda是虚拟块设备</span></span><br><span class="line"><span class="comment"># - init=/usr/sbin/HSLd是HarmonyOS Linux兼容层的初始化程序</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-容器特征"><a href="#2-容器特征" class="headerlink" title="2. 容器特征"></a>2. 容器特征</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看挂载信息</span></span><br><span class="line">cat /proc/mounts</span><br><span class="line"><span class="comment"># 输出：</span></span><br><span class="line">overlay / overlay rw,dirsync,nodev,relatime,</span><br><span class="line">lowerdir=/var/lib/OzoneC/overlay2/rgm_openEuler/lower,</span><br><span class="line">upperdir=/var/lib/ozonec/bundle/openeuler2203fgjM0CXQxp5yLHfFZOK/diff,</span><br><span class="line">workdir=/var/lib/ozonec/bundle/openeuler2203fgjM0CXQxp5yLHfFZOK/work</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这表明：</span></span><br><span class="line"><span class="comment"># - 使用overlay2存储驱动</span></span><br><span class="line"><span class="comment"># - OzoneC是容器运行时</span></span><br><span class="line"><span class="comment"># - openEuler是容器镜像</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-内核分析"><a href="#3-内核分析" class="headerlink" title="3. 内核分析"></a>3. 内核分析</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看内核版本</span></span><br><span class="line">uname -a</span><br><span class="line"><span class="comment"># Linux localhost 6.6.0 aarch64</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看CPU信息</span></span><br><span class="line">cat /proc/cpuinfo</span><br><span class="line"><span class="comment"># CPU implementer: 0x41 (ARM)</span></span><br><span class="line"><span class="comment"># CPU architecture: 8</span></span><br><span class="line"><span class="comment"># 没有hypervisor标志，因为运行在虚拟机中</span></span><br></pre></td></tr></table></figure>
+<h2 id="StratoVirt：企业级虚拟化平台"><a href="#StratoVirt：企业级虚拟化平台" class="headerlink" title="StratoVirt：企业级虚拟化平台"></a>StratoVirt：企业级虚拟化平台</h2><h3 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h3><p>StratoVirt是计算产业中面向云数据中心的企业级虚拟化平台，实现了一套架构统一支持虚拟机、容器、Serverless三种场景。在鸿蒙PC上，它作为Linux兼容的基础设施。</p>
+<h3 id="关键特性"><a href="#关键特性" class="headerlink" title="关键特性"></a>关键特性</h3><ol>
+<li><strong>轻量低噪</strong>：高效的虚拟化实现</li>
+<li><strong>软硬协同</strong>：充分利用硬件特性</li>
+<li><strong>Rust语言级安全</strong>：内存安全的实现</li>
+<li><strong>架构统一</strong>：支持多种场景</li>
+</ol>
+<h3 id="运行模式"><a href="#运行模式" class="headerlink" title="运行模式"></a>运行模式</h3><p>StratoVirt支持两种机型：</p>
+<p><strong>microvm机型</strong>（轻量级）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">./stratovirt \</span><br><span class="line">    -machine microvm \</span><br><span class="line">    -kernel /path/to/kernel \</span><br><span class="line">    -append <span class="string">"console=ttyAMA0 root=/dev/vda"</span> \</span><br><span class="line">    -drive file=/path/to/rootfs,id=rootfs \</span><br><span class="line">    -device virtio-blk-device,drive=rootfs \</span><br><span class="line">    -serial stdio</span><br></pre></td></tr></table></figure></p>
+<p><strong>标准机型</strong>（完整功能）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">./stratovirt \</span><br><span class="line">    -machine virt \</span><br><span class="line">    -kernel /path/to/kernel \</span><br><span class="line">    -drive file=/path/to/firmware,<span class="keyword">if</span>=pflash \</span><br><span class="line">    -device virtio-blk-pci,drive=rootfs \</span><br><span class="line">    -serial stdio</span><br></pre></td></tr></table></figure></p>
+<h2 id="OzoneC：容器运行时"><a href="#OzoneC：容器运行时" class="headerlink" title="OzoneC：容器运行时"></a>OzoneC：容器运行时</h2><h3 id="项目定位"><a href="#项目定位" class="headerlink" title="项目定位"></a>项目定位</h3><p>OzoneC是StratoVirt项目内置的OCI容器运行时，使用Rust语言实现。从源码和挂载路径<code>/var/lib/OzoneC/overlay2/</code>可以确认其使用。</p>
+<h3 id="技术特点"><a href="#技术特点" class="headerlink" title="技术特点"></a>技术特点</h3><p>OzoneC是一个完整的OCI runtime实现：</p>
+<ul>
+<li><strong>开发团队</strong>：Huawei StratoVirt Team</li>
+<li><strong>实现语言</strong>：Rust（内存安全）</li>
+<li><strong>标准兼容</strong>：完全符合OCI runtime-spec</li>
+<li><strong>支持命令</strong>：create, start, state, kill, delete, exec</li>
+</ul>
+<h3 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># OCI标准命令</span></span><br><span class="line">ozonec create  &lt;container-id&gt;  <span class="comment"># 创建容器</span></span><br><span class="line">ozonec start   &lt;container-id&gt;  <span class="comment"># 启动容器</span></span><br><span class="line">ozonec state   &lt;container-id&gt;  <span class="comment"># 查询状态</span></span><br><span class="line">ozonec <span class="built_in">kill</span>    &lt;container-id&gt;  <span class="comment"># 终止容器</span></span><br><span class="line">ozonec delete  &lt;container-id&gt;  <span class="comment"># 删除容器</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 扩展命令</span></span><br><span class="line">ozonec <span class="built_in">exec</span>    &lt;container-id&gt;  <span class="comment"># 在容器中执行命令</span></span><br></pre></td></tr></table></figure>
+<h3 id="架构优势"><a href="#架构优势" class="headerlink" title="架构优势"></a>架构优势</h3><ol>
+<li><strong>Rust实现</strong>：内存安全、无数据竞争</li>
+<li><strong>轻量级</strong>：专为虚拟机场景优化</li>
+<li><strong>原生集成</strong>：与StratoVirt紧密配合</li>
+<li><strong>OCI兼容</strong>：支持标准容器镜像</li>
+</ol>
+<h3 id="与StratoVirt的协作"><a href="#与StratoVirt的协作" class="headerlink" title="与StratoVirt的协作"></a>与StratoVirt的协作</h3><p>OzoneC在StratoVirt虚拟机内部运行，形成双重隔离：</p>
+<ol>
+<li><strong>虚拟机级隔离</strong>：StratoVirt提供硬件级隔离</li>
+<li><strong>容器级隔离</strong>：OzoneC提供应用级隔离</li>
+</ol>
+<p>这种设计兼顾了安全性和性能，且OzoneC作为StratoVirt的子项目，实现了无缝集成。</p>
+<h2 id="融合开发引擎的工作原理"><a href="#融合开发引擎的工作原理" class="headerlink" title="融合开发引擎的工作原理"></a>融合开发引擎的工作原理</h2><h3 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h3><ol>
+<li><strong>鸿蒙PC启动</strong>：微内核系统初始化</li>
+<li><strong>StratoVirt启动</strong>：创建Linux虚拟机</li>
+<li><strong>HSLd初始化</strong>：HarmonyOS Linux Layer daemon启动</li>
+<li><strong>OzoneC运行</strong>：创建openEuler容器</li>
+<li><strong>用户环境</strong>：提供Shell和开发工具</li>
+</ol>
+<h3 id="Linux兼容层（HSLd）"><a href="#Linux兼容层（HSLd）" class="headerlink" title="Linux兼容层（HSLd）"></a>Linux兼容层（HSLd）</h3><p><code>init=/usr/sbin/HSLd</code>参数表明使用了HarmonyOS Linux Layer daemon：</p>
+<ul>
+<li>负责Linux系统服务的初始化</li>
+<li>提供鸿蒙与Linux的交互接口</li>
+<li>管理Linux应用的生命周期</li>
+</ul>
+<h3 id="容器环境"><a href="#容器环境" class="headerlink" title="容器环境"></a>容器环境</h3><p>openEuler容器提供：</p>
+<ul>
+<li>完整的Linux用户空间</li>
+<li>RPM包管理（dnf/yum）</li>
+<li>开发工具链（gcc、make等）</li>
+<li>运行时环境（Python、Node.js等）</li>
+</ul>
+<h2 id="技术优势"><a href="#技术优势" class="headerlink" title="技术优势"></a>技术优势</h2><h3 id="1-安全隔离"><a href="#1-安全隔离" class="headerlink" title="1. 安全隔离"></a>1. 安全隔离</h3><ul>
+<li>虚拟机隔离防止Linux应用影响鸿蒙系统</li>
+<li>容器隔离防止不同Linux应用相互影响</li>
+<li>多层防御，安全可靠</li>
+</ul>
+<h3 id="2-性能优化"><a href="#2-性能优化" class="headerlink" title="2. 性能优化"></a>2. 性能优化</h3><ul>
+<li>StratoVirt使用Rust实现，内存安全且高效</li>
+<li>virtio设备提供高性能I/O</li>
+<li>overlay文件系统减少存储开销</li>
+</ul>
+<h3 id="3-灵活部署"><a href="#3-灵活部署" class="headerlink" title="3. 灵活部署"></a>3. 灵活部署</h3><ul>
+<li>支持不同Linux发行版容器</li>
+<li>可以定制开发环境</li>
+<li>快速部署和销毁</li>
+</ul>
+<h2 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h2><h3 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h3><p>在融合开发引擎中，开发者可以：</p>
+<ul>
+<li>使用完整的Linux开发工具链</li>
+<li>运行服务器软件（nginx、redis等）</li>
+<li>编译Linux应用程序</li>
+<li>使用容器技术部署应用</li>
+</ul>
+<h3 id="使用限制"><a href="#使用限制" class="headerlink" title="使用限制"></a>使用限制</h3><p>由于容器共享宿主机内核：</p>
+<ul>
+<li><strong>无法更换内核版本</strong>：虚拟机内核固定</li>
+<li><strong>glibc版本受限</strong>：容器使用虚拟机的glibc</li>
+<li><strong>内核模块不可加载</strong>：无内核权限</li>
+</ul>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>对于glibc版本问题，可以：</p>
+<ol>
+<li><strong>从源码编译</strong>：使用当前glibc编译应用</li>
+<li><strong>使用静态链接</strong>：避免依赖系统库</li>
+<li><strong>使用隔离环境</strong>：conda、nix等提供独立环境</li>
+</ol>
+<h2 id="与传统方案的对比"><a href="#与传统方案的对比" class="headerlink" title="与传统方案的对比"></a>与传统方案的对比</h2><h3 id="对比WSL"><a href="#对比WSL" class="headerlink" title="对比WSL"></a>对比WSL</h3><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>鸿蒙融合开发引擎</th>
+<th>WSL2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>架构</td>
+<td>虚拟机+容器</td>
+<td>虻拟机</td>
+</tr>
+<tr>
+<td>内核</td>
+<td>Linux 6.6</td>
+<td>Linux 5.x</td>
+</tr>
+<tr>
+<td>容器支持</td>
+<td>OzoneC</td>
+<td>Docker</td>
+</tr>
+<tr>
+<td>镜像管理</td>
+<td>鸿蒙生态</td>
+<td>Docker生态</td>
+</tr>
+<tr>
+<td>安全隔离</td>
+<td>双层隔离</td>
+<td>单层隔离</td>
+</tr>
+</tbody>
+</table>
+<h3 id="对比传统虚拟机"><a href="#对比传统虚拟机" class="headerlink" title="对比传统虚拟机"></a>对比传统虚拟机</h3><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>StratoVirt</th>
+<th>QEMU/KVM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>实现语言</td>
+<td>Rust</td>
+<td>C</td>
+</tr>
+<tr>
+<td>内存安全</td>
+<td>语言级</td>
+<td>需要编码规范</td>
+</tr>
+<tr>
+<td>启动速度</td>
+<td>快速</td>
+<td>传统</td>
+</tr>
+<tr>
+<td>容器集成</td>
+<td>OzoneC</td>
+<td>需额外配置</td>
+</tr>
+</tbody>
+</table>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>鸿蒙PC融合开发引擎通过StratoVirt虚拟化和OzoneC容器技术，巧妙地实现了Linux应用兼容：</p>
+<ol>
+<li><strong>微内核架构</strong>：鸿蒙保持自身特性</li>
+<li><strong>虚拟化隔离</strong>：StratoVirt运行Linux</li>
+<li><strong>容器管理</strong>：OzoneC提供应用环境</li>
+<li><strong>双层隔离</strong>：安全性和性能兼顾</li>
+</ol>
+<p>这种架构设计体现了鸿蒙生态的创新思路，既保持了鸿蒙的微内核优势，又通过虚拟化和容器技术实现了Linux兼容，为开发者提供了熟悉的工作环境。</p>
+<hr>
+<p><strong>参考资料</strong>：</p>
+<ul>
+<li>StratoVirt项目：<a href="https://gitcode.com/openeuler/stratovirt" target="_blank" rel="noopener">https://gitcode.com/openeuler/stratovirt</a></li>
+<li>OzoneC源码：StratoVirt项目的<code>ozonec/</code>目录</li>
+<li>openEuler官网：<a href="https://openeuler.org" target="_blank" rel="noopener">https://openeuler.org</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2026-04-03T13:30:00.000Z" itemprop="dateUpdated">2026-04-03 21:30:00</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2026/04/03/matebookpro-fusion-dev-engine-architecture/" target="_blank" rel="external">http://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        
+    </div>
+    <footer>
+        <a href="http://ystyle.top">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Matebook-Pro/">Matebook Pro</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OzoneC/">OzoneC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/StratoVirt/">StratoVirt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/融合开发引擎/">融合开发引擎</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/鸿蒙/">鸿蒙</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/鸿蒙PC/">鸿蒙PC</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/&title=《鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/&title=《鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式》 — 东方星痕&url=http://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2026/04/03/matebookpro-container-build-neovim/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+        <h4 class="title">鸿蒙PC融合开发引擎中编译安装Neovim与AstroNvim配置指南</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2026/03/19/mcp-term-abandoned/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">MCP-Term：一个未出生即夭折的想法</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+          clientID: '1f887c79a8b9b9fbec12',
+          clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+          repo: 'ystyle.github.io',
+          owner: 'ystyle',
+          admin: ['ystyle'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p>
+            
+
+            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+            <span>东方星痕 &copy; 2015 - 2026</span>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="/img/record-icon.png" style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                  粤公网安备 44010502002055号
+                </p>
+              </a>
+            </div>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/&title=《鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/&title=《鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式》 — 东方星痕&url=http://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/&via=http://ystyle.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtklEQVR42u3aUW6sMBAEwNz/0on0vlm2ewYn+6TiC60IuByJMT3++oqP739HfuWr4/6e91fmY6gPPDw8vNHQ7wc0e8Cr6+/vfz+GdhLx8PDwzvHuB5fzEtL9qz8pDMmY8fDw8D6Btxl0cn0+cXh4eHj/F69d+CbL9zySwMPDw/scXj7o5KbJ4DYTcSRrwcPDw4t5m+XsX50f7O/h4eHhLbrqeeP/qRd3HvJGo8XDw8M7wLuPVvOh7Lcd5GFHOzV4eHh4z/I2L/S8MLTbC2Zl4+IXPDw8vGO89ru+jW73W6zykVx8MeDh4eE9ymubW/Wty4B4VpzeTDQeHh7eAd6+GZY8uI1o297WwV4fHh4eXvIZX76484hhP+vFMh0PDw/vAK/ulb0YbrvgTkKN/dTj4eHhneC1Tf28I7+Z77Yh9/KJeHh4eId5s7bTU83+WbMtyqfx8PDwDvDy86QMPLUg3sQNF1kLHh4e3qO8vE3VxrX53yZ3Tib0TRiBh4eHt+a1g5vFE22KvNkE9vIOeHh4eAd4+7B1c76Z0DYiwcPDw9vzTrT/Z3HDZoPCmzYYHh4e3kO85MO+DRRm5SQnFc0zPDw8vAO8feMqb1blT2lba3h4eHi/yWsbXW1IMdue1W4FqzMVPDw8vAVvtokqf63PtgK04xzWPTw8PLwRr13mPvvuncW4xbIbDw8P7zBvtrCexbt5UcnD5Yt74uHh4R3g7Zv67faCWYA7myA8PDy8E7zv8qhfx+uIdhWO4OHh4R3gzRa+dc0pC8Nmw1ZS2PDw8PD2vLwY5MvlvHjkRWj4/8HDw8M7xpu1oGaRxGzp3I4fDw8P7xN4m8bYZhLbMoOHh4f3ybxZWJCXhPsII2qz4eHh4R3jtXFD+3s7ibPScvELHh4e3gFem4W2C9/9NbPNB3h4eHgHeD+OfQ0B5cUiBgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '东方星痕的博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来╮(╯▽╰)╭';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

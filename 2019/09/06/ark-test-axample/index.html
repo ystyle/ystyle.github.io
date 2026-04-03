@@ -50,7 +50,7 @@
 <meta property="og:site_name" content="东方星痕">
 <meta property="og:description" content="方舟编译器编译过程准备工作 下载java-core.jar 需要安装docker docker镜像 daocloud.io/ystyle/ark 方舟镜像编译教程  准备java代码12345public class Test &amp;#123;  public static void main(String[] args) &amp;#123;    System.out.println(&quot;hello wor">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2026-03-19T10:14:36.214Z">
+<meta property="og:updated_time" content="2026-04-03T15:19:19.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="方舟编译器使用测试">
 <meta name="twitter:description" content="方舟编译器编译过程准备工作 下载java-core.jar 需要安装docker docker镜像 daocloud.io/ystyle/ark 方舟镜像编译教程  准备java代码12345public class Test &amp;#123;  public static void main(String[] args) &amp;#123;    System.out.println(&quot;hello wor">
@@ -157,7 +157,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -224,7 +224,7 @@
 <li>docker镜像 <code>daocloud.io/ystyle/ark</code> <a href="https://ystyle.top/2019/09/06/compile-ark/">方舟镜像编译教程</a></li>
 </ol>
 <h3 id="准备java代码"><a href="#准备java代码" class="headerlink" title="准备java代码"></a>准备java代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"hello world"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 进入docker容器的交互模式</span><br><span class="line">docker run --rm -v -ti $PWD:/mnt/code daocloud.io/ystyle/ark bash</span><br><span class="line"><span class="meta">#</span> 先把java-core转为mplt文件</span><br><span class="line">jbc2mpl -injar java-core.jar</span><br><span class="line"><span class="meta">#</span> 用java-core.jar编译并打包Test.java</span><br><span class="line">java2jar Test.jar java-core.jar Test.java</span><br><span class="line"><span class="meta">#</span> 把Test.jar生成mpl文件</span><br><span class="line">jbc2mpl -mplt java-core.mplt -injar Test.jar -out Test</span><br><span class="line"><span class="meta">#</span> mpl2mpl</span><br><span class="line">maple --run=me:mpl2mpl --option="--quiet:--quiet --regnativefunc --maplelinker" Test.mpl --save-temps</span><br><span class="line"><span class="meta">#</span> 编译.VtableImpl.mpl文件，生成后端优化后的汇编文件(.VtableImpl.s)。</span><br><span class="line">mplcg --fpic --maplelinker --no-pie --quiet --verbose-asm Test.VtableImpl.mpl</span><br><span class="line"><span class="meta">#</span> 后续用android ndk可以把.s文件编译出能在安卓上运行的程序, 因为汇编的原因， linux的GCC是编译不了的</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 进入docker容器的交互模式</span></span><br><span class="line">docker run --rm -v -ti $PWD:/mnt/code daocloud.io/ystyle/ark bash</span><br><span class="line"><span class="meta">#</span><span class="bash"> 先把java-core转为mplt文件</span></span><br><span class="line">jbc2mpl -injar java-core.jar</span><br><span class="line"><span class="meta">#</span><span class="bash"> 用java-core.jar编译并打包Test.java</span></span><br><span class="line">java2jar Test.jar java-core.jar Test.java</span><br><span class="line"><span class="meta">#</span><span class="bash"> 把Test.jar生成mpl文件</span></span><br><span class="line">jbc2mpl -mplt java-core.mplt -injar Test.jar -out Test</span><br><span class="line"><span class="meta">#</span><span class="bash"> mpl2mpl</span></span><br><span class="line">maple --run=me:mpl2mpl --option="--quiet:--quiet --regnativefunc --maplelinker" Test.mpl --save-temps</span><br><span class="line"><span class="meta">#</span><span class="bash"> 编译.VtableImpl.mpl文件，生成后端优化后的汇编文件(.VtableImpl.s)。</span></span><br><span class="line">mplcg --fpic --maplelinker --no-pie --quiet --verbose-asm Test.VtableImpl.mpl</span><br><span class="line"><span class="meta">#</span><span class="bash"> 后续用android ndk可以把.s文件编译出能在安卓上运行的程序, 因为汇编的原因， linux的GCC是编译不了的</span></span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -232,7 +232,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2026-03-19T10:14:36.214Z" itemprop="dateUpdated">2026-03-19 18:14:36</time>
+    最后更新时间：<time datetime="2026-04-03T15:19:19.750Z" itemprop="dateUpdated">2026-04-03 23:19:19</time>
 </span><br>
 
 
