@@ -20,23 +20,7 @@ permalink: matebookpro-run-cangjie-compiler
 - 下载仓颉编译器每日构建版本: [cangjie-sdk-ohos-aarch64-1.1.0-alpha.2025xxxxxxxxxxxxx.tar.gz](https://gitcode.com/Cangjie/nightly_build/releases)
 
 ## 从CodeArts IDE提取签名工具
-打开IDE, 随便创建一个项目打开，在终端执行以下命令
-```shell
-# 复制签名工具
-cp /data/app/toolchains.org/toolchains_1.0/lib//binary-sign-tool .
-# 对签名工具签名
-binary-sign-tool sign -inFile "./binary-sign-tool" -outFile "./binary-sign-tool-signed" -selfSign 1
-# 添加可执行权限
-chmod +x binary-sign-tool-signed
-# 测试，如果没弹授权弹窗和帮忙输出，需要重新签名和添加可执行权限
-./binary-sign-tool-signed
-
-# 复制到用户安装目录
-mkdir -p ~/.local/bin
-cp ./binary-sign-tool-signed ~/.local/bin/binary-sign-tool
-```
-
-最后在`~/.zshrc`添加`export PATH=$HOME/.local/bin:$PATH`
+新方法，直接在应用商店安装： `DevBox`， 然后在HisShell就可以直接使用 `binary-sign-tool`了
 
 ## 安装仓颉编译器
 - 把下载的仓颉编译器复制到个人目录(文件管器和下载目录同级)
