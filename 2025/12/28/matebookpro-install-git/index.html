@@ -42,18 +42,18 @@
     
     
     <meta name="keywords" content="git,鸿蒙,鸿蒙PC,matebook pro">
-    <meta name="description" content="准备工作 在鸿蒙应用商店安装 CodeArts IDE  从CodeArts IDE提取签名工具打开IDE, 随便创建一个项目打开，在终端执行以下命令123456789101112# 复制签名工具cp /data/app/toolchains.org/toolchains_1.0/lib//binary-sign-tool .# 对签名工具签名binary-sign-tool sign -inFi">
+    <meta name="description" content="新方法直接在应用商店搜索安装GitNext  准备工作 在鸿蒙应用商店安装 CodeArts IDE  从CodeArts IDE提取签名工具打开IDE, 随便创建一个项目打开，在终端执行以下命令123456789101112# 复制签名工具cp /data/app/toolchains.org/toolchains_1.0/lib//binary-sign-tool .# 对签名工具签名bina">
 <meta name="keywords" content="git,鸿蒙,鸿蒙PC,matebook pro">
 <meta property="og:type" content="article">
 <meta property="og:title" content="鸿蒙PC Matebook Pro上全局安装GIT">
 <meta property="og:url" content="http://ystyle.top/2025/12/28/matebookpro-install-git/index.html">
 <meta property="og:site_name" content="东方星痕">
-<meta property="og:description" content="准备工作 在鸿蒙应用商店安装 CodeArts IDE  从CodeArts IDE提取签名工具打开IDE, 随便创建一个项目打开，在终端执行以下命令123456789101112# 复制签名工具cp /data/app/toolchains.org/toolchains_1.0/lib//binary-sign-tool .# 对签名工具签名binary-sign-tool sign -inFi">
+<meta property="og:description" content="新方法直接在应用商店搜索安装GitNext  准备工作 在鸿蒙应用商店安装 CodeArts IDE  从CodeArts IDE提取签名工具打开IDE, 随便创建一个项目打开，在终端执行以下命令123456789101112# 复制签名工具cp /data/app/toolchains.org/toolchains_1.0/lib//binary-sign-tool .# 对签名工具签名bina">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:updated_time" content="2025-12-28T02:30:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="鸿蒙PC Matebook Pro上全局安装GIT">
-<meta name="twitter:description" content="准备工作 在鸿蒙应用商店安装 CodeArts IDE  从CodeArts IDE提取签名工具打开IDE, 随便创建一个项目打开，在终端执行以下命令123456789101112# 复制签名工具cp /data/app/toolchains.org/toolchains_1.0/lib//binary-sign-tool .# 对签名工具签名binary-sign-tool sign -inFi">
+<meta name="twitter:description" content="新方法直接在应用商店搜索安装GitNext  准备工作 在鸿蒙应用商店安装 CodeArts IDE  从CodeArts IDE提取签名工具打开IDE, 随便创建一个项目打开，在终端执行以下命令123456789101112# 复制签名工具cp /data/app/toolchains.org/toolchains_1.0/lib//binary-sign-tool .# 对签名工具签名bina">
     
         <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
     
@@ -157,7 +157,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -197,7 +197,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备工作"><span class="post-toc-number">1.</span> <span class="post-toc-text">准备工作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#从CodeArts-IDE提取签名工具"><span class="post-toc-number">2.</span> <span class="post-toc-text">从CodeArts IDE提取签名工具</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#保存签名脚本"><span class="post-toc-number">3.</span> <span class="post-toc-text">保存签名脚本</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#从CodeArts-IDE提取git"><span class="post-toc-number">4.</span> <span class="post-toc-text">从CodeArts IDE提取git</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置git环境"><span class="post-toc-number">5.</span> <span class="post-toc-text">配置git环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试"><span class="post-toc-number">6.</span> <span class="post-toc-text">测试</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新方法"><span class="post-toc-number">1.</span> <span class="post-toc-text">新方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备工作"><span class="post-toc-number">2.</span> <span class="post-toc-text">准备工作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#从CodeArts-IDE提取签名工具"><span class="post-toc-number">3.</span> <span class="post-toc-text">从CodeArts IDE提取签名工具</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#保存签名脚本"><span class="post-toc-number">4.</span> <span class="post-toc-text">保存签名脚本</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#从CodeArts-IDE提取git"><span class="post-toc-number">5.</span> <span class="post-toc-text">从CodeArts IDE提取git</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置git环境"><span class="post-toc-number">6.</span> <span class="post-toc-text">配置git环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试"><span class="post-toc-number">7.</span> <span class="post-toc-text">测试</span></a></li></ol>
         </nav>
     </aside>
     
@@ -218,7 +218,9 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+            <h2 id="新方法"><a href="#新方法" class="headerlink" title="新方法"></a>新方法</h2><p>直接在应用商店搜索安装<code>GitNext</code></p>
+<hr>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
 <li>在鸿蒙应用商店安装 CodeArts IDE</li>
 </ul>
 <h2 id="从CodeArts-IDE提取签名工具"><a href="#从CodeArts-IDE提取签名工具" class="headerlink" title="从CodeArts IDE提取签名工具"></a>从CodeArts IDE提取签名工具</h2><p>打开IDE, 随便创建一个项目打开，在终端执行以下命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 复制签名工具</span></span><br><span class="line">cp /data/app/toolchains.org/toolchains_1.0/lib//binary-sign-tool .</span><br><span class="line"><span class="meta">#</span><span class="bash"> 对签名工具签名</span></span><br><span class="line">binary-sign-tool sign -inFile "./binary-sign-tool" -outFile "./binary-sign-tool-signed" -selfSign 1</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加可执行权限</span></span><br><span class="line">chmod +x binary-sign-tool-signed</span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试，如果没弹授权弹窗和帮忙输出，需要重新签名和添加可执行权限</span></span><br><span class="line">./binary-sign-tool-signed</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 复制到用户安装目录</span></span><br><span class="line">mkdir -p ~/.local/bin</span><br><span class="line">cp ./binary-sign-tool-signed ~/.local/bin/binary-sign-tool</span><br></pre></td></tr></table></figure></p>
@@ -234,7 +236,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2025-12-28T02:30:00.000Z" itemprop="dateUpdated">2025-12-28 10:30:00</time>
+    最后更新时间：<time datetime="2025-12-28T02:30:00.000Z" itemprop="dateUpdated">2025-12-28 10:30:00</time>
 </span><br>
 
 
