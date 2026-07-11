@@ -11,6 +11,11 @@ categories: 软件
 permalink: matebookpro-install-git
 ---
 
+## 新方法
+直接在应用商店搜索安装`GitNext`
+
+-------------------------
+
 ## 准备工作
 - 在鸿蒙应用商店安装 CodeArts IDE
 
