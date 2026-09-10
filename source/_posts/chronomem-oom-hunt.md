@@ -1,5 +1,5 @@
 ---
-title: 忆时塔 OOM 追凶记
+title: 仓颉服务 - 忆时塔 OOM 追凶记
 subtitle: 一次横跨六个仓颉自研库的排查
 date: 2026-09-09 23:30:00
 updated: 2026-09-09 23:30:00
@@ -13,7 +13,7 @@ tags:
   - json-rpc
   - 排查实录
 hero:
-  name: 忆时塔 OOM 追凶记
+  name: 仓颉服务-忆时塔 OOM 追凶记
   text: 一次横跨六个仓颉自研库的排查
   tagline: 从一条空 message 的异常，到 662 个 CLOSE_WAIT —— 长连接泄漏如何伪装成存储 OOM
   actions:
@@ -22,7 +22,7 @@ hero:
       link: '#一条空消息'
 ---
 
-<h1 align="center">忆时塔 OOM 追凶记</h1>
+<h1 align="center">仓颉服务: 忆时塔 OOM 追凶记</h1>
 
 <p align="center"><strong>一次横跨六个仓颉自研库的排查</strong></p>
 
