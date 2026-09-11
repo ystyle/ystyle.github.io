@@ -271,8 +271,8 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        戴森球与光伏文明：一个被忽略的最优解引言：悖论的另一面在关于费米悖论的无数讨论中，有一个流传甚广的说辞：“能造戴森球的文明不需要它，需要它的文明造不出来。” 这句话听起来深刻，却长期缺乏令人信服的底层逻辑。我们习惯了将“高级能源”与“核聚变”“反物质”绑定，却极少停下来思考一个问题——
-如果有一种能源技术，它的材料来源是月球和碳质小行星（硅、铝），它的维护周期以几十年为单位，它的废热恰好是深...
+        引言：悖论的另一面在关于费米悖论的无数讨论中，有一个流传甚广的说辞：“能造戴森球的文明不需要它，需要它的文明造不出来。” 这句话听起来深刻，却长期缺乏令人信服的底层逻辑。我们习惯了将“高级能源”与“核聚变”“反物质”绑定，却极少停下来思考一个问题——
+如果有一种能源技术，它的材料来源是月球和碳质小行星（硅、铝），它的维护周期以几十年为单位，它的废热恰好是深空散热器最欢迎的东西——那么，一个理...
     
 
         <a href="/2026/09/06/dyson-sphere-and-photovoltaic-civilization/" class="post-more waves-effect waves-button">
@@ -319,10 +319,11 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        鸿蒙PC上使用box64运行x86_64鸿蒙SDK编译HAP
+        
 本文记录在鸿蒙PC融合开发引擎的openEuler aarch64容器中，通过box64模拟x86_64兼容层，运行鸿蒙命令行工具编译HAP的完整过程。
 
-背景鸿蒙PC（HarmonyOS PC）的融合开发引擎提供的是openEuler aarch64容器环境，但鸿蒙官方命令行工具（command-line-tools）只有x86...
+背景鸿蒙PC（HarmonyOS PC）的融合开发引擎提供的是openEuler aarch64容器环境，但鸿蒙官方命令行工具（command-line-tools）只有x86_64版本。要在aarch64上编译鸿蒙项目，有两种方案：
+...
     
 
         <a href="/2026/06/30/matebookpro-box64-harmony-sdk/" class="post-more waves-effect waves-button">
@@ -428,11 +429,11 @@ Neovim 版本：0.9.0...
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        鸿蒙PC融合开发引擎中编译安装Neovim与AstroNvim配置指南
+        
 本文记录在鸿蒙PC融合开发引擎的容器环境中，因glibc版本限制从源码编译Neovim和tree-sitter的完整过程，并配置AstroNvim作为开发环境。
 
 问题背景glibc版本冲突在鸿蒙PC融合开发引擎的openEuler容器中，尝试安装nvim-treesitter插件时遇到错误：
-12[nvim-trees...
+12[nvim-treesitter/install/c] error: Error durin...
     
 
         <a href="/2026/04/03/matebookpro-container-build-neovim/" class="post-more waves-effect waves-button">
@@ -479,10 +480,11 @@ Neovim 版本：0.9.0...
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式
+        
 本文深入解析鸿蒙PC融合开发引擎的技术架构，揭示其如何通过StratoVirt虚拟化和OzoneC容器技术实现Linux应用兼容。
 
-背景鸿蒙PC（HarmonyOS PC）采用了独特的架构设计来实现Linux应用兼容。作为用户，我在使用过程中发现系统提供了一个”融合开发引擎”功能，可以在其中运行openEuler环境。本文将解析这个融合开发...
+背景鸿蒙PC（HarmonyOS PC）采用了独特的架构设计来实现Linux应用兼容。作为用户，我在使用过程中发现系统提供了一个”融合开发引擎”功能，可以在其中运行openEuler环境。本文将解析这个融合开发引擎的技术架构。
+架构探秘初次接触在鸿蒙PC的融...
     
 
         <a href="/2026/04/03/matebookpro-fusion-dev-engine-architecture/" class="post-more waves-effect waves-button">
@@ -637,14 +639,15 @@ MCP 是应用层协...
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Neovim移植鸿蒙PC：三方库适配实战与挑战解析
+        
 本文记录将Neovim编辑器移植到HarmonyOS PC过程中，对11个核心依赖库的适配实战经验，涵盖平台差异分析、API限制处理、构建系统改造等关键问题。
 
 项目背景目标：将现代文本编辑器Neovim完整移植到HarmonyOS PC系统，支持完整的Lua插件生态和现代语法高亮。
 环境：
 
 操作系统：HarmonyOS 6.0
-架构：a...
+架构：aarch64 (ARM64)
+编译器：BiShen...
     
 
         <a href="/2025/12/27/matebookpro-port-nvim-deps/" class="post-more waves-effect waves-button">

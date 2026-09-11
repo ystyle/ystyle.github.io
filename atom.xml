@@ -53,7 +53,8 @@
     <published>2026-09-06T01:30:00.000Z</published>
     <updated>2026-09-06T01:30:00.000Z</updated>
     
-    <summary type="html">&lt;h1 id=&quot;戴森球与光伏文明：一个被忽略的最优解&quot;&gt;&lt;a href=&quot;#戴森球与光伏文明：一个被忽略的最优解&quot; class=&quot;headerlink&quot; title=&quot;戴森球与光伏文明：一个被忽略的最优解&quot;&gt;&lt;/a&gt;戴森球与光伏文明：一个被忽略的最优解&lt;/h1&gt;&lt;h2 id=&quot;引言：悖论的另一面&quot;&gt;&lt;a href=&quot;#引言：悖论的另一面&quot; class=&quot;headerlink&quot; title=&quot;引言：悖论的另一面&quot;&gt;&lt;/a&gt;引言：悖论的另一面&lt;/h2&gt;&lt;p&gt;在关于费米悖论的无数讨论中，有一个流传甚广的说辞：&lt;strong&gt;“能造戴森球的文明不需要它，需要它的文明造不出来。”&lt;/strong&gt; 这句&lt;/p&gt;</summary>
+    <summary type="html">&lt;h2 id=&quot;引言：悖论的另一面&quot;&gt;&lt;a href=&quot;#引言：悖论的另一面&quot; class=&quot;headerlink&quot; title=&quot;引言：悖论的另一面&quot;&gt;&lt;/a&gt;引言：悖论的另一面&lt;/h2&gt;&lt;p&gt;在关于费米悖论的无数讨论中，有一个流传甚广的说辞：&lt;strong&gt;“能造戴森球的文明不需要它，需要它的文明造不出来。”&lt;/strong&gt; 这句话听起来深刻，却长期缺乏令人信服的底层逻辑。我们习惯了将“高级能源”与“核聚变”“反物质”绑定，却极少停下来思考一个问题——&lt;/p&gt;
+&lt;p&gt;如果有一种能源技术，它的材料来源是月球和碳质小行星（硅、铝），它的维护周期以几十年为单位，它的废热恰好是深空散热器最欢迎的&lt;/p&gt;</summary>
     
       <category term="思考" scheme="http://ystyle.top/categories/%E6%80%9D%E8%80%83/"/>
     
@@ -75,10 +76,10 @@
     <published>2026-06-30T14:00:00.000Z</published>
     <updated>2026-06-30T14:00:00.000Z</updated>
     
-    <summary type="html">&lt;h1 id=&quot;鸿蒙PC上使用box64运行x86-64鸿蒙SDK编译HAP&quot;&gt;&lt;a href=&quot;#鸿蒙PC上使用box64运行x86-64鸿蒙SDK编译HAP&quot; class=&quot;headerlink&quot; title=&quot;鸿蒙PC上使用box64运行x86_64鸿蒙SDK编译HAP&quot;&gt;&lt;/a&gt;鸿蒙PC上使用box64运行x86_64鸿蒙SDK编译HAP&lt;/h1&gt;&lt;blockquote&gt;
+    <summary type="html">&lt;blockquote&gt;
 &lt;p&gt;本文记录在鸿蒙PC融合开发引擎的openEuler aarch64容器中，通过box64模拟x86_64兼容层，运行鸿蒙命令行工具编译HAP的完整过程。&lt;/p&gt;
 &lt;/blockquote&gt;
-</summary>
+&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;鸿蒙PC（HarmonyOS PC）的融合开发引擎提供的是openEuler aarch64容器环境，但鸿蒙官方命令行工具（command-line-tools）只有x86_64版本。要在aarch64上编译鸿蒙项目，有两种方案：&lt;/p&gt;</summary>
     
       <category term="软件" scheme="http://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
     
@@ -104,7 +105,7 @@
     <link href="http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/"/>
     <id>http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/</id>
     <published>2026-04-03T15:30:00.000Z</published>
-    <updated>2026-09-11T02:43:56.657Z</updated>
+    <updated>2026-09-11T03:59:55.461Z</updated>
     
     <summary type="html">&lt;p&gt;本文档介绍如何在 openEuler (aarch64) 系统上配置 Neovim (AstroNvim) 开发环境，用于仓颉语言开发。&lt;/p&gt;
 &lt;h2 id=&quot;目录&quot;&gt;&lt;a href=&quot;#目录&quot; class=&quot;headerlink&quot; title=&quot;目录&quot;&gt;&lt;/a&gt;目录&lt;/h2&gt;&lt;ul&gt;
@@ -133,8 +134,10 @@
     <published>2026-04-03T13:35:00.000Z</published>
     <updated>2026-04-03T13:35:00.000Z</updated>
     
-    <summary type="html">&lt;h1 id=&quot;鸿蒙PC融合开发引擎中编译安装Neovim与AstroNvim配置指南&quot;&gt;&lt;a href=&quot;#鸿蒙PC融合开发引擎中编译安装Neovim与AstroNvim配置指南&quot; class=&quot;headerlink&quot; title=&quot;鸿蒙PC融合开发引擎中编译安装Neovim与AstroNvim配置指南&quot;&gt;&lt;/a&gt;鸿蒙PC融合开发引擎中编译安装Neovim与AstroNvim配置指南&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;本文记录在鸿蒙PC融合开发引擎的容器环境中，因glibc版本限制从源码编译Neovim和tree-sitter的完整过程，并配置AstroNvim作为开发环境。&lt;/p&gt;&lt;/blockquote&gt;</summary>
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;本文记录在鸿蒙PC融合开发引擎的容器环境中，因glibc版本限制从源码编译Neovim和tree-sitter的完整过程，并配置AstroNvim作为开发环境。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;问题背景&quot;&gt;&lt;a href=&quot;#问题背景&quot; class=&quot;headerlink&quot; title=&quot;问题背景&quot;&gt;&lt;/a&gt;问题背景&lt;/h2&gt;&lt;h3 id=&quot;glibc版本冲突&quot;&gt;&lt;a href=&quot;#glibc版本冲突&quot; class=&quot;headerlink&quot; title=&quot;glibc版本冲突&quot;&gt;&lt;/a&gt;glibc版本冲突&lt;/h3&gt;&lt;p&gt;在鸿蒙PC融合开发引擎的&lt;/p&gt;</summary>
     
       <category term="软件" scheme="http://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
     
@@ -162,10 +165,11 @@
     <published>2026-04-03T13:30:00.000Z</published>
     <updated>2026-04-03T13:30:00.000Z</updated>
     
-    <summary type="html">&lt;h1 id=&quot;鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式&quot;&gt;&lt;a href=&quot;#鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式&quot; class=&quot;headerlink&quot; title=&quot;鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式&quot;&gt;&lt;/a&gt;鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式&lt;/h1&gt;&lt;blockquote&gt;
+    <summary type="html">&lt;blockquote&gt;
 &lt;p&gt;本文深入解析鸿蒙PC融合开发引擎的技术架构，揭示其如何通过StratoVirt虚拟化和OzoneC容器技术实现Linux应用兼容。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;背景&quot;&gt;&lt;/h2&gt;</summary>
+&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;鸿蒙PC（HarmonyOS PC）采用了独特的架构设计来实现Linux应用兼容。作为用户，我在使用过程中发现系统提供了一个”融合开发引擎”功能，可以在其中运行openEuler环境。本文将解析这个融合开发引擎的技术架构。&lt;/p&gt;
+&lt;h2 id=&quot;架构探秘&quot;&gt;&lt;/h2&gt;</summary>
     
       <category term="软件" scheme="http://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
     
@@ -245,10 +249,12 @@
     <published>2025-12-27T11:00:00.000Z</published>
     <updated>2025-12-27T11:00:00.000Z</updated>
     
-    <summary type="html">&lt;h1 id=&quot;Neovim移植鸿蒙PC：三方库适配实战与挑战解析&quot;&gt;&lt;a href=&quot;#Neovim移植鸿蒙PC：三方库适配实战与挑战解析&quot; class=&quot;headerlink&quot; title=&quot;Neovim移植鸿蒙PC：三方库适配实战与挑战解析&quot;&gt;&lt;/a&gt;Neovim移植鸿蒙PC：三方库适配实战与挑战解析&lt;/h1&gt;&lt;blockquote&gt;
+    <summary type="html">&lt;blockquote&gt;
 &lt;p&gt;本文记录将Neovim编辑器移植到HarmonyOS PC过程中，对11个核心依赖库的适配实战经验，涵盖平台差异分析、API限制处理、构建系统改造等关键问题。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;项目背景&quot;&gt;&lt;/h2&gt;</summary>
+&lt;h2 id=&quot;项目背景&quot;&gt;&lt;a href=&quot;#项目背景&quot; class=&quot;headerlink&quot; title=&quot;项目背景&quot;&gt;&lt;/a&gt;项目背景&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;目标&lt;/strong&gt;：将现代文本编辑器Neovim完整移植到HarmonyOS PC系统，支持完整的Lua插件生态和现代语法高亮。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;环境&lt;/strong&gt;：&lt;/p&gt;
+</summary>
     
       <category term="软件" scheme="http://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
     
@@ -499,7 +505,7 @@
     <link href="http://ystyle.top/2021/06/06/openharmonyos-hdc-and-network/"/>
     <id>http://ystyle.top/2021/06/06/openharmonyos-hdc-and-network/</id>
     <published>2021-06-06T10:10:13.000Z</published>
-    <updated>2026-09-11T02:43:56.658Z</updated>
+    <updated>2026-09-11T03:59:55.464Z</updated>
     
     <summary type="html">&lt;h3 id=&quot;hdc下载&quot;&gt;&lt;a href=&quot;#hdc下载&quot; class=&quot;headerlink&quot; title=&quot;hdc下载&quot;&gt;&lt;/a&gt;hdc下载&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;如果下载了源码，可以在源码目录找到: developtools/hdc_standard/prebuilt/windows/hdc_std.exe&lt;/li&gt;

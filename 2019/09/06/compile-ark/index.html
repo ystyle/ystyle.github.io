@@ -42,18 +42,18 @@
     
     
     <meta name="keywords" content="docker,linux,android,ark">
-    <meta name="description" content="用docker编译方舟编译器准备工作 下载方舟源码: git clone https://code.opensource.huaweicloud.com/HarmonyOS/OpenArkCompiler.git 需要安装docker 生成出来的镜像以后可作为CI里编译方舟应用时的编译环境。现在可用来做getting start的环境，简单编译环境的搭建    dockerfile 把下面的doc">
+    <meta name="description" content="准备工作 下载方舟源码: git clone https://code.opensource.huaweicloud.com/HarmonyOS/OpenArkCompiler.git 需要安装docker 生成出来的镜像以后可作为CI里编译方舟应用时的编译环境。现在可用来做getting start的环境，简单编译环境的搭建    dockerfile 把下面的dockerfile放到方舟源码根">
 <meta name="keywords" content="docker,linux,android,ark">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用docker编译方舟编译器">
 <meta property="og:url" content="http://ystyle.top/2019/09/06/compile-ark/index.html">
 <meta property="og:site_name" content="东方星痕">
-<meta property="og:description" content="用docker编译方舟编译器准备工作 下载方舟源码: git clone https://code.opensource.huaweicloud.com/HarmonyOS/OpenArkCompiler.git 需要安装docker 生成出来的镜像以后可作为CI里编译方舟应用时的编译环境。现在可用来做getting start的环境，简单编译环境的搭建    dockerfile 把下面的doc">
+<meta property="og:description" content="准备工作 下载方舟源码: git clone https://code.opensource.huaweicloud.com/HarmonyOS/OpenArkCompiler.git 需要安装docker 生成出来的镜像以后可作为CI里编译方舟应用时的编译环境。现在可用来做getting start的环境，简单编译环境的搭建    dockerfile 把下面的dockerfile放到方舟源码根">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2026-09-11T02:43:56.658Z">
+<meta property="og:updated_time" content="2026-09-11T03:59:55.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用docker编译方舟编译器">
-<meta name="twitter:description" content="用docker编译方舟编译器准备工作 下载方舟源码: git clone https://code.opensource.huaweicloud.com/HarmonyOS/OpenArkCompiler.git 需要安装docker 生成出来的镜像以后可作为CI里编译方舟应用时的编译环境。现在可用来做getting start的环境，简单编译环境的搭建    dockerfile 把下面的doc">
+<meta name="twitter:description" content="准备工作 下载方舟源码: git clone https://code.opensource.huaweicloud.com/HarmonyOS/OpenArkCompiler.git 需要安装docker 生成出来的镜像以后可作为CI里编译方舟应用时的编译环境。现在可用来做getting start的环境，简单编译环境的搭建    dockerfile 把下面的dockerfile放到方舟源码根">
     
         <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
     
@@ -197,7 +197,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#用docker编译方舟编译器"><span class="post-toc-number">1.</span> <span class="post-toc-text">用docker编译方舟编译器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#准备工作"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">准备工作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#dockerfile"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">dockerfile</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编译"><span class="post-toc-number">1.0.3.</span> <span class="post-toc-text">编译</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试"><span class="post-toc-number">1.0.4.</span> <span class="post-toc-text">测试</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#交互模式"><span class="post-toc-number">1.0.5.</span> <span class="post-toc-text">交互模式</span></a></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#准备工作"><span class="post-toc-number">1.</span> <span class="post-toc-text">准备工作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#dockerfile"><span class="post-toc-number">2.</span> <span class="post-toc-text">dockerfile</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编译"><span class="post-toc-number">3.</span> <span class="post-toc-text">编译</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试"><span class="post-toc-number">4.</span> <span class="post-toc-text">测试</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#交互模式"><span class="post-toc-number">5.</span> <span class="post-toc-text">交互模式</span></a></li></ol>
         </nav>
     </aside>
     
@@ -218,7 +218,7 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="用docker编译方舟编译器"><a href="#用docker编译方舟编译器" class="headerlink" title="用docker编译方舟编译器"></a>用docker编译方舟编译器</h1><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
+            <h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
 <li>下载方舟源码: <code>git clone https://code.opensource.huaweicloud.com/HarmonyOS/OpenArkCompiler.git</code></li>
 <li>需要安装docker<blockquote>
 <p>生成出来的镜像以后可作为CI里编译方舟应用时的编译环境。<br>现在可用来做getting start的环境，简单编译环境的搭建</p>
@@ -244,7 +244,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2026-09-11T02:43:56.658Z" itemprop="dateUpdated">2026-09-11 10:43:56</time>
+    Last updated: <time datetime="2026-09-11T03:59:55.465Z" itemprop="dateUpdated">2026-09-11 11:59:55</time>
 </span><br>
 
 
