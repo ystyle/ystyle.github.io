@@ -540,6 +540,51 @@ JS 错误      : 0 条
 
 ---
 
+## 18. 上线：Hugo 已接管 ystyle.top ✅
+
+**架构**
+
+```
+hexo 分支  →  Hexo 源码（保留作回退，CI 已禁用）
+hugo 分支  →  Hugo 源码（push 即构建 + 部署 master + 刷华为云 CDN）
+master     →  部署产物
+```
+
+**回退方式**：重新启用 Hexo 的 workflow，推一次 `hexo` 分支。
+
+**部署要点**
+
+- `.github/workflows/hugo.yaml`（**刻意不叫 build.yaml** —— GitHub 按文件路径标识
+  workflow，同名会被当成同一个，导致无法单独禁用 Hexo 的那个）
+- Hugo 版本**锁定 0.165.0**：Hugo 长期 0.x，小版本有破坏性变更
+- **不用 `--minify`**：它会去掉属性引号（`id=loading class=active`），
+  破坏逐篇 HTML 比对与锚点验收的共同基线；站点有 CDN，传输体积本就由 CDN 压缩
+- ⚠️ `workflow_dispatch` 当前**不可用**（HTTP 422）：GitHub 只允许「存在于默认分支上的
+  workflow」被手动触发，而本仓库默认分支是 `master`（部署产物）。**push 触发不受此限制**，
+  这就是当前的实际部署路径。
+
+### 上线后修掉的三处「主题 CSS 与 Hugo 输出结构不匹配」
+
+| 问题 | 根因 | 修复 |
+|---|---|---|
+| 代码块文字被裁 | 主题的 `.highlight .line{height:22.4px}` 是为 highlight.js 写的，而 Chroma 把每行包在内联 `display:flex` 的 span 里（没有 `.line`），flex 与写死行高打架 | 新增 `static/css/chroma-fix.css`，把行容器改回 `display:block !important` |
+| 评论区漂到 TOC 位置 | 原主题把 comment partial 放在 `</article>` **之内**，我放到了外面，于是逃出文章卡片、被浮动的 `.post-widget` 挤到右侧 | 移回 `</article>` 内 |
+| 代码配色偏暗 | Chroma 默认 `monokai`（深底浅字），14px 下不透亮、与白色卡片不协调 | `[markup.highlight] style = 'github'`（浅底深字），并让 `.highlight` 统一提供底色、`<pre>` 透明 |
+
+> **教训**：复用别人的 CSS 时，样式表里那些「为特定 DOM 结构写死」的规则
+> （`.line{height:...}`、相邻选择器、负 margin）是最容易出事的地方 ——
+> 它们不会报错，只会在结构对不上时静默地裁掉内容或错位。
+
+### 验证线上时踩的坑
+
+- **agent-browser 的截图会缓存**：连续两次截图 SHA 相同，一度让我以为修复没生效。
+  关键判断要靠 `getBoundingClientRect()` 的坐标数据（文字是否越出容器），而不是截图观感。
+- `gh run download` 取 artifact 会**被截断**（11.8 MB / 18.5 MB），改用
+  「本地跑相同命令」来核对 CI 产物更可靠。
+- 误把 `_code.png` / `_live.png` 调试截图提交进了仓库，已移除并把 `_*.png` 加入 `.gitignore`。
+
+---
+
 ## 18. 清理正文里重复的文章标题（7 篇，已上线）✅
 
 **起因**：首页摘要看起来"包含文章标题"，一度以为是 Hugo 独有的问题。
