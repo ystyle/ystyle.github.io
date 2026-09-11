@@ -7,3 +7,6 @@ resources/
 
 # 迁移前的旧尝试备份（仅本地保留，不进仓库）
 _legacy-attempt/
+
+# 调试用截图（agent-browser 临时产物）
+_*.png
