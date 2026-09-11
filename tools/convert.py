@@ -119,6 +119,10 @@ def main():
     srcs = sorted(glob.glob(os.path.join(SRC_DIR, '*.md')))
     if os.path.isdir(DST_DIR):
         for f in glob.glob(os.path.join(DST_DIR, '*.md')):
+            # 保留 _index.md：它是我手写的 section 配置（关掉 Hugo 自动生成的 /posts/ 列表页），
+            # 不在 Hexo 源里，清掉就再也不会有，会导致 /posts/ 与 /posts/page/N/ 冒出来。
+            if os.path.basename(f) == '_index.md':
+                continue
             os.remove(f)
     os.makedirs(DST_DIR, exist_ok=True)
 
