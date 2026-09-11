@@ -6,6 +6,8 @@
   <title>Let&#39;s Encrypt 证书转 PKCS1 (传统私钥格式) | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -202,9 +204,9 @@
 
       <div class="post-content" id="post-content" itemprop="postContent">
         <h3 id="Let’s-Encrypt-证书转-PKCS1-传统私钥格式"><a href="#Let’s-Encrypt-证书转-PKCS1-传统私钥格式" class="headerlink" title="Let’s Encrypt 证书转 PKCS1 (传统私钥格式)"></a>Let&rsquo;s Encrypt 证书转 PKCS1 (传统私钥格式)</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>openssl rsa -in privkey1.pem -out pkcs1.pem
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>openssl rsa -in privkey1.pem -out pkcs1.pem
 </span></span></code></pre></div><p>privkey1.pem 文件格式</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>-----BEGIN PRIVATE KEY-----
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>-----BEGIN PRIVATE KEY-----
 </span></span><span style="display:flex;"><span>MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALkFbpP0ZVpob96k
 </span></span><span style="display:flex;"><span>YOM+ljfA3QOsG342iO/GQSClR04DGAB6mp4ZtKq1cB34w44FsfEg4TCsUL2y2TKl
 </span></span><span style="display:flex;"><span>CDGsHj21cMj7gmPwy4ojXkcSYjyTv61EM6UnlMVIvYn0oDca5BvJUCGWnGX5idXv
@@ -221,7 +223,7 @@
 </span></span><span style="display:flex;"><span>wgkm05RNhx+HXg==
 </span></span><span style="display:flex;"><span>-----END PRIVATE KEY-----
 </span></span></code></pre></div><p>pkcs1.pem文件格式</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>-----BEGIN RSA PRIVATE KEY-----
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>-----BEGIN RSA PRIVATE KEY-----
 </span></span><span style="display:flex;"><span>MIICXAIBAAKBgQC5BW6T9GVaaG/epGDjPpY3wN0DrBt+NojvxkEgpUdOAxgAepqe
 </span></span><span style="display:flex;"><span>GbSqtXAd+MOOBbHxIOEwrFC9stkypQgxrB49tXDI+4Jj8MuKI15HEmI8k7+tRDOl
 </span></span><span style="display:flex;"><span>J5TFSL2J9KA3GuQbyVAhlpxl+YnV7yjxP9l1dkbApg1ixSd5KOPbaQ00WQIDAQAB
@@ -330,10 +332,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -359,6 +360,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

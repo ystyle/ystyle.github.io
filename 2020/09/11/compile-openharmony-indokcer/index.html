@@ -6,6 +6,8 @@
   <title>使用Docker快速上手鸿蒙 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -263,9 +265,9 @@
 <ul>
 <li>打开终端执行以下命令</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkdir ~/OpenHarmony
-</span></span><span style="display:flex;"><span>cd ~/OpenHarmony
-</span></span><span style="display:flex;"><span>docker run --rm -ti -v <span style="color:#e6db74">${</span>PWD<span style="color:#e6db74">}</span>/out:/OpenHarmony/out ystyle/open-harmony
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkdir ~/OpenHarmony
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">cd</span> ~/OpenHarmony
+</span></span><span style="display:flex;"><span>docker run --rm -ti -v <span style="color:#0a3069">${</span><span style="color:#953800">PWD</span><span style="color:#0a3069">}</span>/out:/OpenHarmony/out ystyle/open-harmony
 </span></span></code></pre></div><ul>
 <li>编译成功后各镜像在out目录下面, 默认编译的是<code>Hi3861</code>开发板的系统镜像, 可自行烧录到固定测试</li>
 <li>如果要编译其它板子可以设置dokcer镜像的环境变量<code>HARDWARE</code> 目前支持: <code>wifiiot</code>、<code>ipcamera_hi3516dv300</code>、<code>ipcamera_hi3518ev300</code></li>
@@ -287,52 +289,52 @@ python build.py ${HARDWARE} -b debug
 </li>
 <li>
 <p>新建文件<code>hello_world.c</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;ohos_init.h&#34;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;ohos_types.h&#34;</span><span style="color:#75715e">
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">#include</span> <span style="color:#57606a">&#34;ohos_init.h&#34;</span><span style="color:#57606a">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#include</span> <span style="color:#57606a">&#34;ohos_types.h&#34;</span><span style="color:#57606a">
 </span></span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">HelloWorld</span>(<span style="color:#66d9ef">void</span>)
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;[DEMO] Hello world.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">SYS_RUN</span>(HelloWorld);
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">void</span> <span style="color:#6639ba">HelloWorld</span><span style="color:#1f2328">(</span><span style="color:#cf222e">void</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6639ba">printf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;[DEMO] Hello world.</span><span style="color:#0a3069">\n</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">SYS_RUN</span><span style="color:#1f2328">(</span>HelloWorld<span style="color:#1f2328">);</span>
 </span></span></code></pre></div></li>
 <li>
 <p>新建文件<code>BUILD.gn</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#a6e22e">static_library</span>(<span style="color:#e6db74">&#34;myapp&#34;</span>) {
-</span></span><span style="display:flex;"><span>  sources <span style="color:#f92672">=</span> [
-</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;hello_world.c&#34;</span>
-</span></span><span style="display:flex;"><span>  ]
-</span></span><span style="display:flex;"><span>  include_dirs <span style="color:#f92672">=</span> [
-</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;//utils/native/liteos/include&#34;</span>
-</span></span><span style="display:flex;"><span>  ]
-</span></span><span style="display:flex;"><span>}
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#6639ba">static_library</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;myapp&#34;</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  sources <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0a3069">&#34;hello_world.c&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>  include_dirs <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0a3069">&#34;//utils/native/liteos/include&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
 </span></span></code></pre></div></li>
 <li>
 <p>新建文件<code>APP_BUILD.gn</code></p>
 </li>
 <li>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#a6e22e">import</span>(<span style="color:#e6db74">&#34;//build/lite/config/component/lite_component.gni&#34;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#6639ba">import</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;//build/lite/config/component/lite_component.gni&#34;</span><span style="color:#1f2328">)</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">lite_component</span>(<span style="color:#e6db74">&#34;app&#34;</span>) {
-</span></span><span style="display:flex;"><span>    features <span style="color:#f92672">=</span> [
-</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;my_first_app:myapp&#34;</span>,
-</span></span><span style="display:flex;"><span>    ]
-</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">lite_component</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;app&#34;</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    features <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0a3069">&#34;my_first_app:myapp&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
 </span></span></code></pre></div></li>
 <li>
 <p>现在的目录结构为</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>.
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>.
 </span></span><span style="display:flex;"><span>├── APP_BUILD.gn
 </span></span><span style="display:flex;"><span>├── BUILD.gn
 </span></span><span style="display:flex;"><span>└── hello_world.c
 </span></span></code></pre></div></li>
 </ul>
 <h3 id="编译代码"><a href="#编译代码" class="headerlink" title="编译代码"></a>编译代码</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run --rm <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>  -e HARDWARE<span style="color:#f92672">=</span>wifiiot <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>  -v <span style="color:#e6db74">${</span>PWD<span style="color:#e6db74">}</span>/out:/OpenHarmony/out <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>  -v <span style="color:#e6db74">${</span>PWD<span style="color:#e6db74">}</span>/APP_BUILD.gn:/OpenHarmony/applications/sample/wifi-iot/app/APP_BUILD.gn <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>  -v <span style="color:#e6db74">${</span>PWD<span style="color:#e6db74">}</span>:/OpenHarmony/applications/sample/wifi-iot/app/my_first_app <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run --rm <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -e <span style="color:#953800">HARDWARE</span><span style="color:#0550ae">=</span>wifiiot <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -v <span style="color:#0a3069">${</span><span style="color:#953800">PWD</span><span style="color:#0a3069">}</span>/out:/OpenHarmony/out <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -v <span style="color:#0a3069">${</span><span style="color:#953800">PWD</span><span style="color:#0a3069">}</span>/APP_BUILD.gn:/OpenHarmony/applications/sample/wifi-iot/app/APP_BUILD.gn <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -v <span style="color:#0a3069">${</span><span style="color:#953800">PWD</span><span style="color:#0a3069">}</span>:/OpenHarmony/applications/sample/wifi-iot/app/my_first_app <span style="color:#0a3069">\
 </span></span></span><span style="display:flex;"><span>  ystyle/open-harmony
 </span></span></code></pre></div><blockquote>
 <p>编译后的文件在out目录</p>
@@ -360,98 +362,98 @@ python build.py ${HARDWARE} -b debug
 <p>参考<code>@keithyau</code><a href="https://openharmony.gitee.com/keithyau/build_lite/blob/master/Dockerfile20.04" target="_blank" rel="noopener">所写的Dockerfile</a>
 修改而来</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">ubuntu:20.04</span> <span style="color:#66d9ef">AS</span> <span style="color:#e6db74">build-env</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">LABEL</span> version<span style="color:#f92672">=</span><span style="color:#ae81ff">2020</span>-10-15<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># Set your hardware</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> HARDWARE<span style="color:#f92672">=</span>wifiiot
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Prevent interactive</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> DEBIAN_FRONTEND<span style="color:#f92672">=</span>noninteractive
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#cf222e">FROM</span><span style="color:#fff"> </span><span style="color:#0a3069">ubuntu:20.04</span><span style="color:#fff"> </span><span style="color:#cf222e">AS</span><span style="color:#fff"> </span><span style="color:#0a3069">build-env</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">LABEL</span> <span style="color:#953800">version</span><span style="color:#0550ae">=</span><span style="color:#0550ae">2020</span>-10-15<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># Set your hardware</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">ENV</span> <span style="color:#953800">HARDWARE</span><span style="color:#0550ae">=</span>wifiiot
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># Prevent interactive</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">ENV</span> <span style="color:#953800">DEBIAN_FRONTEND</span><span style="color:#0550ae">=</span>noninteractive
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Setting up the build environment</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> sed -i <span style="color:#e6db74">&#39;s/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g&#39;</span> /etc/apt/sources.list <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    sed -i <span style="color:#e6db74">&#39;s/security.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g&#39;</span> /etc/apt/sources.list <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    apt-get clean -y <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    apt-get -y update <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    apt-get remove python* -y <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    apt-get install git curl build-essential libdbus-glib-1-dev libgirepository1.0-dev -y <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    apt-get install zip libncurses5-dev pkg-config -y <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    apt-get install python3-pip -y <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    apt-get install scons dosfstools mtools mtd-utils default-jdk default-jre -y <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    rm -rf /var/lib/apt/lists/*<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># Setup python</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># Make sure python install on the right python version path</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> update-alternatives --install /usr/bin/python python /usr/bin/python3.8 <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    pip3 install --upgrade pip -i https://mirrors.aliyun.com/pypi/simple <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    pip3 install ninja kconfiglib pycryptodome ecdsa -i https://mirrors.aliyun.com/pypi/simple <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    pip3 install six --upgrade --ignore-installed six -i https://pypi.tuna.tsinghua.edu.cn/simple <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    rm -rf /var/cache/apt/archives<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#Fix Dash</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> rm -rf /bin/sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    ln -s /bin/bash /bin/sh<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#Setup gn</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> PATH /tools/gn:$PATH<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> mkdir /tools <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    cd /tools <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    curl -LO https://repo.huaweicloud.com/harmonyos/compiler/gn/1523/linux/gn.1523.tar <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    tar xvf /tools/gn.1523.tar <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    rm -rf /tools/gn.1523.tar<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#Setup LLVM</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#ADD ./llvm-linux-9.0.0-34042.tar /tools</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> PATH /tools/llvm/bin:$PATH<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> cd /tools <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    curl -LO https://repo.huaweicloud.com/harmonyos/compiler/clang/9.0.0-34042/linux/llvm-linux-9.0.0-34042.tar <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    tar xvf /tools/llvm-linux-9.0.0-34042.tar <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    rm -rf /tools/llvm-linux-9.0.0-34042.tar<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#Setup hc-gen</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> PATH /tools/hc-gen:$PATH<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> cd /tools <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    curl -LO https://repo.huaweicloud.com/harmonyos/compiler/hc-gen/0.65/linux/hc-gen-0.65-linux.tar <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    tar xvf /tools/hc-gen-0.65-linux.tar <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    rm -rf /tools/hc-gen-0.65-linux.tar<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#Setup hmos_app_packing_tool and hapsigntool // 必需是这目录，编译脚本写死了</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> PATH /root/developtools/:$PATH<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> mkdir /root/developtools/ <span style="color:#f92672">&amp;&amp;</span> cd /root/developtools/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    curl -LO https://repo.huaweicloud.com/harmonyos/develop_tools/hmos_app_packing_tool.jar <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    curl -LO https://repo.huaweicloud.com/harmonyos/develop_tools/hapsigntoolv2.jar<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#Setup gcc_riscv32</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> PATH /tools/gcc_riscv32/bin:$PATH<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> cd /tools <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    curl -LO http://tools.harmonyos.com/mirrors/gcc_riscv32/7.3.0/linux/gcc_riscv32-linux-7.3.0.tar.gz <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    tar xvf /tools/gcc_riscv32-linux-7.3.0.tar.gz <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    rm -rf /tools/gcc_riscv32-linux-7.3.0.tar.gz<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#Create work dir</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> mkdir /OpenHarmony<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">WORKDIR</span> <span style="color:#e6db74">/OpenHarmony</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># Gitee Repo tool and download</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># Make sure requests install at the right location</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> curl https://gitee.com/oschina/repo/raw/fork_flow/repo-py3 &gt; /usr/bin/repo <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    chmod a+x /usr/bin/repo <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple requests<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#Download source, update to your info</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> git config --global user.email <span style="color:#e6db74">&#34;lxy5266@live.com&#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    git config --global user.name <span style="color:#e6db74">&#34;ystyle&#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    git config --global color.ui false <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    git config --global credential.helper store <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    repo init -u https://gitee.com/openharmony/manifest.git -b master --repo-branch<span style="color:#f92672">=</span>stable --no-repo-verify <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    repo sync -c<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># compile</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> LANGUAGE en<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> LANG en_US.utf-8<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> export|grep LANG<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;/bin/bash&#34;</span>, <span style="color:#e6db74">&#34;-c&#34;</span>, <span style="color:#e6db74">&#34;python build.py ${HARDWARE} -b debug&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># Setting up the build environment</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> sed -i <span style="color:#0a3069">&#39;s/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g&#39;</span> /etc/apt/sources.list <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    sed -i <span style="color:#0a3069">&#39;s/security.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g&#39;</span> /etc/apt/sources.list <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    apt-get clean -y <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    apt-get -y update <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    apt-get remove python* -y <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    apt-get install git curl build-essential libdbus-glib-1-dev libgirepository1.0-dev -y <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    apt-get install zip libncurses5-dev pkg-config -y <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    apt-get install python3-pip -y <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    apt-get install scons dosfstools mtools mtd-utils default-jdk default-jre -y <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    rm -rf /var/lib/apt/lists/*<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># Setup python</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># Make sure python install on the right python version path</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> update-alternatives --install /usr/bin/python python /usr/bin/python3.8 <span style="color:#0550ae">1</span> <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    pip3 install --upgrade pip -i https://mirrors.aliyun.com/pypi/simple <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    pip3 install ninja kconfiglib pycryptodome ecdsa -i https://mirrors.aliyun.com/pypi/simple <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    pip3 install six --upgrade --ignore-installed six -i https://pypi.tuna.tsinghua.edu.cn/simple <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    rm -rf /var/cache/apt/archives<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#Fix Dash</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> rm -rf /bin/sh <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    ln -s /bin/bash /bin/sh<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#Setup gn</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">ENV</span> PATH /tools/gn:<span style="color:#953800">$PATH</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> mkdir /tools <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    <span style="color:#6639ba">cd</span> /tools <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    curl -LO https://repo.huaweicloud.com/harmonyos/compiler/gn/1523/linux/gn.1523.tar <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    tar xvf /tools/gn.1523.tar <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    rm -rf /tools/gn.1523.tar<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#Setup LLVM</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#ADD ./llvm-linux-9.0.0-34042.tar /tools</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">ENV</span> PATH /tools/llvm/bin:<span style="color:#953800">$PATH</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> <span style="color:#6639ba">cd</span> /tools <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    curl -LO https://repo.huaweicloud.com/harmonyos/compiler/clang/9.0.0-34042/linux/llvm-linux-9.0.0-34042.tar <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    tar xvf /tools/llvm-linux-9.0.0-34042.tar <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    rm -rf /tools/llvm-linux-9.0.0-34042.tar<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#Setup hc-gen</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">ENV</span> PATH /tools/hc-gen:<span style="color:#953800">$PATH</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> <span style="color:#6639ba">cd</span> /tools <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    curl -LO https://repo.huaweicloud.com/harmonyos/compiler/hc-gen/0.65/linux/hc-gen-0.65-linux.tar <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    tar xvf /tools/hc-gen-0.65-linux.tar <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    rm -rf /tools/hc-gen-0.65-linux.tar<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span>    <span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span>    <span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#Setup hmos_app_packing_tool and hapsigntool // 必需是这目录，编译脚本写死了</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">ENV</span> PATH /root/developtools/:<span style="color:#953800">$PATH</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> mkdir /root/developtools/ <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#6639ba">cd</span> /root/developtools/ <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    curl -LO https://repo.huaweicloud.com/harmonyos/develop_tools/hmos_app_packing_tool.jar <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    curl -LO https://repo.huaweicloud.com/harmonyos/develop_tools/hapsigntoolv2.jar<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#Setup gcc_riscv32</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">ENV</span> PATH /tools/gcc_riscv32/bin:<span style="color:#953800">$PATH</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> <span style="color:#6639ba">cd</span> /tools <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    curl -LO http://tools.harmonyos.com/mirrors/gcc_riscv32/7.3.0/linux/gcc_riscv32-linux-7.3.0.tar.gz <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    tar xvf /tools/gcc_riscv32-linux-7.3.0.tar.gz <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    rm -rf /tools/gcc_riscv32-linux-7.3.0.tar.gz<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#Create work dir</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> mkdir /OpenHarmony<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">WORKDIR</span><span style="color:#fff"> </span><span style="color:#0a3069">/OpenHarmony</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># Gitee Repo tool and download</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># Make sure requests install at the right location</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> curl https://gitee.com/oschina/repo/raw/fork_flow/repo-py3 &gt; /usr/bin/repo <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    chmod a+x /usr/bin/repo <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple requests<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#Download source, update to your info</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> git config --global user.email <span style="color:#0a3069">&#34;lxy5266@live.com&#34;</span> <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    git config --global user.name <span style="color:#0a3069">&#34;ystyle&#34;</span> <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    git config --global color.ui <span style="color:#6639ba">false</span> <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    git config --global credential.helper store <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    repo init -u https://gitee.com/openharmony/manifest.git -b master --repo-branch<span style="color:#0550ae">=</span>stable --no-repo-verify <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    repo sync -c<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># compile</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">ENV</span> LANGUAGE en<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">ENV</span> LANG en_US.utf-8<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> export<span style="color:#1f2328">|</span>grep LANG<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">CMD</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;/bin/bash&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;-c&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;python build.py ${HARDWARE} -b debug&#34;</span><span style="color:#1f2328">]</span><span style="color:#f6f8fa;background-color:#82071e">
 </span></span></span></code></pre></div>
       </div>
 
@@ -546,10 +548,9 @@ python build.py ${HARDWARE} -b debug
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -575,6 +576,7 @@ python build.py ${HARDWARE} -b debug
 </section>
 
 
+  </article>
 </div>
 
     

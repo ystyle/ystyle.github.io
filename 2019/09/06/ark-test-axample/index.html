@@ -6,6 +6,8 @@
   <title>方舟编译器使用测试 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -231,24 +233,24 @@
 </li>
 </ol>
 <h3 id="准备java代码"><a href="#准备java代码" class="headerlink" title="准备java代码"></a>准备java代码</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Test</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
-</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;hello world&#34;</span>);
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 进入docker容器的交互模式</span>
-</span></span><span style="display:flex;"><span>docker run --rm -v -ti $PWD:/mnt/code daocloud.io/ystyle/ark bash
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 先把java-core转为mplt文件</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">class</span> <span style="color:#1f2328">Test</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">static</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">main</span><span style="color:#1f2328">(</span>String<span style="color:#0550ae">[]</span><span style="color:#fff"> </span>args<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>System<span style="color:#1f2328">.</span><span style="color:#1f2328">out</span><span style="color:#1f2328">.</span><span style="color:#1f2328">println</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;hello world&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a"># 进入docker容器的交互模式</span>
+</span></span><span style="display:flex;"><span>docker run --rm -v -ti <span style="color:#953800">$PWD</span>:/mnt/code daocloud.io/ystyle/ark bash
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 先把java-core转为mplt文件</span>
 </span></span><span style="display:flex;"><span>jbc2mpl -injar java-core.jar
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 用java-core.jar编译并打包Test.java</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 用java-core.jar编译并打包Test.java</span>
 </span></span><span style="display:flex;"><span>java2jar Test.jar java-core.jar Test.java
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 把Test.jar生成mpl文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 把Test.jar生成mpl文件</span>
 </span></span><span style="display:flex;"><span>jbc2mpl -mplt java-core.mplt -injar Test.jar -out Test
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># mpl2mpl</span>
-</span></span><span style="display:flex;"><span>maple --run<span style="color:#f92672">=</span>me:mpl2mpl --option<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;--quiet:--quiet --regnativefunc --maplelinker&#34;</span> Test.mpl --save-temps
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 编译.VtableImpl.mpl文件，生成后端优化后的汇编文件(.VtableImpl.s)。</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># mpl2mpl</span>
+</span></span><span style="display:flex;"><span>maple --run<span style="color:#0550ae">=</span>me:mpl2mpl --option<span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;--quiet:--quiet --regnativefunc --maplelinker&#34;</span> Test.mpl --save-temps
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 编译.VtableImpl.mpl文件，生成后端优化后的汇编文件(.VtableImpl.s)。</span>
 </span></span><span style="display:flex;"><span>mplcg --fpic --maplelinker --no-pie --quiet --verbose-asm Test.VtableImpl.mpl
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 后续用android ndk可以把.s文件编译出能在安卓上运行的程序, 因为汇编的原因， linux的GCC是编译不了的</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 后续用android ndk可以把.s文件编译出能在安卓上运行的程序, 因为汇编的原因， linux的GCC是编译不了的</span>
 </span></span></code></pre></div>
       </div>
 
@@ -343,10 +345,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -372,6 +373,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

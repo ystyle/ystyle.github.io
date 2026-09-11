@@ -6,6 +6,8 @@
   <title>国内免翻墙预下载kubernetes镜像 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -259,51 +261,51 @@
 <blockquote>
 <p>把以下内容存为 <code>pull_k8s_images.sh</code> 复制到目录机器上执行即可</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">### 版本信息</span>
-</span></span><span style="display:flex;"><span>K8S_VERSION<span style="color:#f92672">=</span>v1.11.0
-</span></span><span style="display:flex;"><span>ETCD_VERSION<span style="color:#f92672">=</span>3.1.12
-</span></span><span style="display:flex;"><span>DASHBOARD_VERSION<span style="color:#f92672">=</span>v1.8.3
-</span></span><span style="display:flex;"><span>FLANNEL_VERSION<span style="color:#f92672">=</span>v0.10.0-amd64
-</span></span><span style="display:flex;"><span>DNS_VERSION<span style="color:#f92672">=</span>1.14.8
-</span></span><span style="display:flex;"><span>PAUSE_VERSION<span style="color:#f92672">=</span>3.1
-</span></span><span style="display:flex;"><span><span style="color:#75715e">## 基本组件</span>
-</span></span><span style="display:flex;"><span>docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-apiserver-amd64:$K8S_VERSION
-</span></span><span style="display:flex;"><span>docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-controller-manager-amd64:$K8S_VERSION
-</span></span><span style="display:flex;"><span>docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-scheduler-amd64:$K8S_VERSION
-</span></span><span style="display:flex;"><span>docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy-amd64:$K8S_VERSION
-</span></span><span style="display:flex;"><span>docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/etcd-amd64:$ETCD_VERSION
-</span></span><span style="display:flex;"><span>docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/pause-amd64:$PAUSE_VERSION
-</span></span><span style="display:flex;"><span><span style="color:#75715e">### 网络</span>
-</span></span><span style="display:flex;"><span>docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/k8s-dns-sidecar-amd64:$DNS_VERSION
-</span></span><span style="display:flex;"><span>docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/k8s-dns-kube-dns-amd64:$DNS_VERSION
-</span></span><span style="display:flex;"><span>docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/k8s-dns-dnsmasq-nanny-amd64:$DNS_VERSION
-</span></span><span style="display:flex;"><span>docker pull quay.io/coreos/flannel:$FLANNEL_VERSION
-</span></span><span style="display:flex;"><span><span style="color:#75715e">### 前端</span>
-</span></span><span style="display:flex;"><span>docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kubernetes-dashboard-amd64:$DASHBOARD_VERSION
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a">### 版本信息</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">K8S_VERSION</span><span style="color:#0550ae">=</span>v1.11.0
+</span></span><span style="display:flex;"><span><span style="color:#953800">ETCD_VERSION</span><span style="color:#0550ae">=</span>3.1.12
+</span></span><span style="display:flex;"><span><span style="color:#953800">DASHBOARD_VERSION</span><span style="color:#0550ae">=</span>v1.8.3
+</span></span><span style="display:flex;"><span><span style="color:#953800">FLANNEL_VERSION</span><span style="color:#0550ae">=</span>v0.10.0-amd64
+</span></span><span style="display:flex;"><span><span style="color:#953800">DNS_VERSION</span><span style="color:#0550ae">=</span>1.14.8
+</span></span><span style="display:flex;"><span><span style="color:#953800">PAUSE_VERSION</span><span style="color:#0550ae">=</span>3.1
+</span></span><span style="display:flex;"><span><span style="color:#57606a">## 基本组件</span>
+</span></span><span style="display:flex;"><span>docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-apiserver-amd64:<span style="color:#953800">$K8S_VERSION</span>
+</span></span><span style="display:flex;"><span>docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-controller-manager-amd64:<span style="color:#953800">$K8S_VERSION</span>
+</span></span><span style="display:flex;"><span>docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-scheduler-amd64:<span style="color:#953800">$K8S_VERSION</span>
+</span></span><span style="display:flex;"><span>docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy-amd64:<span style="color:#953800">$K8S_VERSION</span>
+</span></span><span style="display:flex;"><span>docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/etcd-amd64:<span style="color:#953800">$ETCD_VERSION</span>
+</span></span><span style="display:flex;"><span>docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/pause-amd64:<span style="color:#953800">$PAUSE_VERSION</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">### 网络</span>
+</span></span><span style="display:flex;"><span>docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/k8s-dns-sidecar-amd64:<span style="color:#953800">$DNS_VERSION</span>
+</span></span><span style="display:flex;"><span>docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/k8s-dns-kube-dns-amd64:<span style="color:#953800">$DNS_VERSION</span>
+</span></span><span style="display:flex;"><span>docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/k8s-dns-dnsmasq-nanny-amd64:<span style="color:#953800">$DNS_VERSION</span>
+</span></span><span style="display:flex;"><span>docker pull quay.io/coreos/flannel:<span style="color:#953800">$FLANNEL_VERSION</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">### 前端</span>
+</span></span><span style="display:flex;"><span>docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kubernetes-dashboard-amd64:<span style="color:#953800">$DASHBOARD_VERSION</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">## 修改tag</span>
-</span></span><span style="display:flex;"><span>docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-apiserver-amd64:$K8S_VERSION k8s.gcr.io/kube-apiserver-amd64:$K8S_VERSION
-</span></span><span style="display:flex;"><span>docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-controller-manager-amd64:$K8S_VERSION k8s.gcr.io/kube-controller-manager-amd64:$K8S_VERSION
-</span></span><span style="display:flex;"><span>docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-scheduler-amd64:$K8S_VERSION k8s.gcr.io/kube-scheduler-amd64:$K8S_VERSION
-</span></span><span style="display:flex;"><span>docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy-amd64:$K8S_VERSION k8s.gcr.io/kube-proxy-amd64:$K8S_VERSION
-</span></span><span style="display:flex;"><span>docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/etcd-amd64:$ETCD_VERSION k8s.gcr.io/etcd-amd64:$ETCD_VERSION
-</span></span><span style="display:flex;"><span>docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/pause-amd64:$PAUSE_VERSION k8s.gcr.io/pause-amd64:$PAUSE_VERSION
-</span></span><span style="display:flex;"><span>docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/k8s-dns-sidecar-amd64:$DNS_VERSION k8s.gcr.io/k8s-dns-sidecar-amd64:$DNS_VERSION
-</span></span><span style="display:flex;"><span>docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/k8s-dns-kube-dns-amd64:$DNS_VERSION k8s.gcr.io/k8s-dns-kube-dns-amd64:$DNS_VERSION
-</span></span><span style="display:flex;"><span>docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/k8s-dns-dnsmasq-nanny-amd64:$DNS_VERSION k8s.gcr.io/k8s-dns-dnsmasq-nanny-amd64:$DNS_VERSION
-</span></span><span style="display:flex;"><span>docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kubernetes-dashboard-amd64:$DASHBOARD_VERSION k8s.gcr.io/kubernetes-dashboard-amd64:$DASHBOARD_VERSION
+</span></span><span style="display:flex;"><span><span style="color:#57606a">## 修改tag</span>
+</span></span><span style="display:flex;"><span>docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-apiserver-amd64:<span style="color:#953800">$K8S_VERSION</span> k8s.gcr.io/kube-apiserver-amd64:<span style="color:#953800">$K8S_VERSION</span>
+</span></span><span style="display:flex;"><span>docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-controller-manager-amd64:<span style="color:#953800">$K8S_VERSION</span> k8s.gcr.io/kube-controller-manager-amd64:<span style="color:#953800">$K8S_VERSION</span>
+</span></span><span style="display:flex;"><span>docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-scheduler-amd64:<span style="color:#953800">$K8S_VERSION</span> k8s.gcr.io/kube-scheduler-amd64:<span style="color:#953800">$K8S_VERSION</span>
+</span></span><span style="display:flex;"><span>docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy-amd64:<span style="color:#953800">$K8S_VERSION</span> k8s.gcr.io/kube-proxy-amd64:<span style="color:#953800">$K8S_VERSION</span>
+</span></span><span style="display:flex;"><span>docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/etcd-amd64:<span style="color:#953800">$ETCD_VERSION</span> k8s.gcr.io/etcd-amd64:<span style="color:#953800">$ETCD_VERSION</span>
+</span></span><span style="display:flex;"><span>docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/pause-amd64:<span style="color:#953800">$PAUSE_VERSION</span> k8s.gcr.io/pause-amd64:<span style="color:#953800">$PAUSE_VERSION</span>
+</span></span><span style="display:flex;"><span>docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/k8s-dns-sidecar-amd64:<span style="color:#953800">$DNS_VERSION</span> k8s.gcr.io/k8s-dns-sidecar-amd64:<span style="color:#953800">$DNS_VERSION</span>
+</span></span><span style="display:flex;"><span>docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/k8s-dns-kube-dns-amd64:<span style="color:#953800">$DNS_VERSION</span> k8s.gcr.io/k8s-dns-kube-dns-amd64:<span style="color:#953800">$DNS_VERSION</span>
+</span></span><span style="display:flex;"><span>docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/k8s-dns-dnsmasq-nanny-amd64:<span style="color:#953800">$DNS_VERSION</span> k8s.gcr.io/k8s-dns-dnsmasq-nanny-amd64:<span style="color:#953800">$DNS_VERSION</span>
+</span></span><span style="display:flex;"><span>docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kubernetes-dashboard-amd64:<span style="color:#953800">$DASHBOARD_VERSION</span> k8s.gcr.io/kubernetes-dashboard-amd64:<span style="color:#953800">$DASHBOARD_VERSION</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">## 删除镜像</span>
-</span></span><span style="display:flex;"><span>docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/kube-apiserver-amd64:$K8S_VERSION
-</span></span><span style="display:flex;"><span>docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/kube-controller-manager-amd64:$K8S_VERSION
-</span></span><span style="display:flex;"><span>docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/kube-scheduler-amd64:$K8S_VERSION
-</span></span><span style="display:flex;"><span>docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy-amd64:$K8S_VERSION
-</span></span><span style="display:flex;"><span>docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/etcd-amd64:$ETCD_VERSION
-</span></span><span style="display:flex;"><span>docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/pause-amd64:$PAUSE_VERSION
-</span></span><span style="display:flex;"><span>docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/k8s-dns-sidecar-amd64:$DNS_VERSION
-</span></span><span style="display:flex;"><span>docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/k8s-dns-kube-dns-amd64:$DNS_VERSION
-</span></span><span style="display:flex;"><span>docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/k8s-dns-dnsmasq-nanny-amd64:$DNS_VERSION
-</span></span><span style="display:flex;"><span>docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/kubernetes-dashboard-amd64:$DASHBOARD_VERSION
+</span></span><span style="display:flex;"><span><span style="color:#57606a">## 删除镜像</span>
+</span></span><span style="display:flex;"><span>docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/kube-apiserver-amd64:<span style="color:#953800">$K8S_VERSION</span>
+</span></span><span style="display:flex;"><span>docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/kube-controller-manager-amd64:<span style="color:#953800">$K8S_VERSION</span>
+</span></span><span style="display:flex;"><span>docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/kube-scheduler-amd64:<span style="color:#953800">$K8S_VERSION</span>
+</span></span><span style="display:flex;"><span>docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy-amd64:<span style="color:#953800">$K8S_VERSION</span>
+</span></span><span style="display:flex;"><span>docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/etcd-amd64:<span style="color:#953800">$ETCD_VERSION</span>
+</span></span><span style="display:flex;"><span>docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/pause-amd64:<span style="color:#953800">$PAUSE_VERSION</span>
+</span></span><span style="display:flex;"><span>docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/k8s-dns-sidecar-amd64:<span style="color:#953800">$DNS_VERSION</span>
+</span></span><span style="display:flex;"><span>docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/k8s-dns-kube-dns-amd64:<span style="color:#953800">$DNS_VERSION</span>
+</span></span><span style="display:flex;"><span>docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/k8s-dns-dnsmasq-nanny-amd64:<span style="color:#953800">$DNS_VERSION</span>
+</span></span><span style="display:flex;"><span>docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/kubernetes-dashboard-amd64:<span style="color:#953800">$DASHBOARD_VERSION</span>
 </span></span></code></pre></div>
       </div>
 
@@ -398,10 +400,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -427,6 +428,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

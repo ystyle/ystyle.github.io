@@ -6,6 +6,8 @@
   <title>使用docker 1.12 搭建多主机docker swarm集群 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -284,20 +286,20 @@
 </ol>
 <h3 id="安装docker-engine-1-12"><a href="#安装docker-engine-1-12" class="headerlink" title="安装docker engine 1.12"></a>安装docker engine 1.12</h3>
 <p>在每台机器上执行以下命令</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># sudo tee /etc/yum.repos.d/docker.repo &lt;&lt;-&#39;EOF&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>dockerrepo<span style="color:#f92672">]</span>
-</span></span><span style="display:flex;"><span>name<span style="color:#f92672">=</span>Docker Repository
-</span></span><span style="display:flex;"><span>baseurl<span style="color:#f92672">=</span>https://yum.dockerproject.org/repo/main/centos/7/
-</span></span><span style="display:flex;"><span>enabled<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>gpgcheck<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>gpgkey<span style="color:#f92672">=</span>https://yum.dockerproject.org/gpg
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a"># sudo tee /etc/yum.repos.d/docker.repo &lt;&lt;-&#39;EOF&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>dockerrepo<span style="color:#0550ae">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">name</span><span style="color:#0550ae">=</span>Docker Repository
+</span></span><span style="display:flex;"><span><span style="color:#953800">baseurl</span><span style="color:#0550ae">=</span>https://yum.dockerproject.org/repo/main/centos/7/
+</span></span><span style="display:flex;"><span><span style="color:#953800">enabled</span><span style="color:#0550ae">=</span><span style="color:#0550ae">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">gpgcheck</span><span style="color:#0550ae">=</span><span style="color:#0550ae">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">gpgkey</span><span style="color:#0550ae">=</span>https://yum.dockerproject.org/gpg
 </span></span><span style="display:flex;"><span>EOF
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># sudo yum install docker-engine</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># sudo systemctl enable docker</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># sudo systemctl start docker</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># sudo yum install docker-engine</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># sudo systemctl enable docker</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># sudo systemctl start docker</span>
 </span></span></code></pre></div><p>安装完后查看docker 版本</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@centos-node4 ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker version</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#0550ae">[</span>root@centos-node4 ~<span style="color:#0550ae">]</span><span style="color:#57606a"># docker version</span>
 </span></span><span style="display:flex;"><span>Client:
 </span></span><span style="display:flex;"><span> Version:      1.12.0
 </span></span><span style="display:flex;"><span> API version:  1.24
@@ -314,11 +316,11 @@
 </span></span><span style="display:flex;"><span> Built:        
 </span></span><span style="display:flex;"><span> OS/Arch:      linux/amd64
 </span></span></code></pre></div><p>开放端口相关命令</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>firewall-cmd --zone<span style="color:#f92672">=</span>public --add-port<span style="color:#f92672">=</span>2377/tcp --permanent
-</span></span><span style="display:flex;"><span>firewall-cmd --zone<span style="color:#f92672">=</span>public --add-port<span style="color:#f92672">=</span>7946/tcp --permanent
-</span></span><span style="display:flex;"><span>firewall-cmd --zone<span style="color:#f92672">=</span>public --add-port<span style="color:#f92672">=</span>7946/udp --permanent
-</span></span><span style="display:flex;"><span>firewall-cmd --zone<span style="color:#f92672">=</span>public --add-port<span style="color:#f92672">=</span>4789/tcp --permanent
-</span></span><span style="display:flex;"><span>firewall-cmd --zone<span style="color:#f92672">=</span>public --add-port<span style="color:#f92672">=</span>4789/udp --permanent
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>firewall-cmd --zone<span style="color:#0550ae">=</span>public --add-port<span style="color:#0550ae">=</span>2377/tcp --permanent
+</span></span><span style="display:flex;"><span>firewall-cmd --zone<span style="color:#0550ae">=</span>public --add-port<span style="color:#0550ae">=</span>7946/tcp --permanent
+</span></span><span style="display:flex;"><span>firewall-cmd --zone<span style="color:#0550ae">=</span>public --add-port<span style="color:#0550ae">=</span>7946/udp --permanent
+</span></span><span style="display:flex;"><span>firewall-cmd --zone<span style="color:#0550ae">=</span>public --add-port<span style="color:#0550ae">=</span>4789/tcp --permanent
+</span></span><span style="display:flex;"><span>firewall-cmd --zone<span style="color:#0550ae">=</span>public --add-port<span style="color:#0550ae">=</span>4789/udp --permanent
 </span></span><span style="display:flex;"><span>firewall-cmd --reload
 </span></span></code></pre></div><h3 id="新版docker-swarm-命令详情"><a href="#新版docker-swarm-命令详情" class="headerlink" title="新版docker swarm 命令详情"></a>新版docker swarm 命令详情</h3>
 <p>有关集群的docker命令如下：</p>
@@ -332,7 +334,7 @@
 <ul>
 <li>查看docker swarm 命令说明</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@centos-node4 ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker swarm -h</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#0550ae">[</span>root@centos-node4 ~<span style="color:#0550ae">]</span><span style="color:#57606a"># docker swarm -h</span>
 </span></span><span style="display:flex;"><span>Flag shorthand -h has been deprecated, please use --help
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Usage:	docker swarm COMMAND
@@ -349,29 +351,29 @@
 </span></span><span style="display:flex;"><span>  update      Update the swarm
 </span></span><span style="display:flex;"><span>  leave       Leave a swarm
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Run <span style="color:#e6db74">&#39;docker swarm COMMAND --help&#39;</span> <span style="color:#66d9ef">for</span> more information on a command.
+</span></span><span style="display:flex;"><span>Run <span style="color:#0a3069">&#39;docker swarm COMMAND --help&#39;</span> <span style="color:#cf222e">for</span> more information on a command.
 </span></span></code></pre></div><ul>
 <li>在swarm manager(centos-node4:192.168.99.101)初始化swarm集群</li>
 </ul>
 <p>用<code>--listen-addr</code>指定监听的ip与端口</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#命令格式: docker swarm init --listen-addr &lt;MANAGER-IP&gt;:&lt;PORT&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@centos-node4 ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker swarm init --listen-addr 192.168.99.101:2377</span>
-</span></span><span style="display:flex;"><span>Swarm initialized: current node <span style="color:#f92672">(</span>a60d5c3ttymvtozr46uvk17q4<span style="color:#f92672">)</span> is now a manager.
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a">#命令格式: docker swarm init --listen-addr &lt;MANAGER-IP&gt;:&lt;PORT&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>root@centos-node4 ~<span style="color:#0550ae">]</span><span style="color:#57606a"># docker swarm init --listen-addr 192.168.99.101:2377</span>
+</span></span><span style="display:flex;"><span>Swarm initialized: current node <span style="color:#0550ae">(</span>a60d5c3ttymvtozr46uvk17q4<span style="color:#0550ae">)</span> is now a manager.
 </span></span></code></pre></div><p>查看结果</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@centos-node4 ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker node ls</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#0550ae">[</span>root@centos-node4 ~<span style="color:#0550ae">]</span><span style="color:#57606a"># docker node ls</span>
 </span></span><span style="display:flex;"><span>ID                           HOSTNAME      MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
 </span></span><span style="display:flex;"><span>a60d5c3ttymvtozr46uvk17q4 *  centos-node4  Accepted    Ready   Active        Leader
 </span></span></code></pre></div><ul>
 <li>把swarm-agent1(centos-node5: 192.168.99.102)添加到swarm集群</li>
 </ul>
 <p>在swarm-agent1上执行:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#命令格式: docker swarm join &lt;MANAGER-IP&gt;:&lt;PORT&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@centos-node5 ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker swarm join 192.168.99.101:2377</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a">#命令格式: docker swarm join &lt;MANAGER-IP&gt;:&lt;PORT&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>root@centos-node5 ~<span style="color:#0550ae">]</span><span style="color:#57606a"># docker swarm join 192.168.99.101:2377</span>
 </span></span><span style="display:flex;"><span>This node joined a Swarm as a worker.
 </span></span></code></pre></div><ul>
 <li>在swarm manager查看结果</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@centos-node4 ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker node ls</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#0550ae">[</span>root@centos-node4 ~<span style="color:#0550ae">]</span><span style="color:#57606a"># docker node ls</span>
 </span></span><span style="display:flex;"><span>ID                           HOSTNAME      MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
 </span></span><span style="display:flex;"><span>0ypcw58hjlcvr0xqbtizmau62    centos-node5  Accepted    Ready   Active
 </span></span><span style="display:flex;"><span>a60d5c3ttymvtozr46uvk17q4 *  centos-node4  Accepted    Ready   Active        Leader
@@ -379,29 +381,29 @@
 <ul>
 <li>查看原有网络</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@centos-node4 ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker network ls</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#0550ae">[</span>root@centos-node4 ~<span style="color:#0550ae">]</span><span style="color:#57606a"># docker network ls</span>
 </span></span><span style="display:flex;"><span>NETWORK ID          NAME                DRIVER              SCOPE
-</span></span><span style="display:flex;"><span>abec77415f48        bridge              bridge              local
-</span></span><span style="display:flex;"><span>e2fff9d572a6        docker_gwbridge     bridge              local
-</span></span><span style="display:flex;"><span>166bd71f7d0e        host                host                local
+</span></span><span style="display:flex;"><span>abec77415f48        bridge              bridge              <span style="color:#6639ba">local</span>
+</span></span><span style="display:flex;"><span>e2fff9d572a6        docker_gwbridge     bridge              <span style="color:#6639ba">local</span>
+</span></span><span style="display:flex;"><span>166bd71f7d0e        host                host                <span style="color:#6639ba">local</span>
 </span></span><span style="display:flex;"><span>9gr6bfff1rv9        ingress             overlay             swarm
-</span></span><span style="display:flex;"><span>1d2bfc590294        none                null                local
+</span></span><span style="display:flex;"><span>1d2bfc590294        none                null                <span style="color:#6639ba">local</span>
 </span></span></code></pre></div><blockquote>
 <p>可以看到在swarm上默认已有一个名为ingress的overlay 网络,默认在swarm里使用，本文会创建一个新的</p>
 </blockquote>
 <ul>
 <li>创建一个新的overlay网络</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> <span style="color:#f92672">[</span>root@centos-node4 ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker network create --driver overlay docker-net</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> <span style="color:#0550ae">[</span>root@centos-node4 ~<span style="color:#0550ae">]</span><span style="color:#57606a"># docker network create --driver overlay docker-net</span>
 </span></span><span style="display:flex;"><span>aoqs3p835s5glx69hi46ou2dw
-</span></span><span style="display:flex;"><span> <span style="color:#f92672">[</span>root@centos-node4 ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker network ls</span>
+</span></span><span style="display:flex;"><span> <span style="color:#0550ae">[</span>root@centos-node4 ~<span style="color:#0550ae">]</span><span style="color:#57606a"># docker network ls</span>
 </span></span><span style="display:flex;"><span>NETWORK ID          NAME                DRIVER              SCOPE
-</span></span><span style="display:flex;"><span>abec77415f48        bridge              bridge              local
+</span></span><span style="display:flex;"><span>abec77415f48        bridge              bridge              <span style="color:#6639ba">local</span>
 </span></span><span style="display:flex;"><span>aoqs3p835s5g        docker-net          overlay             swarm
-</span></span><span style="display:flex;"><span>e2fff9d572a6        docker_gwbridge     bridge              local
-</span></span><span style="display:flex;"><span>166bd71f7d0e        host                host                local
+</span></span><span style="display:flex;"><span>e2fff9d572a6        docker_gwbridge     bridge              <span style="color:#6639ba">local</span>
+</span></span><span style="display:flex;"><span>166bd71f7d0e        host                host                <span style="color:#6639ba">local</span>
 </span></span><span style="display:flex;"><span>9gr6bfff1rv9        ingress             overlay             swarm
-</span></span><span style="display:flex;"><span>1d2bfc590294        none                null                local
+</span></span><span style="display:flex;"><span>1d2bfc590294        none                null                <span style="color:#6639ba">local</span>
 </span></span></code></pre></div><blockquote>
 <p>新的网络(docker-net)已创建</p>
 </blockquote>
@@ -410,18 +412,18 @@
 <li>部署</li>
 </ul>
 <p>用<code>alpine</code>镜像在<code>docker-net</code>网络上启动两个实例, 并编排为一组服务</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@centos-node4 ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker service create --replicas 2 --name helloworld --network=docker-net  alpine ping docker.com</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#0550ae">[</span>root@centos-node4 ~<span style="color:#0550ae">]</span><span style="color:#57606a"># docker service create --replicas 2 --name helloworld --network=docker-net  alpine ping docker.com</span>
 </span></span><span style="display:flex;"><span>5lgdq3ihiez0o7h2uegu4fgd3
 </span></span></code></pre></div><ul>
 <li>查看部署结果</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@centos-node4 ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker service ls</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#0550ae">[</span>root@centos-node4 ~<span style="color:#0550ae">]</span><span style="color:#57606a"># docker service ls</span>
 </span></span><span style="display:flex;"><span>ID            NAME        REPLICAS  IMAGE   COMMAND
 </span></span><span style="display:flex;"><span>5lgdq3ihiez0  helloworld  0/2       alpine  ping docker.com
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@centos-node4 ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker service tasks helloworld</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>root@centos-node4 ~<span style="color:#0550ae">]</span><span style="color:#57606a"># docker service tasks helloworld</span>
 </span></span><span style="display:flex;"><span>ID                         NAME          SERVICE     IMAGE   LAST STATE          DESIRED STATE  NODE
-</span></span><span style="display:flex;"><span>eul3bus45qz3b555wekotdmo5  helloworld.1  helloworld  alpine  Running <span style="color:#ae81ff">14</span> seconds  Running        centos-node5
-</span></span><span style="display:flex;"><span>55uhq6xxcv53xlkqv2f0be9b9  helloworld.2  helloworld  alpine  Running <span style="color:#ae81ff">14</span> seconds  Running        centos-node4
+</span></span><span style="display:flex;"><span>eul3bus45qz3b555wekotdmo5  helloworld.1  helloworld  alpine  Running <span style="color:#0550ae">14</span> seconds  Running        centos-node5
+</span></span><span style="display:flex;"><span>55uhq6xxcv53xlkqv2f0be9b9  helloworld.2  helloworld  alpine  Running <span style="color:#0550ae">14</span> seconds  Running        centos-node4
 </span></span></code></pre></div><blockquote>
 <p>可以看到两个实例分别运行在两个节点上</p>
 </blockquote>
@@ -429,56 +431,56 @@
 <ul>
 <li>分别查看两个实例的名称</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 在swarm-manager 上执行</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@centos-node4 ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker ps -a</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a"># 在swarm-manager 上执行</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>root@centos-node4 ~<span style="color:#0550ae">]</span><span style="color:#57606a"># docker ps -a</span>
 </span></span><span style="display:flex;"><span>CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                    PORTS               NAMES
-</span></span><span style="display:flex;"><span>f4a197abdb0b        alpine:latest       <span style="color:#e6db74">&#34;ping docker.com&#34;</span>        <span style="color:#ae81ff">42</span> minutes ago      Up <span style="color:#ae81ff">42</span> minutes                                 helloworld.2.55uhq6xxcv53xlkqv2f0be9b9
+</span></span><span style="display:flex;"><span>f4a197abdb0b        alpine:latest       <span style="color:#0a3069">&#34;ping docker.com&#34;</span>        <span style="color:#0550ae">42</span> minutes ago      Up <span style="color:#0550ae">42</span> minutes                                 helloworld.2.55uhq6xxcv53xlkqv2f0be9b9
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 在swarm-agnet1 上执行</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@centos-node5 ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker ps -a</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 在swarm-agnet1 上执行</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>root@centos-node5 ~<span style="color:#0550ae">]</span><span style="color:#57606a"># docker ps -a</span>
 </span></span><span style="display:flex;"><span>CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-</span></span><span style="display:flex;"><span>39cc35cd54b5        alpine:latest       <span style="color:#e6db74">&#34;ping docker.com&#34;</span>   <span style="color:#ae81ff">50</span> seconds ago      Up <span style="color:#ae81ff">49</span> seconds                           helloworld.1.eul3bus45qz3b555wekotdmo5
+</span></span><span style="display:flex;"><span>39cc35cd54b5        alpine:latest       <span style="color:#0a3069">&#34;ping docker.com&#34;</span>   <span style="color:#0550ae">50</span> seconds ago      Up <span style="color:#0550ae">49</span> seconds                           helloworld.1.eul3bus45qz3b555wekotdmo5
 </span></span></code></pre></div><ul>
 <li>在swarm-manager 上测试</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@centos-node4 ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker exec -ti helloworld.2.55uhq6xxcv53xlkqv2f0be9b9 sh</span>
-</span></span><span style="display:flex;"><span>/ <span style="color:#75715e"># ping helloworld.1.eul3bus45qz3b555wekotdmo5</span>
-</span></span><span style="display:flex;"><span>PING helloworld.1.eul3bus45qz3b555wekotdmo5 <span style="color:#f92672">(</span>10.0.9.3<span style="color:#f92672">)</span>: <span style="color:#ae81ff">56</span> data bytes
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">64</span> bytes from 10.0.9.3: seq<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span> time<span style="color:#f92672">=</span>0.514 ms
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">64</span> bytes from 10.0.9.3: seq<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span> time<span style="color:#f92672">=</span>0.508 ms
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">64</span> bytes from 10.0.9.3: seq<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span> time<span style="color:#f92672">=</span>0.381 ms
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">64</span> bytes from 10.0.9.3: seq<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span> time<span style="color:#f92672">=</span>0.408 ms
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#0550ae">[</span>root@centos-node4 ~<span style="color:#0550ae">]</span><span style="color:#57606a"># docker exec -ti helloworld.2.55uhq6xxcv53xlkqv2f0be9b9 sh</span>
+</span></span><span style="display:flex;"><span>/ <span style="color:#57606a"># ping helloworld.1.eul3bus45qz3b555wekotdmo5</span>
+</span></span><span style="display:flex;"><span>PING helloworld.1.eul3bus45qz3b555wekotdmo5 <span style="color:#0550ae">(</span>10.0.9.3<span style="color:#0550ae">)</span>: <span style="color:#0550ae">56</span> data bytes
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">64</span> bytes from 10.0.9.3: <span style="color:#953800">seq</span><span style="color:#0550ae">=</span><span style="color:#0550ae">0</span> <span style="color:#953800">ttl</span><span style="color:#0550ae">=</span><span style="color:#0550ae">64</span> <span style="color:#953800">time</span><span style="color:#0550ae">=</span>0.514 ms
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">64</span> bytes from 10.0.9.3: <span style="color:#953800">seq</span><span style="color:#0550ae">=</span><span style="color:#0550ae">1</span> <span style="color:#953800">ttl</span><span style="color:#0550ae">=</span><span style="color:#0550ae">64</span> <span style="color:#953800">time</span><span style="color:#0550ae">=</span>0.508 ms
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">64</span> bytes from 10.0.9.3: <span style="color:#953800">seq</span><span style="color:#0550ae">=</span><span style="color:#0550ae">2</span> <span style="color:#953800">ttl</span><span style="color:#0550ae">=</span><span style="color:#0550ae">64</span> <span style="color:#953800">time</span><span style="color:#0550ae">=</span>0.381 ms
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">64</span> bytes from 10.0.9.3: <span style="color:#953800">seq</span><span style="color:#0550ae">=</span><span style="color:#0550ae">3</span> <span style="color:#953800">ttl</span><span style="color:#0550ae">=</span><span style="color:#0550ae">64</span> <span style="color:#953800">time</span><span style="color:#0550ae">=</span>0.408 ms
 </span></span><span style="display:flex;"><span>^C
 </span></span><span style="display:flex;"><span>--- helloworld.1.eul3bus45qz3b555wekotdmo5 ping statistics ---
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span> packets transmitted, <span style="color:#ae81ff">4</span> packets received, 0% packet loss
-</span></span><span style="display:flex;"><span>round-trip min/avg/max <span style="color:#f92672">=</span> 0.381/0.452/0.514 ms
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">4</span> packets transmitted, <span style="color:#0550ae">4</span> packets received, 0% packet loss
+</span></span><span style="display:flex;"><span>round-trip min/avg/max <span style="color:#0550ae">=</span> 0.381/0.452/0.514 ms
 </span></span></code></pre></div><ul>
 <li>在swarm-agent1 上测试</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@centos-node5 ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker ps -a</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#0550ae">[</span>root@centos-node5 ~<span style="color:#0550ae">]</span><span style="color:#57606a"># docker ps -a</span>
 </span></span><span style="display:flex;"><span>CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-</span></span><span style="display:flex;"><span>39cc35cd54b5        alpine:latest       <span style="color:#e6db74">&#34;ping docker.com&#34;</span>   <span style="color:#ae81ff">50</span> seconds ago      Up <span style="color:#ae81ff">49</span> seconds                           helloworld.1.eul3bus45qz3b555wekotdmo5
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@centos-node5 ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker exec -ti  helloworld.1.eul3bus45qz3b555wekotdmo5 sh</span>
-</span></span><span style="display:flex;"><span>/ <span style="color:#75715e"># ping helloworld.2.55uhq6xxcv53xlkqv2f0be9b9</span>
-</span></span><span style="display:flex;"><span>PING helloworld.2.55uhq6xxcv53xlkqv2f0be9b9 <span style="color:#f92672">(</span>10.0.9.4<span style="color:#f92672">)</span>: <span style="color:#ae81ff">56</span> data bytes
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">64</span> bytes from 10.0.9.4: seq<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span> time<span style="color:#f92672">=</span>0.892 ms
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">64</span> bytes from 10.0.9.4: seq<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span> time<span style="color:#f92672">=</span>0.463 ms
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">64</span> bytes from 10.0.9.4: seq<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span> time<span style="color:#f92672">=</span>0.462 ms
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">64</span> bytes from 10.0.9.4: seq<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span> time<span style="color:#f92672">=</span>0.478 ms
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">64</span> bytes from 10.0.9.4: seq<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span> time<span style="color:#f92672">=</span>0.468 ms
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">64</span> bytes from 10.0.9.4: seq<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span> time<span style="color:#f92672">=</span>0.459 ms
+</span></span><span style="display:flex;"><span>39cc35cd54b5        alpine:latest       <span style="color:#0a3069">&#34;ping docker.com&#34;</span>   <span style="color:#0550ae">50</span> seconds ago      Up <span style="color:#0550ae">49</span> seconds                           helloworld.1.eul3bus45qz3b555wekotdmo5
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>root@centos-node5 ~<span style="color:#0550ae">]</span><span style="color:#57606a"># docker exec -ti  helloworld.1.eul3bus45qz3b555wekotdmo5 sh</span>
+</span></span><span style="display:flex;"><span>/ <span style="color:#57606a"># ping helloworld.2.55uhq6xxcv53xlkqv2f0be9b9</span>
+</span></span><span style="display:flex;"><span>PING helloworld.2.55uhq6xxcv53xlkqv2f0be9b9 <span style="color:#0550ae">(</span>10.0.9.4<span style="color:#0550ae">)</span>: <span style="color:#0550ae">56</span> data bytes
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">64</span> bytes from 10.0.9.4: <span style="color:#953800">seq</span><span style="color:#0550ae">=</span><span style="color:#0550ae">0</span> <span style="color:#953800">ttl</span><span style="color:#0550ae">=</span><span style="color:#0550ae">64</span> <span style="color:#953800">time</span><span style="color:#0550ae">=</span>0.892 ms
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">64</span> bytes from 10.0.9.4: <span style="color:#953800">seq</span><span style="color:#0550ae">=</span><span style="color:#0550ae">1</span> <span style="color:#953800">ttl</span><span style="color:#0550ae">=</span><span style="color:#0550ae">64</span> <span style="color:#953800">time</span><span style="color:#0550ae">=</span>0.463 ms
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">64</span> bytes from 10.0.9.4: <span style="color:#953800">seq</span><span style="color:#0550ae">=</span><span style="color:#0550ae">2</span> <span style="color:#953800">ttl</span><span style="color:#0550ae">=</span><span style="color:#0550ae">64</span> <span style="color:#953800">time</span><span style="color:#0550ae">=</span>0.462 ms
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">64</span> bytes from 10.0.9.4: <span style="color:#953800">seq</span><span style="color:#0550ae">=</span><span style="color:#0550ae">3</span> <span style="color:#953800">ttl</span><span style="color:#0550ae">=</span><span style="color:#0550ae">64</span> <span style="color:#953800">time</span><span style="color:#0550ae">=</span>0.478 ms
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">64</span> bytes from 10.0.9.4: <span style="color:#953800">seq</span><span style="color:#0550ae">=</span><span style="color:#0550ae">4</span> <span style="color:#953800">ttl</span><span style="color:#0550ae">=</span><span style="color:#0550ae">64</span> <span style="color:#953800">time</span><span style="color:#0550ae">=</span>0.468 ms
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">64</span> bytes from 10.0.9.4: <span style="color:#953800">seq</span><span style="color:#0550ae">=</span><span style="color:#0550ae">5</span> <span style="color:#953800">ttl</span><span style="color:#0550ae">=</span><span style="color:#0550ae">64</span> <span style="color:#953800">time</span><span style="color:#0550ae">=</span>0.459 ms
 </span></span><span style="display:flex;"><span>^C
 </span></span><span style="display:flex;"><span>--- helloworld.2.55uhq6xxcv53xlkqv2f0be9b9 ping statistics ---
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span> packets transmitted, <span style="color:#ae81ff">6</span> packets received, 0% packet loss
-</span></span><span style="display:flex;"><span>round-trip min/avg/max <span style="color:#f92672">=</span> 0.459/0.537/0.892 ms
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">6</span> packets transmitted, <span style="color:#0550ae">6</span> packets received, 0% packet loss
+</span></span><span style="display:flex;"><span>round-trip min/avg/max <span style="color:#0550ae">=</span> 0.459/0.537/0.892 ms
 </span></span></code></pre></div><blockquote>
 <p>现在新版的docker swarm 管理非常简单, 可以快速的搭建起一个跨主机的集群并部署应用</p>
 </blockquote>
 <h3 id="dokcer-swarm自带的负载均衡"><a href="#dokcer-swarm自带的负载均衡" class="headerlink" title="dokcer swarm自带的负载均衡"></a>dokcer swarm自带的负载均衡</h3>
 <p>创建一组服务</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker service create --replicas <span style="color:#ae81ff">2</span> --name whoami -p 8080:80 daocloud.io/nginx:alpine
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker service create --replicas <span style="color:#0550ae">2</span> --name whoami -p 8080:80 daocloud.io/nginx:alpine
 </span></span></code></pre></div><p>访问服务(可以多执行几次)</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 访问地址格式: swarm-manager.ip + (-p映射的端口)</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a"># 访问地址格式: swarm-manager.ip + (-p映射的端口)</span>
 </span></span><span style="display:flex;"><span>curl -v 192.168.99.101:8080
 </span></span></code></pre></div><p>然后用docker logs 查看容器中nginx的访问日志, 可以现两个容器都有访问记录</p>
 
@@ -575,10 +577,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -604,6 +605,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

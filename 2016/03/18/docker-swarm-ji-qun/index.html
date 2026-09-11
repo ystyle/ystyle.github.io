@@ -6,6 +6,8 @@
   <title>docker &#43; swarm 集群 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -242,32 +244,32 @@
 <p>以虚拟机方式搭建集群练练手</p>
 </blockquote>
 <h3 id="安装swarm"><a href="#安装swarm" class="headerlink" title="安装swarm"></a>安装swarm</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run --rm swarm create
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run --rm swarm create
 </span></span><span style="display:flex;"><span>6a2d606bb3155b4428d0dc483cff6800
 </span></span></code></pre></div><h3 id="创建Docker虚拟机"><a href="#创建Docker虚拟机" class="headerlink" title="创建Docker虚拟机"></a>创建Docker虚拟机</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker-machine.exe create -d virtualbox swarm-master
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker-machine.exe create -d virtualbox swarm-master
 </span></span><span style="display:flex;"><span>docker-machine.exe create -d virtualbox swarm-node1
 </span></span><span style="display:flex;"><span>docker-machine.exe create -d virtualbox swarm-node2
 </span></span></code></pre></div><h3 id="搭建swarm集群"><a href="#搭建swarm集群" class="headerlink" title="搭建swarm集群"></a>搭建swarm集群</h3>
 <p>创建swarm-master</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>eval <span style="color:#66d9ef">$(</span>docker-machine.exe env swarm-master<span style="color:#66d9ef">)</span>
-</span></span><span style="display:flex;"><span>docker run -d -p 3376:3376 -t <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>-v /var/lib/boot2docker:/carts:ro swarm manage <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>-H 0.0.0.0:3376 <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>--tlsverify --tlscacert<span style="color:#f92672">=</span>/certs/ca.pem <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>--tlscert<span style="color:#f92672">=</span>/certs/server.pem <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>--tlskey<span style="color:#f92672">=</span>/certs/server-key.pem <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#6639ba">eval</span> <span style="color:#cf222e">$(</span>docker-machine.exe env swarm-master<span style="color:#cf222e">)</span>
+</span></span><span style="display:flex;"><span>docker run -d -p 3376:3376 -t <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>-v /var/lib/boot2docker:/carts:ro swarm manage <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>-H 0.0.0.0:3376 <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>--tlsverify --tlscacert<span style="color:#0550ae">=</span>/certs/ca.pem <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>--tlscert<span style="color:#0550ae">=</span>/certs/server.pem <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>--tlskey<span style="color:#0550ae">=</span>/certs/server-key.pem <span style="color:#0a3069">\
 </span></span></span><span style="display:flex;"><span>token://6a2d606bb3155b4428d0dc483cff6800
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>docker run -d swarm join --addr<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>docker-machine.exe ip swarm-master<span style="color:#66d9ef">)</span>:2376 token://6a2d606bb3155b4428d0dc483cff6800
+</span></span><span style="display:flex;"><span>docker run -d swarm join --addr<span style="color:#0550ae">=</span><span style="color:#cf222e">$(</span>docker-machine.exe ip swarm-master<span style="color:#cf222e">)</span>:2376 token://6a2d606bb3155b4428d0dc483cff6800
 </span></span></code></pre></div><p>创建swarm-node</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>eval <span style="color:#66d9ef">$(</span>docker-machine.exe env swarm-node1<span style="color:#66d9ef">)</span>
-</span></span><span style="display:flex;"><span>docker run -d swarm join --addr<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>docker-machine.exe ip swarm-node1<span style="color:#66d9ef">)</span>:2376 token://6a2d606bb3155b4428d0dc483cff6800
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#6639ba">eval</span> <span style="color:#cf222e">$(</span>docker-machine.exe env swarm-node1<span style="color:#cf222e">)</span>
+</span></span><span style="display:flex;"><span>docker run -d swarm join --addr<span style="color:#0550ae">=</span><span style="color:#cf222e">$(</span>docker-machine.exe ip swarm-node1<span style="color:#cf222e">)</span>:2376 token://6a2d606bb3155b4428d0dc483cff6800
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>eval <span style="color:#66d9ef">$(</span>docker-machine.exe env swarm-node2<span style="color:#66d9ef">)</span>
-</span></span><span style="display:flex;"><span>docker run -d swarm join --addr<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>docker-machine.exe ip swarm-node2<span style="color:#66d9ef">)</span>:2376 token://6a2d606bb3155b4428d0dc483cff6800
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">eval</span> <span style="color:#cf222e">$(</span>docker-machine.exe env swarm-node2<span style="color:#cf222e">)</span>
+</span></span><span style="display:flex;"><span>docker run -d swarm join --addr<span style="color:#0550ae">=</span><span style="color:#cf222e">$(</span>docker-machine.exe ip swarm-node2<span style="color:#cf222e">)</span>:2376 token://6a2d606bb3155b4428d0dc483cff6800
 </span></span></code></pre></div><h3 id="管理Swarm集群"><a href="#管理Swarm集群" class="headerlink" title="管理Swarm集群"></a>管理Swarm集群</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>export DOCKER_HOST<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>docker-machine ip swarm-master<span style="color:#66d9ef">)</span>:3376
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">DOCKER_HOST</span><span style="color:#0550ae">=</span><span style="color:#cf222e">$(</span>docker-machine ip swarm-master<span style="color:#cf222e">)</span>:3376
 </span></span><span style="display:flex;"><span>docker info
 </span></span></code></pre></div>
       </div>
@@ -363,10 +365,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -392,6 +393,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

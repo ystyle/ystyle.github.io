@@ -6,6 +6,8 @@
   <title>Ghost-flat主题优化 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -162,17 +164,17 @@
       <div class="post-content" id="post-content" itemprop="postContent">
         <p>###图片自适应(包括手机上)<br>
 文件名<code>assets/css/app.css</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#f92672">section</span>.<span style="color:#a6e22e">posts</span>  <span style="color:#f92672">img</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">max-width</span>: <span style="color:#ae81ff">100</span><span style="color:#66d9ef">%</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">height</span>: <span style="color:#66d9ef">auto</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">width</span>: <span style="color:#66d9ef">auto</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#ae81ff">9</span>;
-</span></span><span style="display:flex;"><span>}
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#0550ae">section</span><span style="color:#1f2328">.</span><span style="color:#1f2328">posts</span>  <span style="color:#0550ae">img</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">max-width</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">100</span><span style="color:#cf222e">%</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">height</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">auto</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">width</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">auto</span><span style="color:#f6f8fa;background-color:#82071e">\</span><span style="color:#0550ae">9</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
 </span></span></code></pre></div><p>###文章里的链接新页面打开<br>
 文件名`assets/js/ghost-blog.js</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// 放19行后面
-</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;section.posts a[href^=&#34;http&#34;]&#39;</span>).<span style="color:#a6e22e">each</span>(<span style="color:#66d9ef">function</span>(){
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">attr</span>(<span style="color:#e6db74">&#39;target&#39;</span>, <span style="color:#e6db74">&#39;_blank&#39;</span>);
-</span></span><span style="display:flex;"><span>});
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#57606a">// 放19行后面
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">$</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;section.posts a[href^=&#34;http&#34;]&#39;</span><span style="color:#1f2328">).</span><span style="color:#1f2328">each</span><span style="color:#1f2328">(</span><span style="color:#cf222e">function</span><span style="color:#1f2328">(){</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">$</span><span style="color:#1f2328">(</span><span style="color:#cf222e">this</span><span style="color:#1f2328">).</span><span style="color:#1f2328">attr</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;target&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#39;_blank&#39;</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">});</span>
 </span></span></code></pre></div><p>###多说评论</p>
 
       </div>
@@ -268,10 +270,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -297,6 +298,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

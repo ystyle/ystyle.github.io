@@ -6,6 +6,8 @@
   <title>鸿蒙PC融合开发引擎中编译安装Neovim与AstroNvim配置指南 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -522,12 +524,12 @@
 <pre tabindex="0"><code>[nvim-treesitter/install/c] error: Error during &#34;tree-sitter build&#34;: 
 tree-sitter: /usr/lib64/libc.so.6: version `GLIBC_2.39&#39; not found (required by tree-sitter)
 </code></pre><h3 id="版本检查"><a href="#版本检查" class="headerlink" title="版本检查"></a>版本检查</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ldd --version
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 输出：ldd (GNU libc) 2.38</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ldd --version
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 输出：ldd (GNU libc) 2.38</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>cat /etc/os-release
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># NAME=&#34;openEuler&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># VERSION=&#34;24.03 (LTS-SP1)&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># NAME=&#34;openEuler&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># VERSION=&#34;24.03 (LTS-SP1)&#34;</span>
 </span></span></code></pre></div><p>openEuler 24.03 SP1的glibc是2.38，而nvim-treesitter下载的预编译tree-sitter CLI需要glibc 2.39。</p>
 <h3 id="根本原因"><a href="#根本原因" class="headerlink" title="根本原因"></a>根本原因</h3>
 <p>容器环境共享虚拟机内核，无法升级glibc。解决方案是<strong>从源码编译所有组件</strong>，使用当前系统的glibc版本。</p>
@@ -539,148 +541,148 @@ tree-sitter: /usr/lib64/libc.so.6: version `GLIBC_2.39&#39; not found (required 
 5. 配置AstroNvim
 </code></pre><h2 id="一、安装编译依赖"><a href="#一、安装编译依赖" class="headerlink" title="一、安装编译依赖"></a>一、安装编译依赖</h2>
 <h3 id="基础工具"><a href="#基础工具" class="headerlink" title="基础工具"></a>基础工具</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 安装cmake和ninja</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 安装cmake和ninja</span>
 </span></span><span style="display:flex;"><span>sudo dnf install -y cmake ninja-build
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 验证安装</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 验证安装</span>
 </span></span><span style="display:flex;"><span>cmake --version
 </span></span><span style="display:flex;"><span>ninja --version
 </span></span></code></pre></div><h3 id="其他依赖"><a href="#其他依赖" class="headerlink" title="其他依赖"></a>其他依赖</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># gcc、make等已预装</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># gcc、make等已预装</span>
 </span></span><span style="display:flex;"><span>gcc --version
 </span></span><span style="display:flex;"><span>make --version
 </span></span></code></pre></div><h2 id="二、安装Rust工具链"><a href="#二、安装Rust工具链" class="headerlink" title="二、安装Rust工具链"></a>二、安装Rust工具链</h2>
 <p>tree-sitter CLI使用Rust编写，需要先安装Rust：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 设置代理（可选）</span>
-</span></span><span style="display:flex;"><span>export https_proxy<span style="color:#f92672">=</span>http://192.168.3.6:1080
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 设置代理（可选）</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">https_proxy</span><span style="color:#0550ae">=</span>http://192.168.3.6:1080
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 安装Rust</span>
-</span></span><span style="display:flex;"><span>curl --proto <span style="color:#e6db74">&#39;=https&#39;</span> -sSf https://sh.rustup.rs | sh -s -- -y
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 安装Rust</span>
+</span></span><span style="display:flex;"><span>curl --proto <span style="color:#0a3069">&#39;=https&#39;</span> -sSf https://sh.rustup.rs <span style="color:#1f2328">|</span> sh -s -- -y
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 加载环境</span>
-</span></span><span style="display:flex;"><span>source ~/.cargo/env
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 加载环境</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">source</span> ~/.cargo/env
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 验证</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 验证</span>
 </span></span><span style="display:flex;"><span>cargo --version
 </span></span><span style="display:flex;"><span>rustc --version
 </span></span></code></pre></div><h2 id="三、编译tree-sitter-CLI"><a href="#三、编译tree-sitter-CLI" class="headerlink" title="三、编译tree-sitter CLI"></a>三、编译tree-sitter CLI</h2>
 <h3 id="获取源码"><a href="#获取源码" class="headerlink" title="获取源码"></a>获取源码</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export https_proxy<span style="color:#f92672">=</span>http://192.168.3.6:1080
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">https_proxy</span><span style="color:#0550ae">=</span>http://192.168.3.6:1080
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 克隆tree-sitter CLI（使用稳定版本v0.24.1）</span>
-</span></span><span style="display:flex;"><span>git clone --depth <span style="color:#ae81ff">1</span> --branch v0.24.1 <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    https://github.com/tree-sitter/tree-sitter.git <span style="color:#ae81ff">\
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 克隆tree-sitter CLI（使用稳定版本v0.24.1）</span>
+</span></span><span style="display:flex;"><span>git clone --depth <span style="color:#0550ae">1</span> --branch v0.24.1 <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    https://github.com/tree-sitter/tree-sitter.git <span style="color:#0a3069">\
 </span></span></span><span style="display:flex;"><span>    ~/tree-sitter-cli
 </span></span></code></pre></div><h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd ~/tree-sitter-cli
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6639ba">cd</span> ~/tree-sitter-cli
 </span></span><span style="display:flex;"><span>cargo build --release
 </span></span></code></pre></div><p>编译过程约需1-2分钟。</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 系统安装</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 系统安装</span>
 </span></span><span style="display:flex;"><span>sudo cp ~/tree-sitter-cli/target/release/tree-sitter /usr/local/bin/
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 或替换mason的预编译版本</span>
-</span></span><span style="display:flex;"><span>cp ~/tree-sitter-cli/target/release/tree-sitter <span style="color:#ae81ff">\
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 或替换mason的预编译版本</span>
+</span></span><span style="display:flex;"><span>cp ~/tree-sitter-cli/target/release/tree-sitter <span style="color:#0a3069">\
 </span></span></span><span style="display:flex;"><span>    ~/.local/share/nvim/mason/packages/tree-sitter-cli/tree-sitter-linux-arm64
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 验证</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 验证</span>
 </span></span><span style="display:flex;"><span>tree-sitter --version
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 输出：tree-sitter 0.24.1</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 输出：tree-sitter 0.24.1</span>
 </span></span></code></pre></div><h2 id="四、编译Neovim"><a href="#四、编译Neovim" class="headerlink" title="四、编译Neovim"></a>四、编译Neovim</h2>
 <h3 id="获取源码-1"><a href="#获取源码-1" class="headerlink" title="获取源码"></a>获取源码</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export https_proxy<span style="color:#f92672">=</span>http://192.168.3.6:1080
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">https_proxy</span><span style="color:#0550ae">=</span>http://192.168.3.6:1080
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看最新版本</span>
-</span></span><span style="display:flex;"><span>git ls-remote --tags https://github.com/neovim/neovim.git | <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    grep -v <span style="color:#e6db74">&#39;\^{}&#39;</span> | grep <span style="color:#e6db74">&#39;v0\.1[0-2]&#39;</span> | tail -5
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 查看最新版本</span>
+</span></span><span style="display:flex;"><span>git ls-remote --tags https://github.com/neovim/neovim.git <span style="color:#1f2328">|</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    grep -v <span style="color:#0a3069">&#39;\^{}&#39;</span> <span style="color:#1f2328">|</span> grep <span style="color:#0a3069">&#39;v0\.1[0-2]&#39;</span> <span style="color:#1f2328">|</span> tail -5
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 克隆最新稳定版v0.12.0</span>
-</span></span><span style="display:flex;"><span>git clone --depth <span style="color:#ae81ff">1</span> --branch v0.12.0 <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    https://github.com/neovim/neovim.git <span style="color:#ae81ff">\
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 克隆最新稳定版v0.12.0</span>
+</span></span><span style="display:flex;"><span>git clone --depth <span style="color:#0550ae">1</span> --branch v0.12.0 <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    https://github.com/neovim/neovim.git <span style="color:#0a3069">\
 </span></span></span><span style="display:flex;"><span>    ~/neovim
 </span></span></code></pre></div><h3 id="编译-1"><a href="#编译-1" class="headerlink" title="编译"></a>编译</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd ~/neovim
-</span></span><span style="display:flex;"><span>make CMAKE_BUILD_TYPE<span style="color:#f92672">=</span>Release
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6639ba">cd</span> ~/neovim
+</span></span><span style="display:flex;"><span>make <span style="color:#953800">CMAKE_BUILD_TYPE</span><span style="color:#0550ae">=</span>Release
 </span></span></code></pre></div><p>编译过程约需3-5分钟，会自动下载并编译所有依赖。</p>
 <h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo make install
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo make install
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 验证</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 验证</span>
 </span></span><span style="display:flex;"><span>nvim --version
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 输出：</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># NVIM v0.12.0</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Build type: Release</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># LuaJIT 2.1.1774638290</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 输出：</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># NVIM v0.12.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># Build type: Release</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># LuaJIT 2.1.1774638290</span>
 </span></span></code></pre></div><h3 id="编译输出位置"><a href="#编译输出位置" class="headerlink" title="编译输出位置"></a>编译输出位置</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls ~/neovim/build/bin/nvim
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># -rwxr-xr-x 1 user user 10346568 ... nvim</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls ~/neovim/build/bin/nvim
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># -rwxr-xr-x 1 user user 10346568 ... nvim</span>
 </span></span></code></pre></div><h2 id="五、配置AstroNvim"><a href="#五、配置AstroNvim" class="headerlink" title="五、配置AstroNvim"></a>五、配置AstroNvim</h2>
 <p>AstroNvim是一个预配置的Neovim发行版，提供完整的IDE体验。</p>
 <h3 id="备份现有配置"><a href="#备份现有配置" class="headerlink" title="备份现有配置"></a>备份现有配置</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 备份旧配置</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 备份旧配置</span>
 </span></span><span style="display:flex;"><span>mv ~/.config/nvim ~/.config/nvim.bak
 </span></span><span style="display:flex;"><span>mv ~/.local/share/nvim ~/.local/share/nvim.bak
 </span></span><span style="display:flex;"><span>mv ~/.local/state/nvim ~/.local/state/nvim.bak
 </span></span></code></pre></div><h3 id="安装AstroNvim"><a href="#安装AstroNvim" class="headerlink" title="安装AstroNvim"></a>安装AstroNvim</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 克隆AstroNvim配置</span>
-</span></span><span style="display:flex;"><span>git clone --depth <span style="color:#ae81ff">1</span> https://github.com/AstroNvim/AstroNvim <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 克隆AstroNvim配置</span>
+</span></span><span style="display:flex;"><span>git clone --depth <span style="color:#0550ae">1</span> https://github.com/AstroNvim/AstroNvim <span style="color:#0a3069">\
 </span></span></span><span style="display:flex;"><span>    ~/.config/nvim
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 复制默认用户配置模板</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 复制默认用户配置模板</span>
 </span></span><span style="display:flex;"><span>cp ~/.config/nvim/lua/user_template.lua ~/.config/nvim/lua/user.lua
 </span></span></code></pre></div><h3 id="首次启动"><a href="#首次启动" class="headerlink" title="首次启动"></a>首次启动</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nvim
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nvim
 </span></span></code></pre></div><p>首次启动会自动安装所有插件和tree-sitter解析器。由于我们已编译了tree-sitter CLI，treesitter安装不会出现glibc错误。</p>
 <h3 id="自定义配置"><a href="#自定义配置" class="headerlink" title="自定义配置"></a>自定义配置</h3>
 <p>编辑 <code>~/.config/nvim/lua/user.lua</code>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">-- 自定义颜色方案</span>
-</span></span><span style="display:flex;"><span>  colorscheme <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;catppuccin-mocha&#34;</span>,
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#cf222e">return</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#57606a">-- 自定义颜色方案</span>
+</span></span><span style="display:flex;"><span>  colorscheme <span style="color:#0550ae">=</span> <span style="color:#0a3069">&#34;catppuccin-mocha&#34;</span><span style="color:#1f2328">,</span>
 </span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">-- 自定义选项</span>
-</span></span><span style="display:flex;"><span>  options <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>    opt <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>      relativenumber <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>, <span style="color:#75715e">-- 相对行号</span>
-</span></span><span style="display:flex;"><span>    },
-</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#57606a">-- 自定义选项</span>
+</span></span><span style="display:flex;"><span>  options <span style="color:#0550ae">=</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    opt <span style="color:#0550ae">=</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      relativenumber <span style="color:#0550ae">=</span> <span style="color:#cf222e">true</span><span style="color:#1f2328">,</span> <span style="color:#57606a">-- 相对行号</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">},</span>
 </span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">-- 自定义插件</span>
-</span></span><span style="display:flex;"><span>  plugins <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;rebelot/kanagawa.nvim&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">-- 添加更多插件...</span>
-</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#57606a">-- 自定义插件</span>
+</span></span><span style="display:flex;"><span>  plugins <span style="color:#0550ae">=</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0a3069">&#34;rebelot/kanagawa.nvim&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a">-- 添加更多插件...</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">},</span>
 </span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">-- LSP配置</span>
-</span></span><span style="display:flex;"><span>  lsp <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>    formatting <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>      format_on_save <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>,
-</span></span><span style="display:flex;"><span>    },
-</span></span><span style="display:flex;"><span>    servers <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">-- 添加LSP服务器...</span>
-</span></span><span style="display:flex;"><span>    },
-</span></span><span style="display:flex;"><span>  },
-</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>  <span style="color:#57606a">-- LSP配置</span>
+</span></span><span style="display:flex;"><span>  lsp <span style="color:#0550ae">=</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    formatting <span style="color:#0550ae">=</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      format_on_save <span style="color:#0550ae">=</span> <span style="color:#cf222e">true</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>    servers <span style="color:#0550ae">=</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#57606a">-- 添加LSP服务器...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
 </span></span></code></pre></div><h3 id="安装LSP和工具"><a href="#安装LSP和工具" class="headerlink" title="安装LSP和工具"></a>安装LSP和工具</h3>
 <p>在Neovim中运行：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">LspInstall</span> <span style="color:#a6e22e">python</span>
-</span></span><span style="display:flex;"><span>:<span style="color:#a6e22e">LspInstall</span> <span style="color:#a6e22e">lua_ls</span>
-</span></span><span style="display:flex;"><span>:<span style="color:#a6e22e">TSInstall</span> <span style="color:#a6e22e">python</span>
-</span></span><span style="display:flex;"><span>:<span style="color:#a6e22e">TSInstall</span> <span style="color:#a6e22e">lua</span>
-</span></span><span style="display:flex;"><span>:<span style="color:#a6e22e">MasonInstall</span> <span style="color:#a6e22e">prettier</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">LspInstall</span> <span style="color:#1f2328">python</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">LspInstall</span> <span style="color:#1f2328">lua_ls</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstall</span> <span style="color:#1f2328">python</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstall</span> <span style="color:#1f2328">lua</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">MasonInstall</span> <span style="color:#1f2328">prettier</span>
 </span></span></code></pre></div><h2 id="六、验证tree-sitter工作"><a href="#六、验证tree-sitter工作" class="headerlink" title="六、验证tree-sitter工作"></a>六、验证tree-sitter工作</h2>
 <h3 id="安装解析器"><a href="#安装解析器" class="headerlink" title="安装解析器"></a>安装解析器</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">TSInstallInfo</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstallInfo</span>
 </span></span></code></pre></div><p>查看可用的解析器，选择需要的安装：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">TSInstall</span> <span style="color:#a6e22e">vimdoc</span>
-</span></span><span style="display:flex;"><span>:<span style="color:#a6e22e">TSInstall</span> <span style="color:#a6e22e">lua</span>
-</span></span><span style="display:flex;"><span>:<span style="color:#a6e22e">TSInstall</span> <span style="color:#a6e22e">python</span>
-</span></span><span style="display:flex;"><span>:<span style="color:#a6e22e">TSInstall</span> <span style="color:#a6e22e">javascript</span>
-</span></span><span style="display:flex;"><span>:<span style="color:#a6e22e">TSInstall</span> <span style="color:#a6e22e">html</span>
-</span></span><span style="display:flex;"><span>:<span style="color:#a6e22e">TSInstall</span> <span style="color:#a6e22e">css</span>
-</span></span><span style="display:flex;"><span>:<span style="color:#a6e22e">TSInstall</span> <span style="color:#a6e22e">json</span>
-</span></span><span style="display:flex;"><span>:<span style="color:#a6e22e">TSInstall</span> <span style="color:#a6e22e">markdown</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstall</span> <span style="color:#1f2328">vimdoc</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstall</span> <span style="color:#1f2328">lua</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstall</span> <span style="color:#1f2328">python</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstall</span> <span style="color:#1f2328">javascript</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstall</span> <span style="color:#1f2328">html</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstall</span> <span style="color:#1f2328">css</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstall</span> <span style="color:#1f2328">json</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstall</span> <span style="color:#1f2328">markdown</span>
 </span></span></code></pre></div><h3 id="检查状态"><a href="#检查状态" class="headerlink" title="检查状态"></a>检查状态</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">TSInstallInfo</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstallInfo</span>
 </span></span></code></pre></div><p>所有解析器应显示为 <code>✓ installed</code>。</p>
 <h2 id="七、总结"><a href="#七、总结" class="headerlink" title="七、总结"></a>七、总结</h2>
 <h3 id="编译清单"><a href="#编译清单" class="headerlink" title="编译清单"></a>编译清单</h3>
@@ -747,22 +749,22 @@ tree-sitter: /usr/lib64/libc.so.6: version `GLIBC_2.39&#39; not found (required 
 </ol>
 <h2 id="八、清理构建文件"><a href="#八、清理构建文件" class="headerlink" title="八、清理构建文件"></a>八、清理构建文件</h2>
 <p>编译完成后可以清理源码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 可选：保留源码用于后续升级</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 或删除以节省空间</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 可选：保留源码用于后续升级</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 或删除以节省空间</span>
 </span></span><span style="display:flex;"><span>rm -rf ~/tree-sitter-cli
 </span></span><span style="display:flex;"><span>rm -rf ~/neovim
 </span></span></code></pre></div><p>建议保留源码目录，方便后续版本升级。</p>
 <h2 id="九、后续升级"><a href="#九、后续升级" class="headerlink" title="九、后续升级"></a>九、后续升级</h2>
 <p>升级Neovim：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd ~/neovim
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6639ba">cd</span> ~/neovim
 </span></span><span style="display:flex;"><span>git fetch --tags
-</span></span><span style="display:flex;"><span>git checkout v0.13.0  <span style="color:#75715e"># 假设新版本</span>
-</span></span><span style="display:flex;"><span>make CMAKE_BUILD_TYPE<span style="color:#f92672">=</span>Release
+</span></span><span style="display:flex;"><span>git checkout v0.13.0  <span style="color:#57606a"># 假设新版本</span>
+</span></span><span style="display:flex;"><span>make <span style="color:#953800">CMAKE_BUILD_TYPE</span><span style="color:#0550ae">=</span>Release
 </span></span><span style="display:flex;"><span>sudo make install
 </span></span></code></pre></div><p>升级tree-sitter：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd ~/tree-sitter-cli
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6639ba">cd</span> ~/tree-sitter-cli
 </span></span><span style="display:flex;"><span>git fetch --tags
-</span></span><span style="display:flex;"><span>git checkout v0.25.0  <span style="color:#75715e"># 假设新版本</span>
+</span></span><span style="display:flex;"><span>git checkout v0.25.0  <span style="color:#57606a"># 假设新版本</span>
 </span></span><span style="display:flex;"><span>cargo build --release
 </span></span><span style="display:flex;"><span>sudo cp target/release/tree-sitter /usr/local/bin/
 </span></span></code></pre></div><hr>
@@ -871,10 +873,9 @@ tree-sitter: /usr/lib64/libc.so.6: version `GLIBC_2.39&#39; not found (required 
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -900,6 +901,7 @@ tree-sitter: /usr/lib64/libc.so.6: version `GLIBC_2.39&#39; not found (required 
 </section>
 
 
+  </article>
 </div>
 
     

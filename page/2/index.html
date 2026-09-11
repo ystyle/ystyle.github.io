@@ -7,6 +7,8 @@
   <title>东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -317,6 +319,7 @@ jq rofi 脚本 把以下脚本存放到~/.config/hypr/scripts/switch_windows
 准备脚本 把以下内容存为run.ps1
 $env:REFRESH_TOKEN=&#34;484b469b3ef74dcaba5cf21aeadae2ca&#34; $env:WEBDAV_AUTH_USER=&#34;admin&#34; $env:WEBDAV_AUTH_PASSWORD=&#34;123456&#34; Start-Process -FilePath aliyundrive-webdav.exe -ArgumentList (&#34;--port=8080&#34;) -Wait -WindowStyle Hidden 脚本配置说明:
 $env:REFRESH_TOKEN: 为阿里云网盘登陆后的token, 必需改为自己的
+获取阿里云网盘REFRESH_TOKEN的方法 $env:WEBDAV_AUTH_USER： webdav用户名
 
           <a href="/2022/01/01/aliyundrive-webdav/" class="post-more waves-effect waves-button">Continue reading...</a>
         </div>

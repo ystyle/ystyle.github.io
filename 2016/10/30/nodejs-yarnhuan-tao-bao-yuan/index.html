@@ -6,6 +6,8 @@
   <title>Nodejs yarn换淘宝源 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -190,13 +192,13 @@
       <div class="post-content" id="post-content" itemprop="postContent">
         <h2 id="Nodejs-yarn换淘宝源"><a href="#Nodejs-yarn换淘宝源" class="headerlink" title="Nodejs yarn换淘宝源"></a>Nodejs yarn换淘宝源</h2>
 <p>如果觉得安装速度慢，安装源和原来 npm 是一样的，可以通用，修改方法如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yarn config get registry
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># -&gt; https://registry.yarnpkg.com</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yarn config get registry
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># -&gt; https://registry.yarnpkg.com</span>
 </span></span></code></pre></div><p>可以改成 taobao 的源：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yarn config set registry <span style="color:#e6db74">&#39;https://registry.npm.taobao.org&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># -&gt; yarn config v0.15.0</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># -&gt; success Set &#34;registry&#34; to &#34;https://registry.npm.taobao.org&#34;.</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># -&gt; Done in 0.04s.</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yarn config <span style="color:#6639ba">set</span> registry <span style="color:#0a3069">&#39;https://registry.npm.taobao.org&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># -&gt; yarn config v0.15.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># -&gt; success Set &#34;registry&#34; to &#34;https://registry.npm.taobao.org&#34;.</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># -&gt; Done in 0.04s.</span>
 </span></span></code></pre></div><p>然后 yarn install 的速度就快多了</p>
 
       </div>
@@ -292,10 +294,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -321,6 +322,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

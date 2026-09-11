@@ -6,6 +6,8 @@
   <title>手工申请Let&amp;#180;s Encrypt 证书 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -214,13 +216,13 @@
 <p>本教程讲如何手工申请证书，并提取出来， 因为有些软件并不能直接使用官方提供的脚本，如堡垒机的防火墙软件</p>
 </blockquote>
 <h3 id="安装letsencrypt"><a href="#安装letsencrypt" class="headerlink" title="安装letsencrypt"></a>安装letsencrypt</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone https://github.com/letsencrypt/letsencrypt
-</span></span><span style="display:flex;"><span>cd letsencrypt
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone https://github.com/letsencrypt/letsencrypt
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">cd</span> letsencrypt
 </span></span><span style="display:flex;"><span>./letsencrypt-auto --help
 </span></span></code></pre></div><h3 id="申请证书"><a href="#申请证书" class="headerlink" title="申请证书"></a>申请证书</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./letsencrypt-auto certonly --manual --email lxy5266@live.com -d web.ystyle.top
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./letsencrypt-auto certonly --manual --email lxy5266@live.com -d web.ystyle.top
 </span></span></code></pre></div><p>出现以下内容时，打开一个新的终端</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Saving debug log to /var/log/letsencrypt/letsencrypt.log
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Saving debug log to /var/log/letsencrypt/letsencrypt.log
 </span></span><span style="display:flex;"><span>Plugins selected: Authenticator manual, Installer None
 </span></span><span style="display:flex;"><span>Obtaining a new certificate
 </span></span><span style="display:flex;"><span>Performing the following challenges:
@@ -246,16 +248,16 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>-------------------------------------------------------------------------------
 </span></span><span style="display:flex;"><span>Press Enter to Continue
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkdir -p /tmp/letsencrypt/public_html/.well-known/acme-challenge
-</span></span><span style="display:flex;"><span>cd /tmp/letsencrypt/public_html
-</span></span><span style="display:flex;"><span>printf <span style="color:#e6db74">&#34;%s&#34;</span> tzhL9xuoqMj4F57SMCiTvEpno36QM0nlAFwo8SDuHvk.2lxeywshhzsj142WeXRomKhAOmOFM5Iwlkbc5z1jljc &gt; .well-known/acme-challenge/tzhL9xuoqMj4F57SMCiTvEpno36QM0nlAFwo8SDuHvk
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># echo 中的 tzhL9xuoqMj4F57SMCiTvEpno36QM0nlAFwo8SDuHvk.2lxeywshhzsj142WeXRomKhAOmOFM5Iwlkbc5z1jljc 是Create a file containing just this data: 下面那行</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># .well-known/acme-challenge/tzhL9xuoqMj4F57SMCiTvEpno36QM0nlAFwo8SDuHvk 是 And make it available on your web server at this URL: 下面那行的url中的</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkdir -p /tmp/letsencrypt/public_html/.well-known/acme-challenge
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">cd</span> /tmp/letsencrypt/public_html
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">printf</span> <span style="color:#0a3069">&#34;%s&#34;</span> tzhL9xuoqMj4F57SMCiTvEpno36QM0nlAFwo8SDuHvk.2lxeywshhzsj142WeXRomKhAOmOFM5Iwlkbc5z1jljc &gt; .well-known/acme-challenge/tzhL9xuoqMj4F57SMCiTvEpno36QM0nlAFwo8SDuHvk
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># echo 中的 tzhL9xuoqMj4F57SMCiTvEpno36QM0nlAFwo8SDuHvk.2lxeywshhzsj142WeXRomKhAOmOFM5Iwlkbc5z1jljc 是Create a file containing just this data: 下面那行</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># .well-known/acme-challenge/tzhL9xuoqMj4F57SMCiTvEpno36QM0nlAFwo8SDuHvk 是 And make it available on your web server at this URL: 下面那行的url中的</span>
 </span></span></code></pre></div><p>然后执行</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo python -c <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;import BaseHTTPServer, SimpleHTTPServer; \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">s = BaseHTTPServer.HTTPServer((&#39;&#39;, 80), SimpleHTTPServer.SimpleHTTPRequestHandler); \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">s.serve_forever()&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo python -c <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&#34;import BaseHTTPServer, SimpleHTTPServer; \
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">s = BaseHTTPServer.HTTPServer((&#39;&#39;, 80), SimpleHTTPServer.SimpleHTTPRequestHandler); \
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">s.serve_forever()&#34;</span>
 </span></span></code></pre></div><blockquote>
 <p>注意机器的80端口要先关闭</p>
 </blockquote>
@@ -359,10 +361,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -388,6 +389,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

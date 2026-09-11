@@ -6,6 +6,8 @@
   <title>harl-鸿蒙应用开发实机热更新工具 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -250,12 +252,12 @@
 </li>
 </ul>
 <h3 id="USAGE"><a href="#USAGE" class="headerlink" title="USAGE"></a>USAGE</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>➜ harl.exe
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>➜ harl.exe
 </span></span><span style="display:flex;"><span>NAME:
 </span></span><span style="display:flex;"><span>   harl - Open Harmony OS Dev tools
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>USAGE:
-</span></span><span style="display:flex;"><span>   harl.exe <span style="color:#f92672">[</span>global options<span style="color:#f92672">]</span> command <span style="color:#f92672">[</span>command options<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>arguments...<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>   harl.exe <span style="color:#0550ae">[</span>global options<span style="color:#0550ae">]</span> <span style="color:#6639ba">command</span> <span style="color:#0550ae">[</span><span style="color:#6639ba">command</span> options<span style="color:#0550ae">]</span> <span style="color:#0550ae">[</span>arguments...<span style="color:#0550ae">]</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>VERSION:
 </span></span><span style="display:flex;"><span>   v0.1.2
@@ -267,11 +269,11 @@
 </span></span><span style="display:flex;"><span>   uninstall  uninstall hap
 </span></span><span style="display:flex;"><span>   shell      open a shell
 </span></span><span style="display:flex;"><span>   reboot     reboot
-</span></span><span style="display:flex;"><span>   help, h    Shows a list of commands or help <span style="color:#66d9ef">for</span> one command
+</span></span><span style="display:flex;"><span>   help, h    Shows a list of commands or <span style="color:#6639ba">help</span> <span style="color:#cf222e">for</span> one <span style="color:#6639ba">command</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>GLOBAL OPTIONS:
-</span></span><span style="display:flex;"><span>   --help, -h     show help <span style="color:#f92672">(</span>default: false<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>   --version, -v  print the version <span style="color:#f92672">(</span>default: false<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>   --help, -h     show <span style="color:#6639ba">help</span> <span style="color:#0550ae">(</span>default: <span style="color:#6639ba">false</span><span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>   --version, -v  print the version <span style="color:#0550ae">(</span>default: <span style="color:#6639ba">false</span><span style="color:#0550ae">)</span>
 </span></span></code></pre></div><ul>
 <li><a href="https://gitee.com/ystyle/harl/releases" target="_blank" rel="noopener">下载应用</a>
 </li>
@@ -293,37 +295,37 @@
 <blockquote>
 <p>.harl.yaml</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">watch</span>: <span style="color:#75715e"># 监听文件修改并自动编译、安装的参数</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">excludes</span>: <span style="color:#75715e"># 排除的文件</span>
-</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">.gradle</span>
-</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">.idea</span>
-</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">gradle</span>
-</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">entry/build</span>
-</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">entry/node_modules</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">includes</span>: <span style="color:#75715e"># 监听的文件类型</span>
-</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">.css</span>
-</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">.hml</span>
-</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">.js</span>
-</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">.hap</span>
-</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">.json</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">delay</span>: <span style="color:#ae81ff">100</span> <span style="color:#75715e"># 监听频率，单位ms</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">nfs</span>: <span style="color:#75715e"># nfs 配置</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ldir</span>: <span style="color:#ae81ff">H:/bin</span> <span style="color:#75715e"># 本地nfs挂载目录 </span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rdir</span>: <span style="color:#ae81ff">/nfs</span> <span style="color:#75715e"># 远程nfs(开发板)挂载目录</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">shell</span>: <span style="color:#75715e"># 开发板连接参数</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">com</span>: <span style="color:#ae81ff">COM5</span> <span style="color:#75715e"># 串口号</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">command</span>: <span style="color:#75715e"># 定义常用命令, 在shell或watch里可执行</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">setup</span>: <span style="color:#75715e"># 命令执行方式: ^run setup</span>
-</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">dhclient eth0</span> <span style="color:#75715e"># 命令一行一个, 顺序执行错误不会中断</span>
-</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">mkdir /nfs</span>
-</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">mount 192.168.3.12:/nfsshare /nfs nfs</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">kill</span>: <span style="color:#75715e"># 关闭应用</span>
-</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">cd /nfs</span>
-</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">./aa terminate -p top.ystyle.ohos.js.testapp</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">start</span>: <span style="color:#75715e"># 启动应用</span>
-</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">cd /nfs</span>
-</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">./aa start -p top.ystyle.ohos.js.testapp -n default</span>
-</span></span></code></pre></div><h3 id="支持情况"><a href="#支持情况" class="headerlink" title="支持情况"></a>支持情况</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#0550ae">watch</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#57606a"># 监听文件修改并自动编译、安装的参数</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">excludes</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#57606a"># 排除的文件</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- .gradle<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- .idea<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- gradle<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- entry/build<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- entry/node_modules<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">includes</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#57606a"># 监听的文件类型</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- .css<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- .hml<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- .js<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- .hap<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- .json<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">delay</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#0550ae">100</span><span style="color:#fff"> </span><span style="color:#57606a"># 监听频率，单位ms</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">nfs</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#57606a"># nfs 配置</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">ldir</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>H:/bin<span style="color:#fff"> </span><span style="color:#57606a"># 本地nfs挂载目录 </span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">rdir</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>/nfs<span style="color:#fff"> </span><span style="color:#57606a"># 远程nfs(开发板)挂载目录</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">shell</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#57606a"># 开发板连接参数</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">com</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>COM5<span style="color:#fff"> </span><span style="color:#57606a"># 串口号</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">command</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#57606a"># 定义常用命令, 在shell或watch里可执行</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">setup</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#57606a"># 命令执行方式: ^run setup</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- dhclient eth0<span style="color:#fff"> </span><span style="color:#57606a"># 命令一行一个, 顺序执行错误不会中断</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- mkdir /nfs<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- mount 192.168.3.12:/nfsshare /nfs nfs<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">kill</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#57606a"># 关闭应用</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- cd /nfs<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- ./aa terminate -p top.ystyle.ohos.js.testapp<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">start</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#57606a"># 启动应用</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- cd /nfs<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- ./aa start -p top.ystyle.ohos.js.testapp -n default<span style="color:#fff">
+</span></span></span></code></pre></div><h3 id="支持情况"><a href="#支持情况" class="headerlink" title="支持情况"></a>支持情况</h3>
 <ul>
 <li>只支持windows</li>
 <li>只测试过liteWearable项目改的smartVision</li>
@@ -423,10 +425,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -452,6 +453,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

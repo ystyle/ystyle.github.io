@@ -6,6 +6,8 @@
   <title>使用hadoop&#43;中文分词统计小说里的用词频率 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -273,87 +275,87 @@
 </blockquote>
 <p>2.设置环境变量<br>
 vim ~/.bashrc</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>export HADOOP_INSTALL<span style="color:#f92672">=</span>/home/ystyle/Applications/hadoop-2.7.0
-</span></span><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span>$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">HADOOP_INSTALL</span><span style="color:#0550ae">=</span>/home/ystyle/Applications/hadoop-2.7.0
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">PATH</span><span style="color:#0550ae">=</span><span style="color:#953800">$PATH</span>:<span style="color:#953800">$HADOOP_HOME</span>/bin:<span style="color:#953800">$HADOOP_HOME</span>/sbin
 </span></span></code></pre></div><p>然后再执行 <code>source ~/.bashrc</code></p>
 <p>PS: 这里使用hadoop的单机模式</p>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> net.ystyle.hadoop;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.hadoop.conf.Configuration;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.hadoop.fs.Path;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.hadoop.io.IntWritable;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.hadoop.io.Text;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.hadoop.mapreduce.Job;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.hadoop.mapreduce.Mapper;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.hadoop.mapreduce.Reducer;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.hadoop.util.GenericOptionsParser;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.wltea.analyzer.core.IKSegmenter;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.wltea.analyzer.core.Lexeme;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.IOException;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.StringReader;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WordCount</span> {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TokenizerMapper</span>
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">extends</span> Mapper<span style="color:#f92672">&lt;</span>Object, Text, Text, IntWritable<span style="color:#f92672">&gt;</span>{
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">static</span> IntWritable one <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> IntWritable(1);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Text word <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Text();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">map</span>(Object key, Text value, Context context
-</span></span><span style="display:flex;"><span>                    ) <span style="color:#66d9ef">throws</span> IOException, InterruptedException {
-</span></span><span style="display:flex;"><span>        IKSegmenter iks <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> IKSegmenter(<span style="color:#66d9ef">new</span> StringReader(value.<span style="color:#a6e22e">toString</span>()), <span style="color:#66d9ef">true</span>);
-</span></span><span style="display:flex;"><span>        Lexeme t;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> ((t <span style="color:#f92672">=</span> iks.<span style="color:#a6e22e">next</span>()) <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
-</span></span><span style="display:flex;"><span>            word.<span style="color:#a6e22e">set</span>(t.<span style="color:#a6e22e">getLexemeText</span>());
-</span></span><span style="display:flex;"><span>            context.<span style="color:#a6e22e">write</span>(word, one);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">IntSumReducer</span>
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">extends</span> Reducer<span style="color:#f92672">&lt;</span>Text,IntWritable,Text,IntWritable<span style="color:#f92672">&gt;</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> IntWritable result <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> IntWritable();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">reduce</span>(Text key, Iterable<span style="color:#f92672">&lt;</span>IntWritable<span style="color:#f92672">&gt;</span> values,
-</span></span><span style="display:flex;"><span>                       Context context
-</span></span><span style="display:flex;"><span>                       ) <span style="color:#66d9ef">throws</span> IOException, InterruptedException {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> 0;
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">for</span> (IntWritable val : values) {
-</span></span><span style="display:flex;"><span>        sum <span style="color:#f92672">+=</span> val.<span style="color:#a6e22e">get</span>();
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>      result.<span style="color:#a6e22e">set</span>(sum);
-</span></span><span style="display:flex;"><span>      context.<span style="color:#a6e22e">write</span>(key, result);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
-</span></span><span style="display:flex;"><span>    Configuration conf <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Configuration();
-</span></span><span style="display:flex;"><span>    String<span style="color:#f92672">[]</span> otherArgs <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> GenericOptionsParser(conf, args).<span style="color:#a6e22e">getRemainingArgs</span>();
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (otherArgs.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&lt;</span> 2) {
-</span></span><span style="display:flex;"><span>      System.<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Usage: wordcount &lt;in&gt; [&lt;in&gt;...] &lt;out&gt;&#34;</span>);
-</span></span><span style="display:flex;"><span>      System.<span style="color:#a6e22e">exit</span>(2);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    Job job <span style="color:#f92672">=</span> Job.<span style="color:#a6e22e">getInstance</span>(conf, <span style="color:#e6db74">&#34;word count&#34;</span>);
-</span></span><span style="display:flex;"><span>    job.<span style="color:#a6e22e">setJarByClass</span>(WordCount.<span style="color:#a6e22e">class</span>);
-</span></span><span style="display:flex;"><span>    job.<span style="color:#a6e22e">setMapperClass</span>(TokenizerMapper.<span style="color:#a6e22e">class</span>);
-</span></span><span style="display:flex;"><span>    job.<span style="color:#a6e22e">setCombinerClass</span>(IntSumReducer.<span style="color:#a6e22e">class</span>);
-</span></span><span style="display:flex;"><span>    job.<span style="color:#a6e22e">setReducerClass</span>(IntSumReducer.<span style="color:#a6e22e">class</span>);
-</span></span><span style="display:flex;"><span>    job.<span style="color:#a6e22e">setOutputKeyClass</span>(Text.<span style="color:#a6e22e">class</span>);
-</span></span><span style="display:flex;"><span>    job.<span style="color:#a6e22e">setOutputValueClass</span>(IntWritable.<span style="color:#a6e22e">class</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> otherArgs.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> 1; <span style="color:#f92672">++</span>i) {
-</span></span><span style="display:flex;"><span>      FileInputFormat.<span style="color:#a6e22e">addInputPath</span>(job, <span style="color:#66d9ef">new</span> Path(otherArgs<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span>));
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    FileOutputFormat.<span style="color:#a6e22e">setOutputPath</span>(job,
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">new</span> Path(otherArgs<span style="color:#f92672">[</span>otherArgs.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span>));
-</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">exit</span>(job.<span style="color:#a6e22e">waitForCompletion</span>(<span style="color:#66d9ef">true</span>) <span style="color:#f92672">?</span> 0 : 1);
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#cf222e">package</span><span style="color:#fff"> </span><span style="color:#24292e">net.ystyle.hadoop</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">org.apache.hadoop.conf.Configuration</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">org.apache.hadoop.fs.Path</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">org.apache.hadoop.io.IntWritable</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">org.apache.hadoop.io.Text</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">org.apache.hadoop.mapreduce.Job</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">org.apache.hadoop.mapreduce.Mapper</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">org.apache.hadoop.mapreduce.Reducer</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">org.apache.hadoop.mapreduce.lib.input.FileInputFormat</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">org.apache.hadoop.mapreduce.lib.output.FileOutputFormat</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">org.apache.hadoop.util.GenericOptionsParser</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">org.wltea.analyzer.core.IKSegmenter</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">org.wltea.analyzer.core.Lexeme</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">java.io.IOException</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">java.io.StringReader</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">class</span> <span style="color:#1f2328">WordCount</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">static</span><span style="color:#fff"> </span><span style="color:#cf222e">class</span> <span style="color:#1f2328">TokenizerMapper</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#cf222e">extends</span><span style="color:#fff"> </span>Mapper<span style="color:#0550ae">&lt;</span>Object<span style="color:#1f2328">,</span><span style="color:#fff"> </span>Text<span style="color:#1f2328">,</span><span style="color:#fff"> </span>Text<span style="color:#1f2328">,</span><span style="color:#fff"> </span>IntWritable<span style="color:#0550ae">&gt;</span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">private</span><span style="color:#fff"> </span><span style="color:#cf222e">final</span><span style="color:#fff"> </span><span style="color:#cf222e">static</span><span style="color:#fff"> </span>IntWritable<span style="color:#fff"> </span>one<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">new</span><span style="color:#fff"> </span>IntWritable<span style="color:#1f2328">(</span>1<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">private</span><span style="color:#fff"> </span>Text<span style="color:#fff"> </span>word<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">new</span><span style="color:#fff"> </span>Text<span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">map</span><span style="color:#1f2328">(</span>Object<span style="color:#fff"> </span>key<span style="color:#1f2328">,</span><span style="color:#fff"> </span>Text<span style="color:#fff"> </span>value<span style="color:#1f2328">,</span><span style="color:#fff"> </span>Context<span style="color:#fff"> </span>context<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                    </span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#cf222e">throws</span><span style="color:#fff"> </span>IOException<span style="color:#1f2328">,</span><span style="color:#fff"> </span>InterruptedException<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>IKSegmenter<span style="color:#fff"> </span>iks<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">new</span><span style="color:#fff"> </span>IKSegmenter<span style="color:#1f2328">(</span><span style="color:#cf222e">new</span><span style="color:#fff"> </span>StringReader<span style="color:#1f2328">(</span>value<span style="color:#1f2328">.</span><span style="color:#1f2328">toString</span><span style="color:#1f2328">()),</span><span style="color:#fff"> </span><span style="color:#cf222e">true</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>Lexeme<span style="color:#fff"> </span>t<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">while</span><span style="color:#fff"> </span><span style="color:#1f2328">((</span>t<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>iks<span style="color:#1f2328">.</span><span style="color:#1f2328">next</span><span style="color:#1f2328">())</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">null</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>word<span style="color:#1f2328">.</span><span style="color:#1f2328">set</span><span style="color:#1f2328">(</span>t<span style="color:#1f2328">.</span><span style="color:#1f2328">getLexemeText</span><span style="color:#1f2328">());</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>context<span style="color:#1f2328">.</span><span style="color:#1f2328">write</span><span style="color:#1f2328">(</span>word<span style="color:#1f2328">,</span><span style="color:#fff"> </span>one<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">static</span><span style="color:#fff"> </span><span style="color:#cf222e">class</span> <span style="color:#1f2328">IntSumReducer</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#cf222e">extends</span><span style="color:#fff"> </span>Reducer<span style="color:#0550ae">&lt;</span>Text<span style="color:#1f2328">,</span>IntWritable<span style="color:#1f2328">,</span>Text<span style="color:#1f2328">,</span>IntWritable<span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">private</span><span style="color:#fff"> </span>IntWritable<span style="color:#fff"> </span>result<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">new</span><span style="color:#fff"> </span>IntWritable<span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">reduce</span><span style="color:#1f2328">(</span>Text<span style="color:#fff"> </span>key<span style="color:#1f2328">,</span><span style="color:#fff"> </span>Iterable<span style="color:#0550ae">&lt;</span>IntWritable<span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span>values<span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                       </span>Context<span style="color:#fff"> </span>context<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                       </span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#cf222e">throws</span><span style="color:#fff"> </span>IOException<span style="color:#1f2328">,</span><span style="color:#fff"> </span>InterruptedException<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#cf222e">int</span><span style="color:#fff"> </span>sum<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>0<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>IntWritable<span style="color:#fff"> </span>val<span style="color:#fff"> </span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>values<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>sum<span style="color:#fff"> </span><span style="color:#0550ae">+=</span><span style="color:#fff"> </span>val<span style="color:#1f2328">.</span><span style="color:#1f2328">get</span><span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>result<span style="color:#1f2328">.</span><span style="color:#1f2328">set</span><span style="color:#1f2328">(</span>sum<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>context<span style="color:#1f2328">.</span><span style="color:#1f2328">write</span><span style="color:#1f2328">(</span>key<span style="color:#1f2328">,</span><span style="color:#fff"> </span>result<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">static</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">main</span><span style="color:#1f2328">(</span>String<span style="color:#0550ae">[]</span><span style="color:#fff"> </span>args<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#cf222e">throws</span><span style="color:#fff"> </span>Exception<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>Configuration<span style="color:#fff"> </span>conf<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">new</span><span style="color:#fff"> </span>Configuration<span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>String<span style="color:#0550ae">[]</span><span style="color:#fff"> </span>otherArgs<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">new</span><span style="color:#fff"> </span>GenericOptionsParser<span style="color:#1f2328">(</span>conf<span style="color:#1f2328">,</span><span style="color:#fff"> </span>args<span style="color:#1f2328">).</span><span style="color:#1f2328">getRemainingArgs</span><span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>otherArgs<span style="color:#1f2328">.</span><span style="color:#1f2328">length</span><span style="color:#fff"> </span><span style="color:#0550ae">&lt;</span><span style="color:#fff"> </span>2<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>System<span style="color:#1f2328">.</span><span style="color:#1f2328">err</span><span style="color:#1f2328">.</span><span style="color:#1f2328">println</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Usage: wordcount &lt;in&gt; [&lt;in&gt;...] &lt;out&gt;&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>System<span style="color:#1f2328">.</span><span style="color:#1f2328">exit</span><span style="color:#1f2328">(</span>2<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>Job<span style="color:#fff"> </span>job<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>Job<span style="color:#1f2328">.</span><span style="color:#1f2328">getInstance</span><span style="color:#1f2328">(</span>conf<span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;word count&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>job<span style="color:#1f2328">.</span><span style="color:#1f2328">setJarByClass</span><span style="color:#1f2328">(</span>WordCount<span style="color:#1f2328">.</span><span style="color:#1f2328">class</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>job<span style="color:#1f2328">.</span><span style="color:#1f2328">setMapperClass</span><span style="color:#1f2328">(</span>TokenizerMapper<span style="color:#1f2328">.</span><span style="color:#1f2328">class</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>job<span style="color:#1f2328">.</span><span style="color:#1f2328">setCombinerClass</span><span style="color:#1f2328">(</span>IntSumReducer<span style="color:#1f2328">.</span><span style="color:#1f2328">class</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>job<span style="color:#1f2328">.</span><span style="color:#1f2328">setReducerClass</span><span style="color:#1f2328">(</span>IntSumReducer<span style="color:#1f2328">.</span><span style="color:#1f2328">class</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>job<span style="color:#1f2328">.</span><span style="color:#1f2328">setOutputKeyClass</span><span style="color:#1f2328">(</span>Text<span style="color:#1f2328">.</span><span style="color:#1f2328">class</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>job<span style="color:#1f2328">.</span><span style="color:#1f2328">setOutputValueClass</span><span style="color:#1f2328">(</span>IntWritable<span style="color:#1f2328">.</span><span style="color:#1f2328">class</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span><span style="color:#cf222e">int</span><span style="color:#fff"> </span>i<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>0<span style="color:#1f2328">;</span><span style="color:#fff"> </span>i<span style="color:#fff"> </span><span style="color:#0550ae">&lt;</span><span style="color:#fff"> </span>otherArgs<span style="color:#1f2328">.</span><span style="color:#1f2328">length</span><span style="color:#fff"> </span><span style="color:#0550ae">-</span><span style="color:#fff"> </span>1<span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#0550ae">++</span>i<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>FileInputFormat<span style="color:#1f2328">.</span><span style="color:#1f2328">addInputPath</span><span style="color:#1f2328">(</span>job<span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">new</span><span style="color:#fff"> </span>Path<span style="color:#1f2328">(</span>otherArgs<span style="color:#0550ae">[</span>i<span style="color:#0550ae">]</span><span style="color:#1f2328">));</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>FileOutputFormat<span style="color:#1f2328">.</span><span style="color:#1f2328">setOutputPath</span><span style="color:#1f2328">(</span>job<span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#cf222e">new</span><span style="color:#fff"> </span>Path<span style="color:#1f2328">(</span>otherArgs<span style="color:#0550ae">[</span>otherArgs<span style="color:#1f2328">.</span><span style="color:#1f2328">length</span><span style="color:#fff"> </span><span style="color:#0550ae">-</span><span style="color:#fff"> </span>1<span style="color:#0550ae">]</span><span style="color:#1f2328">));</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>System<span style="color:#1f2328">.</span><span style="color:#1f2328">exit</span><span style="color:#1f2328">(</span>job<span style="color:#1f2328">.</span><span style="color:#1f2328">waitForCompletion</span><span style="color:#1f2328">(</span><span style="color:#cf222e">true</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">?</span><span style="color:#fff"> </span>0<span style="color:#fff"> </span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>1<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre></div><blockquote>
 <p>本代码改自hadoop自带的wordcount: 源码在<code>hadoop/share/hadoop/mapreduce/sources/hadoop-mapreduce-examples-2.7.2-sources.jar</code> 类名为<code>org.apache.hadoop.examples.WordCount</code> 这里只改了map方法添加了IK分词</p>
 </blockquote>
 <h3 id="在IDEA里创建项目"><a href="#在IDEA里创建项目" class="headerlink" title="在IDEA里创建项目"></a>在IDEA里创建项目</h3>
@@ -397,7 +399,7 @@ vim ~/.bashrc</p>
 </ol>
 <h3 id="部分结果如下"><a href="#部分结果如下" class="headerlink" title="部分结果如下"></a>部分结果如下</h3>
 <p>两字词语</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>在这	9889
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>在这	9889
 </span></span><span style="display:flex;"><span>此刻	9000
 </span></span><span style="display:flex;"><span>一个	8819
 </span></span><span style="display:flex;"><span>立刻	8676
@@ -408,7 +410,7 @@ vim ~/.bashrc</p>
 </span></span><span style="display:flex;"><span>修士	7350
 </span></span><span style="display:flex;"><span>四周	7104
 </span></span></code></pre></div><p>四字词语</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>与此同时	1443
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>与此同时	1443
 </span></span><span style="display:flex;"><span>中年男子	1089
 </span></span><span style="display:flex;"><span>轰的一声	1048
 </span></span><span style="display:flex;"><span>未完待续	893
@@ -512,10 +514,9 @@ vim ~/.bashrc</p>
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -541,6 +542,7 @@ vim ~/.bashrc</p>
 </section>
 
 
+  </article>
 </div>
 
     

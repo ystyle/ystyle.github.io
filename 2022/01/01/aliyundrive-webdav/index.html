@@ -6,6 +6,8 @@
   <title>阿里云网盘映射本地硬盘 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -247,10 +249,10 @@
 <blockquote>
 <p>把以下内容存为run.ps1</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$env:REFRESH_TOKEN=<span style="color:#e6db74">&#34;484b469b3ef74dcaba5cf21aeadae2ca&#34;</span>
-</span></span><span style="display:flex;"><span>$env:WEBDAV_AUTH_USER=<span style="color:#e6db74">&#34;admin&#34;</span>
-</span></span><span style="display:flex;"><span>$env:WEBDAV_AUTH_PASSWORD=<span style="color:#e6db74">&#34;123456&#34;</span>
-</span></span><span style="display:flex;"><span>Start-Process -FilePath aliyundrive-webdav.exe -ArgumentList (<span style="color:#e6db74">&#34;--port=8080&#34;</span>) -Wait -WindowStyle Hidden
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#953800">$env:REFRESH_TOKEN</span><span style="color:#1f2328">=</span><span style="color:#0a3069">&#34;484b469b3ef74dcaba5cf21aeadae2ca&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">$env:WEBDAV_AUTH_USER</span><span style="color:#1f2328">=</span><span style="color:#0a3069">&#34;admin&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">$env:WEBDAV_AUTH_PASSWORD</span><span style="color:#1f2328">=</span><span style="color:#0a3069">&#34;123456&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">Start-Process</span> -FilePath <span style="color:#6639ba">aliyundrive-webdav</span><span style="color:#1f2328">.</span>exe -ArgumentList <span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;--port=8080&#34;</span><span style="color:#1f2328">)</span> -Wait -WindowStyle Hidden
 </span></span></code></pre></div><p>脚本配置说明:</p>
 <ul>
 <li>
@@ -509,10 +511,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -538,6 +539,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

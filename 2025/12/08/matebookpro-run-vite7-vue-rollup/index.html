@@ -6,6 +6,8 @@
   <title>鸿蒙pc上Vite 7 &#43; Rollup原生模块问题的解决方案 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -476,54 +478,54 @@
 <h3 id="1-修改Rollup的native-js文件"><a href="#1-修改Rollup的native-js文件" class="headerlink" title="1. 修改Rollup的native.js文件"></a>1. 修改Rollup的native.js文件</h3>
 <p>文件位置：<code>node_modules/rollup/dist/native.js</code></p>
 <p>在文件开头添加以下代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">platform</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;node:process&#39;</span>);
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">{</span> <span style="color:#1f2328">platform</span> <span style="color:#1f2328">}</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;node:process&#39;</span><span style="color:#1f2328">);</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 鸿蒙系统使用JavaScript版本
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">platform</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;openharmony&#39;</span>) {
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 返回一个简单的实现，避免抛出错误
-</span></span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span>.<span style="color:#a6e22e">parse</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">input</span>, <span style="color:#a6e22e">allowReturnOutsideFunction</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>, <span style="color:#a6e22e">jsx</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 返回一个简单的AST结构
-</span></span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Program&#39;</span>,
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> [],
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">sourceType</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;module&#39;</span>,
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">comments</span><span style="color:#f92672">:</span> []
-</span></span><span style="display:flex;"><span>    };
-</span></span><span style="display:flex;"><span>  };
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span>.<span style="color:#a6e22e">parseAsync</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">input</span>, <span style="color:#a6e22e">allowReturnOutsideFunction</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>, <span style="color:#a6e22e">jsx</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>, <span style="color:#a6e22e">signal</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Program&#39;</span>,
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> [],
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">sourceType</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;module&#39;</span>,
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">comments</span><span style="color:#f92672">:</span> []
-</span></span><span style="display:flex;"><span>    };
-</span></span><span style="display:flex;"><span>  };
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span>.<span style="color:#a6e22e">xxhashBase64Url</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">input</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;xxhash_base64_url_stub&#39;</span>;
-</span></span><span style="display:flex;"><span>  };
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span>.<span style="color:#a6e22e">xxhashBase36</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">input</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;xxhash_base36_stub&#39;</span>;
-</span></span><span style="display:flex;"><span>  };
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span>.<span style="color:#a6e22e">xxhashBase16</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">input</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;xxhash_base16_stub&#39;</span>;
-</span></span><span style="display:flex;"><span>  };
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#57606a">// 鸿蒙系统使用JavaScript版本
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">platform</span> <span style="color:#0550ae">===</span> <span style="color:#0a3069">&#39;openharmony&#39;</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#57606a">// 返回一个简单的实现，避免抛出错误
+</span></span></span><span style="display:flex;"><span>  <span style="color:#1f2328">module</span><span style="color:#1f2328">.</span><span style="color:#1f2328">exports</span><span style="color:#1f2328">.</span><span style="color:#1f2328">parse</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">function</span><span style="color:#1f2328">(</span><span style="color:#1f2328">input</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">allowReturnOutsideFunction</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">false</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">jsx</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">false</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a">// 返回一个简单的AST结构
+</span></span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">type</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;Program&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">body</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[],</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">sourceType</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;module&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">comments</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">};</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">};</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">module</span><span style="color:#1f2328">.</span><span style="color:#1f2328">exports</span><span style="color:#1f2328">.</span><span style="color:#1f2328">parseAsync</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">async</span> <span style="color:#cf222e">function</span><span style="color:#1f2328">(</span><span style="color:#1f2328">input</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">allowReturnOutsideFunction</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">false</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">jsx</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">false</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">signal</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">type</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;Program&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">body</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[],</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">sourceType</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;module&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">comments</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">};</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">};</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">module</span><span style="color:#1f2328">.</span><span style="color:#1f2328">exports</span><span style="color:#1f2328">.</span><span style="color:#1f2328">xxhashBase64Url</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">function</span><span style="color:#1f2328">(</span><span style="color:#1f2328">input</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> <span style="color:#0a3069">&#39;xxhash_base64_url_stub&#39;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">};</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">module</span><span style="color:#1f2328">.</span><span style="color:#1f2328">exports</span><span style="color:#1f2328">.</span><span style="color:#1f2328">xxhashBase36</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">function</span><span style="color:#1f2328">(</span><span style="color:#1f2328">input</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> <span style="color:#0a3069">&#39;xxhash_base36_stub&#39;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">};</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">module</span><span style="color:#1f2328">.</span><span style="color:#1f2328">exports</span><span style="color:#1f2328">.</span><span style="color:#1f2328">xxhashBase16</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">function</span><span style="color:#1f2328">(</span><span style="color:#1f2328">input</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> <span style="color:#0a3069">&#39;xxhash_base16_stub&#39;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">};</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">return</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
 </span></span></code></pre></div><h3 id="2-package-json配置"><a href="#2-package-json配置" class="headerlink" title="2. package.json配置"></a>2. package.json配置</h3>
 <p>确保使用Vite 7及相关插件：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;devDependencies&#34;</span>: {
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;@vitejs/plugin-vue&#34;</span>: <span style="color:#e6db74">&#34;^6.0.0&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;@vitejs/plugin-vue-jsx&#34;</span>: <span style="color:#e6db74">&#34;^5.0.0&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;vite&#34;</span>: <span style="color:#e6db74">&#34;^7.0.0&#34;</span>
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;devDependencies&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;@vitejs/plugin-vue&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;^6.0.0&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;@vitejs/plugin-vue-jsx&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;^5.0.0&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;vite&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;^7.0.0&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
 </span></span></code></pre></div><h2 id="完整操作步骤"><a href="#完整操作步骤" class="headerlink" title="完整操作步骤"></a>完整操作步骤</h2>
 <h3 id="步骤1：清理并安装依赖"><a href="#步骤1：清理并安装依赖" class="headerlink" title="步骤1：清理并安装依赖"></a>步骤1：清理并安装依赖</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 清理旧依赖</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 清理旧依赖</span>
 </span></span><span style="display:flex;"><span>rm -rf node_modules package-lock.json
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 安装依赖（使用legacy-peer-deps避免peer依赖冲突）</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 安装依赖（使用legacy-peer-deps避免peer依赖冲突）</span>
 </span></span><span style="display:flex;"><span>npm install --legacy-peer-deps
 </span></span></code></pre></div><h3 id="步骤2：修改Rollup文件"><a href="#步骤2：修改Rollup文件" class="headerlink" title="步骤2：修改Rollup文件"></a>步骤2：修改Rollup文件</h3>
 <ol>
@@ -532,8 +534,8 @@
 <li>保存文件</li>
 </ol>
 <h3 id="步骤3：运行项目"><a href="#步骤3：运行项目" class="headerlink" title="步骤3：运行项目"></a>步骤3：运行项目</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>npm run dev
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 或直接运行</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>npm run dev
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 或直接运行</span>
 </span></span><span style="display:flex;"><span>npx vite
 </span></span></code></pre></div><h2 id="验证结果"><a href="#验证结果" class="headerlink" title="验证结果"></a>验证结果</h2>
 <ul>
@@ -601,7 +603,7 @@
 </ul>
 <h3 id="方案C：使用环境变量"><a href="#方案C：使用环境变量" class="headerlink" title="方案C：使用环境变量"></a>方案C：使用环境变量</h3>
 <p>尝试过但未成功：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ROLLUP_NATIVE<span style="color:#f92672">=</span>false npm run dev
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#953800">ROLLUP_NATIVE</span><span style="color:#0550ae">=</span><span style="color:#6639ba">false</span> npm run dev
 </span></span></code></pre></div><h2 id="故障排除"><a href="#故障排除" class="headerlink" title="故障排除"></a>故障排除</h2>
 <h3 id="问题1：修改后仍然报错"><a href="#问题1：修改后仍然报错" class="headerlink" title="问题1：修改后仍然报错"></a>问题1：修改后仍然报错</h3>
 <ul>
@@ -730,10 +732,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -759,6 +760,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

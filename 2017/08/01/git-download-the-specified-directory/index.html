@@ -6,6 +6,8 @@
   <title>git下载指定目录 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -205,19 +207,19 @@
 <p>Git1.7.0以后加入了Sparse Checkout模式，这使得Check Out指定文件或者文件夹成为可能。</p>
 </blockquote>
 <h3 id="具体实现如下"><a href="#具体实现如下" class="headerlink" title="具体实现如下"></a>具体实现如下</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#照常创建新项目</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a">#照常创建新项目</span>
 </span></span><span style="display:flex;"><span>mkdir project_name
-</span></span><span style="display:flex;"><span>cd project_name
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">cd</span> project_name
 </span></span><span style="display:flex;"><span>git init
 </span></span><span style="display:flex;"><span>git remote add origin &lt;url&gt;
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#接下来，在Config中允许使用Sparse Checkout模式</span>
-</span></span><span style="display:flex;"><span>git config core.sparsecheckout true
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#比较只需要下载src目录与README.md 文件</span>
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;src&#34;</span> &gt;&gt; .git/info/sparse-checkout
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;README.md&#34;</span> &gt;&gt; .git/info/sparse-checkout
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#不下载src/test目录</span>
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;!src/test&#34;</span> &gt;&gt; .git/info/sparse-checkout
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#最后拉取项目</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#接下来，在Config中允许使用Sparse Checkout模式</span>
+</span></span><span style="display:flex;"><span>git config core.sparsecheckout <span style="color:#6639ba">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#比较只需要下载src目录与README.md 文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;src&#34;</span> &gt;&gt; .git/info/sparse-checkout
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;README.md&#34;</span> &gt;&gt; .git/info/sparse-checkout
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#不下载src/test目录</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;!src/test&#34;</span> &gt;&gt; .git/info/sparse-checkout
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#最后拉取项目</span>
 </span></span><span style="display:flex;"><span>git pull origin master
 </span></span></code></pre></div>
       </div>
@@ -313,10 +315,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -342,6 +343,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

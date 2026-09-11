@@ -6,6 +6,8 @@
   <title>用docker编译方舟编译器 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -250,66 +252,66 @@
 <blockquote>
 <p>把下面的dockerfile放到方舟源码根目录下</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">ubuntu:16.04</span> <span style="color:#66d9ef">AS</span> <span style="color:#e6db74">build-env</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">MAINTAINER</span> <span style="color:#e6db74">https://www.openarkcompiler.cn</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># Setting up the build environment</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> sed -i <span style="color:#e6db74">&#39;s/archive.ubuntu.com/mirrors.163.com/g&#39;</span> /etc/apt/sources.list <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    dpkg --add-architecture i386 <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    apt-get -y update <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    apt-get -y dist-upgrade <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    apt-get -y install openjdk-8-jdk git-core build-essential zlib1g-dev libc6-dev-i386 g++-multilib gcc-multilib linux-libc-dev:i386 <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    apt-get -y install gcc-5-aarch64-linux-gnu g++-5-aarch64-linux-gnu unzip tar curl <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    apt-get -y install python3-paramiko python-paramiko python-requests <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    mkdir -p /tools/ninja /tools/gn<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 在国内请反注释下行, 因为容器也是个单独的系统，所以别用127.0.0.1</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#ENV http_proxy=http://192.168.3.81:1081 \ </span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#    https_proxy=http://192.168.3.81:1081</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> cd /tools <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    curl -C - -LO http://releases.llvm.org/8.0.0/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    curl -LO https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-linux.zip <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    curl -LO http://tools.harmonyos.com/mirrors/gn/1523/linux/gn.1523.tar <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    tar Jvxf /tools/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz -C /tools/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    unzip /tools/ninja-linux.zip -d /tools/ninja/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    tar xvf /tools/gn.1523.tar <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    chmod a+x /tools/gn/gn <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    rm /tools/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz /tools/ninja-linux.zip <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    rm -rf /var/cache/apt/archives<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># copy source</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">COPY</span> . /OpenArkCompiler<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">WORKDIR</span> <span style="color:#e6db74">/OpenArkCompiler</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># create symbolic link</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> mkdir -p /OpenArkCompiler/tools /OpenArkCompiler/tools/gn <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    ln -s /tools/ninja /OpenArkCompiler/tools/ninja_1.9.0 <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    ln -s /tools/gn/gn /OpenArkCompiler/tools/gn/gn <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    ln -s /tools/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04 /OpenArkCompiler/tools/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># compile</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;/bin/bash&#34;</span>, <span style="color:#e6db74">&#34;-c&#34;</span>, <span style="color:#e6db74">&#34;source build/envsetup.sh &amp;&amp; make &amp;&amp; ls -al &#34;</span><span style="color:#f92672">]</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># build final docker image</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">ubuntu:16.04</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> sed -i <span style="color:#e6db74">&#39;s/archive.ubuntu.com/mirrors.163.com/g&#39;</span> /etc/apt/sources.list <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    apt-get -y update <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    apt-get install -y openjdk-8-jdk curl vim <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    rm -rf /var/cache/apt/archives<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">COPY</span> --from<span style="color:#f92672">=</span>build-env /OpenArkCompiler/output /OpenArkCompiler<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">VOLUME</span> <span style="color:#e6db74">/OpenArkCompiler</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> PATH<span style="color:#f92672">=</span>/OpenArkCompiler/bin:$PATH<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CMD</span> maple -h<span style="color:#960050;background-color:#1e0010">
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#cf222e">FROM</span><span style="color:#fff"> </span><span style="color:#0a3069">ubuntu:16.04</span><span style="color:#fff"> </span><span style="color:#cf222e">AS</span><span style="color:#fff"> </span><span style="color:#0a3069">build-env</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">MAINTAINER</span><span style="color:#fff"> </span><span style="color:#0a3069">https://www.openarkcompiler.cn</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># Setting up the build environment</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> sed -i <span style="color:#0a3069">&#39;s/archive.ubuntu.com/mirrors.163.com/g&#39;</span> /etc/apt/sources.list <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    dpkg --add-architecture i386 <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    apt-get -y update <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    apt-get -y dist-upgrade <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    apt-get -y install openjdk-8-jdk git-core build-essential zlib1g-dev libc6-dev-i386 g++-multilib gcc-multilib linux-libc-dev:i386 <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    apt-get -y install gcc-5-aarch64-linux-gnu g++-5-aarch64-linux-gnu unzip tar curl <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    apt-get -y install python3-paramiko python-paramiko python-requests <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    mkdir -p /tools/ninja /tools/gn<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># 在国内请反注释下行, 因为容器也是个单独的系统，所以别用127.0.0.1</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#ENV http_proxy=http://192.168.3.81:1081 \ </span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#    https_proxy=http://192.168.3.81:1081</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> <span style="color:#6639ba">cd</span> /tools <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    curl -C - -LO http://releases.llvm.org/8.0.0/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    curl -LO https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-linux.zip <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    curl -LO http://tools.harmonyos.com/mirrors/gn/1523/linux/gn.1523.tar <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    tar Jvxf /tools/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz -C /tools/ <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    unzip /tools/ninja-linux.zip -d /tools/ninja/ <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    tar xvf /tools/gn.1523.tar <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    chmod a+x /tools/gn/gn <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    rm /tools/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz /tools/ninja-linux.zip <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    rm -rf /var/cache/apt/archives<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># copy source</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">COPY</span> . /OpenArkCompiler<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">WORKDIR</span><span style="color:#fff"> </span><span style="color:#0a3069">/OpenArkCompiler</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># create symbolic link</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> mkdir -p /OpenArkCompiler/tools /OpenArkCompiler/tools/gn <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    ln -s /tools/ninja /OpenArkCompiler/tools/ninja_1.9.0 <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    ln -s /tools/gn/gn /OpenArkCompiler/tools/gn/gn <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    ln -s /tools/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04 /OpenArkCompiler/tools/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># compile</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> <span style="color:#0550ae">[</span><span style="color:#0a3069">&#34;/bin/bash&#34;</span>, <span style="color:#0a3069">&#34;-c&#34;</span>, <span style="color:#0a3069">&#34;source build/envsetup.sh &amp;&amp; make &amp;&amp; ls -al &#34;</span><span style="color:#0550ae">]</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># build final docker image</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">FROM</span><span style="color:#fff"> </span><span style="color:#0a3069">ubuntu:16.04</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> sed -i <span style="color:#0a3069">&#39;s/archive.ubuntu.com/mirrors.163.com/g&#39;</span> /etc/apt/sources.list <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    apt-get -y update <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    apt-get install -y openjdk-8-jdk curl vim <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    rm -rf /var/cache/apt/archives<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">COPY</span> --from<span style="color:#0550ae">=</span>build-env /OpenArkCompiler/output /OpenArkCompiler<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">VOLUME</span><span style="color:#fff"> </span><span style="color:#0a3069">/OpenArkCompiler</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">ENV</span> <span style="color:#953800">PATH</span><span style="color:#0550ae">=</span>/OpenArkCompiler/bin:<span style="color:#953800">$PATH</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">CMD</span> maple -h<span style="color:#f6f8fa;background-color:#82071e">
 </span></span></span></code></pre></div><h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3>
 <blockquote>
 <p>第一次编译安装依赖会慢点， 之后因为docker缓存每次编译会跳过依赖安装从复制源码开始</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker build -t ark:latest . 
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker build -t ark:latest . 
 </span></span></code></pre></div><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run --rm ark:latest
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run --rm ark:latest
 </span></span></code></pre></div><h3 id="交互模式"><a href="#交互模式" class="headerlink" title="交互模式"></a>交互模式</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run --rm -ti ark:latest bash
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run --rm -ti ark:latest bash
 </span></span><span style="display:flex;"><span>maple -h
 </span></span></code></pre></div><blockquote>
 <p><a href="https://ystyle.top/2019/09/06/ark-test-axample/">方舟编译java代码教程</a>
@@ -409,10 +411,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -438,6 +439,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

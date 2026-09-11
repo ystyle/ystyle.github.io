@@ -6,6 +6,8 @@
   <title>go mod 拉取 gogs 私有仓库 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -225,11 +227,11 @@ go env -w GOPRIVATE=git.hofo.co
 </ul>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git config --global http.extraheader <span style="color:#e6db74">&#34;PRIVATE-TOKEN: 5737d215af7f9a41a2abe98631d312e9e9311d29d&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git config --global http.extraheader <span style="color:#0a3069">&#34;PRIVATE-TOKEN: 5737d215af7f9a41a2abe98631d312e9e9311d29d&#34;</span>
 </span></span></code></pre></div><ol start="2">
 <li>在git添加url配置, <code>ystyle:5737d215af7f9a41a2abe98631d312e9e939d29d11</code>是用户名和上一步生成的token</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git config --global url.<span style="color:#e6db74">&#34;https://ystyle:5737d215af7f9a41a2abe98631d312e9e939d29d11@git.hofo.co&#34;</span>.insteadOf <span style="color:#e6db74">&#34;https://git.hofo.co&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git config --global url.<span style="color:#0a3069">&#34;https://ystyle:5737d215af7f9a41a2abe98631d312e9e939d29d11@git.hofo.co&#34;</span>.insteadOf <span style="color:#0a3069">&#34;https://git.hofo.co&#34;</span>
 </span></span></code></pre></div>
       </div>
 
@@ -324,10 +326,9 @@ go env -w GOPRIVATE=git.hofo.co
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -353,6 +354,7 @@ go env -w GOPRIVATE=git.hofo.co
 </section>
 
 
+  </article>
 </div>
 
     

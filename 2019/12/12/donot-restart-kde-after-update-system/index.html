@@ -6,6 +6,8 @@
   <title>kde在更新系统后不想重启怎么办 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -206,9 +208,9 @@
 </blockquote>
 <h3 id="不重启系统情况下重启KDE5"><a href="#不重启系统情况下重启KDE5" class="headerlink" title="不重启系统情况下重启KDE5"></a>不重启系统情况下重启KDE5</h3>
 <p>在更新系统完成后输入:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># kquitapp5 plasmashell &amp;&amp; kstart5 plasmashell</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a"># kquitapp5 plasmashell &amp;&amp; kstart5 plasmashell</span>
 </span></span></code></pre></div><p>太长了不好记建议在.zshrc添加以下内容:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>alias kr<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;kquitapp5 plasmashell &amp;&amp; kstart5 plasmashell&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#6639ba">alias</span> <span style="color:#953800">kr</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;kquitapp5 plasmashell &amp;&amp; kstart5 plasmashell&#34;</span>
 </span></span></code></pre></div><p>以后更新完后输入<code>kr</code>就好了， kde重启后还会有日志输出，直接把终端关了就好了</p>
 
       </div>
@@ -304,10 +306,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -333,6 +334,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

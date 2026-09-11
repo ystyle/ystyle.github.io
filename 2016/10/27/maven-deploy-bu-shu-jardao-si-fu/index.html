@@ -6,6 +6,8 @@
   <title>maven deploy 部署jar到私服 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -220,34 +222,34 @@
 
       <div class="post-content" id="post-content" itemprop="postContent">
         <h3 id="修改maven-settings-xml文件"><a href="#修改maven-settings-xml文件" class="headerlink" title="修改maven settings.xml文件"></a>修改maven settings.xml文件</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;servers&gt;</span>  
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;server&gt;</span>    
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;id&gt;</span>private-nexus-library-releases<span style="color:#f92672">&lt;/id&gt;</span>    
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;username&gt;</span>username<span style="color:#f92672">&lt;/username&gt;</span>    
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;password&gt;</span>password<span style="color:#f92672">&lt;/password&gt;</span>    
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">&lt;!---nexus私服的用户名和密码 ----&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/server&gt;</span>  
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;server&gt;</span>  
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;id&gt;</span>private-nexus-library-snapshots<span style="color:#f92672">&lt;/id&gt;</span>  
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;username&gt;</span>username<span style="color:#f92672">&lt;/username&gt;</span>    
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;password&gt;</span>password<span style="color:#f92672">&lt;/password&gt;</span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/server&gt;</span>  
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/servers&gt;</span>  
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#0550ae">&lt;servers&gt;</span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;server&gt;</span>    
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&lt;id&gt;</span>private-nexus-library-releases<span style="color:#0550ae">&lt;/id&gt;</span>    
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&lt;username&gt;</span>username<span style="color:#0550ae">&lt;/username&gt;</span>    
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&lt;password&gt;</span>password<span style="color:#0550ae">&lt;/password&gt;</span>    
+</span></span><span style="display:flex;"><span>        <span style="color:#57606a">&lt;!---nexus私服的用户名和密码 ----&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;/server&gt;</span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;server&gt;</span>  
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&lt;id&gt;</span>private-nexus-library-snapshots<span style="color:#0550ae">&lt;/id&gt;</span>  
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&lt;username&gt;</span>username<span style="color:#0550ae">&lt;/username&gt;</span>    
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&lt;password&gt;</span>password<span style="color:#0550ae">&lt;/password&gt;</span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;/server&gt;</span>  
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;/servers&gt;</span>  
 </span></span></code></pre></div><h3 id="修改项目pom文件"><a href="#修改项目pom文件" class="headerlink" title="修改项目pom文件"></a>修改项目pom文件</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;!--发布--&gt;</span>  
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;distributionManagement&gt;</span>  
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;repository&gt;</span>  
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;id&gt;</span>private-nexus-library-releases<span style="color:#f92672">&lt;/id&gt;</span>  
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;name&gt;</span>private-nexus-library-releases<span style="color:#f92672">&lt;/name&gt;</span>  
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;url&gt;</span>http://host:port/maven-web/repositories/releases/<span style="color:#f92672">&lt;/url&gt;</span>  
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">&lt;!--- url可以在nexus私服repositories列表看到 ----&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/repository&gt;</span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;snapshotRepository&gt;</span>  
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;id&gt;</span>private-nexus-library-snapshots<span style="color:#f92672">&lt;/id&gt;</span>  
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;name&gt;</span>private-nexus-library-snapshots<span style="color:#f92672">&lt;/name&gt;</span>  
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;url&gt;</span>http://host:port/maven-web/repositories/snapshots/<span style="color:#f92672">&lt;/url&gt;</span>  
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/snapshotRepository&gt;</span>  
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/distributionManagement&gt;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#57606a">&lt;!--发布--&gt;</span>  
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;distributionManagement&gt;</span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;repository&gt;</span>  
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&lt;id&gt;</span>private-nexus-library-releases<span style="color:#0550ae">&lt;/id&gt;</span>  
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&lt;name&gt;</span>private-nexus-library-releases<span style="color:#0550ae">&lt;/name&gt;</span>  
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&lt;url&gt;</span>http://host:port/maven-web/repositories/releases/<span style="color:#0550ae">&lt;/url&gt;</span>  
+</span></span><span style="display:flex;"><span>        <span style="color:#57606a">&lt;!--- url可以在nexus私服repositories列表看到 ----&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;/repository&gt;</span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;snapshotRepository&gt;</span>  
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&lt;id&gt;</span>private-nexus-library-snapshots<span style="color:#0550ae">&lt;/id&gt;</span>  
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&lt;name&gt;</span>private-nexus-library-snapshots<span style="color:#0550ae">&lt;/name&gt;</span>  
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&lt;url&gt;</span>http://host:port/maven-web/repositories/snapshots/<span style="color:#0550ae">&lt;/url&gt;</span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;/snapshotRepository&gt;</span>  
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;/distributionManagement&gt;</span>
 </span></span></code></pre></div><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3>
 <ol>
 <li>server 的 id 要与 repository 的 id 保持一致。</li>
@@ -347,10 +349,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -376,6 +377,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

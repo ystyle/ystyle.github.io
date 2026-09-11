@@ -6,6 +6,8 @@
   <title>Neovim移植鸿蒙PC：三方库适配实战与挑战解析 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -625,15 +627,15 @@
 </ol>
 <h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4>
 <p><strong>平台检测与条件编译</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// 在CMakeLists.txt中添加鸿蒙平台定义
-</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">add_definitions</span>(<span style="color:#f92672">-</span>D__OHOS__<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">// 在CMakeLists.txt中添加鸿蒙平台定义
+</span></span></span><span style="display:flex;"><span><span style="color:#6639ba">add_definitions</span><span style="color:#1f2328">(</span><span style="color:#0550ae">-</span>D__OHOS__<span style="color:#0550ae">=</span><span style="color:#0550ae">1</span><span style="color:#1f2328">)</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 关键API的条件编译包装
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#if !defined(__OHOS__)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Linux特有功能（CPU亲和性、mmsghdr等）
-</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">uv_cpumask_size</span>();
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">uv_available_parallelism</span>();
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
+</span></span><span style="display:flex;"><span><span style="color:#57606a">// 关键API的条件编译包装
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#if !defined(__OHOS__)
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">// Linux特有功能（CPU亲和性、mmsghdr等）
+</span></span></span><span style="display:flex;"><span><span style="color:#6639ba">uv_cpumask_size</span><span style="color:#1f2328">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">uv_available_parallelism</span><span style="color:#1f2328">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#endif
 </span></span></span></code></pre></div><p><strong>创建鸿蒙平台文件</strong>：<br>
 基于<code>linux.c</code>创建<code>harmonyos.c</code>，包含：</p>
 <ul>
@@ -662,18 +664,18 @@
 </ol>
 <h4 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h4>
 <p><strong>禁用JIT功能</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 编译选项</span>
-</span></span><span style="display:flex;"><span>-DLUAJIT_DISABLE_JIT      <span style="color:#75715e"># 完全禁用JIT编译器</span>
-</span></span><span style="display:flex;"><span>-DLUAJIT_USE_SYSMALLOC    <span style="color:#75715e"># 使用系统内存分配器</span>
-</span></span><span style="display:flex;"><span>-DLJ_NO_SYSTEM            <span style="color:#75715e"># 限制系统调用（安全考虑）</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 编译选项</span>
+</span></span><span style="display:flex;"><span>-DLUAJIT_DISABLE_JIT      <span style="color:#57606a"># 完全禁用JIT编译器</span>
+</span></span><span style="display:flex;"><span>-DLUAJIT_USE_SYSMALLOC    <span style="color:#57606a"># 使用系统内存分配器</span>
+</span></span><span style="display:flex;"><span>-DLJ_NO_SYSTEM            <span style="color:#57606a"># 限制系统调用（安全考虑）</span>
 </span></span></code></pre></div><p><strong>平台检测扩展</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// 在lj_arch.h中添加鸿蒙平台检测
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#elif defined(__OHOS__)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define LUAJIT_OS          LUAJIT_OS_POSIX
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define LJ_TARGET_OHOS     1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define LJ_TARGET_CONSOLE  1      </span><span style="color:#75715e">// 控制台模式
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define LUAJIT_DISABLE_JIT 1      </span><span style="color:#75715e">// JIT不可用
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define LUAJIT_USE_SYSMALLOC 1    </span><span style="color:#75715e">// 系统分配器
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">// 在lj_arch.h中添加鸿蒙平台检测
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#elif defined(__OHOS__)
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#define LUAJIT_OS          LUAJIT_OS_POSIX
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#define LJ_TARGET_OHOS     1
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#define LJ_TARGET_CONSOLE  1      </span><span style="color:#57606a">// 控制台模式
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#define LUAJIT_DISABLE_JIT 1      </span><span style="color:#57606a">// JIT不可用
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#define LUAJIT_USE_SYSMALLOC 1    </span><span style="color:#57606a">// 系统分配器
 </span></span></span></code></pre></div><h4 id="性能影响"><a href="#性能影响" class="headerlink" title="性能影响"></a>性能影响</h4>
 <p>虽然JIT不可用，但LuaJIT的解释器模式仍提供：</p>
 <ul>
@@ -692,39 +694,39 @@
 </ul>
 <h4 id="统一构建方案"><a href="#统一构建方案" class="headerlink" title="统一构建方案"></a>统一构建方案</h4>
 <p><strong>简化构建流程</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 旧流程（复杂）</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 旧流程（复杂）</span>
 </span></span><span style="display:flex;"><span>下载 → 解压 → 应用补丁 → 构建
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 新流程（简化）</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 新流程（简化）</span>
 </span></span><span style="display:flex;"><span>下载 → 解压（已包含修改） → 构建
 </span></span></code></pre></div><p><strong>工具链统一配置</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 鸿蒙BiSheng工具链</span>
-</span></span><span style="display:flex;"><span>export CC<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/data/app/BiSheng.org/BiSheng_1.0/llvm/bin/clang&#34;</span>
-</span></span><span style="display:flex;"><span>export AR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/data/app/BiSheng.org/BiSheng_1.0/llvm/bin/llvm-ar&#34;</span>
-</span></span><span style="display:flex;"><span>export RANLIB<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/data/app/BiSheng.org/BiSheng_1.0/llvm/bin/llvm-ranlib&#34;</span>
-</span></span><span style="display:flex;"><span>export STRIP<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/data/app/BiSheng.org/BiSheng_1.0/llvm/bin/llvm-strip&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 鸿蒙BiSheng工具链</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">CC</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/data/app/BiSheng.org/BiSheng_1.0/llvm/bin/clang&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">AR</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/data/app/BiSheng.org/BiSheng_1.0/llvm/bin/llvm-ar&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">RANLIB</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/data/app/BiSheng.org/BiSheng_1.0/llvm/bin/llvm-ranlib&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">STRIP</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/data/app/BiSheng.org/BiSheng_1.0/llvm/bin/llvm-strip&#34;</span>
 </span></span></code></pre></div><h3 id="2-4-头文件与路径冲突"><a href="#2-4-头文件与路径冲突" class="headerlink" title="2.4 头文件与路径冲突"></a>2.4 头文件与路径冲突</h3>
 <h4 id="luv的头文件路径问题"><a href="#luv的头文件路径问题" class="headerlink" title="luv的头文件路径问题"></a>luv的头文件路径问题</h4>
 <p><strong>问题</strong>：luv依赖Lua 5.3兼容层，但头文件包含路径错误：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// 错误
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;compat-5.3.h&#34;</span><span style="color:#75715e">
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">// 错误
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#include</span> <span style="color:#57606a">&#34;compat-5.3.h&#34;</span><span style="color:#57606a">
 </span></span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 正确
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;lua_compat53/compat-5.3.h&#34;</span><span style="color:#75715e">
+</span></span><span style="display:flex;"><span><span style="color:#57606a">// 正确
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#include</span> <span style="color:#57606a">&#34;lua_compat53/compat-5.3.h&#34;</span><span style="color:#57606a">
 </span></span></span></code></pre></div><p><strong>解决方案</strong>：</p>
 <ol>
 <li>修复源代码中的包含路径</li>
 <li>添加编译标志避免.c文件包含：</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>-DCMAKE_C_FLAGS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-DCOMPAT53_PREFIX=compat53&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>-DCMAKE_C_FLAGS<span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;-DCOMPAT53_PREFIX=compat53&#34;</span>
 </span></span></code></pre></div><h3 id="2-5-平台检测扩展"><a href="#2-5-平台检测扩展" class="headerlink" title="2.5 平台检测扩展"></a>2.5 平台检测扩展</h3>
 <h4 id="libiconv的config-guess问题"><a href="#libiconv的config-guess问题" class="headerlink" title="libiconv的config.guess问题"></a>libiconv的config.guess问题</h4>
 <p><strong>问题</strong>：Autotools的<code>config.guess</code>脚本无法识别HarmonyOS系统。</p>
 <p><strong>解决方案</strong>：在<code>build-aux/config.guess</code>中添加HarmonyOS检测：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 添加系统检测分支</span>
-</span></span><span style="display:flex;"><span>HarmonyOS*:*:*:*<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>    echo aarch64-unknown-harmonyos
-</span></span><span style="display:flex;"><span>    exit ;;
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 添加系统检测分支</span>
+</span></span><span style="display:flex;"><span>HarmonyOS*:*:*:*<span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6639ba">echo</span> aarch64-unknown-harmonyos
+</span></span><span style="display:flex;"><span>    <span style="color:#6639ba">exit</span> <span style="color:#1f2328">;;</span>
 </span></span></code></pre></div><h2 id="三、适配策略总结"><a href="#三、适配策略总结" class="headerlink" title="三、适配策略总结"></a>三、适配策略总结</h2>
 <h3 id="3-1-渐进式适配策略"><a href="#3-1-渐进式适配策略" class="headerlink" title="3.1 渐进式适配策略"></a>3.1 渐进式适配策略</h3>
 <ol>
@@ -925,10 +927,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -954,6 +955,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

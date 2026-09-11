@@ -6,6 +6,8 @@
   <title>JPA  Hibernate 注解 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -186,12 +188,12 @@ generator:表示主键生成器的名称,这个属性通常和ORM框架相关,�
 示例:</p>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@Id</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GeneratedValues</span>(strategy<span style="color:#f92672">=</span>StrategyType.<span style="color:#a6e22e">SEQUENCE</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getPk</span>() {
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> pk;
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ol start="5">
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">@Id</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">@GeneratedValues</span><span style="color:#1f2328">(</span>strategy<span style="color:#0550ae">=</span>StrategyType<span style="color:#1f2328">.</span><span style="color:#1f2328">SEQUENCE</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">int</span><span style="color:#fff"> </span><span style="color:#6639ba">getPk</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>pk<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre></div><ol start="5">
 <li>@Basic(fetch=FetchType,optional=true)<br>
 可选<br>
 @Basic表示一个简单的属性到数据库表的字段的映射,对于没有任何标注的getXxxx()方法,默认即为@Basic<br>
@@ -199,11 +201,11 @@ fetch: 表示该属性的读取策略,有EAGER和LAZY两种,分别表示主支�
 optional:表示该属性是否允许为null,默认为true<br>
 示例:</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@Basic</span>(optional<span style="color:#f92672">=</span><span style="color:#66d9ef">false</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getAddress</span>() {
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> address;
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ol start="6">
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">@Basic</span><span style="color:#1f2328">(</span>optional<span style="color:#0550ae">=</span><span style="color:#cf222e">false</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span>String<span style="color:#fff"> </span><span style="color:#6639ba">getAddress</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>address<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre></div><ol start="6">
 <li>@Column<br>
 可选<br>
 @Column描述了数据库表中该字段的详细定义,这对于根据JPA注解生成数据库表结构的工具非常有作用.<br>
@@ -216,23 +218,23 @@ updateable:表示在ORM框架执行更新操作时,该字段是否应该出现�
 columnDefinition:表示该字段在数据库中的实际类型.通常ORM框架可以根据属性类型自动判断数据库中字段的类型,但是对于Date类型仍无法确定数据库中字段类型究竟是DATE,TIME还是TIMESTAMP.此外,String的默认映射类型为VARCHAR,如果要将String类型映射到特定数据库的BLOB或TEXT字段类型,该属性非常有用.<br>
 示例:</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@Column</span>(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;BIRTH&#34;</span>,nullable<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;false&#34;</span>,columnDefinition<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;DATE&#34;</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getBithday</span>() {
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> birthday;
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ol start="7">
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">@Column</span><span style="color:#1f2328">(</span>name<span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;BIRTH&#34;</span><span style="color:#1f2328">,</span>nullable<span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;false&#34;</span><span style="color:#1f2328">,</span>columnDefinition<span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;DATE&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span>String<span style="color:#fff"> </span><span style="color:#6639ba">getBithday</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>birthday<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre></div><ol start="7">
 <li>@Transient<br>
 可选<br>
 @Transient表示该属性并非一个到数据库表的字段的映射,ORM框架将忽略该属性.<br>
 如果一个属性并非数据库表的字段映射,就务必将其标示为@Transient,否则,ORM框架默认其注解为@Basic<br>
 示例:</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#75715e">//根据birth计算出age属性</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Transient</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getAge</span>() {
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> getYear(<span style="color:#66d9ef">new</span> Date()) <span style="color:#f92672">-</span> getYear(birth);
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ol start="8">
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#57606a">//根据birth计算出age属性</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">@Transient</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">int</span><span style="color:#fff"> </span><span style="color:#6639ba">getAge</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>getYear<span style="color:#1f2328">(</span><span style="color:#cf222e">new</span><span style="color:#fff"> </span>Date<span style="color:#1f2328">())</span><span style="color:#fff"> </span><span style="color:#0550ae">-</span><span style="color:#fff"> </span>getYear<span style="color:#1f2328">(</span>birth<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre></div><ol start="8">
 <li>@ManyToOne(fetch=FetchType,cascade=CascadeType)<br>
 可选<br>
 @ManyToOne表示一个多对一的映射,该注解标注的属性通常是数据库表的外键<br>
@@ -242,14 +244,14 @@ cascade:表示默认的级联操作策略,可以指定为ALL,PERSIST,MERGE,REFRE
 targetEntity:表示该属性关联的实体类型.该属性通常不必指定,ORM框架根据属性类型自动判断targetEntity.<br>
 示例:</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#75715e">//订单Order和用户User是一个ManyToOne的关系</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//在Order类中定义</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ManyToOne</span>()
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@JoinColumn</span>(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;USER&#34;</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> User <span style="color:#a6e22e">getUser</span>() {
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> user;
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ol start="9">
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#57606a">//订单Order和用户User是一个ManyToOne的关系</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#57606a">//在Order类中定义</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">@ManyToOne</span><span style="color:#1f2328">()</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">@JoinColumn</span><span style="color:#1f2328">(</span>name<span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;USER&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span>User<span style="color:#fff"> </span><span style="color:#6639ba">getUser</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>user<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre></div><ol start="9">
 <li>
 <p>@JoinColumn<br>
 可选<br>
@@ -270,11 +272,11 @@ cascade:表示级联操作策略,对于OneToMany类型的关联非常重要,通�
 示例:</p>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@OneTyMany</span>(cascade<span style="color:#f92672">=</span>ALL)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> List <span style="color:#a6e22e">getOrders</span>() {
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> orders;
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ol start="11">
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">@OneTyMany</span><span style="color:#1f2328">(</span>cascade<span style="color:#0550ae">=</span>ALL<span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span>List<span style="color:#fff"> </span><span style="color:#6639ba">getOrders</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>orders<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre></div><ol start="11">
 <li>@OneToOne(fetch=FetchType,cascade=CascadeType)<br>
 可选<br>
 @OneToOne描述一个一对一的关联<br>
@@ -282,11 +284,11 @@ fetch:表示抓取策略,默认为FetchType.LAZY<br>
 cascade:表示级联操作策略<br>
 示例:</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@OneToOne</span>(fetch<span style="color:#f92672">=</span>FetchType.<span style="color:#a6e22e">LAZY</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Blog <span style="color:#a6e22e">getBlog</span>() {
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> blog;
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ol start="12">
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">@OneToOne</span><span style="color:#1f2328">(</span>fetch<span style="color:#0550ae">=</span>FetchType<span style="color:#1f2328">.</span><span style="color:#1f2328">LAZY</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span>Blog<span style="color:#fff"> </span><span style="color:#6639ba">getBlog</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>blog<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre></div><ol start="12">
 <li>@ManyToMany<br>
 可选<br>
 @ManyToMany 描述一个多对多的关联.多对多关联上是两个一对多关联,但是在ManyToMany描述中,中间表是由ORM框架自动处理<br>
@@ -295,30 +297,30 @@ mappedBy:表示多对多关联的另一个实体类的对应集合属性名称<b
 示例:<br>
 User实体表示用户,Book实体表示书籍,为了描述用户收藏的书籍,可以在User和Book之间建立ManyToMany关联</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@Entity</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span> {
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">private</span> List books;
-</span></span><span style="display:flex;"><span>       <span style="color:#a6e22e">@ManyToMany</span>(targetEntity<span style="color:#f92672">=</span>package.<span style="color:#a6e22e">Book</span>.<span style="color:#a6e22e">class</span>)
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">public</span> List <span style="color:#a6e22e">getBooks</span>() {
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">return</span> books;
-</span></span><span style="display:flex;"><span>       }
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setBooks</span>(List books) {
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">books</span><span style="color:#f92672">=</span>books;
-</span></span><span style="display:flex;"><span>       }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Entity</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Book</span> {
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">private</span> List users;
-</span></span><span style="display:flex;"><span>       <span style="color:#a6e22e">@ManyToMany</span>(targetEntity<span style="color:#f92672">=</span>package.<span style="color:#a6e22e">Users</span>.<span style="color:#a6e22e">class</span>, mappedBy<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;books&#34;</span>)
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">public</span> List <span style="color:#a6e22e">getUsers</span>() {
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">return</span> users;
-</span></span><span style="display:flex;"><span>       }
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setUsers</span>(List users) {
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">users</span><span style="color:#f92672">=</span>users;
-</span></span><span style="display:flex;"><span>       }
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><p>两个实体间相互关联的属性必须标记为@ManyToMany,并相互指定targetEntity属性,<br>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">@Entity</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">class</span> <span style="color:#1f2328">User</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#cf222e">private</span><span style="color:#fff"> </span>List<span style="color:#fff"> </span>books<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#0550ae">@ManyToMany</span><span style="color:#1f2328">(</span>targetEntity<span style="color:#0550ae">=</span>package<span style="color:#1f2328">.</span><span style="color:#1f2328">Book</span><span style="color:#1f2328">.</span><span style="color:#1f2328">class</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span>List<span style="color:#fff"> </span><span style="color:#6639ba">getBooks</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">           </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>books<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">setBooks</span><span style="color:#1f2328">(</span>List<span style="color:#fff"> </span>books<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">           </span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">books</span><span style="color:#0550ae">=</span>books<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">@Entity</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">class</span> <span style="color:#1f2328">Book</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#cf222e">private</span><span style="color:#fff"> </span>List<span style="color:#fff"> </span>users<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#0550ae">@ManyToMany</span><span style="color:#1f2328">(</span>targetEntity<span style="color:#0550ae">=</span>package<span style="color:#1f2328">.</span><span style="color:#1f2328">Users</span><span style="color:#1f2328">.</span><span style="color:#1f2328">class</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>mappedBy<span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;books&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span>List<span style="color:#fff"> </span><span style="color:#6639ba">getUsers</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">           </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>users<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">setUsers</span><span style="color:#1f2328">(</span>List<span style="color:#fff"> </span>users<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">           </span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">users</span><span style="color:#0550ae">=</span>users<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre></div><p>两个实体间相互关联的属性必须标记为@ManyToMany,并相互指定targetEntity属性,<br>
 需要注意的是,有且只有一个实体的@ManyToMany注解需要指定mappedBy属性,指向targetEntity的集合属性名称<br>
 利用ORM工具自动生成的表除了User和Book表外,还自动生成了一个User_Book表,用于实现多对多关联</p>
 <ol start="13">
@@ -327,20 +329,20 @@ User实体表示用户,Book实体表示书籍,为了描述用户收藏的书籍,
 @MappedSuperclass可以将超类的JPA注解传递给子类,使子类能够继承超类的JPA注解<br>
 示例:</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@MappedSuperclass</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Employee</span>() {
-</span></span><span style="display:flex;"><span>       <span style="color:#75715e">//....</span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Entity</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Engineer</span> <span style="color:#66d9ef">extends</span> Employee {
-</span></span><span style="display:flex;"><span>       <span style="color:#75715e">//.....</span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Entity</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Manager</span> <span style="color:#66d9ef">extends</span> Employee {
-</span></span><span style="display:flex;"><span>       <span style="color:#75715e">//.....</span>
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ol start="14">
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">@MappedSuperclass</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">class</span> <span style="color:#6639ba">Employee</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#57606a">//....</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">@Entity</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">class</span> <span style="color:#1f2328">Engineer</span><span style="color:#fff"> </span><span style="color:#cf222e">extends</span><span style="color:#fff"> </span>Employee<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#57606a">//.....</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">@Entity</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">class</span> <span style="color:#1f2328">Manager</span><span style="color:#fff"> </span><span style="color:#cf222e">extends</span><span style="color:#fff"> </span>Employee<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#57606a">//.....</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre></div><ol start="14">
 <li>@Embedded<br>
 可选<br>
 @Embedded将几个字段组合成一个类,并作为整个Entity的一个属性.<br>
@@ -349,16 +351,16 @@ User实体表示用户,Book实体表示书籍,为了描述用户收藏的书籍,
 Address对象必须定义为@Embededable<br>
 示例:</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@Embeddable</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Address</span> {city,street,zip}
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Entity</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span> {
-</span></span><span style="display:flex;"><span>       <span style="color:#a6e22e">@Embedded</span>
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">public</span> Address <span style="color:#a6e22e">getAddress</span>() {
-</span></span><span style="display:flex;"><span>           <span style="color:#75715e">//..........</span>
-</span></span><span style="display:flex;"><span>       }
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><p>Hibernate验证注解</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">@Embeddable</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">class</span> <span style="color:#1f2328">Address</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span>city<span style="color:#1f2328">,</span>street<span style="color:#1f2328">,</span>zip<span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">@Entity</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">class</span> <span style="color:#1f2328">User</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#0550ae">@Embedded</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span>Address<span style="color:#fff"> </span><span style="color:#6639ba">getAddress</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">           </span><span style="color:#57606a">//..........</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">       </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre></div><p>Hibernate验证注解</p>
 <table>
 	<thead>
 			<tr>
@@ -508,10 +510,9 @@ Address对象必须定义为@Embededable<br>
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -537,6 +538,7 @@ Address对象必须定义为@Embededable<br>
 </section>
 
 
+  </article>
 </div>
 
     

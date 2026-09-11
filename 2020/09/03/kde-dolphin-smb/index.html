@@ -6,6 +6,8 @@
   <title>Linux kde文件管理器连接华为Share | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -220,13 +222,13 @@
 <ul>
 <li>检查文件夹没有就创建一个</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkdir ~/.smb
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkdir ~/.smb
 </span></span><span style="display:flex;"><span>vim ~/.smb/smb.conf
 </span></span></code></pre></div><ul>
 <li>然后在文件填写</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#66d9ef">[global]</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">client min protocol</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">NT1</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#cf222e">[global]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">client min protocol</span> <span style="color:#0550ae">=</span> <span style="color:#0a3069">NT1</span>
 </span></span></code></pre></div><ul>
 <li>打开Dolphin</li>
 <li>选择网络在文件管理地址栏填写手机ip: <code>smb://192.168.3.129</code>  回车</li>
@@ -345,10 +347,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -374,6 +375,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

@@ -6,6 +6,8 @@
   <title>鸿蒙PC上使用box64运行x86_64鸿蒙SDK编译HAP | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -389,29 +391,29 @@
 <li>SDK版本：command-line-tools-linux-x64-6.1.1.290 (API 24)</li>
 </ul>
 <h2 id="安装box64"><a href="#安装box64" class="headerlink" title="安装box64"></a>安装box64</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 通过Nix安装</span>
-</span></span><span style="display:flex;"><span>source ~/.nix-profile/etc/profile.d/nix.sh
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 通过Nix安装</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">source</span> ~/.nix-profile/etc/profile.d/nix.sh
 </span></span><span style="display:flex;"><span>nix profile install nixpkgs#box64
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 验证</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 验证</span>
 </span></span><span style="display:flex;"><span>box64 --version
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Box64 arm64 v0.4.2</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># Box64 arm64 v0.4.2</span>
 </span></span></code></pre></div><h2 id="准备x86-64系统库"><a href="#准备x86-64系统库" class="headerlink" title="准备x86_64系统库"></a>准备x86_64系统库</h2>
 <p>box64运行x86_64二进制需要对应的系统库。由于openEuler aarch64没有多架构支持，需要从openEuler x86_64仓库手动下载并提取。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 创建目录</span>
-</span></span><span style="display:flex;"><span>mkdir -p /tmp/x86_64-libs <span style="color:#f92672">&amp;&amp;</span> cd /tmp/x86_64-libs
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 创建目录</span>
+</span></span><span style="display:flex;"><span>mkdir -p /tmp/x86_64-libs <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#6639ba">cd</span> /tmp/x86_64-libs
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>base<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://repo.openeuler.org/openEuler-24.03-LTS-SP1/everything/x86_64/Packages&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">base</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;https://repo.openeuler.org/openEuler-24.03-LTS-SP1/everything/x86_64/Packages&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 下载基本系统库</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> pkg in glibc-2.38-47.oe2403sp1 libgcc-12.3.1-62.oe2403sp1 <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>           libstdc++-12.3.1-62.oe2403sp1; <span style="color:#66d9ef">do</span>
-</span></span><span style="display:flex;"><span>  url<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>curl -sL <span style="color:#e6db74">&#34;</span>$base<span style="color:#e6db74">/&#34;</span> | grep -oP <span style="color:#e6db74">&#34;href=\&#34;</span><span style="color:#e6db74">${</span>pkg<span style="color:#e6db74">}</span><span style="color:#e6db74">[^\&#34;]*x86_64\.rpm\&#34;&#34;</span> | head -1 | sed <span style="color:#e6db74">&#39;s/href=&#34;//;s/&#34;//&#39;</span><span style="color:#66d9ef">)</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">[</span> -n <span style="color:#e6db74">&#34;</span>$url<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> curl -sLO <span style="color:#e6db74">&#34;</span>$base<span style="color:#e6db74">/</span>$url<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span> rpm2cpio <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>pkg<span style="color:#e6db74">}</span><span style="color:#e6db74">.rpm&#34;</span> | cpio -idm
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 下载基本系统库</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">for</span> pkg in glibc-2.38-47.oe2403sp1 libgcc-12.3.1-62.oe2403sp1 <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>           libstdc++-12.3.1-62.oe2403sp1<span style="color:#1f2328">;</span> <span style="color:#cf222e">do</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#953800">url</span><span style="color:#0550ae">=</span><span style="color:#cf222e">$(</span>curl -sL <span style="color:#0a3069">&#34;</span><span style="color:#953800">$base</span><span style="color:#0a3069">/&#34;</span> <span style="color:#1f2328">|</span> grep -oP <span style="color:#0a3069">&#34;href=\&#34;</span><span style="color:#0a3069">${</span><span style="color:#953800">pkg</span><span style="color:#0a3069">}</span><span style="color:#0a3069">[^\&#34;]*x86_64\.rpm\&#34;&#34;</span> <span style="color:#1f2328">|</span> head -1 <span style="color:#1f2328">|</span> sed <span style="color:#0a3069">&#39;s/href=&#34;//;s/&#34;//&#39;</span><span style="color:#cf222e">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">[</span> -n <span style="color:#0a3069">&#34;</span><span style="color:#953800">$url</span><span style="color:#0a3069">&#34;</span> <span style="color:#0550ae">]</span> <span style="color:#0550ae">&amp;&amp;</span> curl -sLO <span style="color:#0a3069">&#34;</span><span style="color:#953800">$base</span><span style="color:#0a3069">/</span><span style="color:#953800">$url</span><span style="color:#0a3069">&#34;</span> <span style="color:#0550ae">&amp;&amp;</span> rpm2cpio <span style="color:#0a3069">&#34;</span><span style="color:#0a3069">${</span><span style="color:#953800">pkg</span><span style="color:#0a3069">}</span><span style="color:#0a3069">.rpm&#34;</span> <span style="color:#1f2328">|</span> cpio -idm
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">done</span>
 </span></span></code></pre></div><p>提取的库文件会分布在 <code>lib64/</code> 和 <code>usr/lib64/</code> 等目录中，后续统一配置到box64的库搜索路径。</p>
 <h2 id="SDK部署"><a href="#SDK部署" class="headerlink" title="SDK部署"></a>SDK部署</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 解压到/opt</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 解压到/opt</span>
 </span></span><span style="display:flex;"><span>sudo mkdir -p /opt/command-line-tools
 </span></span><span style="display:flex;"><span>sudo unzip command-line-tools-linux-x64-6.1.1.290.zip -d /opt/
 </span></span><span style="display:flex;"><span>sudo chown -R user:user /opt/command-line-tools
@@ -427,51 +429,51 @@
 └── tool/node/        # 自带x86_64 node（不使用）
 </code></pre><h2 id="Node-js配置"><a href="#Node-js配置" class="headerlink" title="Node.js配置"></a>Node.js配置</h2>
 <p>SDK自带的node是x86_64版本，使用fnm安装原生aarch64版本替代：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>fnm install <span style="color:#ae81ff">24</span>
-</span></span><span style="display:flex;"><span>fnm default <span style="color:#ae81ff">24</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>fnm install <span style="color:#0550ae">24</span>
+</span></span><span style="display:flex;"><span>fnm default <span style="color:#0550ae">24</span>
 </span></span></code></pre></div><p>在 <code>~/.zshrc</code> 中设置 <code>DEVECO_NODE_HOME</code> 指向fnm的node：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export DEVECO_NODE_HOME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/.local/share/fnm/node-versions/v24.14.1/installation&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">DEVECO_NODE_HOME</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;</span><span style="color:#953800">$HOME</span><span style="color:#0a3069">/.local/share/fnm/node-versions/v24.14.1/installation&#34;</span>
 </span></span></code></pre></div><h2 id="box64配置"><a href="#box64配置" class="headerlink" title="box64配置"></a>box64配置</h2>
 <h3 id="收集x86-64库"><a href="#收集x86-64库" class="headerlink" title="收集x86_64库"></a>收集x86_64库</h3>
 <p>SDK中包含了大量x86_64动态库，需要统一收集到一个目录：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir -p /opt/x86_64-sdk-libs
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir -p /opt/x86_64-sdk-libs
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># SDK中所有x86_64的.so</span>
-</span></span><span style="display:flex;"><span>find /opt/command-line-tools/sdk -type f <span style="color:#ae81ff">\(</span> -name <span style="color:#e6db74">&#34;*.so&#34;</span> -o -name <span style="color:#e6db74">&#34;*.so.*&#34;</span> <span style="color:#ae81ff">\)</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>  -exec file <span style="color:#f92672">{}</span> <span style="color:#ae81ff">\;</span> 2&gt;/dev/null | grep x86-64 | cut -d: -f1 | <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">while</span> read f; <span style="color:#66d9ef">do</span> cp -f <span style="color:#e6db74">&#34;</span>$f<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;/opt/x86_64-sdk-libs/</span><span style="color:#66d9ef">$(</span>basename $f<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># SDK中所有x86_64的.so</span>
+</span></span><span style="display:flex;"><span>find /opt/command-line-tools/sdk -type f <span style="color:#0a3069">\(</span> -name <span style="color:#0a3069">&#34;*.so&#34;</span> -o -name <span style="color:#0a3069">&#34;*.so.*&#34;</span> <span style="color:#0a3069">\)</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -exec file <span style="color:#0550ae">{}</span> <span style="color:#0a3069">\;</span> 2&gt;/dev/null <span style="color:#1f2328">|</span> grep x86-64 <span style="color:#1f2328">|</span> cut -d: -f1 <span style="color:#1f2328">|</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  <span style="color:#cf222e">while</span> <span style="color:#6639ba">read</span> f<span style="color:#1f2328">;</span> <span style="color:#cf222e">do</span> cp -f <span style="color:#0a3069">&#34;</span><span style="color:#953800">$f</span><span style="color:#0a3069">&#34;</span> <span style="color:#0a3069">&#34;/opt/x86_64-sdk-libs/</span><span style="color:#cf222e">$(</span>basename <span style="color:#953800">$f</span><span style="color:#cf222e">)</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">;</span> <span style="color:#cf222e">done</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 加入openEuler x86_64系统库</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 加入openEuler x86_64系统库</span>
 </span></span><span style="display:flex;"><span>cp -n /tmp/x86_64-libs/usr/lib64/libGL* /opt/x86_64-sdk-libs/
 </span></span><span style="display:flex;"><span>cp -n /tmp/x86_64-libs/usr/lib64/libX* /opt/x86_64-sdk-libs/
 </span></span><span style="display:flex;"><span>cp -n /tmp/x86_64-libs/usr/lib64/libxcb* /opt/x86_64-sdk-libs/
 </span></span></code></pre></div><h3 id="注册binfmt-misc"><a href="#注册binfmt-misc" class="headerlink" title="注册binfmt_misc"></a>注册binfmt_misc</h3>
 <p>通过binfmt_misc让系统自动识别x86_64二进制并调用box64：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 挂载</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 挂载</span>
 </span></span><span style="display:flex;"><span>sudo mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 创建wrapper脚本，设置库搜索路径</span>
-</span></span><span style="display:flex;"><span>sudo tee /usr/local/bin/box64-wrapper <span style="color:#e6db74">&lt;&lt; &#39;EOF&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">#!/bin/bash
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">export BOX64_LD_LIBRARY_PATH=&#34;/opt/x86_64-sysroot/lib64:/opt/x86_64-sysroot/usr/lib64:/opt/x86_64-sdk-libs&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">exec /home/user/.nix-profile/bin/box64 &#34;$@&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 创建wrapper脚本，设置库搜索路径</span>
+</span></span><span style="display:flex;"><span>sudo tee /usr/local/bin/box64-wrapper <span style="color:#0a3069">&lt;&lt; &#39;EOF&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">export BOX64_LD_LIBRARY_PATH=&#34;/opt/x86_64-sysroot/lib64:/opt/x86_64-sysroot/usr/lib64:/opt/x86_64-sdk-libs&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">exec /home/user/.nix-profile/bin/box64 &#34;$@&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">EOF</span>
 </span></span><span style="display:flex;"><span>sudo chmod +x /usr/local/bin/box64-wrapper
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 注册</span>
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#39;:box64:M::\x7fELF\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x3e\x00:\
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:\
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">/usr/local/bin/box64-wrapper:F&#39;</span> | sudo tee /proc/sys/fs/binfmt_misc/register
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 注册</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#39;:box64:M::\x7fELF\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x3e\x00:\
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:\
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">/usr/local/bin/box64-wrapper:F&#39;</span> <span style="color:#1f2328">|</span> sudo tee /proc/sys/fs/binfmt_misc/register
 </span></span></code></pre></div><h2 id="编译项目"><a href="#编译项目" class="headerlink" title="编译项目"></a>编译项目</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 配置环境变量</span>
-</span></span><span style="display:flex;"><span>export DEVECO_SDK_HOME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/opt/command-line-tools/sdk&#34;</span>
-</span></span><span style="display:flex;"><span>export DEVECO_NODE_HOME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/.local/share/fnm/node-versions/v24.14.1/installation&#34;</span>
-</span></span><span style="display:flex;"><span>export OHPM_HOME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/opt/command-line-tools&#34;</span>
-</span></span><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/opt/command-line-tools/bin:</span>$PATH<span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>export BOX64_LD_LIBRARY_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/opt/x86_64-sysroot/lib64:/opt/x86_64-sysroot/usr/lib64:/opt/x86_64-sdk-libs&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 配置环境变量</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">DEVECO_SDK_HOME</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/opt/command-line-tools/sdk&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">DEVECO_NODE_HOME</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;</span><span style="color:#953800">$HOME</span><span style="color:#0a3069">/.local/share/fnm/node-versions/v24.14.1/installation&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">OHPM_HOME</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/opt/command-line-tools&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">PATH</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/opt/command-line-tools/bin:</span><span style="color:#953800">$PATH</span><span style="color:#0a3069">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">BOX64_LD_LIBRARY_PATH</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/opt/x86_64-sysroot/lib64:/opt/x86_64-sysroot/usr/lib64:/opt/x86_64-sdk-libs&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 编译</span>
-</span></span><span style="display:flex;"><span>cd ohos_project
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 编译</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">cd</span> ohos_project
 </span></span><span style="display:flex;"><span>hvigorw assembleHap --no-daemon
 </span></span></code></pre></div><h3 id="编译流程详解"><a href="#编译流程详解" class="headerlink" title="编译流程详解"></a>编译流程详解</h3>
 <p>编译过程依次执行以下任务：</p>
@@ -507,8 +509,8 @@
 </ol>
 <h3 id="添加HNP（Native-Plugin）"><a href="#添加HNP（Native-Plugin）" class="headerlink" title="添加HNP（Native Plugin）"></a>添加HNP（Native Plugin）</h3>
 <p>编译生成的unsigned HAP默认不包含HNP。需要手动添加：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd ohos_project
-</span></span><span style="display:flex;"><span>zip -r entry/build/default/outputs/default/entry-default-unsigned.hap <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6639ba">cd</span> ohos_project
+</span></span><span style="display:flex;"><span>zip -r entry/build/default/outputs/default/entry-default-unsigned.hap <span style="color:#0a3069">\
 </span></span></span><span style="display:flex;"><span>  hnp/arm64-v8a/neovim.hnp
 </span></span></code></pre></div><h3 id="编译结果"><a href="#编译结果" class="headerlink" title="编译结果"></a>编译结果</h3>
 <p>unsigned HAP生成位置：</p>
@@ -531,7 +533,7 @@
 </code></pre><p>任何一个缺失都会导致 <code>Cannot dlopen</code> 错误。</p>
 <h3 id="2-Java缺失"><a href="#2-Java缺失" class="headerlink" title="2. Java缺失"></a>2. Java缺失</h3>
 <p>如果遇到 <code>spawn java ENOENT</code> 错误：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf install -y java-17-openjdk
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf install -y java-17-openjdk
 </span></span></code></pre></div><h3 id="3-签名证书"><a href="#3-签名证书" class="headerlink" title="3. 签名证书"></a>3. 签名证书</h3>
 <p>编译时的签名步骤会读取 <code>build-profile.json5</code> 中的证书路径。如果证书在宿主机上，可以：</p>
 <ul>
@@ -559,14 +561,14 @@
 </ol>
 <hr>
 <p><strong>环境变量配置（~/.zshrc）参考</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># HarmonyOS SDK</span>
-</span></span><span style="display:flex;"><span>export DEVECO_SDK_HOME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/opt/command-line-tools/sdk&#34;</span>
-</span></span><span style="display:flex;"><span>export DEVECO_NODE_HOME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/.local/share/fnm/node-versions/v24.14.1/installation&#34;</span>
-</span></span><span style="display:flex;"><span>export OHPM_HOME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/opt/command-line-tools&#34;</span>
-</span></span><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/opt/command-line-tools/bin:</span>$PATH<span style="color:#e6db74">&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># HarmonyOS SDK</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">DEVECO_SDK_HOME</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/opt/command-line-tools/sdk&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">DEVECO_NODE_HOME</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;</span><span style="color:#953800">$HOME</span><span style="color:#0a3069">/.local/share/fnm/node-versions/v24.14.1/installation&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">OHPM_HOME</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/opt/command-line-tools&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">PATH</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/opt/command-line-tools/bin:</span><span style="color:#953800">$PATH</span><span style="color:#0a3069">&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># box64</span>
-</span></span><span style="display:flex;"><span>export BOX64_LD_LIBRARY_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/opt/x86_64-sysroot/lib64:/opt/x86_64-sysroot/usr/lib64:/opt/x86_64-sdk-libs&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># box64</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">BOX64_LD_LIBRARY_PATH</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/opt/x86_64-sysroot/lib64:/opt/x86_64-sysroot/usr/lib64:/opt/x86_64-sdk-libs&#34;</span>
 </span></span></code></pre></div>
       </div>
 
@@ -661,10 +663,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -690,6 +691,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

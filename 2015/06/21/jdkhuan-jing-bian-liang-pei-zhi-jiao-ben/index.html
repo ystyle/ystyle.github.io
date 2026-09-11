@@ -6,6 +6,8 @@
   <title>JDK环境变量配置脚本 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -161,47 +163,47 @@
 
       <div class="post-content" id="post-content" itemprop="postContent">
         <p>复制到jdk安装目录,右键以powershell运行</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e">#region 强制以管理员权限运行</span>
-</span></span><span style="display:flex;"><span>$currentWi = [<span style="color:#66d9ef">Security.Principal.WindowsIdentity</span>]::GetCurrent()
-</span></span><span style="display:flex;"><span>$currentWp = [<span style="color:#66d9ef">Security.Principal.WindowsPrincipal</span>]$currentWi
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>( <span style="color:#f92672">-not</span> $currentWp.IsInRole([<span style="color:#66d9ef">Security.Principal.WindowsBuiltInRole</span>]::Administrator))
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    $boundPara = ($MyInvocation.BoundParameters.Keys | <span style="color:#66d9ef">foreach</span>{<span style="color:#e6db74">&#39;-{0} {1}&#39;</span> <span style="color:#f92672">-f</span>  $_ ,$MyInvocation.BoundParameters[$_]} ) -join <span style="color:#e6db74">&#39; &#39;</span>
-</span></span><span style="display:flex;"><span>    $currentFile = $MyInvocation.MyCommand.Definition
-</span></span><span style="display:flex;"><span>    $fullPara = $boundPara + <span style="color:#e6db74">&#39; &#39;</span> + $args -join <span style="color:#e6db74">&#39; &#39;</span>
-</span></span><span style="display:flex;"><span>    Start-Process <span style="color:#e6db74">&#34;</span>$psHome<span style="color:#e6db74">\powershell.exe&#34;</span>   -ArgumentList <span style="color:#e6db74">&#34;</span>$currentFile<span style="color:#e6db74"> </span>$fullPara<span style="color:#e6db74">&#34;</span> -verb runas
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#endregion</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#57606a">#region 强制以管理员权限运行</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">$currentWi</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">Security.Principal.WindowsIdentity</span><span style="color:#1f2328">]::</span>GetCurrent<span style="color:#1f2328">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">$currentWp</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">Security.Principal.WindowsPrincipal</span><span style="color:#1f2328">]</span><span style="color:#953800">$currentWi</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#1f2328">(</span> <span style="color:#0550ae">-not</span> <span style="color:#953800">$currentWp</span><span style="color:#1f2328">.</span>IsInRole<span style="color:#1f2328">([</span><span style="color:#0550ae">Security.Principal.WindowsBuiltInRole</span><span style="color:#1f2328">]::</span>Administrator<span style="color:#1f2328">))</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#953800">$boundPara</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">(</span><span style="color:#953800">$MyInvocation</span><span style="color:#1f2328">.</span>BoundParameters<span style="color:#1f2328">.</span>Keys <span style="color:#1f2328">|</span> <span style="color:#cf222e">foreach</span><span style="color:#1f2328">{</span><span style="color:#0a3069">&#39;-{0} {1}&#39;</span> <span style="color:#0550ae">-f</span>  <span style="color:#953800">$_</span> <span style="color:#1f2328">,</span><span style="color:#953800">$MyInvocation</span><span style="color:#1f2328">.</span>BoundParameters<span style="color:#1f2328">[</span><span style="color:#953800">$_</span><span style="color:#1f2328">]}</span> <span style="color:#1f2328">)</span> -join <span style="color:#0a3069">&#39; &#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#953800">$currentFile</span> <span style="color:#1f2328">=</span> <span style="color:#953800">$MyInvocation</span><span style="color:#1f2328">.</span>MyCommand<span style="color:#1f2328">.</span>Definition
+</span></span><span style="display:flex;"><span>    <span style="color:#953800">$fullPara</span> <span style="color:#1f2328">=</span> <span style="color:#953800">$boundPara</span> <span style="color:#1f2328">+</span> <span style="color:#0a3069">&#39; &#39;</span> <span style="color:#1f2328">+</span> <span style="color:#953800">$args</span> -join <span style="color:#0a3069">&#39; &#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6639ba">Start-Process</span> <span style="color:#0a3069">&#34;</span><span style="color:#953800">$psHome</span><span style="color:#0a3069">\powershell.exe&#34;</span>   -ArgumentList <span style="color:#0a3069">&#34;</span><span style="color:#953800">$currentFile</span><span style="color:#0a3069"> </span><span style="color:#953800">$fullPara</span><span style="color:#0a3069">&#34;</span> -verb runas
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#endregion</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#region 初始化应用</span>
-</span></span><span style="display:flex;"><span>$currPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
-</span></span><span style="display:flex;"><span>cd $currPath
-</span></span><span style="display:flex;"><span>$isJDKJavac = Test-Path <span style="color:#e6db74">&#34;./bin/javac.exe&#34;</span>
-</span></span><span style="display:flex;"><span>$isJREJava = Test-Path <span style="color:#e6db74">&#34;./bin/java.exe&#34;</span>
-</span></span><span style="display:flex;"><span>$path = [<span style="color:#66d9ef">environment</span>]::GetEnvironmentvariable(<span style="color:#e6db74">&#34;path&#34;</span>, <span style="color:#e6db74">&#34;Machine&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>($path.Length&gt;<span style="color:#ae81ff">0</span>){
-</span></span><span style="display:flex;"><span>    $temp = <span style="color:#e6db74">&#34;;&#34;</span>
-</span></span><span style="display:flex;"><span>}<span style="color:#66d9ef">else</span>{
-</span></span><span style="display:flex;"><span>    $temp = <span style="color:#e6db74">&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#endregion</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#region 初始化应用</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">$currPath</span> <span style="color:#1f2328">=</span> <span style="color:#6639ba">Split-Path</span> -Parent <span style="color:#953800">$MyInvocation</span><span style="color:#1f2328">.</span>MyCommand<span style="color:#1f2328">.</span>Definition
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">cd </span><span style="color:#953800">$currPath</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">$isJDKJavac</span> <span style="color:#1f2328">=</span> <span style="color:#6639ba">Test-Path</span> <span style="color:#0a3069">&#34;./bin/javac.exe&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">$isJREJava</span> <span style="color:#1f2328">=</span> <span style="color:#6639ba">Test-Path</span> <span style="color:#0a3069">&#34;./bin/java.exe&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">$path</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">environment</span><span style="color:#1f2328">]::</span>GetEnvironmentvariable<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;path&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;Machine&#34;</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#1f2328">(</span><span style="color:#953800">$path</span><span style="color:#1f2328">.</span>Length<span style="color:#1f2328">&gt;</span><span style="color:#0550ae">0</span><span style="color:#1f2328">){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#953800">$temp</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#cf222e">else</span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#953800">$temp</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#endregion</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#region 配置环境变量</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>($isJDKJavac){
-</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;检测到./bin/javac编译器...&#34;</span>
-</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;设置环境变量：JAVA_HOME = </span>$currPath<span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>    [<span style="color:#66d9ef">environment</span>]::SetEnvironmentvariable(<span style="color:#e6db74">&#34;JAVA_HOME&#34;</span>, $currPath, <span style="color:#e6db74">&#34;Machine&#34;</span>)
-</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;设置环境变量：PATH = %JAVA_HOME%\bin;&#34;</span>
-</span></span><span style="display:flex;"><span>    [<span style="color:#66d9ef">environment</span>]::SetEnvironmentvariable(<span style="color:#e6db74">&#34;path&#34;</span>, $path + $temp + <span style="color:#e6db74">&#34;%JAVA_HOME%\bin;&#34;</span>, <span style="color:#e6db74">&#34;Machine&#34;</span>)
-</span></span><span style="display:flex;"><span>}<span style="color:#66d9ef">elseif</span>($isJREJava){
-</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;检测到./jre/java运行环境...&#34;</span>
-</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;设置环境变量：PATH = </span>$currPath<span style="color:#e6db74">\bin&#34;</span>
-</span></span><span style="display:flex;"><span>    [<span style="color:#66d9ef">environment</span>]::SetEnvironmentvariable(<span style="color:#e6db74">&#34;path&#34;</span>, $path + $temp + $currPath+<span style="color:#e6db74">&#34;\bin;&#34;</span>, <span style="color:#e6db74">&#34;Machine&#34;</span>)
-</span></span><span style="display:flex;"><span>}<span style="color:#66d9ef">else</span>{
-</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;没有检测到JAVA环境&#34;</span>
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#endregion</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#region 配置环境变量</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#1f2328">(</span><span style="color:#953800">$isJDKJavac</span><span style="color:#1f2328">){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6639ba">echo </span><span style="color:#0a3069">&#34;检测到./bin/javac编译器...&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6639ba">echo </span><span style="color:#0a3069">&#34;设置环境变量：JAVA_HOME = </span><span style="color:#953800">$currPath</span><span style="color:#0a3069">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">[</span><span style="color:#0550ae">environment</span><span style="color:#1f2328">]::</span>SetEnvironmentvariable<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;JAVA_HOME&#34;</span><span style="color:#1f2328">,</span> <span style="color:#953800">$currPath</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;Machine&#34;</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6639ba">echo </span><span style="color:#0a3069">&#34;设置环境变量：PATH = %JAVA_HOME%\bin;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">[</span><span style="color:#0550ae">environment</span><span style="color:#1f2328">]::</span>SetEnvironmentvariable<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;path&#34;</span><span style="color:#1f2328">,</span> <span style="color:#953800">$path</span> <span style="color:#1f2328">+</span> <span style="color:#953800">$temp</span> <span style="color:#1f2328">+</span> <span style="color:#0a3069">&#34;%JAVA_HOME%\bin;&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;Machine&#34;</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#cf222e">elseif</span><span style="color:#1f2328">(</span><span style="color:#953800">$isJREJava</span><span style="color:#1f2328">){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6639ba">echo </span><span style="color:#0a3069">&#34;检测到./jre/java运行环境...&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6639ba">echo </span><span style="color:#0a3069">&#34;设置环境变量：PATH = </span><span style="color:#953800">$currPath</span><span style="color:#0a3069">\bin&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">[</span><span style="color:#0550ae">environment</span><span style="color:#1f2328">]::</span>SetEnvironmentvariable<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;path&#34;</span><span style="color:#1f2328">,</span> <span style="color:#953800">$path</span> <span style="color:#1f2328">+</span> <span style="color:#953800">$temp</span> <span style="color:#1f2328">+</span> <span style="color:#953800">$currPath</span><span style="color:#1f2328">+</span><span style="color:#0a3069">&#34;\bin;&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;Machine&#34;</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#cf222e">else</span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6639ba">echo </span><span style="color:#0a3069">&#34;没有检测到JAVA环境&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#endregion</span>
 </span></span><span style="display:flex;"><span>pause
 </span></span></code></pre></div><p>复制到文件另存为run.sp1</p>
 <p>网盘下载：<a href="http://pan.baidu.com/s/1jG07KFk" target="_blank" rel="noopener"><code>链接</code></a>
@@ -300,10 +302,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -329,6 +330,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

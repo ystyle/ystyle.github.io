@@ -6,6 +6,8 @@
   <title>移植lua到鸿蒙 - 首个移植成功的编程语言 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -268,8 +270,8 @@
 </ul>
 <p>ps: 本文使用与鸿蒙系统一同编译的方法。 如果自己有本地环境，可以把lua项目放鸿蒙代码目录里(或者使用软接连)</p>
 <h3 id="下载lua官方代码"><a href="#下载lua官方代码" class="headerlink" title="下载lua官方代码"></a>下载lua官方代码</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkdir -p ~/code/ohos/
-</span></span><span style="display:flex;"><span>cd ~/code/ohos/
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkdir -p ~/code/ohos/
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">cd</span> ~/code/ohos/
 </span></span><span style="display:flex;"><span>git clone https://github.com/lua/lua.git
 </span></span></code></pre></div><h3 id="编写BUILD-gn文件"><a href="#编写BUILD-gn文件" class="headerlink" title="编写BUILD.gn文件"></a>编写BUILD.gn文件</h3>
 <blockquote>
@@ -355,26 +357,26 @@ ndk_lib(&#34;app_sample&#34;) {
 </blockquote>
 <h3 id="编译脚本"><a href="#编译脚本" class="headerlink" title="编译脚本"></a>编译脚本</h3>
 <p>创建编译脚本<code>build-ohos.sh</code>文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd ~/code/ohos/lua
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#6639ba">cd</span> ~/code/ohos/lua
 </span></span><span style="display:flex;"><span>touch build-ohos.sh
 </span></span><span style="display:flex;"><span>chmod +x build-ohos.sh
 </span></span></code></pre></div><p>文件内容如下</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>set -e
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#6639ba">set</span> -e
 </span></span><span style="display:flex;"><span>rm -rf ./out ./bin
-</span></span><span style="display:flex;"><span>docker run --rm -ti <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>  -e HARDWARE<span style="color:#f92672">=</span>ipcamera_hi3516dv300 <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>  -v <span style="color:#e6db74">${</span>PWD<span style="color:#e6db74">}</span>/out:/OpenHarmony/out <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>  -v <span style="color:#e6db74">${</span>PWD<span style="color:#e6db74">}</span>:/OpenHarmony/applications/sample/camera/app <span style="color:#ae81ff">\
+</span></span><span style="display:flex;"><span>docker run --rm -ti <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -e <span style="color:#953800">HARDWARE</span><span style="color:#0550ae">=</span>ipcamera_hi3516dv300 <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -v <span style="color:#0a3069">${</span><span style="color:#953800">PWD</span><span style="color:#0a3069">}</span>/out:/OpenHarmony/out <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -v <span style="color:#0a3069">${</span><span style="color:#953800">PWD</span><span style="color:#0a3069">}</span>:/OpenHarmony/applications/sample/camera/app <span style="color:#0a3069">\
 </span></span></span><span style="display:flex;"><span>  ystyle/open-harmony
 </span></span><span style="display:flex;"><span>mkdir -p ./bin
 </span></span><span style="display:flex;"><span>cp ./out/ipcamera_hi3516dv300/bin/camera_app ./bin/lua
 </span></span><span style="display:flex;"><span>tar -zcf lua-5.4.2-ohos.tar.gz ./bin
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#39;build success!&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#39;build success!&#39;</span>
 </span></span></code></pre></div><p>与鸿蒙一起编译，这里使用我之前的<a href="https://ystyle.top/2020/09/10/compile-openharmony-indokcer/">docker镜像</a>
 </p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd ~/code/ohos/lua
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#6639ba">cd</span> ~/code/ohos/lua
 </span></span><span style="display:flex;"><span>./build-ohos.sh
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 看到 ohos ipcamera_hi3516dv300 build success! build success! 就编译成功了。</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 看到 ohos ipcamera_hi3516dv300 build success! build success! 就编译成功了。</span>
 </span></span></code></pre></div><blockquote>
 <p>编译后软件在鸿蒙的 ./out/ipcamera_hi3516dv300/bin/camera_app<br>
 脚本会把lua单独打包出来<br>
@@ -507,10 +509,9 @@ ndk_lib(&#34;app_sample&#34;) {
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -536,6 +537,7 @@ ndk_lib(&#34;app_sample&#34;) {
 </section>
 
 
+  </article>
 </div>
 
     

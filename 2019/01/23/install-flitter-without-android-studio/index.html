@@ -6,6 +6,8 @@
   <title>安装flutter | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -270,10 +272,10 @@
   <div class="image-caption">explorer_2019-01-23_17-26-32.png</div>
 </figure>
 <p>在<code>android-sdk-windows</code>目录打开终端(按着shift 右键打开命令行)</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>.\tools\bin\sdkmanager.bat --licenses
-</span></span><span style="display:flex;"><span>.\tools\bin\sdkmanager.bat <span style="color:#e6db74">&#34;build-tools;28.0.3&#34;</span>
-</span></span><span style="display:flex;"><span>.\tools\bin\sdkmanager.bat <span style="color:#e6db74">&#34;platforms;android-28&#34;</span>
-</span></span><span style="display:flex;"><span>.\tools\bin\sdkmanager.bat <span style="color:#e6db74">&#34;platform-tools&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>.\tools\bin\sdkmanager.bat --licenses
+</span></span><span style="display:flex;"><span>.\tools\bin\sdkmanager.bat <span style="color:#0a3069">&#34;build-tools;28.0.3&#34;</span>
+</span></span><span style="display:flex;"><span>.\tools\bin\sdkmanager.bat <span style="color:#0a3069">&#34;platforms;android-28&#34;</span>
+</span></span><span style="display:flex;"><span>.\tools\bin\sdkmanager.bat <span style="color:#0a3069">&#34;platform-tools&#34;</span>
 </span></span></code></pre></div><blockquote>
 <p>如果需要代理在每句命令后面加上<code>--no_https --proxy=http --proxy_host=mirrors.neusoft.edu.cn --proxy_port=80</code></p>
 </blockquote>
@@ -327,22 +329,22 @@
 <li>放一个后缀是.gradle的文件到 GRADLE_HOME/init.d/ 目录下.</li>
 <li><code>init.gradle</code>如下</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-gradle" data-lang="gradle"><span style="display:flex;"><span>allprojects <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    repositories <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        mavenLocal<span style="color:#f92672">()</span>
-</span></span><span style="display:flex;"><span>        maven <span style="color:#f92672">{</span> url <span style="color:#e6db74">&#39;http://maven.aliyun.com/nexus/content/repositories/central/&#39;</span> <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-gradle" data-lang="gradle"><span style="display:flex;"><span>allprojects <span style="color:#0550ae">{</span>
+</span></span><span style="display:flex;"><span>    repositories <span style="color:#0550ae">{</span>
+</span></span><span style="display:flex;"><span>        mavenLocal<span style="color:#0550ae">()</span>
+</span></span><span style="display:flex;"><span>        maven <span style="color:#0550ae">{</span> url <span style="color:#0a3069">&#39;http://maven.aliyun.com/nexus/content/repositories/central/&#39;</span> <span style="color:#0550ae">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">}</span>
 </span></span></code></pre></div><ul>
 <li>另一个方法是在当前项目下修改build.gradle</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-gradle" data-lang="gradle"><span style="display:flex;"><span>repositories <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    mavenLocal<span style="color:#f92672">()</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-gradle" data-lang="gradle"><span style="display:flex;"><span>repositories <span style="color:#0550ae">{</span>
+</span></span><span style="display:flex;"><span>    mavenLocal<span style="color:#0550ae">()</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    maven <span style="color:#f92672">{</span> url <span style="color:#e6db74">&#39;http://maven.aliyun.com/nexus/content/repositories/central/&#39;</span> <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    maven <span style="color:#0550ae">{</span> url <span style="color:#0a3069">&#39;http://maven.aliyun.com/nexus/content/repositories/central/&#39;</span> <span style="color:#0550ae">}</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    mavenCentral<span style="color:#f92672">()</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    mavenCentral<span style="color:#0550ae">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">}</span>
 </span></span></code></pre></div><p>然后打包时会自动执行项目下的<code>./gradlew</code>, 会启用上面的源。如果没安装gradle的话会自动下载， 下载很慢， 可以自己去Gradle官网下载然解压配置到环境变量</p>
 <h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3>
 
@@ -459,10 +461,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -488,6 +489,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

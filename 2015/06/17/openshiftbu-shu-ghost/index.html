@@ -6,6 +6,8 @@
   <title>OpenShift部署Ghost | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -222,26 +224,26 @@
 <p>进入域名解析如：<code>万网</code>  添加CNAME 指向 应用地址类似： <code>xxx-xxxx.rhcloud.com</code></p>
 <p>打开<code>Git bash</code></p>
 <p>执行</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> cd ~/.ssh
-</span></span><span style="display:flex;"><span> cat id_rsa.pub <span style="color:#75715e"># 没有的话选运行 ssh-keygen -t rsa -C “您的邮箱地址”</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> <span style="color:#6639ba">cd</span> ~/.ssh
+</span></span><span style="display:flex;"><span> cat id_rsa.pub <span style="color:#57606a"># 没有的话选运行 ssh-keygen -t rsa -C “您的邮箱地址”</span>
 </span></span></code></pre></div><p>到 <a href="https://openshift.redhat.com/app/console/settings" target="_blank" rel="noopener"><code>Settings</code></a>
   - <code>Add a new key...</code></p>
 <p>复制<code>id_rsa.pub</code>里的内容到大的编辑框，第一行名称可以随便写，然后保存</p>
 <p>然后复制应用页面的 <code>Source Code</code> 类似： <code>xxxx@xxx-xxxx.rhcloud.com</code> 的地址</p>
 <p>在<code>Git bash</code> 执行:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ssh xxxx@xxx-xxxx.rhcloud.com <span style="color:#75715e">#如： ssh 5581340d50044601a3000167@ghost-ystyle.rhcloud.com</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ssh xxxx@xxx-xxxx.rhcloud.com <span style="color:#57606a">#如： ssh 5581340d50044601a3000167@ghost-ystyle.rhcloud.com</span>
 </span></span></code></pre></div><p>远程到openshift后(可以用其它工具连接如<code>xshell</code>)</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#安装主题 其它主题下载：http://marketplace.ghost.org/</span>
-</span></span><span style="display:flex;"><span>cd <span style="color:#e6db74">${</span>OPENSHIFT_REPO_DIR<span style="color:#e6db74">}</span>/themes/
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a">#安装主题 其它主题下载：http://marketplace.ghost.org/</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">cd</span> <span style="color:#0a3069">${</span><span style="color:#953800">OPENSHIFT_REPO_DIR</span><span style="color:#0a3069">}</span>/themes/
 </span></span><span style="display:flex;"><span>git clone https://github.com/fabienwang/Ghost-Flat.git
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#配置Ghost博客</span>
-</span></span><span style="display:flex;"><span>cd <span style="color:#e6db74">${</span>OPENSHIFT_REPO_DIR<span style="color:#e6db74">}</span>
-</span></span><span style="display:flex;"><span>vim  config.js <span style="color:#75715e">#按i进入编辑模式，修改第一页和下几页的production下的url为自己的域名 如：http://www.lxy520.net 然后按Esc输入:wq 按回车退出</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#实现openshift自动重启</span>
-</span></span><span style="display:flex;"><span>cd <span style="color:#e6db74">${</span>OPENSHIFT_REPO_DIR<span style="color:#e6db74">}</span>.openshift/cron/hourly
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a">#配置Ghost博客</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">cd</span> <span style="color:#0a3069">${</span><span style="color:#953800">OPENSHIFT_REPO_DIR</span><span style="color:#0a3069">}</span>
+</span></span><span style="display:flex;"><span>vim  config.js <span style="color:#57606a">#按i进入编辑模式，修改第一页和下几页的production下的url为自己的域名 如：http://www.lxy520.net 然后按Esc输入:wq 按回车退出</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a">#实现openshift自动重启</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">cd</span> <span style="color:#0a3069">${</span><span style="color:#953800">OPENSHIFT_REPO_DIR</span><span style="color:#0a3069">}</span>.openshift/cron/hourly
 </span></span><span style="display:flex;"><span>wget http://dl-cystc.qiniudn.com/openshift/restart.sh
-</span></span><span style="display:flex;"><span>chmod <span style="color:#ae81ff">711</span> restart.sh
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#重启应用, 安装主题与修改config.js 时需要重启应用</span>
+</span></span><span style="display:flex;"><span>chmod <span style="color:#0550ae">711</span> restart.sh
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a">#重启应用, 安装主题与修改config.js 时需要重启应用</span>
 </span></span><span style="display:flex;"><span>ctl_all restart
 </span></span></code></pre></div><hr>
 <p>###四、初始化博客</p>
@@ -342,10 +344,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -371,6 +372,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

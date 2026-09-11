@@ -6,6 +6,8 @@
   <title>traefik配置入门 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -224,73 +226,73 @@
 <p>traefik会在/etc/traefik 、 $HOME/.traefik/ 或 当前目录查找 traefik.toml 文件。<br>
 所以本文的配置文件都放<code>/etc/traefik</code>下面</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#a6e22e">logLevel</span> = <span style="color:#e6db74">&#34;WARN&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 同时支持http和https</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">defaultEntryPoints</span> = [<span style="color:#e6db74">&#34;http&#34;</span>, <span style="color:#e6db74">&#34;https&#34;</span>]
-</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">entryPoints</span>]
-</span></span><span style="display:flex;"><span>  [<span style="color:#a6e22e">entryPoints</span>.<span style="color:#a6e22e">http</span>]
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">address</span> = <span style="color:#e6db74">&#34;:80&#34;</span>
-</span></span><span style="display:flex;"><span>    [<span style="color:#a6e22e">entryPoints</span>.<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">redirect</span>]
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">entryPoint</span> = <span style="color:#e6db74">&#34;https&#34;</span>
-</span></span><span style="display:flex;"><span>  [<span style="color:#a6e22e">entryPoints</span>.<span style="color:#a6e22e">https</span>]
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">address</span> = <span style="color:#e6db74">&#34;:443&#34;</span>
-</span></span><span style="display:flex;"><span>    [<span style="color:#a6e22e">entryPoints</span>.<span style="color:#a6e22e">https</span>.<span style="color:#a6e22e">tls</span>]
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#1f2328">logLevel</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;WARN&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 同时支持http和https</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">defaultEntryPoints</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;http&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;https&#34;</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">entryPoints</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">[</span><span style="color:#1f2328">entryPoints</span><span style="color:#1f2328">.</span><span style="color:#1f2328">http</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">address</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;:80&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">[</span><span style="color:#1f2328">entryPoints</span><span style="color:#1f2328">.</span><span style="color:#1f2328">http</span><span style="color:#1f2328">.</span><span style="color:#1f2328">redirect</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">entryPoint</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;https&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">[</span><span style="color:#1f2328">entryPoints</span><span style="color:#1f2328">.</span><span style="color:#1f2328">https</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">address</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;:443&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">[</span><span style="color:#1f2328">entryPoints</span><span style="color:#1f2328">.</span><span style="color:#1f2328">https</span><span style="color:#1f2328">.</span><span style="color:#1f2328">tls</span><span style="color:#1f2328">]</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 配置自动Let&#39;s Encrypt证书</span>
-</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">acme</span>]
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">email</span> = <span style="color:#e6db74">&#34;yourname@mail.com&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">storage</span> = <span style="color:#e6db74">&#34;/etc/traefik/acme.json&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">entryPoint</span> = <span style="color:#e6db74">&#34;https&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">onDemand</span> = <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 配置自动Let&#39;s Encrypt证书</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">acme</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">email</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;yourname@mail.com&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">storage</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;/etc/traefik/acme.json&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">entryPoint</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;https&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">onDemand</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 开启日志功能</span>
-</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">accessLog</span>]
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">filePath</span> = <span style="color:#e6db74">&#34;/var/log/traefik/acceslog.txt&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 开启日志功能</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">accessLog</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">filePath</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;/var/log/traefik/acceslog.txt&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">traefikLog</span>]
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">filePath</span> = <span style="color:#e6db74">&#34;/var/log/traefik/traefik.log&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">traefikLog</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">filePath</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;/var/log/traefik/traefik.log&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 开启web管理端</span>
-</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">web</span>]
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">address</span> = <span style="color:#e6db74">&#34;:8080&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">readOnly</span> = <span style="color:#66d9ef">true</span>
-</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">web</span>.<span style="color:#a6e22e">auth</span>.<span style="color:#a6e22e">basic</span>]
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">users</span> = [<span style="color:#e6db74">&#34;test:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/&#34;</span>] <span style="color:#75715e">#test/test 登陆名/密码 可用openssl生成</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 开启web管理端</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">web</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">address</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;:8080&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">readOnly</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">web</span><span style="color:#1f2328">.</span><span style="color:#1f2328">auth</span><span style="color:#1f2328">.</span><span style="color:#1f2328">basic</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">users</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;test:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/&#34;</span><span style="color:#1f2328">]</span> <span style="color:#57606a">#test/test 登陆名/密码 可用openssl生成</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用文件方式</span>
-</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">file</span>]
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">directory</span> = <span style="color:#e6db74">&#34;/etc/traefik/rules&#34;</span> <span style="color:#75715e"># 在指定目录查找配置文件</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">watch</span> = <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 使用文件方式</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">file</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">directory</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;/etc/traefik/rules&#34;</span> <span style="color:#57606a"># 在指定目录查找配置文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">watch</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span>
 </span></span></code></pre></div><h3 id="示例：traefik后台配置域名访问"><a href="#示例：traefik后台配置域名访问" class="headerlink" title="示例：traefik后台配置域名访问"></a>示例：traefik后台配置域名访问</h3>
 <blockquote>
 <p>编辑<code>/etc/traefik/rules/traefikadmin.toml</code>文件</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[<span style="color:#a6e22e">backends</span>]
-</span></span><span style="display:flex;"><span>  [<span style="color:#a6e22e">backends</span>.<span style="color:#a6e22e">traefikadmin</span>]
-</span></span><span style="display:flex;"><span>    [<span style="color:#a6e22e">backends</span>.<span style="color:#a6e22e">traefikadmin</span>.<span style="color:#a6e22e">servers</span>.<span style="color:#a6e22e">server1</span>]
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">url</span> = <span style="color:#e6db74">&#34;http://localhost:8080&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">weight</span> = <span style="color:#ae81ff">10</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">backends</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">[</span><span style="color:#1f2328">backends</span><span style="color:#1f2328">.</span><span style="color:#1f2328">traefikadmin</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">[</span><span style="color:#1f2328">backends</span><span style="color:#1f2328">.</span><span style="color:#1f2328">traefikadmin</span><span style="color:#1f2328">.</span><span style="color:#1f2328">servers</span><span style="color:#1f2328">.</span><span style="color:#1f2328">server1</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">url</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;http://localhost:8080&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">weight</span> <span style="color:#1f2328">=</span> <span style="color:#0550ae">10</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">frontends</span>]
-</span></span><span style="display:flex;"><span>  [<span style="color:#a6e22e">frontends</span>.<span style="color:#a6e22e">traefikadmin</span>]
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">backend</span> = <span style="color:#e6db74">&#34;traefikadmin&#34;</span>
-</span></span><span style="display:flex;"><span>    [<span style="color:#a6e22e">frontends</span>.<span style="color:#a6e22e">traefikadmin</span>.<span style="color:#a6e22e">routes</span>.<span style="color:#a6e22e">rule_1</span>]
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">rule</span> = <span style="color:#e6db74">&#34;Host:traefik.ystyle.top&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">frontends</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">[</span><span style="color:#1f2328">frontends</span><span style="color:#1f2328">.</span><span style="color:#1f2328">traefikadmin</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">backend</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;traefikadmin&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">[</span><span style="color:#1f2328">frontends</span><span style="color:#1f2328">.</span><span style="color:#1f2328">traefikadmin</span><span style="color:#1f2328">.</span><span style="color:#1f2328">routes</span><span style="color:#1f2328">.</span><span style="color:#1f2328">rule_1</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">rule</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;Host:traefik.ystyle.top&#34;</span>
 </span></span></code></pre></div><h3 id="示例：syncthing配置域名访问"><a href="#示例：syncthing配置域名访问" class="headerlink" title="示例：syncthing配置域名访问"></a>示例：syncthing配置域名访问</h3>
 <blockquote>
 <p>编辑<code>/etc/traefik/rules/syncthing.toml</code>文件</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[<span style="color:#a6e22e">backends</span>]
-</span></span><span style="display:flex;"><span>  [<span style="color:#a6e22e">backends</span>.<span style="color:#a6e22e">syncthing</span>]
-</span></span><span style="display:flex;"><span>    [<span style="color:#a6e22e">backends</span>.<span style="color:#a6e22e">syncthing</span>.<span style="color:#a6e22e">servers</span>.<span style="color:#a6e22e">server1</span>]
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">url</span> = <span style="color:#e6db74">&#34;http://localhost:8384&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">weight</span> = <span style="color:#ae81ff">10</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">backends</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">[</span><span style="color:#1f2328">backends</span><span style="color:#1f2328">.</span><span style="color:#1f2328">syncthing</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">[</span><span style="color:#1f2328">backends</span><span style="color:#1f2328">.</span><span style="color:#1f2328">syncthing</span><span style="color:#1f2328">.</span><span style="color:#1f2328">servers</span><span style="color:#1f2328">.</span><span style="color:#1f2328">server1</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">url</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;http://localhost:8384&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">weight</span> <span style="color:#1f2328">=</span> <span style="color:#0550ae">10</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">frontends</span>]
-</span></span><span style="display:flex;"><span>  [<span style="color:#a6e22e">frontends</span>.<span style="color:#a6e22e">syncthing</span>]
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">backend</span> = <span style="color:#e6db74">&#34;syncthing&#34;</span>
-</span></span><span style="display:flex;"><span>    [<span style="color:#a6e22e">frontends</span>.<span style="color:#a6e22e">syncthing</span>.<span style="color:#a6e22e">routes</span>.<span style="color:#a6e22e">rule_1</span>]
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">rule</span> = <span style="color:#e6db74">&#34;Host:syncthing.ystyle.top&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">frontends</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">[</span><span style="color:#1f2328">frontends</span><span style="color:#1f2328">.</span><span style="color:#1f2328">syncthing</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">backend</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;syncthing&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">[</span><span style="color:#1f2328">frontends</span><span style="color:#1f2328">.</span><span style="color:#1f2328">syncthing</span><span style="color:#1f2328">.</span><span style="color:#1f2328">routes</span><span style="color:#1f2328">.</span><span style="color:#1f2328">rule_1</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">rule</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;Host:syncthing.ystyle.top&#34;</span>
 </span></span></code></pre></div>
       </div>
 
@@ -385,10 +387,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -414,6 +415,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

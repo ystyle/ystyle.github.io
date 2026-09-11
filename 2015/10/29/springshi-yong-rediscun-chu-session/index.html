@@ -6,6 +6,8 @@
   <title>spring使用Redis存储Session | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -224,55 +226,55 @@
 <p>spring web的maven项目</p>
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3>
 <p>pom.xml添加依赖</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- pom.xml --&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;dependency&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;groupId&gt;</span>org.springframework.session<span style="color:#f92672">&lt;/groupId&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;artifactId&gt;</span>spring-session<span style="color:#f92672">&lt;/artifactId&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;version&gt;</span>1.0.2.RELEASE<span style="color:#f92672">&lt;/version&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dependency&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;dependency&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;groupId&gt;</span>org.springframework.data<span style="color:#f92672">&lt;/groupId&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;artifactId&gt;</span>spring-data-redis<span style="color:#f92672">&lt;/artifactId&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;version&gt;</span>1.4.1.RELEASE<span style="color:#f92672">&lt;/version&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dependency&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;dependency&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;groupId&gt;</span>redis.clients<span style="color:#f92672">&lt;/groupId&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;artifactId&gt;</span>jedis<span style="color:#f92672">&lt;/artifactId&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;version&gt;</span>2.5.2<span style="color:#f92672">&lt;/version&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dependency&gt;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#57606a">&lt;!-- pom.xml --&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;groupId&gt;</span>org.springframework.session<span style="color:#0550ae">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;artifactId&gt;</span>spring-session<span style="color:#0550ae">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;version&gt;</span>1.0.2.RELEASE<span style="color:#0550ae">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;/dependency&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;groupId&gt;</span>org.springframework.data<span style="color:#0550ae">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;artifactId&gt;</span>spring-data-redis<span style="color:#0550ae">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;version&gt;</span>1.4.1.RELEASE<span style="color:#0550ae">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;/dependency&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;groupId&gt;</span>redis.clients<span style="color:#0550ae">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;artifactId&gt;</span>jedis<span style="color:#0550ae">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;version&gt;</span>2.5.2<span style="color:#0550ae">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;/dependency&gt;</span>
 </span></span></code></pre></div><p>web.xml 添加过滤器</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- web.xml --&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;filter&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;filter-name&gt;</span>springSessionRepositoryFilter<span style="color:#f92672">&lt;/filter-name&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;filter-class&gt;</span>org.springframework.web.filter.DelegatingFilterProxy<span style="color:#f92672">&lt;/filter-class&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/filter&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;filter-mapping&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;filter-name&gt;</span>springSessionRepositoryFilter<span style="color:#f92672">&lt;/filter-name&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;url-pattern&gt;</span>/*<span style="color:#f92672">&lt;/url-pattern&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/filter-mapping&gt;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#57606a">&lt;!-- web.xml --&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;filter&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;filter-name&gt;</span>springSessionRepositoryFilter<span style="color:#0550ae">&lt;/filter-name&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;filter-class&gt;</span>org.springframework.web.filter.DelegatingFilterProxy<span style="color:#0550ae">&lt;/filter-class&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;/filter&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;filter-mapping&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;filter-name&gt;</span>springSessionRepositoryFilter<span style="color:#0550ae">&lt;/filter-name&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;url-pattern&gt;</span>/*<span style="color:#0550ae">&lt;/url-pattern&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;/filter-mapping&gt;</span>
 </span></span></code></pre></div><p>spring 配置文件添加redis配置</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;context:annotation-config/&gt;</span><span style="color:#75715e">&lt;!-- 自动扫描必需 --&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration&#34;</span><span style="color:#f92672">/&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;org.springframework.data.redis.connection.jedis.JedisConnectionFactory&#34;</span><span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">&lt;!-- redis 配置 --&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;hostName&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;localhost&#34;</span><span style="color:#f92672">/&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;port&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;6379&#34;</span><span style="color:#f92672">/&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/bean&gt;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;context:annotation-config/&gt;</span><span style="color:#57606a">&lt;!-- 自动扫描必需 --&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;bean</span> <span style="color:#1f2328">class=</span><span style="color:#0a3069">&#34;org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration&#34;</span><span style="color:#0550ae">/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;bean</span> <span style="color:#1f2328">class=</span><span style="color:#0a3069">&#34;org.springframework.data.redis.connection.jedis.JedisConnectionFactory&#34;</span><span style="color:#0550ae">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a">&lt;!-- redis 配置 --&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;property</span> <span style="color:#1f2328">name=</span><span style="color:#0a3069">&#34;hostName&#34;</span> <span style="color:#1f2328">value=</span><span style="color:#0a3069">&#34;localhost&#34;</span><span style="color:#0550ae">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;property</span> <span style="color:#1f2328">name=</span><span style="color:#0a3069">&#34;port&#34;</span> <span style="color:#1f2328">value=</span><span style="color:#0a3069">&#34;6379&#34;</span><span style="color:#0550ae">/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;/bean&gt;</span>
 </span></span></code></pre></div><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@ResponseBody</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RequestMapping</span>(<span style="color:#e6db74">&#34;/get&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">index</span>(Model model,HttpServletRequest request,String action,String msg,String key){
-</span></span><span style="display:flex;"><span>    HttpSession session<span style="color:#f92672">=</span>request.<span style="color:#a6e22e">getSession</span>();
-</span></span><span style="display:flex;"><span>    String message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ok&#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#e6db74">&#34;set&#34;</span>.<span style="color:#a6e22e">equals</span>(action)){
-</span></span><span style="display:flex;"><span>        session.<span style="color:#a6e22e">setAttribute</span>(key, msg);
-</span></span><span style="display:flex;"><span>    }<span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#e6db74">&#34;get&#34;</span>.<span style="color:#a6e22e">equals</span>(action)){
-</span></span><span style="display:flex;"><span>        message<span style="color:#f92672">=</span>(String)session.<span style="color:#a6e22e">getAttribute</span>(key);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> message;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#0550ae">@ResponseBody</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">@RequestMapping</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;/get&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">public</span><span style="color:#fff"> </span>String<span style="color:#fff"> </span><span style="color:#6639ba">index</span><span style="color:#1f2328">(</span>Model<span style="color:#fff"> </span>model<span style="color:#1f2328">,</span>HttpServletRequest<span style="color:#fff"> </span>request<span style="color:#1f2328">,</span>String<span style="color:#fff"> </span>action<span style="color:#1f2328">,</span>String<span style="color:#fff"> </span>msg<span style="color:#1f2328">,</span>String<span style="color:#fff"> </span>key<span style="color:#1f2328">){</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>HttpSession<span style="color:#fff"> </span>session<span style="color:#0550ae">=</span>request<span style="color:#1f2328">.</span><span style="color:#1f2328">getSession</span><span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>String<span style="color:#fff"> </span>message<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;ok&#34;</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;set&#34;</span><span style="color:#1f2328">.</span><span style="color:#1f2328">equals</span><span style="color:#1f2328">(</span>action<span style="color:#1f2328">)){</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>session<span style="color:#1f2328">.</span><span style="color:#1f2328">setAttribute</span><span style="color:#1f2328">(</span>key<span style="color:#1f2328">,</span><span style="color:#fff"> </span>msg<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#cf222e">else</span><span style="color:#fff"> </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;get&#34;</span><span style="color:#1f2328">.</span><span style="color:#1f2328">equals</span><span style="color:#1f2328">(</span>action<span style="color:#1f2328">)){</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>message<span style="color:#0550ae">=</span><span style="color:#1f2328">(</span>String<span style="color:#1f2328">)</span>session<span style="color:#1f2328">.</span><span style="color:#1f2328">getAttribute</span><span style="color:#1f2328">(</span>key<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>message<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre></div>
       </div>
 
       <blockquote class="post-copyright">
@@ -366,10 +368,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -395,6 +396,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

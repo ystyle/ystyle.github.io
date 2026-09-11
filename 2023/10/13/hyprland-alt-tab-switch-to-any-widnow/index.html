@@ -6,6 +6,8 @@
   <title>hypyland实现alt &#43; tab切换到任意工作区的窗口 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -232,10 +234,10 @@
 </ul>
 <h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3>
 <p>把以下脚本存放到<code>~/.config/hypr/scripts/switch_windows</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env bash
-</span></span></span><span style="display:flex;"><span>NAME<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>hyprctl clients -j | jq -r <span style="color:#e6db74">&#39;.[] | select(.title != &#34;&#34;) | .title&#39;</span> | rofi -dmenu<span style="color:#e6db74">`</span>
-</span></span><span style="display:flex;"><span>WINDOW<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>hyprctl clients -j | jq -r <span style="color:#e6db74">&#34;.[] | select(.title == \&#34;</span><span style="color:#e6db74">${</span>NAME<span style="color:#e6db74">}</span><span style="color:#e6db74">\&#34;) | .address&#34;</span><span style="color:#e6db74">`</span>
-</span></span><span style="display:flex;"><span>hyprctl dispatch focuswindow address:<span style="color:#e6db74">${</span>WINDOW<span style="color:#e6db74">}</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a">#!/usr/bin/env bash
+</span></span></span><span style="display:flex;"><span><span style="color:#953800">NAME</span><span style="color:#0550ae">=</span><span style="color:#0a3069">`</span>hyprctl clients -j <span style="color:#1f2328">|</span> jq -r <span style="color:#0a3069">&#39;.[] | select(.title != &#34;&#34;) | .title&#39;</span> <span style="color:#1f2328">|</span> rofi -dmenu<span style="color:#0a3069">`</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">WINDOW</span><span style="color:#0550ae">=</span><span style="color:#0a3069">`</span>hyprctl clients -j <span style="color:#1f2328">|</span> jq -r <span style="color:#0a3069">&#34;.[] | select(.title == \&#34;</span><span style="color:#0a3069">${</span><span style="color:#953800">NAME</span><span style="color:#0a3069">}</span><span style="color:#0a3069">\&#34;) | .address&#34;</span><span style="color:#0a3069">`</span>
+</span></span><span style="display:flex;"><span>hyprctl dispatch focuswindow address:<span style="color:#0a3069">${</span><span style="color:#953800">WINDOW</span><span style="color:#0a3069">}</span>
 </span></span></code></pre></div><p>添加快捷键</p>
 <pre tabindex="0"><code class="language-conf" data-lang="conf">bind = ALT, Tab, exec, ${HOME}/.config/hypr/scripts/switch_windows
 </code></pre><h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3>
@@ -344,10 +346,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -373,6 +374,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

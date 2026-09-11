@@ -18,7 +18,7 @@
 				<link>https://ystyle.top/2016/08/18/maven-xiang-mu-zhuan-wei-gradle-xiang-mu/</link>
 				<pubDate>Thu, 18 Aug 2016 09:16:19 +0800</pubDate>
 				<guid>https://ystyle.top/2016/08/18/maven-xiang-mu-zhuan-wei-gradle-xiang-mu/</guid>
-				<description>&lt;h3 id=&#34;maven-项目转为gradle-项目&#34;&gt;&lt;a href=&#34;#maven-项目转为gradle-项目&#34; class=&#34;headerlink&#34; title=&#34;maven 项目转为gradle 项目&#34;&gt;&lt;/a&gt;maven 项目转为gradle 项目&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gradle init --type pom&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+				<description>&lt;h3 id=&#34;maven-项目转为gradle-项目&#34;&gt;&lt;a href=&#34;#maven-项目转为gradle-项目&#34; class=&#34;headerlink&#34; title=&#34;maven 项目转为gradle 项目&#34;&gt;&lt;/a&gt;maven 项目转为gradle 项目&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gradle init --type pom&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
 			</item>
 	</channel>
 </rss>

@@ -6,6 +6,8 @@
   <title>docker 安装oracle 数据库 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -220,9 +222,9 @@
  在 <a href="https://registry.hub.docker.com/" target="_blank" rel="noopener">Docker中央库</a>
 .</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker pull wnameless/oracle-xe-11g
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker pull wnameless/oracle-xe-11g
 </span></span></code></pre></div><p>以22(sshd), 1521(oracle)号端口启动容器:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run -d -p 49160:22 -p 49161:1521 wnameless/oracle-xe-11g
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run -d -p 49160:22 -p 49161:1521 wnameless/oracle-xe-11g
 </span></span></code></pre></div><p>数据库连接信息:</p>
 <pre tabindex="0"><code class="language-txet" data-lang="txet">hostname: localhost
 port: 49161
@@ -230,9 +232,9 @@ sid: xe
 username: system
 password: oracle
 </code></pre><p>oracle的<code>SYS</code> 和 <code>SYSTEM</code>用户密码:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>oracle
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>oracle
 </span></span></code></pre></div><p>用ssh连接docker容器</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ssh root@localhost -p <span style="color:#ae81ff">49160</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ssh root@localhost -p <span style="color:#0550ae">49160</span>
 </span></span><span style="display:flex;"><span>password: admin
 </span></span></code></pre></div>
       </div>
@@ -328,10 +330,9 @@ password: oracle
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -357,6 +358,7 @@ password: oracle
 </section>
 
 
+  </article>
 </div>
 
     

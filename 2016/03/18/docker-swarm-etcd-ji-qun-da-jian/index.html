@@ -6,6 +6,8 @@
   <title>docker &#43; swarm &#43; etcd 集群搭建 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -281,51 +283,51 @@
 </ul>
 <h3 id="安装etcd-k-v数据库"><a href="#安装etcd-k-v数据库" class="headerlink" title="安装etcd k-v数据库"></a>安装etcd <code>k-v</code>数据库</h3>
 <p>在centos-node1上执行:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 设置当前host的ip</span>
-</span></span><span style="display:flex;"><span>export HOSTIP<span style="color:#f92672">=</span>192.168.99.100
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a"># 设置当前host的ip</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">HOSTIP</span><span style="color:#0550ae">=</span>192.168.99.100
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 启动etcd `k-v`服务器</span>
-</span></span><span style="display:flex;"><span>docker run -d -v /etc/ssl/certs:/etc/ssl/certs -p 4001:4001 -p 2380:2380 -p 2379:2379 <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span> --name etcd ystyle/etcd <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span> -name etcd0 <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span> -advertise-client-urls http://<span style="color:#e6db74">${</span>HOSTIP<span style="color:#e6db74">}</span>:2379,http://<span style="color:#e6db74">${</span>HOSTIP<span style="color:#e6db74">}</span>:4001 <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span> -listen-client-urls http://0.0.0.0:2379,http://0.0.0.0:4001 <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span> -initial-advertise-peer-urls http://<span style="color:#e6db74">${</span>HOSTIP<span style="color:#e6db74">}</span>:2380 <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span> -listen-peer-urls http://0.0.0.0:2380 <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span> -initial-cluster-token etcd-cluster-1 <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span> -initial-cluster etcd0<span style="color:#f92672">=</span>http://<span style="color:#e6db74">${</span>HOSTIP<span style="color:#e6db74">}</span>:2380 <span style="color:#ae81ff">\
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 启动etcd `k-v`服务器</span>
+</span></span><span style="display:flex;"><span>docker run -d -v /etc/ssl/certs:/etc/ssl/certs -p 4001:4001 -p 2380:2380 -p 2379:2379 <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span> --name etcd ystyle/etcd <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span> -name etcd0 <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span> -advertise-client-urls http://<span style="color:#0a3069">${</span><span style="color:#953800">HOSTIP</span><span style="color:#0a3069">}</span>:2379,http://<span style="color:#0a3069">${</span><span style="color:#953800">HOSTIP</span><span style="color:#0a3069">}</span>:4001 <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span> -listen-client-urls http://0.0.0.0:2379,http://0.0.0.0:4001 <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span> -initial-advertise-peer-urls http://<span style="color:#0a3069">${</span><span style="color:#953800">HOSTIP</span><span style="color:#0a3069">}</span>:2380 <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span> -listen-peer-urls http://0.0.0.0:2380 <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span> -initial-cluster-token etcd-cluster-1 <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span> -initial-cluster <span style="color:#953800">etcd0</span><span style="color:#0550ae">=</span>http://<span style="color:#0a3069">${</span><span style="color:#953800">HOSTIP</span><span style="color:#0a3069">}</span>:2380 <span style="color:#0a3069">\
 </span></span></span><span style="display:flex;"><span> -initial-cluster-state new
 </span></span></code></pre></div><h3 id="加入集群"><a href="#加入集群" class="headerlink" title="加入集群"></a>加入集群</h3>
 <ol>
 <li>在centos-node1执行:</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run -d swarm join --addr<span style="color:#f92672">=</span>192.168.99.100:2375 etcd://192.168.99.100:2379/swarm
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run -d swarm join --addr<span style="color:#0550ae">=</span>192.168.99.100:2375 etcd://192.168.99.100:2379/swarm
 </span></span></code></pre></div><ol start="2">
 <li>在centos-node2执行:</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run -d swarm join --addr<span style="color:#f92672">=</span>192.168.99.101:2375 etcd://192.168.99.100:2379/swarm
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run -d swarm join --addr<span style="color:#0550ae">=</span>192.168.99.101:2375 etcd://192.168.99.100:2379/swarm
 </span></span></code></pre></div><ol start="3">
 <li>在centos-node3执行:</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run -d swarm join --addr<span style="color:#f92672">=</span>192.168.99.102:2375 etcd://192.168.99.100:2379/swarm
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run -d swarm join --addr<span style="color:#0550ae">=</span>192.168.99.102:2375 etcd://192.168.99.100:2379/swarm
 </span></span></code></pre></div><h3 id="启动swarm-manage"><a href="#启动swarm-manage" class="headerlink" title="启动swarm manage"></a>启动swarm manage</h3>
 <p>在centos-node2上执行</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 启动swarm manage</span>
-</span></span><span style="display:flex;"><span>docker run -d -p 3376:3376 -t <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span> swarm manage <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>-H 0.0.0.0:3376 <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a"># 启动swarm manage</span>
+</span></span><span style="display:flex;"><span>docker run -d -p 3376:3376 -t <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span> swarm manage <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>-H 0.0.0.0:3376 <span style="color:#0a3069">\
 </span></span></span><span style="display:flex;"><span>etcd://192.168.99.100:2379/swarm
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 检查swarm节点列表</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 检查swarm节点列表</span>
 </span></span><span style="display:flex;"><span>docker run --rm swarm list etcd://192.168.99.100:2379/swarm
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看swarm集群信息</span>
-</span></span><span style="display:flex;"><span>export DOCKER_HOST<span style="color:#f92672">=</span>192.168.99.101:3376
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 查看swarm集群信息</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">DOCKER_HOST</span><span style="color:#0550ae">=</span>192.168.99.101:3376
 </span></span><span style="display:flex;"><span>docker info
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 测试</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 测试</span>
 </span></span><span style="display:flex;"><span>docker run --rm -p 8080:80 nginx:alpine
-</span></span><span style="display:flex;"><span>docker ps -a <span style="color:#75715e"># 查看nginx安装到哪台机器上了</span>
+</span></span><span style="display:flex;"><span>docker ps -a <span style="color:#57606a"># 查看nginx安装到哪台机器上了</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>curl -L http://nginx_host:8080  
 </span></span></code></pre></div><h3 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h3>
@@ -437,10 +439,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -466,6 +467,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

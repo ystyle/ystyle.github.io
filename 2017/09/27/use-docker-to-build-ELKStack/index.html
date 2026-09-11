@@ -6,6 +6,8 @@
   <title>用docker搭建ELK | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -268,35 +270,35 @@
 <p>本篇以 <code>logstash-input-redis</code>插件配置elk</p>
 </blockquote>
 <h3 id="下载sebp-elk镜像"><a href="#下载sebp-elk镜像" class="headerlink" title="下载sebp/elk镜像"></a>下载sebp/elk镜像</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker pull sebp/elk
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker pull sebp/elk
 </span></span></code></pre></div><h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3>
 <ul>
 <li>创建docker-compose.yml文件</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">services</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">elk</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">sebp/elk</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
-</span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#34;5601:5601&#34;</span>
-</span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#34;9200:9200&#34;</span>
-</span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#34;5044:5044&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#0550ae">version</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#0a3069">&#39;3&#39;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">services</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">elk</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>sebp/elk<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">ports</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- <span style="color:#0a3069">&#34;5601:5601&#34;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- <span style="color:#0a3069">&#34;9200:9200&#34;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- <span style="color:#0a3069">&#34;5044:5044&#34;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">restart</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>always<span style="color:#fff">
+</span></span></span></code></pre></div><ul>
 <li>设置主机的虚拟内存</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sysctl -w vm.max_map_count<span style="color:#f92672">=</span><span style="color:#ae81ff">262144</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sysctl -w vm.max_map_count<span style="color:#0550ae">=</span><span style="color:#0550ae">262144</span>
 </span></span></code></pre></div><ul>
 <li>启动容器</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker-compose up -d
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker-compose up -d
 </span></span></code></pre></div><h3 id="配置Logstash虚拟日志条目"><a href="#配置Logstash虚拟日志条目" class="headerlink" title="配置Logstash虚拟日志条目"></a>配置Logstash虚拟日志条目</h3>
 <ul>
 <li>进入容器</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker exec -ti elk_elk_1 bash
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker <span style="color:#6639ba">exec</span> -ti elk_elk_1 bash
 </span></span></code></pre></div><p>删除<code>/etc/logstash/conf.d/</code>下的文件，并新增<code>log4j.conf</code>, 写入以下内容, 然后重启elk</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>input {
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>input {
 </span></span><span style="display:flex;"><span>  redis {
 </span></span><span style="display:flex;"><span>    host =&gt; &#34;127.0.0.1&#34;
 </span></span><span style="display:flex;"><span>    port =&gt; 6379
@@ -344,301 +346,301 @@
 <blockquote>
 <p>依赖 Jedis, 为了从JedisPool取出连接</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.log4j.AppenderSkeleton;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.log4j.helpers.LogLog;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.log4j.spi.LoggingEvent;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> redis.clients.jedis.Jedis;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> redis.clients.jedis.JedisPool;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> redis.clients.jedis.JedisPoolConfig;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RedisAppender</span> <span style="color:#66d9ef">extends</span> AppenderSkeleton{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String DEFAULT_KEYTYPE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;channel&#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String DEFAULT_KEY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;logstash-log&#34;</span>;
-</span></span><span style="display:flex;"><span>    String host <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;127.0.0.1&#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> port <span style="color:#f92672">=</span> 6379;
-</span></span><span style="display:flex;"><span>    String password;
-</span></span><span style="display:flex;"><span>    String keyType <span style="color:#f92672">=</span> DEFAULT_KEYTYPE;
-</span></span><span style="display:flex;"><span>    String key <span style="color:#f92672">=</span> DEFAULT_KEY;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> timeout <span style="color:#f92672">=</span> 2000;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 连接池设置</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">long</span> minEvictableIdleTimeMillis <span style="color:#f92672">=</span> 60000L;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">long</span> timeBetweenEvictionRunsMillis <span style="color:#f92672">=</span> 30000L;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> numTestsPerEvictionRun <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>1;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> maxTotal <span style="color:#f92672">=</span> 8;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> maxIdle <span style="color:#f92672">=</span> 0;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> minIdle <span style="color:#f92672">=</span> 0;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">boolean</span> blockWhenExhaused <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String evictionPolicyClassName;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">boolean</span> lifo <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">boolean</span> testOnBorrow <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">boolean</span> testWhileIdle <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">boolean</span> testOnReturn <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">private</span> JedisPool jedisPool;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">activateOptions</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">super</span>.<span style="color:#a6e22e">activateOptions</span>();
-</span></span><span style="display:flex;"><span>        JedisPoolConfig poolConfig <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> JedisPoolConfig();
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (lifo) {
-</span></span><span style="display:flex;"><span>            poolConfig.<span style="color:#a6e22e">setLifo</span>(lifo);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (testOnBorrow) {
-</span></span><span style="display:flex;"><span>            poolConfig.<span style="color:#a6e22e">setTestOnBorrow</span>(testOnBorrow);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (testWhileIdle) {
-</span></span><span style="display:flex;"><span>            poolConfig.<span style="color:#a6e22e">setTestWhileIdle</span>(testWhileIdle);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (testOnReturn) {
-</span></span><span style="display:flex;"><span>            poolConfig.<span style="color:#a6e22e">setTestOnReturn</span>(testOnReturn);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (timeBetweenEvictionRunsMillis <span style="color:#f92672">&gt;</span> 0) {
-</span></span><span style="display:flex;"><span>            poolConfig.<span style="color:#a6e22e">setTimeBetweenEvictionRunsMillis</span>(timeBetweenEvictionRunsMillis);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (evictionPolicyClassName <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> evictionPolicyClassName.<span style="color:#a6e22e">length</span>() <span style="color:#f92672">&gt;</span> 0) {
-</span></span><span style="display:flex;"><span>            poolConfig.<span style="color:#a6e22e">setEvictionPolicyClassName</span>(evictionPolicyClassName);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (blockWhenExhaused) {
-</span></span><span style="display:flex;"><span>            poolConfig.<span style="color:#a6e22e">setBlockWhenExhausted</span>(blockWhenExhaused);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (minIdle <span style="color:#f92672">&gt;</span> 0) {
-</span></span><span style="display:flex;"><span>            poolConfig.<span style="color:#a6e22e">setMinIdle</span>(minIdle);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (maxIdle <span style="color:#f92672">&gt;</span> 0) {
-</span></span><span style="display:flex;"><span>            poolConfig.<span style="color:#a6e22e">setMaxIdle</span>(maxIdle);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (numTestsPerEvictionRun <span style="color:#f92672">&gt;</span> 0) {
-</span></span><span style="display:flex;"><span>            poolConfig.<span style="color:#a6e22e">setNumTestsPerEvictionRun</span>(numTestsPerEvictionRun);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (maxTotal <span style="color:#f92672">!=</span> 8) {
-</span></span><span style="display:flex;"><span>            poolConfig.<span style="color:#a6e22e">setMaxTotal</span>(maxTotal);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (minEvictableIdleTimeMillis <span style="color:#f92672">&gt;</span> 0) {
-</span></span><span style="display:flex;"><span>            poolConfig.<span style="color:#a6e22e">setMinEvictableIdleTimeMillis</span>(minEvictableIdleTimeMillis);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (password <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> password.<span style="color:#a6e22e">length</span>() <span style="color:#f92672">&gt;</span> 0) {
-</span></span><span style="display:flex;"><span>            jedisPool <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> JedisPool(poolConfig, host, port, timeout, password);
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>            jedisPool <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> JedisPool(poolConfig, host, port, timeout);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 配置连接实验</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>            Jedis jedis <span style="color:#f92672">=</span> jedisPool.<span style="color:#a6e22e">getResource</span>();
-</span></span><span style="display:flex;"><span>            jedis.<span style="color:#a6e22e">ping</span>();
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (Exception e) {
-</span></span><span style="display:flex;"><span>            LogLog.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Redis is can not connected: &#34;</span> <span style="color:#f92672">+</span>  e.<span style="color:#a6e22e">getMessage</span>());
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">append</span>(LoggingEvent event) {
-</span></span><span style="display:flex;"><span>        Jedis resource <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (jedisPool <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>){
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            resource <span style="color:#f92672">=</span> jedisPool.<span style="color:#a6e22e">getResource</span>();
-</span></span><span style="display:flex;"><span>            String format <span style="color:#f92672">=</span> getLayout().<span style="color:#a6e22e">format</span>(event);
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (DEFAULT_KEYTYPE.<span style="color:#a6e22e">equals</span>(keyType)){
-</span></span><span style="display:flex;"><span>                resource.<span style="color:#a6e22e">publish</span>(key,format);
-</span></span><span style="display:flex;"><span>            }<span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                resource.<span style="color:#a6e22e">lpush</span>(key,format);
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }<span style="color:#66d9ef">catch</span> (Exception e){
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        }<span style="color:#66d9ef">finally</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (resource <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>){
-</span></span><span style="display:flex;"><span>                resource.<span style="color:#a6e22e">close</span>();
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">close</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (jedisPool<span style="color:#f92672">!=</span><span style="color:#66d9ef">null</span>){
-</span></span><span style="display:flex;"><span>            jedisPool.<span style="color:#a6e22e">destroy</span>();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">requiresLayout</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getHost</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> host;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setHost</span>(String host) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">host</span> <span style="color:#f92672">=</span> host;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getPort</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> port;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setPort</span>(<span style="color:#66d9ef">int</span> port) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">port</span> <span style="color:#f92672">=</span> port;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getPassword</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> password;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setPassword</span>(String password) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">password</span> <span style="color:#f92672">=</span> password;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getKeyType</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> keyType;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setKeyType</span>(String keyType) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">keyType</span> <span style="color:#f92672">=</span> keyType;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getKey</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> key;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setKey</span>(String key) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">key</span> <span style="color:#f92672">=</span> key;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getTimeout</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> timeout;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setTimeout</span>(<span style="color:#66d9ef">int</span> timeout) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">timeout</span> <span style="color:#f92672">=</span> timeout;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">getMinEvictableIdleTimeMillis</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> minEvictableIdleTimeMillis;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setMinEvictableIdleTimeMillis</span>(<span style="color:#66d9ef">long</span> minEvictableIdleTimeMillis) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">minEvictableIdleTimeMillis</span> <span style="color:#f92672">=</span> minEvictableIdleTimeMillis;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">getTimeBetweenEvictionRunsMillis</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> timeBetweenEvictionRunsMillis;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setTimeBetweenEvictionRunsMillis</span>(<span style="color:#66d9ef">long</span> timeBetweenEvictionRunsMillis) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">timeBetweenEvictionRunsMillis</span> <span style="color:#f92672">=</span> timeBetweenEvictionRunsMillis;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getNumTestsPerEvictionRun</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> numTestsPerEvictionRun;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setNumTestsPerEvictionRun</span>(<span style="color:#66d9ef">int</span> numTestsPerEvictionRun) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">numTestsPerEvictionRun</span> <span style="color:#f92672">=</span> numTestsPerEvictionRun;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getMaxTotal</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> maxTotal;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setMaxTotal</span>(<span style="color:#66d9ef">int</span> maxTotal) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">maxTotal</span> <span style="color:#f92672">=</span> maxTotal;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getMaxIdle</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> maxIdle;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setMaxIdle</span>(<span style="color:#66d9ef">int</span> maxIdle) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">maxIdle</span> <span style="color:#f92672">=</span> maxIdle;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getMinIdle</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> minIdle;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setMinIdle</span>(<span style="color:#66d9ef">int</span> minIdle) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">minIdle</span> <span style="color:#f92672">=</span> minIdle;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isBlockWhenExhaused</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> blockWhenExhaused;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setBlockWhenExhaused</span>(<span style="color:#66d9ef">boolean</span> blockWhenExhaused) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">blockWhenExhaused</span> <span style="color:#f92672">=</span> blockWhenExhaused;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getEvictionPolicyClassName</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> evictionPolicyClassName;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setEvictionPolicyClassName</span>(String evictionPolicyClassName) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">evictionPolicyClassName</span> <span style="color:#f92672">=</span> evictionPolicyClassName;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isLifo</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> lifo;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setLifo</span>(<span style="color:#66d9ef">boolean</span> lifo) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lifo</span> <span style="color:#f92672">=</span> lifo;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isTestOnBorrow</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> testOnBorrow;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setTestOnBorrow</span>(<span style="color:#66d9ef">boolean</span> testOnBorrow) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">testOnBorrow</span> <span style="color:#f92672">=</span> testOnBorrow;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isTestWhileIdle</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> testWhileIdle;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setTestWhileIdle</span>(<span style="color:#66d9ef">boolean</span> testWhileIdle) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">testWhileIdle</span> <span style="color:#f92672">=</span> testWhileIdle;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isTestOnReturn</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> testOnReturn;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setTestOnReturn</span>(<span style="color:#66d9ef">boolean</span> testOnReturn) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">testOnReturn</span> <span style="color:#f92672">=</span> testOnReturn;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">org.apache.log4j.AppenderSkeleton</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">org.apache.log4j.helpers.LogLog</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">org.apache.log4j.spi.LoggingEvent</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">redis.clients.jedis.Jedis</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">redis.clients.jedis.JedisPool</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">redis.clients.jedis.JedisPoolConfig</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">class</span> <span style="color:#1f2328">RedisAppender</span><span style="color:#fff"> </span><span style="color:#cf222e">extends</span><span style="color:#fff"> </span>AppenderSkeleton<span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">private</span><span style="color:#fff"> </span><span style="color:#cf222e">static</span><span style="color:#fff"> </span><span style="color:#cf222e">final</span><span style="color:#fff"> </span>String<span style="color:#fff"> </span>DEFAULT_KEYTYPE<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;channel&#34;</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">private</span><span style="color:#fff"> </span><span style="color:#cf222e">static</span><span style="color:#fff"> </span><span style="color:#cf222e">final</span><span style="color:#fff"> </span>String<span style="color:#fff"> </span>DEFAULT_KEY<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;logstash-log&#34;</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>String<span style="color:#fff"> </span>host<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;127.0.0.1&#34;</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">int</span><span style="color:#fff"> </span>port<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>6379<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>String<span style="color:#fff"> </span>password<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>String<span style="color:#fff"> </span>keyType<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>DEFAULT_KEYTYPE<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>String<span style="color:#fff"> </span>key<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>DEFAULT_KEY<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">int</span><span style="color:#fff"> </span>timeout<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>2000<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#57606a">// 连接池设置</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">private</span><span style="color:#fff"> </span><span style="color:#cf222e">long</span><span style="color:#fff"> </span>minEvictableIdleTimeMillis<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>60000L<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">private</span><span style="color:#fff"> </span><span style="color:#cf222e">long</span><span style="color:#fff"> </span>timeBetweenEvictionRunsMillis<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>30000L<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">private</span><span style="color:#fff"> </span><span style="color:#cf222e">int</span><span style="color:#fff"> </span>numTestsPerEvictionRun<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#0550ae">-</span>1<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">private</span><span style="color:#fff"> </span><span style="color:#cf222e">int</span><span style="color:#fff"> </span>maxTotal<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>8<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">private</span><span style="color:#fff"> </span><span style="color:#cf222e">int</span><span style="color:#fff"> </span>maxIdle<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>0<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">private</span><span style="color:#fff"> </span><span style="color:#cf222e">int</span><span style="color:#fff"> </span>minIdle<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>0<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">private</span><span style="color:#fff"> </span><span style="color:#cf222e">boolean</span><span style="color:#fff"> </span>blockWhenExhaused<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">private</span><span style="color:#fff"> </span>String<span style="color:#fff"> </span>evictionPolicyClassName<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">private</span><span style="color:#fff"> </span><span style="color:#cf222e">boolean</span><span style="color:#fff"> </span>lifo<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">private</span><span style="color:#fff"> </span><span style="color:#cf222e">boolean</span><span style="color:#fff"> </span>testOnBorrow<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">private</span><span style="color:#fff"> </span><span style="color:#cf222e">boolean</span><span style="color:#fff"> </span>testWhileIdle<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">private</span><span style="color:#fff"> </span><span style="color:#cf222e">boolean</span><span style="color:#fff"> </span>testOnReturn<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">static</span><span style="color:#fff"> </span><span style="color:#cf222e">private</span><span style="color:#fff"> </span>JedisPool<span style="color:#fff"> </span>jedisPool<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">@Override</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">activateOptions</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">super</span><span style="color:#1f2328">.</span><span style="color:#1f2328">activateOptions</span><span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>JedisPoolConfig<span style="color:#fff"> </span>poolConfig<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">new</span><span style="color:#fff"> </span>JedisPoolConfig<span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>lifo<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>poolConfig<span style="color:#1f2328">.</span><span style="color:#1f2328">setLifo</span><span style="color:#1f2328">(</span>lifo<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>testOnBorrow<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>poolConfig<span style="color:#1f2328">.</span><span style="color:#1f2328">setTestOnBorrow</span><span style="color:#1f2328">(</span>testOnBorrow<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>testWhileIdle<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>poolConfig<span style="color:#1f2328">.</span><span style="color:#1f2328">setTestWhileIdle</span><span style="color:#1f2328">(</span>testWhileIdle<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>testOnReturn<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>poolConfig<span style="color:#1f2328">.</span><span style="color:#1f2328">setTestOnReturn</span><span style="color:#1f2328">(</span>testOnReturn<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>timeBetweenEvictionRunsMillis<span style="color:#fff"> </span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span>0<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>poolConfig<span style="color:#1f2328">.</span><span style="color:#1f2328">setTimeBetweenEvictionRunsMillis</span><span style="color:#1f2328">(</span>timeBetweenEvictionRunsMillis<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>evictionPolicyClassName<span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">null</span><span style="color:#fff"> </span><span style="color:#0550ae">&amp;&amp;</span><span style="color:#fff"> </span>evictionPolicyClassName<span style="color:#1f2328">.</span><span style="color:#1f2328">length</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span>0<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>poolConfig<span style="color:#1f2328">.</span><span style="color:#1f2328">setEvictionPolicyClassName</span><span style="color:#1f2328">(</span>evictionPolicyClassName<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>blockWhenExhaused<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>poolConfig<span style="color:#1f2328">.</span><span style="color:#1f2328">setBlockWhenExhausted</span><span style="color:#1f2328">(</span>blockWhenExhaused<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>minIdle<span style="color:#fff"> </span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span>0<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>poolConfig<span style="color:#1f2328">.</span><span style="color:#1f2328">setMinIdle</span><span style="color:#1f2328">(</span>minIdle<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>maxIdle<span style="color:#fff"> </span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span>0<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>poolConfig<span style="color:#1f2328">.</span><span style="color:#1f2328">setMaxIdle</span><span style="color:#1f2328">(</span>maxIdle<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>numTestsPerEvictionRun<span style="color:#fff"> </span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span>0<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>poolConfig<span style="color:#1f2328">.</span><span style="color:#1f2328">setNumTestsPerEvictionRun</span><span style="color:#1f2328">(</span>numTestsPerEvictionRun<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>maxTotal<span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span>8<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>poolConfig<span style="color:#1f2328">.</span><span style="color:#1f2328">setMaxTotal</span><span style="color:#1f2328">(</span>maxTotal<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>minEvictableIdleTimeMillis<span style="color:#fff"> </span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span>0<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>poolConfig<span style="color:#1f2328">.</span><span style="color:#1f2328">setMinEvictableIdleTimeMillis</span><span style="color:#1f2328">(</span>minEvictableIdleTimeMillis<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>password<span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">null</span><span style="color:#fff"> </span><span style="color:#0550ae">&amp;&amp;</span><span style="color:#fff"> </span>password<span style="color:#1f2328">.</span><span style="color:#1f2328">length</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span>0<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>jedisPool<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">new</span><span style="color:#fff"> </span>JedisPool<span style="color:#1f2328">(</span>poolConfig<span style="color:#1f2328">,</span><span style="color:#fff"> </span>host<span style="color:#1f2328">,</span><span style="color:#fff"> </span>port<span style="color:#1f2328">,</span><span style="color:#fff"> </span>timeout<span style="color:#1f2328">,</span><span style="color:#fff"> </span>password<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff"> </span><span style="color:#cf222e">else</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>jedisPool<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">new</span><span style="color:#fff"> </span>JedisPool<span style="color:#1f2328">(</span>poolConfig<span style="color:#1f2328">,</span><span style="color:#fff"> </span>host<span style="color:#1f2328">,</span><span style="color:#fff"> </span>port<span style="color:#1f2328">,</span><span style="color:#fff"> </span>timeout<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#57606a">// 配置连接实验</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">try</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>Jedis<span style="color:#fff"> </span>jedis<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>jedisPool<span style="color:#1f2328">.</span><span style="color:#1f2328">getResource</span><span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>jedis<span style="color:#1f2328">.</span><span style="color:#1f2328">ping</span><span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff"> </span><span style="color:#cf222e">catch</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>Exception<span style="color:#fff"> </span>e<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>LogLog<span style="color:#1f2328">.</span><span style="color:#1f2328">error</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Redis is can not connected: &#34;</span><span style="color:#fff"> </span><span style="color:#0550ae">+</span><span style="color:#fff">  </span>e<span style="color:#1f2328">.</span><span style="color:#1f2328">getMessage</span><span style="color:#1f2328">());</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">@Override</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">protected</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">append</span><span style="color:#1f2328">(</span>LoggingEvent<span style="color:#fff"> </span>event<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>Jedis<span style="color:#fff"> </span>resource<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">null</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">try</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>jedisPool<span style="color:#fff"> </span><span style="color:#0550ae">==</span><span style="color:#fff"> </span><span style="color:#cf222e">null</span><span style="color:#1f2328">){</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span><span style="color:#cf222e">return</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>resource<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>jedisPool<span style="color:#1f2328">.</span><span style="color:#1f2328">getResource</span><span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>String<span style="color:#fff"> </span>format<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>getLayout<span style="color:#1f2328">().</span><span style="color:#1f2328">format</span><span style="color:#1f2328">(</span>event<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>DEFAULT_KEYTYPE<span style="color:#1f2328">.</span><span style="color:#1f2328">equals</span><span style="color:#1f2328">(</span>keyType<span style="color:#1f2328">)){</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span>resource<span style="color:#1f2328">.</span><span style="color:#1f2328">publish</span><span style="color:#1f2328">(</span>key<span style="color:#1f2328">,</span>format<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#1f2328">}</span><span style="color:#cf222e">else</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span>resource<span style="color:#1f2328">.</span><span style="color:#1f2328">lpush</span><span style="color:#1f2328">(</span>key<span style="color:#1f2328">,</span>format<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#cf222e">catch</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>Exception<span style="color:#fff"> </span>e<span style="color:#1f2328">){</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#cf222e">finally</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>resource<span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">null</span><span style="color:#1f2328">){</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span>resource<span style="color:#1f2328">.</span><span style="color:#1f2328">close</span><span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">@Override</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">close</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>jedisPool<span style="color:#0550ae">!=</span><span style="color:#cf222e">null</span><span style="color:#1f2328">){</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>jedisPool<span style="color:#1f2328">.</span><span style="color:#1f2328">destroy</span><span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">@Override</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">boolean</span><span style="color:#fff"> </span><span style="color:#6639ba">requiresLayout</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#cf222e">true</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span>String<span style="color:#fff"> </span><span style="color:#6639ba">getHost</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>host<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">setHost</span><span style="color:#1f2328">(</span>String<span style="color:#fff"> </span>host<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">host</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>host<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">int</span><span style="color:#fff"> </span><span style="color:#6639ba">getPort</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>port<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">setPort</span><span style="color:#1f2328">(</span><span style="color:#cf222e">int</span><span style="color:#fff"> </span>port<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">port</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>port<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span>String<span style="color:#fff"> </span><span style="color:#6639ba">getPassword</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>password<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">setPassword</span><span style="color:#1f2328">(</span>String<span style="color:#fff"> </span>password<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">password</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>password<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span>String<span style="color:#fff"> </span><span style="color:#6639ba">getKeyType</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>keyType<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">setKeyType</span><span style="color:#1f2328">(</span>String<span style="color:#fff"> </span>keyType<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">keyType</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>keyType<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span>String<span style="color:#fff"> </span><span style="color:#6639ba">getKey</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>key<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">setKey</span><span style="color:#1f2328">(</span>String<span style="color:#fff"> </span>key<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">key</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>key<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">int</span><span style="color:#fff"> </span><span style="color:#6639ba">getTimeout</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>timeout<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">setTimeout</span><span style="color:#1f2328">(</span><span style="color:#cf222e">int</span><span style="color:#fff"> </span>timeout<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">timeout</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>timeout<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">long</span><span style="color:#fff"> </span><span style="color:#6639ba">getMinEvictableIdleTimeMillis</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>minEvictableIdleTimeMillis<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">setMinEvictableIdleTimeMillis</span><span style="color:#1f2328">(</span><span style="color:#cf222e">long</span><span style="color:#fff"> </span>minEvictableIdleTimeMillis<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">minEvictableIdleTimeMillis</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>minEvictableIdleTimeMillis<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">long</span><span style="color:#fff"> </span><span style="color:#6639ba">getTimeBetweenEvictionRunsMillis</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>timeBetweenEvictionRunsMillis<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">setTimeBetweenEvictionRunsMillis</span><span style="color:#1f2328">(</span><span style="color:#cf222e">long</span><span style="color:#fff"> </span>timeBetweenEvictionRunsMillis<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">timeBetweenEvictionRunsMillis</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>timeBetweenEvictionRunsMillis<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">int</span><span style="color:#fff"> </span><span style="color:#6639ba">getNumTestsPerEvictionRun</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>numTestsPerEvictionRun<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">setNumTestsPerEvictionRun</span><span style="color:#1f2328">(</span><span style="color:#cf222e">int</span><span style="color:#fff"> </span>numTestsPerEvictionRun<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">numTestsPerEvictionRun</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>numTestsPerEvictionRun<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">int</span><span style="color:#fff"> </span><span style="color:#6639ba">getMaxTotal</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>maxTotal<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">setMaxTotal</span><span style="color:#1f2328">(</span><span style="color:#cf222e">int</span><span style="color:#fff"> </span>maxTotal<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">maxTotal</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>maxTotal<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">int</span><span style="color:#fff"> </span><span style="color:#6639ba">getMaxIdle</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>maxIdle<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">setMaxIdle</span><span style="color:#1f2328">(</span><span style="color:#cf222e">int</span><span style="color:#fff"> </span>maxIdle<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">maxIdle</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>maxIdle<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">int</span><span style="color:#fff"> </span><span style="color:#6639ba">getMinIdle</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>minIdle<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">setMinIdle</span><span style="color:#1f2328">(</span><span style="color:#cf222e">int</span><span style="color:#fff"> </span>minIdle<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">minIdle</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>minIdle<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">boolean</span><span style="color:#fff"> </span><span style="color:#6639ba">isBlockWhenExhaused</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>blockWhenExhaused<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">setBlockWhenExhaused</span><span style="color:#1f2328">(</span><span style="color:#cf222e">boolean</span><span style="color:#fff"> </span>blockWhenExhaused<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">blockWhenExhaused</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>blockWhenExhaused<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span>String<span style="color:#fff"> </span><span style="color:#6639ba">getEvictionPolicyClassName</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>evictionPolicyClassName<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">setEvictionPolicyClassName</span><span style="color:#1f2328">(</span>String<span style="color:#fff"> </span>evictionPolicyClassName<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">evictionPolicyClassName</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>evictionPolicyClassName<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">boolean</span><span style="color:#fff"> </span><span style="color:#6639ba">isLifo</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>lifo<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">setLifo</span><span style="color:#1f2328">(</span><span style="color:#cf222e">boolean</span><span style="color:#fff"> </span>lifo<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">lifo</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>lifo<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">boolean</span><span style="color:#fff"> </span><span style="color:#6639ba">isTestOnBorrow</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>testOnBorrow<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">setTestOnBorrow</span><span style="color:#1f2328">(</span><span style="color:#cf222e">boolean</span><span style="color:#fff"> </span>testOnBorrow<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">testOnBorrow</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>testOnBorrow<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">boolean</span><span style="color:#fff"> </span><span style="color:#6639ba">isTestWhileIdle</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>testWhileIdle<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">setTestWhileIdle</span><span style="color:#1f2328">(</span><span style="color:#cf222e">boolean</span><span style="color:#fff"> </span>testWhileIdle<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">testWhileIdle</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>testWhileIdle<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">boolean</span><span style="color:#fff"> </span><span style="color:#6639ba">isTestOnReturn</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span>testOnReturn<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">public</span><span style="color:#fff"> </span><span style="color:#cf222e">void</span><span style="color:#fff"> </span><span style="color:#6639ba">setTestOnReturn</span><span style="color:#1f2328">(</span><span style="color:#cf222e">boolean</span><span style="color:#fff"> </span>testOnReturn<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">testOnReturn</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>testOnReturn<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre></div><ul>
 <li>使用方法</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-properties" data-lang="properties"><span style="display:flex;"><span><span style="color:#75715e"># 在log4j.rootLogger添加logstash</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">log4j.rootLogger</span><span style="color:#f92672">=</span><span style="color:#e6db74">WARN, Console, RollingFile, logstash</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-properties" data-lang="properties"><span style="display:flex;"><span><span style="color:#57606a"># 在log4j.rootLogger添加logstash</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">log4j.rootLogger</span><span style="color:#0550ae">=</span><span style="color:#0a3069">WARN, Console, RollingFile, logstash</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># log4j to redis 配置</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">log4j.appender.logstash</span><span style="color:#f92672">=</span><span style="color:#e6db74">RedisAppender #上面RedisAppender的类名</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">log4j.appender.logstash.host</span><span style="color:#f92672">=</span><span style="color:#e6db74">127.0.0.1</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">log4j.appender.logstash.port</span><span style="color:#f92672">=</span><span style="color:#e6db74">6379</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">log4j.appender.logstash.password</span><span style="color:#f92672">=</span><span style="color:#e6db74">123456</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">log4j.appender.logstash.keyType</span><span style="color:#f92672">=</span><span style="color:#e6db74">channel #支持 channe与list</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">log4j.appender.logstash.key</span><span style="color:#f92672">=</span><span style="color:#e6db74">logstash-log</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">log4j.appender.logstash.layout</span><span style="color:#f92672">=</span><span style="color:#e6db74">net.logstash.log4j.JSONEventLayoutV1</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">log4j.appender.logstash.layout.locationInfo</span><span style="color:#f92672">=</span><span style="color:#e6db74">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># log4j to redis 配置</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">log4j.appender.logstash</span><span style="color:#0550ae">=</span><span style="color:#0a3069">RedisAppender #上面RedisAppender的类名</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">log4j.appender.logstash.host</span><span style="color:#0550ae">=</span><span style="color:#0a3069">127.0.0.1</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">log4j.appender.logstash.port</span><span style="color:#0550ae">=</span><span style="color:#0a3069">6379</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">log4j.appender.logstash.password</span><span style="color:#0550ae">=</span><span style="color:#0a3069">123456</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">log4j.appender.logstash.keyType</span><span style="color:#0550ae">=</span><span style="color:#0a3069">channel #支持 channe与list</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">log4j.appender.logstash.key</span><span style="color:#0550ae">=</span><span style="color:#0a3069">logstash-log</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">log4j.appender.logstash.layout</span><span style="color:#0550ae">=</span><span style="color:#0a3069">net.logstash.log4j.JSONEventLayoutV1</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">log4j.appender.logstash.layout.locationInfo</span><span style="color:#0550ae">=</span><span style="color:#0a3069">true</span>
 </span></span></code></pre></div><ul>
 <li>官方的json layout, 在pom文件添加以下内容</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dependency&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;groupId&gt;</span>net.logstash.log4j<span style="color:#f92672">&lt;/groupId&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;artifactId&gt;</span>jsonevent-layout<span style="color:#f92672">&lt;/artifactId&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;version&gt;</span>1.7<span style="color:#f92672">&lt;/version&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dependency&gt;</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Logger logger <span style="color:#f92672">=</span> LoggerFactory.<span style="color:#a6e22e">getLogger</span>(getClass());
-</span></span><span style="display:flex;"><span>MDC.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;title&#34;</span>,<span style="color:#e6db74">&#34;用户验证模块&#34;</span>); <span style="color:#75715e">// 让后续log带上入口信息，详情百度搜索 log4j mdc</span>
-</span></span><span style="display:flex;"><span>logger.<span style="color:#a6e22e">debug</span>(<span style="color:#e6db74">&#34;用户名验证失败！&#34;</span>);
-</span></span></code></pre></div><h3 id="预览结果"><a href="#预览结果" class="headerlink" title="预览结果"></a>预览结果</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#0550ae">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;groupId&gt;</span>net.logstash.log4j<span style="color:#0550ae">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;artifactId&gt;</span>jsonevent-layout<span style="color:#0550ae">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;version&gt;</span>1.7<span style="color:#0550ae">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;/dependency&gt;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Logger<span style="color:#fff"> </span>logger<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>LoggerFactory<span style="color:#1f2328">.</span><span style="color:#1f2328">getLogger</span><span style="color:#1f2328">(</span>getClass<span style="color:#1f2328">());</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>MDC<span style="color:#1f2328">.</span><span style="color:#1f2328">put</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;title&#34;</span><span style="color:#1f2328">,</span><span style="color:#0a3069">&#34;用户验证模块&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff"> </span><span style="color:#57606a">// 让后续log带上入口信息，详情百度搜索 log4j mdc</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>logger<span style="color:#1f2328">.</span><span style="color:#1f2328">debug</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;用户名验证失败！&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span></code></pre></div><h3 id="预览结果"><a href="#预览结果" class="headerlink" title="预览结果"></a>预览结果</h3>
 
 <figure class="image-bubble">
   <div class="img-lightbox">
@@ -749,10 +751,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -778,6 +779,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

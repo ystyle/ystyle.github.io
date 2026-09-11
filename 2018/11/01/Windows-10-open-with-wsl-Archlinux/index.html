@@ -6,6 +6,8 @@
   <title>windows 10 右键用子系统Archlinux打开文件 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -281,44 +283,44 @@
 </ul>
 <h3 id="windows-右键菜单设置"><a href="#windows-右键菜单设置" class="headerlink" title="windows 右键菜单设置"></a>windows 右键菜单设置</h3>
 <h3 id="以下存为文件-gt-文件夹空白位置右键打开zsh-reg"><a href="#以下存为文件-gt-文件夹空白位置右键打开zsh-reg" class="headerlink" title="以下存为文件 -&gt; 文件夹空白位置右键打开zsh.reg"></a>以下存为文件 -&gt; <code>文件夹空白位置右键打开zsh.reg</code></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-reg" data-lang="reg"><span style="display:flex;"><span>Windows Registry Editor Version 5.00
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-reg" data-lang="reg"><span style="display:flex;"><span>Windows Registry Editor Version 5.00
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[</span>HKEY_CLASSES_ROOT<span style="color:#66d9ef">\Directory\Background\shell\Open with Arch]</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">&#34;Icon&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Y:\\Users\\YSTYLE\\Downloads\\Arch\\Arch.exe&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">[</span><span style="color:#6639ba">HKEY_CLASSES_ROOT</span><span style="color:#cf222e">\Directory\Background\shell\Open with Arch]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">&#34;Icon&#34;</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;Y:\\Users\\YSTYLE\\Downloads\\Arch\\Arch.exe&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[</span>HKEY_CLASSES_ROOT<span style="color:#66d9ef">\Directory\Background\shell\Open with Arch\command]</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Y:\\Users\\YSTYLE\\Downloads\\Arch\\Arch.exe run zsh&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">[</span><span style="color:#6639ba">HKEY_CLASSES_ROOT</span><span style="color:#cf222e">\Directory\Background\shell\Open with Arch\command]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">@</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;Y:\\Users\\YSTYLE\\Downloads\\Arch\\Arch.exe run zsh&#34;</span>
 </span></span></code></pre></div><blockquote>
 <p>修改Arch.exe的位置，记得用\， 然后右键该文件点合并</p>
 </blockquote>
 <h3 id="以下存为文件-gt-文件夹空白位置右键打开vim-reg"><a href="#以下存为文件-gt-文件夹空白位置右键打开vim-reg" class="headerlink" title="以下存为文件 -&gt; 文件夹空白位置右键打开vim.reg"></a>以下存为文件 -&gt; <code>文件夹空白位置右键打开vim.reg</code></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-reg" data-lang="reg"><span style="display:flex;"><span>Windows Registry Editor Version 5.00
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-reg" data-lang="reg"><span style="display:flex;"><span>Windows Registry Editor Version 5.00
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[</span>HKEY_CLASSES_ROOT<span style="color:#66d9ef">\Directory\Background\shell\Open with Vim]</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">&#34;Icon&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Y:\\Users\\YSTYLE\\Downloads\\Arch\\Arch.exe&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">[</span><span style="color:#6639ba">HKEY_CLASSES_ROOT</span><span style="color:#cf222e">\Directory\Background\shell\Open with Vim]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">&#34;Icon&#34;</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;Y:\\Users\\YSTYLE\\Downloads\\Arch\\Arch.exe&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[</span>HKEY_CLASSES_ROOT<span style="color:#66d9ef">\Directory\Background\shell\Open with Vim\command]</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Y:\\Users\\YSTYLE\\Downloads\\Arch\\Arch.exe run runvim.sh &#39;%V&#39;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">[</span><span style="color:#6639ba">HKEY_CLASSES_ROOT</span><span style="color:#cf222e">\Directory\Background\shell\Open with Vim\command]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">@</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;Y:\\Users\\YSTYLE\\Downloads\\Arch\\Arch.exe run runvim.sh &#39;%V&#39;&#34;</span>
 </span></span></code></pre></div><blockquote>
 <p>处理方式同上</p>
 </blockquote>
 <p>同时要在Archlinux的/bin下面添加一文件<code>runvim.sh</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a">#!/bin/bash
 </span></span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>FILENAME<span style="color:#f92672">=</span>$1
-</span></span><span style="display:flex;"><span>FILENAME<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>FILENAME/:/<span style="color:#e6db74">}</span>
-</span></span><span style="display:flex;"><span>FILENAME<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>FILENAME//<span style="color:#ae81ff">\\</span>/<span style="color:#ae81ff">\/</span><span style="color:#e6db74">}</span>
-</span></span><span style="display:flex;"><span>FILENAME<span style="color:#f92672">=</span>/mnt/<span style="color:#e6db74">${</span>FILENAME,<span style="color:#e6db74">}</span>
-</span></span><span style="display:flex;"><span>vim $FILENAME
+</span></span><span style="display:flex;"><span><span style="color:#953800">FILENAME</span><span style="color:#0550ae">=</span><span style="color:#953800">$1</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">FILENAME</span><span style="color:#0550ae">=</span><span style="color:#0a3069">${</span><span style="color:#953800">FILENAME</span><span style="color:#1f2328">/:/</span><span style="color:#0a3069">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">FILENAME</span><span style="color:#0550ae">=</span><span style="color:#0a3069">${</span><span style="color:#953800">FILENAME</span><span style="color:#1f2328">//</span><span style="color:#0a3069">\\</span><span style="color:#1f2328">/</span><span style="color:#0a3069">\/</span><span style="color:#0a3069">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">FILENAME</span><span style="color:#0550ae">=</span>/mnt/<span style="color:#0a3069">${</span><span style="color:#953800">FILENAME</span><span style="color:#1f2328">,</span><span style="color:#0a3069">}</span>
+</span></span><span style="display:flex;"><span>vim <span style="color:#953800">$FILENAME</span>
 </span></span></code></pre></div><p>执行命令: <code>sudo chmod +x /bin/runvim.sh</code></p>
 <h3 id="以下存为文件-gt-文件右键用vim打开-reg"><a href="#以下存为文件-gt-文件右键用vim打开-reg" class="headerlink" title="以下存为文件 -&gt; 文件右键用vim打开.reg"></a>以下存为文件 -&gt; <code>文件右键用vim打开.reg</code></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-reg" data-lang="reg"><span style="display:flex;"><span>Windows Registry Editor Version 5.00
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-reg" data-lang="reg"><span style="display:flex;"><span>Windows Registry Editor Version 5.00
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[</span>HKEY_CLASSES_ROOT<span style="color:#66d9ef">\*\shell\Open with Vim]</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">&#34;Icon&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;D:\\Application\\Neovim\\bin\\nvim-qt.exe&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">[</span><span style="color:#6639ba">HKEY_CLASSES_ROOT</span><span style="color:#cf222e">\*\shell\Open with Vim]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">&#34;Icon&#34;</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;D:\\Application\\Neovim\\bin\\nvim-qt.exe&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[</span>HKEY_CLASSES_ROOT<span style="color:#66d9ef">\*\shell\Open with Vim\command]</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Y:\\Users\\YSTYLE\\Downloads\\Arch\\Arch.exe run runvim.sh &#39;%1&#39;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">[</span><span style="color:#6639ba">HKEY_CLASSES_ROOT</span><span style="color:#cf222e">\*\shell\Open with Vim\command]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">@</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;Y:\\Users\\YSTYLE\\Downloads\\Arch\\Arch.exe run runvim.sh &#39;%1&#39;&#34;</span>
 </span></span></code></pre></div><h3 id="功能测试"><a href="#功能测试" class="headerlink" title="功能测试"></a>功能测试</h3>
 <p>三个文件都右键合并到注册表。</p>
 <ul>
@@ -428,10 +430,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -457,6 +458,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

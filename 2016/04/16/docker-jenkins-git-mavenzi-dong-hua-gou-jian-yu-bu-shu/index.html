@@ -6,6 +6,8 @@
   <title>docker &#43; jenkins &#43; git &#43; maven自动化构建与部署 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -260,7 +262,7 @@
 <p>本教程所有工具和数据目录存放于<code>/dockerworkspace</code>目录下</p>
 </blockquote>
 <h3 id="安装jenkins"><a href="#安装jenkins" class="headerlink" title="安装jenkins"></a>安装jenkins</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run -d --name jenkins
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run -d --name jenkins
 </span></span><span style="display:flex;"><span>    -p 8080:8080
 </span></span><span style="display:flex;"><span>    -p 50000:50000
 </span></span><span style="display:flex;"><span>    -v /dockerworkspace/jenkins:/var/jenkins_home
@@ -268,7 +270,7 @@
 </span></span><span style="display:flex;"><span>    -v /dockerworkspace/java/jdk:/usr/local/jdk
 </span></span><span style="display:flex;"><span>    jenkins:2.0-beta-1
 </span></span></code></pre></div><p>访问jenkins:8080(jenkins改成服务器地址) ,然后输入以下查看到的密码Unlock Jenkins</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat /dockerworkspace/jenkins/secrets/initialAdminPassword
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat /dockerworkspace/jenkins/secrets/initialAdminPassword
 </span></span></code></pre></div>
 <figure class="image-bubble">
   <div class="img-lightbox">
@@ -426,61 +428,61 @@
 </ol>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/sh
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 请修改以下环境变量</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a">#!/bin/sh
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># 请修改以下环境变量</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>SERVER<span style="color:#f92672">=</span>http://127.0.0.1:8080 <span style="color:#75715e">#jenkins服务器地址</span>
-</span></span><span style="display:flex;"><span>TOKEN<span style="color:#f92672">=</span>jenkins1270018080hosttesttomcat <span style="color:#75715e">#jenkins项目的 身份验证令牌</span>
-</span></span><span style="display:flex;"><span>JENKINS_USER<span style="color:#f92672">=</span>admin <span style="color:#75715e">#jenkins用户</span>
-</span></span><span style="display:flex;"><span>JENKINS_PWD<span style="color:#f92672">=</span>admin <span style="color:#75715e"># jenkins用户密码</span>
-</span></span><span style="display:flex;"><span>JENKINS_PROJECT<span style="color:#f92672">=</span>test_tomcat <span style="color:#75715e"># jenkins项目名</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">SERVER</span><span style="color:#0550ae">=</span>http://127.0.0.1:8080 <span style="color:#57606a">#jenkins服务器地址</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">TOKEN</span><span style="color:#0550ae">=</span>jenkins1270018080hosttesttomcat <span style="color:#57606a">#jenkins项目的 身份验证令牌</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">JENKINS_USER</span><span style="color:#0550ae">=</span>admin <span style="color:#57606a">#jenkins用户</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">JENKINS_PWD</span><span style="color:#0550ae">=</span>admin <span style="color:#57606a"># jenkins用户密码</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">JENKINS_PROJECT</span><span style="color:#0550ae">=</span>test_tomcat <span style="color:#57606a"># jenkins项目名</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Startting Build War File On  Jenkins&#39;s Server&#34;</span>
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Setting Token On The Jenkins&#39;s Server......&#34;</span>
-</span></span><span style="display:flex;"><span>CRUMB<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>curl -s --user $JENKINS_USER:$JENKINS_PWD <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    $SERVER/crumbIssuer/api/xml?xpath<span style="color:#f92672">=</span>concat<span style="color:#ae81ff">\(</span>//crumbRequestField,%22:%22,//crumb<span style="color:#ae81ff">\)</span><span style="color:#66d9ef">)</span>
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Trigger Jenkins&#39;s Server Start Building......&#34;</span>
-</span></span><span style="display:flex;"><span>curl -s --user $JENKINS_USER:$JENKINS_PWD -H <span style="color:#e6db74">&#34;</span>$CRUMB<span style="color:#e6db74">&#34;</span> $SERVER/job/$JENKINS_PROJECT/build?token<span style="color:#f92672">=</span>$TOKEN
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Jenkins&#39;s Server Build Success!&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;Startting Build War File On  Jenkins&#39;s Server&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;Setting Token On The Jenkins&#39;s Server......&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">CRUMB</span><span style="color:#0550ae">=</span><span style="color:#cf222e">$(</span>curl -s --user <span style="color:#953800">$JENKINS_USER</span>:<span style="color:#953800">$JENKINS_PWD</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    <span style="color:#953800">$SERVER</span>/crumbIssuer/api/xml?xpath<span style="color:#0550ae">=</span>concat<span style="color:#0a3069">\(</span>//crumbRequestField,%22:%22,//crumb<span style="color:#0a3069">\)</span><span style="color:#cf222e">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;Trigger Jenkins&#39;s Server Start Building......&#34;</span>
+</span></span><span style="display:flex;"><span>curl -s --user <span style="color:#953800">$JENKINS_USER</span>:<span style="color:#953800">$JENKINS_PWD</span> -H <span style="color:#0a3069">&#34;</span><span style="color:#953800">$CRUMB</span><span style="color:#0a3069">&#34;</span> <span style="color:#953800">$SERVER</span>/job/<span style="color:#953800">$JENKINS_PROJECT</span>/build?token<span style="color:#0550ae">=</span><span style="color:#953800">$TOKEN</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;Jenkins&#39;s Server Build Success!&#34;</span>
 </span></span></code></pre></div><h3 id="tomcat-服务器配置"><a href="#tomcat-服务器配置" class="headerlink" title="tomcat 服务器配置"></a>tomcat 服务器配置</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run -d
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run -d
 </span></span><span style="display:flex;"><span>    --name test_tomcat
 </span></span><span style="display:flex;"><span>    -p 8888:8080
 </span></span><span style="display:flex;"><span>    -v /dockerworkspace/tomcat/webapps:/usr/local/tomcat/webapps
 </span></span><span style="display:flex;"><span>    -v /dockerworkspace/java/jdk:/usr/local/jdk
-</span></span><span style="display:flex;"><span>    -e <span style="color:#e6db74">&#34;JAVA_HOME=/usr/local/jdk&#34;</span>
+</span></span><span style="display:flex;"><span>    -e <span style="color:#0a3069">&#34;JAVA_HOME=/usr/local/jdk&#34;</span>
 </span></span><span style="display:flex;"><span>    tomcat
 </span></span></code></pre></div><p>测试用mysql服务器</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD<span style="color:#f92672">=</span>admin -d mysql
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> docker run -p 3306:3306 --name mysql -e <span style="color:#953800">MYSQL_ROOT_PASSWORD</span><span style="color:#0550ae">=</span>admin -d mysql
 </span></span></code></pre></div><p>创建一个脚本文件<code>vim /dockerworkspace/tomcat/deploy.sh</code> 内容如下</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/sh
-</span></span></span><span style="display:flex;"><span>SERVER<span style="color:#f92672">=</span>http://127.0.0.1:8080 <span style="color:#75715e">#jenkins服务器地址</span>
-</span></span><span style="display:flex;"><span>TOKEN<span style="color:#f92672">=</span>jenkins1270018080hosttesttomcat <span style="color:#75715e">#jenkins项目的 身份验证令牌</span>
-</span></span><span style="display:flex;"><span>JENKINS_USER<span style="color:#f92672">=</span>admin <span style="color:#75715e">#jenkins用户</span>
-</span></span><span style="display:flex;"><span>JENKINS_PWD<span style="color:#f92672">=</span>admin <span style="color:#75715e"># jenkins用户密码</span>
-</span></span><span style="display:flex;"><span>JENKINS_PROJECT<span style="color:#f92672">=</span>test_tomcat <span style="color:#75715e"># jenkins项目名</span>
-</span></span><span style="display:flex;"><span>MAVEN_GROUPID<span style="color:#f92672">=</span>net.lxy520.test_tomcat <span style="color:#75715e">#maven项目pom.xml的groupId</span>
-</span></span><span style="display:flex;"><span>MAVEN_NAME<span style="color:#f92672">=</span>ROOT <span style="color:#75715e">#maven项目pom.xml的groupId</span>
-</span></span><span style="display:flex;"><span>MAVEN_VERSION<span style="color:#f92672">=</span>1.2.6 <span style="color:#75715e">#maven项目pom.xml的groupId</span>
-</span></span><span style="display:flex;"><span>CONTAINER<span style="color:#f92672">=</span>test_tomcat <span style="color:#75715e">#tomcat docker 的容器id或名称</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a">#!/bin/sh
+</span></span></span><span style="display:flex;"><span><span style="color:#953800">SERVER</span><span style="color:#0550ae">=</span>http://127.0.0.1:8080 <span style="color:#57606a">#jenkins服务器地址</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">TOKEN</span><span style="color:#0550ae">=</span>jenkins1270018080hosttesttomcat <span style="color:#57606a">#jenkins项目的 身份验证令牌</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">JENKINS_USER</span><span style="color:#0550ae">=</span>admin <span style="color:#57606a">#jenkins用户</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">JENKINS_PWD</span><span style="color:#0550ae">=</span>admin <span style="color:#57606a"># jenkins用户密码</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">JENKINS_PROJECT</span><span style="color:#0550ae">=</span>test_tomcat <span style="color:#57606a"># jenkins项目名</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">MAVEN_GROUPID</span><span style="color:#0550ae">=</span>net.lxy520.test_tomcat <span style="color:#57606a">#maven项目pom.xml的groupId</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">MAVEN_NAME</span><span style="color:#0550ae">=</span>ROOT <span style="color:#57606a">#maven项目pom.xml的groupId</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">MAVEN_VERSION</span><span style="color:#0550ae">=</span>1.2.6 <span style="color:#57606a">#maven项目pom.xml的groupId</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">CONTAINER</span><span style="color:#0550ae">=</span>test_tomcat <span style="color:#57606a">#tomcat docker 的容器id或名称</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;设置Jenkins服务器为</span>$SERVER<span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;向服务器请求token&#34;</span>
-</span></span><span style="display:flex;"><span>CRUMB<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>curl -s --user $JENKINS_USER:$JENKINS_PWD <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    $SERVER/crumbIssuer/api/xml?xpath<span style="color:#f92672">=</span>concat<span style="color:#ae81ff">\(</span>//crumbRequestField,%22:%22,//crumb<span style="color:#ae81ff">\)</span><span style="color:#66d9ef">)</span>
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;下载war文件......&#34;</span>
-</span></span><span style="display:flex;"><span>curl -s --user $JENKINS_USER:$JENKINS_PWD -H <span style="color:#e6db74">&#34;</span>$CRUMB<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$SERVER<span style="color:#e6db74">/job/</span>$JENKINS_PROJECT<span style="color:#e6db74">/lastStableBuild/</span><span style="color:#e6db74">${</span>MAVEN_GROUPID<span style="color:#e6db74">}</span><span style="color:#e6db74">\$</span><span style="color:#e6db74">${</span>MAVEN_NAME<span style="color:#e6db74">}</span><span style="color:#e6db74">/artifact/</span>$MAVEN_GROUPID<span style="color:#e6db74">/</span>$MAVEN_NAME<span style="color:#e6db74">/</span>$MAVEN_VERSION<span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>MAVEN_NAME<span style="color:#e6db74">}</span><span style="color:#e6db74">-</span><span style="color:#e6db74">${</span>MAVEN_VERSION<span style="color:#e6db74">}</span><span style="color:#e6db74">.war&#34;</span> -o <span style="color:#e6db74">${</span>MAVEN_NAME<span style="color:#e6db74">}</span>-<span style="color:#e6db74">${</span>MAVEN_VERSION<span style="color:#e6db74">}</span>.war
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;下载完成!&#34;</span>
-</span></span><span style="display:flex;"><span>CURRENT<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>pwd<span style="color:#e6db74">`</span>
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;临时存放路径:</span>$CURRENT<span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>MAVEN_NAME<span style="color:#e6db74">}</span><span style="color:#e6db74">-</span><span style="color:#e6db74">${</span>MAVEN_VERSION<span style="color:#e6db74">}</span><span style="color:#e6db74">.war&#34;</span>
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;暂停Tomcat服务...&#34;</span>
-</span></span><span style="display:flex;"><span>docker stop $CONTAINER
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;覆盖项目...&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;设置Jenkins服务器为</span><span style="color:#953800">$SERVER</span><span style="color:#0a3069">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;向服务器请求token&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">CRUMB</span><span style="color:#0550ae">=</span><span style="color:#cf222e">$(</span>curl -s --user <span style="color:#953800">$JENKINS_USER</span>:<span style="color:#953800">$JENKINS_PWD</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    <span style="color:#953800">$SERVER</span>/crumbIssuer/api/xml?xpath<span style="color:#0550ae">=</span>concat<span style="color:#0a3069">\(</span>//crumbRequestField,%22:%22,//crumb<span style="color:#0a3069">\)</span><span style="color:#cf222e">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;下载war文件......&#34;</span>
+</span></span><span style="display:flex;"><span>curl -s --user <span style="color:#953800">$JENKINS_USER</span>:<span style="color:#953800">$JENKINS_PWD</span> -H <span style="color:#0a3069">&#34;</span><span style="color:#953800">$CRUMB</span><span style="color:#0a3069">&#34;</span> <span style="color:#0a3069">&#34;</span><span style="color:#953800">$SERVER</span><span style="color:#0a3069">/job/</span><span style="color:#953800">$JENKINS_PROJECT</span><span style="color:#0a3069">/lastStableBuild/</span><span style="color:#0a3069">${</span><span style="color:#953800">MAVEN_GROUPID</span><span style="color:#0a3069">}</span><span style="color:#0a3069">\$</span><span style="color:#0a3069">${</span><span style="color:#953800">MAVEN_NAME</span><span style="color:#0a3069">}</span><span style="color:#0a3069">/artifact/</span><span style="color:#953800">$MAVEN_GROUPID</span><span style="color:#0a3069">/</span><span style="color:#953800">$MAVEN_NAME</span><span style="color:#0a3069">/</span><span style="color:#953800">$MAVEN_VERSION</span><span style="color:#0a3069">/</span><span style="color:#0a3069">${</span><span style="color:#953800">MAVEN_NAME</span><span style="color:#0a3069">}</span><span style="color:#0a3069">-</span><span style="color:#0a3069">${</span><span style="color:#953800">MAVEN_VERSION</span><span style="color:#0a3069">}</span><span style="color:#0a3069">.war&#34;</span> -o <span style="color:#0a3069">${</span><span style="color:#953800">MAVEN_NAME</span><span style="color:#0a3069">}</span>-<span style="color:#0a3069">${</span><span style="color:#953800">MAVEN_VERSION</span><span style="color:#0a3069">}</span>.war
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;下载完成!&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">CURRENT</span><span style="color:#0550ae">=</span><span style="color:#0a3069">`</span><span style="color:#6639ba">pwd</span><span style="color:#0a3069">`</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;临时存放路径:</span><span style="color:#953800">$CURRENT</span><span style="color:#0a3069">/</span><span style="color:#0a3069">${</span><span style="color:#953800">MAVEN_NAME</span><span style="color:#0a3069">}</span><span style="color:#0a3069">-</span><span style="color:#0a3069">${</span><span style="color:#953800">MAVEN_VERSION</span><span style="color:#0a3069">}</span><span style="color:#0a3069">.war&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;暂停Tomcat服务...&#34;</span>
+</span></span><span style="display:flex;"><span>docker stop <span style="color:#953800">$CONTAINER</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;覆盖项目...&#34;</span>
 </span></span><span style="display:flex;"><span>rm -rf /dockerworkspace/tomcat/webapps/ROOT.war /dockerworkspace/tomcat/webapps/ROOT
-</span></span><span style="display:flex;"><span>mv <span style="color:#e6db74">${</span>MAVEN_NAME<span style="color:#e6db74">}</span>-<span style="color:#e6db74">${</span>MAVEN_VERSION<span style="color:#e6db74">}</span>.war /dockerworkspace/tomcat/webapps/ROOT.war
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;重启Tomcat服务...&#34;</span>
-</span></span><span style="display:flex;"><span>docker start $CONTAINER
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Tomcat启动成功.&#34;</span>
+</span></span><span style="display:flex;"><span>mv <span style="color:#0a3069">${</span><span style="color:#953800">MAVEN_NAME</span><span style="color:#0a3069">}</span>-<span style="color:#0a3069">${</span><span style="color:#953800">MAVEN_VERSION</span><span style="color:#0a3069">}</span>.war /dockerworkspace/tomcat/webapps/ROOT.war
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;重启Tomcat服务...&#34;</span>
+</span></span><span style="display:flex;"><span>docker start <span style="color:#953800">$CONTAINER</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;Tomcat启动成功.&#34;</span>
 </span></span></code></pre></div><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3>
 <p>在本地项目中git push, 查看jenkins会不会自动构建,然后检查docker中的容器是否正确部署<br>
 
@@ -586,10 +588,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -615,6 +616,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

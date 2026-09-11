@@ -6,6 +6,8 @@
   <title>sequelize.js 生成DDL语句预览 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -162,26 +164,26 @@
 <p>因为想做一个直接生成建表语句的工具。 又不想连接到数据库(懒得让数据库一直启动着)<br>
 看了下sequelize.js的测试代码， 找到了以下方法可以实现</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">Sequelize</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;sequelize&#39;</span>);
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 因为没有连接到数据库， 用户名什么的可以随意写
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">sequelize</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Sequelize</span>(<span style="color:#e6db74">&#39;test&#39;</span>, <span style="color:#e6db74">&#39;root&#39;</span>, <span style="color:#e6db74">&#39;root&#39;</span>, {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">dialect</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;mysql&#34;</span>
-</span></span><span style="display:flex;"><span>});
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#cf222e">var</span> <span style="color:#1f2328">Sequelize</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;sequelize&#39;</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">// 因为没有连接到数据库， 用户名什么的可以随意写
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">var</span> <span style="color:#1f2328">sequelize</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">new</span> <span style="color:#1f2328">Sequelize</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;test&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#39;root&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#39;root&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">dialect</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;mysql&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">});</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">User</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">sequelize</span>.<span style="color:#a6e22e">define</span>(<span style="color:#e6db74">&#39;User&#39;</span>, {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">username</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Sequelize</span>.<span style="color:#a6e22e">STRING</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Sequelize</span>.<span style="color:#a6e22e">STRING</span>
-</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">var</span> <span style="color:#1f2328">User</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">sequelize</span><span style="color:#1f2328">.</span><span style="color:#1f2328">define</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;User&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">username</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">Sequelize</span><span style="color:#1f2328">.</span><span style="color:#1f2328">STRING</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">password</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">Sequelize</span><span style="color:#1f2328">.</span><span style="color:#1f2328">STRING</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">});</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">sql</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">sequelize</span>.<span style="color:#a6e22e">dialect</span>.<span style="color:#a6e22e">QueryGenerator</span>;
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">var</span> <span style="color:#1f2328">sql</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">sequelize</span><span style="color:#1f2328">.</span><span style="color:#1f2328">dialect</span><span style="color:#1f2328">.</span><span style="color:#1f2328">QueryGenerator</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ddlsql</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">createTableQuery</span>(<span style="color:#a6e22e">User</span>.<span style="color:#a6e22e">getTableName</span>(), <span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">attributesToSQL</span>(<span style="color:#a6e22e">User</span>.<span style="color:#a6e22e">rawAttributes</span>), { });
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">var</span> <span style="color:#1f2328">ddlsql</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">sql</span><span style="color:#1f2328">.</span><span style="color:#1f2328">createTableQuery</span><span style="color:#1f2328">(</span><span style="color:#1f2328">User</span><span style="color:#1f2328">.</span><span style="color:#1f2328">getTableName</span><span style="color:#1f2328">(),</span> <span style="color:#1f2328">sql</span><span style="color:#1f2328">.</span><span style="color:#1f2328">attributesToSQL</span><span style="color:#1f2328">(</span><span style="color:#1f2328">User</span><span style="color:#1f2328">.</span><span style="color:#1f2328">rawAttributes</span><span style="color:#1f2328">),</span> <span style="color:#1f2328">{</span> <span style="color:#1f2328">});</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">ddlsql</span>);
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">console</span><span style="color:#1f2328">.</span><span style="color:#1f2328">log</span><span style="color:#1f2328">(</span><span style="color:#1f2328">ddlsql</span><span style="color:#1f2328">);</span>
 </span></span></code></pre></div><p>生成DDL建表语句</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ node test.js
-</span></span><span style="display:flex;"><span>CREATE TABLE IF NOT EXISTS <span style="color:#e6db74">`</span>Users<span style="color:#e6db74">`</span> <span style="color:#f92672">(</span><span style="color:#e6db74">`</span>id<span style="color:#e6db74">`</span> INTEGER NOT NULL auto_increment , <span style="color:#e6db74">`</span>username<span style="color:#e6db74">`</span> VARCHAR<span style="color:#f92672">(</span>255<span style="color:#f92672">)</span>, <span style="color:#e6db74">`</span>password<span style="color:#e6db74">`</span> VARCHAR
-</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>255<span style="color:#f92672">)</span>, <span style="color:#e6db74">`</span>createdAt<span style="color:#e6db74">`</span> DATETIME NOT NULL, <span style="color:#e6db74">`</span>updatedAt<span style="color:#e6db74">`</span> DATETIME NOT NULL, PRIMARY KEY <span style="color:#f92672">(</span><span style="color:#e6db74">`</span>id<span style="color:#e6db74">`</span><span style="color:#f92672">))</span> ENGINE<span style="color:#f92672">=</span>InnoDB;
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ node test.js
+</span></span><span style="display:flex;"><span>CREATE TABLE IF NOT EXISTS <span style="color:#0a3069">`</span>Users<span style="color:#0a3069">`</span> <span style="color:#0550ae">(</span><span style="color:#0a3069">`</span>id<span style="color:#0a3069">`</span> INTEGER NOT NULL auto_increment , <span style="color:#0a3069">`</span>username<span style="color:#0a3069">`</span> VARCHAR<span style="color:#0550ae">(</span>255<span style="color:#0550ae">)</span>, <span style="color:#0a3069">`</span>password<span style="color:#0a3069">`</span> VARCHAR
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">(</span>255<span style="color:#0550ae">)</span>, <span style="color:#0a3069">`</span>createdAt<span style="color:#0a3069">`</span> DATETIME NOT NULL, <span style="color:#0a3069">`</span>updatedAt<span style="color:#0a3069">`</span> DATETIME NOT NULL, PRIMARY KEY <span style="color:#0550ae">(</span><span style="color:#0a3069">`</span>id<span style="color:#0a3069">`</span><span style="color:#0550ae">))</span> <span style="color:#953800">ENGINE</span><span style="color:#0550ae">=</span>InnoDB<span style="color:#1f2328">;</span>
 </span></span></code></pre></div>
       </div>
 
@@ -276,10 +278,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -305,6 +306,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

@@ -6,6 +6,8 @@
   <title>用安卓设备DIY一个NAS | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -365,10 +367,10 @@
 <p>配置aria2 下载器</p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo mkdir /etc/aria2    <span style="color:#75715e">#新建文件夹  </span>
-</span></span><span style="display:flex;"><span>sudo touch /etc/aria2/aria2.session    <span style="color:#75715e">#新建session文件</span>
-</span></span><span style="display:flex;"><span>sudo chmod <span style="color:#ae81ff">777</span> /etc/aria2/aria2.session    <span style="color:#75715e">#设置aria2.session可写</span>
-</span></span><span style="display:flex;"><span>sudo vim /etc/aria2/aria2.conf    <span style="color:#75715e">#创建配置文件</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo mkdir /etc/aria2    <span style="color:#57606a">#新建文件夹  </span>
+</span></span><span style="display:flex;"><span>sudo touch /etc/aria2/aria2.session    <span style="color:#57606a">#新建session文件</span>
+</span></span><span style="display:flex;"><span>sudo chmod <span style="color:#0550ae">777</span> /etc/aria2/aria2.session    <span style="color:#57606a">#设置aria2.session可写</span>
+</span></span><span style="display:flex;"><span>sudo vim /etc/aria2/aria2.conf    <span style="color:#57606a">#创建配置文件</span>
 </span></span></code></pre></div><ul>
 <li>aria2.conf文件配置</li>
 </ul>
@@ -525,12 +527,12 @@ environment = STNORESTART=&#34;1&#34;, HOME=&#34;/home/syncthing&#34;
 </code></pre></li>
 <li>
 <p>执行<code>vim /home/syncthing/.config/syncthing/config.xml</code> 找到以下内容，把[address]中的地址改为0.0.0.0</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;gui</span> <span style="color:#a6e22e">enabled=</span><span style="color:#e6db74">&#34;true&#34;</span> <span style="color:#a6e22e">tls=</span><span style="color:#e6db74">&#34;false&#34;</span> <span style="color:#a6e22e">debugging=</span><span style="color:#e6db74">&#34;false&#34;</span><span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;address&gt;</span>0.0.0.0:8384<span style="color:#f92672">&lt;/address&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;user&gt;</span>ystyle<span style="color:#f92672">&lt;/user&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;password&gt;</span>$2a$10$ZhHTlk3OwM2s7hbFigI/quti97wNT0Y3fpciNE3ngIkJYVmLcyw76<span style="color:#f92672">&lt;/password&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;apikey&gt;</span>SvgmE6D6i2hNzX6WGh5ZKnDNi6KriMqS<span style="color:#f92672">&lt;/apikey&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;theme&gt;</span>dark<span style="color:#f92672">&lt;/theme&gt;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#0550ae">&lt;gui</span> <span style="color:#1f2328">enabled=</span><span style="color:#0a3069">&#34;true&#34;</span> <span style="color:#1f2328">tls=</span><span style="color:#0a3069">&#34;false&#34;</span> <span style="color:#1f2328">debugging=</span><span style="color:#0a3069">&#34;false&#34;</span><span style="color:#0550ae">&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#0550ae">&lt;address&gt;</span>0.0.0.0:8384<span style="color:#0550ae">&lt;/address&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#0550ae">&lt;user&gt;</span>ystyle<span style="color:#0550ae">&lt;/user&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#0550ae">&lt;password&gt;</span>$2a$10$ZhHTlk3OwM2s7hbFigI/quti97wNT0Y3fpciNE3ngIkJYVmLcyw76<span style="color:#0550ae">&lt;/password&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#0550ae">&lt;apikey&gt;</span>SvgmE6D6i2hNzX6WGh5ZKnDNi6KriMqS<span style="color:#0550ae">&lt;/apikey&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#0550ae">&lt;theme&gt;</span>dark<span style="color:#0550ae">&lt;/theme&gt;</span>
 </span></span></code></pre></div></li>
 </ul>
   </gui>
@@ -634,10 +636,9 @@ environment = STNORESTART=&#34;1&#34;, HOME=&#34;/home/syncthing&#34;
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -663,6 +664,7 @@ environment = STNORESTART=&#34;1&#34;, HOME=&#34;/home/syncthing&#34;
 </section>
 
 
+  </article>
 </div>
 
     

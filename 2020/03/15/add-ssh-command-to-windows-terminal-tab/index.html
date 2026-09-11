@@ -6,6 +6,8 @@
   <title>Windows Terminal 添加SSH到Tabs里 | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -235,38 +237,38 @@
 <blockquote>
 <p>命令一定要用转义的双引号包起来, key的路径用git bash的路径方式，没key的话，删掉-i后面的就好，但每次都要输入密码. key登陆百度搜索SSH免密登陆</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;guid&#34;</span>: <span style="color:#e6db74">&#34;{43d5c880-802b-42c7-aeaf-21b112a3569b}&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;腾讯云&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;icon&#34;</span>:<span style="color:#e6db74">&#34;E:\\Images\\tx.ico&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;commandline&#34;</span>: <span style="color:#e6db74">&#34;E:\\Application\\Git\\bin\\bash.exe -c \&#34;ssh ubuntu@140.143.205.68 -i /e/Code/Docker/tx.key\&#34;&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;useAcrylic&#34;</span>:<span style="color:#66d9ef">true</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;acrylicOpacity&#34;</span>: <span style="color:#ae81ff">0.75</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;backgroundImage&#34;</span> : <span style="color:#e6db74">&#34;E:\\Images\\壁纸\\03.jpg&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;backgroundImageOpacity&#34;</span> : <span style="color:#ae81ff">0.5</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;startingDirectory&#34;</span>: <span style="color:#e6db74">&#34;./&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;scrollbarState&#34;</span>: <span style="color:#66d9ef">false</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;hidden&#34;</span>: <span style="color:#66d9ef">false</span>
-</span></span><span style="display:flex;"><span>}
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;guid&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;{43d5c880-802b-42c7-aeaf-21b112a3569b}&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;腾讯云&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;icon&#34;</span><span style="color:#1f2328">:</span><span style="color:#0a3069">&#34;E:\\Images\\tx.ico&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;commandline&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;E:\\Application\\Git\\bin\\bash.exe -c \&#34;ssh ubuntu@140.143.205.68 -i /e/Code/Docker/tx.key\&#34;&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;useAcrylic&#34;</span><span style="color:#1f2328">:</span><span style="color:#cf222e">true</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;acrylicOpacity&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">0.75</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;backgroundImage&#34;</span> <span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;E:\\Images\\壁纸\\03.jpg&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;backgroundImageOpacity&#34;</span> <span style="color:#1f2328">:</span> <span style="color:#0550ae">0.5</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;startingDirectory&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;./&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;scrollbarState&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">false</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;hidden&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">false</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
 </span></span></code></pre></div><h3 id="用Power-Shell自带的SSH"><a href="#用Power-Shell自带的SSH" class="headerlink" title="用Power Shell自带的SSH"></a>用Power Shell自带的SSH</h3>
 <blockquote>
 <p>基本是一样的，但key的目录必需在当前用户的主目录下，路径是windwos的标准格式</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// Make changes here to the powershell.exe profile
-</span></span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;guid&#34;</span>: <span style="color:#e6db74">&#34;{61c54bbd-c2c6-5271-96e7-009a87ff44ba}&#34;</span>,
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;腾讯云&#34;</span>,
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;icon&#34;</span>:<span style="color:#e6db74">&#34;E:\\Images\\tx.ico&#34;</span>,
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;commandline&#34;</span>: <span style="color:#e6db74">&#34;powershell.exe -c \&#34;ssh ubuntu@140.143.205.68 -i C:/Users/Administrator/tx.key\&#34;&#34;</span>,
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;useAcrylic&#34;</span>:<span style="color:#66d9ef">true</span>,
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;acrylicOpacity&#34;</span>: <span style="color:#ae81ff">0.75</span>,
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;backgroundImage&#34;</span> : <span style="color:#e6db74">&#34;E:\\Images\\壁纸\\03.jpg&#34;</span>,
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;backgroundImageOpacity&#34;</span> : <span style="color:#ae81ff">0.5</span>,
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;startingDirectory&#34;</span>: <span style="color:#e6db74">&#34;./&#34;</span>,
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;scrollbarState&#34;</span>: <span style="color:#66d9ef">false</span>,
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;background&#34;</span>: <span style="color:#e6db74">&#34;#0000FF&#34;</span>,
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;hidden&#34;</span>: <span style="color:#66d9ef">false</span>
-</span></span><span style="display:flex;"><span>}
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#57606a">// Make changes here to the powershell.exe profile
+</span></span></span><span style="display:flex;"><span>   <span style="color:#0550ae">&#34;guid&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;{61c54bbd-c2c6-5271-96e7-009a87ff44ba}&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;腾讯云&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#0550ae">&#34;icon&#34;</span><span style="color:#1f2328">:</span><span style="color:#0a3069">&#34;E:\\Images\\tx.ico&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#0550ae">&#34;commandline&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;powershell.exe -c \&#34;ssh ubuntu@140.143.205.68 -i C:/Users/Administrator/tx.key\&#34;&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#0550ae">&#34;useAcrylic&#34;</span><span style="color:#1f2328">:</span><span style="color:#cf222e">true</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#0550ae">&#34;acrylicOpacity&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">0.75</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#0550ae">&#34;backgroundImage&#34;</span> <span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;E:\\Images\\壁纸\\03.jpg&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#0550ae">&#34;backgroundImageOpacity&#34;</span> <span style="color:#1f2328">:</span> <span style="color:#0550ae">0.5</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#0550ae">&#34;startingDirectory&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;./&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#0550ae">&#34;scrollbarState&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">false</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#0550ae">&#34;background&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;#0000FF&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#0550ae">&#34;hidden&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">false</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
 </span></span></code></pre></div><h3 id="添加右键菜单-在任意地方打开Window-Terminal"><a href="#添加右键菜单-在任意地方打开Window-Terminal" class="headerlink" title="添加右键菜单-在任意地方打开Window Terminal"></a>添加右键菜单-在任意地方打开Window Terminal</h3>
 <blockquote>
 <p><a href="https://raw.githubusercontent.com/microsoft/terminal/master/res/terminal.ico" target="_blank" rel="noopener">图标下载</a>
@@ -383,10 +385,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -412,6 +413,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

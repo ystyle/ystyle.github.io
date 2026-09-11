@@ -6,6 +6,8 @@
   <title>VBox虚拟机安装Remix OS | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -315,7 +317,7 @@
   <div class="image-caption"></div>
 </figure>
 <p>用lsblk查看添加的硬盘名称是什么, 一般是sda, 然后运行cfdisk (图片的A是截图不小心按到的)</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>lsblk
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>lsblk
 </span></span><span style="display:flex;"><span>cfdisk
 </span></span></code></pre></div>
 <figure class="image-bubble">
@@ -345,26 +347,26 @@
   <div class="image-caption"></div>
 </figure>
 <p>接下来挂载分区</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 新建目录以挂载iso和虚拟硬盘</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a"># 新建目录以挂载iso和虚拟硬盘</span>
 </span></span><span style="display:flex;"><span>mkdir /mnt/remix
 </span></span><span style="display:flex;"><span>mkdir /mnt/cdrom
-</span></span><span style="display:flex;"><span>lsblk <span style="color:#75715e">## 用lsblk 可看SIZE列为2.5G的NAME字段是sr1,所以/dev/sr1就是Remix的ios镜像 (查看下图)</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 挂载镜像和目录</span>
+</span></span><span style="display:flex;"><span>lsblk <span style="color:#57606a">## 用lsblk 可看SIZE列为2.5G的NAME字段是sr1,所以/dev/sr1就是Remix的ios镜像 (查看下图)</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 挂载镜像和目录</span>
 </span></span><span style="display:flex;"><span>mount /dev/sda1 /mnt/remix
 </span></span><span style="display:flex;"><span>mount /dev/sr1 /mnt/cdrom
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">## 如果上面完成了， 接下来直接复制下面的命令执行就行了。</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">## 目的是拷贝iso里的文件到虚拟机的硬盘里。</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">## 拷贝这些文件到虚拟硬盘</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">## 如果上面完成了， 接下来直接复制下面的命令执行就行了。</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">## 目的是拷贝iso里的文件到虚拟机的硬盘里。</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">## 拷贝这些文件到虚拟硬盘</span>
 </span></span><span style="display:flex;"><span>cp /mnt/cdrom/system.img /mnt/remix
 </span></span><span style="display:flex;"><span>cp /mnt/cdrom/initrd.img /mnt/remix
 </span></span><span style="display:flex;"><span>cp /mnt/cdrom/ramdisk.img /mnt/remix
 </span></span><span style="display:flex;"><span>cp /mnt/cdrom/kernel /mnt/remix
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">## 创建data分区（其实就是虚拟机硬盘的一个目录，不是分区）</span>
-</span></span><span style="display:flex;"><span>cd /mnt/remix/
+</span></span><span style="display:flex;"><span><span style="color:#57606a">## 创建data分区（其实就是虚拟机硬盘的一个目录，不是分区）</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">cd</span> /mnt/remix/
 </span></span><span style="display:flex;"><span>mkdir data
-</span></span><span style="display:flex;"><span>chmod <span style="color:#ae81ff">777</span> -R /mnt/remix/data
+</span></span><span style="display:flex;"><span>chmod <span style="color:#0550ae">777</span> -R /mnt/remix/data
 </span></span></code></pre></div>
 <figure class="image-bubble">
   <div class="img-lightbox">
@@ -374,11 +376,11 @@
   <div class="image-caption"></div>
 </figure>
 <p>安装grub引导</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>grub-install --root-directory<span style="color:#f92672">=</span>/mnt/remix /dev/sda
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 新建grub.cfg文件, 添加启动项</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>grub-install --root-directory<span style="color:#0550ae">=</span>/mnt/remix /dev/sda
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 新建grub.cfg文件, 添加启动项</span>
 </span></span><span style="display:flex;"><span>vim /mnt/remix/boot/grub/grub.cfg
 </span></span></code></pre></div><p>文本如下</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>set default=0
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>set default=0
 </span></span><span style="display:flex;"><span>set timeout=3
 </span></span><span style="display:flex;"><span>set gfxmode=1024x768
 </span></span><span style="display:flex;"><span>terminal_output gfxterm
@@ -397,7 +399,7 @@
   <div class="image-caption"></div>
 </figure>
 <p>安装好后目录是这样的</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd /mnt/remix
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#6639ba">cd</span> /mnt/remix
 </span></span><span style="display:flex;"><span>ls
 </span></span></code></pre></div>
 <figure class="image-bubble">
@@ -513,10 +515,9 @@
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -542,6 +543,7 @@
 </section>
 
 
+  </article>
 </div>
 
     

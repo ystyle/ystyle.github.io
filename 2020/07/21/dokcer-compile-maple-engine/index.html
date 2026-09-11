@@ -6,6 +6,8 @@
   <title>Dokcer编译方舟引擎（MapleEngine） | 东方星痕</title>
   
   <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
 </head>
 <body>
   
@@ -250,36 +252,36 @@
 <blockquote>
 <p>复制到方舟引擎代码根目录, 文件名为Dockerfile</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">ubuntu:16.04</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">MAINTAINER</span> <span style="color:#e6db74">https://www.openarkcompiler.cn</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># Setting up the build environment</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> sed -i <span style="color:#e6db74">&#39;s/archive.ubuntu.com/mirrors.163.com/g&#39;</span> /etc/apt/sources.list <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    apt-get -y update <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    apt install --no-install-recommends -y build-essential git wget clang cmake libffi-dev libelf-dev libunwind-dev <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>        libssl-dev openjdk-8-jdk-headless unzip python-minimal python3 curl <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    rm -rf /var/lib/apt/lists/*<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 在国内请反注释下行, 因为容器也是个单独的系统，所以别用127.0.0.1</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#ENV http_proxy=http://192.168.3.81:1081 \ </span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#    https_proxy=http://192.168.3.81:1081</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># copy source</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">COPY</span> . /maple_engine<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">WORKDIR</span> <span style="color:#e6db74">/maple_engine</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># custom java/lang/Object.java</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> cd /maple_engine/maple_build/jar/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    bash -c <span style="color:#e6db74">&#34;cp /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/{rt.jar,jce.jar,jsse.jar,charsets.jar} . &#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    mkdir -p java/lang/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    curl -L http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/raw-file/jdk8u265-b01/src/share/classes/java/lang/Object.java &gt; java/lang/Object.java <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    sed -i <span style="color:#e6db74">&#39;/public class Object {/a\long reserved_1; int reserved_2;&#39;</span> java/lang/Object.java <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    javac -target 1.8 -g java/lang/Object.java <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    jar uf rt.jar java/lang/Object.class <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    rm -rf java<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># compile</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> bash -c <span style="color:#e6db74">&#34;source ./envsetup.sh &amp;&amp; ./maple_build/tools/build-maple.sh &amp;&amp; ./maple_build/tools/build-libcore.sh &amp;&amp; rm -rf /maple_engine/maple_build/out/*&#34;</span><span style="color:#960050;background-color:#1e0010">
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#cf222e">FROM</span><span style="color:#fff"> </span><span style="color:#0a3069">ubuntu:16.04</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">MAINTAINER</span><span style="color:#fff"> </span><span style="color:#0a3069">https://www.openarkcompiler.cn</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># Setting up the build environment</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> sed -i <span style="color:#0a3069">&#39;s/archive.ubuntu.com/mirrors.163.com/g&#39;</span> /etc/apt/sources.list <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    apt-get -y update <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    apt install --no-install-recommends -y build-essential git wget clang cmake libffi-dev libelf-dev libunwind-dev <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>        libssl-dev openjdk-8-jdk-headless unzip python-minimal python3 curl <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    rm -rf /var/lib/apt/lists/*<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># 在国内请反注释下行, 因为容器也是个单独的系统，所以别用127.0.0.1</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#ENV http_proxy=http://192.168.3.81:1081 \ </span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#    https_proxy=http://192.168.3.81:1081</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># copy source</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">COPY</span> . /maple_engine<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">WORKDIR</span><span style="color:#fff"> </span><span style="color:#0a3069">/maple_engine</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># custom java/lang/Object.java</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> <span style="color:#6639ba">cd</span> /maple_engine/maple_build/jar/ <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    bash -c <span style="color:#0a3069">&#34;cp /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/{rt.jar,jce.jar,jsse.jar,charsets.jar} . &#34;</span> <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    mkdir -p java/lang/ <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    curl -L http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/raw-file/jdk8u265-b01/src/share/classes/java/lang/Object.java &gt; java/lang/Object.java <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    sed -i <span style="color:#0a3069">&#39;/public class Object {/a\long reserved_1; int reserved_2;&#39;</span> java/lang/Object.java <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    javac -target 1.8 -g java/lang/Object.java <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    jar uf rt.jar java/lang/Object.class <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    rm -rf java<span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># compile</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> bash -c <span style="color:#0a3069">&#34;source ./envsetup.sh &amp;&amp; ./maple_build/tools/build-maple.sh &amp;&amp; ./maple_build/tools/build-libcore.sh &amp;&amp; rm -rf /maple_engine/maple_build/out/*&#34;</span><span style="color:#f6f8fa;background-color:#82071e">
 </span></span></span></code></pre></div><h3 id="编译方舟引擎"><a href="#编译方舟引擎" class="headerlink" title="编译方舟引擎"></a>编译方舟引擎</h3>
 <blockquote>
 <p>方舟编译器，也会一起编译，注意： 编译libjava时会占用25G左右的内存，不足25G建议添加swap分区</p>
@@ -287,7 +289,7 @@
 <blockquote>
 <p>本人机器是16G内存，20G的SSD swap分区</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker build -t ystyle/maple-engine .
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker build -t ystyle/maple-engine .
 </span></span></code></pre></div>
 <figure class="image-bubble">
   <div class="img-lightbox">
@@ -435,10 +437,9 @@ $MAPLE_BUILD_TOOLS/asm2so.sh HelloWorld.s
       
     </nav>
     
-  </article>
 
-  
-  
+    
+    
 
 <section class="comments" id="comments">
   <div id="gitalk-container"></div>
@@ -464,6 +465,7 @@ $MAPLE_BUILD_TOOLS/asm2so.sh HelloWorld.s
 </section>
 
 
+  </article>
 </div>
 
     
