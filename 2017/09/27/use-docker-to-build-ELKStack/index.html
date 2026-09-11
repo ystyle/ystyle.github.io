@@ -53,7 +53,7 @@
 <meta property="og:image" content="https://dll.ystyle.top/qiniu//201717291743-N.png">
 <meta property="og:image" content="https://dll.ystyle.top/qiniu//201717291744-B.png">
 <meta property="og:image" content="https://dll.ystyle.top/qiniu//201717291744-R.png">
-<meta property="og:updated_time" content="2026-09-10T10:27:08.391Z">
+<meta property="og:updated_time" content="2026-09-11T02:07:28.337Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用docker搭建ELK">
 <meta name="twitter:description" content="logstash-input-tcp 可用，但log4j会把对象序列化，在kibana看到的会是乱码 logstash-input-log4j 不可用，官方已废弃该插件， log4j连接不上该插件 logstash-input-redis 可用，配置简洁，有安全保障    本篇以 logstash-input-redis插件配置elk  下载sebp/elk镜像1docker pull seb">
@@ -62,7 +62,7 @@
         <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
     
     <link rel="shortcut icon" href="/img/avatar.jpg">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.6.10">
     <script>window.lazyScripts=[]</script>
 </head>
 
@@ -301,7 +301,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2026-09-10T10:27:08.391Z" itemprop="dateUpdated">2026-09-10 18:27:08</time>
+    Last updated: <time datetime="2026-09-11T02:07:28.337Z" itemprop="dateUpdated">2026-09-11 10:07:28</time>
 </span><br>
 
 
@@ -413,8 +413,8 @@
 
 <section class="comments" id="comments">
     <div id="gitalk-container"></div>
-    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <link rel="stylesheet" href="/css/gitalk.css">
+    <script src="/js/gitalk.min.js"></script>
     <script>
         var id = location.pathname
         if (location.pathname.length > 50) {
@@ -515,14 +515,14 @@
 
 
 
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+    <script src="/js/waves.min.js"></script>
 <script>
 var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 </script>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+<script src="/js/main.min.js?v=1.6.10"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -542,30 +542,9 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 </li>
 </template>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+<script src="/js/search.min.js?v=1.6.10" async></script>
 
 
-
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
-</script>
-
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
 
 
 

@@ -42,23 +42,23 @@
     
     
     <meta name="keywords" content="Cangjie,MCP,badger-cj,json-rpc,排查实录">
-    <meta name="description" content="仓颉服务: 忆时塔 OOM 追凶记  一次横跨六个仓颉自研库的排查  从一条空 message 的异常，到 662 个 CLOSE_WAIT —— 长连接泄漏如何伪装成存储 OOM  2026-08-19 → 2026-09-09 · Cangjie · badger-cj · mcp-cj · json-rpc   一条空消息事情的开始，是一条几乎不包含任何信息的报错。 我在本地跑着一个常驻的">
+    <meta name="description" content="一次横跨六个仓颉自研库的排查  从一条空 message 的异常，到 662 个 CLOSE_WAIT —— 长连接泄漏如何伪装成存储 OOM  2026-08-19 → 2026-09-09 · Cangjie · badger-cj · mcp-cj · json-rpc   一条空消息事情的开始，是一条几乎不包含任何信息的报错。 我在本地跑着一个常驻的 MCP 服务——一个基于时序数据库、用">
 <meta name="keywords" content="Cangjie,MCP,badger-cj,json-rpc,排查实录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="仓颉服务 - 忆时塔 OOM 追凶记">
 <meta property="og:url" content="http://ystyle.top/2026/09/09/chronomem-oom-hunt/index.html">
 <meta property="og:site_name" content="东方星痕">
-<meta property="og:description" content="仓颉服务: 忆时塔 OOM 追凶记  一次横跨六个仓颉自研库的排查  从一条空 message 的异常，到 662 个 CLOSE_WAIT —— 长连接泄漏如何伪装成存储 OOM  2026-08-19 → 2026-09-09 · Cangjie · badger-cj · mcp-cj · json-rpc   一条空消息事情的开始，是一条几乎不包含任何信息的报错。 我在本地跑着一个常驻的">
+<meta property="og:description" content="一次横跨六个仓颉自研库的排查  从一条空 message 的异常，到 662 个 CLOSE_WAIT —— 长连接泄漏如何伪装成存储 OOM  2026-08-19 → 2026-09-09 · Cangjie · badger-cj · mcp-cj · json-rpc   一条空消息事情的开始，是一条几乎不包含任何信息的报错。 我在本地跑着一个常驻的 MCP 服务——一个基于时序数据库、用">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:updated_time" content="2026-09-09T15:30:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="仓颉服务 - 忆时塔 OOM 追凶记">
-<meta name="twitter:description" content="仓颉服务: 忆时塔 OOM 追凶记  一次横跨六个仓颉自研库的排查  从一条空 message 的异常，到 662 个 CLOSE_WAIT —— 长连接泄漏如何伪装成存储 OOM  2026-08-19 → 2026-09-09 · Cangjie · badger-cj · mcp-cj · json-rpc   一条空消息事情的开始，是一条几乎不包含任何信息的报错。 我在本地跑着一个常驻的">
+<meta name="twitter:description" content="一次横跨六个仓颉自研库的排查  从一条空 message 的异常，到 662 个 CLOSE_WAIT —— 长连接泄漏如何伪装成存储 OOM  2026-08-19 → 2026-09-09 · Cangjie · badger-cj · mcp-cj · json-rpc   一条空消息事情的开始，是一条几乎不包含任何信息的报错。 我在本地跑着一个常驻的 MCP 服务——一个基于时序数据库、用">
     
         <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
     
     <link rel="shortcut icon" href="/img/avatar.jpg">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.6.10">
     <script>window.lazyScripts=[]</script>
 </head>
 
@@ -197,7 +197,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.</span> <span class="post-toc-text">仓颉服务: 忆时塔 OOM 追凶记</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一条空消息"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">一条空消息</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第一现场：写路径为什么会静悄悄地断"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">第一现场：写路径为什么会静悄悄地断</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第二现场：256MB-的-GC-堆与-4MB-的-memtable"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">第二现场：256MB 的 GC 堆与 4MB 的 memtable</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#顺着依赖往上挖：badger-cj、json-rpc、mcp-cj"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">顺着依赖往上挖：badger-cj、json-rpc、mcp-cj</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#badger-cj：存储引擎的三笔旧账"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">badger-cj：存储引擎的三笔旧账</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#json-rpc：被-OOM-杀死的接收循环"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">json-rpc：被 OOM 杀死的接收循环</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mcp-cj：SSE-长连接里的幽灵"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">mcp-cj：SSE 长连接里的幽灵</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#转折点：一句朴素的直觉"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">转折点：一句朴素的直觉</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SSE：wait-永远等不到的那个通知"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">SSE：wait() 永远等不到的那个通知</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#cjxt：同一款病，换了个协议"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">cjxt：同一款病，换了个协议</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#cron-cj：差点被漏掉的第三个循环"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">cron-cj：差点被漏掉的第三个循环</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#完整因果链"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">完整因果链</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#沉淀：七条可以复用的经验"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">沉淀：七条可以复用的经验</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#后记"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">后记</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一条空消息"><span class="post-toc-number">1.</span> <span class="post-toc-text">一条空消息</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第一现场：写路径为什么会静悄悄地断"><span class="post-toc-number">2.</span> <span class="post-toc-text">第一现场：写路径为什么会静悄悄地断</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第二现场：256MB-的-GC-堆与-4MB-的-memtable"><span class="post-toc-number">3.</span> <span class="post-toc-text">第二现场：256MB 的 GC 堆与 4MB 的 memtable</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#顺着依赖往上挖：badger-cj、json-rpc、mcp-cj"><span class="post-toc-number">4.</span> <span class="post-toc-text">顺着依赖往上挖：badger-cj、json-rpc、mcp-cj</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#badger-cj：存储引擎的三笔旧账"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">badger-cj：存储引擎的三笔旧账</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#json-rpc：被-OOM-杀死的接收循环"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">json-rpc：被 OOM 杀死的接收循环</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mcp-cj：SSE-长连接里的幽灵"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">mcp-cj：SSE 长连接里的幽灵</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#转折点：一句朴素的直觉"><span class="post-toc-number">5.</span> <span class="post-toc-text">转折点：一句朴素的直觉</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SSE：wait-永远等不到的那个通知"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">SSE：wait() 永远等不到的那个通知</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#cjxt：同一款病，换了个协议"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">cjxt：同一款病，换了个协议</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#cron-cj：差点被漏掉的第三个循环"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">cron-cj：差点被漏掉的第三个循环</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#完整因果链"><span class="post-toc-number">6.</span> <span class="post-toc-text">完整因果链</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#沉淀：七条可以复用的经验"><span class="post-toc-number">7.</span> <span class="post-toc-text">沉淀：七条可以复用的经验</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#后记"><span class="post-toc-number">8.</span> <span class="post-toc-text">后记</span></a></li></ol>
         </nav>
     </aside>
     
@@ -218,9 +218,7 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 align="center">仓颉服务: 忆时塔 OOM 追凶记</h1>
-
-<p align="center"><strong>一次横跨六个仓颉自研库的排查</strong></p>
+            <p align="center"><strong>一次横跨六个仓颉自研库的排查</strong></p>
 
 <p align="center"><em>从一条空 message 的异常，到 662 个 CLOSE_WAIT —— 长连接泄漏如何伪装成存储 OOM</em></p>
 
@@ -544,8 +542,8 @@
 
 <section class="comments" id="comments">
     <div id="gitalk-container"></div>
-    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <link rel="stylesheet" href="/css/gitalk.css">
+    <script src="/js/gitalk.min.js"></script>
     <script>
         var id = location.pathname
         if (location.pathname.length > 50) {
@@ -646,14 +644,14 @@
 
 
 
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+    <script src="/js/waves.min.js"></script>
 <script>
 var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 </script>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+<script src="/js/main.min.js?v=1.6.10"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -673,30 +671,9 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 </li>
 </template>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+<script src="/js/search.min.js?v=1.6.10" async></script>
 
 
-
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
-</script>
-
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
 
 
 

@@ -56,7 +56,7 @@
         <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
     
     <link rel="shortcut icon" href="/img/avatar.jpg">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.6.10">
     <script>window.lazyScripts=[]</script>
 </head>
 
@@ -216,9 +216,7 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        仓颉服务: 忆时塔 OOM 追凶记
-
-一次横跨六个仓颉自研库的排查
+        一次横跨六个仓颉自研库的排查
 
 从一条空 message 的异常，到 662 个 CLOSE_WAIT —— 长连接泄漏如何伪装成存储 OOM
 
@@ -226,7 +224,7 @@
 
 
 一条空消息事情的开始，是一条几乎不包含任何信息的报错。
-我在本地跑着一个常...
+我在本地跑着一个常驻的 MCP 服务——一个基于时序数据...
     
 
         <a href="/2026/09/09/chronomem-oom-hunt/" class="post-more waves-effect waves-button">
@@ -803,14 +801,14 @@ MCP 是应用层协...
 
 
 
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+    <script src="/js/waves.min.js"></script>
 <script>
 var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 </script>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+<script src="/js/main.min.js?v=1.6.10"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -830,30 +828,9 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 </li>
 </template>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+<script src="/js/search.min.js?v=1.6.10" async></script>
 
 
-
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
-</script>
-
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
 
 
 
