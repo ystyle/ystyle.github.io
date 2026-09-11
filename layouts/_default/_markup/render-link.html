@@ -1,0 +1,12 @@
+{{/*
+  链接渲染钩子 —— 复刻 Hexo 的 external_link: true 行为。
+
+  Hexo 会给**站外**链接自动加上 target="_blank" rel="noopener"：
+    <a href="http://zb.oschina.net/…" target="_blank" rel="noopener">项目地址</a>
+  而 goldmark 默认只输出裸 <a href>。
+
+  判断口径与原站一致：http(s) 开头、且不是本站域名 —— 站内绝对链接不加。
+*/}}
+{{- $dest := .Destination -}}
+{{- $isExternal := and (or (hasPrefix $dest "http://") (hasPrefix $dest "https://")) (not (hasPrefix $dest site.BaseURL)) -}}
+<a href="{{ $dest | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $isExternal }} target="_blank" rel="noopener"{{ end }}>{{ .Text }}</a>

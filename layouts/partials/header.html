@@ -1,0 +1,58 @@
+{{/*
+  顶栏 + 页面 banner（对应 Hexo 主题的 _partial/header.ejs）
+
+  两块：
+    header.top-header#header  —— position:fixed 的 56px 顶栏：菜单按钮 / 标题 / 搜索 / 分享
+    header.content-header     —— 页面 banner，class 依页面类型而变
+
+  ⚠️ .post-card 有 margin-top:-150px，是**故意压在 banner 上**的；缺了这个 banner，
+     文章卡片会被拉到视口之外（实测 artTop = -120）。
+
+  banner class 与原主题各模板的 hdClass 一一对应：
+    post.ejs→post-header  index.ejs→index-header  page.ejs→page-header
+    archive.ejs→archives-header  tags.ejs→tags-header  categories.ejs→categories-header
+*/}}
+{{- $hd := "page-header" -}}
+{{- if eq .Kind "home" -}}{{- $hd = "index-header" -}}
+{{- else if eq .Kind "section" -}}{{- if eq .Section "archives" -}}{{- $hd = "archives-header" -}}{{- end -}}
+{{- else if eq .Kind "page" -}}{{- if eq .Section "posts" -}}{{- $hd = "post-header" -}}{{- end -}}
+{{- else if eq .Kind "taxonomy" -}}{{- if eq .Section "tags" -}}{{- $hd = "tags-header" -}}{{- else -}}{{- $hd = "categories-header" -}}{{- end -}}
+{{- else if eq .Kind "term" -}}{{- if eq .Section "tags" -}}{{- $hd = "tags-header" -}}{{- else -}}{{- $hd = "categories-header" -}}{{- end -}}
+{{- end -}}
+
+<header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">{{ .Title }}</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header {{ $hd }}">
+  <div class="container fade-scale in">
+    <h1 class="title">{{ .Title }}</h1>
+    <h5 class="subtitle">
+      {{- if and (eq .Kind "page") (eq .Section "posts") }}
+      <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" itemprop="datePublished" class="page-time">{{ .Date.Format "2006-01-02" }}</time>
+      {{ with .GetTerms "categories" }}<ul class="article-category-list">{{ range . }}<li class="article-category-list-item"><a class="article-category-list-link" href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}</ul>{{ end }}
+      {{- else if eq .Kind "home" }}
+      {{ site.Params.subtitle }}
+      {{- else if .Description }}
+      {{ .Description }}
+      {{- end }}
+    </h5>
+  </div>
+</header>

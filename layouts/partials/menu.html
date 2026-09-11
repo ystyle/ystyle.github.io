@@ -1,0 +1,40 @@
+{{/*
+  侧边抽屉菜单（对应 Hexo 主题的 _partial/menu.ejs）
+
+  DOM 结构必须与主题 CSS/JS 保持一致：
+    #menu > .inner > (#menu-off, .brand-wrap, .scroll-wrap > .nav)
+  main.js 依赖 #menu / #menu-off / #menu-toggle / #mask 这几个 id 做开合。
+*/}}
+{{ $cur := .RelPermalink }}
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url({{ site.Params.brand | relURL }})">
+      <div class="brand">
+        <a href="{{ site.Params.avatar_link | relURL }}" class="avatar waves-effect waves-circle waves-light">
+          <img src="{{ site.Params.avatar | relURL }}" alt="{{ site.Params.author }}">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">{{ site.Params.author }}</h5>
+          <a class="mail" href="mailto:{{ site.Params.email }}">{{ site.Params.email }}</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        {{ range site.Menus.main }}
+        {{/* 高亮：'/' 精确匹配，其余按前缀匹配（对应主题 menu.ejs 里的 isActive 逻辑） */}}
+        {{ $active := or (eq $cur .URL) (and (ne .URL "/") (hasPrefix $cur .URL)) }}
+        <li class="waves-block waves-effect{{ if $active }} active{{ end }}">
+          <a href="{{ .URL }}"{{ with .Params.target }} target="{{ . }}"{{ end }}>
+            <i class="icon icon-lg icon-{{ .Identifier }}"></i>
+            {{ .Name }}
+          </a>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+</aside>

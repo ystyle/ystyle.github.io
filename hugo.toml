@@ -1,0 +1,170 @@
+# Hugo 站点配置 —— Hexo(东方星痕) 迁移版
+# 阶段 ①：先用最简模板验证「内容 + URL」与现有站点 100% 对齐，暂不涉及主题。
+# 本文件中的每一项都对应报告 8.3 节「中文站必填配置清单」——
+# 这些配置的共同特点是：配错/漏配不会报错，但功能减半或行为错误。
+
+baseURL      = "https://ystyle.top/"
+# Hugo v0.158 起 languageCode 已弃用，改用 locale（值仍须是 zh-*，
+# 否则 Pagefind 会静默不做中文分词）
+locale       = "zh-cn"
+defaultContentLanguage = "zh-cn"
+title        = "东方星痕"
+timeZone     = "Asia/Shanghai"
+
+# Hugo 默认对 taxonomy 的 term 名做 title-case（badger-cj → Badger-Cj、json-rpc → Json-Rpc），
+# 连 .Title 拿到的都是处理过的值，会把页面标签、搜索索引里的 name 全部改掉。必须关掉。
+titleCaseStyle = "none"
+
+# ① 按 CJK 规则统计词数。不开则 .WordCount 被严重低估 → .Summary 返回全文
+#    （首页每篇显示全文）、RSS 体积膨胀、.ReadingTime 算错。
+hasCJKLanguage = true
+
+# 列表页摘要长度，单位是「词」（中文按字算）。
+# 原站 Hexo 的 excerpt_length 是 200 **字符**且输出纯文本（excerpt_render: false）；
+# 列表模板里配了 plainify（去掉 HTML 标签），实测 30 词 → 136 字符、50 词 → 约 230 字符。
+summaryLength = 70
+
+# ② 禁止把 URL 路径小写化。不开则含大写 slug 的文章 URL 会改变
+#    （如 Use-dat-instead-of-... → use-dat-instead-of-...）。
+disablePathToLower = true
+
+# ③ URL 结构对齐 Hexo 的 permalink: :year/:month/:day/:title/
+#    Hexo 会把 front-matter 的 permalink 赋给 slug（processor/post.js:125-127），
+#    所以这里用 :slug 即可与现有 URL 一一对应。
+[permalinks]
+  [permalinks.page]
+    posts = '/:year/:month/:day/:slug/'
+
+# ④ goldmark 默认 unsafe=false，会丢弃正文里的裸 HTML（本站有 7 篇块级裸 HTML，
+#    含 chronomem-oom-hunt.md 的居中封面块），必须显式打开。
+#
+#    hardWraps：把单个换行渲染成 <br>。Hexo 用的 marked 是 breaks:true，
+#    正文里大量「一行一句」的写法依赖这个行为；goldmark 默认按 CommonMark
+#    把软换行当空格，逐篇 diff 会发现成片的 <br> 消失。
+[markup.goldmark.renderer]
+  unsafe = true
+  hardWraps = true
+
+# 独立成段的图片不要包 <p>。Hexo 的 marked 不包，goldmark 默认包，
+# 逐篇 diff 时会看到成片的 `<p><figure class="image-bubble">…` 与站点对不上。
+[markup.goldmark.parser]
+  wrapStandAloneImageWithinParagraph = false
+
+# ⑤ RSS：条数对齐 Hexo 的 20 条。
+#    Hexo 的订阅地址是 /atom.xml（Atom 1.0），Hugo 默认只产出 /index.xml（RSS 2.0）。
+#    老订阅者的地址不能断，所以额外输出一份 Atom 到 /atom.xml。
+[services.rss]
+  limit = 20
+
+# ⑥ 搜索数据源：原站由 hexo-generator-json-content 产出 /content.json，
+#    主题的 search.js 直接读它做纯前端子串匹配。这里用自定义输出格式复刻同构 JSON。
+# application/atom+xml 不是 Hugo 的内置媒体类型，必须先声明，否则报
+# "media type application/atom+xml not found" 并让整个构建失败。
+[mediaTypes."application/atom+xml"]
+  suffixes = ["xml"]
+
+[outputFormats.Atom]
+  mediaType = "application/atom+xml"
+  baseName = "atom"
+  isPlainText = false
+  notAlternative = true
+
+[outputFormats.Content]
+  mediaType = "application/json"
+  baseName = "content"
+  isPlainText = true
+  notAlternative = true
+
+# 只输出 Atom（/atom.xml），不输出 Hugo 默认的 RSS（/index.xml）——
+# 原站只有 atom.xml，这样 URL 集合才完全一致。
+# （[services.rss] 的 limit 仅对 RSS 输出生效，此处保留以备后用。）
+[outputs]
+  home = ["HTML", "Atom", "Content"]
+
+# ⑥ 分页对齐 Hexo 的 per_page: 10
+#    disableAliases：Hugo 默认会给分页第一页额外生成 /page/1/，Hexo 没有，关掉以对齐
+[pagination]
+  pagerSize = 10
+  disableAliases = true
+
+[params]
+  subtitle = "请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔."
+  author   = "YSTYLE"
+  since_year = "2015"
+
+  # 侧边菜单里的头像与品牌图（来自主题 source/img，已复制到 static/img）
+  avatar      = "/img/avatar.jpg"
+  avatar_link = "/"
+  brand       = "/img/brand.jpg"
+  email       = "lxy5266@live.com"
+
+  # 页脚备案信息
+  icp_license  = "粤ICP备2021106688号-1"
+  gonan_code   = "44010502002055"
+  gonan_record = "粤公网安备 44010502002055号"
+
+  # 开启分享（会写入 BLOG.SHARE，main.js 据此初始化分享弹窗与浮动按钮）
+  share = true
+
+# 评论：gitalk，与原站同一套配置
+# ⚠️ client_secret 是明文（原站也如此，公开仓库可见），建议轮换或改用 giscus
+[params.gitalk]
+  owner         = "ystyle"
+  repo          = "ystyle.github.io"
+  client_id     = "1f887c79a8b9b9fbec12"
+  client_secret = "05033003da5f8a5809b903806420690a665b0ea0"
+
+# 侧边菜单：identifier 用作 fontawesome 图标名，与原主题的 menu 配置一一对应
+[[menu.main]]
+  name = "主页"
+  identifier = "home"
+  url = "/"
+  weight = 10
+
+[[menu.main]]
+  name = "归档"
+  identifier = "archives"
+  url = "/archives"
+  weight = 20
+
+[[menu.main]]
+  name = "标签"
+  identifier = "tags"
+  url = "/tags"
+  weight = 30
+
+[[menu.main]]
+  name = "分类"
+  identifier = "th-list"
+  url = "/categories"
+  weight = 40
+
+[[menu.main]]
+  name = "项目"
+  identifier = "github"
+  url = "https://github.com/ystyle"
+  weight = 50
+  [menu.main.params]
+    target = "_blank"
+
+[[menu.main]]
+  name = "微博"
+  identifier = "weibo"
+  url = "http://www.weibo.com/512308314"
+  weight = 60
+  [menu.main.params]
+    target = "_blank"
+
+[[menu.main]]
+  name = "订阅"
+  identifier = "rss"
+  url = "/atom.xml"
+  weight = 70
+  [menu.main.params]
+    target = "_blank"
+
+[[menu.main]]
+  name = "友链"
+  identifier = "link"
+  url = "/friends"
+  weight = 80

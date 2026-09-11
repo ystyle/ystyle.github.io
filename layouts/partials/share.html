@@ -1,0 +1,67 @@
+{{/*
+  分享组件（对应 Hexo 主题的 _partial/post/share.ejs）
+
+  用法：
+    {{ partial "share.html" (dict "scope" "global" "page" .) }}   ← 全站分享弹窗（含微信二维码）
+    {{ partial "share.html" (dict "scope" "page"   "page" .) }}   ← 文章页浮动分享
+
+  生成两个容器 id：globalShare / pageShare，外加全局的 #wxShare 二维码弹窗。
+  main.js 的 share() 会：
+    · 给 #menuShare 绑点击 → 弹 #globalShare
+    · 给 #shareFab 绑点击 → 切换 #pageShare 的 .in
+    · 给 .wxFab 绑点击 → 弹 #wxShare
+  因此这些 id/class 必须与主题一致，否则 main.js 里的 modal() 会在 null 上取 .close 而报错。
+*/}}
+{{- $scope := .scope -}}
+{{- $page := .page -}}
+{{- $sUrl := $page.Permalink -}}
+{{- $sTitle := printf "《%s》 — %s" $page.Title site.Title -}}
+{{- $sDesc := $page.Summary | plainify | truncate 80 -}}
+{{- $sPic := site.Params.avatar | absURL -}}
+
+<div class="{{ $scope }}-share" id="{{ $scope }}Share">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url={{ $sUrl }}&title={{ $sTitle }}&pic={{ $sPic }}" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url={{ $sUrl }}&title={{ $sTitle }}&source={{ $sDesc }}" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ $sUrl }}" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text={{ $sTitle }}&url={{ $sUrl }}&via={{ site.BaseURL }}" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      {{/* Google+ 早已关停，但原站也保留着，为保持一致一起搬过来 */}}
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url={{ $sUrl }}" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+{{ if eq $scope "global" }}
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  {{/* 原站用 Hexo 的 qrcode helper 在**服务端**生成 data URI；Hugo 无此能力，
+       改为客户端用 qrcode-generator 生成（见 baseof.html 末尾的脚本），
+       库文件已本地化到 static/js/qrcode.min.js，不引入远程依赖。 */}}
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="{{ $sUrl }}">
+</div>
+{{ end }}

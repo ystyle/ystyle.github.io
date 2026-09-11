@@ -1,0 +1,18 @@
+{{/* 页脚（对应 Hexo 主题的 _partial/footer.ejs：版权 + 备案） */}}
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>{{ site.Title }} &copy; {{ site.Params.since_year }} - {{ now.Year }}</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">{{ site.Params.icp_license }}</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode={{ site.Params.gonan_code }}" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            {{ site.Params.gonan_record }}
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>

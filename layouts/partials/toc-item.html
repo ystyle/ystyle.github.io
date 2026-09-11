@@ -1,0 +1,19 @@
+{{/* TOC 单项，递归处理子层级（编号形如 1. / 1.1. / 1.1.2.） */}}
+{{- $h := .h -}}
+{{- $prefix := .prefix -}}
+<li class="post-toc-item post-toc-level-{{ $h.Level }}">
+  {{/* 注意：Hugo 的 .Fragments 给出的 ID 是 percent-encoded 的，而正文 <h2 id> 是原文。
+       浏览器访问 #%e4%b8%80… 时会自动解码，锚点跳转正常，故直接用。
+       （Hugo 没有 URL 解码函数，urls.Unescape 不存在，htmlUnescape 只解 HTML 实体。）
+       代价：TOC 的 href 字面形式与原站不同。 */}}
+  <a class="post-toc-link" href="#{{ $h.ID }}">
+    <span class="post-toc-number">{{ $prefix }}.</span> <span class="post-toc-text">{{ $h.Title | plainify }}</span>
+  </a>
+  {{ with $h.Headings }}
+  <ol class="post-toc-child">
+    {{ range $i, $sub := . }}
+    {{ partial "toc-item.html" (dict "h" $sub "prefix" (printf "%s.%d" $prefix (add $i 1))) }}
+    {{ end }}
+  </ol>
+  {{ end }}
+</li>

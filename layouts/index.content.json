@@ -1,0 +1,55 @@
+{{/*
+  搜索数据源 /content.json —— 复刻 hexo-generator-json-content 的输出。
+
+  主题的 search.js 会 GET 这个文件，取 res.posts 后做**纯前端子串匹配**
+  （new RegExp(key.replace(/ /g,'|'),'gmi') + test），匹配 title / tags[].name / text。
+  所以字段名和层级必须与原站一致，否则搜索直接失灵。
+
+  字段对齐原站：title / slug / date / updated / comments / path / link /
+  permalink / excerpt / text / categories / tags，其中 tags 与 categories
+  是 [{name, slug, permalink}]。
+  注意 path **不含前导斜杠**（search.js 会自己拼 BLOG.ROOT + '/' + path）。
+*/}}
+{{- $posts := slice -}}
+{{- range where .Site.RegularPages "Section" "posts" -}}
+  {{- $tags := slice -}}
+  {{- range .GetTerms "tags" -}}
+    {{- $tags = $tags | append (dict "name" .Title "slug" .Title "permalink" .Permalink) -}}
+  {{- end -}}
+  {{- $cats := slice -}}
+  {{- range .GetTerms "categories" -}}
+    {{- $cats = $cats | append (dict "name" .Title "slug" .Title "permalink" .Permalink) -}}
+  {{- end -}}
+  {{- $posts = $posts | append (dict
+        "title" .Title
+        "slug" .File.TranslationBaseName
+        "date" (.Date.Format "2006-01-02T15:04:05.000Z07:00")
+        "updated" (.Lastmod.Format "2006-01-02T15:04:05.000Z07:00")
+        "comments" true
+        "path" (strings.TrimPrefix "/" .RelPermalink)
+        "link" ""
+        "permalink" .Permalink
+        "excerpt" ""
+        "text" (.Plain | replaceRE `\s+` " ")
+        "categories" $cats
+        "tags" $tags) -}}
+{{- end -}}
+
+{{- $pages := slice -}}
+{{- range where .Site.RegularPages "Section" "ne" "posts" -}}
+  {{- $pages = $pages | append (dict
+        "title" .Title
+        "path" (strings.TrimPrefix "/" .RelPermalink)
+        "permalink" .Permalink
+        "text" (.Plain | replaceRE `\s+` " ")) -}}
+{{- end -}}
+
+{{- dict
+      "meta" (dict
+        "title" site.Title
+        "subtitle" site.Params.subtitle
+        "description" site.Params.subtitle
+        "author" site.Params.author
+        "url" (strings.TrimSuffix "/" site.BaseURL))
+      "pages" $pages
+      "posts" $posts | jsonify -}}

@@ -1,0 +1,64 @@
+{{ define "main" }}
+{{/*
+  归档页模板：/archives/、/archives/YYYY/、/archives/YYYY/MM/ 共用。
+  这三类页面由 tools/gen-archives.py 生成的 _index.md 提供，区别只在
+  front-matter 里有没有 year / month。
+
+  结构照抄原站 archive.ejs：
+    按「年月」分组，每组一个 <h3 class="archive-separator">九月, 2026</h3>
+    加一个 <div class="waterfall">；卡片是 article.article-card.archive-article。
+    .waterfall 的 .in 类由 main.js 的 waterfall() 计算布局时补上，不用自己写。
+
+  注意：Go template 的 where 无法按 .Date.Year 过滤（那是方法调用不是字段），
+        所以用 range + if 手动筛。
+*/}}
+{{- $all := where .Site.RegularPages "Section" "posts" -}}
+{{- $pages := $all -}}
+
+{{- with .Params.year -}}
+  {{- $y := int . -}}
+  {{- $f := slice -}}
+  {{- range $all -}}{{- if eq .Date.Year $y -}}{{- $f = $f | append . -}}{{- end -}}{{- end -}}
+  {{- $pages = $f -}}
+{{- end -}}
+
+{{- with .Params.month -}}
+  {{- $m := int . -}}
+  {{- $f := slice -}}
+  {{- range $pages -}}{{- if eq (int .Date.Month) $m -}}{{- $f = $f | append . -}}{{- end -}}{{- end -}}
+  {{- $pages = $f -}}
+{{- end -}}
+
+{{/* 中文月份名：Hugo 的 time.Format 不带中文月份，手工映射 */}}
+{{- $months := slice "" "一月" "二月" "三月" "四月" "五月" "六月" "七月" "八月" "九月" "十月" "十一月" "十二月" -}}
+
+<div class="container body-wrap fade in">
+  {{ range (.Paginate $pages).Pages.GroupByDate "2006-01" }}
+  {{ $head := index .Pages 0 }}
+  <h3 class="archive-separator">{{ index $months (int $head.Date.Month) }}, {{ $head.Date.Year }}</h3>
+  <div class="waterfall">
+    {{ range .Pages }}
+    <div class="waterfall-item">
+      <article class="article-card archive-article">
+        <div class="post-meta">
+          <time class="post-time" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" itemprop="datePublished">{{ .Date.Format "2006-01-02" }}</time>
+          {{ with .GetTerms "categories" }}
+          <ul class="article-category-list">{{ range . }}<li class="article-category-list-item"><a class="article-category-list-link" href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}</ul>
+          {{ end }}
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </h3>
+        <div class="post-footer">
+          {{ with .GetTerms "tags" }}
+          <ul class="article-tag-list">{{ range . }}<li class="article-tag-list-item"><a class="article-tag-list-link" href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}</ul>
+          {{ end }}
+        </div>
+      </article>
+    </div>
+    {{ end }}
+  </div>
+  {{ end }}
+  {{ partial "paginator.html" . }}
+</div>
+{{ end }}

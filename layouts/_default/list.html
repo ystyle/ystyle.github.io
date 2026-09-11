@@ -1,0 +1,47 @@
+{{ define "main" }}
+{{/*
+  列表页（对应 Hexo 主题的 index.ejs / archive.ejs 的列表部分）
+  首页、/archives/、/tags/xxx/、/categories/xxx/ 共用。
+
+  卡片结构照抄原站：
+    li.post-list-item > article.article-card
+      > .post-meta（日期 + 分类）
+      > h3.post-title > a.post-title-link
+      > .post-content（摘要 + Continue reading）
+      > .post-footer（标签）
+
+  ⚠️ .post-list-item 带 .fade，CSS 里是 opacity:0，必须有 .in 才可见。
+*/}}
+<div class="container body-wrap">
+  <ul class="post-list">
+    {{ range .Paginator.Pages }}
+    <li class="post-list-item fade in">
+      <article id="post-{{ .File.TranslationBaseName }}" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" itemprop="datePublished">{{ .Date.Format "2006-01-02" }}</time>
+          {{ with .GetTerms "categories" }}
+          <ul class="article-category-list">{{ range . }}<li class="article-category-list-item"><a class="article-category-list-link" href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}</ul>
+          {{ end }}
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          {{/* 必须 plainify：原站（Hexo 的 excerpt_render: false）输出的是不含标签的纯文本摘要，
+               而 Hugo 的 .Summary 保留 HTML —— 正文里的小节标题（如「一条空消息」）会被
+               渲染成大标题，看上去像列表项标题重复了一次。去掉标签后与线上表现一致。 */}}
+          {{ .Summary | plainify }}
+          <a href="{{ .RelPermalink }}" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          {{ with .GetTerms "tags" }}
+          <ul class="article-tag-list">{{ range . }}<li class="article-tag-list-item"><a class="article-tag-list-link" href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}</ul>
+          {{ end }}
+        </div>
+      </article>
+    </li>
+    {{ end }}
+  </ul>
+  {{ partial "paginator.html" . }}
+</div>
+{{ end }}

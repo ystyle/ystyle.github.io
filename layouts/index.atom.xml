@@ -1,0 +1,44 @@
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\"?>" | safeHTML }}
+{{/*
+  Atom 1.0 订阅源，输出到 /atom.xml —— 复刻原站（Hexo 的 hexo-generator-feed）。
+
+  为什么要这个：Hugo 默认产出的是 /index.xml（RSS 2.0），而原站订阅地址是
+  /atom.xml（Atom 1.0）。老订阅者的地址不能断。
+
+  两个必须注意的点：
+    1. <?xml …?> 声明不能直接硬编码 —— Go template 在 .xml 模板里处于 XML 上下文，
+       会把开头的 < 转义成 &lt;，导致整个 feed 解析失败。必须走 safeHTML。
+    2. 时间用 .UTC.Format "…Z" 输出成 Z 结尾，与原站（Hexo 输出 UTC）一致；
+       否则会写成 +08:00，虽然表示同一时刻但形式不同。
+
+  条数与 Hexo 的 feed.limit 对齐（20 条，见 hugo.toml 的 [services.rss]）。
+*/}}
+{{- $posts := first 20 (where .Site.RegularPages "Section" "posts") -}}
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ site.Title }}</title>
+  <subtitle>{{ site.Params.subtitle }}</subtitle>
+  <link href="{{ "atom.xml" | relURL }}" rel="self"/>
+  <link href="{{ site.BaseURL }}"/>
+  {{- with index $posts 0 }}
+  <updated>{{ .Date.UTC.Format "2006-01-02T15:04:05.000Z" }}</updated>
+  {{- end }}
+  <id>{{ site.BaseURL }}</id>
+  <author>
+    <name>{{ site.Params.author }}</name>
+  </author>
+  <generator uri="https://gohugo.io/">Hugo</generator>
+{{ range $posts }}  <entry>
+    <title>{{ .Title }}</title>
+    <link href="{{ .Permalink }}"/>
+    <id>{{ .Permalink }}</id>
+    <published>{{ .Date.UTC.Format "2006-01-02T15:04:05.000Z" }}</published>
+    <updated>{{ .Lastmod.UTC.Format "2006-01-02T15:04:05.000Z" }}</updated>
+    {{/* htmlEscape 先转一次，但 .xml 模板处于 XML 上下文会再转一次（变成 &amp;lt;）。
+         加 safeHTML 阻止二次转义，得到与原站一致的 &lt;p …&gt; 形式。
+         注：Go 的转义把 " 写成 &#34; 而原站是 &quot;，XML 语义完全等价。 */}}
+    <summary type="html">{{ .Summary | htmlEscape | safeHTML }}</summary>
+    {{ range .GetTerms "categories" }}<category term="{{ .Title }}" scheme="{{ .Permalink }}"/>
+    {{ end }}{{ range .GetTerms "tags" }}<category term="{{ .Title }}" scheme="{{ .Permalink }}"/>
+    {{ end }}
+  </entry>
+{{ end }}</feed>

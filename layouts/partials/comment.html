@@ -1,0 +1,33 @@
+{{/*
+  评论区（对应 Hexo 主题的 _partial/post/comment.ejs → plugins/gitalk.ejs）
+
+  评论身份绑定 location.pathname —— 这正是前面确保 URL 100% 一致的价值：
+  URL 不变，旧评论就还在。
+
+  ⚠️ client_secret 是明文（原站也如此，公开仓库可见），存在被滥用的风险，
+     建议轮换或改用 giscus（用 GitHub Discussions，不需要 secret）。
+*/}}
+{{ with site.Params.gitalk }}
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="{{ "css/gitalk.css" | relURL }}">
+  <script src="{{ "js/gitalk.min.js" | relURL }}"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '{{ .client_id }}',
+      clientSecret: '{{ .client_secret }}',
+      repo: '{{ .repo }}',
+      owner: '{{ .owner }}',
+      admin: ['{{ .owner }}'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+{{ end }}

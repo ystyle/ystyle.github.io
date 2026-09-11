@@ -1,0 +1,62 @@
+name: Hugo Build and Deploy
+
+# 只监听 hugo 分支。Hexo 的 workflow 监听 hexo 分支 ——
+# 两个都往 master 推产物，所以切换时必须显式停掉另一个（见文末注意事项）。
+on:
+  push:
+    branches:
+      - hugo
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: '是否部署到 master（默认只构建并上传产物供核对）'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write # 部署需要往 master 推提交
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 供 .GitInfo / .Lastmod 使用
+
+      - name: 2. Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          # 锁定精确版本：Hugo 长期处于 0.x，小版本存在破坏性变更，
+          # 用 latest 会让某天的一次构建突然产出不同的 HTML
+          hugo-version: '0.165.0'
+          extended: true
+
+      - name: 3. Build
+        run: hugo --minify
+
+      - name: 4. Upload artifact（供人工核对）
+        uses: actions/upload-artifact@v4
+        with:
+          name: public
+          path: public
+          retention-days: 14
+
+      - name: 5. Deploy to master
+        # 只有「手动触发 + 勾选 deploy」时才真正部署
+        if: github.event_name == 'workflow_dispatch' && inputs.deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: public
+          branch: master
+          clean: true
+
+      - name: 6. Refresh Huawei Cloud CDN
+        if: github.event_name == 'workflow_dispatch' && inputs.deploy
+        uses: ystyle/hwcdn-cache@master
+        env:
+          ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+          SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
+          TYPE: directory
+          URLS: https://ystyle.top/

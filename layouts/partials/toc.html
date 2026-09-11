@@ -1,0 +1,31 @@
+{{/*
+  自定义 TOC —— 复刻 Hexo 的 toc() helper 输出结构：
+
+    <ol class="post-toc">
+      <li class="post-toc-item post-toc-level-2">
+        <a class="post-toc-link" href="#id">
+          <span class="post-toc-number">1.</span> <span class="post-toc-text">标题</span>
+        </a>
+        <ol class="post-toc-child">…</ol>
+      </li>
+    </ol>
+
+  为什么不直接用 .TableOfContents：Hugo 原生输出的是
+  <nav id="TableOfContents"><ul><li><a>…，既没有 class 也没有编号，
+  套不上主题 CSS，也会让 main.js 的滚动高亮（依赖 .post-toc a[href="#id"] 与 li.active）失效。
+
+  .Fragments.Headings 提供嵌套的 {ID, Level, Title, Headings}，可以任意构造。
+*/}}
+{{ $headings := .Fragments.Headings }}
+{{/* Hugo 会在顶层套一个 level-0 的虚拟节点（没有 ID / Title），要跳过它，
+     否则 TOC 会多出一条空的 "1." */}}
+{{ if and $headings (not (index $headings 0).ID) }}
+  {{ $headings = (index $headings 0).Headings }}
+{{ end }}
+{{ if $headings }}
+<ol class="post-toc">
+  {{ range $i, $h := $headings }}
+  {{ partial "toc-item.html" (dict "h" $h "prefix" (printf "%d" (add $i 1))) }}
+  {{ end }}
+</ol>
+{{ end }}

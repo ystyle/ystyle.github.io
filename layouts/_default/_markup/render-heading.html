@@ -1,0 +1,19 @@
+{{/*
+  标题渲染钩子 —— 复刻 Hexo 渲染器给标题加的 headerlink 锚点。
+
+  原站输出：
+    <h3 id="SpagoBI-5-2-汉化补丁说明"><a href="#SpagoBI-5-2-汉化补丁说明"
+        class="headerlink" title="SpagoBI 5.2 汉化补丁说明"></a>SpagoBI 5.2 汉化补丁说明</h3>
+
+  ⚠️ 两个坑：
+  1. id 的优先级：.Attributes.id（标题上显式写的 {#xxx}，阶段 ② 注入了 554 个）
+     必须优先于 .Anchor（Hugo 自动生成的兜底值），否则会把对齐好的锚点覆盖掉。
+
+  2. href 里的中文不能被 percent-encode。放在属性里写 `href="#{{ $id }}"` 时，
+     Hugo 会对属性做 URL 规范化，中文会变成 %e6%b1%89…；加 safeURL 也拦不住。
+     只有把整个 <a> 交给 safeHTML 才保持原文 —— 这正是与原站一致的关键。
+*/}}
+{{- $id := .Anchor -}}
+{{- with .Attributes.id -}}{{- $id = . -}}{{- end -}}
+{{- $link := printf `<a href="#%s" class="headerlink" title="%s"></a>` $id (.PlainText | htmlEscape) -}}
+<h{{ .Level }} id="{{ $id }}">{{ $link | safeHTML }}{{ .Text }}</h{{ .Level }}>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Locale }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ .Title }}{{ if not .IsHome }} | {{ site.Title }}{{ end }}</title>
+  {{/* 复用 Hexo 主题编译好的样式表（从旧站 public/css 复制到 static/css） */}}
+  <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+</head>
+<body>
+  {{/* #loading 是顶部进度条。.active 由 main.js 在 window load 时移除，
+       所以「它消失了」本身就是脚本跑通的信号；若一直显示说明 JS 出错。 */}}
+  <div id="loading" class="active"></div>
+
+  {{ partial "menu.html" . }}
+
+  <main id="main">
+    {{/* 顶栏 + 页面 banner。banner 不能省：.post-card 有 margin-top:-150px 是压在它上面的 */}}
+    {{ partial "header.html" . }}
+    {{ block "main" . }}{{ end }}
+    {{ partial "footer.html" . }}
+  </main>
+
+  {{ partial "after-footer.html" . }}
+  {{ partial "share.html" (dict "scope" "global" "page" .) }}
+  {{ partial "search.html" . }}
+
+  {{/* waves 提供点击涟漪；BLOG 是 main.js 依赖的全局配置，必须在它之前定义。
+       SHARE 必须与 #globalShare 的 DOM 同时存在 —— main.js 的 share() 里
+       `new this.modal("#globalShare")` 会对不存在的元素取 .close 并抛错，
+       进而中断整个脚本（连 #loading 进度条都会卡住）。 */}}
+  <script src="{{ "js/waves.min.js" | relURL }}"></script>
+  <script>
+  var BLOG = { ROOT: '{{ "/" | relURL }}', SHARE: {{ site.Params.share }}, REWARD: false };
+  </script>
+  <script src="{{ "js/main.min.js" | relURL }}"></script>
+  {{/* 用 defer 而不是原站的 async：async 脚本一旦下载完就立即执行，本地延迟低时
+       会赶在 HTML 解析到 <template id="search-tpl"> 之前运行，于是
+       search.js:12 的 $('#search-tpl').innerHTML 取到 null 并抛错。 */}}
+  <script src="{{ "js/search.min.js" | relURL }}" defer></script>
+
+  {{/* 微信分享二维码：原站靠 Hexo 的 qrcode helper 在服务端生成 data URI，
+       Hugo 没有这个能力，改在客户端用本地化的 qrcode-generator 生成。
+       失败也不影响其他功能，故整段包在 try 里。 */}}
+  <script src="{{ "js/qrcode.min.js" | relURL }}"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) { /* 忽略：仅影响二维码显示 */ }
+  })();
+  </script>
+</body>
+</html>

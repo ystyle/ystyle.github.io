@@ -1,0 +1,105 @@
+基准（从 public/ 反推的现有 URL）: 96 条
+源文章                            : 96 篇
+
+--- 字段映射统计 ---
+  permalink->slug        24
+  permalink->slug,updated->lastmod 71
+  updated->lastmod,no-slug(靠文件名) 1
+
+--- 逐篇明细 ---
+ActiveMQ-入门.md                                             permalink->slug,updated->lastmod
+Beat Saber mod安装整理.md                                      permalink->slug,updated->lastmod
+Bug-千百个，注释无一行.md                                           permalink->slug,updated->lastmod
+Cangjie-Neovim-Development-Setup.md                        permalink->slug
+Centos-7-docker-启动容器iptables报No-chain-target-match-by-that-name.md permalink->slug,updated->lastmod
+Docker-搭建redis-集群.md                                       updated->lastmod,no-slug(靠文件名)
+Dokcer编译方舟引擎（MapleEngine）.md                               permalink->slug,updated->lastmod
+Ghost-flat主题优化.md                                          permalink->slug,updated->lastmod
+Ghost博客优化.md                                               permalink->slug,updated->lastmod
+Github协助工作流.md                                             permalink->slug,updated->lastmod
+Git单文件恢复到历史版本.md                                           permalink->slug,updated->lastmod
+Intellij-IDEA部署Tomcat-Maven版.md                            permalink->slug,updated->lastmod
+JDK环境变量配置脚本.md                                             permalink->slug,updated->lastmod
+JPA-Hibernate-注解.md                                        permalink->slug,updated->lastmod
+JetBrains-家全新Go-IDE-代号GogLand.md                           permalink->slug,updated->lastmod
+KDE添加右键菜单.md                                               permalink->slug,updated->lastmod
+Let-s-Encrypt-证书转-PKCS1-传统私钥格式.md                          permalink->slug
+Linux kde文件管理器连接华为Share.md                                 permalink->slug,updated->lastmod
+Neovim移植鸿蒙PC：三方库适配实战与挑战解析.md                               permalink->slug,updated->lastmod
+Nodejs-yarn换淘宝源.md                                         permalink->slug,updated->lastmod
+OpenShift部署Ghost.md                                        permalink->slug,updated->lastmod
+Power-designer生成建表语句的设置.md                                 permalink->slug,updated->lastmod
+Quest2 激活与无线串流的设置.md                                       permalink->slug,updated->lastmod
+Share使用七牛文件上传.md                                           permalink->slug
+SpagoBI-5-2-中文汉化补丁包.md                                     permalink->slug,updated->lastmod
+VBox虚拟机安装Remix-OS.md                                       permalink->slug,updated->lastmod
+Webpack-项目中使用fetch-js.md                                   permalink->slug,updated->lastmod
+Win10开机启动hyper-v版Docker.md                                 permalink->slug
+Windows Terminal 添加SSH到Tabs里.md                            permalink->slug,updated->lastmod
+Windows-JDK-版本管理器-jvms-0-0-2-发布.md                         permalink->slug,updated->lastmod
+Windows右键菜单添Window Terminal命令行打开文件.md                      permalink->slug,updated->lastmod
+aliyundrive-webdav.md                                      permalink->slug,updated->lastmod
+chronomem-oom-hunt.md                                      permalink->slug,updated->lastmod
+docker-1-12-的服务自动发现.md                                     permalink->slug,updated->lastmod
+docker-jenkins-git-maven自动化构建与部署.md                        permalink->slug,updated->lastmod
+docker-swarm-etcd-集群搭建.md                                  permalink->slug,updated->lastmod
+docker-swarm-集群.md                                         permalink->slug,updated->lastmod
+docker-安装oracle-数据库.md                                     permalink->slug,updated->lastmod
+eclipse-和-IDEA-多JDK设置方法.md                                 permalink->slug,updated->lastmod
+electron-react-boilerplate-开环境搭建.md                        permalink->slug,updated->lastmod
+git下载指定目录.md                                               permalink->slug
+go mod 拉取 gogs 私有仓库.md                                     permalink->slug,updated->lastmod
+harl.md                                                    permalink->slug,updated->lastmod
+hyprland实现alt + tab切换到任意工作区的窗口.md                          permalink->slug,updated->lastmod
+k3s云上master+内网agent的部署方式.md                                permalink->slug,updated->lastmod
+kde5在更新系统后不想重启怎么办.md                                       permalink->slug,updated->lastmod
+leanote添探索功能.md                                            permalink->slug
+maven-deploy-部署jar到私服.md                                   permalink->slug,updated->lastmod
+maven-项目转为gradle-项目.md                                     permalink->slug,updated->lastmod
+mcp-term的想法.md                                             permalink->slug,updated->lastmod
+oracle生成随机数.md                                             permalink->slug
+push-loongarch64-app-to-archlinux-aur.md                   permalink->slug,updated->lastmod
+sequelize-js-生成DDL语句预览.md                                  permalink->slug,updated->lastmod
+spring使用Redis存储Session.md                                  permalink->slug,updated->lastmod
+tensorflow-在windows-下使用gpu.md                              permalink->slug,updated->lastmod
+tomcat通过ssh代理连接到内网服务器.md                                   permalink->slug
+traefik配置入门.md                                             permalink->slug
+txt小说转epub与mobi.md                                         permalink->slug,updated->lastmod
+uTorrent BT软件入门.md                                         permalink->slug,updated->lastmod
+windows-10-子系统Archlinux.md                                 permalink->slug
+windows最小化搭建react-native环境.md                              permalink->slug,updated->lastmod
+使用Docker快速上手鸿蒙.md                                          permalink->slug,updated->lastmod
+使用dat代替resilio sync分享数据.md                                 permalink->slug
+使用docker-1-12-搭建多主机docker-swarm集群.md                       permalink->slug,updated->lastmod
+使用hadoop-中文分词统计小说里的用词频率.md                                 permalink->slug,updated->lastmod
+使用qemu8.0安装龙芯loongarch64版本archlinux.md                     permalink->slug,updated->lastmod
+使用泛型设计gorm扩展字段.md                                          permalink->slug,updated->lastmod
+全新的重制版jvms2-0.md                                           permalink->slug
+剑网3重制版唐门机关小猪任务流程.md                                        permalink->slug
+国内免翻墙预下载kubernetes镜像.md                                    permalink->slug
+在鸿蒙PC上全局安装git.md                                           permalink->slug,updated->lastmod
+妄想症Paranoia.md                                             permalink->slug
+安装flutter.md                                               permalink->slug
+嵌入式数据库storm的使用.md                                          permalink->slug
+开源鸿蒙网络和hdc连接方法.md                                          permalink->slug
+我Github的star项目列表.md                                        permalink->slug,updated->lastmod
+我的第一篇博客.md                                                 permalink->slug,updated->lastmod
+戴森球与光伏文明：一个被忽略的最优解.md                                      permalink->slug,updated->lastmod
+手工申请Let-s-Encrypt-证书.md                                    permalink->slug
+方舟编译器使用测试.md                                               permalink->slug
+每日一笑.md                                                    permalink->slug,updated->lastmod
+用docker搭建ELK.md                                            permalink->slug
+用docker编译方舟编译器.md                                          permalink->slug
+用安卓设备DIY一个NAS.md                                           permalink->slug
+移植lua到鸿蒙.md                                                permalink->slug,updated->lastmod
+端午节快乐.md                                                   permalink->slug,updated->lastmod
+缘尽世间.md                                                    permalink->slug,updated->lastmod
+解决手动删除lxss文件夹后提示LX-子系统有安装、卸载或维护操作未完成的问题.md                 permalink->slug
+转换在线漫画为mobi格式.md                                           permalink->slug,updated->lastmod
+送给程序员：关于性格内向者的10个误解.md                                     permalink->slug,updated->lastmod
+鸿蒙PC Matebook Pro上安装仓颉编译器每日构建版.md                          permalink->slug,updated->lastmod
+鸿蒙PC上使用box64运行x86_64鸿蒙SDK编译HAP.md                          permalink->slug,updated->lastmod
+鸿蒙PC融合开发引擎中编译安装Neovim与AstroNvim配置指南.md                     permalink->slug,updated->lastmod
+鸿蒙PC融合开发引擎架构解析-虚拟机与容器双模式.md                                permalink->slug,updated->lastmod
+鸿蒙pc上Vite 7 + Rollup原生模块问题的解决方案.md                         permalink->slug,updated->lastmod
+鸿蒙开发板HI3516用命令行连接wifi.md                                   permalink->slug,updated->lastmod

@@ -1,0 +1,106 @@
+{{ define "main" }}
+{{/*
+  文章页（对应 Hexo 主题的 _partial/post.ejs）
+
+  结构约束（都来自主题 CSS/JS，写错就错位）：
+    1. <aside class="post-widget"> 必须排在 <article> 之前 —— CSS 用相邻选择器
+       .post-widget + .post-article。
+    2. banner（.post-header）由 partials/header.html 统一输出，此处不重复。
+    3. .fade 需带 .in：CSS 是 .fade{opacity:0}/.fade.in{opacity:1}，main.js 会在
+       load 时补上，首屏先写上以免 JS 未就绪时内容隐身。
+
+  上下篇的方向（实测原站确认）：
+    Hexo 的 post.next = 时间上更早的文章  → 对应 Hugo 的 .NextInSection
+    Hexo 的 post.prev = 更新的文章        → 对应 Hugo 的 .PrevInSection
+*/}}
+<div class="container body-wrap">
+  {{ if .Fragments.Headings }}
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      {{/* 用自定义 partial 复刻 Hexo 的 .post-toc 结构（带层级编号），
+           而不是 Hugo 原生的 .TableOfContents —— 后者没有 class 也没有编号 */}}
+      {{ partial "toc.html" . }}
+    </nav>
+  </aside>
+  {{ end }}
+
+  <article class="post-article article-type-post fade in" id="post-{{ .File.TranslationBaseName }}" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">{{ .Title }}</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" itemprop="datePublished">{{ .Date.Format "2006-01-02" }}</time>
+        {{/* 用 .GetTerms 而非 .Params.categories：Hexo 的 categories 有时是字符串，
+             直接 range 会报 "range can't iterate over 软件" */}}
+        {{ with .GetTerms "categories" }}
+        <ul class="article-category-list">{{ range . }}<li class="article-category-list-item"><a class="article-category-list-link" href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}</ul>
+        {{ end }}
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        {{ .Content }}
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}" itemprop="dateUpdated">{{ .Lastmod.Format "2006-01-02 15:04:05" }}</time>
+          </span><br>
+          本文链接：<a href="{{ .RelPermalink }}" target="_blank" rel="external">{{ .Permalink }}</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="{{ site.BaseURL }}">
+            <img src="{{ site.Params.avatar | relURL }}" alt="{{ site.Params.author }}">
+            {{ site.Params.author }}
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        {{ with .GetTerms "tags" }}
+        <ul class="article-tag-list">{{ range . }}<li class="article-tag-list-item"><a class="article-tag-list-link" href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}</ul>
+        {{ end }}
+
+        {{/* 浮动分享按钮（对应原主题 _partial/post/share-fab.ejs）。
+             main.js 的 share() 会给 #shareFab 绑点击、切换 #pageShare 的 .in，
+             所以这两个 id 缺一不可。 */}}
+        {{ if site.Params.share }}
+        <div class="page-share-wrap">
+          {{ partial "share.html" (dict "scope" "page" "page" .) }}
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+
+    {{ $prev := .PrevInSection }}
+    {{ $next := .NextInSection }}
+    {{ if or $prev $next }}
+    <nav class="post-nav flex-row flex-justify-between{{ if not $prev }} flex-row-reverse{{ end }}">
+      {{ with $prev }}
+      <div class="waves-block waves-effect prev">
+        <a href="{{ .RelPermalink }}" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">{{ .Title }}</h4>
+        </a>
+      </div>
+      {{ end }}
+      {{ with $next }}
+      <div class="waves-block waves-effect next">
+        <a href="{{ .RelPermalink }}" id="post-next" class="post-nav-link">
+          <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+          <h4 class="title">{{ .Title }}</h4>
+        </a>
+      </div>
+      {{ end }}
+    </nav>
+    {{ end }}
+  </article>
+
+  {{/* 评论区（对应原主题 _partial/post/comment.ejs）。评论身份绑定 location.pathname，
+       所以前面保证 URL 100% 一致，旧评论才还在。 */}}
+  {{ partial "comment.html" . }}
+</div>
+{{ end }}

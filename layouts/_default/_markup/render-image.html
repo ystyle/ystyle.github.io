@@ -1,0 +1,24 @@
+{{/*
+  图片渲染钩子 —— 复刻原站主题的 lightbox 包装。
+
+  原站（主题 plugins.js 的 before_post_render 过滤器）会把正文里的图片
+  统一替换成 {% image %} 标签，最终输出：
+
+    <figure class="image-bubble">
+      <div class="img-lightbox">
+        <div class="overlay"></div>
+        <img src="…" alt="…" title="…">
+      </div>
+      <div class="image-caption">标题或 alt</div>
+    </figure>
+
+  主题的过滤规则是「排除代码块内的图片」，其余（含行内图片）都包 figure，
+  这里保持一致，所以不做块级/行内区分。
+*/}}
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }}>
+  </div>
+  <div class="image-caption">{{ with .Title }}{{ . }}{{ else }}{{ .Text }}{{ end }}</div>
+</figure>

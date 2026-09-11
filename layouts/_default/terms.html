@@ -1,0 +1,40 @@
+{{ define "main" }}
+{{/*
+  taxonomy 索引页模板：/tags/ 与 /categories/（对应原站的 tags.ejs / categories.ejs）
+
+  注意原站这里**不是标签云**，而是：
+    每个标签一个 <h3 class="archive-separator" id="tag-xxx">，
+    下面跟一个 <div class="waterfall"> 列出该标签下的全部文章卡片。
+  （原站连分类也用 tag- 前缀的 id，照抄。）
+
+  另：不能套用 list.html —— 那里调用 .Paginator 会让 Hugo 额外生成
+  /tags/page/2/ … /tags/page/16/，而原站的 /tags/ 是不分页的单页。
+*/}}
+<div class="container body-wrap fade in">
+  {{ range .Pages }}
+  <h3 class="archive-separator" id="tag-{{ .Title }}">{{ .Title }}</h3>
+  <div class="waterfall">
+    {{ range .Pages }}
+    <div class="waterfall-item">
+      <article class="article-card archive-article">
+        <div class="post-meta">
+          <time class="post-time" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" itemprop="datePublished">{{ .Date.Format "2006-01-02" }}</time>
+          {{ with .GetTerms "categories" }}
+          <ul class="article-category-list">{{ range . }}<li class="article-category-list-item"><a class="article-category-list-link" href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}</ul>
+          {{ end }}
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </h3>
+        <div class="post-footer">
+          {{ with .GetTerms "tags" }}
+          <ul class="article-tag-list">{{ range . }}<li class="article-tag-list-item"><a class="article-tag-list-link" href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}</ul>
+          {{ end }}
+        </div>
+      </article>
+    </div>
+    {{ end }}
+  </div>
+  {{ end }}
+</div>
+{{ end }}

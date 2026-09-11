@@ -1,0 +1,9 @@
+# Hugo 构建产物
+public/
+resources/
+
+# Hugo 构建锁
+.hugo_build.lock
+
+# 迁移前的旧尝试备份（仅本地保留，不进仓库）
+_legacy-attempt/

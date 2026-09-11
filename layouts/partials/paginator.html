@@ -1,0 +1,32 @@
+{{/*
+  分页（复刻 Hexo 主题 _partial/paginator.ejs 的输出）
+
+  原站结构：
+    <nav id="page-nav"><div class="inner">
+      <a class="extend prev" rel="prev" href="/">上一页</a>
+      <a class="page-number" href="/">1</a>
+      <span class="page-number current">2</span>
+      …
+      <span class="space">&hellip;</span>
+      <a class="extend next" rel="next" href="/page/3/">下一页</a>
+    </div></nav>
+
+  Hugo 内建的 _internal/pagination.html 产出的是 <ul class="pagination">，
+  套不上主题 CSS，所以自己写一份。
+*/}}
+{{ $p := .Paginator }}
+{{ if gt $p.TotalPages 1 }}
+<nav id="page-nav">
+  <div class="inner">
+    {{ with $p.Prev }}<a class="extend prev" rel="prev" href="{{ .URL }}">上一页</a>{{ end }}
+    {{ range $p.Pagers }}
+      {{ if eq .PageNumber $p.PageNumber }}
+      <span class="page-number current">{{ .PageNumber }}</span>
+      {{ else }}
+      <a class="page-number" href="{{ .URL }}">{{ .PageNumber }}</a>
+      {{ end }}
+    {{ end }}
+    {{ with $p.Next }}<a class="extend next" rel="next" href="{{ .URL }}">下一页</a>{{ end }}
+  </div>
+</nav>
+{{ end }}
