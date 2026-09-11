@@ -34,7 +34,10 @@ jobs:
           extended: true
 
       - name: 3. Build
-        run: hugo --minify
+        # 刻意不用 --minify：它会去掉属性引号（id=loading class=active），
+        # 使逐篇 HTML 比对与锚点验收失去共同基线；而站点走华为云 CDN，
+        # HTML 传输体积本就由 CDN 压缩，minify 收益有限。
+        run: hugo
 
       - name: 4. Upload artifact（供人工核对）
         uses: actions/upload-artifact@v4
@@ -44,8 +47,11 @@ jobs:
           retention-days: 14
 
       - name: 5. Deploy to master
-        # 只有「手动触发 + 勾选 deploy」时才真正部署
-        if: github.event_name == 'workflow_dispatch' && inputs.deploy
+        # push 到 hugo 分支即部署；手动触发则需勾选 deploy。
+        # 现实约束：本仓库默认分支是 master（部署产物），而 workflow_dispatch
+        # 只对「存在于默认分支上的 workflow」生效，所以 gh workflow run 现在会报 422。
+        # push 触发不受此限制 —— 这也是当前实际的部署路径。
+        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.deploy)
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: public
@@ -53,7 +59,7 @@ jobs:
           clean: true
 
       - name: 6. Refresh Huawei Cloud CDN
-        if: github.event_name == 'workflow_dispatch' && inputs.deploy
+        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.deploy)
         uses: ystyle/hwcdn-cache@master
         env:
           ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
