@@ -13,9 +13,6 @@ tags:
 categories: 软件
 permalink: matebookpro-container-build-neovim
 ---
-
-# 鸿蒙PC融合开发引擎中编译安装Neovim与AstroNvim配置指南
-
 > 本文记录在鸿蒙PC融合开发引擎的容器环境中，因glibc版本限制从源码编译Neovim和tree-sitter的完整过程，并配置AstroNvim作为开发环境。
 
 ## 问题背景

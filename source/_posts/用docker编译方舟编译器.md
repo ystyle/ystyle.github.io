@@ -9,8 +9,6 @@ tags:
 categories: 编程
 permalink: compile-ark
 ---
-
-# 用docker编译方舟编译器
 ### 准备工作
 1. 下载方舟源码: `git clone https://code.opensource.huaweicloud.com/HarmonyOS/OpenArkCompiler.git`
 2. 需要安装docker

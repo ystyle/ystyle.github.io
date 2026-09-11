@@ -13,9 +13,6 @@ tags:
 categories: 软件
 permalink: matebookpro-box64-harmony-sdk
 ---
-
-# 鸿蒙PC上使用box64运行x86_64鸿蒙SDK编译HAP
-
 > 本文记录在鸿蒙PC融合开发引擎的openEuler aarch64容器中，通过box64模拟x86_64兼容层，运行鸿蒙命令行工具编译HAP的完整过程。
 
 ## 背景

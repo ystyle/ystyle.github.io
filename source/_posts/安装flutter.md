@@ -7,7 +7,6 @@ tags:
 categories: 编程
 permalink: install-flitter-without-android-studio
 ---
-# 安装flutter
 > 因为不想安装Android Studio， 所以只安装了安装Android sdk
 
 ### 安装安卓sdk
