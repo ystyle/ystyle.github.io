@@ -45,6 +45,12 @@ disablePathToLower = true
   unsafe = true
   hardWraps = true
 
+# 代码高亮配色。默认的 monokai 是深底浅字，字号只有 14px 时观感偏暗、
+# 与白色文章卡片也不协调。换成 github（浅底深字），对比度更高、更清楚。
+# 其它可选：dracula / nord / one-dark（深色），vs / xcode / friendly（浅色）
+[markup.highlight]
+  style = 'github'
+
 # 独立成段的图片不要包 <p>。Hexo 的 marked 不包，goldmark 默认包，
 # 逐篇 diff 时会看到成片的 `<p><figure class="image-bubble">…` 与站点对不上。
 [markup.goldmark.parser]

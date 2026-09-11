@@ -6,6 +6,8 @@
   <title>{{ .Title }}{{ if not .IsHome }} | {{ site.Title }}{{ end }}</title>
   {{/* 复用 Hexo 主题编译好的样式表（从旧站 public/css 复制到 static/css） */}}
   <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+  {{/* 修正 Chroma 与主题 CSS 的结构冲突（代码块被裁切），详见该文件注释 */}}
+  <link rel="stylesheet" href="{{ "css/chroma-fix.css" | relURL }}">
 </head>
 <body>
   {{/* #loading 是顶部进度条。.active 由 main.js 在 window load 时移除，

@@ -1,0 +1,52 @@
+/*
+ * Chroma 与 indigo 主题 CSS 的冲突修复
+ * =====================================
+ *
+ * 主题的 .post-content .highlight 系列规则是为 Hexo 的 highlight.js 结构写的：
+ *
+ *   <div class="highlight"><pre><span class="line">代码</span></pre></div>
+ *   .post-content .highlight .line { height: 22.4px; line-height: 22.4px; }
+ *
+ * 而 Hugo 的 Chroma 输出结构完全不同 —— 没有 .line，而是把每一行包在
+ * 一个内联 display:flex 的 span 里：
+ *
+ *   <div class="highlight"><pre><code><span style="display:flex;"><span>Exception:</span></span></code></pre></div>
+ *
+ * flex 容器与主题写死的行高互相打架，把行容器改回块级。
+ * 用 !important 是必要的 —— display:flex 写在内联 style 上，优先级高于外部样式表。
+ */
+
+.post-content .highlight code > span[style*="display:flex"] {
+  display: block !important;
+}
+
+.post-content .highlight code > span,
+.post-content .highlight code > span > span {
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+/*
+ * 背景统一：Chroma 会按所选 style 给 <pre> 写内联背景色
+ * （hugo.toml 里 [markup.highlight] style = 'github'，即浅色）。
+ * 主题又给 .highlight 铺了 #f5f5f5，两层底色叠加会出现割裂的边框感。
+ * 这里让 <pre> 透明，统一由 .highlight 提供底色。
+ */
+.post-content .highlight {
+  background: #f6f8fa;
+}
+
+.post-content .highlight pre {
+  margin: 0;
+  padding: 0;
+  background: transparent !important;
+  overflow-x: auto;
+}
+
+/* 代码字号略微调大，14px 在高分屏下偏小 */
+.post-content .highlight,
+.post-content .highlight pre,
+.post-content .highlight code {
+  font-size: 14.5px;
+  line-height: 1.7;
+}

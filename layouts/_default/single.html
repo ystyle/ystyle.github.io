@@ -97,10 +97,12 @@
       {{ end }}
     </nav>
     {{ end }}
-  </article>
 
-  {{/* 评论区（对应原主题 _partial/post/comment.ejs）。评论身份绑定 location.pathname，
-       所以前面保证 URL 100% 一致，旧评论才还在。 */}}
-  {{ partial "comment.html" . }}
+    {{/* 评论区必须在 </article> **之内** —— 原主题的 post.ejs 就是这么放的。
+         放到 </article> 之后会逃出文章卡片，被 .body-wrap 里浮动的
+         .post-widget（TOC 侧栏）挤到右边去。
+         评论身份绑定 location.pathname，所以前面保证 URL 100% 一致，旧评论才还在。 */}}
+    {{ partial "comment.html" . }}
+  </article>
 </div>
 {{ end }}
