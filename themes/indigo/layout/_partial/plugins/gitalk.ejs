@@ -1,8 +1,8 @@
 <% if (theme.gitalk){ %>
 <section class="comments" id="comments">
     <div id="gitalk-container"></div>
-    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <link rel="stylesheet" href="<%- url_for('/css/gitalk.css') %>">
+    <script src="<%- url_for('/js/gitalk.min.js') %>"></script>
     <script>
         var id = location.pathname
         if (location.pathname.length > 50) {

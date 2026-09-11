@@ -62,7 +62,9 @@ categories_title: 分类
 excerpt_render: false
 excerpt_length: 200
 excerpt_link: 阅读全文...
-mathjax: true
+# 博客目前没有数学公式；MathJax 2.7 还会去请求早已停服的 cdn.mathjax.org，
+# 导致左下角一直挂着 Loading 提示，故关闭。以后若需要公式可改回 true。
+mathjax: false
 archive_yearly: true
 
 # 是否显示文章最后更新时间
@@ -146,7 +148,7 @@ title_change:
   normal: 欢迎回来╮(╯▽╰)╭
   leave: 东方星痕的博客
 # 设置为 true 发布后将使用 unpkg cdn
-cdn: true
+cdn: false
 
 # 设置为 true 将使用 lightbox render 图片
 lightbox: true

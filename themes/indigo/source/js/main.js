@@ -108,25 +108,34 @@
                 headerH = header.clientHeight,
                 titles = $('#post-content').querySelectorAll('h1, h2, h3, h4, h5, h6');
 
-            toc.querySelector('a[href="#' + titles[0].id + '"]').parentNode.classList.add('active');
+            // 防御：正文里的裸 HTML 标题（如 <h1 align="center">…</h1>）不会生成 id，
+            // 此时 TOC 中不存在对应链接，直接取 .parentNode 会抛 TypeError 并中断整个 IIFE，
+            // 于是 load / DOMContentLoaded 监听器注册不上，.fade 永远拿不到 .in，正文 opacity 保持 0。
+            var setActive = function (id) {
+                var link = id ? toc.querySelector('a[href="#' + id + '"]') : null;
+                var current = toc.querySelector('li.active');
+
+                if (current) current.classList.remove('active');
+                if (link && link.parentNode) link.parentNode.classList.add('active');
+            };
+
+            if (titles.length) setActive(titles[0].id);
 
             return {
                 fixed: function (top) {
                     top >= bannerH - headerH ? toc.classList.add('fixed') : toc.classList.remove('fixed');
                 },
                 actived: function (top) {
+                    if (!titles.length) return;
+
                     for (i = 0, len = titles.length; i < len; i++) {
                         if (top > offset(titles[i]).y - headerH - 5) {
-                            toc.querySelector('li.active').classList.remove('active');
-
-                            var active = toc.querySelector('a[href="#' + titles[i].id + '"]').parentNode;
-                            active.classList.add('active');
+                            setActive(titles[i].id);
                         }
                     }
 
                     if (top < offset(titles[0]).y) {
-                        toc.querySelector('li.active').classList.remove('active');
-                        toc.querySelector('a[href="#' + titles[0].id + '"]').parentNode.classList.add('active');
+                        setActive(titles[0].id);
                     }
                 }
             }

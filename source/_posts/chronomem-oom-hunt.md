@@ -22,8 +22,6 @@ hero:
       link: '#一条空消息'
 ---
 
-<h1 align="center">仓颉服务: 忆时塔 OOM 追凶记</h1>
-
 <p align="center"><strong>一次横跨六个仓颉自研库的排查</strong></p>
 
 <p align="center"><em>从一条空 message 的异常，到 662 个 CLOSE_WAIT —— 长连接泄漏如何伪装成存储 OOM</em></p>
