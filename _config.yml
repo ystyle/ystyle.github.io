@@ -65,6 +65,17 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: indigo
 
+# Feed（RSS / Atom）
+## content: false —— 不在 feed 里内嵌全文。插件默认是 true，会让 20 条 entry 各带一份
+## 完整正文 HTML（atom.xml 因此膨胀到 264 KB），订阅者每次抓取都要全量下载。
+## 改为输出 content_limit 字符的摘要；limit 与原默认一致（20 条）。
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  content: false
+  content_limit: 300
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
