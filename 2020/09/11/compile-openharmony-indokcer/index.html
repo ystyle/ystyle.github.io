@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>使用Docker快速上手鸿蒙 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">使用Docker快速上手鸿蒙</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">使用Docker快速上手鸿蒙</h1>
+    <h5 class="subtitle">
+      <time datetime="2020-09-11T01:00:26&#43;08:00" itemprop="datePublished" class="page-time">2020-09-11</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-0">
+  
+  <a class="post-toc-link" href="#">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text"></span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%87%86%e5%a4%87">
+    <span class="post-toc-number">1.1.</span> <span class="post-toc-text">准备</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e7%bc%96%e8%af%91%e9%b8%bf%e8%92%99%e7%b3%bb%e7%bb%9f%e9%95%9c%e5%83%8f">
+    <span class="post-toc-number">1.2.</span> <span class="post-toc-text">编译鸿蒙系统镜像</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e6%9b%b4%e6%96%b0%e4%bb%a3%e7%a0%81%e5%b9%b6%e7%bc%96%e8%af%91">
+    <span class="post-toc-number">1.3.</span> <span class="post-toc-text">更新代码并编译</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e7%bc%96%e5%86%99%e5%ba%94%e7%94%a8%e7%a8%8b%e5%ba%8f">
+    <span class="post-toc-number">1.4.</span> <span class="post-toc-text">编写应用程序</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e7%bc%96%e8%af%91%e4%bb%a3%e7%a0%81">
+    <span class="post-toc-number">1.5.</span> <span class="post-toc-text">编译代码</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%85%b6%e5%ae%83%e9%97%ae%e9%a2%98">
+    <span class="post-toc-number">1.6.</span> <span class="post-toc-text">其它问题</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e6%9c%ac%e6%96%87%e6%89%80%e4%bd%bf%e7%94%a8Docker%e9%95%9c%e5%83%8f%e7%9a%84dockerfile%e6%96%87%e4%bb%b6">
+    <span class="post-toc-number">1.7.</span> <span class="post-toc-text">本文所使用Docker镜像的dockerfile文件</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-使用Docker快速上手鸿蒙" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">使用Docker快速上手鸿蒙</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2020-09-11T01:00:26&#43;08:00" itemprop="datePublished">2020-09-11</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3>
+<ul>
+<li>在机器上安装好Docker</li>
+</ul>
+<h3 id="编译鸿蒙系统镜像"><a href="#编译鸿蒙系统镜像" class="headerlink" title="编译鸿蒙系统镜像"></a>编译鸿蒙系统镜像</h3>
+<ul>
+<li>打开终端执行以下命令</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkdir ~/OpenHarmony
+</span></span><span style="display:flex;"><span>cd ~/OpenHarmony
+</span></span><span style="display:flex;"><span>docker run --rm -ti -v <span style="color:#e6db74">${</span>PWD<span style="color:#e6db74">}</span>/out:/OpenHarmony/out ystyle/open-harmony
+</span></span></code></pre></div><ul>
+<li>编译成功后各镜像在out目录下面, 默认编译的是<code>Hi3861</code>开发板的系统镜像, 可自行烧录到固定测试</li>
+<li>如果要编译其它板子可以设置dokcer镜像的环境变量<code>HARDWARE</code> 目前支持: <code>wifiiot</code>、<code>ipcamera_hi3516dv300</code>、<code>ipcamera_hi3518ev300</code></li>
+</ul>
+<h3 id="更新代码并编译"><a href="#更新代码并编译" class="headerlink" title="更新代码并编译"></a>更新代码并编译</h3>
+<pre tabindex="0"><code>mkdir ~/OpenHarmony
+cd ~/OpenHarmony
+docker run --rm -ti -e HARDWARE=ipcamera_hi3516dv300 -v ${PWD}/out:/OpenHarmony/out ystyle/open-harmony bash
+repo sync -c
+python build.py ${HARDWARE} -b debug
+</code></pre><h3 id="编写应用程序"><a href="#编写应用程序" class="headerlink" title="编写应用程序"></a>编写应用程序</h3>
+<ul>
+<li>
+<p>示例在这<a href="https://openharmony.gitee.com/openharmony/docs/blob/master/quick-start/Hi3861%E5%BC%80%E5%8F%91%E6%9D%BF%E7%AC%AC%E4%BA%8C%E4%B8%AA%E7%A4%BA%E4%BE%8B%E7%A8%8B%E5%BA%8F.md" target="_blank" rel="noopener">Hi3861开发板第二个示例程序</a>
+</p>
+</li>
+<li>
+<p>创建一个代码目录: <code>my_first_app</code></p>
+</li>
+<li>
+<p>新建文件<code>hello_world.c</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;ohos_init.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;ohos_types.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">HelloWorld</span>(<span style="color:#66d9ef">void</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;[DEMO] Hello world.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">SYS_RUN</span>(HelloWorld);
+</span></span></code></pre></div></li>
+<li>
+<p>新建文件<code>BUILD.gn</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#a6e22e">static_library</span>(<span style="color:#e6db74">&#34;myapp&#34;</span>) {
+</span></span><span style="display:flex;"><span>  sources <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;hello_world.c&#34;</span>
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>  include_dirs <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;//utils/native/liteos/include&#34;</span>
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p>新建文件<code>APP_BUILD.gn</code></p>
+</li>
+<li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#a6e22e">import</span>(<span style="color:#e6db74">&#34;//build/lite/config/component/lite_component.gni&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">lite_component</span>(<span style="color:#e6db74">&#34;app&#34;</span>) {
+</span></span><span style="display:flex;"><span>    features <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;my_first_app:myapp&#34;</span>,
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p>现在的目录结构为</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>.
+</span></span><span style="display:flex;"><span>├── APP_BUILD.gn
+</span></span><span style="display:flex;"><span>├── BUILD.gn
+</span></span><span style="display:flex;"><span>└── hello_world.c
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="编译代码"><a href="#编译代码" class="headerlink" title="编译代码"></a>编译代码</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run --rm <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -e HARDWARE<span style="color:#f92672">=</span>wifiiot <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -v <span style="color:#e6db74">${</span>PWD<span style="color:#e6db74">}</span>/out:/OpenHarmony/out <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -v <span style="color:#e6db74">${</span>PWD<span style="color:#e6db74">}</span>/APP_BUILD.gn:/OpenHarmony/applications/sample/wifi-iot/app/APP_BUILD.gn <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -v <span style="color:#e6db74">${</span>PWD<span style="color:#e6db74">}</span>:/OpenHarmony/applications/sample/wifi-iot/app/my_first_app <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  ystyle/open-harmony
+</span></span></code></pre></div><blockquote>
+<p>编译后的文件在out目录</p>
+</blockquote>
+<pre tabindex="0"><code>.
+├── APP_BUILD.gn
+├── BUILD.gn
+├── hello_world.c
+└── out
+    └── wifiiot
+</code></pre><h3 id="其它问题"><a href="#其它问题" class="headerlink" title="其它问题"></a>其它问题</h3>
+<ul>
+<li>如果实际开发，建议直接替换掉 整个<code>/OpenHarmony/applications/sample/wifi-iot/app/</code> 目录, 目录里边的都是示例代码.</li>
+<li>如果要修改启动编译的命令的话，可以写好shell 脚本， run时指定cmd命令
+<ul>
+<li>构建命令为: <code>python build.py ${HARDWARE} -b debug</code></li>
+<li><code>docker run --rm -v ${PWD}/mybuild.sh:/OpenHarmony/mybuild.sh ystyle/open-harmony /OpenHarmony/mybuild.sh</code></li>
+</ul>
+</li>
+<li>更新鸿蒙代码: 用修改镜像启动命令的方法，在<code>/OpenHarmony</code>目录执行<code>repo sync -c</code> 命令</li>
+<li>其它驱动开发或系统组件开发也可以用挂载的方式把工程目录映射到容器，开发并编译</li>
+</ul>
+<h3 id="本文所使用Docker镜像的dockerfile文件"><a href="#本文所使用Docker镜像的dockerfile文件" class="headerlink" title="本文所使用Docker镜像的dockerfile文件"></a>本文所使用Docker镜像的dockerfile文件</h3>
+<blockquote>
+<p>参考<code>@keithyau</code><a href="https://openharmony.gitee.com/keithyau/build_lite/blob/master/Dockerfile20.04" target="_blank" rel="noopener">所写的Dockerfile</a>
+修改而来</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">ubuntu:20.04</span> <span style="color:#66d9ef">AS</span> <span style="color:#e6db74">build-env</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">LABEL</span> version<span style="color:#f92672">=</span><span style="color:#ae81ff">2020</span>-10-15<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># Set your hardware</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> HARDWARE<span style="color:#f92672">=</span>wifiiot
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Prevent interactive</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> DEBIAN_FRONTEND<span style="color:#f92672">=</span>noninteractive
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Setting up the build environment</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> sed -i <span style="color:#e6db74">&#39;s/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g&#39;</span> /etc/apt/sources.list <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    sed -i <span style="color:#e6db74">&#39;s/security.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g&#39;</span> /etc/apt/sources.list <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    apt-get clean -y <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    apt-get -y update <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    apt-get remove python* -y <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    apt-get install git curl build-essential libdbus-glib-1-dev libgirepository1.0-dev -y <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    apt-get install zip libncurses5-dev pkg-config -y <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    apt-get install python3-pip -y <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    apt-get install scons dosfstools mtools mtd-utils default-jdk default-jre -y <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    rm -rf /var/lib/apt/lists/*<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># Setup python</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># Make sure python install on the right python version path</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> update-alternatives --install /usr/bin/python python /usr/bin/python3.8 <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    pip3 install --upgrade pip -i https://mirrors.aliyun.com/pypi/simple <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    pip3 install ninja kconfiglib pycryptodome ecdsa -i https://mirrors.aliyun.com/pypi/simple <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    pip3 install six --upgrade --ignore-installed six -i https://pypi.tuna.tsinghua.edu.cn/simple <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    rm -rf /var/cache/apt/archives<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#Fix Dash</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> rm -rf /bin/sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    ln -s /bin/bash /bin/sh<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#Setup gn</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> PATH /tools/gn:$PATH<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> mkdir /tools <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    cd /tools <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    curl -LO https://repo.huaweicloud.com/harmonyos/compiler/gn/1523/linux/gn.1523.tar <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    tar xvf /tools/gn.1523.tar <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    rm -rf /tools/gn.1523.tar<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#Setup LLVM</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#ADD ./llvm-linux-9.0.0-34042.tar /tools</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> PATH /tools/llvm/bin:$PATH<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> cd /tools <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    curl -LO https://repo.huaweicloud.com/harmonyos/compiler/clang/9.0.0-34042/linux/llvm-linux-9.0.0-34042.tar <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    tar xvf /tools/llvm-linux-9.0.0-34042.tar <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    rm -rf /tools/llvm-linux-9.0.0-34042.tar<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#Setup hc-gen</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> PATH /tools/hc-gen:$PATH<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> cd /tools <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    curl -LO https://repo.huaweicloud.com/harmonyos/compiler/hc-gen/0.65/linux/hc-gen-0.65-linux.tar <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    tar xvf /tools/hc-gen-0.65-linux.tar <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    rm -rf /tools/hc-gen-0.65-linux.tar<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#Setup hmos_app_packing_tool and hapsigntool // 必需是这目录，编译脚本写死了</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> PATH /root/developtools/:$PATH<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> mkdir /root/developtools/ <span style="color:#f92672">&amp;&amp;</span> cd /root/developtools/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    curl -LO https://repo.huaweicloud.com/harmonyos/develop_tools/hmos_app_packing_tool.jar <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    curl -LO https://repo.huaweicloud.com/harmonyos/develop_tools/hapsigntoolv2.jar<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#Setup gcc_riscv32</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> PATH /tools/gcc_riscv32/bin:$PATH<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> cd /tools <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    curl -LO http://tools.harmonyos.com/mirrors/gcc_riscv32/7.3.0/linux/gcc_riscv32-linux-7.3.0.tar.gz <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    tar xvf /tools/gcc_riscv32-linux-7.3.0.tar.gz <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    rm -rf /tools/gcc_riscv32-linux-7.3.0.tar.gz<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#Create work dir</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> mkdir /OpenHarmony<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">WORKDIR</span> <span style="color:#e6db74">/OpenHarmony</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># Gitee Repo tool and download</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># Make sure requests install at the right location</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> curl https://gitee.com/oschina/repo/raw/fork_flow/repo-py3 &gt; /usr/bin/repo <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    chmod a+x /usr/bin/repo <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple requests<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#Download source, update to your info</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> git config --global user.email <span style="color:#e6db74">&#34;lxy5266@live.com&#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    git config --global user.name <span style="color:#e6db74">&#34;ystyle&#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    git config --global color.ui false <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    git config --global credential.helper store <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    repo init -u https://gitee.com/openharmony/manifest.git -b master --repo-branch<span style="color:#f92672">=</span>stable --no-repo-verify <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    repo sync -c<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># compile</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> LANGUAGE en<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> LANG en_US.utf-8<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> export|grep LANG<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;/bin/bash&#34;</span>, <span style="color:#e6db74">&#34;-c&#34;</span>, <span style="color:#e6db74">&#34;python build.py ${HARDWARE} -b debug&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div>
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2020-12-25T16:40:26&#43;08:00" itemprop="dateUpdated">2020-12-25 16:40:26</time>
+          </span><br>
+          本文链接：<a href="/2020/09/11/compile-openharmony-indokcer/" target="_blank" rel="external">https://ystyle.top/2020/09/11/compile-openharmony-indokcer/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%B8%BF%E8%92%99/">鸿蒙</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2020%2f09%2f11%2fcompile-openharmony-indokcer%2f&title=%e3%80%8a%e4%bd%bf%e7%94%a8Docker%e5%bf%ab%e9%80%9f%e4%b8%8a%e6%89%8b%e9%b8%bf%e8%92%99%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2020%2f09%2f11%2fcompile-openharmony-indokcer%2f&title=%e3%80%8a%e4%bd%bf%e7%94%a8Docker%e5%bf%ab%e9%80%9f%e4%b8%8a%e6%89%8b%e9%b8%bf%e8%92%99%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e5%87%86%e5%a4%87%20%e5%9c%a8%e6%9c%ba%e5%99%a8%e4%b8%8a%e5%ae%89%e8%a3%85%e5%a5%bdDocker%20%e7%bc%96%e8%af%91%e9%b8%bf%e8%92%99%e7%b3%bb%e7%bb%9f%e9%95%9c%e5%83%8f%20%e6%89%93%e5%bc%80%e7%bb%88%e7%ab%af%e6%89%a7%e8%a1%8c%e4%bb%a5%e4%b8%8b%e5%91%bd%e4%bb%a4%20mkdir%20~%2fOpenHarmony%20cd%20~%2fOpenHarmony%20docker%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2020%2f09%2f11%2fcompile-openharmony-indokcer%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e4%bd%bf%e7%94%a8Docker%e5%bf%ab%e9%80%9f%e4%b8%8a%e6%89%8b%e9%b8%bf%e8%92%99%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2020%2f09%2f11%2fcompile-openharmony-indokcer%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2020%2f09%2f11%2fcompile-openharmony-indokcer%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2020/09/04/comic-cli/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">转换在线漫画为mobi格式</h4>
+        </a>
+      </div>
+      
+      
+      <div class="waves-block waves-effect next">
+        <a href="/2020/10/25/harl/" id="post-next" class="post-nav-link">
+          <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+          <h4 class="title">harl-鸿蒙应用开发实机热更新工具</h4>
+        </a>
+      </div>
+      
+    </nav>
+    
+  </article>
+
+  
+  
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2020%2f09%2f11%2fcompile-openharmony-indokcer%2f&title=%e3%80%8a%e4%bd%bf%e7%94%a8Docker%e5%bf%ab%e9%80%9f%e4%b8%8a%e6%89%8b%e9%b8%bf%e8%92%99%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2020%2f09%2f11%2fcompile-openharmony-indokcer%2f&title=%e3%80%8a%e4%bd%bf%e7%94%a8Docker%e5%bf%ab%e9%80%9f%e4%b8%8a%e6%89%8b%e9%b8%bf%e8%92%99%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e5%87%86%e5%a4%87%20%e5%9c%a8%e6%9c%ba%e5%99%a8%e4%b8%8a%e5%ae%89%e8%a3%85%e5%a5%bdDocker%20%e7%bc%96%e8%af%91%e9%b8%bf%e8%92%99%e7%b3%bb%e7%bb%9f%e9%95%9c%e5%83%8f%20%e6%89%93%e5%bc%80%e7%bb%88%e7%ab%af%e6%89%a7%e8%a1%8c%e4%bb%a5%e4%b8%8b%e5%91%bd%e4%bb%a4%20mkdir%20~%2fOpenHarmony%20cd%20~%2fOpenHarmony%20docker%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2020%2f09%2f11%2fcompile-openharmony-indokcer%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e4%bd%bf%e7%94%a8Docker%e5%bf%ab%e9%80%9f%e4%b8%8a%e6%89%8b%e9%b8%bf%e8%92%99%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2020%2f09%2f11%2fcompile-openharmony-indokcer%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2020%2f09%2f11%2fcompile-openharmony-indokcer%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2020/09/11/compile-openharmony-indokcer/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+</body>
+</html>

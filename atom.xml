@@ -1,542 +1,511 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>东方星痕</title>
-  
   <subtitle>请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</subtitle>
   <link href="/atom.xml" rel="self"/>
-  
-  <link href="http://ystyle.top/"/>
+  <link href="https://ystyle.top/"/>
   <updated>2026-09-09T15:30:00.000Z</updated>
-  <id>http://ystyle.top/</id>
-  
+  <id>https://ystyle.top/</id>
   <author>
     <name>YSTYLE</name>
-    
   </author>
-  
-  <generator uri="http://hexo.io/">Hexo</generator>
-  
+  <generator uri="https://gohugo.io/">Hugo</generator>
   <entry>
     <title>仓颉服务 - 忆时塔 OOM 追凶记</title>
-    <link href="http://ystyle.top/2026/09/09/chronomem-oom-hunt/"/>
-    <id>http://ystyle.top/2026/09/09/chronomem-oom-hunt/</id>
+    <link href="https://ystyle.top/2026/09/09/chronomem-oom-hunt/"/>
+    <id>https://ystyle.top/2026/09/09/chronomem-oom-hunt/</id>
     <published>2026-09-09T15:30:00.000Z</published>
     <updated>2026-09-09T15:30:00.000Z</updated>
     
-    <summary type="html">&lt;p align=&quot;center&quot;&gt;&lt;strong&gt;一次横跨六个仓颉自研库的排查&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p align=&quot;center&quot;&gt;&lt;em&gt;从一条空 message 的异常，到 662 个 CLOSE_WAIT —— 长连接泄漏如何伪装成存储 OOM&lt;/em&gt;&lt;/p&gt;
-
-&lt;p align=&quot;center&quot;&gt;&lt;code&gt;2026-08-19 → 2026-09-09&lt;/code&gt; · &lt;code&gt;Cangjie&lt;/code&gt; · &lt;code&gt;badger-cj&lt;/code&gt; · &lt;code&gt;mcp-cj&lt;/code&gt; · &lt;code&gt;json-rpc&lt;/code&gt;&lt;/p&gt;
-
-</summary>
-    
-      <category term="软件" scheme="http://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
-    
-    
-      <category term="Cangjie" scheme="http://ystyle.top/tags/Cangjie/"/>
-    
-      <category term="MCP" scheme="http://ystyle.top/tags/MCP/"/>
-    
-      <category term="badger-cj" scheme="http://ystyle.top/tags/badger-cj/"/>
-    
-      <category term="json-rpc" scheme="http://ystyle.top/tags/json-rpc/"/>
-    
-      <category term="排查实录" scheme="http://ystyle.top/tags/%E6%8E%92%E6%9F%A5%E5%AE%9E%E5%BD%95/"/>
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;一次横跨六个仓颉自研库的排查&lt;/strong&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;em&gt;从一条空 message 的异常，到 662 个 CLOSE_WAIT —— 长连接泄漏如何伪装成存储 OOM&lt;/em&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;code&gt;2026-08-19 → 2026-09-09&lt;/code&gt; · &lt;code&gt;Cangjie&lt;/code&gt; · &lt;code&gt;badger-cj&lt;/code&gt; · &lt;code&gt;mcp-cj&lt;/code&gt; · &lt;code&gt;json-rpc&lt;/code&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;一条空消息&#34;&gt;&lt;a href=&#34;#一条空消息&#34; class=&#34;headerlink&#34; title=&#34;一条空消息&#34;&gt;&lt;/a&gt;一条空消息&lt;/h2&gt;
+&lt;p&gt;事情的开始，是一条几乎不包含任何信息的报错。&lt;/p&gt;
+&lt;p&gt;我在本地跑着一个常驻的 MCP 服务——一个&lt;strong&gt;基于时序数据库、用于会话记录存储的记忆系统&lt;/strong&gt;（下面就叫它「线上这个服务」）。它会在后台定期执行维护任务。&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
+    <category term="MCP" scheme="https://ystyle.top/tags/MCP/"/>
+    <category term="badger-cj" scheme="https://ystyle.top/tags/badger-cj/"/>
+    <category term="json-rpc" scheme="https://ystyle.top/tags/json-rpc/"/>
+    <category term="排查实录" scheme="https://ystyle.top/tags/%E6%8E%92%E6%9F%A5%E5%AE%9E%E5%BD%95/"/>
     
   </entry>
-  
   <entry>
     <title>戴森球与光伏文明：一个被忽略的最优解</title>
-    <link href="http://ystyle.top/2026/09/06/dyson-sphere-and-photovoltaic-civilization/"/>
-    <id>http://ystyle.top/2026/09/06/dyson-sphere-and-photovoltaic-civilization/</id>
+    <link href="https://ystyle.top/2026/09/06/dyson-sphere-and-photovoltaic-civilization/"/>
+    <id>https://ystyle.top/2026/09/06/dyson-sphere-and-photovoltaic-civilization/</id>
     <published>2026-09-06T01:30:00.000Z</published>
     <updated>2026-09-06T01:30:00.000Z</updated>
     
-    <summary type="html">&lt;h2 id=&quot;引言：悖论的另一面&quot;&gt;&lt;a href=&quot;#引言：悖论的另一面&quot; class=&quot;headerlink&quot; title=&quot;引言：悖论的另一面&quot;&gt;&lt;/a&gt;引言：悖论的另一面&lt;/h2&gt;&lt;p&gt;在关于费米悖论的无数讨论中，有一个流传甚广的说辞：&lt;strong&gt;“能造戴森球的文明不需要它，需要它的文明造不出来。”&lt;/strong&gt; 这句话听起来深刻，却长期缺乏令人信服的底层逻辑。我们习惯了将“高级能源”与“核聚变”“反物质”绑定，却极少停下来思考一个问题——&lt;/p&gt;
-&lt;p&gt;如果有一种能源技术，它的材料来源是月球和碳质小行星（硅、铝），它的维护周期以几十年为单位，它的废热恰好是深空散热器最欢迎的&lt;/p&gt;</summary>
-    
-      <category term="思考" scheme="http://ystyle.top/categories/%E6%80%9D%E8%80%83/"/>
-    
-    
-      <category term="科幻" scheme="http://ystyle.top/tags/%E7%A7%91%E5%B9%BB/"/>
-    
-      <category term="戴森球" scheme="http://ystyle.top/tags/%E6%88%B4%E6%A3%AE%E7%90%83/"/>
-    
-      <category term="核取变" scheme="http://ystyle.top/tags/%E6%A0%B8%E5%8F%96%E5%8F%98/"/>
-    
-      <category term="太空城" scheme="http://ystyle.top/tags/%E5%A4%AA%E7%A9%BA%E5%9F%8E/"/>
+    <summary type="html">&lt;h2 id=&#34;引言：悖论的另一面&#34;&gt;&lt;a href=&#34;#引言：悖论的另一面&#34; class=&#34;headerlink&#34; title=&#34;引言：悖论的另一面&#34;&gt;&lt;/a&gt;引言：悖论的另一面&lt;/h2&gt;
+&lt;p&gt;在关于费米悖论的无数讨论中，有一个流传甚广的说辞：&lt;strong&gt;“能造戴森球的文明不需要它，需要它的文明造不出来。”&lt;/strong&gt; 这句话听起来深刻，却长期缺乏令人信服的底层逻辑。我们习惯了将“高级能源”与“核聚变”“反物质”绑定，却极少停下来思考一个问题——&lt;/p&gt;</summary>
+    <category term="思考" scheme="https://ystyle.top/categories/%E6%80%9D%E8%80%83/"/>
+    <category term="科幻" scheme="https://ystyle.top/tags/%E7%A7%91%E5%B9%BB/"/>
+    <category term="戴森球" scheme="https://ystyle.top/tags/%E6%88%B4%E6%A3%AE%E7%90%83/"/>
+    <category term="核取变" scheme="https://ystyle.top/tags/%E6%A0%B8%E5%8F%96%E5%8F%98/"/>
+    <category term="太空城" scheme="https://ystyle.top/tags/%E5%A4%AA%E7%A9%BA%E5%9F%8E/"/>
     
   </entry>
-  
   <entry>
     <title>鸿蒙PC上使用box64运行x86_64鸿蒙SDK编译HAP</title>
-    <link href="http://ystyle.top/2026/06/30/matebookpro-box64-harmony-sdk/"/>
-    <id>http://ystyle.top/2026/06/30/matebookpro-box64-harmony-sdk/</id>
+    <link href="https://ystyle.top/2026/06/30/matebookpro-box64-harmony-sdk/"/>
+    <id>https://ystyle.top/2026/06/30/matebookpro-box64-harmony-sdk/</id>
     <published>2026-06-30T14:00:00.000Z</published>
     <updated>2026-06-30T14:00:00.000Z</updated>
     
     <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;本文记录在鸿蒙PC融合开发引擎的openEuler aarch64容器中，通过box64模拟x86_64兼容层，运行鸿蒙命令行工具编译HAP的完整过程。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;鸿蒙PC（HarmonyOS PC）的融合开发引擎提供的是openEuler aarch64容器环境，但鸿蒙官方命令行工具（command-line-tools）只有x86_64版本。要在aarch64上编译鸿蒙项目，有两种方案：&lt;/p&gt;</summary>
-    
-      <category term="软件" scheme="http://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
-    
-    
-      <category term="鸿蒙" scheme="http://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
-    
-      <category term="鸿蒙PC" scheme="http://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/"/>
-    
-      <category term="Matebook Pro" scheme="http://ystyle.top/tags/Matebook-Pro/"/>
-    
-      <category term="box64" scheme="http://ystyle.top/tags/box64/"/>
-    
-      <category term="SDK" scheme="http://ystyle.top/tags/SDK/"/>
-    
-      <category term="HAP" scheme="http://ystyle.top/tags/HAP/"/>
-    
-      <category term="编译" scheme="http://ystyle.top/tags/%E7%BC%96%E8%AF%91/"/>
+&lt;p&gt;本文记录在鸿蒙PC融合开发引擎的openEuler aarch64容器中，通过box64模拟x86_64兼容层，运行鸿蒙命令行工具编译HAP的完整过程。&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="鸿蒙" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
+    <category term="鸿蒙PC" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/"/>
+    <category term="box64" scheme="https://ystyle.top/tags/box64/"/>
+    <category term="SDK" scheme="https://ystyle.top/tags/SDK/"/>
+    <category term="HAP" scheme="https://ystyle.top/tags/HAP/"/>
+    <category term="编译" scheme="https://ystyle.top/tags/%E7%BC%96%E8%AF%91/"/>
+    <category term="matebook-pro" scheme="https://ystyle.top/tags/matebook-pro/"/>
     
   </entry>
-  
   <entry>
     <title>仓颉语言 Neovim 开发环境配置指南</title>
-    <link href="http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/"/>
-    <id>http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/</id>
+    <link href="https://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/"/>
+    <id>https://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/</id>
     <published>2026-04-03T15:30:00.000Z</published>
-    <updated>2026-09-11T03:59:55.461Z</updated>
+    <updated>2026-04-03T15:30:00.000Z</updated>
     
     <summary type="html">&lt;p&gt;本文档介绍如何在 openEuler (aarch64) 系统上配置 Neovim (AstroNvim) 开发环境，用于仓颉语言开发。&lt;/p&gt;
-&lt;h2 id=&quot;目录&quot;&gt;&lt;a href=&quot;#目录&quot; class=&quot;headerlink&quot; title=&quot;目录&quot;&gt;&lt;/a&gt;目录&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#系统要求&quot;&gt;系统要求&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#安装仓颉-sdk&quot;&gt;安装仓颉 SDK&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#安装-cangjie-stdx&quot;&gt;安装 Cangjie STDX&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;</summary>
-    
-      <category term="编程" scheme="http://ystyle.top/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="Cangjie" scheme="http://ystyle.top/tags/Cangjie/"/>
-    
-      <category term="Neovim" scheme="http://ystyle.top/tags/Neovim/"/>
-    
-      <category term="AstroNvim" scheme="http://ystyle.top/tags/AstroNvim/"/>
-    
-      <category term="openEuler" scheme="http://ystyle.top/tags/openEuler/"/>
+&lt;h2 id=&#34;目录&#34;&gt;&lt;a href=&#34;#目录&#34; class=&#34;headerlink&#34; title=&#34;目录&#34;&gt;&lt;/a&gt;目录&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#%e7%b3%bb%e7%bb%9f%e8%a6%81%e6%b1%82&#34;&gt;系统要求&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%e5%ae%89%e8%a3%85%e4%bb%93%e9%a2%89-sdk&#34;&gt;安装仓颉 SDK&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%e5%ae%89%e8%a3%85-cangjie-stdx&#34;&gt;安装 Cangjie STDX&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f%e9%85%8d%e7%bd%ae&#34;&gt;环境变量配置&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#neovim-%e9%85%8d%e7%bd%ae&#34;&gt;Neovim 配置&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%e5%b8%b8%e8%a7%81%e9%97%ae%e9%a2%98&#34;&gt;常见问题&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;系统要求&#34;&gt;&lt;a href=&#34;#系统要求&#34; class=&#34;headerlink&#34; title=&#34;系统要求&#34;&gt;&lt;/a&gt;系统要求&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;操作系统：openEuler 2403 SP1 (aarch64)&lt;/li&gt;
+&lt;li&gt;GCC 版本：12.3.1 或更高&lt;/li&gt;
+&lt;li&gt;Neovim 版本：0.9.0 或更高&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;安装仓颉-SDK&#34;&gt;&lt;a href=&#34;#安装仓颉-SDK&#34; class=&#34;headerlink&#34; title=&#34;安装仓颉 SDK&#34;&gt;&lt;/a&gt;安装仓颉 SDK&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;从官方渠道下载仓颉 SDK (aarch64 版本)&lt;/li&gt;
+&lt;li&gt;解压到 &lt;code&gt;~/.config/cjvs/store/&lt;/code&gt; 目录&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;目录结构示例：&lt;/p&gt;</summary>
+    <category term="编程" scheme="https://ystyle.top/categories/%E7%BC%96%E7%A8%8B/"/>
+    <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
+    <category term="neovim" scheme="https://ystyle.top/tags/neovim/"/>
+    <category term="AstroNvim" scheme="https://ystyle.top/tags/AstroNvim/"/>
+    <category term="openEuler" scheme="https://ystyle.top/tags/openEuler/"/>
     
   </entry>
-  
   <entry>
     <title>鸿蒙PC融合开发引擎中编译安装Neovim与AstroNvim配置指南</title>
-    <link href="http://ystyle.top/2026/04/03/matebookpro-container-build-neovim/"/>
-    <id>http://ystyle.top/2026/04/03/matebookpro-container-build-neovim/</id>
+    <link href="https://ystyle.top/2026/04/03/matebookpro-container-build-neovim/"/>
+    <id>https://ystyle.top/2026/04/03/matebookpro-container-build-neovim/</id>
     <published>2026-04-03T13:35:00.000Z</published>
     <updated>2026-04-03T13:35:00.000Z</updated>
     
     <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;本文记录在鸿蒙PC融合开发引擎的容器环境中，因glibc版本限制从源码编译Neovim和tree-sitter的完整过程，并配置AstroNvim作为开发环境。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;问题背景&quot;&gt;&lt;a href=&quot;#问题背景&quot; class=&quot;headerlink&quot; title=&quot;问题背景&quot;&gt;&lt;/a&gt;问题背景&lt;/h2&gt;&lt;h3 id=&quot;glibc版本冲突&quot;&gt;&lt;a href=&quot;#glibc版本冲突&quot; class=&quot;headerlink&quot; title=&quot;glibc版本冲突&quot;&gt;&lt;/a&gt;glibc版本冲突&lt;/h3&gt;&lt;p&gt;在鸿蒙PC融合开发引擎的&lt;/p&gt;</summary>
-    
-      <category term="软件" scheme="http://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
-    
-    
-      <category term="AstroNvim" scheme="http://ystyle.top/tags/AstroNvim/"/>
-    
-      <category term="鸿蒙" scheme="http://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
-    
-      <category term="鸿蒙PC" scheme="http://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/"/>
-    
-      <category term="neovim" scheme="http://ystyle.top/tags/neovim/"/>
-    
-      <category term="tree-sitter" scheme="http://ystyle.top/tags/tree-sitter/"/>
-    
-      <category term="编译安装" scheme="http://ystyle.top/tags/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/"/>
-    
-      <category term="Matebook Pro" scheme="http://ystyle.top/tags/Matebook-Pro/"/>
+&lt;p&gt;本文记录在鸿蒙PC融合开发引擎的容器环境中，因glibc版本限制从源码编译Neovim和tree-sitter的完整过程，并配置AstroNvim作为开发环境。&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="鸿蒙" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
+    <category term="鸿蒙PC" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/"/>
+    <category term="neovim" scheme="https://ystyle.top/tags/neovim/"/>
+    <category term="tree-sitter" scheme="https://ystyle.top/tags/tree-sitter/"/>
+    <category term="AstroNvim" scheme="https://ystyle.top/tags/AstroNvim/"/>
+    <category term="编译安装" scheme="https://ystyle.top/tags/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/"/>
+    <category term="matebook-pro" scheme="https://ystyle.top/tags/matebook-pro/"/>
     
   </entry>
-  
   <entry>
     <title>鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式</title>
-    <link href="http://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/"/>
-    <id>http://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/</id>
+    <link href="https://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/"/>
+    <id>https://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/</id>
     <published>2026-04-03T13:30:00.000Z</published>
     <updated>2026-04-03T13:30:00.000Z</updated>
     
     <summary type="html">&lt;blockquote&gt;
 &lt;p&gt;本文深入解析鸿蒙PC融合开发引擎的技术架构，揭示其如何通过StratoVirt虚拟化和OzoneC容器技术实现Linux应用兼容。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;鸿蒙PC（HarmonyOS PC）采用了独特的架构设计来实现Linux应用兼容。作为用户，我在使用过程中发现系统提供了一个”融合开发引擎”功能，可以在其中运行openEuler环境。本文将解析这个融合开发引擎的技术架构。&lt;/p&gt;
-&lt;h2 id=&quot;架构探秘&quot;&gt;&lt;/h2&gt;</summary>
-    
-      <category term="软件" scheme="http://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
-    
-    
-      <category term="鸿蒙" scheme="http://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
-    
-      <category term="鸿蒙PC" scheme="http://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/"/>
-    
-      <category term="Matebook Pro" scheme="http://ystyle.top/tags/Matebook-Pro/"/>
-    
-      <category term="StratoVirt" scheme="http://ystyle.top/tags/StratoVirt/"/>
-    
-      <category term="OzoneC" scheme="http://ystyle.top/tags/OzoneC/"/>
-    
-      <category term="融合开发引擎" scheme="http://ystyle.top/tags/%E8%9E%8D%E5%90%88%E5%BC%80%E5%8F%91%E5%BC%95%E6%93%8E/"/>
+&lt;h2 id=&#34;背景&#34;&gt;&lt;a href=&#34;#背景&#34; class=&#34;headerlink&#34; title=&#34;背景&#34;&gt;&lt;/a&gt;背景&lt;/h2&gt;
+&lt;p&gt;鸿蒙PC（HarmonyOS PC）采用了独特的架构设计来实现Linux应用兼容。作为用户，我在使用过程中发现系统提供了一个&amp;quot;融合开发引擎&amp;quot;功能，可以在其中运行openEuler环境。本文将解析这个融合开发引擎的技术架构。&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="鸿蒙" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
+    <category term="鸿蒙PC" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/"/>
+    <category term="StratoVirt" scheme="https://ystyle.top/tags/StratoVirt/"/>
+    <category term="OzoneC" scheme="https://ystyle.top/tags/OzoneC/"/>
+    <category term="融合开发引擎" scheme="https://ystyle.top/tags/%E8%9E%8D%E5%90%88%E5%BC%80%E5%8F%91%E5%BC%95%E6%93%8E/"/>
+    <category term="matebook-pro" scheme="https://ystyle.top/tags/matebook-pro/"/>
     
   </entry>
-  
   <entry>
     <title>MCP-Term：一个未出生即夭折的想法</title>
-    <link href="http://ystyle.top/2026/03/19/mcp-term-abandoned/"/>
-    <id>http://ystyle.top/2026/03/19/mcp-term-abandoned/</id>
+    <link href="https://ystyle.top/2026/03/19/mcp-term-abandoned/"/>
+    <id>https://ystyle.top/2026/03/19/mcp-term-abandoned/</id>
     <published>2026-03-19T12:00:00.000Z</published>
     <updated>2026-03-19T12:00:00.000Z</updated>
     
     <summary type="html">&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;⚠️ 已弃坑&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;此项目在讨论阶段即放弃，无任何代码实现。&lt;br&gt;放弃原因：市场风向转变，目标场景已被钉钉、Obsidian CLI, anything CLI 等原生工具覆盖。&lt;br&gt;记录此文仅为保存思考过程。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id=&quot;起因：MCP-协议的-Token-困境&quot;&gt;&lt;a href=&quot;#起因：MCP-协议的-Token-困境&quot; class=&quot;headerlink&quot; title=&quot;起因：MCP 协议的 Token 困境&quot;&gt;&lt;/a&gt;起因：MCP 协议的 Token 困境&lt;/h2&gt;</summary>
-    
-      <category term="思考" scheme="http://ystyle.top/categories/%E6%80%9D%E8%80%83/"/>
-    
-    
-      <category term="MCP" scheme="http://ystyle.top/tags/MCP/"/>
-    
-      <category term="AI" scheme="http://ystyle.top/tags/AI/"/>
-    
-      <category term="Protocol" scheme="http://ystyle.top/tags/Protocol/"/>
-    
-      <category term="Abandoned" scheme="http://ystyle.top/tags/Abandoned/"/>
+&lt;p&gt;此项目在讨论阶段即放弃，无任何代码实现。&lt;br&gt;
+放弃原因：市场风向转变，目标场景已被钉钉、Obsidian CLI, anything CLI 等原生工具覆盖。&lt;br&gt;
+记录此文仅为保存思考过程。&lt;/p&gt;</summary>
+    <category term="思考" scheme="https://ystyle.top/categories/%E6%80%9D%E8%80%83/"/>
+    <category term="MCP" scheme="https://ystyle.top/tags/MCP/"/>
+    <category term="AI" scheme="https://ystyle.top/tags/AI/"/>
+    <category term="Protocol" scheme="https://ystyle.top/tags/Protocol/"/>
+    <category term="Abandoned" scheme="https://ystyle.top/tags/Abandoned/"/>
     
   </entry>
-  
   <entry>
     <title>鸿蒙PC Matebook Pro上全局安装GIT</title>
-    <link href="http://ystyle.top/2025/12/28/matebookpro-install-git/"/>
-    <id>http://ystyle.top/2025/12/28/matebookpro-install-git/</id>
+    <link href="https://ystyle.top/2025/12/28/matebookpro-install-git/"/>
+    <id>https://ystyle.top/2025/12/28/matebookpro-install-git/</id>
     <published>2025-12-28T02:30:00.000Z</published>
     <updated>2025-12-28T02:30:00.000Z</updated>
     
-    <summary type="html">&lt;h2 id=&quot;新方法&quot;&gt;&lt;a href=&quot;#新方法&quot; class=&quot;headerlink&quot; title=&quot;新方法&quot;&gt;&lt;/a&gt;新方法&lt;/h2&gt;&lt;p&gt;直接在应用商店搜索安装&lt;code&gt;GitNext&lt;/code&gt;&lt;/p&gt;
+    <summary type="html">&lt;h2 id=&#34;新方法&#34;&gt;&lt;a href=&#34;#新方法&#34; class=&#34;headerlink&#34; title=&#34;新方法&#34;&gt;&lt;/a&gt;新方法&lt;/h2&gt;
+&lt;p&gt;直接在应用商店搜索安装&lt;code&gt;GitNext&lt;/code&gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;ul&gt;
+&lt;h2 id=&#34;准备工作&#34;&gt;&lt;a href=&#34;#准备工作&#34; class=&#34;headerlink&#34; title=&#34;准备工作&#34;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;
+&lt;ul&gt;
 &lt;li&gt;在鸿蒙应用商店安装 CodeArts IDE&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&quot;从CodeArts-IDE提取签名工具&quot;&gt;&lt;/h2&gt;</summary>
-    
-      <category term="软件" scheme="http://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
-    
-    
-      <category term="git" scheme="http://ystyle.top/tags/git/"/>
-    
-      <category term="鸿蒙" scheme="http://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
-    
-      <category term="鸿蒙PC" scheme="http://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/"/>
-    
-      <category term="matebook pro" scheme="http://ystyle.top/tags/matebook-pro/"/>
+&lt;h2 id=&#34;从CodeArts-IDE提取签名工具&#34;&gt;&lt;a href=&#34;#从CodeArts-IDE提取签名工具&#34; class=&#34;headerlink&#34; title=&#34;从CodeArts IDE提取签名工具&#34;&gt;&lt;/a&gt;从CodeArts IDE提取签名工具&lt;/h2&gt;
+&lt;p&gt;打开IDE, 随便创建一个项目打开，在终端执行以下命令&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="鸿蒙" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
+    <category term="鸿蒙PC" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/"/>
+    <category term="GIT" scheme="https://ystyle.top/tags/GIT/"/>
+    <category term="matebook-pro" scheme="https://ystyle.top/tags/matebook-pro/"/>
     
   </entry>
-  
   <entry>
     <title>Neovim移植鸿蒙PC：三方库适配实战与挑战解析</title>
-    <link href="http://ystyle.top/2025/12/27/matebookpro-port-nvim-deps/"/>
-    <id>http://ystyle.top/2025/12/27/matebookpro-port-nvim-deps/</id>
+    <link href="https://ystyle.top/2025/12/27/matebookpro-port-nvim-deps/"/>
+    <id>https://ystyle.top/2025/12/27/matebookpro-port-nvim-deps/</id>
     <published>2025-12-27T11:00:00.000Z</published>
     <updated>2025-12-27T11:00:00.000Z</updated>
     
     <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;本文记录将Neovim编辑器移植到HarmonyOS PC过程中，对11个核心依赖库的适配实战经验，涵盖平台差异分析、API限制处理、构建系统改造等关键问题。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;项目背景&quot;&gt;&lt;a href=&quot;#项目背景&quot; class=&quot;headerlink&quot; title=&quot;项目背景&quot;&gt;&lt;/a&gt;项目背景&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;目标&lt;/strong&gt;：将现代文本编辑器Neovim完整移植到HarmonyOS PC系统，支持完整的Lua插件生态和现代语法高亮。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;环境&lt;/strong&gt;：&lt;/p&gt;
-</summary>
-    
-      <category term="软件" scheme="http://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
-    
-    
-      <category term="鸿蒙" scheme="http://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
-    
-      <category term="鸿蒙PC" scheme="http://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/"/>
-    
-      <category term="matebook pro" scheme="http://ystyle.top/tags/matebook-pro/"/>
-    
-      <category term="neovim" scheme="http://ystyle.top/tags/neovim/"/>
-    
-      <category term="livub" scheme="http://ystyle.top/tags/livub/"/>
-    
-      <category term="luajit" scheme="http://ystyle.top/tags/luajit/"/>
+&lt;p&gt;本文记录将Neovim编辑器移植到HarmonyOS PC过程中，对11个核心依赖库的适配实战经验，涵盖平台差异分析、API限制处理、构建系统改造等关键问题。&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="鸿蒙" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
+    <category term="鸿蒙PC" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/"/>
+    <category term="neovim" scheme="https://ystyle.top/tags/neovim/"/>
+    <category term="livub" scheme="https://ystyle.top/tags/livub/"/>
+    <category term="luajit" scheme="https://ystyle.top/tags/luajit/"/>
+    <category term="matebook-pro" scheme="https://ystyle.top/tags/matebook-pro/"/>
     
   </entry>
-  
   <entry>
     <title>鸿蒙PC Matebook Pro上安装仓颉编译器每日构建版</title>
-    <link href="http://ystyle.top/2025/12/27/matebookpro-run-cangjie-compiler/"/>
-    <id>http://ystyle.top/2025/12/27/matebookpro-run-cangjie-compiler/</id>
+    <link href="https://ystyle.top/2025/12/27/matebookpro-run-cangjie-compiler/"/>
+    <id>https://ystyle.top/2025/12/27/matebookpro-run-cangjie-compiler/</id>
     <published>2025-12-27T07:00:00.000Z</published>
     <updated>2025-12-27T07:00:00.000Z</updated>
     
-    <summary type="html">&lt;figure class=&quot;image-bubble&quot;&gt;
-                &lt;div class=&quot;img-lightbox&quot;&gt;
-                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
-                    &lt;img src=&quot;https://dll.ystyle.top/images/2025-12/5e398f57bb264562850d933612e65a3d.png&quot; alt=&quot;使用示例&quot; title=&quot;&quot;&gt;
-                &lt;/div&gt;
-                &lt;/figure&gt;</summary>
-    
-      <category term="软件" scheme="http://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
-    
-    
-      <category term="鸿蒙" scheme="http://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
-    
-      <category term="鸿蒙PC" scheme="http://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/"/>
-    
-      <category term="matebook pro" scheme="http://ystyle.top/tags/matebook-pro/"/>
-    
-      <category term="仓颉" scheme="http://ystyle.top/tags/%E4%BB%93%E9%A2%89/"/>
-    
-      <category term="cangjie" scheme="http://ystyle.top/tags/cangjie/"/>
-    
-      <category term="cangjie-lang" scheme="http://ystyle.top/tags/cangjie-lang/"/>
+    <summary type="html">&lt;figure class=&#34;image-bubble&#34;&gt;
+  &lt;div class=&#34;img-lightbox&#34;&gt;
+    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;
+    &lt;img src=&#34;https://dll.ystyle.top/images/2025-12/5e398f57bb264562850d933612e65a3d.png&#34; alt=&#34;使用示例&#34;&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;image-caption&#34;&gt;使用示例&lt;/div&gt;
+&lt;/figure&gt;
+&lt;h2 id=&#34;准备工作&#34;&gt;&lt;a href=&#34;#准备工作&#34; class=&#34;headerlink&#34; title=&#34;准备工作&#34;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;在鸿蒙PC上使用应用商店安装CodeArts IDE&lt;/li&gt;
+&lt;li&gt;下载仓颉编译器每日构建版本: &lt;a href=&#34;https://gitcode.com/Cangjie/nightly_build/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;cangjie-sdk-ohos-aarch64-1.1.0-alpha.2025xxxxxxxxxxxxx.tar.gz&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;从CodeArts-IDE提取签名工具&#34;&gt;&lt;a href=&#34;#从CodeArts-IDE提取签名工具&#34; class=&#34;headerlink&#34; title=&#34;从CodeArts IDE提取签名工具&#34;&gt;&lt;/a&gt;从CodeArts IDE提取签名工具&lt;/h2&gt;
+&lt;p&gt;新方法，直接在应用商店安装： &lt;code&gt;DevBox&lt;/code&gt;， 然后在HisShell就可以直接使用 &lt;code&gt;binary-sign-tool&lt;/code&gt;了&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="鸿蒙" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
+    <category term="鸿蒙PC" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/"/>
+    <category term="仓颉" scheme="https://ystyle.top/tags/%E4%BB%93%E9%A2%89/"/>
+    <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
+    <category term="cangjie-lang" scheme="https://ystyle.top/tags/cangjie-lang/"/>
+    <category term="matebook-pro" scheme="https://ystyle.top/tags/matebook-pro/"/>
     
   </entry>
-  
   <entry>
-    <title>鸿蒙pc上Vite 7 + Rollup原生模块问题的解决方案</title>
-    <link href="http://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/"/>
-    <id>http://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/</id>
+    <title>鸿蒙pc上Vite 7 &#43; Rollup原生模块问题的解决方案</title>
+    <link href="https://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/"/>
+    <id>https://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/</id>
     <published>2025-12-08T13:00:00.000Z</published>
     <updated>2025-12-08T13:00:00.000Z</updated>
     
-    <summary type="html">&lt;h2 id=&quot;环境信息&quot;&gt;&lt;a href=&quot;#环境信息&quot; class=&quot;headerlink&quot; title=&quot;环境信息&quot;&gt;&lt;/a&gt;环境信息&lt;/h2&gt;&lt;ul&gt;
+    <summary type="html">&lt;h2 id=&#34;环境信息&#34;&gt;&lt;a href=&#34;#环境信息&#34; class=&#34;headerlink&#34; title=&#34;环境信息&#34;&gt;&lt;/a&gt;环境信息&lt;/h2&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;操作系统&lt;/strong&gt;：HarmonyOS HongMeng Kernel 1.11.0 (OpenHarmony)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Node.js版本&lt;/strong&gt;：22.7.0&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Vite版本&lt;/strong&gt;：7.2.6&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Rollup版本&lt;/strong&gt;：4.53.3&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;项目类型&lt;/strong&gt;&lt;/li&gt;&lt;/ul&gt;</summary>
-    
-      <category term="软件" scheme="http://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
-    
-    
-      <category term="鸿蒙" scheme="http://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
-    
-      <category term="鸿蒙PC" scheme="http://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/"/>
-    
-      <category term="matebook pro" scheme="http://ystyle.top/tags/matebook-pro/"/>
-    
-      <category term="vite" scheme="http://ystyle.top/tags/vite/"/>
-    
-      <category term="vue3" scheme="http://ystyle.top/tags/vue3/"/>
-    
-      <category term="Rollup" scheme="http://ystyle.top/tags/Rollup/"/>
+&lt;li&gt;&lt;strong&gt;项目类型&lt;/strong&gt;：Vue 3 + TypeScript + Vite&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;问题描述&#34;&gt;&lt;a href=&#34;#问题描述&#34; class=&#34;headerlink&#34; title=&#34;问题描述&#34;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;
+&lt;p&gt;在鸿蒙系统上运行&lt;code&gt;npm run dev&lt;/code&gt;时出现以下错误：&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="鸿蒙" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
+    <category term="鸿蒙PC" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/"/>
+    <category term="vite" scheme="https://ystyle.top/tags/vite/"/>
+    <category term="vue3" scheme="https://ystyle.top/tags/vue3/"/>
+    <category term="Rollup" scheme="https://ystyle.top/tags/Rollup/"/>
+    <category term="matebook-pro" scheme="https://ystyle.top/tags/matebook-pro/"/>
     
   </entry>
-  
   <entry>
-    <title>hypyland实现alt + tab切换到任意工作区的窗口</title>
-    <link href="http://ystyle.top/2023/10/13/hyprland-alt-tab-switch-to-any-widnow/"/>
-    <id>http://ystyle.top/2023/10/13/hyprland-alt-tab-switch-to-any-widnow/</id>
+    <title>hypyland实现alt &#43; tab切换到任意工作区的窗口</title>
+    <link href="https://ystyle.top/2023/10/13/hyprland-alt-tab-switch-to-any-widnow/"/>
+    <id>https://ystyle.top/2023/10/13/hyprland-alt-tab-switch-to-any-widnow/</id>
     <published>2023-10-13T02:46:26.000Z</published>
     <updated>2023-10-13T07:08:26.000Z</updated>
     
     <summary type="html">&lt;blockquote&gt;
 &lt;p&gt;hypyland使用过程中，遇到开了很多工作区和很多窗口时，找指定的窗口会比较麻烦&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3 id=&quot;依赖&quot;&gt;&lt;a href=&quot;#依赖&quot; class=&quot;headerlink&quot; title=&quot;依赖&quot;&gt;&lt;/a&gt;依赖&lt;/h3&gt;&lt;blockquote&gt;
+&lt;h3 id=&#34;依赖&#34;&gt;&lt;a href=&#34;#依赖&#34; class=&#34;headerlink&#34; title=&#34;依赖&#34;&gt;&lt;/a&gt;依赖&lt;/h3&gt;
+&lt;blockquote&gt;
 &lt;p&gt;一键安装 &lt;code&gt;yay -S jq rofi-lbonn-wayland-git&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;jq&lt;/li&gt;
 &lt;li&gt;rofi&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&quot;脚本&quot;&gt;&lt;/h3&gt;</summary>
-    
-      <category term="系统" scheme="http://ystyle.top/categories/%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-      <category term="hyprland" scheme="http://ystyle.top/tags/hyprland/"/>
-    
-      <category term="wayland" scheme="http://ystyle.top/tags/wayland/"/>
+&lt;h3 id=&#34;脚本&#34;&gt;&lt;a href=&#34;#脚本&#34; class=&#34;headerlink&#34; title=&#34;脚本&#34;&gt;&lt;/a&gt;脚本&lt;/h3&gt;
+&lt;p&gt;把以下脚本存放到&lt;code&gt;~/.config/hypr/scripts/switch_windows&lt;/code&gt;&lt;/p&gt;</summary>
+    <category term="系统" scheme="https://ystyle.top/categories/%E7%B3%BB%E7%BB%9F/"/>
+    <category term="hyprland" scheme="https://ystyle.top/tags/hyprland/"/>
+    <category term="wayland" scheme="https://ystyle.top/tags/wayland/"/>
     
   </entry>
-  
   <entry>
     <title>使用泛型设计gorm扩展字段</title>
-    <link href="http://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/"/>
-    <id>http://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/</id>
+    <link href="https://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/"/>
+    <id>https://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/</id>
     <published>2023-09-25T09:37:26.000Z</published>
     <updated>2023-09-25T09:37:26.000Z</updated>
     
     <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;大型项目经常需要在标准的用户表或员工表加些扩展字段，如果你有一套标准的用户管理系统的话，要么每个项目复制过来改一遍或者添加十几个固定的自定义字段Def1~Def10， 现在可以用在gorm定义模型时使用泛型来解决这个问题&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&quot;gorm-embeded嵌入字段&quot;&gt;&lt;a href=&quot;#gorm-embeded嵌入字段&quot; class=&quot;headerlink&quot; title=&quot;gorm embeded嵌入字段&quot;&gt;&lt;/a&gt;gorm embeded嵌入字段&lt;/h3&gt;&lt;p&gt;使用&lt;code&gt;gorm:&amp;quot;embedded&amp;q&lt;/code&gt;&lt;/p&gt;</summary>
-    
-      <category term="软件" scheme="http://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
-    
-    
-      <category term="go" scheme="http://ystyle.top/tags/go/"/>
-    
-      <category term="gorm" scheme="http://ystyle.top/tags/gorm/"/>
-    
-      <category term="泛型" scheme="http://ystyle.top/tags/%E6%B3%9B%E5%9E%8B/"/>
+&lt;p&gt;大型项目经常需要在标准的用户表或员工表加些扩展字段，如果你有一套标准的用户管理系统的话，要么每个项目复制过来改一遍或者添加十几个固定的自定义字段Def1~Def10， 现在可以用在gorm定义模型时使用泛型来解决这个问题&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="go" scheme="https://ystyle.top/tags/go/"/>
+    <category term="gorm" scheme="https://ystyle.top/tags/gorm/"/>
+    <category term="泛型" scheme="https://ystyle.top/tags/%E6%B3%9B%E5%9E%8B/"/>
     
   </entry>
-  
   <entry>
     <title>使用qemu8.0安装龙芯loongarch64版本archlinux</title>
-    <link href="http://ystyle.top/2023/07/20/install-loongarch64-archlinux-qemu/"/>
-    <id>http://ystyle.top/2023/07/20/install-loongarch64-archlinux-qemu/</id>
+    <link href="https://ystyle.top/2023/07/20/install-loongarch64-archlinux-qemu/"/>
+    <id>https://ystyle.top/2023/07/20/install-loongarch64-archlinux-qemu/</id>
     <published>2023-07-20T02:46:26.000Z</published>
     <updated>2023-07-20T02:46:26.000Z</updated>
     
-    <summary type="html">&lt;h3 id=&quot;准备&quot;&gt;&lt;a href=&quot;#准备&quot; class=&quot;headerlink&quot; title=&quot;准备&quot;&gt;&lt;/a&gt;准备&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://loongarchlinux.org/pages/download/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Loong Arch Linux官网&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://mirrors.pku.edu.cn/loongarch/archlinux/images/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;qemu镜像下载&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</summary>
-    
-      <category term="系统" scheme="http://ystyle.top/categories/%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-      <category term="loongarch" scheme="http://ystyle.top/tags/loongarch/"/>
-    
-      <category term="archlinux" scheme="http://ystyle.top/tags/archlinux/"/>
-    
-      <category term="qemu" scheme="http://ystyle.top/tags/qemu/"/>
+    <summary type="html">&lt;h3 id=&#34;准备&#34;&gt;&lt;a href=&#34;#准备&#34; class=&#34;headerlink&#34; title=&#34;准备&#34;&gt;&lt;/a&gt;准备&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://loongarchlinux.org/pages/download/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Loong Arch Linux官网&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mirrors.pku.edu.cn/loongarch/archlinux/images/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;qemu镜像下载&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;QEMU_EFI_8.0.fd&lt;/code&gt;: 固件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;archlinux-xfce4-2023.05.10-loong64.qcow2.zst&lt;/code&gt;: 系统镜像, 下载后需要解压出qcow2文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;安装依赖&#34;&gt;&lt;a href=&#34;#安装依赖&#34; class=&#34;headerlink&#34; title=&#34;安装依赖&#34;&gt;&lt;/a&gt;安装依赖&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;建议安装&lt;code&gt;qemu-full&lt;/code&gt;包, 我以前安装的不是这个, 导致gpu加载不了&lt;/p&gt;</summary>
+    <category term="系统" scheme="https://ystyle.top/categories/%E7%B3%BB%E7%BB%9F/"/>
+    <category term="qemu" scheme="https://ystyle.top/tags/qemu/"/>
+    <category term="loongarch" scheme="https://ystyle.top/tags/loongarch/"/>
+    <category term="archlinux" scheme="https://ystyle.top/tags/archlinux/"/>
     
   </entry>
-  
   <entry>
     <title>在archlinux aur上提交龙芯loongarch的软件包</title>
-    <link href="http://ystyle.top/2023/07/19/push-loongarch64-app-to-archlinux-aur/"/>
-    <id>http://ystyle.top/2023/07/19/push-loongarch64-app-to-archlinux-aur/</id>
+    <link href="https://ystyle.top/2023/07/19/push-loongarch64-app-to-archlinux-aur/"/>
+    <id>https://ystyle.top/2023/07/19/push-loongarch64-app-to-archlinux-aur/</id>
     <published>2023-07-19T06:46:26.000Z</published>
     <updated>2023-07-19T06:46:26.000Z</updated>
     
-    <summary type="html">&lt;figure class=&quot;image-bubble&quot;&gt;
-                &lt;div class=&quot;img-lightbox&quot;&gt;
-                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
-                    &lt;img src=&quot;https://github.com/ystyle/ystyle.github.io/assets/4478635/1813826c-da90-426f-9d19-e9a459f3f262&quot; alt=&quot;image&quot; title=&quot;&quot;&gt;
-                &lt;/div&gt;&lt;/figure&gt;</summary>
-    
-      <category term="系统" scheme="http://ystyle.top/categories/%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-      <category term="loongarch" scheme="http://ystyle.top/tags/loongarch/"/>
-    
-      <category term="archlinux" scheme="http://ystyle.top/tags/archlinux/"/>
-    
-      <category term="龙芯" scheme="http://ystyle.top/tags/%E9%BE%99%E8%8A%AF/"/>
+    <summary type="html">&lt;figure class=&#34;image-bubble&#34;&gt;
+  &lt;div class=&#34;img-lightbox&#34;&gt;
+    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;
+    &lt;img src=&#34;https://github.com/ystyle/ystyle.github.io/assets/4478635/1813826c-da90-426f-9d19-e9a459f3f262&#34; alt=&#34;image&#34;&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;image-caption&#34;&gt;image&lt;/div&gt;
+&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;发现安装好龙芯后, laur软件仓库就自带了yay和paru, 可以直接使用pacman安装. 我有一个软件kaf-cli是go写的可以直接编译到龙芯上.本文记录一下PKGBUILD的写法&lt;/p&gt;</summary>
+    <category term="系统" scheme="https://ystyle.top/categories/%E7%B3%BB%E7%BB%9F/"/>
+    <category term="loongarch" scheme="https://ystyle.top/tags/loongarch/"/>
+    <category term="archlinux" scheme="https://ystyle.top/tags/archlinux/"/>
+    <category term="龙芯" scheme="https://ystyle.top/tags/%E9%BE%99%E8%8A%AF/"/>
     
   </entry>
-  
   <entry>
-    <title>k3s云上master+内网agent的部署方式</title>
-    <link href="http://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/"/>
-    <id>http://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/</id>
+    <title>k3s云上master&#43;内网agent的部署方式</title>
+    <link href="https://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/"/>
+    <id>https://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/</id>
     <published>2023-03-11T13:02:26.000Z</published>
     <updated>2023-03-11T13:02:26.000Z</updated>
     
     <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;公网master和内网agent使用&lt;code&gt;wireguard-native&lt;/code&gt;通信， 只要在所有节点上安装了&lt;code&gt;wireguard&lt;/code&gt;模块，k3s会自动处理所有通信流量&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&quot;准备&quot;&gt;&lt;a href=&quot;#准备&quot; class=&quot;headerlink&quot; title=&quot;准备&quot;&gt;&lt;/a&gt;准备&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;在云端master开放&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;tcp&lt;/code&gt; &lt;code&gt;6443&lt;/code&gt; 端口，&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;udp&lt;/code&gt; &lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;</summary>
-    
-      <category term="运维" scheme="http://ystyle.top/categories/%E8%BF%90%E7%BB%B4/"/>
-    
-    
-      <category term="k3s" scheme="http://ystyle.top/tags/k3s/"/>
-    
-      <category term="kubernetes" scheme="http://ystyle.top/tags/kubernetes/"/>
-    
-      <category term="wireguard-native" scheme="http://ystyle.top/tags/wireguard-native/"/>
-    
-      <category term="wireguard" scheme="http://ystyle.top/tags/wireguard/"/>
+&lt;p&gt;公网master和内网agent使用&lt;code&gt;wireguard-native&lt;/code&gt;通信， 只要在所有节点上安装了&lt;code&gt;wireguard&lt;/code&gt;模块，k3s会自动处理所有通信流量&lt;/p&gt;</summary>
+    <category term="运维" scheme="https://ystyle.top/categories/%E8%BF%90%E7%BB%B4/"/>
+    <category term="k3s" scheme="https://ystyle.top/tags/k3s/"/>
+    <category term="kubernetes" scheme="https://ystyle.top/tags/kubernetes/"/>
+    <category term="wireguard-native" scheme="https://ystyle.top/tags/wireguard-native/"/>
+    <category term="wireguard" scheme="https://ystyle.top/tags/wireguard/"/>
     
   </entry>
-  
   <entry>
     <title>阿里云网盘映射本地硬盘</title>
-    <link href="http://ystyle.top/2022/01/01/aliyundrive-webdav/"/>
-    <id>http://ystyle.top/2022/01/01/aliyundrive-webdav/</id>
+    <link href="https://ystyle.top/2022/01/01/aliyundrive-webdav/"/>
+    <id>https://ystyle.top/2022/01/01/aliyundrive-webdav/</id>
     <published>2022-01-01T14:46:26.000Z</published>
     <updated>2022-01-01T14:46:26.000Z</updated>
     
-    <summary type="html">&lt;h3 id=&quot;下载aliyundrive-webdav&quot;&gt;&lt;a href=&quot;#下载aliyundrive-webdav&quot; class=&quot;headerlink&quot; title=&quot;下载aliyundrive-webdav&quot;&gt;&lt;/a&gt;下载aliyundrive-webdav&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;下载地址: &lt;a href=&quot;https://github.com/messense/aliyundrive-webdav/releases/latest&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/messense/aliyundrive-we&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</summary>
-    
-      <category term="软件" scheme="http://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
-    
-    
-      <category term="阿里云网盘" scheme="http://ystyle.top/tags/%E9%98%BF%E9%87%8C%E4%BA%91%E7%BD%91%E7%9B%98/"/>
-    
-      <category term="webdav" scheme="http://ystyle.top/tags/webdav/"/>
+    <summary type="html">&lt;h3 id=&#34;下载aliyundrive-webdav&#34;&gt;&lt;a href=&#34;#下载aliyundrive-webdav&#34; class=&#34;headerlink&#34; title=&#34;下载aliyundrive-webdav&#34;&gt;&lt;/a&gt;下载aliyundrive-webdav&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;下载地址: &lt;a href=&#34;https://github.com/messense/aliyundrive-webdav/releases/latest&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://github.com/messense/aliyundrive-webdav/releases/latest&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;解压并放在一个目录里&lt;br&gt;
+
+&lt;figure class=&#34;image-bubble&#34;&gt;
+  &lt;div class=&#34;img-lightbox&#34;&gt;
+    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;
+    &lt;img src=&#34;https://dll.ystyle.top/images/2022-01/explorer_2022-01-01_23-16-55.png&#34; alt=&#34;&#34;&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;image-caption&#34;&gt;&lt;/div&gt;
+&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;准备脚本&#34;&gt;&lt;a href=&#34;#准备脚本&#34; class=&#34;headerlink&#34; title=&#34;准备脚本&#34;&gt;&lt;/a&gt;准备脚本&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;把以下内容存为run.ps1&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$env:REFRESH_TOKEN=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;484b469b3ef74dcaba5cf21aeadae2ca&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$env:WEBDAV_AUTH_USER=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;admin&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$env:WEBDAV_AUTH_PASSWORD=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;123456&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Start-Process -FilePath aliyundrive-webdav.exe -ArgumentList (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;--port=8080&amp;#34;&lt;/span&gt;) -Wait -WindowStyle Hidden
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;脚本配置说明:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;$env:REFRESH_TOKEN&lt;/code&gt;: 为阿里云网盘登陆后的token, 必需改为自己的&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="阿里云网盘" scheme="https://ystyle.top/tags/%E9%98%BF%E9%87%8C%E4%BA%91%E7%BD%91%E7%9B%98/"/>
+    <category term="webdav" scheme="https://ystyle.top/tags/webdav/"/>
     
   </entry>
-  
   <entry>
     <title>go mod 拉取 gogs 私有仓库</title>
-    <link href="http://ystyle.top/2021/06/22/go-mod-gogs-private/"/>
-    <id>http://ystyle.top/2021/06/22/go-mod-gogs-private/</id>
+    <link href="https://ystyle.top/2021/06/22/go-mod-gogs-private/"/>
+    <id>https://ystyle.top/2021/06/22/go-mod-gogs-private/</id>
     <published>2021-06-22T02:46:26.000Z</published>
     <updated>2021-06-22T02:46:26.000Z</updated>
     
-    <summary type="html">&lt;h3 id=&quot;环境变量设置&quot;&gt;&lt;a href=&quot;#环境变量设置&quot; class=&quot;headerlink&quot; title=&quot;环境变量设置&quot;&gt;&lt;/a&gt;环境变量设置&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;添加环境变量或设置go env&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;&lt;/ol&gt;</summary>
-    
-      <category term="软件" scheme="http://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
-    
-    
-      <category term="git" scheme="http://ystyle.top/tags/git/"/>
-    
-      <category term="gogs" scheme="http://ystyle.top/tags/gogs/"/>
-    
-      <category term="go" scheme="http://ystyle.top/tags/go/"/>
+    <summary type="html">&lt;h3 id=&#34;环境变量设置&#34;&gt;&lt;a href=&#34;#环境变量设置&#34; class=&#34;headerlink&#34; title=&#34;环境变量设置&#34;&gt;&lt;/a&gt;环境变量设置&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;添加环境变量或设置go env&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;export GOPRIVATE=git.hofo.co
+# 或者
+go env -w GOPRIVATE=git.hofo.co
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;git设置&#34;&gt;&lt;a href=&#34;#git设置&#34; class=&#34;headerlink&#34; title=&#34;git设置&#34;&gt;&lt;/a&gt;git设置&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;在git设置http.extraheader
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;PRIVATE-TOKEN&lt;/code&gt;生成方式:  在点击gogs右上头像-用户设置-授权应用-生成新的token&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git config --global http.extraheader &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;PRIVATE-TOKEN: 5737d215af7f9a41a2abe98631d312e9e9311d29d&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;在git添加url配置, &lt;code&gt;ystyle:5737d215af7f9a41a2abe98631d312e9e939d29d11&lt;/code&gt;是用户名和上一步生成的token&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git config --global url.&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://ystyle:5737d215af7f9a41a2abe98631d312e9e939d29d11@git.hofo.co&amp;#34;&lt;/span&gt;.insteadOf &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://git.hofo.co&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="GIT" scheme="https://ystyle.top/tags/GIT/"/>
+    <category term="gogs" scheme="https://ystyle.top/tags/gogs/"/>
+    <category term="go" scheme="https://ystyle.top/tags/go/"/>
     
   </entry>
-  
   <entry>
     <title>开源鸿蒙网络和hdc连接方法</title>
-    <link href="http://ystyle.top/2021/06/06/openharmonyos-hdc-and-network/"/>
-    <id>http://ystyle.top/2021/06/06/openharmonyos-hdc-and-network/</id>
+    <link href="https://ystyle.top/2021/06/06/openharmonyos-hdc-and-network/"/>
+    <id>https://ystyle.top/2021/06/06/openharmonyos-hdc-and-network/</id>
     <published>2021-06-06T10:10:13.000Z</published>
-    <updated>2026-09-11T03:59:55.464Z</updated>
+    <updated>2021-06-06T10:10:13.000Z</updated>
     
-    <summary type="html">&lt;h3 id=&quot;hdc下载&quot;&gt;&lt;a href=&quot;#hdc下载&quot; class=&quot;headerlink&quot; title=&quot;hdc下载&quot;&gt;&lt;/a&gt;hdc下载&lt;/h3&gt;&lt;ul&gt;
+    <summary type="html">&lt;h3 id=&#34;hdc下载&#34;&gt;&lt;a href=&#34;#hdc下载&#34; class=&#34;headerlink&#34; title=&#34;hdc下载&#34;&gt;&lt;/a&gt;hdc下载&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;如果下载了源码，可以在源码目录找到: developtools/hdc_standard/prebuilt/windows/hdc_std.exe&lt;/li&gt;
-&lt;li&gt;远程仓库地址： &lt;a href=&quot;https://gitee.com/openharmony/developtools_hdc_standard&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://gitee.com/openha&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</summary>
-    
-      <category term="系统" scheme="http://ystyle.top/categories/%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-      <category term="鸿蒙" scheme="http://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
+&lt;li&gt;远程仓库地址： &lt;a href=&#34;https://gitee.com/openharmony/developtools_hdc_standard&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://gitee.com/openharmony/developtools_hdc_standard&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;hdc使用手册: &lt;a href=&#34;https://gitee.com/openharmony/docs/blob/master/zh-cn/device-dev/subsystems/hdc_std-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%AF%BC.md&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://gitee.com/openharmony/docs/blob/master/zh-cn/device-dev/subsystems/hdc_std-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%AF%BC.md&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;通过usb连接鸿蒙&#34;&gt;&lt;a href=&#34;#通过usb连接鸿蒙&#34; class=&#34;headerlink&#34; title=&#34;通过usb连接鸿蒙&#34;&gt;&lt;/a&gt;通过usb连接鸿蒙&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;通过hi3516背面的type-c口连接电脑, 目前只有这口能传数据， 底下的口不行
+&lt;ul&gt;
+&lt;li&gt;如果成功，可以在电脑 &lt;code&gt;设备管理-用串行总线设备&lt;/code&gt;下面看到&lt;code&gt;HDC Device&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;打开终端， 输入&lt;code&gt;hdc list targets&lt;/code&gt;列出设备&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+&lt;figure class=&#34;image-bubble&#34;&gt;
+  &lt;div class=&#34;img-lightbox&#34;&gt;
+    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;
+    &lt;img src=&#34;https://dll.ystyle.top/images/2021-06/mmc_2021-06-07_19-52-37.png&#34; alt=&#34;&#34;&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;image-caption&#34;&gt;&lt;/div&gt;
+&lt;/figure&gt;
+&lt;br&gt;
+
+&lt;figure class=&#34;image-bubble&#34;&gt;
+  &lt;div class=&#34;img-lightbox&#34;&gt;
+    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;
+    &lt;img src=&#34;https://dll.ystyle.top/images/2021-06/WindowsTerminal_2021-06-07_19-53-25.png&#34; alt=&#34;&#34;&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;image-caption&#34;&gt;&lt;/div&gt;
+&lt;/figure&gt;
+&lt;/p&gt;</summary>
+    <category term="系统" scheme="https://ystyle.top/categories/%E7%B3%BB%E7%BB%9F/"/>
+    <category term="鸿蒙" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
     
   </entry>
-  
   <entry>
     <title>鸿蒙开发板HI3516用命令行连接wifi</title>
-    <link href="http://ystyle.top/2020/12/18/hi3516-connect-wifi/"/>
-    <id>http://ystyle.top/2020/12/18/hi3516-connect-wifi/</id>
+    <link href="https://ystyle.top/2020/12/18/hi3516-connect-wifi/"/>
+    <id>https://ystyle.top/2020/12/18/hi3516-connect-wifi/</id>
     <published>2020-12-18T12:11:48.000Z</published>
     <updated>2020-12-18T12:11:48.000Z</updated>
     
     <summary type="html">&lt;blockquote&gt;
 &lt;p&gt;鸿蒙的HI3516编译里已经有wpa_supplicant相关工程了，但编译时没有包进去, 所以只要修改配置文件后就能编译出来了&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;主要修改文件: &lt;a href=&quot;https://gitee.com/openharmony/applications_sample_camera/blob/master/communication/BUILD.gn#L17-18&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;communication/BUILD.gn#L17-18&lt;/a&gt; 行之间添加， 以下第2行&lt;br&gt;&lt;/p&gt;</summary>
-    
-      <category term="系统" scheme="http://ystyle.top/categories/%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-      <category term="鸿蒙" scheme="http://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
-    
-      <category term="wifi" scheme="http://ystyle.top/tags/wifi/"/>
+&lt;p&gt;主要修改文件: &lt;a href=&#34;https://gitee.com/openharmony/applications_sample_camera/blob/master/communication/BUILD.gn#L17-18&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;communication/BUILD.gn#L17-18&lt;/a&gt;
+ 行之间添加， 以下第2行&lt;/p&gt;</summary>
+    <category term="系统" scheme="https://ystyle.top/categories/%E7%B3%BB%E7%BB%9F/"/>
+    <category term="鸿蒙" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
+    <category term="wifi" scheme="https://ystyle.top/tags/wifi/"/>
     
   </entry>
-  
 </feed>

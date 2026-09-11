@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>ShareX on 东方星痕</title>
+		<link>https://ystyle.top/tags/ShareX/</link>
+		<description>Recent content in ShareX on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Wed, 05 Jul 2017 14:06:26 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/ShareX/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>ShareX使用七牛文件上传</title>
+				<link>https://ystyle.top/2017/07/05/share-the-use-of-qiniu-file-upload/</link>
+				<pubDate>Wed, 05 Jul 2017 14:06:26 +0800</pubDate>
+				<guid>https://ystyle.top/2017/07/05/share-the-use-of-qiniu-file-upload/</guid>
+				<description>&lt;ul&gt;&#xA;&lt;li&gt;ShareX界面&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://dll.ystyle.top/qiniu//201717051546-t.png&#34; alt=&#34;&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&lt;h3 id=&#34;配置文件&#34;&gt;&lt;a href=&#34;#配置文件&#34; class=&#34;headerlink&#34; title=&#34;配置文件&#34;&gt;&lt;/a&gt;配置文件&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;token字段得自己在七牛的其它工具生成， 本文后面提供一个&lt;a href=&#34;https://ystyle.top/2017/07/05/share-the-use-of-qiniu-file-upload/#qiniu-token-%e8%8e%b7%e5%8f%96%e5%b7%a5%e5%85%b7&#34;&gt;我制作的小工具&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;上传的文件名格式为 &lt;code&gt;20171705/1546-t.png&lt;/code&gt;,  &lt;code&gt;-&lt;/code&gt;后面的为随机数字或字母。&lt;/li&gt;&#xA;&lt;li&gt;URL字段在七牛存储空间的内容管理页面的&lt;code&gt;外链默认域名&lt;/code&gt; 下拉菜单能找到&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://91p7joo70y.codesandbox.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;在线配置生成工具&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;在配置页面填写好&lt;code&gt;存储区域、token、域名&lt;/code&gt; 下载配置导入ShareX&lt;/li&gt;&#xA;&lt;li&gt;&lt;del&gt;文件保存为 &lt;code&gt;qiniu.sxcu&lt;/code&gt; 然后在上图所示界面导入&lt;/del&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;del&gt;&lt;code&gt;RequestURL&lt;/code&gt; 可能因为每个对象存储的区域不一样， 华东，华北，华南，北美 的地址分别为 &lt;code&gt;http://up-z0.qiniu.com/&lt;/code&gt; &lt;code&gt;http://up-z1.qiniu.com/&lt;/code&gt; &lt;code&gt;http://up-z2.qiniu.com/&lt;/code&gt; &lt;code&gt;http://up-na0.qiniu.com/&lt;/code&gt;&lt;/del&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;配置文件示例：&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>webdav on 东方星痕</title>
+		<link>https://ystyle.top/tags/webdav/</link>
+		<description>Recent content in webdav on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Sat, 01 Jan 2022 22:46:26 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/webdav/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>阿里云网盘映射本地硬盘</title>
+				<link>https://ystyle.top/2022/01/01/aliyundrive-webdav/</link>
+				<pubDate>Sat, 01 Jan 2022 22:46:26 +0800</pubDate>
+				<guid>https://ystyle.top/2022/01/01/aliyundrive-webdav/</guid>
+				<description>&lt;h3 id=&#34;下载aliyundrive-webdav&#34;&gt;&lt;a href=&#34;#下载aliyundrive-webdav&#34; class=&#34;headerlink&#34; title=&#34;下载aliyundrive-webdav&#34;&gt;&lt;/a&gt;下载aliyundrive-webdav&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;下载地址: &lt;a href=&#34;https://github.com/messense/aliyundrive-webdav/releases/latest&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://github.com/messense/aliyundrive-webdav/releases/latest&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;解压并放在一个目录里&lt;br&gt;&#xA;&#xA;&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://dll.ystyle.top/images/2022-01/explorer_2022-01-01_23-16-55.png&#34; alt=&#34;&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;准备脚本&#34;&gt;&lt;a href=&#34;#准备脚本&#34; class=&#34;headerlink&#34; title=&#34;准备脚本&#34;&gt;&lt;/a&gt;准备脚本&lt;/h3&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;把以下内容存为run.ps1&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$env:REFRESH_TOKEN=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;484b469b3ef74dcaba5cf21aeadae2ca&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$env:WEBDAV_AUTH_USER=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;admin&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$env:WEBDAV_AUTH_PASSWORD=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;123456&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Start-Process -FilePath aliyundrive-webdav.exe -ArgumentList (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;--port=8080&amp;#34;&lt;/span&gt;) -Wait -WindowStyle Hidden&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;脚本配置说明:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;code&gt;$env:REFRESH_TOKEN&lt;/code&gt;: 为阿里云网盘登陆后的token, 必需改为自己的&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

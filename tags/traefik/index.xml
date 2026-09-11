@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>traefik on 东方星痕</title>
+		<link>https://ystyle.top/tags/traefik/</link>
+		<description>Recent content in traefik on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 08 Dec 2017 14:46:26 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/traefik/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>traefik配置入门</title>
+				<link>https://ystyle.top/2017/12/08/traefik-getting-start/</link>
+				<pubDate>Fri, 08 Dec 2017 14:46:26 +0800</pubDate>
+				<guid>https://ystyle.top/2017/12/08/traefik-getting-start/</guid>
+				<description>&lt;h3 id=&#34;添加-etc-traefik-traefik-toml-配置文件&#34;&gt;&lt;a href=&#34;#添加-etc-traefik-traefik-toml-配置文件&#34; class=&#34;headerlink&#34; title=&#34;添加 /etc/traefik/traefik.toml 配置文件&#34;&gt;&lt;/a&gt;添加 /etc/traefik/traefik.toml 配置文件&lt;/h3&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;traefik会在/etc/traefik 、 $HOME/.traefik/ 或 当前目录查找 traefik.toml 文件。&lt;br&gt;&#xA;所以本文的配置文件都放&lt;code&gt;/etc/traefik&lt;/code&gt;下面&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

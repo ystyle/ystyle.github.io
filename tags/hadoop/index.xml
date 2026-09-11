@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>hadoop on 东方星痕</title>
+		<link>https://ystyle.top/tags/hadoop/</link>
+		<description>Recent content in hadoop on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Sun, 24 Apr 2016 12:04:32 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/hadoop/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>使用hadoop&#43;中文分词统计小说里的用词频率</title>
+				<link>https://ystyle.top/2016/02/22/shi-yong-hadoop-zhong-wen-fen-ci-tong-ji-xiao-shuo-li-de-yong-ci-pin-lu/</link>
+				<pubDate>Mon, 22 Feb 2016 14:24:16 +0800</pubDate>
+				<guid>https://ystyle.top/2016/02/22/shi-yong-hadoop-zhong-wen-fen-ci-tong-ji-xiao-shuo-li-de-yong-ci-pin-lu/</guid>
+				<description>&lt;h2 id=&#34;使用hadoop-中文分词统计小说里的用词频率&#34;&gt;&lt;a href=&#34;#使用hadoop-中文分词统计小说里的用词频率&#34; class=&#34;headerlink&#34; title=&#34;使用hadoop+中文分词统计小说里的用词频率&#34;&gt;&lt;/a&gt;使用hadoop+中文分词统计小说里的用词频率&lt;/h2&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;事情是这样的, 某小说贴吧吧友开玩笑说 某作者最常使用的词语是xxxx , 然后就突发奇想地想用工具分析一下&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h3 id=&#34;环境&#34;&gt;&lt;a href=&#34;#环境&#34; class=&#34;headerlink&#34; title=&#34;环境&#34;&gt;&lt;/a&gt;环境&lt;/h3&gt;&#xA;&lt;p&gt;系统: ArchLinux&lt;/p&gt;&#xA;&lt;p&gt;软件: hadoop 2.7&lt;/p&gt;&#xA;&lt;h3 id=&#34;准备&#34;&gt;&lt;a href=&#34;#准备&#34; class=&#34;headerlink&#34; title=&#34;准备&#34;&gt;&lt;/a&gt;准备&lt;/h3&gt;&#xA;&lt;p&gt;下载hadoop: &lt;a href=&#34;http://hadoop.apache.org/releases.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;下载地址&lt;/a&gt;&#xA;&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

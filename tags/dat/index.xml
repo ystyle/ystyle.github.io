@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>dat on 东方星痕</title>
+		<link>https://ystyle.top/tags/dat/</link>
+		<description>Recent content in dat on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Mon, 03 Dec 2018 15:57:33 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/dat/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>使用dat代替resilio sync分享数据</title>
+				<link>https://ystyle.top/2018/12/03/Use-dat-instead-of-resilio-sync-to-share-data/</link>
+				<pubDate>Mon, 03 Dec 2018 15:57:33 +0800</pubDate>
+				<guid>https://ystyle.top/2018/12/03/Use-dat-instead-of-resilio-sync-to-share-data/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;用btsync/resilio sync绝大部分原因就是用来做文件分享，只要简单添加个文件夹，把key复制出去就好了，同步用户数上来后甚至可以把软件关掉也不会影响分享&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

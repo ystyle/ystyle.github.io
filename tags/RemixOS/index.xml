@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>RemixOS on 东方星痕</title>
+		<link>https://ystyle.top/tags/RemixOS/</link>
+		<description>Recent content in RemixOS on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 26 Aug 2016 10:14:01 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/RemixOS/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>VBox虚拟机安装Remix OS</title>
+				<link>https://ystyle.top/2016/03/25/vboxxu-ni-ji-an-zhuang-remix-os/</link>
+				<pubDate>Fri, 25 Mar 2016 23:59:42 +0800</pubDate>
+				<guid>https://ystyle.top/2016/03/25/vboxxu-ni-ji-an-zhuang-remix-os/</guid>
+				<description>&lt;h2 id=&#34;VBox虚拟机安装Remix-OS&#34;&gt;&lt;a href=&#34;#VBox虚拟机安装Remix-OS&#34; class=&#34;headerlink&#34; title=&#34;VBox虚拟机安装Remix OS&#34;&gt;&lt;/a&gt;VBox虚拟机安装Remix OS&lt;/h2&gt;&#xA;&lt;h3 id=&#34;下载&#34;&gt;&lt;a href=&#34;#下载&#34; class=&#34;headerlink&#34; title=&#34;下载&#34;&gt;&lt;/a&gt;下载&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://www.jide.com/remixos-for-pc#downloadNow&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;下载Remix&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;h3 id=&#34;创建虚拟机&#34;&gt;&lt;a href=&#34;#创建虚拟机&#34; class=&#34;headerlink&#34; title=&#34;创建虚拟机&#34;&gt;&lt;/a&gt;创建虚拟机&lt;/h3&gt;&#xA;&lt;p&gt;选择64位的&lt;/p&gt;&#xA;&#xA;&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://ystyle.top/images/2016/03/1.png&#34; alt=&#34;&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&lt;p&gt;内存1G以上&lt;/p&gt;&#xA;&#xA;&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://ystyle.top/images/2016/03/2.png&#34; alt=&#34;&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://ystyle.top/images/2016/03/3.png&#34; alt=&#34;&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&lt;p&gt;一定要VHD的vdi的启动时会卡在命令行界面&lt;/p&gt;&#xA;&#xA;&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://ystyle.top/images/2016/03/4.png&#34; alt=&#34;&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&lt;p&gt;硬盘看着给&lt;/p&gt;&#xA;&#xA;&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://ystyle.top/images/2016/03/5-1.png&#34; alt=&#34;&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&lt;p&gt;创建要虚拟机里在设置里把显存调成最大,并启用3D加速&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

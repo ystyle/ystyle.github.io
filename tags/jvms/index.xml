@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>jvms on 东方星痕</title>
+		<link>https://ystyle.top/tags/jvms/</link>
+		<description>Recent content in jvms on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Mon, 24 Jul 2017 09:22:49 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/jvms/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>全新的重制版jvms2.0</title>
+				<link>https://ystyle.top/2017/07/24/the-new-heavy-version-of-jvms2.0/</link>
+				<pubDate>Mon, 24 Jul 2017 09:22:49 +0800</pubDate>
+				<guid>https://ystyle.top/2017/07/24/the-new-heavy-version-of-jvms2.0/</guid>
+				<description>&lt;h3 id=&#34;介绍&#34;&gt;&lt;a href=&#34;#介绍&#34; class=&#34;headerlink&#34; title=&#34;介绍&#34;&gt;&lt;/a&gt;介绍&lt;/h3&gt;&#xA;&lt;p&gt;JDK Version Manager (JVMS) for Windows&lt;/p&gt;&#xA;&lt;p&gt;Windows下JDK多版本管理器，类似 nvm, nvmw, rvm&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/ystyle/jvms/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;jvms下载地址&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;这对JDK不同版本之间切换是非常有用的。例如，如果你想测试一个项目你想使用最新最前沿的版本,却不想卸载JDK的稳定版，这个工具可以很好的解决。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Windows JDK 版本管理器 jvms 0.0.2 发布</title>
+				<link>https://ystyle.top/2015/12/03/windows-jdk-ban-ben-guan-li-qi-jvms-fa-bu/</link>
+				<pubDate>Thu, 03 Dec 2015 11:57:21 +0800</pubDate>
+				<guid>https://ystyle.top/2015/12/03/windows-jdk-ban-ben-guan-li-qi-jvms-fa-bu/</guid>
+				<description>&lt;p&gt;JDK Version Manager (JVMS) for Windows&lt;/p&gt;&#xA;&lt;p&gt;Windows下JDK多版本管理器，类似 nvm, nvmw, rvm&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/ystyle/jvms/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;jvms下载地址&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;本软件源于 &lt;a href=&#34;https://github.com/coreybutler/nvm-windows&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;nvm-windows&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;这对JDK不同版本之间切换是非常有用的。例如，如果你想测试一个项目你想使用最新最前沿的版本,却不想卸载JDK的稳定版，这个工具可以很好的解决。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>etcd on 东方星痕</title>
+		<link>https://ystyle.top/tags/etcd/</link>
+		<description>Recent content in etcd on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Sat, 19 Mar 2016 00:13:36 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/etcd/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>docker &#43; swarm &#43; etcd 集群搭建</title>
+				<link>https://ystyle.top/2016/03/18/docker-swarm-etcd-ji-qun-da-jian/</link>
+				<pubDate>Fri, 18 Mar 2016 23:16:21 +0800</pubDate>
+				<guid>https://ystyle.top/2016/03/18/docker-swarm-etcd-ji-qun-da-jian/</guid>
+				<description>&lt;h2 id=&#34;安装Swarm集群&#34;&gt;&lt;a href=&#34;#安装Swarm集群&#34; class=&#34;headerlink&#34; title=&#34;安装Swarm集群&#34;&gt;&lt;/a&gt;安装Swarm集群&lt;/h2&gt;&#xA;&lt;h3 id=&#34;环境信息&#34;&gt;&lt;a href=&#34;#环境信息&#34; class=&#34;headerlink&#34; title=&#34;环境信息&#34;&gt;&lt;/a&gt;环境信息&lt;/h3&gt;&#xA;&lt;p&gt;服务器:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;192.168.99.100 centos-node1&lt;/li&gt;&#xA;&lt;li&gt;192.168.99.101 centos-node2&lt;/li&gt;&#xA;&lt;li&gt;192.168.99.102 centos-node3&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;集群信息:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;etc服务器: 192.168.99.100:2379&lt;/li&gt;&#xA;&lt;li&gt;swarm manage: 192.168.99.101:3376&lt;/li&gt;&#xA;&lt;li&gt;swarm-node1: 192.168.99.100:2375&lt;/li&gt;&#xA;&lt;li&gt;swarm-node2: 192.168.99.101:2375&lt;/li&gt;&#xA;&lt;li&gt;swarm-node3: 192.168.99.102:2375&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;准备&#34;&gt;&lt;a href=&#34;#准备&#34; class=&#34;headerlink&#34; title=&#34;准备&#34;&gt;&lt;/a&gt;准备&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;在所有的机器上安装dokcer&lt;/li&gt;&#xA;&lt;li&gt;在centos-node1 上&lt;code&gt;docker pull ystyle/etcd&lt;/code&gt; (官方的下载不了,自己做了个一样的)&lt;/li&gt;&#xA;&lt;li&gt;在所有机器上&lt;code&gt;dokcer pull swarm&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;以上三步可以用&lt;code&gt;docker-machine&lt;/code&gt;完成&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;开放所有机器的&lt;code&gt;2375&lt;/code&gt;端口, &lt;code&gt;centos-node1&lt;/code&gt;的&lt;code&gt;2379&lt;/code&gt;端口,&lt;code&gt;centos-node2&lt;/code&gt;的&lt;code&gt;3376&lt;/code&gt;端口&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;安装etcd-k-v数据库&#34;&gt;&lt;a href=&#34;#安装etcd-k-v数据库&#34; class=&#34;headerlink&#34; title=&#34;安装etcd k-v数据库&#34;&gt;&lt;/a&gt;安装etcd &lt;code&gt;k-v&lt;/code&gt;数据库&lt;/h3&gt;&#xA;&lt;p&gt;在centos-node1上执行:&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

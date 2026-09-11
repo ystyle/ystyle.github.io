@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>gogs on 东方星痕</title>
+		<link>https://ystyle.top/tags/gogs/</link>
+		<description>Recent content in gogs on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Tue, 22 Jun 2021 10:46:26 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/gogs/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>go mod 拉取 gogs 私有仓库</title>
+				<link>https://ystyle.top/2021/06/22/go-mod-gogs-private/</link>
+				<pubDate>Tue, 22 Jun 2021 10:46:26 +0800</pubDate>
+				<guid>https://ystyle.top/2021/06/22/go-mod-gogs-private/</guid>
+				<description>&lt;h3 id=&#34;环境变量设置&#34;&gt;&lt;a href=&#34;#环境变量设置&#34; class=&#34;headerlink&#34; title=&#34;环境变量设置&#34;&gt;&lt;/a&gt;环境变量设置&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;添加环境变量或设置go env&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;export GOPRIVATE=git.hofo.co&#xA;# 或者&#xA;go env -w GOPRIVATE=git.hofo.co&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;git设置&#34;&gt;&lt;a href=&#34;#git设置&#34; class=&#34;headerlink&#34; title=&#34;git设置&#34;&gt;&lt;/a&gt;git设置&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;在git设置http.extraheader&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;PRIVATE-TOKEN&lt;/code&gt;生成方式:  在点击gogs右上头像-用户设置-授权应用-生成新的token&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git config --global http.extraheader &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;PRIVATE-TOKEN: 5737d215af7f9a41a2abe98631d312e9e9311d29d&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;&#xA;&lt;li&gt;在git添加url配置, &lt;code&gt;ystyle:5737d215af7f9a41a2abe98631d312e9e939d29d11&lt;/code&gt;是用户名和上一步生成的token&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git config --global url.&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://ystyle:5737d215af7f9a41a2abe98631d312e9e939d29d11@git.hofo.co&amp;#34;&lt;/span&gt;.insteadOf &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://git.hofo.co&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+			</item>
+	</channel>
+</rss>

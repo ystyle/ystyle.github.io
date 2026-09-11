@@ -1,541 +1,582 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cn">
 <head>
-    
-
-    
-
-    
-<!-- Baidu Tongji -->
-<script>var _hmt = _hmt || []</script>
-<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
-<!-- End Baidu Tongji -->
-
-
-
-<!-- Baidu Push -->
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-<!-- End Baidu Push -->
-
-
-    <meta charset="utf-8">
-    
-    
-    
-    <title>Dokcer编译方舟引擎（MapleEngine） | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="编译器,方舟,方舟多语言调试器">
-    <meta name="description" content="文档 方舟引擎发布公告 官方文档 - 方舟引擎编译说明 官方文档 - 构建Java 核心库  Docker 文件 复制到方舟引擎代码根目录, 文件名为Dockerfile  123456789101112131415161718192021222324252627282930FROM ubuntu:16.04MAINTAINER https://www.openarkcompiler.cn# Se">
-<meta name="keywords" content="编译器,方舟,方舟多语言调试器">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Dokcer编译方舟引擎（MapleEngine）">
-<meta property="og:url" content="http://ystyle.top/2020/07/21/dokcer-compile-maple-engine/index.html">
-<meta property="og:site_name" content="东方星痕">
-<meta property="og:description" content="文档 方舟引擎发布公告 官方文档 - 方舟引擎编译说明 官方文档 - 构建Java 核心库  Docker 文件 复制到方舟引擎代码根目录, 文件名为Dockerfile  123456789101112131415161718192021222324252627282930FROM ubuntu:16.04MAINTAINER https://www.openarkcompiler.cn# Se">
-<meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="https://dll.ystyle.top/images/2020-07/44F09FD9B6FF040264D4D5D02EBD079E.jpg">
-<meta property="og:image" content="https://dll.ystyle.top/images/2020-07/2020-07-22_10-35.png">
-<meta property="og:updated_time" content="2020-08-06T07:08:26.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dokcer编译方舟引擎（MapleEngine）">
-<meta name="twitter:description" content="文档 方舟引擎发布公告 官方文档 - 方舟引擎编译说明 官方文档 - 构建Java 核心库  Docker 文件 复制到方舟引擎代码根目录, 文件名为Dockerfile  123456789101112131415161718192021222324252627282930FROM ubuntu:16.04MAINTAINER https://www.openarkcompiler.cn# Se">
-<meta name="twitter:image" content="https://dll.ystyle.top/images/2020-07/44F09FD9B6FF040264D4D5D02EBD079E.jpg">
-    
-        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/img/avatar.jpg">
-    <link rel="stylesheet" href="/css/style.css?v=1.6.10">
-    <script>window.lazyScripts=[]</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dokcer编译方舟引擎（MapleEngine） | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
-    <div id="loading" class="active"></div>
+  
+  <div id="loading" class="active"></div>
 
-    <aside id="menu"  >
+  
+
+<aside id="menu">
   <div class="inner flex-row-vertical">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
+      <i class="icon icon-lg icon-close"></i>
     </a>
     <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.jpg">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
         </a>
         <hgroup class="introduce">
           <h5 class="nickname">YSTYLE</h5>
-          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
         </hgroup>
       </div>
     </div>
     <div class="scroll-wrap flex-col">
       <ul class="nav">
         
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                归档
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                标签
-              </a>
-            </li>
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                分类
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/ystyle" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                项目
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="http://www.weibo.com/512308314" target="_blank" >
-                <i class="icon icon-lg icon-weibo"></i>
-                微博
-              </a>
-            </li>
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/atom.xml" target="_blank" >
-                <i class="icon icon-lg icon-rss"></i>
-                订阅
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/friends"  >
-                <i class="icon icon-lg icon-link"></i>
-                友链
-              </a>
-            </li>
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
         
       </ul>
     </div>
   </div>
 </aside>
 
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">Dokcer编译方舟引擎（MapleEngine）</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">Dokcer编译方舟引擎（MapleEngine）</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
     </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
 </header>
+
 <header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">Dokcer编译方舟引擎（MapleEngine）</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2020-07-21T02:46:26.000Z" itemprop="datePublished" class="page-time">
-  2020-07-21
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/软件/">软件</a></li></ul>
-
-            
-        </h5>
-    </div>
+  <div class="container fade-scale in">
+    <h1 class="title">Dokcer编译方舟引擎（MapleEngine）</h1>
+    <h5 class="subtitle">
+      <time datetime="2020-07-21T10:46:26&#43;08:00" itemprop="datePublished" class="page-time">2020-07-21</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+    </h5>
+  </div>
+</header>
 
     
-
-</header>
-
 
 <div class="container body-wrap">
-    
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文档"><span class="post-toc-number">1.</span> <span class="post-toc-text">文档</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Docker-文件"><span class="post-toc-number">2.</span> <span class="post-toc-text">Docker 文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编译方舟引擎"><span class="post-toc-number">3.</span> <span class="post-toc-text">编译方舟引擎</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试"><span class="post-toc-number">4.</span> <span class="post-toc-text">测试</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#调试应用程序"><span class="post-toc-number">5.</span> <span class="post-toc-text">调试应用程序</span></a></li></ol>
-        </nav>
-    </aside>
-    
-<article id="post-dokcer-compile-maple-engine"
-  class="post-article article-type-post fade" itemprop="blogPost">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
 
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-0">
+  
+  <a class="post-toc-link" href="#">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text"></span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e6%96%87%e6%a1%a3">
+    <span class="post-toc-number">1.1.</span> <span class="post-toc-text">文档</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#Docker-%e6%96%87%e4%bb%b6">
+    <span class="post-toc-number">1.2.</span> <span class="post-toc-text">Docker 文件</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e7%bc%96%e8%af%91%e6%96%b9%e8%88%9f%e5%bc%95%e6%93%8e">
+    <span class="post-toc-number">1.3.</span> <span class="post-toc-text">编译方舟引擎</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e6%b5%8b%e8%af%95">
+    <span class="post-toc-number">1.4.</span> <span class="post-toc-text">测试</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e8%b0%83%e8%af%95%e5%ba%94%e7%94%a8%e7%a8%8b%e5%ba%8f">
+    <span class="post-toc-number">1.5.</span> <span class="post-toc-text">调试应用程序</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-Dokcer编译方舟引擎（MapleEngine）" itemprop="blogPost">
     <div class="post-card">
-        <h1 class="post-card-title">Dokcer编译方舟引擎（MapleEngine）</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2020-07-21 10:46:26" datetime="2020-07-21T02:46:26.000Z"  itemprop="datePublished">2020-07-21</time>
+      <h1 class="post-card-title">Dokcer编译方舟引擎（MapleEngine）</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2020-07-21T10:46:26&#43;08:00" itemprop="datePublished">2020-07-21</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        
+      </div>
 
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/软件/">软件</a></li></ul>
-
-
-
-            
-
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><ul>
-<li><a href="https://gitee.com/harmonyos/OpenArkCompiler/issues/I1OHE5" target="_blank" rel="noopener">方舟引擎发布公告</a></li>
-<li><a href="https://gitee.com/openarkcompiler-incubator/maple_engine" target="_blank" rel="noopener">官方文档 - 方舟引擎编译说明</a></li>
-<li><a href="https://gitee.com/openarkcompiler-incubator/maple_engine/blob/master/maple_build/doc/build_OpenJDK8.md" target="_blank" rel="noopener">官方文档 - 构建Java 核心库</a></li>
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3>
+<ul>
+<li><a href="https://gitee.com/harmonyos/OpenArkCompiler/issues/I1OHE5" target="_blank" rel="noopener">方舟引擎发布公告</a>
+</li>
+<li><a href="https://gitee.com/openarkcompiler-incubator/maple_engine" target="_blank" rel="noopener">官方文档 - 方舟引擎编译说明</a>
+</li>
+<li><a href="https://gitee.com/openarkcompiler-incubator/maple_engine/blob/master/maple_build/doc/build_OpenJDK8.md" target="_blank" rel="noopener">官方文档 - 构建Java 核心库</a>
+</li>
 </ul>
-<h3 id="Docker-文件"><a href="#Docker-文件" class="headerlink" title="Docker 文件"></a>Docker 文件</h3><blockquote>
+<h3 id="Docker-文件"><a href="#Docker-文件" class="headerlink" title="Docker 文件"></a>Docker 文件</h3>
+<blockquote>
 <p>复制到方舟引擎代码根目录, 文件名为Dockerfile</p>
 </blockquote>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"><span class="keyword">MAINTAINER</span> https://www.openarkcompiler.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># Setting up the build environment</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> sed -i <span class="string">'s/archive.ubuntu.com/mirrors.163.com/g'</span> /etc/apt/sources.list &amp;&amp; \</span></span><br><span class="line"><span class="bash">    apt-get -y update &amp;&amp; \</span></span><br><span class="line"><span class="bash">    apt install --no-install-recommends -y build-essential git wget clang cmake libffi-dev libelf-dev libunwind-dev \</span></span><br><span class="line"><span class="bash">        libssl-dev openjdk-8-jdk-headless unzip python-minimal python3 curl &amp;&amp; \</span></span><br><span class="line"><span class="bash">    rm -rf /var/lib/apt/lists/*</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># 在国内请反注释下行, 因为容器也是个单独的系统，所以别用127.0.0.1</span></span></span><br><span class="line"><span class="bash"><span class="comment">#ENV http_proxy=http://192.168.3.81:1081 \ </span></span></span><br><span class="line"><span class="bash"><span class="comment">#    https_proxy=http://192.168.3.81:1081</span></span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># copy source</span></span></span><br><span class="line"><span class="bash">COPY . /maple_engine</span></span><br><span class="line"><span class="bash">WORKDIR /maple_engine</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># custom java/lang/Object.java</span></span></span><br><span class="line"><span class="bash">RUN <span class="built_in">cd</span> /maple_engine/maple_build/jar/ &amp;&amp; \</span></span><br><span class="line"><span class="bash">    bash -c <span class="string">"cp /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/&#123;rt.jar,jce.jar,jsse.jar,charsets.jar&#125; . "</span> &amp;&amp; \</span></span><br><span class="line"><span class="bash">    mkdir -p java/lang/ &amp;&amp; \</span></span><br><span class="line"><span class="bash">    curl -L http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/raw-file/jdk8u265-b01/src/share/classes/java/lang/Object.java &gt; java/lang/Object.java &amp;&amp; \</span></span><br><span class="line"><span class="bash">    sed -i <span class="string">'/public class Object &#123;/a\long reserved_1; int reserved_2;'</span> java/lang/Object.java &amp;&amp; \</span></span><br><span class="line"><span class="bash">    javac -target 1.8 -g java/lang/Object.java &amp;&amp; \</span></span><br><span class="line"><span class="bash">    jar uf rt.jar java/lang/Object.class &amp;&amp; \</span></span><br><span class="line"><span class="bash">    rm -rf java</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># compile</span></span></span><br><span class="line"><span class="bash">RUN bash -c <span class="string">"source ./envsetup.sh &amp;&amp; ./maple_build/tools/build-maple.sh &amp;&amp; ./maple_build/tools/build-libcore.sh &amp;&amp; rm -rf /maple_engine/maple_build/out/*"</span></span></span><br></pre></td></tr></table></figure>
-<h3 id="编译方舟引擎"><a href="#编译方舟引擎" class="headerlink" title="编译方舟引擎"></a>编译方舟引擎</h3><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">ubuntu:16.04</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">MAINTAINER</span> <span style="color:#e6db74">https://www.openarkcompiler.cn</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># Setting up the build environment</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> sed -i <span style="color:#e6db74">&#39;s/archive.ubuntu.com/mirrors.163.com/g&#39;</span> /etc/apt/sources.list <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    apt-get -y update <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    apt install --no-install-recommends -y build-essential git wget clang cmake libffi-dev libelf-dev libunwind-dev <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>        libssl-dev openjdk-8-jdk-headless unzip python-minimal python3 curl <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    rm -rf /var/lib/apt/lists/*<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 在国内请反注释下行, 因为容器也是个单独的系统，所以别用127.0.0.1</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#ENV http_proxy=http://192.168.3.81:1081 \ </span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#    https_proxy=http://192.168.3.81:1081</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># copy source</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">COPY</span> . /maple_engine<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">WORKDIR</span> <span style="color:#e6db74">/maple_engine</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># custom java/lang/Object.java</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> cd /maple_engine/maple_build/jar/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    bash -c <span style="color:#e6db74">&#34;cp /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/{rt.jar,jce.jar,jsse.jar,charsets.jar} . &#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    mkdir -p java/lang/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    curl -L http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/raw-file/jdk8u265-b01/src/share/classes/java/lang/Object.java &gt; java/lang/Object.java <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    sed -i <span style="color:#e6db74">&#39;/public class Object {/a\long reserved_1; int reserved_2;&#39;</span> java/lang/Object.java <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    javac -target 1.8 -g java/lang/Object.java <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    jar uf rt.jar java/lang/Object.class <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    rm -rf java<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># compile</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> bash -c <span style="color:#e6db74">&#34;source ./envsetup.sh &amp;&amp; ./maple_build/tools/build-maple.sh &amp;&amp; ./maple_build/tools/build-libcore.sh &amp;&amp; rm -rf /maple_engine/maple_build/out/*&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><h3 id="编译方舟引擎"><a href="#编译方舟引擎" class="headerlink" title="编译方舟引擎"></a>编译方舟引擎</h3>
+<blockquote>
 <p>方舟编译器，也会一起编译，注意： 编译libjava时会占用25G左右的内存，不足25G建议添加swap分区</p>
 </blockquote>
 <blockquote>
 <p>本人机器是16G内存，20G的SSD swap分区</p>
 </blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t ystyle/maple-engine .</span><br></pre></td></tr></table></figure>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker build -t ystyle/maple-engine .
+</span></span></code></pre></div>
 <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://dll.ystyle.top/images/2020-07/44F09FD9B6FF040264D4D5D02EBD079E.jpg" alt="编译占用" title="">
-                </div>
-                <div class="image-caption">编译占用</div>
-            </figure>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><blockquote>
-<p><a href="https://hub.docker.com/r/ystyle/maple-engine" target="_blank" rel="noopener">镜像</a>已经推送到<a href="https://hub.docker.com/r/ystyle/maple-engine" target="_blank" rel="noopener">docker hub</a>, 可以直接使用下面的镜像编译hello world或其它软件</p>
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="https://dll.ystyle.top/images/2020-07/44F09FD9B6FF040264D4D5D02EBD079E.jpg" alt="编译占用">
+  </div>
+  <div class="image-caption">编译占用</div>
+</figure>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3>
+<blockquote>
+<p><a href="https://hub.docker.com/r/ystyle/maple-engine" target="_blank" rel="noopener">镜像</a>
+已经推送到<a href="https://hub.docker.com/r/ystyle/maple-engine" target="_blank" rel="noopener">docker hub</a>
+, 可以直接使用下面的镜像编译hello world或其它软件</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -ti ystyle/maple-engine bash</span><br><span class="line"># 设置基础环境</span><br><span class="line">source ./envsetup.sh</span><br><span class="line"># 编译java hello world</span><br><span class="line">cd ./maple_build/examples/HelloWorld</span><br><span class="line">$MAPLE_BUILD_TOOLS/java2asm.sh HelloWorld.java</span><br><span class="line"># 生成把.s文件编译为.so</span><br><span class="line">$MAPLE_BUILD_TOOLS/asm2so.sh HelloWorld.s</span><br><span class="line"># 运行软件</span><br><span class="line">$MAPLE_BUILD_TOOLS/run-app.sh -classpath ./HelloWorld.so HelloWorld</span><br></pre></td></tr></table></figure>
+<pre tabindex="0"><code>docker run --rm -ti ystyle/maple-engine bash
+# 设置基础环境
+source ./envsetup.sh
+# 编译java hello world
+cd ./maple_build/examples/HelloWorld
+$MAPLE_BUILD_TOOLS/java2asm.sh HelloWorld.java
+# 生成把.s文件编译为.so
+$MAPLE_BUILD_TOOLS/asm2so.sh HelloWorld.s
+# 运行软件
+$MAPLE_BUILD_TOOLS/run-app.sh -classpath ./HelloWorld.so HelloWorld
+</code></pre>
 <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://dll.ystyle.top/images/2020-07/2020-07-22_10-35.png" alt="编译执行结果" title="">
-                </div>
-                <div class="image-caption">编译执行结果</div>
-            </figure>
-<h3 id="调试应用程序"><a href="#调试应用程序" class="headerlink" title="调试应用程序"></a>调试应用程序</h3><ul>
-<li><a href="https://gitee.com/openarkcompiler-incubator/maple_engine/wikis/%E6%96%B9%E8%88%9F%E5%A4%9A%E8%AF%AD%E8%A8%80%E8%B0%83%E8%AF%95%E5%99%A8?sort_id=2711073" target="_blank" rel="noopener">方舟多语言调试器介绍</a></li>
-<li><a href="https://gitee.com/openarkcompiler-incubator/maple_engine/tree/master/maple_debugger" target="_blank" rel="noopener">方舟多语言调试器项目说明</a></li>
-<li><a href="https://gitee.com/openarkcompiler-incubator/maple_engine/blob/master/maple_debugger/UserReference.md" target="_blank" rel="noopener">方舟多语言调试器用户手册</a></li>
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="https://dll.ystyle.top/images/2020-07/2020-07-22_10-35.png" alt="编译执行结果">
+  </div>
+  <div class="image-caption">编译执行结果</div>
+</figure>
+<h3 id="调试应用程序"><a href="#调试应用程序" class="headerlink" title="调试应用程序"></a>调试应用程序</h3>
+<ul>
+<li><a href="https://gitee.com/openarkcompiler-incubator/maple_engine/wikis/%E6%96%B9%E8%88%9F%E5%A4%9A%E8%AF%AD%E8%A8%80%E8%B0%83%E8%AF%95%E5%99%A8?sort_id=2711073" target="_blank" rel="noopener">方舟多语言调试器介绍</a>
+</li>
+<li><a href="https://gitee.com/openarkcompiler-incubator/maple_engine/tree/master/maple_debugger" target="_blank" rel="noopener">方舟多语言调试器项目说明</a>
+</li>
+<li><a href="https://gitee.com/openarkcompiler-incubator/maple_engine/blob/master/maple_debugger/UserReference.md" target="_blank" rel="noopener">方舟多语言调试器用户手册</a>
+</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -ti ystyle/maple-engine:gdb bash</span><br><span class="line"># 设置jdk源码路径 $JDK_SRC 为本地的openjdk源码</span><br><span class="line"># docker run --rm -ti -v $&#123;JDK_SRC&#125;:/root/my_openjdk8/jdk/src/ ystyle/maple-engine:gdb bash</span><br><span class="line"># 设置基础环境</span><br><span class="line">source ./envsetup.sh</span><br><span class="line"># 编译java hello world</span><br><span class="line">cd ./maple_build/examples/HelloWorld</span><br><span class="line">$MAPLE_BUILD_TOOLS/java2asm.sh HelloWorld.java</span><br><span class="line"># 生成把.s文件编译为.so</span><br><span class="line">$MAPLE_BUILD_TOOLS/asm2so.sh HelloWorld.s</span><br><span class="line"># 调试应用程序</span><br><span class="line">&quot;$MAPLE_BUILD_TOOLS&quot;/run-app.sh -gdb -classpath ./HelloWorld.so HelloWorld</span><br></pre></td></tr></table></figure>
+<pre tabindex="0"><code>docker run --rm -ti ystyle/maple-engine:gdb bash
+# 设置jdk源码路径 $JDK_SRC 为本地的openjdk源码
+# docker run --rm -ti -v ${JDK_SRC}:/root/my_openjdk8/jdk/src/ ystyle/maple-engine:gdb bash
+# 设置基础环境
+source ./envsetup.sh
+# 编译java hello world
+cd ./maple_build/examples/HelloWorld
+$MAPLE_BUILD_TOOLS/java2asm.sh HelloWorld.java
+# 生成把.s文件编译为.so
+$MAPLE_BUILD_TOOLS/asm2so.sh HelloWorld.s
+# 调试应用程序
+&#34;$MAPLE_BUILD_TOOLS&#34;/run-app.sh -gdb -classpath ./HelloWorld.so HelloWorld
+</code></pre>
+      </div>
 
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2020-08-06T15:08:26&#43;08:00" itemprop="dateUpdated">2020-08-06 15:08:26</time>
+          </span><br>
+          本文链接：<a href="/2020/07/21/dokcer-compile-maple-engine/" target="_blank" rel="external">https://ystyle.top/2020/07/21/dokcer-compile-maple-engine/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
         </div>
-
-        <blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2020-08-06T07:08:26.000Z" itemprop="dateUpdated">2020-08-06 15:08:26</time>
-</span><br>
-
-
-        
-        本文链接：<a href="/2020/07/21/dokcer-compile-maple-engine/" target="_blank" rel="external">http://ystyle.top/2020/07/21/dokcer-compile-maple-engine/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
-        
-    </div>
-    <footer>
-        <a href="http://ystyle.top">
+        <footer>
+          <a href="https://ystyle.top/">
             <img src="/img/avatar.jpg" alt="YSTYLE">
             YSTYLE
-        </a>
-    </footer>
-</blockquote>
+          </a>
+        </footer>
+      </blockquote>
 
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%99%A8/">编译器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B9%E8%88%9F/">方舟</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B9%E8%88%9F%E5%A4%9A%E8%AF%AD%E8%A8%80%E8%B0%83%E8%AF%95%E5%99%A8/">方舟多语言调试器</a></li></ul>
         
 
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/方舟/">方舟</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/方舟多语言调试器/">方舟多语言调试器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编译器/">编译器</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2020/07/21/dokcer-compile-maple-engine/&title=《Dokcer编译方舟引擎（MapleEngine）》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2020/07/21/dokcer-compile-maple-engine/&title=《Dokcer编译方舟引擎（MapleEngine）》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2020/07/21/dokcer-compile-maple-engine/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Dokcer编译方舟引擎（MapleEngine）》 — 东方星痕&url=http://ystyle.top/2020/07/21/dokcer-compile-maple-engine/&via=http://ystyle.top" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2020/07/21/dokcer-compile-maple-engine/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2020%2f07%2f21%2fdokcer-compile-maple-engine%2f&title=%e3%80%8aDokcer%e7%bc%96%e8%af%91%e6%96%b9%e8%88%9f%e5%bc%95%e6%93%8e%ef%bc%88MapleEngine%ef%bc%89%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2020%2f07%2f21%2fdokcer-compile-maple-engine%2f&title=%e3%80%8aDokcer%e7%bc%96%e8%af%91%e6%96%b9%e8%88%9f%e5%bc%95%e6%93%8e%ef%bc%88MapleEngine%ef%bc%89%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e6%96%87%e6%a1%a3%20%e6%96%b9%e8%88%9f%e5%bc%95%e6%93%8e%e5%8f%91%e5%b8%83%e5%85%ac%e5%91%8a%20%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3%20-%20%e6%96%b9%e8%88%9f%e5%bc%95%e6%93%8e%e7%bc%96%e8%af%91%e8%af%b4%e6%98%8e%20%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3%20-%20%e6%9e%84%e5%bb%baJava%20%e6%a0%b8%e5%bf%83%e5%ba%93%20Docker%20%e6%96%87%e4%bb%b6%20%e5%a4%8d%e5%88%b6%e5%88%b0%e6%96%b9%e8%88%9f%e5%bc%95%e6%93%8e%e4%bb%a3%e7%a0%81%e6%a0%b9%e7%9b%ae%e5%bd%95%2c%20%e6%96%87%e4%bb%b6%e5%90%8d%e4%b8%ba%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2020%2f07%2f21%2fdokcer-compile-maple-engine%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8aDokcer%e7%bc%96%e8%af%91%e6%96%b9%e8%88%9f%e5%bc%95%e6%93%8e%ef%bc%88MapleEngine%ef%bc%89%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2020%2f07%2f21%2fdokcer-compile-maple-engine%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2020%2f07%2f21%2fdokcer-compile-maple-engine%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
 </div>
 
 
 
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
         </div>
+        
+      </div>
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2020/09/03/kde-dolphin-smb/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
-        <h4 class="title">Linux kde文件管理器连接华为Share</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2020/05/31/open-file-with-windows-terminal-command/" id="post-next" class="post-nav-link">
-        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Windows右键菜单添以Window Terminal命令行打开文件</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
     
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2020/05/31/open-file-with-windows-terminal-command/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">Windows右键菜单添以Window Terminal命令行打开文件</h4>
+        </a>
+      </div>
+      
+      
+      <div class="waves-block waves-effect next">
+        <a href="/2020/09/03/kde-dolphin-smb/" id="post-next" class="post-nav-link">
+          <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+          <h4 class="title">Linux kde文件管理器连接华为Share</h4>
+        </a>
+      </div>
+      
+    </nav>
+    
+  </article>
 
-
-
-
-
-
-
-
-
-
+  
+  
 
 <section class="comments" id="comments">
-    <div id="gitalk-container"></div>
-    <link rel="stylesheet" href="/css/gitalk.css">
-    <script src="/js/gitalk.min.js"></script>
-    <script>
-        var id = location.pathname
-        if (location.pathname.length > 50) {
-          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
-        }
-        const gitalk = new Gitalk({
-          clientID: '1f887c79a8b9b9fbec12',
-          clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
-          repo: 'ystyle.github.io',
-          owner: 'ystyle',
-          admin: ['ystyle'],
-          id: id,      // Ensure uniqueness and length less than 50
-          title: document.title.split('|')[0],
-          distractionFreeMode: false  // Facebook-like distraction free mode
-        })
-
-        gitalk.render('gitalk-container')
-    </script>
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
 </section>
 
 
-
-
-</article>
-
-
-
 </div>
 
-        <footer class="footer">
-    <div class="bottom">
-        <p>
-            
-
-            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
-            <span>东方星痕 &copy; 2015 - 2026</span>
-            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
-            <div style="width:300px;margin:0 auto; padding:20px 0;">
-              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
-                <img src="/img/record-icon.png" style="float:left;"/>
-                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
-                  粤公网安备 44010502002055号
-                </p>
-              </a>
-            </div>
-        </p>
-    </div>
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
 </footer>
 
-    </main>
-    <div class="mask" id="mask"></div>
+  </main>
+
+  
+<div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2020/07/21/dokcer-compile-maple-engine/&title=《Dokcer编译方舟引擎（MapleEngine）》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2020/07/21/dokcer-compile-maple-engine/&title=《Dokcer编译方舟引擎（MapleEngine）》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2020/07/21/dokcer-compile-maple-engine/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Dokcer编译方舟引擎（MapleEngine）》 — 东方星痕&url=http://ystyle.top/2020/07/21/dokcer-compile-maple-engine/&via=http://ystyle.top" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2020/07/21/dokcer-compile-maple-engine/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2020%2f07%2f21%2fdokcer-compile-maple-engine%2f&title=%e3%80%8aDokcer%e7%bc%96%e8%af%91%e6%96%b9%e8%88%9f%e5%bc%95%e6%93%8e%ef%bc%88MapleEngine%ef%bc%89%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2020%2f07%2f21%2fdokcer-compile-maple-engine%2f&title=%e3%80%8aDokcer%e7%bc%96%e8%af%91%e6%96%b9%e8%88%9f%e5%bc%95%e6%93%8e%ef%bc%88MapleEngine%ef%bc%89%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e6%96%87%e6%a1%a3%20%e6%96%b9%e8%88%9f%e5%bc%95%e6%93%8e%e5%8f%91%e5%b8%83%e5%85%ac%e5%91%8a%20%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3%20-%20%e6%96%b9%e8%88%9f%e5%bc%95%e6%93%8e%e7%bc%96%e8%af%91%e8%af%b4%e6%98%8e%20%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3%20-%20%e6%9e%84%e5%bb%baJava%20%e6%a0%b8%e5%bf%83%e5%ba%93%20Docker%20%e6%96%87%e4%bb%b6%20%e5%a4%8d%e5%88%b6%e5%88%b0%e6%96%b9%e8%88%9f%e5%bc%95%e6%93%8e%e4%bb%a3%e7%a0%81%e6%a0%b9%e7%9b%ae%e5%bd%95%2c%20%e6%96%87%e4%bb%b6%e5%90%8d%e4%b8%ba%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2020%2f07%2f21%2fdokcer-compile-maple-engine%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8aDokcer%e7%bc%96%e8%af%91%e6%96%b9%e8%88%9f%e5%bc%95%e6%93%8e%ef%bc%88MapleEngine%ef%bc%89%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2020%2f07%2f21%2fdokcer-compile-maple-engine%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2020%2f07%2f21%2fdokcer-compile-maple-engine%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
 
 
 <div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJklEQVR42u3aQWoDMQwF0N7/0il0VQhJ/remhbGfVyEJnnleCFnS11e8Hj8r+eb3ev7+/T9f7XzZwsDAuC3j8XY9b528UPv5FSN5NwwMjHMYl2334oDmR/bhnTEwMDAG1PxXDAwMjKsCbptW5sklBgYGxnvGWrhMSmPJi+aX5Avu4hgYGDdktI2B//z8h/0NDAyMmzAe5ZqX3vIWZvFWGBgYWzPyQYo2pUsSxHzP6CkYGBjHMNotknAZFcuC3YqqIQYGxnaM/Oe1oLkWTNsjwMDA2JsxKdMnoTa/pq41EjAwME5gJFu3SeTa/nn6WPdjMTAwbsuYlObbh03Kah+ejoGBsTWjLaLN25NtYa7YHwMD4xhGWyabXFaT3ZKAjoGBcSYjbyUmD8ivr6NrMwYGxtaMHNAOXqylg6OnYGBgHMkoJjWWLp+T0l4RcDEwMG7LaIv1c0Y7KJb8HwMDY29GclHMGwPt/5OgXBwlBgbGwYwclgyTtQG3GPLAwMDYlNEmf21AbIcwFpNRDAyMAxiTpDAPqWsth6gVioGBsTWjziKXmp0tfrH9iYGBsSnjUa620NYmnYthGgMDY2vGtffEKIEry3Nrg7AYGBj7MSYjWflFNB84a1NVDAyMcxh/UdYfxfgYjIGBgTFJDduAnl+hP8yMYGBgHM9YK/G3Q2N5+oiBgXEOIw+IdY+0LMblQXnxLo6BgXFDxrzF2AbN/DjWjhUDA2MjxjepuPoI0Te+nwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2020/07/21/dokcer-compile-maple-engine/">
 </div>
 
 
-
-
-    <script src="/js/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
-
-
-</script>
-
-<script src="/js/main.min.js?v=1.6.10"></script>
-
-
+  
 <div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
+  <ul class="search-result" id="search-result"></ul>
 </div>
 <template id="search-tpl">
 <li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.6.10" async></script>
 
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
 
-
-
-
-
-
-
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '东方星痕的博客';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '欢迎回来╮(╯▽╰)╭';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
-        }
-    });
-})();
-</script>
-
-
-
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
 </body>
 </html>

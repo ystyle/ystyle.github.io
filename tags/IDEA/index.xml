@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>IDEA on 东方星痕</title>
+		<link>https://ystyle.top/tags/IDEA/</link>
+		<description>Recent content in IDEA on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Thu, 24 Sep 2015 18:09:11 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/IDEA/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Intellij IDEA部署Tomcat[Maven版]</title>
+				<link>https://ystyle.top/2015/09/19/intellij-ideabu-shu-tomcat/</link>
+				<pubDate>Sat, 19 Sep 2015 12:42:24 +0800</pubDate>
+				<guid>https://ystyle.top/2015/09/19/intellij-ideabu-shu-tomcat/</guid>
+				<description>&lt;h2 id=&#34;Intellij-IDEA部署Tomcat-Maven版&#34;&gt;&lt;a href=&#34;#Intellij-IDEA部署Tomcat-Maven版&#34; class=&#34;headerlink&#34; title=&#34;Intellij IDEA部署Tomcat[Maven版]&#34;&gt;&lt;/a&gt;Intellij IDEA部署Tomcat[Maven版]&lt;/h2&gt;&#xA;&lt;h3 id=&#34;准备&#34;&gt;&lt;a href=&#34;#准备&#34; class=&#34;headerlink&#34; title=&#34;准备&#34;&gt;&lt;/a&gt;准备&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;IDEA的&lt;code&gt;Maven&lt;/code&gt;项目&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Tomcat&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3 id=&#34;部署&#34;&gt;&lt;a href=&#34;#部署&#34; class=&#34;headerlink&#34; title=&#34;部署&#34;&gt;&lt;/a&gt;部署&lt;/h3&gt;&#xA;&lt;p&gt;点运行旁边的下拉框，选择&lt;code&gt;Edit Configurations... &lt;/code&gt;&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

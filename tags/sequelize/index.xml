@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>sequelize on 东方星痕</title>
+		<link>https://ystyle.top/tags/sequelize/</link>
+		<description>Recent content in sequelize on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Wed, 30 Nov 2016 17:29:45 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/sequelize/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>sequelize.js 生成DDL语句预览</title>
+				<link>https://ystyle.top/2016/11/30/sequelize-js-sheng-cheng-ddlyu-ju-yu-lan/</link>
+				<pubDate>Wed, 30 Nov 2016 14:26:26 +0800</pubDate>
+				<guid>https://ystyle.top/2016/11/30/sequelize-js-sheng-cheng-ddlyu-ju-yu-lan/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;因为想做一个直接生成建表语句的工具。 又不想连接到数据库(懒得让数据库一直启动着)&lt;br&gt;&#xA;看了下sequelize.js的测试代码， 找到了以下方法可以实现&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

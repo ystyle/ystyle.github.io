@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>lua on 东方星痕</title>
+		<link>https://ystyle.top/tags/lua/</link>
+		<description>Recent content in lua on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Sat, 07 Nov 2020 23:52:26 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/lua/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>移植lua到鸿蒙 - 首个移植成功的编程语言</title>
+				<link>https://ystyle.top/2020/11/07/porting-Lua-to-openharmony/</link>
+				<pubDate>Sat, 07 Nov 2020 23:52:26 +0800</pubDate>
+				<guid>https://ystyle.top/2020/11/07/porting-Lua-to-openharmony/</guid>
+				<description>&lt;h3 id=&#34;惯例先放hello-world&#34;&gt;&lt;a href=&#34;#惯例先放hello-world&#34; class=&#34;headerlink&#34; title=&#34;惯例先放hello world&#34;&gt;&lt;/a&gt;惯例先放hello world&lt;/h3&gt;&#xA;&#xA;&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://dll.ystyle.top/images/2020-11/WindowsTerminal_2020-11-07_23-28-08.png&#34; alt=&#34;hello world&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;hello world&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;本项目地址: &lt;a href=&#34;https://gitee.com/ystyle/lua&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://gitee.com/ystyle/lua&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://gitee.com/ystyle/lua/releases/v5.4.2&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;下载二进制文件&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;准备环境&#34;&gt;&lt;a href=&#34;#准备环境&#34; class=&#34;headerlink&#34; title=&#34;准备环境&#34;&gt;&lt;/a&gt;准备环境&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;安装 docker&lt;/li&gt;&#xA;&lt;li&gt;docker pull ystyle/open-harmony&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;ps: 本文使用与鸿蒙系统一同编译的方法。 如果自己有本地环境，可以把lua项目放鸿蒙代码目录里(或者使用软接连)&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JPA  Hibernate 注解 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">JPA  Hibernate 注解</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">JPA  Hibernate 注解</h1>
+    <h5 class="subtitle">
+      <time datetime="2015-09-11T06:30:27&#43;08:00" itemprop="datePublished" class="page-time">2015-09-11</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+
+  <article class="post-article article-type-post fade in" id="post-JPA-Hibernate-注解" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">JPA  Hibernate 注解</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2015-09-11T06:30:27&#43;08:00" itemprop="datePublished">2015-09-11</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <ol>
+<li>
+<p>@Entity(name=&ldquo;EntityName&rdquo;)<br>
+必须,name为可选,对应数据库中一的个表</p>
+</li>
+<li>
+<p>@Table(name=&quot;&quot;,catalog=&quot;&quot;,schema=&quot;&quot;)<br>
+可选,通常和@Entity配合使用,只能标注在实体的class定义处,表示实体对应的数据库表的信息<br>
+name:可选,表示表的名称.默认地,表名和实体名称一致,只有在不一致的情况下才需要指定表名<br>
+catalog:可选,表示Catalog名称,默认为Catalog(&quot;&quot;).<br>
+schema:可选,表示Schema名称,默认为Schema(&quot;&quot;).</p>
+</li>
+<li>
+<p>@id<br>
+必须<br>
+@id定义了映射到数据库表的主键的属性,一个实体只能有一个属性被映射为主键.置于getXxxx()前.</p>
+</li>
+<li>
+<p>@GeneratedValue(strategy=GenerationType,generator=&quot;&quot;)<br>
+可选<br>
+strategy:表示主键生成策略,有AUTO,INDENTITY,SEQUENCE 和 TABLE 4种,分别表示让ORM框架自动选择,<br>
+根据数据库的Identity字段生成,根据数据库表的Sequence字段生成,以有根据一个额外的表生成主键,默认为AUTO<br>
+generator:表示主键生成器的名称,这个属性通常和ORM框架相关,例如,Hibernate可以指定uuid等主键生成方式.<br>
+示例:</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@Id</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GeneratedValues</span>(strategy<span style="color:#f92672">=</span>StrategyType.<span style="color:#a6e22e">SEQUENCE</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getPk</span>() {
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> pk;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ol start="5">
+<li>@Basic(fetch=FetchType,optional=true)<br>
+可选<br>
+@Basic表示一个简单的属性到数据库表的字段的映射,对于没有任何标注的getXxxx()方法,默认即为@Basic<br>
+fetch: 表示该属性的读取策略,有EAGER和LAZY两种,分别表示主支抓取和延迟加载,默认为EAGER.<br>
+optional:表示该属性是否允许为null,默认为true<br>
+示例:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@Basic</span>(optional<span style="color:#f92672">=</span><span style="color:#66d9ef">false</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getAddress</span>() {
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> address;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ol start="6">
+<li>@Column<br>
+可选<br>
+@Column描述了数据库表中该字段的详细定义,这对于根据JPA注解生成数据库表结构的工具非常有作用.<br>
+name:表示数据库表中该字段的名称,默认情形属性名称一致<br>
+nullable:表示该字段是否允许为null,默认为true<br>
+unique:表示该字段是否是唯一标识,默认为false<br>
+length:表示该字段的大小,仅对String类型的字段有效<br>
+insertable:表示在ORM框架执行插入操作时,该字段是否应出现INSETRT语句中,默认为true<br>
+updateable:表示在ORM框架执行更新操作时,该字段是否应该出现在UPDATE语句中,默认为true.对于一经创建就不可以更改的字段,该属性非常有用,如对于birthday字段.<br>
+columnDefinition:表示该字段在数据库中的实际类型.通常ORM框架可以根据属性类型自动判断数据库中字段的类型,但是对于Date类型仍无法确定数据库中字段类型究竟是DATE,TIME还是TIMESTAMP.此外,String的默认映射类型为VARCHAR,如果要将String类型映射到特定数据库的BLOB或TEXT字段类型,该属性非常有用.<br>
+示例:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@Column</span>(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;BIRTH&#34;</span>,nullable<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;false&#34;</span>,columnDefinition<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;DATE&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getBithday</span>() {
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> birthday;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ol start="7">
+<li>@Transient<br>
+可选<br>
+@Transient表示该属性并非一个到数据库表的字段的映射,ORM框架将忽略该属性.<br>
+如果一个属性并非数据库表的字段映射,就务必将其标示为@Transient,否则,ORM框架默认其注解为@Basic<br>
+示例:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#75715e">//根据birth计算出age属性</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Transient</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getAge</span>() {
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> getYear(<span style="color:#66d9ef">new</span> Date()) <span style="color:#f92672">-</span> getYear(birth);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ol start="8">
+<li>@ManyToOne(fetch=FetchType,cascade=CascadeType)<br>
+可选<br>
+@ManyToOne表示一个多对一的映射,该注解标注的属性通常是数据库表的外键<br>
+optional:是否允许该字段为null,该属性应该根据数据库表的外键约束来确定,默认为true<br>
+fetch:表示抓取策略,默认为FetchType.EAGER<br>
+cascade:表示默认的级联操作策略,可以指定为ALL,PERSIST,MERGE,REFRESH和REMOVE中的若干组合,默认为无级联操作<br>
+targetEntity:表示该属性关联的实体类型.该属性通常不必指定,ORM框架根据属性类型自动判断targetEntity.<br>
+示例:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#75715e">//订单Order和用户User是一个ManyToOne的关系</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//在Order类中定义</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ManyToOne</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@JoinColumn</span>(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;USER&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> User <span style="color:#a6e22e">getUser</span>() {
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> user;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ol start="9">
+<li>
+<p>@JoinColumn<br>
+可选<br>
+@JoinColumn和@Column类似,介量描述的不是一个简单字段,而一一个关联字段,例如.描述一个@ManyToOne的字段.<br>
+name:该字段的名称.由于@JoinColumn描述的是一个关联字段,如ManyToOne,则默认的名称由其关联的实体决定.<br>
+例如,实体Order有一个user属性来关联实体User,则Order的user属性为一个外键,<br>
+其默认的名称为实体User的名称+下划线+实体User的主键名称<br>
+示例:<br>
+见@ManyToOne</p>
+</li>
+<li>
+<p>@OneToMany(fetch=FetchType,cascade=CascadeType)<br>
+可选<br>
+@OneToMany描述一个一对多的关联,该属性应该为集体类型,在数据库中并没有实际字段.<br>
+fetch:表示抓取策略,默认为FetchType.LAZY,因为关联的多个对象通常不必从数据库预先读取到内存<br>
+cascade:表示级联操作策略,对于OneToMany类型的关联非常重要,通常该实体更新或删除时,其关联的实体也应当被更新或删除<br>
+例如:实体User和Order是OneToMany的关系,则实体User被删除时,其关联的实体Order也应该被全部删除<br>
+示例:</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@OneTyMany</span>(cascade<span style="color:#f92672">=</span>ALL)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> List <span style="color:#a6e22e">getOrders</span>() {
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> orders;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ol start="11">
+<li>@OneToOne(fetch=FetchType,cascade=CascadeType)<br>
+可选<br>
+@OneToOne描述一个一对一的关联<br>
+fetch:表示抓取策略,默认为FetchType.LAZY<br>
+cascade:表示级联操作策略<br>
+示例:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@OneToOne</span>(fetch<span style="color:#f92672">=</span>FetchType.<span style="color:#a6e22e">LAZY</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Blog <span style="color:#a6e22e">getBlog</span>() {
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> blog;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ol start="12">
+<li>@ManyToMany<br>
+可选<br>
+@ManyToMany 描述一个多对多的关联.多对多关联上是两个一对多关联,但是在ManyToMany描述中,中间表是由ORM框架自动处理<br>
+targetEntity:表示多对多关联的另一个实体类的全名,例如:package.Book.class<br>
+mappedBy:表示多对多关联的另一个实体类的对应集合属性名称<br>
+示例:<br>
+User实体表示用户,Book实体表示书籍,为了描述用户收藏的书籍,可以在User和Book之间建立ManyToMany关联</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@Entity</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span> {
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">private</span> List books;
+</span></span><span style="display:flex;"><span>       <span style="color:#a6e22e">@ManyToMany</span>(targetEntity<span style="color:#f92672">=</span>package.<span style="color:#a6e22e">Book</span>.<span style="color:#a6e22e">class</span>)
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">public</span> List <span style="color:#a6e22e">getBooks</span>() {
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">return</span> books;
+</span></span><span style="display:flex;"><span>       }
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setBooks</span>(List books) {
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">books</span><span style="color:#f92672">=</span>books;
+</span></span><span style="display:flex;"><span>       }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Entity</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Book</span> {
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">private</span> List users;
+</span></span><span style="display:flex;"><span>       <span style="color:#a6e22e">@ManyToMany</span>(targetEntity<span style="color:#f92672">=</span>package.<span style="color:#a6e22e">Users</span>.<span style="color:#a6e22e">class</span>, mappedBy<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;books&#34;</span>)
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">public</span> List <span style="color:#a6e22e">getUsers</span>() {
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">return</span> users;
+</span></span><span style="display:flex;"><span>       }
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setUsers</span>(List users) {
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">users</span><span style="color:#f92672">=</span>users;
+</span></span><span style="display:flex;"><span>       }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>两个实体间相互关联的属性必须标记为@ManyToMany,并相互指定targetEntity属性,<br>
+需要注意的是,有且只有一个实体的@ManyToMany注解需要指定mappedBy属性,指向targetEntity的集合属性名称<br>
+利用ORM工具自动生成的表除了User和Book表外,还自动生成了一个User_Book表,用于实现多对多关联</p>
+<ol start="13">
+<li>@MappedSuperclass<br>
+可选<br>
+@MappedSuperclass可以将超类的JPA注解传递给子类,使子类能够继承超类的JPA注解<br>
+示例:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@MappedSuperclass</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Employee</span>() {
+</span></span><span style="display:flex;"><span>       <span style="color:#75715e">//....</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Entity</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Engineer</span> <span style="color:#66d9ef">extends</span> Employee {
+</span></span><span style="display:flex;"><span>       <span style="color:#75715e">//.....</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Entity</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Manager</span> <span style="color:#66d9ef">extends</span> Employee {
+</span></span><span style="display:flex;"><span>       <span style="color:#75715e">//.....</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ol start="14">
+<li>@Embedded<br>
+可选<br>
+@Embedded将几个字段组合成一个类,并作为整个Entity的一个属性.<br>
+例如User包括id,name,city,street,zip属性.<br>
+我们希望city,street,zip属性映射为Address对象.这样,User对象将具有id,name和address这三个属性.<br>
+Address对象必须定义为@Embededable<br>
+示例:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@Embeddable</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Address</span> {city,street,zip}
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Entity</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span> {
+</span></span><span style="display:flex;"><span>       <span style="color:#a6e22e">@Embedded</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">public</span> Address <span style="color:#a6e22e">getAddress</span>() {
+</span></span><span style="display:flex;"><span>           <span style="color:#75715e">//..........</span>
+</span></span><span style="display:flex;"><span>       }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>Hibernate验证注解</p>
+<table>
+	<thead>
+			<tr>
+					<th style="text-align: left">注解</th>
+					<th style="text-align: left">适用类型</th>
+					<th style="text-align: left">说明</th>
+					<th style="text-align: left">示例</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">@Pattern</td>
+					<td style="text-align: left">String</td>
+					<td style="text-align: left">通过正则表达式来验证字符串</td>
+					<td style="text-align: left">@attern(regex=”[a-z]{6}”)</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">@Length</td>
+					<td style="text-align: left">String</td>
+					<td style="text-align: left">验证字符串的长度</td>
+					<td style="text-align: left">@length(min=3,max=20)</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">@Email</td>
+					<td style="text-align: left">String</td>
+					<td style="text-align: left">验证一个Email地址是否有效</td>
+					<td style="text-align: left">@email</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">@Range</td>
+					<td style="text-align: left">Long</td>
+					<td style="text-align: left">验证一个整型是否在有效的范围内</td>
+					<td style="text-align: left">@Range(min=0,max=100)</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">@Max</td>
+					<td style="text-align: left">Long</td>
+					<td style="text-align: left">验证一个整型必须不大于指定值</td>
+					<td style="text-align: left">@Max(value=20)</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">@Min</td>
+					<td style="text-align: left">Long</td>
+					<td style="text-align: left">验证一个整型必须不小于指定值</td>
+					<td style="text-align: left">@Min(value=10)</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">@Size</td>
+					<td style="text-align: left">集合或数组</td>
+					<td style="text-align: left">集合或数组的大小是否在指定范围内</td>
+					<td style="text-align: left">@Size(min=1,max=255)</td>
+			</tr>
+	</tbody>
+</table>
+<p>以上每个注解都可能性有一个message属性，用于在验证失败后向用户返回的消息，还可以三个属性上使用多个注解</p>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2015-09-24T18:10:40&#43;08:00" itemprop="dateUpdated">2015-09-24 18:10:40</time>
+          </span><br>
+          本文链接：<a href="/2015/09/11/jpa-hibernate-zhu-jie/" target="_blank" rel="external">https://ystyle.top/2015/09/11/jpa-hibernate-zhu-jie/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2015%2f09%2f11%2fjpa-hibernate-zhu-jie%2f&title=%e3%80%8aJPA%20%20Hibernate%20%e6%b3%a8%e8%a7%a3%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2015%2f09%2f11%2fjpa-hibernate-zhu-jie%2f&title=%e3%80%8aJPA%20%20Hibernate%20%e6%b3%a8%e8%a7%a3%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%20%40Entity%28name%3d%26ldquo%3bEntityName%26rdquo%3b%29%0a%e5%bf%85%e9%a1%bb%2cname%e4%b8%ba%e5%8f%af%e9%80%89%2c%e5%af%b9%e5%ba%94%e6%95%b0%e6%8d%ae%e5%ba%93%e4%b8%ad%e4%b8%80%e7%9a%84%e4%b8%aa%e8%a1%a8%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2015%2f09%2f11%2fjpa-hibernate-zhu-jie%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8aJPA%20%20Hibernate%20%e6%b3%a8%e8%a7%a3%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2015%2f09%2f11%2fjpa-hibernate-zhu-jie%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2015%2f09%2f11%2fjpa-hibernate-zhu-jie%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2015/08/06/githubxie-zhu-gong-zuo-liu/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">Github协助工作流</h4>
+        </a>
+      </div>
+      
+      
+      <div class="waves-block waves-effect next">
+        <a href="/2015/09/19/intellij-ideabu-shu-tomcat/" id="post-next" class="post-nav-link">
+          <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+          <h4 class="title">Intellij IDEA部署Tomcat[Maven版]</h4>
+        </a>
+      </div>
+      
+    </nav>
+    
+  </article>
+
+  
+  
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2015%2f09%2f11%2fjpa-hibernate-zhu-jie%2f&title=%e3%80%8aJPA%20%20Hibernate%20%e6%b3%a8%e8%a7%a3%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2015%2f09%2f11%2fjpa-hibernate-zhu-jie%2f&title=%e3%80%8aJPA%20%20Hibernate%20%e6%b3%a8%e8%a7%a3%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%20%40Entity%28name%3d%26ldquo%3bEntityName%26rdquo%3b%29%0a%e5%bf%85%e9%a1%bb%2cname%e4%b8%ba%e5%8f%af%e9%80%89%2c%e5%af%b9%e5%ba%94%e6%95%b0%e6%8d%ae%e5%ba%93%e4%b8%ad%e4%b8%80%e7%9a%84%e4%b8%aa%e8%a1%a8%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2015%2f09%2f11%2fjpa-hibernate-zhu-jie%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8aJPA%20%20Hibernate%20%e6%b3%a8%e8%a7%a3%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2015%2f09%2f11%2fjpa-hibernate-zhu-jie%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2015%2f09%2f11%2fjpa-hibernate-zhu-jie%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2015/09/11/jpa-hibernate-zhu-jie/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+</body>
+</html>

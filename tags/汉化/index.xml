@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>汉化 on 东方星痕</title>
+		<link>https://ystyle.top/tags/%E6%B1%89%E5%8C%96/</link>
+		<description>Recent content in 汉化 on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 06 Jan 2017 19:36:34 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/%E6%B1%89%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>SpagoBI 5.2 中文汉化补丁包</title>
+				<link>https://ystyle.top/2015/01/05/spagobi-5-2-zhong-wen-yi-hua-bu-ding-bao/</link>
+				<pubDate>Mon, 05 Jan 2015 05:26:07 +0800</pubDate>
+				<guid>https://ystyle.top/2015/01/05/spagobi-5-2-zhong-wen-yi-hua-bu-ding-bao/</guid>
+				<description>&lt;h3 id=&#34;SpagoBI-5-2-汉化补丁说明&#34;&gt;&lt;a href=&#34;#SpagoBI-5-2-汉化补丁说明&#34; class=&#34;headerlink&#34; title=&#34;[SpagoBI 5.2 汉化补丁说明]&#34;&gt;&lt;/a&gt;[SpagoBI 5.2 汉化补丁说明]&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;本补丁[SpagoBI 5.2]对谨针对[webapp/SpagoBI]项目的汉化. 并在几个常用表单上支持了中文的输入[名称, 描述]。(实现该功能的java文件在对应的class目录下)。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

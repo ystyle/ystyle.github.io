@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>鸿蒙PC on 东方星痕</title>
+		<link>https://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/</link>
+		<description>Recent content in 鸿蒙PC on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Tue, 30 Jun 2026 22:00:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>鸿蒙PC上使用box64运行x86_64鸿蒙SDK编译HAP</title>
+				<link>https://ystyle.top/2026/06/30/matebookpro-box64-harmony-sdk/</link>
+				<pubDate>Tue, 30 Jun 2026 22:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/06/30/matebookpro-box64-harmony-sdk/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;本文记录在鸿蒙PC融合开发引擎的openEuler aarch64容器中，通过box64模拟x86_64兼容层，运行鸿蒙命令行工具编译HAP的完整过程。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>鸿蒙PC融合开发引擎中编译安装Neovim与AstroNvim配置指南</title>
+				<link>https://ystyle.top/2026/04/03/matebookpro-container-build-neovim/</link>
+				<pubDate>Fri, 03 Apr 2026 21:35:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/04/03/matebookpro-container-build-neovim/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;本文记录在鸿蒙PC融合开发引擎的容器环境中，因glibc版本限制从源码编译Neovim和tree-sitter的完整过程，并配置AstroNvim作为开发环境。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式</title>
+				<link>https://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/</link>
+				<pubDate>Fri, 03 Apr 2026 21:30:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;本文深入解析鸿蒙PC融合开发引擎的技术架构，揭示其如何通过StratoVirt虚拟化和OzoneC容器技术实现Linux应用兼容。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;背景&#34;&gt;&lt;a href=&#34;#背景&#34; class=&#34;headerlink&#34; title=&#34;背景&#34;&gt;&lt;/a&gt;背景&lt;/h2&gt;&#xA;&lt;p&gt;鸿蒙PC（HarmonyOS PC）采用了独特的架构设计来实现Linux应用兼容。作为用户，我在使用过程中发现系统提供了一个&amp;quot;融合开发引擎&amp;quot;功能，可以在其中运行openEuler环境。本文将解析这个融合开发引擎的技术架构。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>鸿蒙PC Matebook Pro上全局安装GIT</title>
+				<link>https://ystyle.top/2025/12/28/matebookpro-install-git/</link>
+				<pubDate>Sun, 28 Dec 2025 10:30:00 +0800</pubDate>
+				<guid>https://ystyle.top/2025/12/28/matebookpro-install-git/</guid>
+				<description>&lt;h2 id=&#34;新方法&#34;&gt;&lt;a href=&#34;#新方法&#34; class=&#34;headerlink&#34; title=&#34;新方法&#34;&gt;&lt;/a&gt;新方法&lt;/h2&gt;&#xA;&lt;p&gt;直接在应用商店搜索安装&lt;code&gt;GitNext&lt;/code&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;准备工作&#34;&gt;&lt;a href=&#34;#准备工作&#34; class=&#34;headerlink&#34; title=&#34;准备工作&#34;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;在鸿蒙应用商店安装 CodeArts IDE&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;从CodeArts-IDE提取签名工具&#34;&gt;&lt;a href=&#34;#从CodeArts-IDE提取签名工具&#34; class=&#34;headerlink&#34; title=&#34;从CodeArts IDE提取签名工具&#34;&gt;&lt;/a&gt;从CodeArts IDE提取签名工具&lt;/h2&gt;&#xA;&lt;p&gt;打开IDE, 随便创建一个项目打开，在终端执行以下命令&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Neovim移植鸿蒙PC：三方库适配实战与挑战解析</title>
+				<link>https://ystyle.top/2025/12/27/matebookpro-port-nvim-deps/</link>
+				<pubDate>Sat, 27 Dec 2025 19:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2025/12/27/matebookpro-port-nvim-deps/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;本文记录将Neovim编辑器移植到HarmonyOS PC过程中，对11个核心依赖库的适配实战经验，涵盖平台差异分析、API限制处理、构建系统改造等关键问题。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>鸿蒙PC Matebook Pro上安装仓颉编译器每日构建版</title>
+				<link>https://ystyle.top/2025/12/27/matebookpro-run-cangjie-compiler/</link>
+				<pubDate>Sat, 27 Dec 2025 15:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2025/12/27/matebookpro-run-cangjie-compiler/</guid>
+				<description>&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://dll.ystyle.top/images/2025-12/5e398f57bb264562850d933612e65a3d.png&#34; alt=&#34;使用示例&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;使用示例&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&lt;h2 id=&#34;准备工作&#34;&gt;&lt;a href=&#34;#准备工作&#34; class=&#34;headerlink&#34; title=&#34;准备工作&#34;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;在鸿蒙PC上使用应用商店安装CodeArts IDE&lt;/li&gt;&#xA;&lt;li&gt;下载仓颉编译器每日构建版本: &lt;a href=&#34;https://gitcode.com/Cangjie/nightly_build/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;cangjie-sdk-ohos-aarch64-1.1.0-alpha.2025xxxxxxxxxxxxx.tar.gz&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;从CodeArts-IDE提取签名工具&#34;&gt;&lt;a href=&#34;#从CodeArts-IDE提取签名工具&#34; class=&#34;headerlink&#34; title=&#34;从CodeArts IDE提取签名工具&#34;&gt;&lt;/a&gt;从CodeArts IDE提取签名工具&lt;/h2&gt;&#xA;&lt;p&gt;新方法，直接在应用商店安装： &lt;code&gt;DevBox&lt;/code&gt;， 然后在HisShell就可以直接使用 &lt;code&gt;binary-sign-tool&lt;/code&gt;了&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>鸿蒙pc上Vite 7 &#43; Rollup原生模块问题的解决方案</title>
+				<link>https://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/</link>
+				<pubDate>Mon, 08 Dec 2025 21:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/</guid>
+				<description>&lt;h2 id=&#34;环境信息&#34;&gt;&lt;a href=&#34;#环境信息&#34; class=&#34;headerlink&#34; title=&#34;环境信息&#34;&gt;&lt;/a&gt;环境信息&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;操作系统&lt;/strong&gt;：HarmonyOS HongMeng Kernel 1.11.0 (OpenHarmony)&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Node.js版本&lt;/strong&gt;：22.7.0&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Vite版本&lt;/strong&gt;：7.2.6&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Rollup版本&lt;/strong&gt;：4.53.3&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;项目类型&lt;/strong&gt;：Vue 3 + TypeScript + Vite&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;问题描述&#34;&gt;&lt;a href=&#34;#问题描述&#34; class=&#34;headerlink&#34; title=&#34;问题描述&#34;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&#xA;&lt;p&gt;在鸿蒙系统上运行&lt;code&gt;npm run dev&lt;/code&gt;时出现以下错误：&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

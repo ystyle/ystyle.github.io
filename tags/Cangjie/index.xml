@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Cangjie on 东方星痕</title>
+		<link>https://ystyle.top/tags/Cangjie/</link>
+		<description>Recent content in Cangjie on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Wed, 09 Sep 2026 23:30:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/Cangjie/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>仓颉服务 - 忆时塔 OOM 追凶记</title>
+				<link>https://ystyle.top/2026/09/09/chronomem-oom-hunt/</link>
+				<pubDate>Wed, 09 Sep 2026 23:30:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/09/09/chronomem-oom-hunt/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;一次横跨六个仓颉自研库的排查&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;从一条空 message 的异常，到 662 个 CLOSE_WAIT —— 长连接泄漏如何伪装成存储 OOM&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;code&gt;2026-08-19 → 2026-09-09&lt;/code&gt; · &lt;code&gt;Cangjie&lt;/code&gt; · &lt;code&gt;badger-cj&lt;/code&gt; · &lt;code&gt;mcp-cj&lt;/code&gt; · &lt;code&gt;json-rpc&lt;/code&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;一条空消息&#34;&gt;&lt;a href=&#34;#一条空消息&#34; class=&#34;headerlink&#34; title=&#34;一条空消息&#34;&gt;&lt;/a&gt;一条空消息&lt;/h2&gt;&#xA;&lt;p&gt;事情的开始，是一条几乎不包含任何信息的报错。&lt;/p&gt;&#xA;&lt;p&gt;我在本地跑着一个常驻的 MCP 服务——一个&lt;strong&gt;基于时序数据库、用于会话记录存储的记忆系统&lt;/strong&gt;（下面就叫它「线上这个服务」）。它会在后台定期执行维护任务。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>仓颉语言 Neovim 开发环境配置指南</title>
+				<link>https://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/</link>
+				<pubDate>Fri, 03 Apr 2026 23:30:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/</guid>
+				<description>&lt;p&gt;本文档介绍如何在 openEuler (aarch64) 系统上配置 Neovim (AstroNvim) 开发环境，用于仓颉语言开发。&lt;/p&gt;&#xA;&lt;h2 id=&#34;目录&#34;&gt;&lt;a href=&#34;#目录&#34; class=&#34;headerlink&#34; title=&#34;目录&#34;&gt;&lt;/a&gt;目录&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#%e7%b3%bb%e7%bb%9f%e8%a6%81%e6%b1%82&#34;&gt;系统要求&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#%e5%ae%89%e8%a3%85%e4%bb%93%e9%a2%89-sdk&#34;&gt;安装仓颉 SDK&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#%e5%ae%89%e8%a3%85-cangjie-stdx&#34;&gt;安装 Cangjie STDX&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f%e9%85%8d%e7%bd%ae&#34;&gt;环境变量配置&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#neovim-%e9%85%8d%e7%bd%ae&#34;&gt;Neovim 配置&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#%e5%b8%b8%e8%a7%81%e9%97%ae%e9%a2%98&#34;&gt;常见问题&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;系统要求&#34;&gt;&lt;a href=&#34;#系统要求&#34; class=&#34;headerlink&#34; title=&#34;系统要求&#34;&gt;&lt;/a&gt;系统要求&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;操作系统：openEuler 2403 SP1 (aarch64)&lt;/li&gt;&#xA;&lt;li&gt;GCC 版本：12.3.1 或更高&lt;/li&gt;&#xA;&lt;li&gt;Neovim 版本：0.9.0 或更高&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;安装仓颉-SDK&#34;&gt;&lt;a href=&#34;#安装仓颉-SDK&#34; class=&#34;headerlink&#34; title=&#34;安装仓颉 SDK&#34;&gt;&lt;/a&gt;安装仓颉 SDK&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;从官方渠道下载仓颉 SDK (aarch64 版本)&lt;/li&gt;&#xA;&lt;li&gt;解压到 &lt;code&gt;~/.config/cjvs/store/&lt;/code&gt; 目录&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;目录结构示例：&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>鸿蒙PC Matebook Pro上安装仓颉编译器每日构建版</title>
+				<link>https://ystyle.top/2025/12/27/matebookpro-run-cangjie-compiler/</link>
+				<pubDate>Sat, 27 Dec 2025 15:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2025/12/27/matebookpro-run-cangjie-compiler/</guid>
+				<description>&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://dll.ystyle.top/images/2025-12/5e398f57bb264562850d933612e65a3d.png&#34; alt=&#34;使用示例&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;使用示例&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&lt;h2 id=&#34;准备工作&#34;&gt;&lt;a href=&#34;#准备工作&#34; class=&#34;headerlink&#34; title=&#34;准备工作&#34;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;在鸿蒙PC上使用应用商店安装CodeArts IDE&lt;/li&gt;&#xA;&lt;li&gt;下载仓颉编译器每日构建版本: &lt;a href=&#34;https://gitcode.com/Cangjie/nightly_build/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;cangjie-sdk-ohos-aarch64-1.1.0-alpha.2025xxxxxxxxxxxxx.tar.gz&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;从CodeArts-IDE提取签名工具&#34;&gt;&lt;a href=&#34;#从CodeArts-IDE提取签名工具&#34; class=&#34;headerlink&#34; title=&#34;从CodeArts IDE提取签名工具&#34;&gt;&lt;/a&gt;从CodeArts IDE提取签名工具&lt;/h2&gt;&#xA;&lt;p&gt;新方法，直接在应用商店安装： &lt;code&gt;DevBox&lt;/code&gt;， 然后在HisShell就可以直接使用 &lt;code&gt;binary-sign-tool&lt;/code&gt;了&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

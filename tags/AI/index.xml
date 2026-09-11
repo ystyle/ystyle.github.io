@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>AI on 东方星痕</title>
+		<link>https://ystyle.top/tags/AI/</link>
+		<description>Recent content in AI on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Thu, 19 Mar 2026 20:00:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/AI/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>MCP-Term：一个未出生即夭折的想法</title>
+				<link>https://ystyle.top/2026/03/19/mcp-term-abandoned/</link>
+				<pubDate>Thu, 19 Mar 2026 20:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/03/19/mcp-term-abandoned/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;⚠️ 已弃坑&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;此项目在讨论阶段即放弃，无任何代码实现。&lt;br&gt;&#xA;放弃原因：市场风向转变，目标场景已被钉钉、Obsidian CLI, anything CLI 等原生工具覆盖。&lt;br&gt;&#xA;记录此文仅为保存思考过程。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

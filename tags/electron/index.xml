@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>electron on 东方星痕</title>
+		<link>https://ystyle.top/tags/electron/</link>
+		<description>Recent content in electron on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Tue, 28 Feb 2017 19:27:08 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/electron/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>electron-react-boilerplate 开环境搭建</title>
+				<link>https://ystyle.top/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/</link>
+				<pubDate>Mon, 27 Feb 2017 15:14:13 +0800</pubDate>
+				<guid>https://ystyle.top/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;因为electron下载被墙的原因, electorn很难下载成功, electorn的react, redux的开发插件也装不上, 本文记录了解决这些问题时的方法&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

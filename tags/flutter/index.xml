@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>flutter on 东方星痕</title>
+		<link>https://ystyle.top/tags/flutter/</link>
+		<description>Recent content in flutter on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Wed, 23 Jan 2019 18:47:21 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/flutter/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>安装flutter</title>
+				<link>https://ystyle.top/2019/01/23/install-flitter-without-android-studio/</link>
+				<pubDate>Wed, 23 Jan 2019 18:47:21 +0800</pubDate>
+				<guid>https://ystyle.top/2019/01/23/install-flitter-without-android-studio/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;因为不想安装Android Studio， 所以只安装了安装Android sdk&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h3 id=&#34;安装安卓sdk&#34;&gt;&lt;a href=&#34;#安装安卓sdk&#34; class=&#34;headerlink&#34; title=&#34;安装安卓sdk&#34;&gt;&lt;/a&gt;安装安卓sdk&lt;/h3&gt;&#xA;&lt;p&gt;到&lt;a href=&#34;https://developer.android.google.cn/studio/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://developer.android.google.cn/studio/&lt;/a&gt;&#xA; 下载 Android-sdk-tools命令行工具&lt;/p&gt;&#xA;&#xA;&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://dll.ystyle.top/images/2019-01/chrome_2019-01-23_17-25-00.png&#34; alt=&#34;chrome_2019-01-23_17-25-00.png&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;chrome_2019-01-23_17-25-00.png&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&lt;p&gt;下载后直接解压就行了，如图。 解压后其实只有&lt;code&gt;tools&lt;/code&gt;一个文件夹, 我已经执行过安装其它工具的命令了，所以有那么多文件夹&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

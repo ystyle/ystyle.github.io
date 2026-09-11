@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>golang on 东方星痕</title>
+		<link>https://ystyle.top/tags/golang/</link>
+		<description>Recent content in golang on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 07 Apr 2017 16:39:19 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>leanote添探索功能</title>
+				<link>https://ystyle.top/2017/04/07/leanote-Add-the-search-function/</link>
+				<pubDate>Fri, 07 Apr 2017 16:39:19 +0800</pubDate>
+				<guid>https://ystyle.top/2017/04/07/leanote-Add-the-search-function/</guid>
+				<description>&lt;h3 id=&#34;leanote-编译打包&#34;&gt;&lt;a href=&#34;#leanote-编译打包&#34; class=&#34;headerlink&#34; title=&#34;leanote 编译打包&#34;&gt;&lt;/a&gt;leanote 编译打包&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;配置本地环境&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;设置&lt;code&gt;GOPATH&lt;/code&gt;环境变量为工作区目录&lt;br&gt;&#xA;然后执行:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;go get github.com/revel/cmd/revel&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;go get github.com/ystyle/leanote/app&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv $GOPATH/src/github.com/ystyle $GOPATH/src/github.com/leanote&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;&#xA;&lt;p&gt;注:源码在&lt;code&gt;$GOPATH/src/github.com/leanote/leanote/&lt;/code&gt;目录&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>JetBrains 家全新Go IDE 代号GogLand</title>
+				<link>https://ystyle.top/2016/12/14/jetbrains-jia-quan-xin-go-ide-dai-hao-gogland/</link>
+				<pubDate>Wed, 14 Dec 2016 06:53:18 +0800</pubDate>
+				<guid>https://ystyle.top/2016/12/14/jetbrains-jia-quan-xin-go-ide-dai-hao-gogland/</guid>
+				<description>&lt;h3 id=&#34;简介&#34;&gt;&lt;a href=&#34;#简介&#34; class=&#34;headerlink&#34; title=&#34;简介&#34;&gt;&lt;/a&gt;简介&lt;/h3&gt;&#xA;&lt;p&gt;我们很高兴地告诉你，今天JetBrains宣布IntelliJ家族新添成员：Gogland，一个全新的Go IDE。&lt;/p&gt;&#xA;&lt;p&gt;Gogland仍然在开发中，但我们正在开放其私人EAP，并邀请您加入！在这里你可以阅读Gogland背后的故事，或跳转到下载链接。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

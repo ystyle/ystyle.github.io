@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>wifi on 东方星痕</title>
+		<link>https://ystyle.top/tags/wifi/</link>
+		<description>Recent content in wifi on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 18 Dec 2020 20:11:48 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/wifi/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>鸿蒙开发板HI3516用命令行连接wifi</title>
+				<link>https://ystyle.top/2020/12/18/hi3516-connect-wifi/</link>
+				<pubDate>Fri, 18 Dec 2020 20:11:48 +0800</pubDate>
+				<guid>https://ystyle.top/2020/12/18/hi3516-connect-wifi/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;鸿蒙的HI3516编译里已经有wpa_supplicant相关工程了，但编译时没有包进去, 所以只要修改配置文件后就能编译出来了&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;主要修改文件: &lt;a href=&#34;https://gitee.com/openharmony/applications_sample_camera/blob/master/communication/BUILD.gn#L17-18&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;communication/BUILD.gn#L17-18&lt;/a&gt;&#xA; 行之间添加， 以下第2行&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

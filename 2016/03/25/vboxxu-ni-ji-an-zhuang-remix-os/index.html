@@ -1,650 +1,660 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cn">
 <head>
-    
-
-    
-
-    
-<!-- Baidu Tongji -->
-<script>var _hmt = _hmt || []</script>
-<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
-<!-- End Baidu Tongji -->
-
-
-
-<!-- Baidu Push -->
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-<!-- End Baidu Push -->
-
-
-    <meta charset="utf-8">
-    
-    
-    
-    <title>VBox虚拟机安装Remix OS | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="vbox,RemixOS">
-    <meta name="description" content="VBox虚拟机安装Remix OS下载下载Remix 创建虚拟机选择64位的                                                                                                            内存1G以上">
-<meta name="keywords" content="vbox,RemixOS">
-<meta property="og:type" content="article">
-<meta property="og:title" content="VBox虚拟机安装Remix OS">
-<meta property="og:url" content="http://ystyle.top/2016/03/25/vboxxu-ni-ji-an-zhuang-remix-os/index.html">
-<meta property="og:site_name" content="东方星痕">
-<meta property="og:description" content="VBox虚拟机安装Remix OS下载下载Remix 创建虚拟机选择64位的                                                                                                            内存1G以上">
-<meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="http://ystyle.top/images/2016/03/1.png">
-<meta property="og:image" content="http://ystyle.top/images/2016/03/2.png">
-<meta property="og:image" content="http://ystyle.top/images/2016/03/3.png">
-<meta property="og:image" content="http://ystyle.top/images/2016/03/4.png">
-<meta property="og:image" content="http://ystyle.top/images/2016/03/5-1.png">
-<meta property="og:image" content="http://ystyle.top/images/2016/03/6.png">
-<meta property="og:image" content="http://ystyle.top/images/2016/03/7.png">
-<meta property="og:image" content="http://ystyle.top/images/2016/03/8.png">
-<meta property="og:image" content="http://ystyle.top/images/2016/03/9.png">
-<meta property="og:image" content="http://ystyle.top/images/2016/03/10.png">
-<meta property="og:image" content="http://ystyle.top/images/2016/03/11.png">
-<meta property="og:image" content="http://ystyle.top/images/2016/03/12.png">
-<meta property="og:image" content="http://ystyle.top/images/2016/03/13.png">
-<meta property="og:image" content="http://ystyle.top/images/2016/03/15-1.png">
-<meta property="og:image" content="http://ystyle.top/images/2016/03/14.png">
-<meta property="og:image" content="http://ystyle.top/images/2016/03/16.png">
-<meta property="og:updated_time" content="2016-08-26T02:14:01.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="VBox虚拟机安装Remix OS">
-<meta name="twitter:description" content="VBox虚拟机安装Remix OS下载下载Remix 创建虚拟机选择64位的                                                                                                            内存1G以上">
-<meta name="twitter:image" content="http://ystyle.top/images/2016/03/1.png">
-    
-        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/img/avatar.jpg">
-    <link rel="stylesheet" href="/css/style.css?v=1.6.10">
-    <script>window.lazyScripts=[]</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VBox虚拟机安装Remix OS | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
-    <div id="loading" class="active"></div>
+  
+  <div id="loading" class="active"></div>
 
-    <aside id="menu"  >
+  
+
+<aside id="menu">
   <div class="inner flex-row-vertical">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
+      <i class="icon icon-lg icon-close"></i>
     </a>
     <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.jpg">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
         </a>
         <hgroup class="introduce">
           <h5 class="nickname">YSTYLE</h5>
-          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
         </hgroup>
       </div>
     </div>
     <div class="scroll-wrap flex-col">
       <ul class="nav">
         
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                归档
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                标签
-              </a>
-            </li>
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                分类
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/ystyle" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                项目
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="http://www.weibo.com/512308314" target="_blank" >
-                <i class="icon icon-lg icon-weibo"></i>
-                微博
-              </a>
-            </li>
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/atom.xml" target="_blank" >
-                <i class="icon icon-lg icon-rss"></i>
-                订阅
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/friends"  >
-                <i class="icon icon-lg icon-link"></i>
-                友链
-              </a>
-            </li>
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
         
       </ul>
     </div>
   </div>
 </aside>
 
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">VBox虚拟机安装Remix OS</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">VBox虚拟机安装Remix OS</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
     </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
 </header>
+
 <header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">VBox虚拟机安装Remix OS</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2016-03-25T15:59:42.000Z" itemprop="datePublished" class="page-time">
-  2016-03-25
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
-
-            
-        </h5>
-    </div>
+  <div class="container fade-scale in">
+    <h1 class="title">VBox虚拟机安装Remix OS</h1>
+    <h5 class="subtitle">
+      <time datetime="2016-03-25T23:59:42&#43;08:00" itemprop="datePublished" class="page-time">2016-03-25</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+    </h5>
+  </div>
+</header>
 
     
-
-</header>
-
 
 <div class="container body-wrap">
-    
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#VBox虚拟机安装Remix-OS"><span class="post-toc-number">1.</span> <span class="post-toc-text">VBox虚拟机安装Remix OS</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#下载"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">下载</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建虚拟机"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">创建虚拟机</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装RemixOS"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">安装RemixOS</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#重启进入RemixOS"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">重启进入RemixOS</span></a></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-<article id="post-vboxxu-ni-ji-an-zhuang-remix-os"
-  class="post-article article-type-post fade" itemprop="blogPost">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
 
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#VBox%e8%99%9a%e6%8b%9f%e6%9c%ba%e5%ae%89%e8%a3%85Remix-OS">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">VBox虚拟机安装Remix OS</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%8b%e8%bd%bd">
+    <span class="post-toc-number">1.1.</span> <span class="post-toc-text">下载</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%88%9b%e5%bb%ba%e8%99%9a%e6%8b%9f%e6%9c%ba">
+    <span class="post-toc-number">1.2.</span> <span class="post-toc-text">创建虚拟机</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%ae%89%e8%a3%85RemixOS">
+    <span class="post-toc-number">1.3.</span> <span class="post-toc-text">安装RemixOS</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e9%87%8d%e5%90%af%e8%bf%9b%e5%85%a5RemixOS">
+    <span class="post-toc-number">1.4.</span> <span class="post-toc-text">重启进入RemixOS</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-VBox虚拟机安装Remix-OS" itemprop="blogPost">
     <div class="post-card">
-        <h1 class="post-card-title">VBox虚拟机安装Remix OS</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2016-03-25 23:59:42" datetime="2016-03-25T15:59:42.000Z"  itemprop="datePublished">2016-03-25</time>
+      <h1 class="post-card-title">VBox虚拟机安装Remix OS</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2016-03-25T23:59:42&#43;08:00" itemprop="datePublished">2016-03-25</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+        
+      </div>
 
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统/">系统</a></li></ul>
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <h2 id="VBox虚拟机安装Remix-OS"><a href="#VBox虚拟机安装Remix-OS" class="headerlink" title="VBox虚拟机安装Remix OS"></a>VBox虚拟机安装Remix OS</h2>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3>
+<p><a href="http://www.jide.com/remixos-for-pc#downloadNow" target="_blank" rel="noopener">下载Remix</a>
+</p>
+<h3 id="创建虚拟机"><a href="#创建虚拟机" class="headerlink" title="创建虚拟机"></a>创建虚拟机</h3>
+<p>选择64位的</p>
 
-
-
-            
-
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="VBox虚拟机安装Remix-OS"><a href="#VBox虚拟机安装Remix-OS" class="headerlink" title="VBox虚拟机安装Remix OS"></a>VBox虚拟机安装Remix OS</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p><a href="http://www.jide.com/remixos-for-pc#downloadNow" target="_blank" rel="noopener">下载Remix</a></p>
-<h3 id="创建虚拟机"><a href="#创建虚拟机" class="headerlink" title="创建虚拟机"></a>创建虚拟机</h3><p>选择64位的</p>
 <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/2016/03/1.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2016/03/1.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
 <p>内存1G以上</p>
+
 <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/2016/03/2.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2016/03/2.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
+
 <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/2016/03/3.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2016/03/3.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
 <p>一定要VHD的vdi的启动时会卡在命令行界面</p>
+
 <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/2016/03/4.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2016/03/4.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
 <p>硬盘看着给</p>
+
 <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/2016/03/5-1.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2016/03/5-1.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
 <p>创建要虚拟机里在设置里把显存调成最大,并启用3D加速</p>
+
 <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/2016/03/6.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2016/03/6.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
 <p>在光盘里添加linux的安装镜像</p>
+
 <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/2016/03/7.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2016/03/7.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
 <p>然后选中控制器IDE再新增一个光驱, 选择留空</p>
+
 <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/2016/03/8.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<h3 id="安装RemixOS"><a href="#安装RemixOS" class="headerlink" title="安装RemixOS"></a>安装RemixOS</h3><p>启动虚拟机</p>
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2016/03/8.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
+<h3 id="安装RemixOS"><a href="#安装RemixOS" class="headerlink" title="安装RemixOS"></a>安装RemixOS</h3>
+<p>启动虚拟机</p>
+
 <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/2016/03/9.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2016/03/9.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
 <p>用lsblk查看添加的硬盘名称是什么, 一般是sda, 然后运行cfdisk (图片的A是截图不小心按到的)</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsblk</span><br><span class="line">cfdisk</span><br></pre></td></tr></table></figure>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>lsblk
+</span></span><span style="display:flex;"><span>cfdisk
+</span></span></code></pre></div>
 <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/2016/03/10.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2016/03/10.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
 <p>进来用左右键选择<code>New</code>然后回车, 再选择<code>Write</code>回车输入<code>yes</code>回车, 然后再选择<code>Qite</code>退出</p>
+
 <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/2016/03/11.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2016/03/11.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
 <p>然后格式化分区, 执行<code>mkfs.ext4 /dev/sda1</code> (忘记截图了)</p>
 <p>在虚拟机菜单分配光盘, 在没有选择iso的那个添加Remix的镜像</p>
+
 <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/2016/03/12.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2016/03/12.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
 <p>接下来挂载分区</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 新建目录以挂载iso和虚拟硬盘</span></span><br><span class="line">mkdir /mnt/remix</span><br><span class="line">mkdir /mnt/cdrom</span><br><span class="line">lsblk ## 用lsblk 可看SIZE列为2.5G的NAME字段是sr1,所以/dev/sr1就是Remix的ios镜像 (查看下图)</span><br><span class="line"><span class="meta">#</span><span class="bash"> 挂载镜像和目录</span></span><br><span class="line">mount /dev/sda1 /mnt/remix</span><br><span class="line">mount /dev/sr1 /mnt/cdrom</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 如果上面完成了， 接下来直接复制下面的命令执行就行了。</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 目的是拷贝iso里的文件到虚拟机的硬盘里。</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 拷贝这些文件到虚拟硬盘</span></span></span><br><span class="line">cp /mnt/cdrom/system.img /mnt/remix</span><br><span class="line">cp /mnt/cdrom/initrd.img /mnt/remix</span><br><span class="line">cp /mnt/cdrom/ramdisk.img /mnt/remix</span><br><span class="line">cp /mnt/cdrom/kernel /mnt/remix</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 创建data分区（其实就是虚拟机硬盘的一个目录，不是分区）</span></span></span><br><span class="line">cd /mnt/remix/</span><br><span class="line">mkdir data</span><br><span class="line">chmod 777 -R /mnt/remix/data</span><br></pre></td></tr></table></figure>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 新建目录以挂载iso和虚拟硬盘</span>
+</span></span><span style="display:flex;"><span>mkdir /mnt/remix
+</span></span><span style="display:flex;"><span>mkdir /mnt/cdrom
+</span></span><span style="display:flex;"><span>lsblk <span style="color:#75715e">## 用lsblk 可看SIZE列为2.5G的NAME字段是sr1,所以/dev/sr1就是Remix的ios镜像 (查看下图)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 挂载镜像和目录</span>
+</span></span><span style="display:flex;"><span>mount /dev/sda1 /mnt/remix
+</span></span><span style="display:flex;"><span>mount /dev/sr1 /mnt/cdrom
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 如果上面完成了， 接下来直接复制下面的命令执行就行了。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 目的是拷贝iso里的文件到虚拟机的硬盘里。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 拷贝这些文件到虚拟硬盘</span>
+</span></span><span style="display:flex;"><span>cp /mnt/cdrom/system.img /mnt/remix
+</span></span><span style="display:flex;"><span>cp /mnt/cdrom/initrd.img /mnt/remix
+</span></span><span style="display:flex;"><span>cp /mnt/cdrom/ramdisk.img /mnt/remix
+</span></span><span style="display:flex;"><span>cp /mnt/cdrom/kernel /mnt/remix
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 创建data分区（其实就是虚拟机硬盘的一个目录，不是分区）</span>
+</span></span><span style="display:flex;"><span>cd /mnt/remix/
+</span></span><span style="display:flex;"><span>mkdir data
+</span></span><span style="display:flex;"><span>chmod <span style="color:#ae81ff">777</span> -R /mnt/remix/data
+</span></span></code></pre></div>
 <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/2016/03/13.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2016/03/13.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
 <p>安装grub引导</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grub-install --root-directory=/mnt/remix /dev/sda</span><br><span class="line"><span class="meta">#</span><span class="bash"> 新建grub.cfg文件, 添加启动项</span></span><br><span class="line">vim /mnt/remix/boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
-<p>文本如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">set default=0</span><br><span class="line">set timeout=3</span><br><span class="line">set gfxmode=1024x768</span><br><span class="line">terminal_output gfxterm</span><br><span class="line"></span><br><span class="line">menuentry &apos;Remix OS For PC&apos; --class android-x86 &#123;</span><br><span class="line">        search --file --no-floppy --set=root /kernel</span><br><span class="line">        linux /kernel root=/dev/ram0 androidboot.hardware=remix_cn_x86_64 androidboot.selinux=permissive quiet SRC=/ DATA=/data</span><br><span class="line">        initrd /initrd.img</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>grub-install --root-directory<span style="color:#f92672">=</span>/mnt/remix /dev/sda
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 新建grub.cfg文件, 添加启动项</span>
+</span></span><span style="display:flex;"><span>vim /mnt/remix/boot/grub/grub.cfg
+</span></span></code></pre></div><p>文本如下</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>set default=0
+</span></span><span style="display:flex;"><span>set timeout=3
+</span></span><span style="display:flex;"><span>set gfxmode=1024x768
+</span></span><span style="display:flex;"><span>terminal_output gfxterm
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>menuentry &#39;Remix OS For PC&#39; --class android-x86 {
+</span></span><span style="display:flex;"><span>        search --file --no-floppy --set=root /kernel
+</span></span><span style="display:flex;"><span>        linux /kernel root=/dev/ram0 androidboot.hardware=remix_cn_x86_64 androidboot.selinux=permissive quiet SRC=/ DATA=/data
+</span></span><span style="display:flex;"><span>        initrd /initrd.img
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
 <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/2016/03/15-1.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2016/03/15-1.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
 <p>安装好后目录是这样的</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /mnt/remix</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd /mnt/remix
+</span></span><span style="display:flex;"><span>ls
+</span></span></code></pre></div>
 <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/2016/03/14.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<h3 id="重启进入RemixOS"><a href="#重启进入RemixOS" class="headerlink" title="重启进入RemixOS"></a>重启进入RemixOS</h3><p>直接退出关闭虚拟机,然后在设置里移除两个iso镜像</p>
-<p>启动RemixOS<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/2016/03/16.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure></p>
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2016/03/14.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
+<h3 id="重启进入RemixOS"><a href="#重启进入RemixOS" class="headerlink" title="重启进入RemixOS"></a>重启进入RemixOS</h3>
+<p>直接退出关闭虚拟机,然后在设置里移除两个iso镜像</p>
+<p>启动RemixOS<br>
 
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2016/03/16.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
+</p>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2016-08-26T10:14:01&#43;08:00" itemprop="dateUpdated">2016-08-26 10:14:01</time>
+          </span><br>
+          本文链接：<a href="/2016/03/25/vboxxu-ni-ji-an-zhuang-remix-os/" target="_blank" rel="external">https://ystyle.top/2016/03/25/vboxxu-ni-ji-an-zhuang-remix-os/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
         </div>
-
-        <blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2016-08-26T02:14:01.000Z" itemprop="dateUpdated">2016-08-26 10:14:01</time>
-</span><br>
-
-
-        
-        本文链接：<a href="/2016/03/25/vboxxu-ni-ji-an-zhuang-remix-os/" target="_blank" rel="external">http://ystyle.top/2016/03/25/vboxxu-ni-ji-an-zhuang-remix-os/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
-        
-    </div>
-    <footer>
-        <a href="http://ystyle.top">
+        <footer>
+          <a href="https://ystyle.top/">
             <img src="/img/avatar.jpg" alt="YSTYLE">
             YSTYLE
-        </a>
-    </footer>
-</blockquote>
+          </a>
+        </footer>
+      </blockquote>
 
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vbox/">vbox</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RemixOS/">RemixOS</a></li></ul>
         
 
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RemixOS/">RemixOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vbox/">vbox</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2016/03/25/vboxxu-ni-ji-an-zhuang-remix-os/&title=《VBox虚拟机安装Remix OS》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2016/03/25/vboxxu-ni-ji-an-zhuang-remix-os/&title=《VBox虚拟机安装Remix OS》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2016/03/25/vboxxu-ni-ji-an-zhuang-remix-os/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《VBox虚拟机安装Remix OS》 — 东方星痕&url=http://ystyle.top/2016/03/25/vboxxu-ni-ji-an-zhuang-remix-os/&via=http://ystyle.top" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2016/03/25/vboxxu-ni-ji-an-zhuang-remix-os/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2016%2f03%2f25%2fvboxxu-ni-ji-an-zhuang-remix-os%2f&title=%e3%80%8aVBox%e8%99%9a%e6%8b%9f%e6%9c%ba%e5%ae%89%e8%a3%85Remix%20OS%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2016%2f03%2f25%2fvboxxu-ni-ji-an-zhuang-remix-os%2f&title=%e3%80%8aVBox%e8%99%9a%e6%8b%9f%e6%9c%ba%e5%ae%89%e8%a3%85Remix%20OS%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=VBox%e8%99%9a%e6%8b%9f%e6%9c%ba%e5%ae%89%e8%a3%85Remix%20OS%20%e4%b8%8b%e8%bd%bd%20%e4%b8%8b%e8%bd%bdRemix%20%e5%88%9b%e5%bb%ba%e8%99%9a%e6%8b%9f%e6%9c%ba%20%e9%80%89%e6%8b%a964%e4%bd%8d%e7%9a%84%0a%e5%86%85%e5%ad%981G%e4%bb%a5%e4%b8%8a%0a%e4%b8%80%e5%ae%9a%e8%a6%81VHD%e7%9a%84vdi%e7%9a%84%e5%90%af%e5%8a%a8%e6%97%b6%e4%bc%9a%e5%8d%a1%e5%9c%a8%e5%91%bd%e4%bb%a4%e8%a1%8c%e7%95%8c%e9%9d%a2%0a%e7%a1%ac%e7%9b%98%e7%9c%8b%e7%9d%80%e7%bb%99%0a%e5%88%9b%e5%bb%ba%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2016%2f03%2f25%2fvboxxu-ni-ji-an-zhuang-remix-os%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8aVBox%e8%99%9a%e6%8b%9f%e6%9c%ba%e5%ae%89%e8%a3%85Remix%20OS%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2016%2f03%2f25%2fvboxxu-ni-ji-an-zhuang-remix-os%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2016%2f03%2f25%2fvboxxu-ni-ji-an-zhuang-remix-os%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
 </div>
 
 
 
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
         </div>
+        
+      </div>
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2016/04/16/docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
-        <h4 class="title">docker + jenkins + git + maven自动化构建与部署</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2016/03/18/docker-swarm-ji-qun/" id="post-next" class="post-nav-link">
-        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">docker + swarm 集群</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
     
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2016/03/18/docker-swarm-ji-qun/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">docker &#43; swarm 集群</h4>
+        </a>
+      </div>
+      
+      
+      <div class="waves-block waves-effect next">
+        <a href="/2016/04/16/docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu/" id="post-next" class="post-nav-link">
+          <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+          <h4 class="title">docker &#43; jenkins &#43; git &#43; maven自动化构建与部署</h4>
+        </a>
+      </div>
+      
+    </nav>
+    
+  </article>
 
-
-
-
-
-
-
-
-
-
+  
+  
 
 <section class="comments" id="comments">
-    <div id="gitalk-container"></div>
-    <link rel="stylesheet" href="/css/gitalk.css">
-    <script src="/js/gitalk.min.js"></script>
-    <script>
-        var id = location.pathname
-        if (location.pathname.length > 50) {
-          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
-        }
-        const gitalk = new Gitalk({
-          clientID: '1f887c79a8b9b9fbec12',
-          clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
-          repo: 'ystyle.github.io',
-          owner: 'ystyle',
-          admin: ['ystyle'],
-          id: id,      // Ensure uniqueness and length less than 50
-          title: document.title.split('|')[0],
-          distractionFreeMode: false  // Facebook-like distraction free mode
-        })
-
-        gitalk.render('gitalk-container')
-    </script>
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
 </section>
 
 
-
-
-</article>
-
-
-
 </div>
 
-        <footer class="footer">
-    <div class="bottom">
-        <p>
-            
-
-            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
-            <span>东方星痕 &copy; 2015 - 2026</span>
-            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
-            <div style="width:300px;margin:0 auto; padding:20px 0;">
-              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
-                <img src="/img/record-icon.png" style="float:left;"/>
-                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
-                  粤公网安备 44010502002055号
-                </p>
-              </a>
-            </div>
-        </p>
-    </div>
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
 </footer>
 
-    </main>
-    <div class="mask" id="mask"></div>
+  </main>
+
+  
+<div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2016/03/25/vboxxu-ni-ji-an-zhuang-remix-os/&title=《VBox虚拟机安装Remix OS》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2016/03/25/vboxxu-ni-ji-an-zhuang-remix-os/&title=《VBox虚拟机安装Remix OS》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2016/03/25/vboxxu-ni-ji-an-zhuang-remix-os/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《VBox虚拟机安装Remix OS》 — 东方星痕&url=http://ystyle.top/2016/03/25/vboxxu-ni-ji-an-zhuang-remix-os/&via=http://ystyle.top" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2016/03/25/vboxxu-ni-ji-an-zhuang-remix-os/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2016%2f03%2f25%2fvboxxu-ni-ji-an-zhuang-remix-os%2f&title=%e3%80%8aVBox%e8%99%9a%e6%8b%9f%e6%9c%ba%e5%ae%89%e8%a3%85Remix%20OS%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2016%2f03%2f25%2fvboxxu-ni-ji-an-zhuang-remix-os%2f&title=%e3%80%8aVBox%e8%99%9a%e6%8b%9f%e6%9c%ba%e5%ae%89%e8%a3%85Remix%20OS%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=VBox%e8%99%9a%e6%8b%9f%e6%9c%ba%e5%ae%89%e8%a3%85Remix%20OS%20%e4%b8%8b%e8%bd%bd%20%e4%b8%8b%e8%bd%bdRemix%20%e5%88%9b%e5%bb%ba%e8%99%9a%e6%8b%9f%e6%9c%ba%20%e9%80%89%e6%8b%a964%e4%bd%8d%e7%9a%84%0a%e5%86%85%e5%ad%981G%e4%bb%a5%e4%b8%8a%0a%e4%b8%80%e5%ae%9a%e8%a6%81VHD%e7%9a%84vdi%e7%9a%84%e5%90%af%e5%8a%a8%e6%97%b6%e4%bc%9a%e5%8d%a1%e5%9c%a8%e5%91%bd%e4%bb%a4%e8%a1%8c%e7%95%8c%e9%9d%a2%0a%e7%a1%ac%e7%9b%98%e7%9c%8b%e7%9d%80%e7%bb%99%0a%e5%88%9b%e5%bb%ba%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2016%2f03%2f25%2fvboxxu-ni-ji-an-zhuang-remix-os%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8aVBox%e8%99%9a%e6%8b%9f%e6%9c%ba%e5%ae%89%e8%a3%85Remix%20OS%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2016%2f03%2f25%2fvboxxu-ni-ji-an-zhuang-remix-os%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2016%2f03%2f25%2fvboxxu-ni-ji-an-zhuang-remix-os%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
 
 
 <div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLElEQVR42u3aQW4jMQwEwPz/097rAhtPuillAUulUzCYWCoHYCiSX1/xev218ufv3nn9s9797uaFgYHxsYzX43o+SrvxuzeTfZ/xGBgYNzCet0wOmiCTwJ3si4GBgTE71q6QjYGBgbEr4C6lccuBHgMD405GEi6f328LdusBHQMD4x5GWyb7nz//Sn8DAwPjoxivcu3qISbNzuJUGBgYRzPaov8MNmtn1sMfGBgYhzJ+o0yfgPOBsOgrw8DAOJqRh9Q24ZvdMWfNCQwMjHsY7UU0T+zaLyjfBQMD4wbG+lDXetidXXG/uYVjYGAczSgqc8upXj5a8bxjXdXDwMD4WEZe5GoDa5uTtonjN3thYGAcymjL97uezJoExSUWAwPjOMZKyWxXoT9nFJdYDAyMIxhtcpZfKZPkMi/YLQ1bYGBgfDhj/TqaBM1dYxw/XGIxMDCOZrRHyQth+eFmpb0oumNgYBzBmOWSs3bCrmELDAyMexh5Ka0oeMVBc9aK+OFvgoGBcTRjpTGQh+bZVTYKyhgYGJcx8rLaru5EEljr6TYMDIxDGSstyTxxrPur+ZgFBgbGcYzZmNcsgOafULczMTAwjmbMgl0eUmfb18MWGBgYFzDaINuOos7YdcDFwMC4gLHehmyHvWap3tugj4GBgRG3G9tmZzFO8QzGwMDAiAcy1p8kJ9z2fwMDA+OjGHkYzY/VfnLb/sTAwLiHsVLcnyV8ydGTIIuBgXEB4w/8RUupcYAunAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2016/03/25/vboxxu-ni-ji-an-zhuang-remix-os/">
 </div>
 
 
-
-
-    <script src="/js/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
-
-
-</script>
-
-<script src="/js/main.min.js?v=1.6.10"></script>
-
-
+  
 <div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
+  <ul class="search-result" id="search-result"></ul>
 </div>
 <template id="search-tpl">
 <li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.6.10" async></script>
 
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
 
-
-
-
-
-
-
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '东方星痕的博客';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '欢迎回来╮(╯▽╰)╭';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
-        }
-    });
-})();
-</script>
-
-
-
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
 </body>
 </html>

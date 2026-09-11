@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>建模 on 东方星痕</title>
+		<link>https://ystyle.top/tags/%E5%BB%BA%E6%A8%A1/</link>
+		<description>Recent content in 建模 on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Wed, 14 Dec 2016 12:16:50 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/%E5%BB%BA%E6%A8%A1/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Power designer生成建表语句的设置</title>
+				<link>https://ystyle.top/2016/12/12/power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi/</link>
+				<pubDate>Mon, 12 Dec 2016 18:46:13 +0800</pubDate>
+				<guid>https://ystyle.top/2016/12/12/power-designersheng-cheng-jian-biao-yu-ju-de-she-zhi/</guid>
+				<description>&lt;h3 id=&#34;oracle去年字段的引号&#34;&gt;&lt;a href=&#34;#oracle去年字段的引号&#34; class=&#34;headerlink&#34; title=&#34;oracle去年字段的引号&#34;&gt;&lt;/a&gt;oracle去年字段的引号&lt;/h3&gt;&#xA;&lt;p&gt;DataBase - Edit Current DBMS&lt;/p&gt;&#xA;&lt;p&gt;修改 &lt;code&gt;ORA11GR1::Script\Sql\Format\CaseSensitivityUsingQuote&lt;/code&gt;改为&lt;code&gt;No&lt;/code&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;oracle生成的字段注释不换行&#34;&gt;&lt;a href=&#34;#oracle生成的字段注释不换行&#34; class=&#34;headerlink&#34; title=&#34;oracle生成的字段注释不换行&#34;&gt;&lt;/a&gt;oracle生成的字段注释不换行&lt;/h3&gt;&#xA;&lt;p&gt;DataBase - Edit Current DBMS&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

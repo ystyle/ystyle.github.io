@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>nas on 东方星痕</title>
+		<link>https://ystyle.top/tags/nas/</link>
+		<description>Recent content in nas on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Thu, 30 Nov 2017 09:11:33 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/nas/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>用安卓设备DIY一个NAS</title>
+				<link>https://ystyle.top/2017/11/30/diy-a-nas-with-android-device/</link>
+				<pubDate>Thu, 30 Nov 2017 09:11:33 +0800</pubDate>
+				<guid>https://ystyle.top/2017/11/30/diy-a-nas-with-android-device/</guid>
+				<description>&lt;h3 id=&#34;网站地址&#34;&gt;&lt;a href=&#34;#网站地址&#34; class=&#34;headerlink&#34; title=&#34;网站地址&#34;&gt;&lt;/a&gt;网站地址&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;以安卓IP地址&lt;code&gt;192.168.1.7&lt;/code&gt;为例&lt;/li&gt;&#xA;&lt;li&gt;ssh连接地址: &lt;code&gt;ssh ystyle@192.168.1.7&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;supervisor 管理地址： &lt;a href=&#34;http://192.168.1.7:9001/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://192.168.1.7:9001/&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;aria2 web ui &lt;a href=&#34;http://webui-aria2.ghostry.cn/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://webui-aria2.ghostry.cn/&lt;/a&gt;&#xA; 设置-连接设置填写aria2 的rpc地址&lt;/li&gt;&#xA;&lt;li&gt;aria2 rpc地址： &lt;a href=&#34;192.168.1.7:6800&#34;&gt;192.168.1.7:6800&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;syncthing 管理页面：&lt;a href=&#34;http://127.0.0.1:8384/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://127.0.0.1:8384/&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;安卓设置需要安装的软件&#34;&gt;&lt;a href=&#34;#安卓设置需要安装的软件&#34; class=&#34;headerlink&#34; title=&#34;安卓设置需要安装的软件&#34;&gt;&lt;/a&gt;安卓设置需要安装的软件&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;kingroot&lt;/code&gt; 设备需要&lt;code&gt;root&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;linux deploy&lt;/code&gt; 安装linux&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;Linux系统安装软件&#34;&gt;&lt;a href=&#34;#Linux系统安装软件&#34; class=&#34;headerlink&#34; title=&#34;Linux系统安装软件&#34;&gt;&lt;/a&gt;Linux系统安装软件&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;bash completion&lt;/li&gt;&#xA;&lt;li&gt;screenfetch&lt;/li&gt;&#xA;&lt;li&gt;htop&lt;/li&gt;&#xA;&lt;li&gt;vim&lt;/li&gt;&#xA;&lt;li&gt;supervisor&lt;/li&gt;&#xA;&lt;li&gt;aria2&lt;/li&gt;&#xA;&lt;li&gt;syncthing&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;安卓部署Linux记录&#34;&gt;&lt;a href=&#34;#安卓部署Linux记录&#34; class=&#34;headerlink&#34; title=&#34;安卓部署Linux记录&#34;&gt;&lt;/a&gt;安卓部署Linux记录&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;获取root权限&lt;/li&gt;&#xA;&lt;li&gt;安装linux deploy&lt;/li&gt;&#xA;&lt;li&gt;点右下角的图标进去配置界面&#xA;&lt;ul&gt;&#xA;&lt;li&gt;选择好linux发行版与版本&#xA;&lt;ul&gt;&#xA;&lt;li&gt;架构用默认的就好，手机64位的可选择arm64之类的&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;设置用户名和密码&lt;/li&gt;&#xA;&lt;li&gt;本地化选择zh_CN.UTF-8&lt;/li&gt;&#xA;&lt;li&gt;启用SSH(若喜欢图形界面可以选择桌面环境和VNC的组合)&lt;/li&gt;&#xA;&lt;li&gt;退出设置到主界面&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;点右上角三点 选择 安装&lt;/li&gt;&#xA;&lt;li&gt;等待系统安装完毕。其中过程出现 fail,download fail之类的重新执行安装过程&#xA;&lt;ul&gt;&#xA;&lt;li&gt;重新安装需要点击主界面的停止，卸载已挂载的文件系统，再点右上菜单的清空&lt;/li&gt;&#xA;&lt;li&gt;继续执行安装操作&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; deploy ... &amp;lt;&amp;lt;&amp;lt; deploy&lt;/code&gt;之间没出现错误说明安装完成&lt;/li&gt;&#xA;&lt;li&gt;点击主界面的启动，出现&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; start ... ... &amp;lt;&amp;lt;&amp;lt; start&lt;/code&gt;则启动完成&#xA;&lt;ul&gt;&#xA;&lt;li&gt;若启动过程出现 extra/ssh fail 之类的，执行重新安装操作&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;左边三横线新建配置文件后，若需要安装其它系统/或切换系统，则要先点主界面的停止按钮&#xA;&lt;ul&gt;&#xA;&lt;li&gt;若要配置多个系统，右下属性里&lt;code&gt;安装路径&lt;/code&gt;的*.img换成其它名字&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;安装linux-软件&#34;&gt;&lt;a href=&#34;#安装linux-软件&#34; class=&#34;headerlink&#34; title=&#34;安装linux 软件&#34;&gt;&lt;/a&gt;安装linux 软件&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;在电脑上或手机上安装ssh 客户端&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

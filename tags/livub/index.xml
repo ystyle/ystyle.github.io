@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>livub on 东方星痕</title>
+		<link>https://ystyle.top/tags/livub/</link>
+		<description>Recent content in livub on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Sat, 27 Dec 2025 19:00:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/livub/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Neovim移植鸿蒙PC：三方库适配实战与挑战解析</title>
+				<link>https://ystyle.top/2025/12/27/matebookpro-port-nvim-deps/</link>
+				<pubDate>Sat, 27 Dec 2025 19:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2025/12/27/matebookpro-port-nvim-deps/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;本文记录将Neovim编辑器移植到HarmonyOS PC过程中，对11个核心依赖库的适配实战经验，涵盖平台差异分析、API限制处理、构建系统改造等关键问题。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

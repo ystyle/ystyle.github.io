@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>tensorflow-gpu on 东方星痕</title>
+		<link>https://ystyle.top/tags/tensorflow-gpu/</link>
+		<description>Recent content in tensorflow-gpu on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Sat, 16 Sep 2017 10:52:26 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/tensorflow-gpu/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>tensorflow 在windows 下使用gpu</title>
+				<link>https://ystyle.top/2017/01/06/tensorflow-zai-windows-xia-shi-yong-gpu/</link>
+				<pubDate>Fri, 06 Jan 2017 04:49:17 +0800</pubDate>
+				<guid>https://ystyle.top/2017/01/06/tensorflow-zai-windows-xia-shi-yong-gpu/</guid>
+				<description>&lt;h2 id=&#34;tensorflow-在windows-下怎么使用gpu&#34;&gt;&lt;a href=&#34;#tensorflow-在windows-下怎么使用gpu&#34; class=&#34;headerlink&#34; title=&#34;tensorflow 在windows 下怎么使用gpu&#34;&gt;&lt;/a&gt;tensorflow 在windows 下怎么使用gpu&lt;/h2&gt;&#xA;&lt;h3 id=&#34;需要安装的工具&#34;&gt;&lt;a href=&#34;#需要安装的工具&#34; class=&#34;headerlink&#34; title=&#34;需要安装的工具&#34;&gt;&lt;/a&gt;需要安装的工具&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;python 3.5.x&lt;/li&gt;&#xA;&lt;li&gt;tensorflow-gpu (1.13.0)&lt;/li&gt;&#xA;&lt;li&gt;Cuda Toolkit 8.0&lt;/li&gt;&#xA;&lt;li&gt;cuDNN 6.x&lt;/li&gt;&#xA;&lt;li&gt;Visual C++ 2015 64 bit&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;安装-Visual-C-2015-64-bit&#34;&gt;&lt;a href=&#34;#安装-Visual-C-2015-64-bit&#34; class=&#34;headerlink&#34; title=&#34;安装 Visual C++ 2015 64 bit&#34;&gt;&lt;/a&gt;安装 Visual C++ 2015 64 bit&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.microsoft.com/zh-cn/download/details.aspx?id=48145&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;下载地址&lt;/a&gt;&#xA;&lt;br&gt;&#xA;点页面中间的下载， 然后选择64位&lt;br&gt;&#xA;&#xA;&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://dll.ystyle.top/qiniu//201717161118-r.png&#34; alt=&#34;下载Visual C&amp;#43;&amp;#43; 2015&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;下载Visual C++ 2015&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&lt;br&gt;&#xA;下载后双击安装就好了&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

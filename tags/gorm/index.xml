@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>gorm on 东方星痕</title>
+		<link>https://ystyle.top/tags/gorm/</link>
+		<description>Recent content in gorm on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Mon, 25 Sep 2023 17:37:26 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/gorm/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>使用泛型设计gorm扩展字段</title>
+				<link>https://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/</link>
+				<pubDate>Mon, 25 Sep 2023 17:37:26 +0800</pubDate>
+				<guid>https://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;大型项目经常需要在标准的用户表或员工表加些扩展字段，如果你有一套标准的用户管理系统的话，要么每个项目复制过来改一遍或者添加十几个固定的自定义字段Def1~Def10， 现在可以用在gorm定义模型时使用泛型来解决这个问题&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

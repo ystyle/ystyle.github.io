@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenShift部署Ghost | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">OpenShift部署Ghost</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">OpenShift部署Ghost</h1>
+    <h5 class="subtitle">
+      <time datetime="2015-06-17T07:45:20&#43;08:00" itemprop="datePublished" class="page-time">2015-06-17</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-0">
+  
+  <a class="post-toc-link" href="#">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text"></span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e7%ae%80%e4%bb%8b%ef%bc%9a">
+    <span class="post-toc-number">1.1.</span> <span class="post-toc-text">简介：</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-OpenShift部署Ghost" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">OpenShift部署Ghost</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2015-06-17T07:45:20&#43;08:00" itemprop="datePublished">2015-06-17</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <h3 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h3>
+<p>利用免费云服务部署个人博客</p>
+<hr>
+<p>###一、注册openshift</p>
+<p><a href="https://www.openshift.com/app/account/new?then=%2fapp%2fconsole" target="_blank" rel="noopener"><code>点击注册 </code></a>
+</p>
+<hr>
+<p>###二、安装Ghost</p>
+<p>点 <a href="https://openshift.redhat.com/app/console/applications" target="_blank" rel="noopener"><code>Applications</code></a>
+ - <code>Add Applications</code></p>
+<p>找到 <code>Ghost x.x.x</code> 点进去<code> Public URL</code> 随便写如：<code>ghost </code></p>
+<p>拉到下面点 <code>Create Application</code></p>
+<hr>
+<p>###三、配置域名</p>
+<p>点 <a href="https://openshift.redhat.com/app/console/applications" target="_blank" rel="noopener"><code>Applications</code></a>
+ - 进入自己的应用</p>
+<p>点<code>Change</code>添加个人域名，<code>Add alia</code>进入新页面填入自己的域名就行了如：<a href="http://www.lxy520.net" target="_blank" rel="noopener"><code>www.lxy520.net</code></a>
+</p>
+<p>进入域名解析如：<code>万网</code>  添加CNAME 指向 应用地址类似： <code>xxx-xxxx.rhcloud.com</code></p>
+<p>打开<code>Git bash</code></p>
+<p>执行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> cd ~/.ssh
+</span></span><span style="display:flex;"><span> cat id_rsa.pub <span style="color:#75715e"># 没有的话选运行 ssh-keygen -t rsa -C “您的邮箱地址”</span>
+</span></span></code></pre></div><p>到 <a href="https://openshift.redhat.com/app/console/settings" target="_blank" rel="noopener"><code>Settings</code></a>
+  - <code>Add a new key...</code></p>
+<p>复制<code>id_rsa.pub</code>里的内容到大的编辑框，第一行名称可以随便写，然后保存</p>
+<p>然后复制应用页面的 <code>Source Code</code> 类似： <code>xxxx@xxx-xxxx.rhcloud.com</code> 的地址</p>
+<p>在<code>Git bash</code> 执行:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ssh xxxx@xxx-xxxx.rhcloud.com <span style="color:#75715e">#如： ssh 5581340d50044601a3000167@ghost-ystyle.rhcloud.com</span>
+</span></span></code></pre></div><p>远程到openshift后(可以用其它工具连接如<code>xshell</code>)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#安装主题 其它主题下载：http://marketplace.ghost.org/</span>
+</span></span><span style="display:flex;"><span>cd <span style="color:#e6db74">${</span>OPENSHIFT_REPO_DIR<span style="color:#e6db74">}</span>/themes/
+</span></span><span style="display:flex;"><span>git clone https://github.com/fabienwang/Ghost-Flat.git
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#配置Ghost博客</span>
+</span></span><span style="display:flex;"><span>cd <span style="color:#e6db74">${</span>OPENSHIFT_REPO_DIR<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>vim  config.js <span style="color:#75715e">#按i进入编辑模式，修改第一页和下几页的production下的url为自己的域名 如：http://www.lxy520.net 然后按Esc输入:wq 按回车退出</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#实现openshift自动重启</span>
+</span></span><span style="display:flex;"><span>cd <span style="color:#e6db74">${</span>OPENSHIFT_REPO_DIR<span style="color:#e6db74">}</span>.openshift/cron/hourly
+</span></span><span style="display:flex;"><span>wget http://dl-cystc.qiniudn.com/openshift/restart.sh
+</span></span><span style="display:flex;"><span>chmod <span style="color:#ae81ff">711</span> restart.sh
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#重启应用, 安装主题与修改config.js 时需要重启应用</span>
+</span></span><span style="display:flex;"><span>ctl_all restart
+</span></span></code></pre></div><hr>
+<p>###四、初始化博客</p>
+<p>用自己的域名进入博客，在地址栏加上<code>/ghost </code></p>
+<p>输入用户名，邮箱，密码初始化博客</p>
+<p>完成之后, 后台页面 <code>content</code> 管理文章，<code>New post</code>发布博客， <code>Setting</code>设置博客基本信息</p>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2016-09-09T10:41:04&#43;08:00" itemprop="dateUpdated">2016-09-09 10:41:04</time>
+          </span><br>
+          本文链接：<a href="/2015/06/17/openshiftbu-shu-ghost/" target="_blank" rel="external">https://ystyle.top/2015/06/17/openshiftbu-shu-ghost/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ghost/">Ghost</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2015%2f06%2f17%2fopenshiftbu-shu-ghost%2f&title=%e3%80%8aOpenShift%e9%83%a8%e7%bd%b2Ghost%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2015%2f06%2f17%2fopenshiftbu-shu-ghost%2f&title=%e3%80%8aOpenShift%e9%83%a8%e7%bd%b2Ghost%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e7%ae%80%e4%bb%8b%ef%bc%9a%20%e5%88%a9%e7%94%a8%e5%85%8d%e8%b4%b9%e4%ba%91%e6%9c%8d%e5%8a%a1%e9%83%a8%e7%bd%b2%e4%b8%aa%e4%ba%ba%e5%8d%9a%e5%ae%a2%0a%23%23%23%e4%b8%80%e3%80%81%e6%b3%a8%e5%86%8copenshift%0a%e7%82%b9%e5%87%bb%e6%b3%a8%e5%86%8c%20%23%23%23%e4%ba%8c%e3%80%81%e5%ae%89%e8%a3%85Ghost%0a%e7%82%b9%20Applications%20-%20Add%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2015%2f06%2f17%2fopenshiftbu-shu-ghost%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8aOpenShift%e9%83%a8%e7%bd%b2Ghost%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2015%2f06%2f17%2fopenshiftbu-shu-ghost%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2015%2f06%2f17%2fopenshiftbu-shu-ghost%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2015/01/05/spagobi-5-2-zhong-wen-yi-hua-bu-ding-bao/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">SpagoBI 5.2 中文汉化补丁包</h4>
+        </a>
+      </div>
+      
+      
+      <div class="waves-block waves-effect next">
+        <a href="/2015/06/17/welcome-to-ghost/" id="post-next" class="post-nav-link">
+          <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+          <h4 class="title">我的第一篇博客</h4>
+        </a>
+      </div>
+      
+    </nav>
+    
+  </article>
+
+  
+  
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2015%2f06%2f17%2fopenshiftbu-shu-ghost%2f&title=%e3%80%8aOpenShift%e9%83%a8%e7%bd%b2Ghost%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2015%2f06%2f17%2fopenshiftbu-shu-ghost%2f&title=%e3%80%8aOpenShift%e9%83%a8%e7%bd%b2Ghost%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e7%ae%80%e4%bb%8b%ef%bc%9a%20%e5%88%a9%e7%94%a8%e5%85%8d%e8%b4%b9%e4%ba%91%e6%9c%8d%e5%8a%a1%e9%83%a8%e7%bd%b2%e4%b8%aa%e4%ba%ba%e5%8d%9a%e5%ae%a2%0a%23%23%23%e4%b8%80%e3%80%81%e6%b3%a8%e5%86%8copenshift%0a%e7%82%b9%e5%87%bb%e6%b3%a8%e5%86%8c%20%23%23%23%e4%ba%8c%e3%80%81%e5%ae%89%e8%a3%85Ghost%0a%e7%82%b9%20Applications%20-%20Add%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2015%2f06%2f17%2fopenshiftbu-shu-ghost%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8aOpenShift%e9%83%a8%e7%bd%b2Ghost%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2015%2f06%2f17%2fopenshiftbu-shu-ghost%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2015%2f06%2f17%2fopenshiftbu-shu-ghost%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2015/06/17/openshiftbu-shu-ghost/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>docker 1.12 的服务自动发现 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">docker 1.12 的服务自动发现</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">docker 1.12 的服务自动发现</h1>
+    <h5 class="subtitle">
+      <time datetime="2016-09-03T02:26:07&#43;08:00" itemprop="datePublished" class="page-time">2016-09-03</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-0">
+  
+  <a class="post-toc-link" href="#">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text"></span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%bb%8b%e7%bb%8d">
+    <span class="post-toc-number">1.1.</span> <span class="post-toc-text">介绍</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%87%86%e5%a4%87">
+    <span class="post-toc-number">1.2.</span> <span class="post-toc-text">准备</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%88%9b%e5%bb%baoverlay%e7%bd%91%e7%bb%9c">
+    <span class="post-toc-number">1.3.</span> <span class="post-toc-text">创建overlay网络</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%9c%a8swarm%e4%b8%8a%e7%94%a8overlay-%e7%bd%91%e7%bb%9c%e5%88%9b%e5%bb%ba%e4%b8%80%e4%b8%aa%e6%9c%8d%e5%8a%a1">
+    <span class="post-toc-number">1.4.</span> <span class="post-toc-text">在swarm上用overlay 网络创建一个服务</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e6%bc%94%e7%a4%ba%e4%bd%bf%e7%94%a8%e6%9c%8d%e5%8a%a1%e5%90%8d%e8%ae%bf%e9%97%aenginx">
+    <span class="post-toc-number">1.5.</span> <span class="post-toc-text">演示使用服务名访问nginx</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e7%bb%93%e8%af%ad">
+    <span class="post-toc-number">1.6.</span> <span class="post-toc-text">结语</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-docker-1-12-的服务自动发现" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">docker 1.12 的服务自动发现</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2016-09-03T02:26:07&#43;08:00" itemprop="datePublished">2016-09-03</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3>
+<blockquote>
+<p>docker 1.12 的swarm 集群的自动发现有两种方式, virtual IP address (VIP) 与 DNS round-robin, 本文使用的是VIP的方式</p>
+</blockquote>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3>
+<ol>
+<li>安装docker 1.12 以上版本</li>
+<li>初始化swarm集群</li>
+<li>创建一个名为<code>docker-net</code> 的overlay网络</li>
+<li>开放<code>7946 TCP/UDP</code> , <code>4789 UDP</code> 端口</li>
+</ol>
+<blockquote>
+<p>初始化swarm集群部份可看我之前的博客<a href="http://www.lxy520.net/2016/07/02/shi-yong-docker-1-12-da-jian-duo-zhu-ji-docker-swarmji-qun/" target="_blank" rel="noopener">使用docker 1.12 搭建多主机docker swarm集群</a>
+</p>
+</blockquote>
+<h3 id="创建overlay网络"><a href="#创建overlay网络" class="headerlink" title="创建overlay网络"></a>创建overlay网络</h3>
+<p>查看当前的网络</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@swarm-manager ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker network ls</span>
+</span></span><span style="display:flex;"><span>NETWORK ID          NAME                DRIVER              SCOPE
+</span></span><span style="display:flex;"><span>376f5b337bfc        bridge              bridge              local                                    
+</span></span><span style="display:flex;"><span>166bd71f7d0e        host                host                local               
+</span></span><span style="display:flex;"><span>9gr6bfff1rv9        ingress             overlay             swarm               
+</span></span></code></pre></div><blockquote>
+<p><code>ingress</code> 也是一个overlay网络, 可以跨主机通信, 本教程会创建一个新的</p>
+</blockquote>
+<p>创建网络</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker network create <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --driver overlay <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --opt encrypted <span style="color:#ae81ff">\ </span><span style="color:#75715e">## 是否使用加密</span>
+</span></span><span style="display:flex;"><span>  my-network
+</span></span></code></pre></div><p>查看</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@swarm-manager ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker network ls</span>
+</span></span><span style="display:flex;"><span>NETWORK ID          NAME                DRIVER              SCOPE
+</span></span><span style="display:flex;"><span>376f5b337bfc        bridge              bridge              local                                    
+</span></span><span style="display:flex;"><span>166bd71f7d0e        host                host                local               
+</span></span><span style="display:flex;"><span>9gr6bfff1rv9        ingress             overlay             swarm       
+</span></span><span style="display:flex;"><span>aoqs3p835s5g        docker-net          overlay             swarm        
+</span></span></code></pre></div><h3 id="在swarm上用overlay-网络创建一个服务"><a href="#在swarm上用overlay-网络创建一个服务" class="headerlink" title="在swarm上用overlay 网络创建一个服务"></a>在swarm上用overlay 网络创建一个服务</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker service create <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --replicas <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --name my-web <span style="color:#ae81ff">\ </span><span style="color:#75715e"># 服务名为my-web</span>
+</span></span><span style="display:flex;"><span>  --network docker-net <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  daocloud.io/nginx:alpine <span style="color:#75715e"># 使用国内的镜像, alpine版的体积很小,下载会快点</span>
+</span></span></code></pre></div><p>查看服务</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 本次只起了一个manager节点, 所以容器都跑在这台机器上了</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@swarm-manager ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker service ps my-web</span>
+</span></span><span style="display:flex;"><span>ID                         NAME          IMAGE                     NODE           DESIRED STATE  CURRENT STATE            ERROR
+</span></span><span style="display:flex;"><span>bavjn0xhxi35nx6n9kn33yfga  my-web.1      daocloud.io/nginx:alpine  swarm-manager  Running        Running <span style="color:#ae81ff">31</span> minutes ago   
+</span></span><span style="display:flex;"><span>cibuo8zqp78z1xb8cu3v4pkmj  my-web.2      daocloud.io/nginx:alpine  swarm-manager  Running        Running <span style="color:#ae81ff">31</span> minutes ago   
+</span></span><span style="display:flex;"><span>0pkg1eoa0onku71cbp1hqtcv5  my-web.3      daocloud.io/nginx:alpine  swarm-manager  Running        Running <span style="color:#ae81ff">31</span> minutes ago   
+</span></span></code></pre></div><p>在一个网络上有哪些容器可以在network inspect的Containers节点看到</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@swarm-manager ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker network inspect docker-net</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;Name&#34;</span>: <span style="color:#e6db74">&#34;docker-net&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;Id&#34;</span>: <span style="color:#e6db74">&#34;aoqs3p835s5glx69hi46ou2dw&#34;</span>,
+</span></span><span style="display:flex;"><span>        ....
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;Containers&#34;</span>: <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;1c87aae81449b448983924017fc4037b7b1e9e1eaa03bc55745b0167ab4e495b&#34;</span>: <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;Name&#34;</span>: <span style="color:#e6db74">&#34;my-web.1.bavjn0xhxi35nx6n9kn33yfga&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;EndpointID&#34;</span>: <span style="color:#e6db74">&#34;2ab6c7e698ce69ec318a211dd0386533de1a0d8f2070bd4ee6cdc43cb94dcd0a&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;MacAddress&#34;</span>: <span style="color:#e6db74">&#34;02:42:0a:00:09:03&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;IPv4Address&#34;</span>: <span style="color:#e6db74">&#34;10.0.9.3/24&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;IPv6Address&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>            .....
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>        .....
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>查看服务使用的vip</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@swarm-manager ~<span style="color:#f92672">]</span><span style="color:#75715e">#  docker service inspect --format=&#39;{{.Endpoint.VirtualIPs}}&#39;   my-web</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[{</span>aoqs3p835s5glx69hi46ou2dw 10.0.9.2/24<span style="color:#f92672">}]</span>
+</span></span></code></pre></div><h3 id="演示使用服务名访问nginx"><a href="#演示使用服务名访问nginx" class="headerlink" title="演示使用服务名访问nginx"></a>演示使用服务名访问nginx</h3>
+<p>先创建一个同样使用docker-net的overlay网络 的服务</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker service create <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --name my-busybox <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --network docker-net <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  busybox <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  sleep <span style="color:#ae81ff">3000</span>
+</span></span></code></pre></div><p>等待服务启动后, 用docker exec 连接进busybox的容器里</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@swarm-manager ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker service ps my-busybox</span>
+</span></span><span style="display:flex;"><span>ID                         NAME              IMAGE    NODE           DESIRED STATE  CURRENT STATE                ERROR
+</span></span><span style="display:flex;"><span>7ftv4wj1g3vu8g7mfghx8du65  my-busybox.1      busybox  swarm-manager  Running        Running about a minute ago   
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@swarm-manager ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker exec -ti my-busybox.1.7ftv4wj1g3vu8g7mfghx8du65 sh</span>
+</span></span></code></pre></div><p>在busybox容器. 向DNS查询nginx服务的vip</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@swarm-manager ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker exec -ti my-busybox.1.7ftv4wj1g3vu8g7mfghx8du65 sh</span>
+</span></span><span style="display:flex;"><span>/ <span style="color:#75715e"># nslookup my-web</span>
+</span></span><span style="display:flex;"><span>Server:    127.0.0.11
+</span></span><span style="display:flex;"><span>Address 1: 127.0.0.11
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Name:      my-web
+</span></span><span style="display:flex;"><span>Address 1: 10.0.9.2 10.0.9.2 <span style="color:#75715e"># 和在外面看到的一样</span>
+</span></span></code></pre></div><p>在busybox容器. 向DNS查询nginx服务所有容器的ip地址</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>/ <span style="color:#75715e"># nslookup tasks.my-web</span>
+</span></span><span style="display:flex;"><span>Server:    127.0.0.11
+</span></span><span style="display:flex;"><span>Address 1: 127.0.0.11
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Name:      tasks.my-web
+</span></span><span style="display:flex;"><span>Address 1: 10.0.9.5 my-web.3.0pkg1eoa0onku71cbp1hqtcv5.docker-net
+</span></span><span style="display:flex;"><span>Address 2: 10.0.9.4 my-web.2.cibuo8zqp78z1xb8cu3v4pkmj.docker-net
+</span></span><span style="display:flex;"><span>Address 3: 10.0.9.3 my-web.1.bavjn0xhxi35nx6n9kn33yfga.docker-net
+</span></span></code></pre></div><p>在busybox容器, 通过服务名访问nginx</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>/ <span style="color:#75715e"># wget -O- my-web</span>
+</span></span><span style="display:flex;"><span>Connecting to my-web <span style="color:#f92672">(</span>10.0.9.2:80<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&lt;!DOCTYPE html&gt;
+</span></span><span style="display:flex;"><span>&lt;html&gt;
+</span></span><span style="display:flex;"><span>&lt;head&gt;
+</span></span><span style="display:flex;"><span>&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+</span></span><span style="display:flex;"><span>&lt;style&gt;
+</span></span><span style="display:flex;"><span>    body <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        width: 35em;
+</span></span><span style="display:flex;"><span>        margin: <span style="color:#ae81ff">0</span> auto;
+</span></span><span style="display:flex;"><span>        font-family: Tahoma, Verdana, Arial, sans-serif;
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>&lt;/style&gt;
+</span></span><span style="display:flex;"><span>&lt;/head&gt;
+</span></span><span style="display:flex;"><span>&lt;body&gt;
+</span></span><span style="display:flex;"><span>&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
+</span></span><span style="display:flex;"><span>&lt;p&gt;If you see this page, the nginx web server is successfully installed and
+</span></span><span style="display:flex;"><span>working. Further configuration is required.&lt;/p&gt;
+</span></span><span style="display:flex;"><span>.....
+</span></span></code></pre></div><h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3>
+<p>通过实验可以看出, 在swarm集群中使用overlay网络时, 不同服务之间可以使用服务名(docker service name)互相访问</p>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2016-09-03T23:12:03&#43;08:00" itemprop="dateUpdated">2016-09-03 23:12:03</time>
+          </span><br>
+          本文链接：<a href="/2016/09/03/docker-1-12-de-fu-wu-zi-dong-fa-xian/" target="_blank" rel="external">https://ystyle.top/2016/09/03/docker-1-12-de-fu-wu-zi-dong-fa-xian/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2016%2f09%2f03%2fdocker-1-12-de-fu-wu-zi-dong-fa-xian%2f&title=%e3%80%8adocker%201.12%20%e7%9a%84%e6%9c%8d%e5%8a%a1%e8%87%aa%e5%8a%a8%e5%8f%91%e7%8e%b0%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2016%2f09%2f03%2fdocker-1-12-de-fu-wu-zi-dong-fa-xian%2f&title=%e3%80%8adocker%201.12%20%e7%9a%84%e6%9c%8d%e5%8a%a1%e8%87%aa%e5%8a%a8%e5%8f%91%e7%8e%b0%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e4%bb%8b%e7%bb%8d%20docker%201.12%20%e7%9a%84swarm%20%e9%9b%86%e7%be%a4%e7%9a%84%e8%87%aa%e5%8a%a8%e5%8f%91%e7%8e%b0%e6%9c%89%e4%b8%a4%e7%a7%8d%e6%96%b9%e5%bc%8f%2c%20virtual%20IP%20address%20%28VIP%29%20%e4%b8%8e%20DNS%20round-robin%2c%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2016%2f09%2f03%2fdocker-1-12-de-fu-wu-zi-dong-fa-xian%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8adocker%201.12%20%e7%9a%84%e6%9c%8d%e5%8a%a1%e8%87%aa%e5%8a%a8%e5%8f%91%e7%8e%b0%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2016%2f09%2f03%2fdocker-1-12-de-fu-wu-zi-dong-fa-xian%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2016%2f09%2f03%2fdocker-1-12-de-fu-wu-zi-dong-fa-xian%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2016/08/18/maven-xiang-mu-zhuan-wei-gradle-xiang-mu/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">maven 项目转为gradle 项目</h4>
+        </a>
+      </div>
+      
+      
+      <div class="waves-block waves-effect next">
+        <a href="/2016/09/14/awesome-stars/" id="post-next" class="post-nav-link">
+          <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+          <h4 class="title">我Github的star项目列表</h4>
+        </a>
+      </div>
+      
+    </nav>
+    
+  </article>
+
+  
+  
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2016%2f09%2f03%2fdocker-1-12-de-fu-wu-zi-dong-fa-xian%2f&title=%e3%80%8adocker%201.12%20%e7%9a%84%e6%9c%8d%e5%8a%a1%e8%87%aa%e5%8a%a8%e5%8f%91%e7%8e%b0%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2016%2f09%2f03%2fdocker-1-12-de-fu-wu-zi-dong-fa-xian%2f&title=%e3%80%8adocker%201.12%20%e7%9a%84%e6%9c%8d%e5%8a%a1%e8%87%aa%e5%8a%a8%e5%8f%91%e7%8e%b0%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e4%bb%8b%e7%bb%8d%20docker%201.12%20%e7%9a%84swarm%20%e9%9b%86%e7%be%a4%e7%9a%84%e8%87%aa%e5%8a%a8%e5%8f%91%e7%8e%b0%e6%9c%89%e4%b8%a4%e7%a7%8d%e6%96%b9%e5%bc%8f%2c%20virtual%20IP%20address%20%28VIP%29%20%e4%b8%8e%20DNS%20round-robin%2c%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2016%2f09%2f03%2fdocker-1-12-de-fu-wu-zi-dong-fa-xian%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8adocker%201.12%20%e7%9a%84%e6%9c%8d%e5%8a%a1%e8%87%aa%e5%8a%a8%e5%8f%91%e7%8e%b0%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2016%2f09%2f03%2fdocker-1-12-de-fu-wu-zi-dong-fa-xian%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2016%2f09%2f03%2fdocker-1-12-de-fu-wu-zi-dong-fa-xian%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2016/09/03/docker-1-12-de-fu-wu-zi-dong-fa-xian/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+</body>
+</html>

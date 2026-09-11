@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>qemu on 东方星痕</title>
+		<link>https://ystyle.top/tags/qemu/</link>
+		<description>Recent content in qemu on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Thu, 20 Jul 2023 10:46:26 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/qemu/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>使用qemu8.0安装龙芯loongarch64版本archlinux</title>
+				<link>https://ystyle.top/2023/07/20/install-loongarch64-archlinux-qemu/</link>
+				<pubDate>Thu, 20 Jul 2023 10:46:26 +0800</pubDate>
+				<guid>https://ystyle.top/2023/07/20/install-loongarch64-archlinux-qemu/</guid>
+				<description>&lt;h3 id=&#34;准备&#34;&gt;&lt;a href=&#34;#准备&#34; class=&#34;headerlink&#34; title=&#34;准备&#34;&gt;&lt;/a&gt;准备&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://loongarchlinux.org/pages/download/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Loong Arch Linux官网&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://mirrors.pku.edu.cn/loongarch/archlinux/images/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;qemu镜像下载&lt;/a&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;QEMU_EFI_8.0.fd&lt;/code&gt;: 固件&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;archlinux-xfce4-2023.05.10-loong64.qcow2.zst&lt;/code&gt;: 系统镜像, 下载后需要解压出qcow2文件&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;安装依赖&#34;&gt;&lt;a href=&#34;#安装依赖&#34; class=&#34;headerlink&#34; title=&#34;安装依赖&#34;&gt;&lt;/a&gt;安装依赖&lt;/h3&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;建议安装&lt;code&gt;qemu-full&lt;/code&gt;包, 我以前安装的不是这个, 导致gpu加载不了&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>terminal on 东方星痕</title>
+		<link>https://ystyle.top/tags/terminal/</link>
+		<description>Recent content in terminal on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Sun, 15 Mar 2020 14:46:26 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/terminal/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Windows Terminal 添加SSH到Tabs里</title>
+				<link>https://ystyle.top/2020/03/15/add-ssh-command-to-windows-terminal-tab/</link>
+				<pubDate>Sun, 15 Mar 2020 14:46:26 +0800</pubDate>
+				<guid>https://ystyle.top/2020/03/15/add-ssh-command-to-windows-terminal-tab/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;注意替换路径&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h3 id=&#34;用git-bash带的SSH&#34;&gt;&lt;a href=&#34;#用git-bash带的SSH&#34; class=&#34;headerlink&#34; title=&#34;用git-bash带的SSH&#34;&gt;&lt;/a&gt;用git-bash带的SSH&lt;/h3&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;命令一定要用转义的双引号包起来, key的路径用git bash的路径方式，没key的话，删掉-i后面的就好，但每次都要输入密码. key登陆百度搜索SSH免密登陆&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

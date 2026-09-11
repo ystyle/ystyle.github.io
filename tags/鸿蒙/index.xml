@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>鸿蒙 on 东方星痕</title>
+		<link>https://ystyle.top/tags/%E9%B8%BF%E8%92%99/</link>
+		<description>Recent content in 鸿蒙 on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Tue, 30 Jun 2026 22:00:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/%E9%B8%BF%E8%92%99/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>鸿蒙PC上使用box64运行x86_64鸿蒙SDK编译HAP</title>
+				<link>https://ystyle.top/2026/06/30/matebookpro-box64-harmony-sdk/</link>
+				<pubDate>Tue, 30 Jun 2026 22:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/06/30/matebookpro-box64-harmony-sdk/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;本文记录在鸿蒙PC融合开发引擎的openEuler aarch64容器中，通过box64模拟x86_64兼容层，运行鸿蒙命令行工具编译HAP的完整过程。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>鸿蒙PC融合开发引擎中编译安装Neovim与AstroNvim配置指南</title>
+				<link>https://ystyle.top/2026/04/03/matebookpro-container-build-neovim/</link>
+				<pubDate>Fri, 03 Apr 2026 21:35:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/04/03/matebookpro-container-build-neovim/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;本文记录在鸿蒙PC融合开发引擎的容器环境中，因glibc版本限制从源码编译Neovim和tree-sitter的完整过程，并配置AstroNvim作为开发环境。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式</title>
+				<link>https://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/</link>
+				<pubDate>Fri, 03 Apr 2026 21:30:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;本文深入解析鸿蒙PC融合开发引擎的技术架构，揭示其如何通过StratoVirt虚拟化和OzoneC容器技术实现Linux应用兼容。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;背景&#34;&gt;&lt;a href=&#34;#背景&#34; class=&#34;headerlink&#34; title=&#34;背景&#34;&gt;&lt;/a&gt;背景&lt;/h2&gt;&#xA;&lt;p&gt;鸿蒙PC（HarmonyOS PC）采用了独特的架构设计来实现Linux应用兼容。作为用户，我在使用过程中发现系统提供了一个&amp;quot;融合开发引擎&amp;quot;功能，可以在其中运行openEuler环境。本文将解析这个融合开发引擎的技术架构。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>鸿蒙PC Matebook Pro上全局安装GIT</title>
+				<link>https://ystyle.top/2025/12/28/matebookpro-install-git/</link>
+				<pubDate>Sun, 28 Dec 2025 10:30:00 +0800</pubDate>
+				<guid>https://ystyle.top/2025/12/28/matebookpro-install-git/</guid>
+				<description>&lt;h2 id=&#34;新方法&#34;&gt;&lt;a href=&#34;#新方法&#34; class=&#34;headerlink&#34; title=&#34;新方法&#34;&gt;&lt;/a&gt;新方法&lt;/h2&gt;&#xA;&lt;p&gt;直接在应用商店搜索安装&lt;code&gt;GitNext&lt;/code&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;准备工作&#34;&gt;&lt;a href=&#34;#准备工作&#34; class=&#34;headerlink&#34; title=&#34;准备工作&#34;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;在鸿蒙应用商店安装 CodeArts IDE&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;从CodeArts-IDE提取签名工具&#34;&gt;&lt;a href=&#34;#从CodeArts-IDE提取签名工具&#34; class=&#34;headerlink&#34; title=&#34;从CodeArts IDE提取签名工具&#34;&gt;&lt;/a&gt;从CodeArts IDE提取签名工具&lt;/h2&gt;&#xA;&lt;p&gt;打开IDE, 随便创建一个项目打开，在终端执行以下命令&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Neovim移植鸿蒙PC：三方库适配实战与挑战解析</title>
+				<link>https://ystyle.top/2025/12/27/matebookpro-port-nvim-deps/</link>
+				<pubDate>Sat, 27 Dec 2025 19:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2025/12/27/matebookpro-port-nvim-deps/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;本文记录将Neovim编辑器移植到HarmonyOS PC过程中，对11个核心依赖库的适配实战经验，涵盖平台差异分析、API限制处理、构建系统改造等关键问题。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>鸿蒙PC Matebook Pro上安装仓颉编译器每日构建版</title>
+				<link>https://ystyle.top/2025/12/27/matebookpro-run-cangjie-compiler/</link>
+				<pubDate>Sat, 27 Dec 2025 15:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2025/12/27/matebookpro-run-cangjie-compiler/</guid>
+				<description>&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://dll.ystyle.top/images/2025-12/5e398f57bb264562850d933612e65a3d.png&#34; alt=&#34;使用示例&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;使用示例&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&lt;h2 id=&#34;准备工作&#34;&gt;&lt;a href=&#34;#准备工作&#34; class=&#34;headerlink&#34; title=&#34;准备工作&#34;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;在鸿蒙PC上使用应用商店安装CodeArts IDE&lt;/li&gt;&#xA;&lt;li&gt;下载仓颉编译器每日构建版本: &lt;a href=&#34;https://gitcode.com/Cangjie/nightly_build/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;cangjie-sdk-ohos-aarch64-1.1.0-alpha.2025xxxxxxxxxxxxx.tar.gz&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;从CodeArts-IDE提取签名工具&#34;&gt;&lt;a href=&#34;#从CodeArts-IDE提取签名工具&#34; class=&#34;headerlink&#34; title=&#34;从CodeArts IDE提取签名工具&#34;&gt;&lt;/a&gt;从CodeArts IDE提取签名工具&lt;/h2&gt;&#xA;&lt;p&gt;新方法，直接在应用商店安装： &lt;code&gt;DevBox&lt;/code&gt;， 然后在HisShell就可以直接使用 &lt;code&gt;binary-sign-tool&lt;/code&gt;了&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>鸿蒙pc上Vite 7 &#43; Rollup原生模块问题的解决方案</title>
+				<link>https://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/</link>
+				<pubDate>Mon, 08 Dec 2025 21:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/</guid>
+				<description>&lt;h2 id=&#34;环境信息&#34;&gt;&lt;a href=&#34;#环境信息&#34; class=&#34;headerlink&#34; title=&#34;环境信息&#34;&gt;&lt;/a&gt;环境信息&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;操作系统&lt;/strong&gt;：HarmonyOS HongMeng Kernel 1.11.0 (OpenHarmony)&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Node.js版本&lt;/strong&gt;：22.7.0&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Vite版本&lt;/strong&gt;：7.2.6&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Rollup版本&lt;/strong&gt;：4.53.3&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;项目类型&lt;/strong&gt;：Vue 3 + TypeScript + Vite&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;问题描述&#34;&gt;&lt;a href=&#34;#问题描述&#34; class=&#34;headerlink&#34; title=&#34;问题描述&#34;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&#xA;&lt;p&gt;在鸿蒙系统上运行&lt;code&gt;npm run dev&lt;/code&gt;时出现以下错误：&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>开源鸿蒙网络和hdc连接方法</title>
+				<link>https://ystyle.top/2021/06/06/openharmonyos-hdc-and-network/</link>
+				<pubDate>Sun, 06 Jun 2021 18:10:13 +0800</pubDate>
+				<guid>https://ystyle.top/2021/06/06/openharmonyos-hdc-and-network/</guid>
+				<description>&lt;h3 id=&#34;hdc下载&#34;&gt;&lt;a href=&#34;#hdc下载&#34; class=&#34;headerlink&#34; title=&#34;hdc下载&#34;&gt;&lt;/a&gt;hdc下载&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;如果下载了源码，可以在源码目录找到: developtools/hdc_standard/prebuilt/windows/hdc_std.exe&lt;/li&gt;&#xA;&lt;li&gt;远程仓库地址： &lt;a href=&#34;https://gitee.com/openharmony/developtools_hdc_standard&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://gitee.com/openharmony/developtools_hdc_standard&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;hdc使用手册: &lt;a href=&#34;https://gitee.com/openharmony/docs/blob/master/zh-cn/device-dev/subsystems/hdc_std-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%AF%BC.md&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://gitee.com/openharmony/docs/blob/master/zh-cn/device-dev/subsystems/hdc_std-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%AF%BC.md&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;通过usb连接鸿蒙&#34;&gt;&lt;a href=&#34;#通过usb连接鸿蒙&#34; class=&#34;headerlink&#34; title=&#34;通过usb连接鸿蒙&#34;&gt;&lt;/a&gt;通过usb连接鸿蒙&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;通过hi3516背面的type-c口连接电脑, 目前只有这口能传数据， 底下的口不行&#xA;&lt;ul&gt;&#xA;&lt;li&gt;如果成功，可以在电脑 &lt;code&gt;设备管理-用串行总线设备&lt;/code&gt;下面看到&lt;code&gt;HDC Device&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;打开终端， 输入&lt;code&gt;hdc list targets&lt;/code&gt;列出设备&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&#xA;&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://dll.ystyle.top/images/2021-06/mmc_2021-06-07_19-52-37.png&#34; alt=&#34;&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&lt;br&gt;&#xA;&#xA;&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://dll.ystyle.top/images/2021-06/WindowsTerminal_2021-06-07_19-53-25.png&#34; alt=&#34;&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>鸿蒙开发板HI3516用命令行连接wifi</title>
+				<link>https://ystyle.top/2020/12/18/hi3516-connect-wifi/</link>
+				<pubDate>Fri, 18 Dec 2020 20:11:48 +0800</pubDate>
+				<guid>https://ystyle.top/2020/12/18/hi3516-connect-wifi/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;鸿蒙的HI3516编译里已经有wpa_supplicant相关工程了，但编译时没有包进去, 所以只要修改配置文件后就能编译出来了&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;主要修改文件: &lt;a href=&#34;https://gitee.com/openharmony/applications_sample_camera/blob/master/communication/BUILD.gn#L17-18&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;communication/BUILD.gn#L17-18&lt;/a&gt;&#xA; 行之间添加， 以下第2行&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>移植lua到鸿蒙 - 首个移植成功的编程语言</title>
+				<link>https://ystyle.top/2020/11/07/porting-Lua-to-openharmony/</link>
+				<pubDate>Sat, 07 Nov 2020 23:52:26 +0800</pubDate>
+				<guid>https://ystyle.top/2020/11/07/porting-Lua-to-openharmony/</guid>
+				<description>&lt;h3 id=&#34;惯例先放hello-world&#34;&gt;&lt;a href=&#34;#惯例先放hello-world&#34; class=&#34;headerlink&#34; title=&#34;惯例先放hello world&#34;&gt;&lt;/a&gt;惯例先放hello world&lt;/h3&gt;&#xA;&#xA;&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://dll.ystyle.top/images/2020-11/WindowsTerminal_2020-11-07_23-28-08.png&#34; alt=&#34;hello world&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;hello world&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;本项目地址: &lt;a href=&#34;https://gitee.com/ystyle/lua&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://gitee.com/ystyle/lua&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://gitee.com/ystyle/lua/releases/v5.4.2&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;下载二进制文件&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;准备环境&#34;&gt;&lt;a href=&#34;#准备环境&#34; class=&#34;headerlink&#34; title=&#34;准备环境&#34;&gt;&lt;/a&gt;准备环境&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;安装 docker&lt;/li&gt;&#xA;&lt;li&gt;docker pull ystyle/open-harmony&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;ps: 本文使用与鸿蒙系统一同编译的方法。 如果自己有本地环境，可以把lua项目放鸿蒙代码目录里(或者使用软接连)&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>harl-鸿蒙应用开发实机热更新工具</title>
+				<link>https://ystyle.top/2020/10/25/harl/</link>
+				<pubDate>Sun, 25 Oct 2020 01:30:26 +0800</pubDate>
+				<guid>https://ystyle.top/2020/10/25/harl/</guid>
+				<description>&lt;p&gt;&lt;a href=&#34;https://gitee.com/ystyle/harl/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;鸿蒙应用开发实机热更新工具&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;h3 id=&#34;依赖&#34;&gt;&lt;a href=&#34;#依赖&#34; class=&#34;headerlink&#34; title=&#34;依赖&#34;&gt;&lt;/a&gt;依赖&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;debug 版本的hi3516镜像(release版本不支持shell)&lt;/li&gt;&#xA;&lt;li&gt;nfs v3&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://openharmony.gitee.com/openharmony/docs/blob/master/kernel/NFS.md&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;配置过程&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://openharmony.gitee.com/openharmony/docs/issues/I1YIBO&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;配置过程可能遇到的问题&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;serial(串口)&lt;/li&gt;&#xA;&lt;li&gt;dev tools (可以从鸿蒙编译目录&lt;code&gt;/out/ipcamera_hi3516dv300/dev_tools/bin&lt;/code&gt;复制到nfs挂载目录)&#xA;&lt;ul&gt;&#xA;&lt;li&gt;aa (管理APP启动，关闭)&lt;/li&gt;&#xA;&lt;li&gt;bm (安装卸载APP)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;USAGE&#34;&gt;&lt;a href=&#34;#USAGE&#34; class=&#34;headerlink&#34; title=&#34;USAGE&#34;&gt;&lt;/a&gt;USAGE&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;➜ harl.exe&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;NAME:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   harl - Open Harmony OS Dev tools&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;USAGE:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   harl.exe &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;global options&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; command &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;command options&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;arguments...&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;VERSION:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   v0.1.2&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;COMMANDS:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   init, i    init .harm.yml&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   watch, w   watch and reload app&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   install    install hap&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   uninstall  uninstall hap&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   shell      open a shell&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   reboot     reboot&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   help, h    Shows a list of commands or help &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; one command&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;GLOBAL OPTIONS:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   --help, -h     show help &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;default: false&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   --version, -v  print the version &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;default: false&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://gitee.com/ystyle/harl/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;下载应用&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;cd /your-project-dir&lt;/code&gt; 切换到项目目录&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;harl init&lt;/code&gt; 初始化配置文件&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;harl w&lt;/code&gt; 监听项目文件修改&#xA;&lt;ul&gt;&#xA;&lt;li&gt;监听时支持输入命令, 若看不到提示符请在调试日志暂停打印时按回车&lt;/li&gt;&#xA;&lt;li&gt;可以用&lt;code&gt;^run [command name]&lt;/code&gt;的方式执行command里定义的脚本&#xA;&lt;ul&gt;&#xA;&lt;li&gt;如执行示例配置文件的setup脚本， &lt;code&gt;^run setup&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;目前命令只支持在项目目录执行&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;配置文件&#34;&gt;&lt;a href=&#34;#配置文件&#34; class=&#34;headerlink&#34; title=&#34;配置文件&#34;&gt;&lt;/a&gt;配置文件&lt;/h3&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;.harl.yaml&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>使用Docker快速上手鸿蒙</title>
+				<link>https://ystyle.top/2020/09/11/compile-openharmony-indokcer/</link>
+				<pubDate>Fri, 11 Sep 2020 01:00:26 +0800</pubDate>
+				<guid>https://ystyle.top/2020/09/11/compile-openharmony-indokcer/</guid>
+				<description>&lt;h3 id=&#34;准备&#34;&gt;&lt;a href=&#34;#准备&#34; class=&#34;headerlink&#34; title=&#34;准备&#34;&gt;&lt;/a&gt;准备&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;在机器上安装好Docker&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;编译鸿蒙系统镜像&#34;&gt;&lt;a href=&#34;#编译鸿蒙系统镜像&#34; class=&#34;headerlink&#34; title=&#34;编译鸿蒙系统镜像&#34;&gt;&lt;/a&gt;编译鸿蒙系统镜像&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;打开终端执行以下命令&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir ~/OpenHarmony&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd ~/OpenHarmony&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run --rm -ti -v &lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;PWD&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;/out:/OpenHarmony/out ystyle/open-harmony&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;&#xA;&lt;li&gt;编译成功后各镜像在out目录下面, 默认编译的是&lt;code&gt;Hi3861&lt;/code&gt;开发板的系统镜像, 可自行烧录到固定测试&lt;/li&gt;&#xA;&lt;li&gt;如果要编译其它板子可以设置dokcer镜像的环境变量&lt;code&gt;HARDWARE&lt;/code&gt; 目前支持: &lt;code&gt;wifiiot&lt;/code&gt;、&lt;code&gt;ipcamera_hi3516dv300&lt;/code&gt;、&lt;code&gt;ipcamera_hi3518ev300&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;更新代码并编译&#34;&gt;&lt;a href=&#34;#更新代码并编译&#34; class=&#34;headerlink&#34; title=&#34;更新代码并编译&#34;&gt;&lt;/a&gt;更新代码并编译&lt;/h3&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mkdir ~/OpenHarmony&#xA;cd ~/OpenHarmony&#xA;docker run --rm -ti -e HARDWARE=ipcamera_hi3516dv300 -v ${PWD}/out:/OpenHarmony/out ystyle/open-harmony bash&#xA;repo sync -c&#xA;python build.py ${HARDWARE} -b debug&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;编写应用程序&#34;&gt;&lt;a href=&#34;#编写应用程序&#34; class=&#34;headerlink&#34; title=&#34;编写应用程序&#34;&gt;&lt;/a&gt;编写应用程序&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;示例在这&lt;a href=&#34;https://openharmony.gitee.com/openharmony/docs/blob/master/quick-start/Hi3861%E5%BC%80%E5%8F%91%E6%9D%BF%E7%AC%AC%E4%BA%8C%E4%B8%AA%E7%A4%BA%E4%BE%8B%E7%A8%8B%E5%BA%8F.md&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Hi3861开发板第二个示例程序&lt;/a&gt;&#xA;&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

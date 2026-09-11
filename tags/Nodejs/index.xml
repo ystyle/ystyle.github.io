@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Nodejs on 东方星痕</title>
+		<link>https://ystyle.top/tags/Nodejs/</link>
+		<description>Recent content in Nodejs on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Wed, 30 Nov 2016 17:29:45 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/Nodejs/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>sequelize.js 生成DDL语句预览</title>
+				<link>https://ystyle.top/2016/11/30/sequelize-js-sheng-cheng-ddlyu-ju-yu-lan/</link>
+				<pubDate>Wed, 30 Nov 2016 14:26:26 +0800</pubDate>
+				<guid>https://ystyle.top/2016/11/30/sequelize-js-sheng-cheng-ddlyu-ju-yu-lan/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;因为想做一个直接生成建表语句的工具。 又不想连接到数据库(懒得让数据库一直启动着)&lt;br&gt;&#xA;看了下sequelize.js的测试代码， 找到了以下方法可以实现&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Nodejs yarn换淘宝源</title>
+				<link>https://ystyle.top/2016/10/30/nodejs-yarnhuan-tao-bao-yuan/</link>
+				<pubDate>Sun, 30 Oct 2016 18:36:19 +0800</pubDate>
+				<guid>https://ystyle.top/2016/10/30/nodejs-yarnhuan-tao-bao-yuan/</guid>
+				<description>&lt;h2 id=&#34;Nodejs-yarn换淘宝源&#34;&gt;&lt;a href=&#34;#Nodejs-yarn换淘宝源&#34; class=&#34;headerlink&#34; title=&#34;Nodejs yarn换淘宝源&#34;&gt;&lt;/a&gt;Nodejs yarn换淘宝源&lt;/h2&gt;&#xA;&lt;p&gt;如果觉得安装速度慢，安装源和原来 npm 是一样的，可以通用，修改方法如下：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yarn config get registry&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# -&amp;gt; https://registry.yarnpkg.com&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可以改成 taobao 的源：&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Webpack 项目中使用fetch.js</title>
+				<link>https://ystyle.top/2016/02/01/webpack-xiang-mu-zhong-shi-yong-fetch-js/</link>
+				<pubDate>Mon, 01 Feb 2016 11:36:09 +0800</pubDate>
+				<guid>https://ystyle.top/2016/02/01/webpack-xiang-mu-zhong-shi-yong-fetch-js/</guid>
+				<description>&lt;h3 id=&#34;安装依赖&#34;&gt;&lt;a href=&#34;#安装依赖&#34; class=&#34;headerlink&#34; title=&#34;安装依赖&#34;&gt;&lt;/a&gt;安装依赖&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;npm i imports-loader exports-loader --save-dev&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;npm i whatwg-fetch --save&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;方法一-webpack配置&#34;&gt;&lt;a href=&#34;#方法一-webpack配置&#34; class=&#34;headerlink&#34; title=&#34;方法一: webpack配置&#34;&gt;&lt;/a&gt;方法一: webpack配置&lt;/h3&gt;&#xA;&lt;p&gt;修改&lt;code&gt;webpack.config.js&lt;/code&gt; 文件&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;plugins&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; [&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;webpack&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ProvidePlugin&lt;/span&gt;({&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;fetch&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;imports?this=&amp;gt;global!exports?global.fetch!whatwg-fetch&amp;#39;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }),&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ],&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;方法二-import&#34;&gt;&lt;a href=&#34;#方法二-import&#34; class=&#34;headerlink&#34; title=&#34;方法二: import&#34;&gt;&lt;/a&gt;方法二: import&lt;/h3&gt;&#xA;&lt;p&gt;在需要使用的文件中import&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>ActiveMQ 入门</title>
+				<link>https://ystyle.top/2015/07/30/activemq-ru-men/</link>
+				<pubDate>Thu, 30 Jul 2015 23:34:38 +0800</pubDate>
+				<guid>https://ystyle.top/2015/07/30/activemq-ru-men/</guid>
+				<description>&lt;h2 id=&#34;ActiveMQ-入门&#34;&gt;&lt;a href=&#34;#ActiveMQ-入门&#34; class=&#34;headerlink&#34; title=&#34;ActiveMQ 入门&#34;&gt;&lt;/a&gt;ActiveMQ 入门&lt;/h2&gt;&#xA;&lt;h3 id=&#34;下载与安装&#34;&gt;&lt;a href=&#34;#下载与安装&#34; class=&#34;headerlink&#34; title=&#34;下载与安装&#34;&gt;&lt;/a&gt;下载与安装&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://activemq.apache.org/download-archives.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;官方下载地址&lt;/code&gt;&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;解压，运行bin/win[32|64]/activemq[.bat] 启动服务&lt;/p&gt;&#xA;&lt;h3 id=&#34;环境信息&#34;&gt;&lt;a href=&#34;#环境信息&#34; class=&#34;headerlink&#34; title=&#34;环境信息&#34;&gt;&lt;/a&gt;环境信息&lt;/h3&gt;&#xA;&lt;p&gt;控制台: &lt;code&gt;http://localhost:8161&lt;/code&gt; 默认端口:&lt;code&gt;8161&lt;/code&gt;&lt;br&gt;&#xA;服务地址:&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

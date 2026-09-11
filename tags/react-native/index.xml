@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>react-native on 东方星痕</title>
+		<link>https://ystyle.top/tags/react-native/</link>
+		<description>Recent content in react-native on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Thu, 18 Aug 2016 10:11:50 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/react-native/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>windows最小化搭建react-native环境</title>
+				<link>https://ystyle.top/2016/07/30/windowszui-xiao-hua-da-jian-react-nativehuan-jing/</link>
+				<pubDate>Sat, 30 Jul 2016 22:09:37 +0800</pubDate>
+				<guid>https://ystyle.top/2016/07/30/windowszui-xiao-hua-da-jian-react-nativehuan-jing/</guid>
+				<description>&lt;h3 id=&#34;准备&#34;&gt;&lt;a href=&#34;#准备&#34; class=&#34;headerlink&#34; title=&#34;准备&#34;&gt;&lt;/a&gt;准备&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#git&#34;&gt;git for windows&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#java&#34;&gt;java&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#gradle&#34;&gt;gradle&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#nodejs&#34;&gt;node.js&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#reactnativecli&#34;&gt;react-native-cli&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#androidsdk&#34;&gt;android-sdk&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;安装git&#34;&gt;&lt;a href=&#34;#安装git&#34; class=&#34;headerlink&#34; title=&#34;安装git&#34;&gt;&lt;/a&gt;安装git&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://git-scm.com/download&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;下载git&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;h3 id=&#34;安装java&#34;&gt;&lt;a href=&#34;#安装java&#34; class=&#34;headerlink&#34; title=&#34;安装java&#34;&gt;&lt;/a&gt;安装java&lt;/h3&gt;&#xA;&lt;p&gt;配置好&lt;code&gt;JAVA_HOME&lt;/code&gt;环境变量,并把&lt;code&gt;JAVA_HOME/bin&lt;/code&gt;添加到&lt;code&gt;path&lt;/code&gt;里&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://www.lxy520.net/2015/12/02/windows-jdk-ban-ben-guan-li-qi-jvms-fa-bu/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;JDK版本管理工具&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;h3 id=&#34;安装gradle&#34;&gt;&lt;a href=&#34;#安装gradle&#34; class=&#34;headerlink&#34; title=&#34;安装gradle&#34;&gt;&lt;/a&gt;安装gradle&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://services.gradle.org/distributions/gradle-2.14.1-all.zip&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;下载gradle&lt;/a&gt;&#xA;: (若安装过idea之类的工具可以看看&lt;code&gt;~/.gradle/wrapper/dists&lt;/code&gt;目录下有没有)&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

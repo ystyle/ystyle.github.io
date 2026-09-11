@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 | 东方星痕</title>
+
 <style>
     *{margin:0;padding:0;outline:none;font-family:\5FAE\8F6F\96C5\9ED1,宋体;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-khtml-user-select:none;user-select:none;cursor:default;font-weight:lighter;}
     .center{margin:0 auto;}
@@ -8,9 +15,20 @@
     p{color:#fff;margin-top:40px;font-size:24px;}
     #num{margin:0 5px;font-weight:bold;}
 </style>
-
-<div class="whole"><br>    <img src="/images/2017/03/30/back.jpg"><br>    <div class="mask"></div><br></div><br><div class="b"><br>    <img src="/images/2017/03/30/404.png" class="center"><br>    <p><br>        暂时未能找到您查找的页面<br><br>        可能输入的网址错误或此页面不存在<br><br>        <span id="num"></span>秒后自动跳转到主页<br>    </p><br></div>
-
+</head>
+<body>
+<div class="whole">
+    <img src="/images/2017/03/30/back.jpg" alt="">
+    <div class="mask"></div>
+</div>
+<div class="b">
+    <img src="/images/2017/03/30/404.png" class="center" alt="404">
+    <p>
+        暂时未能找到您查找的页面<br>
+        可能输入的网址错误或此页面不存在<br>
+        <span id="num"></span>秒后自动跳转到主页
+    </p>
+</div>
 <script type="text/javascript">
     var num=4;
     function redirect(){
@@ -18,9 +36,11 @@
         document.getElementById("num").innerHTML=num;
         if(num<0){
             document.getElementById("num").innerHTML=0;
-            location.href="http://ystyle.top";
-            }
+            location.href="https://ystyle.top/";
         }
+    }
     redirect()
     setInterval("redirect()", 1000);
 </script>
+</body>
+</html>

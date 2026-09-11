@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>tensorflow 在windows 下使用gpu | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">tensorflow 在windows 下使用gpu</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">tensorflow 在windows 下使用gpu</h1>
+    <h5 class="subtitle">
+      <time datetime="2017-01-06T04:49:17&#43;08:00" itemprop="datePublished" class="page-time">2017-01-06</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#tensorflow-%e5%9c%a8windows-%e4%b8%8b%e6%80%8e%e4%b9%88%e4%bd%bf%e7%94%a8gpu">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">tensorflow 在windows 下怎么使用gpu</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e9%9c%80%e8%a6%81%e5%ae%89%e8%a3%85%e7%9a%84%e5%b7%a5%e5%85%b7">
+    <span class="post-toc-number">1.1.</span> <span class="post-toc-text">需要安装的工具</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%ae%89%e8%a3%85-Visual-C-2015-64-bit">
+    <span class="post-toc-number">1.2.</span> <span class="post-toc-text">安装 Visual C++ 2015 64 bit</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%ae%89%e8%a3%85tensorflow-gpu">
+    <span class="post-toc-number">1.3.</span> <span class="post-toc-text">安装tensorflow-gpu</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%ae%89%e8%a3%85Cuda-Toolkit-8-0">
+    <span class="post-toc-number">1.4.</span> <span class="post-toc-text">安装Cuda Toolkit 8.0</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%ae%89%e8%a3%85cuDNN">
+    <span class="post-toc-number">1.5.</span> <span class="post-toc-text">安装cuDNN</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e6%b5%8b%e8%af%95">
+    <span class="post-toc-number">1.6.</span> <span class="post-toc-text">测试</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-tensorflow-在windows-下使用gpu" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">tensorflow 在windows 下使用gpu</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2017-01-06T04:49:17&#43;08:00" itemprop="datePublished">2017-01-06</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <h2 id="tensorflow-在windows-下怎么使用gpu"><a href="#tensorflow-在windows-下怎么使用gpu" class="headerlink" title="tensorflow 在windows 下怎么使用gpu"></a>tensorflow 在windows 下怎么使用gpu</h2>
+<h3 id="需要安装的工具"><a href="#需要安装的工具" class="headerlink" title="需要安装的工具"></a>需要安装的工具</h3>
+<ul>
+<li>python 3.5.x</li>
+<li>tensorflow-gpu (1.13.0)</li>
+<li>Cuda Toolkit 8.0</li>
+<li>cuDNN 6.x</li>
+<li>Visual C++ 2015 64 bit</li>
+</ul>
+<h3 id="安装-Visual-C-2015-64-bit"><a href="#安装-Visual-C-2015-64-bit" class="headerlink" title="安装 Visual C++ 2015 64 bit"></a>安装 Visual C++ 2015 64 bit</h3>
+<p><a href="https://www.microsoft.com/zh-cn/download/details.aspx?id=48145" target="_blank" rel="noopener">下载地址</a>
+<br>
+点页面中间的下载， 然后选择64位<br>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="https://dll.ystyle.top/qiniu//201717161118-r.png" alt="下载Visual C&#43;&#43; 2015">
+  </div>
+  <div class="image-caption">下载Visual C++ 2015</div>
+</figure>
+<br>
+下载后双击安装就好了</p>
+<h3 id="安装tensorflow-gpu"><a href="#安装tensorflow-gpu" class="headerlink" title="安装tensorflow-gpu"></a>安装tensorflow-gpu</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pip install tensorflow-gpu
+</span></span></code></pre></div><h3 id="安装Cuda-Toolkit-8-0"><a href="#安装Cuda-Toolkit-8-0" class="headerlink" title="安装Cuda Toolkit 8.0"></a>安装Cuda Toolkit 8.0</h3>
+<p><a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="noopener">Cuda Toolkit 8.0下载地址</a>
+</p>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2017/01/chrome_2017-01-07_23-29-28.png" alt="Cuda Toolkit 8.0">
+  </div>
+  <div class="image-caption">Cuda Toolkit 8.0</div>
+</figure>
+<blockquote>
+<p>安装前注意更新显示驱动! 下载后安装一路下一步</p>
+</blockquote>
+<h3 id="安装cuDNN"><a href="#安装cuDNN" class="headerlink" title="安装cuDNN"></a>安装cuDNN</h3>
+<ul>
+<li><a href="https://developer.nvidia.com/cudnn" target="_blank" rel="noopener">cuDNN下载地址</a>
+ 点页面中间的<code>Download</code>按钮 然后登陆后点击<code>I Agree To the Terms of the cuDNN Software License Agreement</code>就能下载了</li>
+</ul>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="https://dll.ystyle.top/qiniu//201717271824-W.png" alt="cuDNN">
+  </div>
+  <div class="image-caption">cuDNN</div>
+</figure>
+<ul>
+<li>
+<p>解压</p>
+</li>
+<li>
+<p>添加bin目录到环境变量PATH</p>
+</li>
+</ul>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2017/01/atom_2017-01-08_00-17-53.png" alt="安装cuDNN">
+  </div>
+  <div class="image-caption">安装cuDNN</div>
+</figure>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2017/01/powershell_2017-01-07_23-47-28.png" alt="测试1">
+  </div>
+  <div class="image-caption">测试1</div>
+</figure>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2017/01/powershell_2017-01-08_00-06-02.png" alt="测试2">
+  </div>
+  <div class="image-caption">测试2</div>
+</figure>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2017/01/powershell_2017-01-08_00-21-34.png" alt="测试3">
+  </div>
+  <div class="image-caption">测试3</div>
+</figure>
+<blockquote>
+<p>注意1： 如果都安装好但tensorflow没反应的话， 先卸载tensorflow tensorflow-gpu 然后重装</p>
+</blockquote>
+<blockquote>
+<p>注意2： 运行报错Couldn&rsquo;t open CUDA library cupti64_80.dll 解决方法：${CUDA_HOME}/extras/CUPTI/lib64 添加到PATH环境变量</p>
+</blockquote>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2017-09-16T10:52:26&#43;08:00" itemprop="dateUpdated">2017-09-16 10:52:26</time>
+          </span><br>
+          本文链接：<a href="/2017/01/06/tensorflow-zai-windows-xia-shi-yong-gpu/" target="_blank" rel="external">https://ystyle.top/2017/01/06/tensorflow-zai-windows-xia-shi-yong-gpu/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow-gpu/">tensorflow-gpu</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2017%2f01%2f06%2ftensorflow-zai-windows-xia-shi-yong-gpu%2f&title=%e3%80%8atensorflow%20%e5%9c%a8windows%20%e4%b8%8b%e4%bd%bf%e7%94%a8gpu%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2017%2f01%2f06%2ftensorflow-zai-windows-xia-shi-yong-gpu%2f&title=%e3%80%8atensorflow%20%e5%9c%a8windows%20%e4%b8%8b%e4%bd%bf%e7%94%a8gpu%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=tensorflow%20%e5%9c%a8windows%20%e4%b8%8b%e6%80%8e%e4%b9%88%e4%bd%bf%e7%94%a8gpu%20%e9%9c%80%e8%a6%81%e5%ae%89%e8%a3%85%e7%9a%84%e5%b7%a5%e5%85%b7%20python%203.5.x%20tensorflow-gpu%20%281.13.0%29%20Cuda%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2017%2f01%2f06%2ftensorflow-zai-windows-xia-shi-yong-gpu%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8atensorflow%20%e5%9c%a8windows%20%e4%b8%8b%e4%bd%bf%e7%94%a8gpu%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2017%2f01%2f06%2ftensorflow-zai-windows-xia-shi-yong-gpu%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2017%2f01%2f06%2ftensorflow-zai-windows-xia-shi-yong-gpu%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2016/12/14/jetbrains-jia-quan-xin-go-ide-dai-hao-gogland/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">JetBrains 家全新Go IDE 代号GogLand</h4>
+        </a>
+      </div>
+      
+      
+      <div class="waves-block waves-effect next">
+        <a href="/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/" id="post-next" class="post-nav-link">
+          <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+          <h4 class="title">electron-react-boilerplate 开环境搭建</h4>
+        </a>
+      </div>
+      
+    </nav>
+    
+  </article>
+
+  
+  
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2017%2f01%2f06%2ftensorflow-zai-windows-xia-shi-yong-gpu%2f&title=%e3%80%8atensorflow%20%e5%9c%a8windows%20%e4%b8%8b%e4%bd%bf%e7%94%a8gpu%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2017%2f01%2f06%2ftensorflow-zai-windows-xia-shi-yong-gpu%2f&title=%e3%80%8atensorflow%20%e5%9c%a8windows%20%e4%b8%8b%e4%bd%bf%e7%94%a8gpu%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=tensorflow%20%e5%9c%a8windows%20%e4%b8%8b%e6%80%8e%e4%b9%88%e4%bd%bf%e7%94%a8gpu%20%e9%9c%80%e8%a6%81%e5%ae%89%e8%a3%85%e7%9a%84%e5%b7%a5%e5%85%b7%20python%203.5.x%20tensorflow-gpu%20%281.13.0%29%20Cuda%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2017%2f01%2f06%2ftensorflow-zai-windows-xia-shi-yong-gpu%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8atensorflow%20%e5%9c%a8windows%20%e4%b8%8b%e4%bd%bf%e7%94%a8gpu%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2017%2f01%2f06%2ftensorflow-zai-windows-xia-shi-yong-gpu%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2017%2f01%2f06%2ftensorflow-zai-windows-xia-shi-yong-gpu%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2017/01/06/tensorflow-zai-windows-xia-shi-yong-gpu/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+</body>
+</html>

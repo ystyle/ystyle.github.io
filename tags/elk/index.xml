@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>elk on 东方星痕</title>
+		<link>https://ystyle.top/tags/elk/</link>
+		<description>Recent content in elk on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Wed, 27 Sep 2017 09:05:31 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/elk/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>用docker搭建ELK</title>
+				<link>https://ystyle.top/2017/09/27/use-docker-to-build-ELKStack/</link>
+				<pubDate>Wed, 27 Sep 2017 09:05:31 +0800</pubDate>
+				<guid>https://ystyle.top/2017/09/27/use-docker-to-build-ELKStack/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;code&gt;logstash-input-tcp&lt;/code&gt; 可用，但log4j会把对象序列化，在kibana看到的会是乱码&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;ol start=&#34;2&#34;&gt;&#xA;&lt;li&gt;&lt;code&gt;logstash-input-log4j&lt;/code&gt; 不可用，官方已废弃该插件， log4j连接不上该插件&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;logstash-input-redis&lt;/code&gt; 可用，配置简洁，有安全保障&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;本篇以 &lt;code&gt;logstash-input-redis&lt;/code&gt;插件配置elk&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

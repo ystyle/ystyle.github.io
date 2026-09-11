@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Github协助工作流 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">Github协助工作流</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">Github协助工作流</h1>
+    <h5 class="subtitle">
+      <time datetime="2015-08-06T06:45:27&#43;08:00" itemprop="datePublished" class="page-time">2015-08-06</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#Github%e5%8d%8f%e5%8a%a9%e5%b7%a5%e4%bd%9c%e6%b5%81">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">Github协助工作流</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e6%8f%8f%e8%bf%b0">
+    <span class="post-toc-number">1.1.</span> <span class="post-toc-text">描述</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c">
+    <span class="post-toc-number">1.2.</span> <span class="post-toc-text">准备工作</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#Fork-%e9%a1%b9%e7%9b%ae">
+    <span class="post-toc-number">1.3.</span> <span class="post-toc-text">Fork 项目</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#clone%e9%a1%b9%e7%9b%ae%e5%88%b0%e6%9c%ac%e5%9c%b0">
+    <span class="post-toc-number">1.4.</span> <span class="post-toc-text">clone项目到本地</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%bf%ae%e6%94%b9%e6%96%87%e4%bb%b6%e6%88%96%e4%bb%a3%e7%a0%81">
+    <span class="post-toc-number">1.5.</span> <span class="post-toc-text">修改文件或代码</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%8a%e4%bc%a0%e6%96%87%e4%bb%b6">
+    <span class="post-toc-number">1.6.</span> <span class="post-toc-text">上传文件</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e8%af%b7%e6%b1%82%e5%90%88%e5%b9%b6%e4%bb%a3%e7%a0%81">
+    <span class="post-toc-number">1.7.</span> <span class="post-toc-text">请求合并代码</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-Github协助工作流" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">Github协助工作流</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2015-08-06T06:45:27&#43;08:00" itemprop="datePublished">2015-08-06</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <h2 id="Github协助工作流"><a href="#Github协助工作流" class="headerlink" title="Github协助工作流"></a>Github协助工作流</h2>
+<h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3>
+<p>给Github新手的一个简单的参与开源项目的方法</p>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3>
+<p>Git客户端: <a href="http://www.git-scm.com/download/" target="_blank" rel="noopener"><code>git-scm</code></a>
+ [常称git或 git bash]、<a href="https://windows.github.com/" target="_blank" rel="noopener"><code>github for windows</code></a>
+</p>
+<h3 id="Fork-项目"><a href="#Fork-项目" class="headerlink" title="Fork 项目"></a><code>Fork</code> 项目</h3>
+<blockquote>
+<p>首先进入你要参与项目的首页, 网址类似这样的 <code>https://github.com/${username}/${projectname}</code><br>
+点击右上角的按钮 <code>Fork</code><br>
+现在你自己的仓库里就<code>clone</code>了一个和主项目一样的仓库</p>
+</blockquote>
+<h3 id="clone项目到本地"><a href="#clone项目到本地" class="headerlink" title="clone项目到本地"></a><code>clone</code>项目到本地</h3>
+<p>git bash</p>
+<blockquote>
+<p>在工作空间右键git bash 打开终端<br>
+项目右边有输入框:<code>HTTPS clone URL</code>点击输入框旁边的按钮<code>copy to clipboard</code><br>
+把地址复制到 git bash 里回车下载到本地</p>
+</blockquote>
+<p>github[可以在右上的齿轮里登陆帐号]</p>
+<blockquote>
+<p>打开<code>github for windows</code>左上的+号点 <code>clone</code> 会刷新自己的项目，选择就下载到本地了</p>
+</blockquote>
+<h3 id="修改文件或代码"><a href="#修改文件或代码" class="headerlink" title="修改文件或代码"></a>修改文件或代码</h3>
+<blockquote>
+<p>已经把代码/文件下载到本地了，随意debug, 新增功能什么的</p>
+</blockquote>
+<h3 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h3>
+<blockquote>
+<p>修改新增文件后要用<code>git add .</code>标记文件,  (初始化项目是：git init)<br>
+用<code>git commit -m &quot;message for update&quot; </code>提交文件(本地缓存),<br>
+用<code>git push</code>上传文件 用git bash的username是github的用户名/密码</p>
+</blockquote>
+<p>注: (密钥方式自己看其它教程配置)</p>
+<h3 id="请求合并代码"><a href="#请求合并代码" class="headerlink" title="请求合并代码"></a>请求合并代码</h3>
+<p>进入自己的首页，进入自己<code>clone</code>的项目<br>
+在分支与代码目录之间有一个连接<code>Pull request</code> 如下图：<br>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2015/08/----20150806220439.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
+</p>
+<blockquote>
+<p>点击这连接向主仓库发起一个<code>Pull request</code> 请求</p>
+</blockquote>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2015/08/----20150806220942.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
+<blockquote>
+<p>填写你的说明：如修改了什么代码或新增了什么功能什么的</p>
+</blockquote>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2015/08/----20150806221008.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
+<blockquote>
+<p>成功的截图</p>
+</blockquote>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2015/08/----20150806221500.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
+<blockquote>
+<p>成功发起了一个<code>Pull request</code> 请求</p>
+</blockquote>
+<blockquote>
+<p>对方接收到<code>Pull request</code> 请求，如果主仓库接受你的代码的话，主仓库会合并这些代码</p>
+</blockquote>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/images/2015/08/-1-P7BO-Y1-1_LRWJU-T32J.png" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2015-09-24T18:11:13&#43;08:00" itemprop="dateUpdated">2015-09-24 18:11:13</time>
+          </span><br>
+          本文链接：<a href="/2015/08/06/githubxie-zhu-gong-zuo-liu/" target="_blank" rel="external">https://ystyle.top/2015/08/06/githubxie-zhu-gong-zuo-liu/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GIT/">GIT</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2015%2f08%2f06%2fgithubxie-zhu-gong-zuo-liu%2f&title=%e3%80%8aGithub%e5%8d%8f%e5%8a%a9%e5%b7%a5%e4%bd%9c%e6%b5%81%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2015%2f08%2f06%2fgithubxie-zhu-gong-zuo-liu%2f&title=%e3%80%8aGithub%e5%8d%8f%e5%8a%a9%e5%b7%a5%e4%bd%9c%e6%b5%81%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=Github%e5%8d%8f%e5%8a%a9%e5%b7%a5%e4%bd%9c%e6%b5%81%20%e6%8f%8f%e8%bf%b0%20%e7%bb%99Github%e6%96%b0%e6%89%8b%e7%9a%84%e4%b8%80%e4%b8%aa%e7%ae%80%e5%8d%95%e7%9a%84%e5%8f%82%e4%b8%8e%e5%bc%80%e6%ba%90%e9%a1%b9%e7%9b%ae%e7%9a%84%e6%96%b9%e6%b3%95%0a%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c%20Git%e5%ae%a2%e6%88%b7%e7%ab%af%3a%20git-scm%20%5b%e5%b8%b8%e7%a7%b0git%e6%88%96%20git%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2015%2f08%2f06%2fgithubxie-zhu-gong-zuo-liu%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8aGithub%e5%8d%8f%e5%8a%a9%e5%b7%a5%e4%bd%9c%e6%b5%81%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2015%2f08%2f06%2fgithubxie-zhu-gong-zuo-liu%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2015%2f08%2f06%2fgithubxie-zhu-gong-zuo-liu%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2015/07/30/activemq-ru-men/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">ActiveMQ 入门</h4>
+        </a>
+      </div>
+      
+      
+      <div class="waves-block waves-effect next">
+        <a href="/2015/09/11/jpa-hibernate-zhu-jie/" id="post-next" class="post-nav-link">
+          <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+          <h4 class="title">JPA  Hibernate 注解</h4>
+        </a>
+      </div>
+      
+    </nav>
+    
+  </article>
+
+  
+  
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2015%2f08%2f06%2fgithubxie-zhu-gong-zuo-liu%2f&title=%e3%80%8aGithub%e5%8d%8f%e5%8a%a9%e5%b7%a5%e4%bd%9c%e6%b5%81%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2015%2f08%2f06%2fgithubxie-zhu-gong-zuo-liu%2f&title=%e3%80%8aGithub%e5%8d%8f%e5%8a%a9%e5%b7%a5%e4%bd%9c%e6%b5%81%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=Github%e5%8d%8f%e5%8a%a9%e5%b7%a5%e4%bd%9c%e6%b5%81%20%e6%8f%8f%e8%bf%b0%20%e7%bb%99Github%e6%96%b0%e6%89%8b%e7%9a%84%e4%b8%80%e4%b8%aa%e7%ae%80%e5%8d%95%e7%9a%84%e5%8f%82%e4%b8%8e%e5%bc%80%e6%ba%90%e9%a1%b9%e7%9b%ae%e7%9a%84%e6%96%b9%e6%b3%95%0a%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c%20Git%e5%ae%a2%e6%88%b7%e7%ab%af%3a%20git-scm%20%5b%e5%b8%b8%e7%a7%b0git%e6%88%96%20git%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2015%2f08%2f06%2fgithubxie-zhu-gong-zuo-liu%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8aGithub%e5%8d%8f%e5%8a%a9%e5%b7%a5%e4%bd%9c%e6%b5%81%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2015%2f08%2f06%2fgithubxie-zhu-gong-zuo-liu%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2015%2f08%2f06%2fgithubxie-zhu-gong-zuo-liu%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2015/08/06/githubxie-zhu-gong-zuo-liu/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+</body>
+</html>

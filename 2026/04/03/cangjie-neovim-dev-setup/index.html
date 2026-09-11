@@ -1,627 +1,820 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cn">
 <head>
-    
-
-    
-
-    
-<!-- Baidu Tongji -->
-<script>var _hmt = _hmt || []</script>
-<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
-<!-- End Baidu Tongji -->
-
-
-
-<!-- Baidu Push -->
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-<!-- End Baidu Push -->
-
-
-    <meta charset="utf-8">
-    
-    
-    
-    <title>仓颉语言 Neovim 开发环境配置指南 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="Cangjie,Neovim,AstroNvim,openEuler">
-    <meta name="description" content="本文档介绍如何在 openEuler (aarch64) 系统上配置 Neovim (AstroNvim) 开发环境，用于仓颉语言开发。 目录 系统要求 安装仓颉 SDK 安装 Cangjie STDX 环境变量配置 Neovim 配置 常见问题  系统要求 操作系统：openEuler 2403 SP1 (aarch64) GCC 版本：12.3.1 或更高 Neovim 版本：0.9.0 或更">
-<meta name="keywords" content="Cangjie,Neovim,AstroNvim,openEuler">
-<meta property="og:type" content="article">
-<meta property="og:title" content="仓颉语言 Neovim 开发环境配置指南">
-<meta property="og:url" content="http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/index.html">
-<meta property="og:site_name" content="东方星痕">
-<meta property="og:description" content="本文档介绍如何在 openEuler (aarch64) 系统上配置 Neovim (AstroNvim) 开发环境，用于仓颉语言开发。 目录 系统要求 安装仓颉 SDK 安装 Cangjie STDX 环境变量配置 Neovim 配置 常见问题  系统要求 操作系统：openEuler 2403 SP1 (aarch64) GCC 版本：12.3.1 或更高 Neovim 版本：0.9.0 或更">
-<meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2026-09-11T03:59:55.461Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="仓颉语言 Neovim 开发环境配置指南">
-<meta name="twitter:description" content="本文档介绍如何在 openEuler (aarch64) 系统上配置 Neovim (AstroNvim) 开发环境，用于仓颉语言开发。 目录 系统要求 安装仓颉 SDK 安装 Cangjie STDX 环境变量配置 Neovim 配置 常见问题  系统要求 操作系统：openEuler 2403 SP1 (aarch64) GCC 版本：12.3.1 或更高 Neovim 版本：0.9.0 或更">
-    
-        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/img/avatar.jpg">
-    <link rel="stylesheet" href="/css/style.css?v=1.6.10">
-    <script>window.lazyScripts=[]</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>仓颉语言 Neovim 开发环境配置指南 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
-    <div id="loading" class="active"></div>
+  
+  <div id="loading" class="active"></div>
 
-    <aside id="menu"  >
+  
+
+<aside id="menu">
   <div class="inner flex-row-vertical">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
+      <i class="icon icon-lg icon-close"></i>
     </a>
     <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.jpg">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
         </a>
         <hgroup class="introduce">
           <h5 class="nickname">YSTYLE</h5>
-          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
         </hgroup>
       </div>
     </div>
     <div class="scroll-wrap flex-col">
       <ul class="nav">
         
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                归档
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                标签
-              </a>
-            </li>
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                分类
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/ystyle" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                项目
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="http://www.weibo.com/512308314" target="_blank" >
-                <i class="icon icon-lg icon-weibo"></i>
-                微博
-              </a>
-            </li>
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/atom.xml" target="_blank" >
-                <i class="icon icon-lg icon-rss"></i>
-                订阅
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/friends"  >
-                <i class="icon icon-lg icon-link"></i>
-                友链
-              </a>
-            </li>
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
         
       </ul>
     </div>
   </div>
 </aside>
 
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">仓颉语言 Neovim 开发环境配置指南</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">仓颉语言 Neovim 开发环境配置指南</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
     </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
 </header>
+
 <header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">仓颉语言 Neovim 开发环境配置指南</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2026-04-03T15:30:00.000Z" itemprop="datePublished" class="page-time">
-  2026-04-03
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
-
-            
-        </h5>
-    </div>
+  <div class="container fade-scale in">
+    <h1 class="title">仓颉语言 Neovim 开发环境配置指南</h1>
+    <h5 class="subtitle">
+      <time datetime="2026-04-03T23:30:00&#43;08:00" itemprop="datePublished" class="page-time">2026-04-03</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
+    </h5>
+  </div>
+</header>
 
     
-
-</header>
-
 
 <div class="container body-wrap">
-    
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目录"><span class="post-toc-number">1.</span> <span class="post-toc-text">目录</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#系统要求"><span class="post-toc-number">2.</span> <span class="post-toc-text">系统要求</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装仓颉-SDK"><span class="post-toc-number">3.</span> <span class="post-toc-text">安装仓颉 SDK</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装-Cangjie-STDX"><span class="post-toc-number">4.</span> <span class="post-toc-text">安装 Cangjie STDX</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#环境变量配置"><span class="post-toc-number">5.</span> <span class="post-toc-text">环境变量配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建-GCC-运行时库符号链接"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">创建 GCC 运行时库符号链接</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Neovim-配置"><span class="post-toc-number">6.</span> <span class="post-toc-text">Neovim 配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-安装-AstroNvim"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">1. 安装 AstroNvim</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-配置仓颉-LSP-插件"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">2. 配置仓颉 LSP 插件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-启动-Neovim-并安装插件"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">3. 启动 Neovim 并安装插件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常见问题"><span class="post-toc-number">7.</span> <span class="post-toc-text">常见问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-链接错误：cannot-find-crtbeginS-o"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">1. 链接错误：cannot find crtbeginS.o</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-LSP-不工作"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">2. LSP 不工作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-找不到-STDX"><span class="post-toc-number">7.3.</span> <span class="post-toc-text">3. 找不到 STDX</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-快速事件上下文错误"><span class="post-toc-number">7.4.</span> <span class="post-toc-text">4. 快速事件上下文错误</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#键位映射"><span class="post-toc-number">8.</span> <span class="post-toc-text">键位映射</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考链接"><span class="post-toc-number">9.</span> <span class="post-toc-text">参考链接</span></a></li></ol>
-        </nav>
-    </aside>
-    
-<article id="post-cangjie-neovim-dev-setup"
-  class="post-article article-type-post fade" itemprop="blogPost">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
 
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e7%9b%ae%e5%bd%95">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">目录</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e7%b3%bb%e7%bb%9f%e8%a6%81%e6%b1%82">
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">系统要求</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%ae%89%e8%a3%85%e4%bb%93%e9%a2%89-SDK">
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">安装仓颉 SDK</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%ae%89%e8%a3%85-Cangjie-STDX">
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">安装 Cangjie STDX</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f%e9%85%8d%e7%bd%ae">
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">环境变量配置</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%88%9b%e5%bb%ba-GCC-%e8%bf%90%e8%a1%8c%e6%97%b6%e5%ba%93%e7%ac%a6%e5%8f%b7%e9%93%be%e6%8e%a5">
+    <span class="post-toc-number">5.1.</span> <span class="post-toc-text">创建 GCC 运行时库符号链接</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#Neovim-%e9%85%8d%e7%bd%ae">
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">Neovim 配置</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#1-%e5%ae%89%e8%a3%85-AstroNvim">
+    <span class="post-toc-number">6.1.</span> <span class="post-toc-text">1. 安装 AstroNvim</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#2-%e9%85%8d%e7%bd%ae%e4%bb%93%e9%a2%89-LSP-%e6%8f%92%e4%bb%b6">
+    <span class="post-toc-number">6.2.</span> <span class="post-toc-text">2. 配置仓颉 LSP 插件</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#3-%e5%90%af%e5%8a%a8-Neovim-%e5%b9%b6%e5%ae%89%e8%a3%85%e6%8f%92%e4%bb%b6">
+    <span class="post-toc-number">6.3.</span> <span class="post-toc-text">3. 启动 Neovim 并安装插件</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%b8%b8%e8%a7%81%e9%97%ae%e9%a2%98">
+    <span class="post-toc-number">7.</span> <span class="post-toc-text">常见问题</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#1-%e9%93%be%e6%8e%a5%e9%94%99%e8%af%af%ef%bc%9acannot-find-crtbeginS-o">
+    <span class="post-toc-number">7.1.</span> <span class="post-toc-text">1. 链接错误：cannot find crtbeginS.o</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#2-LSP-%e4%b8%8d%e5%b7%a5%e4%bd%9c">
+    <span class="post-toc-number">7.2.</span> <span class="post-toc-text">2. LSP 不工作</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#3-%e6%89%be%e4%b8%8d%e5%88%b0-STDX">
+    <span class="post-toc-number">7.3.</span> <span class="post-toc-text">3. 找不到 STDX</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#4-%e5%bf%ab%e9%80%9f%e4%ba%8b%e4%bb%b6%e4%b8%8a%e4%b8%8b%e6%96%87%e9%94%99%e8%af%af">
+    <span class="post-toc-number">7.4.</span> <span class="post-toc-text">4. 快速事件上下文错误</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e9%94%ae%e4%bd%8d%e6%98%a0%e5%b0%84">
+    <span class="post-toc-number">8.</span> <span class="post-toc-text">键位映射</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5">
+    <span class="post-toc-number">9.</span> <span class="post-toc-text">参考链接</span>
+  </a>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-Cangjie-Neovim-Development-Setup" itemprop="blogPost">
     <div class="post-card">
-        <h1 class="post-card-title">仓颉语言 Neovim 开发环境配置指南</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2026-04-03 23:30:00" datetime="2026-04-03T15:30:00.000Z"  itemprop="datePublished">2026-04-03</time>
+      <h1 class="post-card-title">仓颉语言 Neovim 开发环境配置指南</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2026-04-03T23:30:00&#43;08:00" itemprop="datePublished">2026-04-03</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
+        
+      </div>
 
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
-
-
-
-            
-
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>本文档介绍如何在 openEuler (aarch64) 系统上配置 Neovim (AstroNvim) 开发环境，用于仓颉语言开发。</p>
-<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
-<li><a href="#系统要求">系统要求</a></li>
-<li><a href="#安装仓颉-sdk">安装仓颉 SDK</a></li>
-<li><a href="#安装-cangjie-stdx">安装 Cangjie STDX</a></li>
-<li><a href="#环境变量配置">环境变量配置</a></li>
-<li><a href="#neovim-配置">Neovim 配置</a></li>
-<li><a href="#常见问题">常见问题</a></li>
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <p>本文档介绍如何在 openEuler (aarch64) 系统上配置 Neovim (AstroNvim) 开发环境，用于仓颉语言开发。</p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2>
+<ul>
+<li><a href="#%e7%b3%bb%e7%bb%9f%e8%a6%81%e6%b1%82">系统要求</a>
+</li>
+<li><a href="#%e5%ae%89%e8%a3%85%e4%bb%93%e9%a2%89-sdk">安装仓颉 SDK</a>
+</li>
+<li><a href="#%e5%ae%89%e8%a3%85-cangjie-stdx">安装 Cangjie STDX</a>
+</li>
+<li><a href="#%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f%e9%85%8d%e7%bd%ae">环境变量配置</a>
+</li>
+<li><a href="#neovim-%e9%85%8d%e7%bd%ae">Neovim 配置</a>
+</li>
+<li><a href="#%e5%b8%b8%e8%a7%81%e9%97%ae%e9%a2%98">常见问题</a>
+</li>
 </ul>
-<h2 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h2><ul>
+<h2 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h2>
+<ul>
 <li>操作系统：openEuler 2403 SP1 (aarch64)</li>
 <li>GCC 版本：12.3.1 或更高</li>
 <li>Neovim 版本：0.9.0 或更高</li>
 </ul>
-<h2 id="安装仓颉-SDK"><a href="#安装仓颉-SDK" class="headerlink" title="安装仓颉 SDK"></a>安装仓颉 SDK</h2><ol>
+<h2 id="安装仓颉-SDK"><a href="#安装仓颉-SDK" class="headerlink" title="安装仓颉 SDK"></a>安装仓颉 SDK</h2>
+<ol>
 <li>从官方渠道下载仓颉 SDK (aarch64 版本)</li>
 <li>解压到 <code>~/.config/cjvs/store/</code> 目录</li>
 </ol>
-<p>目录结构示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">~/.config/cjvs/</span><br><span class="line">└── store/</span><br><span class="line">    └── 1.1.0-beta.25/</span><br><span class="line">        ├── envsetup.sh</span><br><span class="line">        ├── lib/</span><br><span class="line">        ├── runtime/</span><br><span class="line">        └── ...</span><br></pre></td></tr></table></figure></p>
-<h2 id="安装-Cangjie-STDX"><a href="#安装-Cangjie-STDX" class="headerlink" title="安装 Cangjie STDX"></a>安装 Cangjie STDX</h2><p>STDX 是仓颉的标准扩展库，需要单独安装：</p>
+<p>目录结构示例：</p>
+<pre tabindex="0"><code>~/.config/cjvs/
+└── store/
+    └── 1.1.0-beta.25/
+        ├── envsetup.sh
+        ├── lib/
+        ├── runtime/
+        └── ...
+</code></pre><h2 id="安装-Cangjie-STDX"><a href="#安装-Cangjie-STDX" class="headerlink" title="安装 Cangjie STDX"></a>安装 Cangjie STDX</h2>
+<p>STDX 是仓颉的标准扩展库，需要单独安装：</p>
 <ol>
-<li>从发布页面下载：<a href="https://gitcode.com/Cangjie/cangjie_stdx/releases/v1.1.0-beta.24.1" target="_blank" rel="noopener">https://gitcode.com/Cangjie/cangjie_stdx/releases/v1.1.0-beta.24.1</a></li>
+<li>从发布页面下载：https://gitcode.com/Cangjie/cangjie_stdx/releases/v1.1.0-beta.24.1</li>
 <li>选择 <code>linux_aarch64_cjnative</code> 版本</li>
 <li>解压到 <code>~/.config/cjvs/stdx/</code> 目录</li>
 </ol>
-<p>目录结构示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">~/.config/cjvs/</span><br><span class="line">└── stdx/</span><br><span class="line">    └── 1.1.0-beta.24/</span><br><span class="line">        └── linux_aarch64_cjnative/</span><br><span class="line">            └── static/</span><br><span class="line">                └── stdx/</span><br><span class="line">                    ├── stdx.cjo</span><br><span class="line">                    └── ...</span><br></pre></td></tr></table></figure></p>
-<h2 id="环境变量配置"><a href="#环境变量配置" class="headerlink" title="环境变量配置"></a>环境变量配置</h2><p>编辑 <code>~/.zshrc</code>，添加以下配置：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 仓颉 SDK 环境配置</span></span><br><span class="line"><span class="built_in">source</span> <span class="variable">$HOME</span>/.config/cjvs/store/1.1.0-beta.25/envsetup.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># STDX 路径配置</span></span><br><span class="line"><span class="built_in">export</span> CANGJIE_STDX_PATH=<span class="string">"<span class="variable">$HOME</span>/.config/cjvs/stdx/1.1.0-beta.24/linux_aarch64_cjnative/static/stdx"</span></span><br></pre></td></tr></table></figure>
-<p>配置完成后执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure></p>
-<p><strong>说明</strong>：</p>
+<p>目录结构示例：</p>
+<pre tabindex="0"><code>~/.config/cjvs/
+└── stdx/
+    └── 1.1.0-beta.24/
+        └── linux_aarch64_cjnative/
+            └── static/
+                └── stdx/
+                    ├── stdx.cjo
+                    └── ...
+</code></pre><h2 id="环境变量配置"><a href="#环境变量配置" class="headerlink" title="环境变量配置"></a>环境变量配置</h2>
+<p>编辑 <code>~/.zshrc</code>，添加以下配置：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 仓颉 SDK 环境配置</span>
+</span></span><span style="display:flex;"><span>source $HOME/.config/cjvs/store/1.1.0-beta.25/envsetup.sh
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># STDX 路径配置</span>
+</span></span><span style="display:flex;"><span>export CANGJIE_STDX_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/.config/cjvs/stdx/1.1.0-beta.24/linux_aarch64_cjnative/static/stdx&#34;</span>
+</span></span></code></pre></div><p>配置完成后执行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>source ~/.zshrc
+</span></span></code></pre></div><p><strong>说明</strong>：</p>
 <ul>
 <li><code>envsetup.sh</code>：设置仓颉编译器所需的环境变量</li>
 <li><code>CANGJIE_STDX_PATH</code>：指定 STDX 库的路径</li>
 </ul>
-<h3 id="创建-GCC-运行时库符号链接"><a href="#创建-GCC-运行时库符号链接" class="headerlink" title="创建 GCC 运行时库符号链接"></a>创建 GCC 运行时库符号链接</h3><p>由于仓颉链接器脚本默认搜索 <code>/lib64</code> 目录，需要创建符号链接：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -sf /usr/lib/gcc/aarch64-openEuler-linux/12/crtbeginS.o /lib64/crtbeginS.o</span><br><span class="line">sudo ln -sf /usr/lib/gcc/aarch64-openEuler-linux/12/crtendS.o /lib64/crtendS.o</span><br><span class="line">sudo ln -sf /usr/lib/gcc/aarch64-openEuler-linux/12/crtbegin.o /lib64/crtbegin.o</span><br><span class="line">sudo ln -sf /usr/lib/gcc/aarch64-openEuler-linux/12/crtend.o /lib64/crtend.o</span><br></pre></td></tr></table></figure>
-<p><strong>说明</strong>：解决链接时找不到 <code>crtbeginS.o</code> 等运行时库的问题</p>
-<h2 id="Neovim-配置"><a href="#Neovim-配置" class="headerlink" title="Neovim 配置"></a>Neovim 配置</h2><h3 id="1-安装-AstroNvim"><a href="#1-安装-AstroNvim" class="headerlink" title="1. 安装 AstroNvim"></a>1. 安装 AstroNvim</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim</span><br></pre></td></tr></table></figure>
-<h3 id="2-配置仓颉-LSP-插件"><a href="#2-配置仓颉-LSP-插件" class="headerlink" title="2. 配置仓颉 LSP 插件"></a>2. 配置仓颉 LSP 插件</h3><p>创建文件 <code>~/.config/nvim/lua/plugins/cangjie-lsp.lua</code>：</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> &#123;</span><br><span class="line">  <span class="string">"https://gitcode.com/ystyle/cangjie-nvim"</span>,</span><br><span class="line">  dependencies = &#123; <span class="string">"neovim/nvim-lspconfig"</span> &#125;,</span><br><span class="line">  opts = &#123; auto_install = <span class="literal">true</span> &#125;,</span><br><span class="line">  <span class="built_in">config</span> = <span class="function"><span class="keyword">function</span><span class="params">(plugin)</span></span></span><br><span class="line">    <span class="built_in">require</span>(<span class="string">"cangjie-nvim"</span>).setup(plugin.opts)</span><br><span class="line"></span><br><span class="line">    vim.api.nvim_create_autocmd(<span class="string">"LspAttach"</span>, &#123;</span><br><span class="line">      callback = <span class="function"><span class="keyword">function</span><span class="params">(args)</span></span></span><br><span class="line">        <span class="keyword">if</span> vim.bo[args.buf].filetype ~= <span class="string">"Cangjie"</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">map</span><span class="params">(mode, lhs, rhs, desc)</span></span></span><br><span class="line">          vim.keymap.set(mode, lhs, rhs, &#123; buffer = args.buf, desc = desc &#125;)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"&lt;leader&gt;li"</span>, <span class="string">"&lt;cmd&gt;LspInfo&lt;cr&gt;"</span>, <span class="string">"LSP Info"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"K"</span>, vim.lsp.buf.hover, <span class="string">"Hover Document"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"&lt;leader&gt;lf"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span> vim.lsp.buf.<span class="built_in">format</span> &#123; async = <span class="literal">true</span> &#125; <span class="keyword">end</span>, <span class="string">"Format Document"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"gl"</span>, vim.diagnostic.open_float, <span class="string">"Line Diagnostics"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"&lt;leader&gt;ld"</span>, vim.diagnostic.open_float, <span class="string">"Line Diagnostics"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"&lt;leader&gt;lD"</span>, vim.diagnostic.setqflist, <span class="string">"All Diagnostics"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"gra"</span>, vim.lsp.buf.code_action, <span class="string">"Code Actions"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"&lt;leader&gt;la"</span>, vim.lsp.buf.code_action, <span class="string">"Code Actions"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"&lt;leader&gt;lh"</span>, vim.lsp.buf.signature_help, <span class="string">"Signature Help"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"grn"</span>, vim.lsp.buf.<span class="built_in">rename</span>, <span class="string">"Rename"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"&lt;leader&gt;lr"</span>, vim.lsp.buf.<span class="built_in">rename</span>, <span class="string">"Rename"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"&lt;leader&gt;ls"</span>, vim.lsp.buf.document_symbol, <span class="string">"Document Symbols"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"&lt;leader&gt;lG"</span>, vim.lsp.buf.workspace_symbol, <span class="string">"Workspace Symbols"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"]d"</span>, vim.diagnostic.goto_next, <span class="string">"Diagnostic Next"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"[d"</span>, vim.diagnostic.goto_prev, <span class="string">"Diagnostics Previous"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"]e"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span> vim.diagnostic.goto_next &#123; severity = vim.diagnostic.severity.ERROR &#125; <span class="keyword">end</span>, <span class="string">"Error Next"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"[e"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span> vim.diagnostic.goto_prev &#123; severity = vim.diagnostic.severity.ERROR &#125; <span class="keyword">end</span>, <span class="string">"Error Previous"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"]w"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span> vim.diagnostic.goto_next &#123; severity = vim.diagnostic.severity.WARN &#125; <span class="keyword">end</span>, <span class="string">"Warning Next"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"[w"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span> vim.diagnostic.goto_prev &#123; severity = vim.diagnostic.severity.WARN &#125; <span class="keyword">end</span>, <span class="string">"Warning Previous"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"gD"</span>, vim.lsp.buf.declaration, <span class="string">"Declaration"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"gy"</span>, vim.lsp.buf.type_definition, <span class="string">"Type Definition"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"gd"</span>, vim.lsp.buf.definition, <span class="string">"Definition"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"gri"</span>, vim.lsp.buf.implementation, <span class="string">"Implementation"</span>)</span><br><span class="line">        map(<span class="string">"n"</span>, <span class="string">"grr"</span>, vim.lsp.buf.references, <span class="string">"References"</span>)</span><br><span class="line">      <span class="keyword">end</span>,</span><br><span class="line">    &#125;)</span><br><span class="line">  <span class="keyword">end</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="3-启动-Neovim-并安装插件"><a href="#3-启动-Neovim-并安装插件" class="headerlink" title="3. 启动 Neovim 并安装插件"></a>3. 启动 Neovim 并安装插件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvim</span><br></pre></td></tr></table></figure>
-<p>AstroNvim 会自动检测并安装 <code>cangjie-nvim</code> 插件。首次打开 <code>.cj</code> 文件时，插件会自动下载 LSP wrapper 二进制文件。</p>
+<h3 id="创建-GCC-运行时库符号链接"><a href="#创建-GCC-运行时库符号链接" class="headerlink" title="创建 GCC 运行时库符号链接"></a>创建 GCC 运行时库符号链接</h3>
+<p>由于仓颉链接器脚本默认搜索 <code>/lib64</code> 目录，需要创建符号链接：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ln -sf /usr/lib/gcc/aarch64-openEuler-linux/12/crtbeginS.o /lib64/crtbeginS.o
+</span></span><span style="display:flex;"><span>sudo ln -sf /usr/lib/gcc/aarch64-openEuler-linux/12/crtendS.o /lib64/crtendS.o
+</span></span><span style="display:flex;"><span>sudo ln -sf /usr/lib/gcc/aarch64-openEuler-linux/12/crtbegin.o /lib64/crtbegin.o
+</span></span><span style="display:flex;"><span>sudo ln -sf /usr/lib/gcc/aarch64-openEuler-linux/12/crtend.o /lib64/crtend.o
+</span></span></code></pre></div><p><strong>说明</strong>：解决链接时找不到 <code>crtbeginS.o</code> 等运行时库的问题</p>
+<h2 id="Neovim-配置"><a href="#Neovim-配置" class="headerlink" title="Neovim 配置"></a>Neovim 配置</h2>
+<h3 id="1-安装-AstroNvim"><a href="#1-安装-AstroNvim" class="headerlink" title="1. 安装 AstroNvim"></a>1. 安装 AstroNvim</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone --depth <span style="color:#ae81ff">1</span> https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+</span></span></code></pre></div><h3 id="2-配置仓颉-LSP-插件"><a href="#2-配置仓颉-LSP-插件" class="headerlink" title="2. 配置仓颉 LSP 插件"></a>2. 配置仓颉 LSP 插件</h3>
+<p>创建文件 <code>~/.config/nvim/lua/plugins/cangjie-lsp.lua</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;https://gitcode.com/ystyle/cangjie-nvim&#34;</span>,
+</span></span><span style="display:flex;"><span>  dependencies <span style="color:#f92672">=</span> { <span style="color:#e6db74">&#34;neovim/nvim-lspconfig&#34;</span> },
+</span></span><span style="display:flex;"><span>  opts <span style="color:#f92672">=</span> { auto_install <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span> },
+</span></span><span style="display:flex;"><span>  config <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(plugin)
+</span></span><span style="display:flex;"><span>    require(<span style="color:#e6db74">&#34;cangjie-nvim&#34;</span>).setup(plugin.opts)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    vim.api.nvim_create_autocmd(<span style="color:#e6db74">&#34;LspAttach&#34;</span>, {
+</span></span><span style="display:flex;"><span>      callback <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(args)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> vim.bo[args.buf].filetype <span style="color:#f92672">~=</span> <span style="color:#e6db74">&#34;Cangjie&#34;</span> <span style="color:#66d9ef">then</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">map</span>(mode, lhs, rhs, desc)
+</span></span><span style="display:flex;"><span>          vim.keymap.set(mode, lhs, rhs, { buffer <span style="color:#f92672">=</span> args.buf, desc <span style="color:#f92672">=</span> desc })
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;&lt;leader&gt;li&#34;</span>, <span style="color:#e6db74">&#34;&lt;cmd&gt;LspInfo&lt;cr&gt;&#34;</span>, <span style="color:#e6db74">&#34;LSP Info&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;K&#34;</span>, vim.lsp.buf.hover, <span style="color:#e6db74">&#34;Hover Document&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;&lt;leader&gt;lf&#34;</span>, <span style="color:#66d9ef">function</span>() vim.lsp.buf.format { async <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span> } <span style="color:#66d9ef">end</span>, <span style="color:#e6db74">&#34;Format Document&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;gl&#34;</span>, vim.diagnostic.open_float, <span style="color:#e6db74">&#34;Line Diagnostics&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;&lt;leader&gt;ld&#34;</span>, vim.diagnostic.open_float, <span style="color:#e6db74">&#34;Line Diagnostics&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;&lt;leader&gt;lD&#34;</span>, vim.diagnostic.setqflist, <span style="color:#e6db74">&#34;All Diagnostics&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;gra&#34;</span>, vim.lsp.buf.code_action, <span style="color:#e6db74">&#34;Code Actions&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;&lt;leader&gt;la&#34;</span>, vim.lsp.buf.code_action, <span style="color:#e6db74">&#34;Code Actions&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;&lt;leader&gt;lh&#34;</span>, vim.lsp.buf.signature_help, <span style="color:#e6db74">&#34;Signature Help&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;grn&#34;</span>, vim.lsp.buf.rename, <span style="color:#e6db74">&#34;Rename&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;&lt;leader&gt;lr&#34;</span>, vim.lsp.buf.rename, <span style="color:#e6db74">&#34;Rename&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;&lt;leader&gt;ls&#34;</span>, vim.lsp.buf.document_symbol, <span style="color:#e6db74">&#34;Document Symbols&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;&lt;leader&gt;lG&#34;</span>, vim.lsp.buf.workspace_symbol, <span style="color:#e6db74">&#34;Workspace Symbols&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;]d&#34;</span>, vim.diagnostic.goto_next, <span style="color:#e6db74">&#34;Diagnostic Next&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;[d&#34;</span>, vim.diagnostic.goto_prev, <span style="color:#e6db74">&#34;Diagnostics Previous&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;]e&#34;</span>, <span style="color:#66d9ef">function</span>() vim.diagnostic.goto_next { severity <span style="color:#f92672">=</span> vim.diagnostic.severity.ERROR } <span style="color:#66d9ef">end</span>, <span style="color:#e6db74">&#34;Error Next&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;[e&#34;</span>, <span style="color:#66d9ef">function</span>() vim.diagnostic.goto_prev { severity <span style="color:#f92672">=</span> vim.diagnostic.severity.ERROR } <span style="color:#66d9ef">end</span>, <span style="color:#e6db74">&#34;Error Previous&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;]w&#34;</span>, <span style="color:#66d9ef">function</span>() vim.diagnostic.goto_next { severity <span style="color:#f92672">=</span> vim.diagnostic.severity.WARN } <span style="color:#66d9ef">end</span>, <span style="color:#e6db74">&#34;Warning Next&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;[w&#34;</span>, <span style="color:#66d9ef">function</span>() vim.diagnostic.goto_prev { severity <span style="color:#f92672">=</span> vim.diagnostic.severity.WARN } <span style="color:#66d9ef">end</span>, <span style="color:#e6db74">&#34;Warning Previous&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;gD&#34;</span>, vim.lsp.buf.declaration, <span style="color:#e6db74">&#34;Declaration&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;gy&#34;</span>, vim.lsp.buf.type_definition, <span style="color:#e6db74">&#34;Type Definition&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;gd&#34;</span>, vim.lsp.buf.definition, <span style="color:#e6db74">&#34;Definition&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;gri&#34;</span>, vim.lsp.buf.implementation, <span style="color:#e6db74">&#34;Implementation&#34;</span>)
+</span></span><span style="display:flex;"><span>        map(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#e6db74">&#34;grr&#34;</span>, vim.lsp.buf.references, <span style="color:#e6db74">&#34;References&#34;</span>)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">end</span>,
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">end</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="3-启动-Neovim-并安装插件"><a href="#3-启动-Neovim-并安装插件" class="headerlink" title="3. 启动 Neovim 并安装插件"></a>3. 启动 Neovim 并安装插件</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nvim
+</span></span></code></pre></div><p>AstroNvim 会自动检测并安装 <code>cangjie-nvim</code> 插件。首次打开 <code>.cj</code> 文件时，插件会自动下载 LSP wrapper 二进制文件。</p>
 <p><strong>LSP Wrapper 地址</strong>：</p>
 <ul>
-<li>项目地址：<a href="https://gitcode.com/ystyle/cangjie-lsp-wrapper" target="_blank" rel="noopener">https://gitcode.com/ystyle/cangjie-lsp-wrapper</a></li>
+<li>项目地址：https://gitcode.com/ystyle/cangjie-lsp-wrapper</li>
 <li>自动下载位置：<code>~/.local/share/nvim/data/cangjie-nvim/bin/</code></li>
 </ul>
-<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="1-链接错误：cannot-find-crtbeginS-o"><a href="#1-链接错误：cannot-find-crtbeginS-o" class="headerlink" title="1. 链接错误：cannot find crtbeginS.o"></a>1. 链接错误：cannot find crtbeginS.o</h3><p><strong>错误信息</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ld: cannot find crtbeginS.o: No such file or directory</span><br></pre></td></tr></table></figure></p>
-<p><strong>解决方案</strong>：<br>创建 GCC 运行时库符号链接：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -sf /usr/lib/gcc/aarch64-openEuler-linux/12/crtbeginS.o /lib64/crtbeginS.o</span><br><span class="line">sudo ln -sf /usr/lib/gcc/aarch64-openEuler-linux/12/crtendS.o /lib64/crtendS.o</span><br><span class="line">sudo ln -sf /usr/lib/gcc/aarch64-openEuler-linux/12/crtbegin.o /lib64/crtbegin.o</span><br><span class="line">sudo ln -sf /usr/lib/gcc/aarch64-openEuler-linux/12/crtend.o /lib64/crtend.o</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-LSP-不工作"><a href="#2-LSP-不工作" class="headerlink" title="2. LSP 不工作"></a>2. LSP 不工作</h3><p><strong>检查步骤</strong>：</p>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2>
+<h3 id="1-链接错误：cannot-find-crtbeginS-o"><a href="#1-链接错误：cannot-find-crtbeginS-o" class="headerlink" title="1. 链接错误：cannot find crtbeginS.o"></a>1. 链接错误：cannot find crtbeginS.o</h3>
+<p><strong>错误信息</strong>：</p>
+<pre tabindex="0"><code>/usr/bin/ld: cannot find crtbeginS.o: No such file or directory
+</code></pre><p><strong>解决方案</strong>：<br>
+创建 GCC 运行时库符号链接：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ln -sf /usr/lib/gcc/aarch64-openEuler-linux/12/crtbeginS.o /lib64/crtbeginS.o
+</span></span><span style="display:flex;"><span>sudo ln -sf /usr/lib/gcc/aarch64-openEuler-linux/12/crtendS.o /lib64/crtendS.o
+</span></span><span style="display:flex;"><span>sudo ln -sf /usr/lib/gcc/aarch64-openEuler-linux/12/crtbegin.o /lib64/crtbegin.o
+</span></span><span style="display:flex;"><span>sudo ln -sf /usr/lib/gcc/aarch64-openEuler-linux/12/crtend.o /lib64/crtend.o
+</span></span></code></pre></div><h3 id="2-LSP-不工作"><a href="#2-LSP-不工作" class="headerlink" title="2. LSP 不工作"></a>2. LSP 不工作</h3>
+<p><strong>检查步骤</strong>：</p>
 <ol>
 <li>确认仓颉 SDK 环境变量已加载：<code>echo $CANGJIE_HOME</code></li>
 <li>确认 LSP wrapper 已下载：<code>ls ~/.local/share/nvim/data/cangjie-nvim/bin/</code></li>
-<li>手动安装 LSP wrapper：<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:lua <span class="built_in">require</span>(<span class="string">"cangjie-nvim"</span>).install()</span><br></pre></td></tr></table></figure>
-</li>
+<li>手动安装 LSP wrapper：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>:lua require(<span style="color:#e6db74">&#34;cangjie-nvim&#34;</span>).install()
+</span></span></code></pre></div></li>
 </ol>
-<h3 id="3-找不到-STDX"><a href="#3-找不到-STDX" class="headerlink" title="3. 找不到 STDX"></a>3. 找不到 STDX</h3><p><strong>错误信息</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error: cannot find stdx module</span><br></pre></td></tr></table></figure></p>
-<p><strong>解决方案</strong>：<br>确认 <code>CANGJIE_STDX_PATH</code> 环境变量指向正确的目录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls <span class="variable">$CANGJIE_STDX_PATH</span></span><br><span class="line"><span class="comment"># 应该能看到 stdx.cjo 文件</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="4-快速事件上下文错误"><a href="#4-快速事件上下文错误" class="headerlink" title="4. 快速事件上下文错误"></a>4. 快速事件上下文错误</h3><p><strong>错误信息</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E5560: nvim_create_namespace must not be called in a fast event context</span><br></pre></td></tr></table></figure></p>
-<p><strong>解决方案</strong>：<br>此问题已在 <code>cangjie-nvim</code> 插件中修复，请确保使用最新版本。</p>
-<h2 id="键位映射"><a href="#键位映射" class="headerlink" title="键位映射"></a>键位映射</h2><table>
-<thead>
-<tr>
-<th>快捷键</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>K</code></td>
-<td>显示悬停文档</td>
-</tr>
-<tr>
-<td><code>gd</code></td>
-<td>跳转到定义</td>
-</tr>
-<tr>
-<td><code>gD</code></td>
-<td>跳转到声明</td>
-</tr>
-<tr>
-<td><code>gy</code></td>
-<td>跳转到类型定义</td>
-</tr>
-<tr>
-<td><code>gri</code></td>
-<td>跳转到实现</td>
-</tr>
-<tr>
-<td><code>grr</code></td>
-<td>查找引用</td>
-</tr>
-<tr>
-<td><code>grn</code></td>
-<td>重命名</td>
-</tr>
-<tr>
-<td><code>&lt;leader&gt;lf</code></td>
-<td>格式化文档</td>
-</tr>
-<tr>
-<td><code>&lt;leader&gt;la</code></td>
-<td>代码操作</td>
-</tr>
-<tr>
-<td><code>&lt;leader&gt;li</code></td>
-<td>LSP 信息</td>
-</tr>
-<tr>
-<td><code>]d</code> / <code>[d</code></td>
-<td>下一个/上一个诊断</td>
-</tr>
-<tr>
-<td><code>]e</code> / <code>[e</code></td>
-<td>下一个/上一个错误</td>
-</tr>
-<tr>
-<td><code>]w</code> / <code>[w</code></td>
-<td>下一个/上一个警告</td>
-</tr>
-</tbody>
+<h3 id="3-找不到-STDX"><a href="#3-找不到-STDX" class="headerlink" title="3. 找不到 STDX"></a>3. 找不到 STDX</h3>
+<p><strong>错误信息</strong>：</p>
+<pre tabindex="0"><code>error: cannot find stdx module
+</code></pre><p><strong>解决方案</strong>：<br>
+确认 <code>CANGJIE_STDX_PATH</code> 环境变量指向正确的目录：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls $CANGJIE_STDX_PATH
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 应该能看到 stdx.cjo 文件</span>
+</span></span></code></pre></div><h3 id="4-快速事件上下文错误"><a href="#4-快速事件上下文错误" class="headerlink" title="4. 快速事件上下文错误"></a>4. 快速事件上下文错误</h3>
+<p><strong>错误信息</strong>：</p>
+<pre tabindex="0"><code>E5560: nvim_create_namespace must not be called in a fast event context
+</code></pre><p><strong>解决方案</strong>：<br>
+此问题已在 <code>cangjie-nvim</code> 插件中修复，请确保使用最新版本。</p>
+<h2 id="键位映射"><a href="#键位映射" class="headerlink" title="键位映射"></a>键位映射</h2>
+<table>
+	<thead>
+			<tr>
+					<th>快捷键</th>
+					<th>功能</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>K</code></td>
+					<td>显示悬停文档</td>
+			</tr>
+			<tr>
+					<td><code>gd</code></td>
+					<td>跳转到定义</td>
+			</tr>
+			<tr>
+					<td><code>gD</code></td>
+					<td>跳转到声明</td>
+			</tr>
+			<tr>
+					<td><code>gy</code></td>
+					<td>跳转到类型定义</td>
+			</tr>
+			<tr>
+					<td><code>gri</code></td>
+					<td>跳转到实现</td>
+			</tr>
+			<tr>
+					<td><code>grr</code></td>
+					<td>查找引用</td>
+			</tr>
+			<tr>
+					<td><code>grn</code></td>
+					<td>重命名</td>
+			</tr>
+			<tr>
+					<td><code>&lt;leader&gt;lf</code></td>
+					<td>格式化文档</td>
+			</tr>
+			<tr>
+					<td><code>&lt;leader&gt;la</code></td>
+					<td>代码操作</td>
+			</tr>
+			<tr>
+					<td><code>&lt;leader&gt;li</code></td>
+					<td>LSP 信息</td>
+			</tr>
+			<tr>
+					<td><code>]d</code> / <code>[d</code></td>
+					<td>下一个/上一个诊断</td>
+			</tr>
+			<tr>
+					<td><code>]e</code> / <code>[e</code></td>
+					<td>下一个/上一个错误</td>
+			</tr>
+			<tr>
+					<td><code>]w</code> / <code>[w</code></td>
+					<td>下一个/上一个警告</td>
+			</tr>
+	</tbody>
 </table>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
-<li><a href="https://cangjie.org/" target="_blank" rel="noopener">仓颉语言官网</a></li>
-<li><a href="https://astronvim.github.io/" target="_blank" rel="noopener">AstroNvim 文档</a></li>
-<li><a href="https://gitcode.com/ystyle/cangjie-nvim" target="_blank" rel="noopener">cangjie-nvim 插件</a></li>
-<li><a href="https://gitcode.com/ystyle/cangjie-lsp-wrapper" target="_blank" rel="noopener">cangjie-lsp-wrapper</a></li>
-<li><a href="https://gitcode.com/Cangjie/cangjie_stdx/releases" target="_blank" rel="noopener">Cangjie STDX 发布</a></li>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2>
+<ul>
+<li><a href="https://cangjie.org/" target="_blank" rel="noopener">仓颉语言官网</a>
+</li>
+<li><a href="https://astronvim.github.io/" target="_blank" rel="noopener">AstroNvim 文档</a>
+</li>
+<li><a href="https://gitcode.com/ystyle/cangjie-nvim" target="_blank" rel="noopener">cangjie-nvim 插件</a>
+</li>
+<li><a href="https://gitcode.com/ystyle/cangjie-lsp-wrapper" target="_blank" rel="noopener">cangjie-lsp-wrapper</a>
+</li>
+<li><a href="https://gitcode.com/Cangjie/cangjie_stdx/releases" target="_blank" rel="noopener">Cangjie STDX 发布</a>
+</li>
 </ul>
 
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2026-04-03T23:30:00&#43;08:00" itemprop="dateUpdated">2026-04-03 23:30:00</time>
+          </span><br>
+          本文链接：<a href="/2026/04/03/cangjie-neovim-dev-setup/" target="_blank" rel="external">https://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
         </div>
-
-        <blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2026-09-11T03:59:55.461Z" itemprop="dateUpdated">2026-09-11 11:59:55</time>
-</span><br>
-
-
-        
-        本文链接：<a href="/2026/04/03/cangjie-neovim-dev-setup/" target="_blank" rel="external">http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
-        
-    </div>
-    <footer>
-        <a href="http://ystyle.top">
+        <footer>
+          <a href="https://ystyle.top/">
             <img src="/img/avatar.jpg" alt="YSTYLE">
             YSTYLE
-        </a>
-    </footer>
-</blockquote>
+          </a>
+        </footer>
+      </blockquote>
 
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/neovim/">neovim</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AstroNvim/">AstroNvim</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openEuler/">openEuler</a></li></ul>
         
 
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AstroNvim/">AstroNvim</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Neovim/">Neovim</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openEuler/">openEuler</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/&title=《仓颉语言 Neovim 开发环境配置指南》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/&title=《仓颉语言 Neovim 开发环境配置指南》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《仓颉语言 Neovim 开发环境配置指南》 — 东方星痕&url=http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/&via=http://ystyle.top" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f04%2f03%2fcangjie-neovim-dev-setup%2f&title=%e3%80%8a%e4%bb%93%e9%a2%89%e8%af%ad%e8%a8%80%20Neovim%20%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae%e6%8c%87%e5%8d%97%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f04%2f03%2fcangjie-neovim-dev-setup%2f&title=%e3%80%8a%e4%bb%93%e9%a2%89%e8%af%ad%e8%a8%80%20Neovim%20%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae%e6%8c%87%e5%8d%97%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e6%9c%ac%e6%96%87%e6%a1%a3%e4%bb%8b%e7%bb%8d%e5%a6%82%e4%bd%95%e5%9c%a8%20openEuler%20%28aarch64%29%20%e7%b3%bb%e7%bb%9f%e4%b8%8a%e9%85%8d%e7%bd%ae%20Neovim%20%28AstroNvim%29%20%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83%ef%bc%8c%e7%94%a8%e4%ba%8e%e4%bb%93%e9%a2%89%e8%af%ad%e8%a8%80%e5%bc%80%e5%8f%91%e3%80%82%0a%e7%9b%ae%e5%bd%95%20%e7%b3%bb%e7%bb%9f%e8%a6%81%e6%b1%82%20%e5%ae%89%e8%a3%85%e4%bb%93%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f04%2f03%2fcangjie-neovim-dev-setup%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e4%bb%93%e9%a2%89%e8%af%ad%e8%a8%80%20Neovim%20%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae%e6%8c%87%e5%8d%97%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f04%2f03%2fcangjie-neovim-dev-setup%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f04%2f03%2fcangjie-neovim-dev-setup%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
 </div>
 
 
 
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
         </div>
+        
+      </div>
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2026/06/30/matebookpro-box64-harmony-sdk/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
-        <h4 class="title">鸿蒙PC上使用box64运行x86_64鸿蒙SDK编译HAP</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2026/04/03/matebookpro-container-build-neovim/" id="post-next" class="post-nav-link">
-        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">鸿蒙PC融合开发引擎中编译安装Neovim与AstroNvim配置指南</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
     
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2026/04/03/matebookpro-container-build-neovim/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">鸿蒙PC融合开发引擎中编译安装Neovim与AstroNvim配置指南</h4>
+        </a>
+      </div>
+      
+      
+      <div class="waves-block waves-effect next">
+        <a href="/2026/06/30/matebookpro-box64-harmony-sdk/" id="post-next" class="post-nav-link">
+          <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+          <h4 class="title">鸿蒙PC上使用box64运行x86_64鸿蒙SDK编译HAP</h4>
+        </a>
+      </div>
+      
+    </nav>
+    
+  </article>
 
-
-
-
-
-
-
-
-
-
+  
+  
 
 <section class="comments" id="comments">
-    <div id="gitalk-container"></div>
-    <link rel="stylesheet" href="/css/gitalk.css">
-    <script src="/js/gitalk.min.js"></script>
-    <script>
-        var id = location.pathname
-        if (location.pathname.length > 50) {
-          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
-        }
-        const gitalk = new Gitalk({
-          clientID: '1f887c79a8b9b9fbec12',
-          clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
-          repo: 'ystyle.github.io',
-          owner: 'ystyle',
-          admin: ['ystyle'],
-          id: id,      // Ensure uniqueness and length less than 50
-          title: document.title.split('|')[0],
-          distractionFreeMode: false  // Facebook-like distraction free mode
-        })
-
-        gitalk.render('gitalk-container')
-    </script>
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
 </section>
 
 
-
-
-</article>
-
-
-
 </div>
 
-        <footer class="footer">
-    <div class="bottom">
-        <p>
-            
-
-            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
-            <span>东方星痕 &copy; 2015 - 2026</span>
-            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
-            <div style="width:300px;margin:0 auto; padding:20px 0;">
-              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
-                <img src="/img/record-icon.png" style="float:left;"/>
-                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
-                  粤公网安备 44010502002055号
-                </p>
-              </a>
-            </div>
-        </p>
-    </div>
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
 </footer>
 
-    </main>
-    <div class="mask" id="mask"></div>
+  </main>
+
+  
+<div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/&title=《仓颉语言 Neovim 开发环境配置指南》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/&title=《仓颉语言 Neovim 开发环境配置指南》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《仓颉语言 Neovim 开发环境配置指南》 — 东方星痕&url=http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/&via=http://ystyle.top" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f04%2f03%2fcangjie-neovim-dev-setup%2f&title=%e3%80%8a%e4%bb%93%e9%a2%89%e8%af%ad%e8%a8%80%20Neovim%20%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae%e6%8c%87%e5%8d%97%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f04%2f03%2fcangjie-neovim-dev-setup%2f&title=%e3%80%8a%e4%bb%93%e9%a2%89%e8%af%ad%e8%a8%80%20Neovim%20%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae%e6%8c%87%e5%8d%97%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e6%9c%ac%e6%96%87%e6%a1%a3%e4%bb%8b%e7%bb%8d%e5%a6%82%e4%bd%95%e5%9c%a8%20openEuler%20%28aarch64%29%20%e7%b3%bb%e7%bb%9f%e4%b8%8a%e9%85%8d%e7%bd%ae%20Neovim%20%28AstroNvim%29%20%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83%ef%bc%8c%e7%94%a8%e4%ba%8e%e4%bb%93%e9%a2%89%e8%af%ad%e8%a8%80%e5%bc%80%e5%8f%91%e3%80%82%0a%e7%9b%ae%e5%bd%95%20%e7%b3%bb%e7%bb%9f%e8%a6%81%e6%b1%82%20%e5%ae%89%e8%a3%85%e4%bb%93%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f04%2f03%2fcangjie-neovim-dev-setup%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e4%bb%93%e9%a2%89%e8%af%ad%e8%a8%80%20Neovim%20%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae%e6%8c%87%e5%8d%97%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f04%2f03%2fcangjie-neovim-dev-setup%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f04%2f03%2fcangjie-neovim-dev-setup%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
 
 
 <div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNklEQVR42u3a3a6CQAxFYd7/pTm3JsfBtVs0obO4MqgwHyZ1+nMc+Dhfjuvz/Mz/16sztx0yZMh4LOO8PK4Z5MbkOuS+q8/IkCFjHwa5PQnE1+H1Gka+uzwvQ4YMGY3NH79m+vhkyJAhgwTN/oay/zhkyJCxDyPdoqUJLSm6/SgXlyFDxgMZvOr++9df6W/IkCHjUYwzPO5qcHbW8GZVMmTIGM3gAa7DqzUb4uEPGTJkjGaQ4lcn4UwTXR7KkU+GDBmDGJ2bpW0AsqxOyU+GDBnzGLyJWBu/IIE4bX+iiqAMGTLGMXjCWdsspg2AeAREhgwZQxlktIIs994OapwYy5AhYxvGXVMNaVAm734I3zJkyBjN6Hz03jCdJrEffgAZMmRswKg1FNNBitqgBvqTkCFDxiBGrdvZaRXw13wNMmTImM3gjcxaLOeFs7Q5scTIkCFjKCNNMvml+QaxNoJ2pE9UhgwZD2Skhf5aUtopqBV/BxkyZAxi9Ld9nfI9D99o5EKGDBmjGbX0FYW/UnmOP/s3G0QZMmRsw0hLZulwWH8jiAKuDBkyxjGCNmE4ilEbtoi3kjJkyBjKOMMjXW5/OBWNZciQIWM0oxbsvtHUTJPeIkaGDBmPZaSL46V8HqDTgCtDhow9GWnCSbZ9pP2Z/gMsryxDhgwZYRuyU4Zr7V5lyJAhA3w+HZtI09rlo5EhQ8YGjNrYRG3Agl+HfEuGDBk7MNJ9FwmdZJuYhuBO6itDhozHMv4AMlJLqRKSmqoAAAAASUVORK5CYII=" alt="微信分享二维码">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/">
 </div>
 
 
-
-
-    <script src="/js/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
-
-
-</script>
-
-<script src="/js/main.min.js?v=1.6.10"></script>
-
-
+  
 <div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
+  <ul class="search-result" id="search-result"></ul>
 </div>
 <template id="search-tpl">
 <li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.6.10" async></script>
 
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
 
-
-
-
-
-
-
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '东方星痕的博客';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '欢迎回来╮(╯▽╰)╭';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
-        }
-    });
-})();
-</script>
-
-
-
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
 </body>
 </html>

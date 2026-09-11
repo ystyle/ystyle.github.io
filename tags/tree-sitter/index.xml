@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>tree-sitter on 东方星痕</title>
+		<link>https://ystyle.top/tags/tree-sitter/</link>
+		<description>Recent content in tree-sitter on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 03 Apr 2026 21:35:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/tree-sitter/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>鸿蒙PC融合开发引擎中编译安装Neovim与AstroNvim配置指南</title>
+				<link>https://ystyle.top/2026/04/03/matebookpro-container-build-neovim/</link>
+				<pubDate>Fri, 03 Apr 2026 21:35:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/04/03/matebookpro-container-build-neovim/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;本文记录在鸿蒙PC融合开发引擎的容器环境中，因glibc版本限制从源码编译Neovim和tree-sitter的完整过程，并配置AstroNvim作为开发环境。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

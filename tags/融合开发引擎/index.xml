@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>融合开发引擎 on 东方星痕</title>
+		<link>https://ystyle.top/tags/%E8%9E%8D%E5%90%88%E5%BC%80%E5%8F%91%E5%BC%95%E6%93%8E/</link>
+		<description>Recent content in 融合开发引擎 on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 03 Apr 2026 21:30:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/%E8%9E%8D%E5%90%88%E5%BC%80%E5%8F%91%E5%BC%95%E6%93%8E/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式</title>
+				<link>https://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/</link>
+				<pubDate>Fri, 03 Apr 2026 21:30:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;本文深入解析鸿蒙PC融合开发引擎的技术架构，揭示其如何通过StratoVirt虚拟化和OzoneC容器技术实现Linux应用兼容。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;背景&#34;&gt;&lt;a href=&#34;#背景&#34; class=&#34;headerlink&#34; title=&#34;背景&#34;&gt;&lt;/a&gt;背景&lt;/h2&gt;&#xA;&lt;p&gt;鸿蒙PC（HarmonyOS PC）采用了独特的架构设计来实现Linux应用兼容。作为用户，我在使用过程中发现系统提供了一个&amp;quot;融合开发引擎&amp;quot;功能，可以在其中运行openEuler环境。本文将解析这个融合开发引擎的技术架构。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

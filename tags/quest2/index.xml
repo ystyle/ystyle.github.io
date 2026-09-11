@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>quest2 on 东方星痕</title>
+		<link>https://ystyle.top/tags/quest2/</link>
+		<description>Recent content in quest2 on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 05 Nov 2021 19:30:26 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/quest2/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Quest2 使用Netch激活与无线串流的设置</title>
+				<link>https://ystyle.top/2020/12/06/quest2/</link>
+				<pubDate>Sun, 06 Dec 2020 01:30:26 +0800</pubDate>
+				<guid>https://ystyle.top/2020/12/06/quest2/</guid>
+				<description>&lt;h1 id=&#34;Quest2-激活与无线串流的设置&#34;&gt;&lt;a href=&#34;#Quest2-激活与无线串流的设置&#34; class=&#34;headerlink&#34; title=&#34;Quest2 激活与无线串流的设置&#34;&gt;&lt;/a&gt;Quest2 激活与无线串流的设置&lt;/h1&gt;&#xA;&lt;h3 id=&#34;更新后自带Airlink串流，不需要买virtual-desktop了&#34;&gt;&lt;a href=&#34;#更新后自带Airlink串流，不需要买virtual-desktop了&#34; class=&#34;headerlink&#34; title=&#34;更新后自带Airlink串流，不需要买virtual desktop了&#34;&gt;&lt;/a&gt;更新后自带Airlink串流，不需要买virtual desktop了&lt;/h3&gt;&#xA;&lt;h3 id=&#34;连网激活&#34;&gt;&lt;a href=&#34;#连网激活&#34; class=&#34;headerlink&#34; title=&#34;连网激活&#34;&gt;&lt;/a&gt;连网激活&lt;/h3&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;需要可上网，与tcp、udp转发， 激活更新系统时需要udp转发才能正常更新系统, 本方法完美支持，只需要有支持wifi网卡的电脑&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

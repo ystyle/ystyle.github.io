@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>hyper-v on 东方星痕</title>
+		<link>https://ystyle.top/tags/hyper-v/</link>
+		<description>Recent content in hyper-v on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Tue, 23 Jan 2018 09:23:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/hyper-v/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Win10开机启动hyper-v版Docker</title>
+				<link>https://ystyle.top/2018/01/23/Win10-auto-start-hyper-v-version-of-Docker/</link>
+				<pubDate>Tue, 23 Jan 2018 09:23:00 +0800</pubDate>
+				<guid>https://ystyle.top/2018/01/23/Win10-auto-start-hyper-v-version-of-Docker/</guid>
+				<description>&lt;h3 id=&#34;简介&#34;&gt;&lt;a href=&#34;#简介&#34; class=&#34;headerlink&#34; title=&#34;简介&#34;&gt;&lt;/a&gt;简介&lt;/h3&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;当前的Dcoker for windows hyper-v版本不能开机自动启动，自己解决了这问题，记录一下解决方法&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h3 id=&#34;解决步骤&#34;&gt;&lt;a href=&#34;#解决步骤&#34; class=&#34;headerlink&#34; title=&#34;解决步骤&#34;&gt;&lt;/a&gt;解决步骤&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;win + s&lt;/code&gt; 搜索 &lt;code&gt;计划任务&lt;/code&gt; 按回车&lt;/li&gt;&#xA;&lt;li&gt;在&lt;code&gt;任务计划程序库&lt;/code&gt; 右键 &lt;code&gt;创建任务&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;在弹出窗口，名称 填写 &lt;code&gt;开机启动Docker&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;选择 &lt;code&gt;触发器&lt;/code&gt; 页签 &lt;code&gt;新建&lt;/code&gt; 在开始任务选择&lt;code&gt;启动时&lt;/code&gt; 确认&lt;/li&gt;&#xA;&lt;li&gt;在&lt;code&gt; 操作&lt;/code&gt; 页签 &lt;code&gt;新建&lt;/code&gt; 操作选择&lt;code&gt;启动程序&lt;/code&gt; 在程序或脚本填写Docker文件位置&#xA;&lt;ul&gt;&#xA;&lt;li&gt;选择开始菜单的局势方式也行&lt;code&gt;&amp;quot;C:\ProgramData\Microsoft\Windows\Start Menu\Docker for Windows.lnk&amp;quot;&lt;/code&gt; 引号也要复制&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;详细步骤图&#34;&gt;&lt;a href=&#34;#详细步骤图&#34; class=&#34;headerlink&#34; title=&#34;详细步骤图&#34;&gt;&lt;/a&gt;详细步骤图&lt;/h3&gt;&#xA;&#xA;&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://dll.ystyle.top/qiniu//20180123/0946-u.png&#34; alt=&#34;&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://dll.ystyle.top/qiniu//20180123/0947-b.png&#34; alt=&#34;&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://dll.ystyle.top/qiniu//20180123/0947-x.png&#34; alt=&#34;&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://dll.ystyle.top/qiniu//20180123/0948-Y.png&#34; alt=&#34;&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;&lt;/div&gt;&#xA;&lt;/figure&gt;</description>
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>kubernetes on 东方星痕</title>
+		<link>https://ystyle.top/tags/kubernetes/</link>
+		<description>Recent content in kubernetes on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Sat, 11 Mar 2023 21:02:26 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>k3s云上master&#43;内网agent的部署方式</title>
+				<link>https://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/</link>
+				<pubDate>Sat, 11 Mar 2023 21:02:26 +0800</pubDate>
+				<guid>https://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;公网master和内网agent使用&lt;code&gt;wireguard-native&lt;/code&gt;通信， 只要在所有节点上安装了&lt;code&gt;wireguard&lt;/code&gt;模块，k3s会自动处理所有通信流量&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>国内免翻墙预下载kubernetes镜像</title>
+				<link>https://ystyle.top/2018/07/02/pre-download-kubernetes-image/</link>
+				<pubDate>Mon, 02 Jul 2018 15:24:23 +0800</pubDate>
+				<guid>https://ystyle.top/2018/07/02/pre-download-kubernetes-image/</guid>
+				<description>&lt;h3 id=&#34;当前组件版本信息&#34;&gt;&lt;a href=&#34;#当前组件版本信息&#34; class=&#34;headerlink&#34; title=&#34;当前组件版本信息&#34;&gt;&lt;/a&gt;当前组件版本信息&lt;/h3&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th style=&#34;text-align: left&#34;&gt;组件&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th style=&#34;text-align: left&#34;&gt;变量&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th style=&#34;text-align: left&#34;&gt;版本&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td style=&#34;text-align: left&#34;&gt;k8s版本&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td style=&#34;text-align: left&#34;&gt;K8S_VERSION&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td style=&#34;text-align: left&#34;&gt;v1.11.0&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td style=&#34;text-align: left&#34;&gt;ETCD版本&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td style=&#34;text-align: left&#34;&gt;ETCD_VERSION&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td style=&#34;text-align: left&#34;&gt;3.1.12&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td style=&#34;text-align: left&#34;&gt;Dashboard版本&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td style=&#34;text-align: left&#34;&gt;DASHBOARD_VERSION&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td style=&#34;text-align: left&#34;&gt;v1.8.3&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td style=&#34;text-align: left&#34;&gt;flannel版本&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td style=&#34;text-align: left&#34;&gt;FLANNEL_VERSION&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td style=&#34;text-align: left&#34;&gt;v0.10.0-amd64&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td style=&#34;text-align: left&#34;&gt;DNS版本&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td style=&#34;text-align: left&#34;&gt;DNS_VERSION&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td style=&#34;text-align: left&#34;&gt;1.14.8&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td style=&#34;text-align: left&#34;&gt;PAUSE版本&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td style=&#34;text-align: left&#34;&gt;PAUSE_VERSION&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td style=&#34;text-align: left&#34;&gt;3.1&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;需要安装其它版本时，修改这几个变量就好了&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

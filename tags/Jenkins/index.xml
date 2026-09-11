@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Jenkins on 东方星痕</title>
+		<link>https://ystyle.top/tags/Jenkins/</link>
+		<description>Recent content in Jenkins on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Sun, 03 Jul 2016 13:11:13 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/Jenkins/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>docker &#43; jenkins &#43; git &#43; maven自动化构建与部署</title>
+				<link>https://ystyle.top/2016/04/16/docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu/</link>
+				<pubDate>Sat, 16 Apr 2016 18:37:15 +0800</pubDate>
+				<guid>https://ystyle.top/2016/04/16/docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu/</guid>
+				<description>&lt;h2 id=&#34;docker-jenkins-git-maven自动化构建与部署&#34;&gt;&lt;a href=&#34;#docker-jenkins-git-maven自动化构建与部署&#34; class=&#34;headerlink&#34; title=&#34;docker + jenkins + git + maven自动化构建与部署&#34;&gt;&lt;/a&gt;docker + jenkins + git + maven自动化构建与部署&lt;/h2&gt;&#xA;&lt;h3 id=&#34;准备工作&#34;&gt;&lt;a href=&#34;#准备工作&#34; class=&#34;headerlink&#34; title=&#34;准备工作&#34;&gt;&lt;/a&gt;准备工作&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;安装好最新docker&lt;/li&gt;&#xA;&lt;li&gt;docker 分别pull 以下镜像 &lt;code&gt;jenkins:2.0-beta-1&lt;/code&gt; &lt;code&gt;tomcat&lt;/code&gt; &lt;code&gt;mysql&lt;/code&gt;(mysql只用来做测试项目的数据库,有其它数据库服务器的可以不下载)&lt;/li&gt;&#xA;&lt;li&gt;下载&lt;a href=&#34;http://mirrors.cnnic.cn/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;maven&lt;/code&gt;&lt;/a&gt;&#xA; 解压&lt;code&gt;mkdir -p /dockerworkspace/maven &amp;amp;&amp;amp; tar zxf apache-maven-3.3.9-bin.tar.gz -C /dockerworkspace/maven&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;下载&lt;a href=&#34;http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;jdk&lt;/code&gt;&lt;/a&gt;&#xA; &lt;code&gt;tar zxf jdk*.tar.gz -C /dockerworkspace/java/ &amp;amp;&amp;amp; mv /dockerworkspace/java/jdk* /dockerworkspace/java/jdk&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;本教程所有工具和数据目录存放于&lt;code&gt;/dockerworkspace&lt;/code&gt;目录下&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

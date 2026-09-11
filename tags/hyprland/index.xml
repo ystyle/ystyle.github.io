@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>hyprland on 东方星痕</title>
+		<link>https://ystyle.top/tags/hyprland/</link>
+		<description>Recent content in hyprland on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 13 Oct 2023 15:08:26 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/hyprland/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>hypyland实现alt &#43; tab切换到任意工作区的窗口</title>
+				<link>https://ystyle.top/2023/10/13/hyprland-alt-tab-switch-to-any-widnow/</link>
+				<pubDate>Fri, 13 Oct 2023 10:46:26 +0800</pubDate>
+				<guid>https://ystyle.top/2023/10/13/hyprland-alt-tab-switch-to-any-widnow/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;hypyland使用过程中，遇到开了很多工作区和很多窗口时，找指定的窗口会比较麻烦&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h3 id=&#34;依赖&#34;&gt;&lt;a href=&#34;#依赖&#34; class=&#34;headerlink&#34; title=&#34;依赖&#34;&gt;&lt;/a&gt;依赖&lt;/h3&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;一键安装 &lt;code&gt;yay -S jq rofi-lbonn-wayland-git&lt;/code&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;jq&lt;/li&gt;&#xA;&lt;li&gt;rofi&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;脚本&#34;&gt;&lt;a href=&#34;#脚本&#34; class=&#34;headerlink&#34; title=&#34;脚本&#34;&gt;&lt;/a&gt;脚本&lt;/h3&gt;&#xA;&lt;p&gt;把以下脚本存放到&lt;code&gt;~/.config/hypr/scripts/switch_windows&lt;/code&gt;&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

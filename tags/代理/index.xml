@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>代理 on 东方星痕</title>
+		<link>https://ystyle.top/tags/%E4%BB%A3%E7%90%86/</link>
+		<description>Recent content in 代理 on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 26 May 2017 12:58:54 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/%E4%BB%A3%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>tomcat通过ssh代理连接到内网数据库服务器</title>
+				<link>https://ystyle.top/2017/05/26/tomcat-through-ssh-proxy-connected-to-the-internal-network/</link>
+				<pubDate>Fri, 26 May 2017 12:58:54 +0800</pubDate>
+				<guid>https://ystyle.top/2017/05/26/tomcat-through-ssh-proxy-connected-to-the-internal-network/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;项目的测试数据库服务器是在某内网的，&lt;br&gt;&#xA;现在要通过ssh的代理隧道，连接到内网的数据库&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h3 id=&#34;解决方法：&#34;&gt;&lt;a href=&#34;#解决方法：&#34; class=&#34;headerlink&#34; title=&#34;解决方法：&#34;&gt;&lt;/a&gt;解决方法：&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;用xshell连接到ssh服务器&lt;/li&gt;&#xA;&lt;li&gt;打开查看-隧道窗体&lt;/li&gt;&#xA;&lt;li&gt;新建转移规则&#xA;&lt;ul&gt;&#xA;&lt;li&gt;类型： Local(Outgoing)&lt;/li&gt;&#xA;&lt;li&gt;源主机： localhost(自己开发电脑的ip)&lt;/li&gt;&#xA;&lt;li&gt;侦听端口： 1521&lt;/li&gt;&#xA;&lt;li&gt;目标主机： 192.168.101.102(ssh的局域网ip都可以)&lt;/li&gt;&#xA;&lt;li&gt;目标端口： 1521&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;这一步linux可以直接执行：&lt;code&gt;ssh -L 1521:192.168.101.102:1521 sshserverip&lt;/code&gt; -L代表本地转移到远程&lt;/li&gt;&#xA;&lt;li&gt;java的数据库连接配置改&lt;code&gt;jdbc:oracle:thin:@localhost:1521:orcl&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;启动项目连接成功&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+			</item>
+	</channel>
+</rss>

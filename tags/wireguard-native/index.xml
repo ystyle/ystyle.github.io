@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>wireguard-native on 东方星痕</title>
+		<link>https://ystyle.top/tags/wireguard-native/</link>
+		<description>Recent content in wireguard-native on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Sat, 11 Mar 2023 21:02:26 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/wireguard-native/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>k3s云上master&#43;内网agent的部署方式</title>
+				<link>https://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/</link>
+				<pubDate>Sat, 11 Mar 2023 21:02:26 +0800</pubDate>
+				<guid>https://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;公网master和内网agent使用&lt;code&gt;wireguard-native&lt;/code&gt;通信， 只要在所有节点上安装了&lt;code&gt;wireguard&lt;/code&gt;模块，k3s会自动处理所有通信流量&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

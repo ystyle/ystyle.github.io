@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>box64 on 东方星痕</title>
+		<link>https://ystyle.top/tags/box64/</link>
+		<description>Recent content in box64 on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Tue, 30 Jun 2026 22:00:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/box64/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>鸿蒙PC上使用box64运行x86_64鸿蒙SDK编译HAP</title>
+				<link>https://ystyle.top/2026/06/30/matebookpro-box64-harmony-sdk/</link>
+				<pubDate>Tue, 30 Jun 2026 22:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/06/30/matebookpro-box64-harmony-sdk/</guid>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;本文记录在鸿蒙PC融合开发引擎的openEuler aarch64容器中，通过box64模拟x86_64兼容层，运行鸿蒙命令行工具编译HAP的完整过程。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

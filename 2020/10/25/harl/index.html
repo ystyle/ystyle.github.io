@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>harl-鸿蒙应用开发实机热更新工具 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">harl-鸿蒙应用开发实机热更新工具</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">harl-鸿蒙应用开发实机热更新工具</h1>
+    <h5 class="subtitle">
+      <time datetime="2020-10-25T01:30:26&#43;08:00" itemprop="datePublished" class="page-time">2020-10-25</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-0">
+  
+  <a class="post-toc-link" href="#">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text"></span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%be%9d%e8%b5%96">
+    <span class="post-toc-number">1.1.</span> <span class="post-toc-text">依赖</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#USAGE">
+    <span class="post-toc-number">1.2.</span> <span class="post-toc-text">USAGE</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6">
+    <span class="post-toc-number">1.3.</span> <span class="post-toc-text">配置文件</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e6%94%af%e6%8c%81%e6%83%85%e5%86%b5">
+    <span class="post-toc-number">1.4.</span> <span class="post-toc-text">支持情况</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-harl" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">harl-鸿蒙应用开发实机热更新工具</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2020-10-25T01:30:26&#43;08:00" itemprop="datePublished">2020-10-25</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <p><a href="https://gitee.com/ystyle/harl/" target="_blank" rel="noopener">鸿蒙应用开发实机热更新工具</a>
+</p>
+<h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3>
+<ul>
+<li>debug 版本的hi3516镜像(release版本不支持shell)</li>
+<li>nfs v3
+<ul>
+<li><a href="https://openharmony.gitee.com/openharmony/docs/blob/master/kernel/NFS.md" target="_blank" rel="noopener">配置过程</a>
+</li>
+<li><a href="https://openharmony.gitee.com/openharmony/docs/issues/I1YIBO" target="_blank" rel="noopener">配置过程可能遇到的问题</a>
+</li>
+</ul>
+</li>
+<li>serial(串口)</li>
+<li>dev tools (可以从鸿蒙编译目录<code>/out/ipcamera_hi3516dv300/dev_tools/bin</code>复制到nfs挂载目录)
+<ul>
+<li>aa (管理APP启动，关闭)</li>
+<li>bm (安装卸载APP)</li>
+</ul>
+</li>
+</ul>
+<h3 id="USAGE"><a href="#USAGE" class="headerlink" title="USAGE"></a>USAGE</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>➜ harl.exe
+</span></span><span style="display:flex;"><span>NAME:
+</span></span><span style="display:flex;"><span>   harl - Open Harmony OS Dev tools
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>USAGE:
+</span></span><span style="display:flex;"><span>   harl.exe <span style="color:#f92672">[</span>global options<span style="color:#f92672">]</span> command <span style="color:#f92672">[</span>command options<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>arguments...<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>VERSION:
+</span></span><span style="display:flex;"><span>   v0.1.2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>COMMANDS:
+</span></span><span style="display:flex;"><span>   init, i    init .harm.yml
+</span></span><span style="display:flex;"><span>   watch, w   watch and reload app
+</span></span><span style="display:flex;"><span>   install    install hap
+</span></span><span style="display:flex;"><span>   uninstall  uninstall hap
+</span></span><span style="display:flex;"><span>   shell      open a shell
+</span></span><span style="display:flex;"><span>   reboot     reboot
+</span></span><span style="display:flex;"><span>   help, h    Shows a list of commands or help <span style="color:#66d9ef">for</span> one command
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>GLOBAL OPTIONS:
+</span></span><span style="display:flex;"><span>   --help, -h     show help <span style="color:#f92672">(</span>default: false<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>   --version, -v  print the version <span style="color:#f92672">(</span>default: false<span style="color:#f92672">)</span>
+</span></span></code></pre></div><ul>
+<li><a href="https://gitee.com/ystyle/harl/releases" target="_blank" rel="noopener">下载应用</a>
+</li>
+<li><code>cd /your-project-dir</code> 切换到项目目录</li>
+<li><code>harl init</code> 初始化配置文件</li>
+<li><code>harl w</code> 监听项目文件修改
+<ul>
+<li>监听时支持输入命令, 若看不到提示符请在调试日志暂停打印时按回车</li>
+<li>可以用<code>^run [command name]</code>的方式执行command里定义的脚本
+<ul>
+<li>如执行示例配置文件的setup脚本， <code>^run setup</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>目前命令只支持在项目目录执行</li>
+</ul>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3>
+<blockquote>
+<p>.harl.yaml</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">watch</span>: <span style="color:#75715e"># 监听文件修改并自动编译、安装的参数</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">excludes</span>: <span style="color:#75715e"># 排除的文件</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">.gradle</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">.idea</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">gradle</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">entry/build</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">entry/node_modules</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">includes</span>: <span style="color:#75715e"># 监听的文件类型</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">.css</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">.hml</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">.js</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">.hap</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">.json</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">delay</span>: <span style="color:#ae81ff">100</span> <span style="color:#75715e"># 监听频率，单位ms</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">nfs</span>: <span style="color:#75715e"># nfs 配置</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ldir</span>: <span style="color:#ae81ff">H:/bin</span> <span style="color:#75715e"># 本地nfs挂载目录 </span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rdir</span>: <span style="color:#ae81ff">/nfs</span> <span style="color:#75715e"># 远程nfs(开发板)挂载目录</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">shell</span>: <span style="color:#75715e"># 开发板连接参数</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">com</span>: <span style="color:#ae81ff">COM5</span> <span style="color:#75715e"># 串口号</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">command</span>: <span style="color:#75715e"># 定义常用命令, 在shell或watch里可执行</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">setup</span>: <span style="color:#75715e"># 命令执行方式: ^run setup</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">dhclient eth0</span> <span style="color:#75715e"># 命令一行一个, 顺序执行错误不会中断</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">mkdir /nfs</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">mount 192.168.3.12:/nfsshare /nfs nfs</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">kill</span>: <span style="color:#75715e"># 关闭应用</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">cd /nfs</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">./aa terminate -p top.ystyle.ohos.js.testapp</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">start</span>: <span style="color:#75715e"># 启动应用</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">cd /nfs</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">./aa start -p top.ystyle.ohos.js.testapp -n default</span>
+</span></span></code></pre></div><h3 id="支持情况"><a href="#支持情况" class="headerlink" title="支持情况"></a>支持情况</h3>
+<ul>
+<li>只支持windows</li>
+<li>只测试过liteWearable项目改的smartVision</li>
+<li>只在hi3516d上测试过</li>
+</ul>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2020-10-25T01:30:26&#43;08:00" itemprop="dateUpdated">2020-10-25 01:30:26</time>
+          </span><br>
+          本文链接：<a href="/2020/10/25/harl/" target="_blank" rel="external">https://ystyle.top/2020/10/25/harl/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%B8%BF%E8%92%99/">鸿蒙</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/">工具</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2020%2f10%2f25%2fharl%2f&title=%e3%80%8aharl-%e9%b8%bf%e8%92%99%e5%ba%94%e7%94%a8%e5%bc%80%e5%8f%91%e5%ae%9e%e6%9c%ba%e7%83%ad%e6%9b%b4%e6%96%b0%e5%b7%a5%e5%85%b7%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2020%2f10%2f25%2fharl%2f&title=%e3%80%8aharl-%e9%b8%bf%e8%92%99%e5%ba%94%e7%94%a8%e5%bc%80%e5%8f%91%e5%ae%9e%e6%9c%ba%e7%83%ad%e6%9b%b4%e6%96%b0%e5%b7%a5%e5%85%b7%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e9%b8%bf%e8%92%99%e5%ba%94%e7%94%a8%e5%bc%80%e5%8f%91%e5%ae%9e%e6%9c%ba%e7%83%ad%e6%9b%b4%e6%96%b0%e5%b7%a5%e5%85%b7%20%e4%be%9d%e8%b5%96%20debug%20%e7%89%88%e6%9c%ac%e7%9a%84hi3516%e9%95%9c%e5%83%8f%28release%e7%89%88%e6%9c%ac%e4%b8%8d%e6%94%af%e6%8c%81shell%29%20nfs%20v3%20%e9%85%8d%e7%bd%ae%e8%bf%87%e7%a8%8b%20%e9%85%8d%e7%bd%ae%e8%bf%87%e7%a8%8b%e5%8f%af%e8%83%bd%e9%81%87%e5%88%b0%e7%9a%84%e9%97%ae%e9%a2%98%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2020%2f10%2f25%2fharl%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8aharl-%e9%b8%bf%e8%92%99%e5%ba%94%e7%94%a8%e5%bc%80%e5%8f%91%e5%ae%9e%e6%9c%ba%e7%83%ad%e6%9b%b4%e6%96%b0%e5%b7%a5%e5%85%b7%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2020%2f10%2f25%2fharl%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2020%2f10%2f25%2fharl%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2020/09/11/compile-openharmony-indokcer/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">使用Docker快速上手鸿蒙</h4>
+        </a>
+      </div>
+      
+      
+      <div class="waves-block waves-effect next">
+        <a href="/2020/11/07/porting-Lua-to-openharmony/" id="post-next" class="post-nav-link">
+          <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+          <h4 class="title">移植lua到鸿蒙 - 首个移植成功的编程语言</h4>
+        </a>
+      </div>
+      
+    </nav>
+    
+  </article>
+
+  
+  
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2020%2f10%2f25%2fharl%2f&title=%e3%80%8aharl-%e9%b8%bf%e8%92%99%e5%ba%94%e7%94%a8%e5%bc%80%e5%8f%91%e5%ae%9e%e6%9c%ba%e7%83%ad%e6%9b%b4%e6%96%b0%e5%b7%a5%e5%85%b7%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2020%2f10%2f25%2fharl%2f&title=%e3%80%8aharl-%e9%b8%bf%e8%92%99%e5%ba%94%e7%94%a8%e5%bc%80%e5%8f%91%e5%ae%9e%e6%9c%ba%e7%83%ad%e6%9b%b4%e6%96%b0%e5%b7%a5%e5%85%b7%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e9%b8%bf%e8%92%99%e5%ba%94%e7%94%a8%e5%bc%80%e5%8f%91%e5%ae%9e%e6%9c%ba%e7%83%ad%e6%9b%b4%e6%96%b0%e5%b7%a5%e5%85%b7%20%e4%be%9d%e8%b5%96%20debug%20%e7%89%88%e6%9c%ac%e7%9a%84hi3516%e9%95%9c%e5%83%8f%28release%e7%89%88%e6%9c%ac%e4%b8%8d%e6%94%af%e6%8c%81shell%29%20nfs%20v3%20%e9%85%8d%e7%bd%ae%e8%bf%87%e7%a8%8b%20%e9%85%8d%e7%bd%ae%e8%bf%87%e7%a8%8b%e5%8f%af%e8%83%bd%e9%81%87%e5%88%b0%e7%9a%84%e9%97%ae%e9%a2%98%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2020%2f10%2f25%2fharl%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8aharl-%e9%b8%bf%e8%92%99%e5%ba%94%e7%94%a8%e5%bc%80%e5%8f%91%e5%ae%9e%e6%9c%ba%e7%83%ad%e6%9b%b4%e6%96%b0%e5%b7%a5%e5%85%b7%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2020%2f10%2f25%2fharl%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2020%2f10%2f25%2fharl%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2020/10/25/harl/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+</body>
+</html>

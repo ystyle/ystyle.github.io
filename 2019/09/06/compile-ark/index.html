@@ -1,517 +1,556 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cn">
 <head>
-    
-
-    
-
-    
-<!-- Baidu Tongji -->
-<script>var _hmt = _hmt || []</script>
-<script async src="//hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
-<!-- End Baidu Tongji -->
-
-
-
-<!-- Baidu Push -->
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-<!-- End Baidu Push -->
-
-
-    <meta charset="utf-8">
-    
-    
-    
-    <title>用docker编译方舟编译器 | 东方星痕 | 请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="docker,linux,android,ark">
-    <meta name="description" content="准备工作 下载方舟源码: git clone https://code.opensource.huaweicloud.com/HarmonyOS/OpenArkCompiler.git 需要安装docker 生成出来的镜像以后可作为CI里编译方舟应用时的编译环境。现在可用来做getting start的环境，简单编译环境的搭建    dockerfile 把下面的dockerfile放到方舟源码根">
-<meta name="keywords" content="docker,linux,android,ark">
-<meta property="og:type" content="article">
-<meta property="og:title" content="用docker编译方舟编译器">
-<meta property="og:url" content="http://ystyle.top/2019/09/06/compile-ark/index.html">
-<meta property="og:site_name" content="东方星痕">
-<meta property="og:description" content="准备工作 下载方舟源码: git clone https://code.opensource.huaweicloud.com/HarmonyOS/OpenArkCompiler.git 需要安装docker 生成出来的镜像以后可作为CI里编译方舟应用时的编译环境。现在可用来做getting start的环境，简单编译环境的搭建    dockerfile 把下面的dockerfile放到方舟源码根">
-<meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2026-09-11T03:59:55.465Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="用docker编译方舟编译器">
-<meta name="twitter:description" content="准备工作 下载方舟源码: git clone https://code.opensource.huaweicloud.com/HarmonyOS/OpenArkCompiler.git 需要安装docker 生成出来的镜像以后可作为CI里编译方舟应用时的编译环境。现在可用来做getting start的环境，简单编译环境的搭建    dockerfile 把下面的dockerfile放到方舟源码根">
-    
-        <link rel="alternate" type="application/atom+xml" title="东方星痕" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/img/avatar.jpg">
-    <link rel="stylesheet" href="/css/style.css?v=1.6.10">
-    <script>window.lazyScripts=[]</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>用docker编译方舟编译器 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
-    <div id="loading" class="active"></div>
+  
+  <div id="loading" class="active"></div>
 
-    <aside id="menu"  >
+  
+
+<aside id="menu">
   <div class="inner flex-row-vertical">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
+      <i class="icon icon-lg icon-close"></i>
     </a>
     <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.jpg">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
         </a>
         <hgroup class="introduce">
           <h5 class="nickname">YSTYLE</h5>
-          <a href="mailto:lxy5266@live.com" title="lxy5266@live.com" class="mail">lxy5266@live.com</a>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
         </hgroup>
       </div>
     </div>
     <div class="scroll-wrap flex-col">
       <ul class="nav">
         
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                归档
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                标签
-              </a>
-            </li>
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                分类
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/ystyle" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                项目
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="http://www.weibo.com/512308314" target="_blank" >
-                <i class="icon icon-lg icon-weibo"></i>
-                微博
-              </a>
-            </li>
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/atom.xml" target="_blank" >
-                <i class="icon icon-lg icon-rss"></i>
-                订阅
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/friends"  >
-                <i class="icon icon-lg icon-link"></i>
-                友链
-              </a>
-            </li>
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
         
       </ul>
     </div>
   </div>
 </aside>
 
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">用docker编译方舟编译器</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">用docker编译方舟编译器</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
     </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
 </header>
+
 <header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">用docker编译方舟编译器</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2019-09-06T12:22:21.000Z" itemprop="datePublished" class="page-time">
-  2019-09-06
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
-
-            
-        </h5>
-    </div>
+  <div class="container fade-scale in">
+    <h1 class="title">用docker编译方舟编译器</h1>
+    <h5 class="subtitle">
+      <time datetime="2019-09-06T20:22:21&#43;08:00" itemprop="datePublished" class="page-time">2019-09-06</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
+    </h5>
+  </div>
+</header>
 
     
-
-</header>
-
 
 <div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-0">
+  
+  <a class="post-toc-link" href="#">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text"></span>
+  </a>
+  
+  <ol class="post-toc-child">
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#准备工作"><span class="post-toc-number">1.</span> <span class="post-toc-text">准备工作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#dockerfile"><span class="post-toc-number">2.</span> <span class="post-toc-text">dockerfile</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编译"><span class="post-toc-number">3.</span> <span class="post-toc-text">编译</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试"><span class="post-toc-number">4.</span> <span class="post-toc-text">测试</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#交互模式"><span class="post-toc-number">5.</span> <span class="post-toc-text">交互模式</span></a></li></ol>
-        </nav>
-    </aside>
-    
-<article id="post-compile-ark"
-  class="post-article article-type-post fade" itemprop="blogPost">
-
-    <div class="post-card">
-        <h1 class="post-card-title">用docker编译方舟编译器</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2019-09-06 20:22:21" datetime="2019-09-06T12:22:21.000Z"  itemprop="datePublished">2019-09-06</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
-
-
-
-            
-
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
-<li>下载方舟源码: <code>git clone https://code.opensource.huaweicloud.com/HarmonyOS/OpenArkCompiler.git</code></li>
-<li>需要安装docker<blockquote>
-<p>生成出来的镜像以后可作为CI里编译方舟应用时的编译环境。<br>现在可用来做getting start的环境，简单编译环境的搭建</p>
-</blockquote>
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c">
+    <span class="post-toc-number">1.1.</span> <span class="post-toc-text">准备工作</span>
+  </a>
+  
 </li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#dockerfile">
+    <span class="post-toc-number">1.2.</span> <span class="post-toc-text">dockerfile</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e7%bc%96%e8%af%91">
+    <span class="post-toc-number">1.3.</span> <span class="post-toc-text">编译</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e6%b5%8b%e8%af%95">
+    <span class="post-toc-number">1.4.</span> <span class="post-toc-text">测试</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%ba%a4%e4%ba%92%e6%a8%a1%e5%bc%8f">
+    <span class="post-toc-number">1.5.</span> <span class="post-toc-text">交互模式</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
 </ol>
-<h3 id="dockerfile"><a href="#dockerfile" class="headerlink" title="dockerfile"></a>dockerfile</h3><blockquote>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-用docker编译方舟编译器" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">用docker编译方舟编译器</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2019-09-06T20:22:21&#43;08:00" itemprop="datePublished">2019-09-06</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3>
+<ol>
+<li>下载方舟源码: <code>git clone https://code.opensource.huaweicloud.com/HarmonyOS/OpenArkCompiler.git</code></li>
+<li>需要安装docker</li>
+</ol>
+<blockquote>
+<p>生成出来的镜像以后可作为CI里编译方舟应用时的编译环境。<br>
+现在可用来做getting start的环境，简单编译环境的搭建</p>
+</blockquote>
+<h3 id="dockerfile"><a href="#dockerfile" class="headerlink" title="dockerfile"></a>dockerfile</h3>
+<blockquote>
 <p>把下面的dockerfile放到方舟源码根目录下</p>
 </blockquote>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span> AS build-<span class="keyword">env</span></span><br><span class="line"><span class="keyword">MAINTAINER</span> https://www.openarkcompiler.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># Setting up the build environment</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> sed -i <span class="string">'s/archive.ubuntu.com/mirrors.163.com/g'</span> /etc/apt/sources.list &amp;&amp; \</span></span><br><span class="line"><span class="bash">    dpkg --add-architecture i386 &amp;&amp; \</span></span><br><span class="line"><span class="bash">    apt-get -y update &amp;&amp; \</span></span><br><span class="line"><span class="bash">    apt-get -y dist-upgrade &amp;&amp; \</span></span><br><span class="line"><span class="bash">    apt-get -y install openjdk-8-jdk git-core build-essential zlib1g-dev libc6-dev-i386 g++-multilib gcc-multilib linux-libc-dev:i386 &amp;&amp; \</span></span><br><span class="line"><span class="bash">    apt-get -y install gcc-5-aarch64-linux-gnu g++-5-aarch64-linux-gnu unzip tar curl &amp;&amp; \</span></span><br><span class="line"><span class="bash">    apt-get -y install python3-paramiko python-paramiko python-requests &amp;&amp; \</span></span><br><span class="line"><span class="bash">    mkdir -p /tools/ninja /tools/gn</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># 在国内请反注释下行, 因为容器也是个单独的系统，所以别用127.0.0.1</span></span></span><br><span class="line"><span class="bash"><span class="comment">#ENV http_proxy=http://192.168.3.81:1081 \ </span></span></span><br><span class="line"><span class="bash"><span class="comment">#    https_proxy=http://192.168.3.81:1081</span></span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">RUN <span class="built_in">cd</span> /tools &amp;&amp; \</span></span><br><span class="line"><span class="bash">    curl -C - -LO http://releases.llvm.org/8.0.0/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz &amp;&amp; \</span></span><br><span class="line"><span class="bash">    curl -LO https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-linux.zip &amp;&amp; \</span></span><br><span class="line"><span class="bash">    curl -LO http://tools.harmonyos.com/mirrors/gn/1523/linux/gn.1523.tar &amp;&amp; \</span></span><br><span class="line"><span class="bash">    tar Jvxf /tools/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz -C /tools/ &amp;&amp; \</span></span><br><span class="line"><span class="bash">    unzip /tools/ninja-linux.zip -d /tools/ninja/ &amp;&amp; \</span></span><br><span class="line"><span class="bash">    tar xvf /tools/gn.1523.tar &amp;&amp; \</span></span><br><span class="line"><span class="bash">    chmod a+x /tools/gn/gn &amp;&amp; \</span></span><br><span class="line"><span class="bash">    rm /tools/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz /tools/ninja-linux.zip &amp;&amp; \</span></span><br><span class="line"><span class="bash">    rm -rf /var/cache/apt/archives</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># copy source</span></span></span><br><span class="line"><span class="bash">COPY . /OpenArkCompiler</span></span><br><span class="line"><span class="bash">WORKDIR /OpenArkCompiler</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># create symbolic link</span></span></span><br><span class="line"><span class="bash">RUN mkdir -p /OpenArkCompiler/tools /OpenArkCompiler/tools/gn &amp;&amp; \</span></span><br><span class="line"><span class="bash">    ln -s /tools/ninja /OpenArkCompiler/tools/ninja_1.9.0 &amp;&amp; \</span></span><br><span class="line"><span class="bash">    ln -s /tools/gn/gn /OpenArkCompiler/tools/gn/gn &amp;&amp; \</span></span><br><span class="line"><span class="bash">    ln -s /tools/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04 /OpenArkCompiler/tools/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># compile</span></span></span><br><span class="line"><span class="bash">RUN [<span class="string">"/bin/bash"</span>, <span class="string">"-c"</span>, <span class="string">"source build/envsetup.sh &amp;&amp; make &amp;&amp; ls -al "</span>]</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># build final docker image</span></span></span><br><span class="line"><span class="bash">FROM ubuntu:16.04</span></span><br><span class="line"><span class="bash">RUN sed -i <span class="string">'s/archive.ubuntu.com/mirrors.163.com/g'</span> /etc/apt/sources.list &amp;&amp; \</span></span><br><span class="line"><span class="bash">    apt-get -y update &amp;&amp; \</span></span><br><span class="line"><span class="bash">    apt-get install -y openjdk-8-jdk curl vim &amp;&amp; \</span></span><br><span class="line"><span class="bash">    rm -rf /var/cache/apt/archives</span></span><br><span class="line"><span class="bash">COPY --from=build-env /OpenArkCompiler/output /OpenArkCompiler</span></span><br><span class="line"><span class="bash">VOLUME /OpenArkCompiler</span></span><br><span class="line"><span class="bash">ENV PATH=/OpenArkCompiler/bin:<span class="variable">$PATH</span></span></span><br><span class="line"><span class="bash">CMD maple -h</span></span><br></pre></td></tr></table></figure>
-<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><blockquote>
-<p>第一次编译安装依赖会慢点， 之后因为docker缓存每次编译会跳过依赖安装从复制源码开始<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t ark:latest .</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm ark:latest</span><br></pre></td></tr></table></figure>
-<h3 id="交互模式"><a href="#交互模式" class="headerlink" title="交互模式"></a>交互模式</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -ti ark:latest bash</span><br><span class="line">maple -h</span><br></pre></td></tr></table></figure>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">ubuntu:16.04</span> <span style="color:#66d9ef">AS</span> <span style="color:#e6db74">build-env</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">MAINTAINER</span> <span style="color:#e6db74">https://www.openarkcompiler.cn</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># Setting up the build environment</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> sed -i <span style="color:#e6db74">&#39;s/archive.ubuntu.com/mirrors.163.com/g&#39;</span> /etc/apt/sources.list <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    dpkg --add-architecture i386 <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    apt-get -y update <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    apt-get -y dist-upgrade <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    apt-get -y install openjdk-8-jdk git-core build-essential zlib1g-dev libc6-dev-i386 g++-multilib gcc-multilib linux-libc-dev:i386 <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    apt-get -y install gcc-5-aarch64-linux-gnu g++-5-aarch64-linux-gnu unzip tar curl <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    apt-get -y install python3-paramiko python-paramiko python-requests <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    mkdir -p /tools/ninja /tools/gn<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 在国内请反注释下行, 因为容器也是个单独的系统，所以别用127.0.0.1</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#ENV http_proxy=http://192.168.3.81:1081 \ </span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#    https_proxy=http://192.168.3.81:1081</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> cd /tools <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    curl -C - -LO http://releases.llvm.org/8.0.0/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    curl -LO https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-linux.zip <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    curl -LO http://tools.harmonyos.com/mirrors/gn/1523/linux/gn.1523.tar <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    tar Jvxf /tools/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz -C /tools/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    unzip /tools/ninja-linux.zip -d /tools/ninja/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    tar xvf /tools/gn.1523.tar <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    chmod a+x /tools/gn/gn <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    rm /tools/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz /tools/ninja-linux.zip <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    rm -rf /var/cache/apt/archives<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># copy source</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">COPY</span> . /OpenArkCompiler<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">WORKDIR</span> <span style="color:#e6db74">/OpenArkCompiler</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># create symbolic link</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> mkdir -p /OpenArkCompiler/tools /OpenArkCompiler/tools/gn <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    ln -s /tools/ninja /OpenArkCompiler/tools/ninja_1.9.0 <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    ln -s /tools/gn/gn /OpenArkCompiler/tools/gn/gn <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    ln -s /tools/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04 /OpenArkCompiler/tools/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># compile</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;/bin/bash&#34;</span>, <span style="color:#e6db74">&#34;-c&#34;</span>, <span style="color:#e6db74">&#34;source build/envsetup.sh &amp;&amp; make &amp;&amp; ls -al &#34;</span><span style="color:#f92672">]</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># build final docker image</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">ubuntu:16.04</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> sed -i <span style="color:#e6db74">&#39;s/archive.ubuntu.com/mirrors.163.com/g&#39;</span> /etc/apt/sources.list <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    apt-get -y update <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    apt-get install -y openjdk-8-jdk curl vim <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    rm -rf /var/cache/apt/archives<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">COPY</span> --from<span style="color:#f92672">=</span>build-env /OpenArkCompiler/output /OpenArkCompiler<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">VOLUME</span> <span style="color:#e6db74">/OpenArkCompiler</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> PATH<span style="color:#f92672">=</span>/OpenArkCompiler/bin:$PATH<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CMD</span> maple -h<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3>
 <blockquote>
-<p><a href="https://ystyle.top/2019/09/06/ark-test-axample/">方舟编译java代码教程</a></p>
+<p>第一次编译安装依赖会慢点， 之后因为docker缓存每次编译会跳过依赖安装从复制源码开始</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker build -t ark:latest . 
+</span></span></code></pre></div><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run --rm ark:latest
+</span></span></code></pre></div><h3 id="交互模式"><a href="#交互模式" class="headerlink" title="交互模式"></a>交互模式</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run --rm -ti ark:latest bash
+</span></span><span style="display:flex;"><span>maple -h
+</span></span></code></pre></div><blockquote>
+<p><a href="https://ystyle.top/2019/09/06/ark-test-axample/">方舟编译java代码教程</a>
+</p>
 </blockquote>
 
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2019-09-06T20:22:21&#43;08:00" itemprop="dateUpdated">2019-09-06 20:22:21</time>
+          </span><br>
+          本文链接：<a href="/2019/09/06/compile-ark/" target="_blank" rel="external">https://ystyle.top/2019/09/06/compile-ark/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
         </div>
-
-        <blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2026-09-11T03:59:55.465Z" itemprop="dateUpdated">2026-09-11 11:59:55</time>
-</span><br>
-
-
-        
-        本文链接：<a href="/2019/09/06/compile-ark/" target="_blank" rel="external">http://ystyle.top/2019/09/06/compile-ark/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
-        
-    </div>
-    <footer>
-        <a href="http://ystyle.top">
+        <footer>
+          <a href="https://ystyle.top/">
             <img src="/img/avatar.jpg" alt="YSTYLE">
             YSTYLE
-        </a>
-    </footer>
-</blockquote>
+          </a>
+        </footer>
+      </blockquote>
 
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ark/">ark</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
         
 
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ark/">ark</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2019/09/06/compile-ark/&title=《用docker编译方舟编译器》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2019/09/06/compile-ark/&title=《用docker编译方舟编译器》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2019/09/06/compile-ark/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用docker编译方舟编译器》 — 东方星痕&url=http://ystyle.top/2019/09/06/compile-ark/&via=http://ystyle.top" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2019/09/06/compile-ark/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2019%2f09%2f06%2fcompile-ark%2f&title=%e3%80%8a%e7%94%a8docker%e7%bc%96%e8%af%91%e6%96%b9%e8%88%9f%e7%bc%96%e8%af%91%e5%99%a8%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2019%2f09%2f06%2fcompile-ark%2f&title=%e3%80%8a%e7%94%a8docker%e7%bc%96%e8%af%91%e6%96%b9%e8%88%9f%e7%bc%96%e8%af%91%e5%99%a8%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c%20%e4%b8%8b%e8%bd%bd%e6%96%b9%e8%88%9f%e6%ba%90%e7%a0%81%3a%20git%20clone%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2019%2f09%2f06%2fcompile-ark%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e7%94%a8docker%e7%bc%96%e8%af%91%e6%96%b9%e8%88%9f%e7%bc%96%e8%af%91%e5%99%a8%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2019%2f09%2f06%2fcompile-ark%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2019%2f09%2f06%2fcompile-ark%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
 </div>
 
 
 
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
         </div>
+        
+      </div>
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2019/09/06/ark-test-axample/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
-        <h4 class="title">方舟编译器使用测试</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2019/04/05/beat-saber-mod-install/" id="post-next" class="post-nav-link">
-        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Beat Saber mod安装方法</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
     
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2019/04/05/beat-saber-mod-install/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">Beat Saber mod安装方法</h4>
+        </a>
+      </div>
+      
+      
+      <div class="waves-block waves-effect next">
+        <a href="/2019/09/06/ark-test-axample/" id="post-next" class="post-nav-link">
+          <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+          <h4 class="title">方舟编译器使用测试</h4>
+        </a>
+      </div>
+      
+    </nav>
+    
+  </article>
 
-
-
-
-
-
-
-
-
-
+  
+  
 
 <section class="comments" id="comments">
-    <div id="gitalk-container"></div>
-    <link rel="stylesheet" href="/css/gitalk.css">
-    <script src="/js/gitalk.min.js"></script>
-    <script>
-        var id = location.pathname
-        if (location.pathname.length > 50) {
-          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
-        }
-        const gitalk = new Gitalk({
-          clientID: '1f887c79a8b9b9fbec12',
-          clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
-          repo: 'ystyle.github.io',
-          owner: 'ystyle',
-          admin: ['ystyle'],
-          id: id,      // Ensure uniqueness and length less than 50
-          title: document.title.split('|')[0],
-          distractionFreeMode: false  // Facebook-like distraction free mode
-        })
-
-        gitalk.render('gitalk-container')
-    </script>
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
 </section>
 
 
-
-
-</article>
-
-
-
 </div>
 
-        <footer class="footer">
-    <div class="bottom">
-        <p>
-            
-
-            <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
-            <span>东方星痕 &copy; 2015 - 2026</span>
-            <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
-            <div style="width:300px;margin:0 auto; padding:20px 0;">
-              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
-                <img src="/img/record-icon.png" style="float:left;"/>
-                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
-                  粤公网安备 44010502002055号
-                </p>
-              </a>
-            </div>
-        </p>
-    </div>
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
 </footer>
 
-    </main>
-    <div class="mask" id="mask"></div>
+  </main>
+
+  
+<div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ystyle.top/2019/09/06/compile-ark/&title=《用docker编译方舟编译器》 — 东方星痕&pic=http://ystyle.top/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ystyle.top/2019/09/06/compile-ark/&title=《用docker编译方舟编译器》 — 东方星痕&source=请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ystyle.top/2019/09/06/compile-ark/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用docker编译方舟编译器》 — 东方星痕&url=http://ystyle.top/2019/09/06/compile-ark/&via=http://ystyle.top" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ystyle.top/2019/09/06/compile-ark/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2019%2f09%2f06%2fcompile-ark%2f&title=%e3%80%8a%e7%94%a8docker%e7%bc%96%e8%af%91%e6%96%b9%e8%88%9f%e7%bc%96%e8%af%91%e5%99%a8%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2019%2f09%2f06%2fcompile-ark%2f&title=%e3%80%8a%e7%94%a8docker%e7%bc%96%e8%af%91%e6%96%b9%e8%88%9f%e7%bc%96%e8%af%91%e5%99%a8%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c%20%e4%b8%8b%e8%bd%bd%e6%96%b9%e8%88%9f%e6%ba%90%e7%a0%81%3a%20git%20clone%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2019%2f09%2f06%2fcompile-ark%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e7%94%a8docker%e7%bc%96%e8%af%91%e6%96%b9%e8%88%9f%e7%bc%96%e8%af%91%e5%99%a8%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2019%2f09%2f06%2fcompile-ark%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2019%2f09%2f06%2fcompile-ark%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
 
 
 <div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABw0lEQVR42u3aS27DMAwFQN//0u62QGL7UR8iCUarQnGl0YYQKR5HPM5/42rmdf711/v/XTZwcXGnueftqH5TPXC+Pi4ubj/3aoNk6WSdsaPi4uJ+CzcJW3low8XF/SVuNcAlM7i4uJ/Gza8gq1jbczVcXNwJbl6l3Pf3lvouLi7uEPcsjh3XoMLuuLi4LdxqgWOsSFo93sM6uLi4jdz7Ror5AujYc+xDroaLi7uNW90gv/SMlT8GmzBwcXE3cO83u58fa+dKvn8IfLi4uBu41YtI/ryRJD/JheZNFQcXF3czN18i3yY50lTDFi4ubgs3CUPzxZGZ55kHNC4u7lJu3oBVhVZzr6gtDBcXt5G7L3hVY+rDDC4ubgs3eeCsHmMBIk6TcHFx93GTsma5PWIoHSo0ZuHi4rZw83aK6iFnUqY33+Di4jZy89eKaoPFURzRLQwXF3cb9yyOfLO83aqwPi4ubgu3GlzGShvJlaiQ/ODi4rZw54ukeeqSB7LLX3FxcRu5Y4XOaphbcJXBxcX9Em5+h0rC5WAVBxcX9wO41Yxq1dMsLi5uJzcPMaueVfJCCS4ubj93d7kzT58W13dxcXFHuH//x+wLHYN/lgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2019/09/06/compile-ark/">
 </div>
 
 
-
-
-    <script src="/js/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
-
-
-</script>
-
-<script src="/js/main.min.js?v=1.6.10"></script>
-
-
+  
 <div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
+  <ul class="search-result" id="search-result"></ul>
 </div>
 <template id="search-tpl">
 <li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.6.10" async></script>
 
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
 
-
-
-
-
-
-
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '东方星痕的博客';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '欢迎回来╮(╯▽╰)╭';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
-        }
-    });
-})();
-</script>
-
-
-
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
 </body>
 </html>
