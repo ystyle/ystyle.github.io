@@ -11,8 +11,6 @@ toc: true
 slug: matebookpro-binrary-debug-sign
 ---
 
-**欢迎加入开源鸿蒙PC社区：https://harmonypc.csdn.net/**
-**欢迎在PC社区平台申请新建项目：https://atomgit.com/OpenHarmonyPCDeveloper**
 
 ## 摘要
 
