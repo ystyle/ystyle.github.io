@@ -151,6 +151,32 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-JDK环境变量配置脚本" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2015-06-21T21:16:17&#43;08:00" itemprop="datePublished">2015-06-21</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2015/06/21/jdkhuan-jing-bian-liang-pei-zhi-jiao-ben/">JDK环境变量配置脚本</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          复制到jdk安装目录,右键以powershell运行
+#region 强制以管理员权限运行 $currentWi = [Security.Principal.WindowsIdentity]::GetCurrent() $currentWp = [Security.Principal.WindowsPrincipal]$currentWi if( -not $currentWp.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $boundPara = ($MyInvocation.BoundParameters.Keys | foreach{&#39;-{0} {1}&#39; -f $_ ,$MyInvocation.BoundParameters[$_]} ) -join &#39; &#39; $currentFile = $MyInvocation.MyCommand.Definition $fullPara = $boundPara + &#39; &#39; + $args -join &#39; &#39; Start-Process &#34;$psHome\powershell.exe&#34; -ArgumentList &#34;$currentFile $fullPara&#34; -verb runas return } #endregion #region 初始化应用 $currPath = Split-Path -Parent $MyInvocation.MyCommand.Definition cd $currPath $isJDKJavac = Test-Path &#34;./bin/javac.exe&#34; $isJREJava = Test-Path &#34;./bin/java.exe&#34; $path = [environment]::GetEnvironmentvariable(&#34;path&#34;, &#34;Machine&#34;) if($path.Length&gt;0){ $temp = &#34;;&#34; }else{ $temp = &#34;&#34; } #endregion #region 配置环境变量 if($isJDKJavac){ echo &#34;检测到./bin/javac编译器...&#34; echo &#34;设置环境变量：JAVA_HOME = $currPath&#34; [environment]::SetEnvironmentvariable(&#34;JAVA_HOME&#34;, $currPath, &#34;Machine&#34;) echo &#34;设置环境变量：PATH = %JAVA_HOME%\bin;&#34; [environment]::SetEnvironmentvariable(&#34;path&#34;, $path + $temp + &#34;%JAVA_HOME%\bin;&#34;, &#34;Machine&#34;) }elseif($isJREJava){ echo &#34;检测到./jre/java运行环境...&#34; echo &#34;设置环境变量：PATH = $currPath\bin&#34; [environment]::SetEnvironmentvariable(&#34;path&#34;, $path + $temp + $currPath+&#34;\bin;&#34;, &#34;Machine&#34;) }else{ echo &#34;没有检测到JAVA环境&#34; } #endregion pause 复制到文件另存为run.sp1
+
+          <a href="/2015/06/21/jdkhuan-jing-bian-liang-pei-zhi-jiao-ben/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-Ghost-flat主题优化" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2015-06-21T10:51:05&#43;08:00" itemprop="datePublished">2015-06-21</time>

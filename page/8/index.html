@@ -151,6 +151,31 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-docker-jenkins-git-maven自动化构建与部署" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2016-04-16T18:37:15&#43;08:00" itemprop="datePublished">2016-04-16</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2016/04/16/docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu/">docker &#43; jenkins &#43; git &#43; maven自动化构建与部署</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          docker + jenkins + git + maven自动化构建与部署 准备工作 安装好最新docker docker 分别pull 以下镜像 jenkins:2.0-beta-1 tomcat mysql(mysql只用来做测试项目的数据库,有其它数据库服务器的可以不下载) 下载maven 解压mkdir -p /dockerworkspace/maven &amp;&amp; tar zxf apache-maven-3.3.9-bin.tar.gz -C /dockerworkspace/maven 下载jdk tar zxf jdk*.tar.gz -C /dockerworkspace/java/ &amp;&amp; mv /dockerworkspace/java/jdk* /dockerworkspace/java/jdk 本教程所有工具和数据目录存放于/dockerworkspace目录下
+
+          <a href="/2016/04/16/docker-jenkins-git-mavenzi-dong-hua-gou-jian-yu-bu-shu/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GIT/">GIT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jenkins/">Jenkins</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/">Maven</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-VBox虚拟机安装Remix-OS" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2016-03-25T23:59:42&#43;08:00" itemprop="datePublished">2016-03-25</time>
@@ -387,32 +412,6 @@ mkdir/data/docker/redis/ wget https://raw.githubusercontent.com/antirez/redis/3.
         <div class="post-footer">
           
           <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%90%91/">内向</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%A7%E6%A0%BC/">性格</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-Centos-7-docker-启动容器iptables报No-chain-target-match-by-that-name" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2015-09-24T03:53:48&#43;08:00" itemprop="datePublished">2015-09-24</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2015/09/24/centos-7-docker-qi-dong-bao/">Centos 7 docker 启动容器iptables报No chain/target/match by that name</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-          启动一个有nat映射端口的容器时iptables 报No chain/target/match by that name
-docker run -d -p 2181:2181 -p 2888:2888 -p 3888:3888 garland/zookeeper Error response from daemon: Cannot start container 565c06efde6cd4411e2596ef3d726817c58dd777bc5fd13762e0c34d86076b9e: iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 3888 -j DNAT --to-destination 192.168.42.11:3888 ! -i docker0: iptables: No chain/target/match by that name 找了N多网站和官方issue后，还是没找到真正的解决方法，网上到处转载的只是分析了原因，
-
-          <a href="/2015/09/24/centos-7-docker-qi-dong-bao/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
           
         </div>
       </article>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>OpenHarmony on 东方星痕</title>
+		<link>https://ystyle.top/tags/OpenHarmony/</link>
+		<description>Recent content in OpenHarmony on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Tue, 22 Sep 2026 20:30:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/OpenHarmony/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>【鸿蒙PC】二进制签名实战：三类签名、沙箱权限矩阵，以及一张调试证书的坑</title>
+				<link>https://ystyle.top/2026/09/22/matebookpro-binrary-debug-sign/</link>
+				<pubDate>Tue, 22 Sep 2026 20:30:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/09/22/matebookpro-binrary-debug-sign/</guid>
+				<description>鸿蒙 PC 上二进制必须合法签名才能加载运行。本文把官方给出的三类签名规则、应用拉起二进制的沙箱权限矩阵整理成表，再补上我们在 MateBook Pro（OpenHarmony-7.0.0.105）上实测出的五种组合结果——包括一张 DevEco 自动签名调试证书被内核 fs-verity 拒掉的完整证据链，以及换成自申请调试证书后立刻能跑的对照实验。</description>
+			</item>
+	</channel>
+</rss>

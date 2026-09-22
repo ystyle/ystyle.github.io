@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【鸿蒙PC】二进制签名实战：三类签名、沙箱权限矩阵，以及一张调试证书的坑 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">【鸿蒙PC】二进制签名实战：三类签名、沙箱权限矩阵，以及一张调试证书的坑</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">【鸿蒙PC】二进制签名实战：三类签名、沙箱权限矩阵，以及一张调试证书的坑</h1>
+    <h5 class="subtitle">
+      <time datetime="2026-09-22T20:30:00&#43;08:00" itemprop="datePublished" class="page-time">2026-09-22</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E9%B8%BF%E8%92%99PC/">鸿蒙PC</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e6%91%98%e8%a6%81">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">摘要</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#1-%e5%ae%98%e6%96%b9%e8%a7%84%e5%88%99%e4%b8%89%e7%b1%bb%e7%ad%be%e5%90%8d">
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">1. 官方规则：三类签名</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#11-%e4%b8%89%e7%a7%8d%e7%ad%be%e5%90%8d%e7%b1%bb%e5%9e%8b%e7%9a%84%e5%8c%ba%e5%88%ab">
+    <span class="post-toc-number">2.1.</span> <span class="post-toc-text">1.1 三种签名类型的区别</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#12-%e5%ba%94%e7%94%a8%e6%8b%89%e8%b5%b7%e4%ba%8c%e8%bf%9b%e5%88%b6%e5%bc%ba%e5%bc%b1%e6%b2%99%e7%ae%b1%e6%9d%83%e9%99%90%e7%9f%a9%e9%98%b5">
+    <span class="post-toc-number">2.2.</span> <span class="post-toc-text">1.2 应用拉起二进制：强弱沙箱权限矩阵</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#13-%e5%ae%98%e6%96%b9%e9%87%8d%e8%a6%81%e8%af%b4%e6%98%8e%e9%87%8c%e6%9c%80%e8%af%a5%e8%ae%b0%e4%bd%8f%e7%9a%84%e4%b8%80%e6%9d%a1">
+    <span class="post-toc-number">2.3.</span> <span class="post-toc-text">1.3 官方重要说明里最该记住的一条</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#2-%e8%b0%83%e8%af%95%e8%af%81%e4%b9%a6%e7%ad%be%e5%90%8d%e5%ae%8c%e6%95%b4%e6%b5%81%e7%a8%8b">
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">2. 调试证书签名：完整流程</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#21-%e7%ad%be%e5%90%8d%e5%91%bd%e4%bb%a4">
+    <span class="post-toc-number">3.1.</span> <span class="post-toc-text">2.1 签名命令</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#22-%e6%9d%83%e9%99%90%e7%ad%96%e7%95%a5%e6%ae%b5-modulejson">
+    <span class="post-toc-number">3.2.</span> <span class="post-toc-text">2.2 权限策略段 module.json</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#23-%e7%ad%be%e5%90%8d%e5%90%8e%e5%bf%85%e9%a1%bb-chmod-x">
+    <span class="post-toc-number">3.3.</span> <span class="post-toc-text">2.3 签名后必须 chmod +x</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#24-%e9%a1%ba%e5%b8%a6%e4%b8%80%e6%8f%90%e7%ad%be%e5%90%8d%e5%8f%a3%e4%bb%a4%e5%8f%af%e8%83%bd%e6%98%af%e5%af%86%e6%96%87">
+    <span class="post-toc-number">3.4.</span> <span class="post-toc-text">2.4 顺带一提：签名口令可能是密文</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#3-%e6%9c%ac%e6%9c%ba%e5%ae%9e%e6%b5%8b%e4%ba%94%e7%a7%8d%e7%bb%84%e5%90%88%e7%9a%84%e7%bb%93%e6%9e%9c">
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">3. 本机实测：五种组合的结果</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#31-%e7%ac%ac-4-%e7%bb%84%e4%b8%ba%e4%bb%80%e4%b9%88%e5%a4%b1%e8%b4%a5%e5%ba%94%e7%94%a8%e4%be%a7%e6%97%a5%e5%bf%97%e5%8f%aa%e7%bb%99%e4%ba%86%e5%8d%8a%e5%8f%a5%e8%af%9d">
+    <span class="post-toc-number">4.1.</span> <span class="post-toc-text">3.1 第 4 组为什么失败：应用侧日志只给了半句话</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#32-%e7%9c%9f%e6%ad%a3%e7%9a%84%e7%ad%94%e6%a1%88%e5%9c%a8%e5%86%85%e6%a0%b8%e6%97%a5%e5%bf%97%e9%87%8c">
+    <span class="post-toc-number">4.2.</span> <span class="post-toc-text">3.2 真正的答案在内核日志里</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#33-%e6%8d%a2%e6%88%90%e8%87%aa%e5%b7%b1%e7%94%b3%e8%af%b7%e7%9a%84%e8%b0%83%e8%af%95%e8%af%81%e4%b9%a6%e7%ab%8b%e5%88%bb%e5%b0%b1%e8%83%bd%e8%b7%91">
+    <span class="post-toc-number">4.3.</span> <span class="post-toc-text">3.3 换成&quot;自己申请的&quot;调试证书，立刻就能跑</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#34-datalocaltmp-%e9%82%a3%e6%9d%a1%e6%98%af%e5%8f%a6%e4%b8%80%e4%b8%aa%e9%97%ae%e9%a2%98">
+    <span class="post-toc-number">4.4.</span> <span class="post-toc-text">3.4 /data/local/tmp 那条是另一个问题</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#4-%e6%8e%92%e6%9f%a5%e5%b7%a5%e5%85%b7%e7%ae%b1">
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">4. 排查工具箱</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#5-%e8%b8%a9%e5%9d%91%e6%b8%85%e5%8d%95tldr">
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">5. 踩坑清单（TL;DR）</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#6-%e7%bb%93%e8%ae%ba%e4%b8%8e%e5%bb%ba%e8%ae%ae">
+    <span class="post-toc-number">7.</span> <span class="post-toc-text">6. 结论与建议</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e9%99%84%e5%bd%95%e5%91%bd%e4%bb%a4%e9%80%9f%e6%9f%a5">
+    <span class="post-toc-number">8.</span> <span class="post-toc-text">附录：命令速查</span>
+  </a>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-【鸿蒙PC】二进制签名实战：三类签名、沙箱权限矩阵，以及一张调试证书的坑" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">【鸿蒙PC】二进制签名实战：三类签名、沙箱权限矩阵，以及一张调试证书的坑</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2026-09-22T20:30:00&#43;08:00" itemprop="datePublished">2026-09-22</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E9%B8%BF%E8%92%99PC/">鸿蒙PC</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <p><strong>欢迎加入开源鸿蒙PC社区：https://harmonypc.csdn.net/</strong><br>
+<strong>欢迎在PC社区平台申请新建项目：https://atomgit.com/OpenHarmonyPCDeveloper</strong></p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2>
+<p>鸿蒙 PC（2in1）和手机一样，<strong>只允许合法签名的二进制程序加载和运行</strong>——这是为了识别开发者身份、保障程序完整性。但对刚从 Linux 迁移过来的命令行工具来说，这条规则的具体边界并不直观：</p>
+<ul>
+<li>交叉编译出来的 ELF 直接 <code>./tool</code> 会报什么错？错误码背后是谁在拦？</li>
+<li>自签名（adhoc）和调试证书签名到底差在哪？为什么&quot;能跑&quot;和&quot;能声明权限&quot;是两件事？</li>
+<li>签名成功 ≠ 能运行。我们在实测中遇到的现象是：<code>binary-sign-tool</code> 报 <code>write code sign data success</code>，但执行时 <code>Operation not permitted</code>，<strong>内核日志里才看得到真正原因</strong>。</li>
+</ul>
+<p>本文分两部分：先把华为开发者支持给出的<strong>官方规则</strong>（三类签名对比、应用拉起二进制的强弱沙箱权限矩阵、调试证书签名流程）整理成可查的表；再给出我们在 HUAWEI MateBook Pro（<code>HAD-W24 7.0.0.105</code> / <code>OpenHarmony-7.0.0.105</code> / API 26 / 2in1）上的<strong>实测结果</strong>——五种签名组合逐一验证，并用内核 <code>kmsg</code> 日志定位到一张调试证书失败的真实原因。</p>
+<p>一句话结论：<strong>自签名（adhoc）能跑但不能声明权限；调试证书签名能用，但请务必用&quot;自己申请的&quot;那张证书——DevEco 自动签名下发的那张调试证书，在我们的设备上被内核的 PKCS7 校验拒掉了。</strong></p>
+<hr>
+<h2 id="1-官方规则三类签名"><a href="#1-官方规则三类签名" class="headerlink" title="1. 官方规则：三类签名"></a>1. 官方规则：三类签名</h2>
+<h3 id="11-三种签名类型的区别"><a href="#11-三种签名类型的区别" class="headerlink" title="1.1 三种签名类型的区别"></a>1.1 三种签名类型的区别</h3>
+<table>
+	<thead>
+			<tr>
+					<th>类型</th>
+					<th>证书</th>
+					<th>分发范围</th>
+					<th>可执行程序声明权限</th>
+					<th>典型场景</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>二进制证书签名</strong></td>
+					<td>华为颁发的二进制证书（面向华为认证的已知开发者）</td>
+					<td>无限制</td>
+					<td>✅ 支持</td>
+					<td>面向用户大范围分发</td>
+			</tr>
+			<tr>
+					<td><strong>调试证书签名</strong></td>
+					<td>华为颁发的调试证书</td>
+					<td>只能分发到<strong>开发者指定的设备</strong>（<code>.permission</code> 里的 <code>device-ids</code>）；运行时要求设备处于<strong>开发者模式</strong></td>
+					<td>✅ 支持（<strong>共享库不支持</strong>）</td>
+					<td>开发者内部调试</td>
+			</tr>
+			<tr>
+					<td><strong>自签名（adhoc）</strong></td>
+					<td>不需要证书</td>
+					<td>无限制</td>
+					<td>❌ 不支持</td>
+					<td>编译后<strong>仅在本地</strong>加载运行</td>
+			</tr>
+	</tbody>
+</table>
+<p>两条容易被忽略的细节：</p>
+<ol>
+<li><strong>&ldquo;调试证书签名的二进制可执行程序可以声明权限，但共享库不支持声明权限&rdquo;</strong>——如果你签的是 <code>.so</code>，权限段是无效的。</li>
+<li><strong>自签名的二进制（adhoc）权限策略段运行过程不会生效</strong>，也就是说：<code>-selfSign 1</code> 签出来的程序，写多少 <code>requestPermissions</code> 都没用。</li>
+</ol>
+<blockquote>
+<p>个人开发者目前基本拿不到&quot;二进制证书&quot;，所以本文的实践集中在<strong>自签名</strong>与<strong>调试证书签名</strong>两条路上。</p>
+</blockquote>
+<h3 id="12-应用拉起二进制强弱沙箱权限矩阵"><a href="#12-应用拉起二进制强弱沙箱权限矩阵" class="headerlink" title="1.2 应用拉起二进制：强弱沙箱权限矩阵"></a>1.2 应用拉起二进制：强弱沙箱权限矩阵</h3>
+<p>官方的&quot;强/弱沙箱&quot;定义：</p>
+<ul>
+<li><strong>弱沙箱应用</strong>：具备 <code>ohos.permission.CUSTOM_SANDBOX</code></li>
+<li><strong>强沙箱应用</strong>：不具备该权限</li>
+</ul>
+<table>
+	<thead>
+			<tr>
+					<th>应用类型</th>
+					<th><code>ALLOW_EXTERNAL_NATIVE_CODE</code></th>
+					<th>normal bin</th>
+					<th>debug bin</th>
+					<th>adhoc bin</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>弱沙箱</td>
+					<td>无</td>
+					<td>✅</td>
+					<td>✅</td>
+					<td>✅</td>
+			</tr>
+			<tr>
+					<td>弱沙箱</td>
+					<td>有</td>
+					<td>✅</td>
+					<td>✅</td>
+					<td>✅</td>
+			</tr>
+			<tr>
+					<td>强沙箱</td>
+					<td>无</td>
+					<td>❌</td>
+					<td>❌</td>
+					<td>❌</td>
+			</tr>
+			<tr>
+					<td>强沙箱</td>
+					<td>有</td>
+					<td>✅</td>
+					<td>✅</td>
+					<td>❌</td>
+			</tr>
+	</tbody>
+</table>
+<p>读法：<strong>弱沙箱应用怎样都能拉起独立二进制；强沙箱应用必须申请 <code>ALLOW_EXTERNAL_NATIVE_CODE</code>，而且即便如此也拉不起 adhoc bin。</strong></p>
+<h3 id="13-官方重要说明里最该记住的一条"><a href="#13-官方重要说明里最该记住的一条" class="headerlink" title="1.3 官方重要说明里最该记住的一条"></a>1.3 官方重要说明里最该记住的一条</h3>
+<blockquote>
+<p>使用 DevEco Studio 的 clang 编译的二进制属于<strong>自签名场景</strong>，二进制类型是 <code>adhoc bin</code> 而不是 <code>debug bin</code><br>
+（<code>debug bin</code> 必须使用调试证书签名）。如果二进制类型是 <code>adhoc bin</code>，需要申请弱沙箱权限<br>
+<code>ohos.permission.CUSTOM_SANDBOX</code>，该权限为 <strong>ACL 权限</strong>。</p>
+</blockquote>
+<p>也就是说：<strong>交叉编译出来的产物默认是 adhoc</strong>。要让它变成 <code>debug bin</code>（可声明权限、受限分发），必须补一步调试证书签名。</p>
+<hr>
+<h2 id="2-调试证书签名完整流程"><a href="#2-调试证书签名完整流程" class="headerlink" title="2. 调试证书签名：完整流程"></a>2. 调试证书签名：完整流程</h2>
+<h3 id="21-签名命令"><a href="#21-签名命令" class="headerlink" title="2.1 签名命令"></a>2.1 签名命令</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./binary-sign-tool sign <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -keyAlias <span style="color:#0a3069">&#34;密钥别名（证书签名时必填）&#34;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -signAlg <span style="color:#0a3069">&#34;SHA256withECDSA 或 SHA384withECDSA（必填）&#34;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -appCertFile <span style="color:#0a3069">&#34;开发者申请的调试证书（必填）&#34;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -inFile <span style="color:#0a3069">&#34;待签名的二进制程序文件（必填）&#34;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -keystoreFile <span style="color:#0a3069">&#34;密钥库文件（必填）&#34;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -outFile <span style="color:#0a3069">&#34;签名后输出的二进制程序文件名（必填）&#34;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -keyPwd <span style="color:#0a3069">&#34;密钥口令（可选）&#34;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -keystorePwd <span style="color:#0a3069">&#34;密钥库口令（可选）&#34;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -moduleFile <span style="color:#0a3069">&#34;权限声明等信息（json 文件）&#34;</span>
+</span></span></code></pre></div><p>实测可用的完整命令（鸿蒙 PC 本机，用 SDK 自带的 <strong>aarch64 原生</strong> <code>binary-sign-tool</code>）：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#953800">SDK</span><span style="color:#0550ae">=</span>~/.local/opt/deveco_tools/sdk/default/openharmony
+</span></span><span style="display:flex;"><span><span style="color:#0a3069">&#34;</span><span style="color:#953800">$SDK</span><span style="color:#0a3069">/toolchains/lib/binary-sign-tool&#34;</span> sign <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -keyAlias ystyle -signAlg SHA256withECDSA <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -appCertFile  ~/Documents/通用测试证书.cer <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -keystoreFile ~/Documents/ystyle-test.p12 <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -keyPwd <span style="color:#0a3069">&#34;</span><span style="color:#953800">$SIGN_PWD</span><span style="color:#0a3069">&#34;</span> -keystorePwd <span style="color:#0a3069">&#34;</span><span style="color:#953800">$SIGN_PWD</span><span style="color:#0a3069">&#34;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -inFile tool.unsigned -outFile tool -moduleFile module.json
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>chmod <span style="color:#0550ae">755</span> tool     <span style="color:#57606a"># ← 见 2.3，必须</span>
+</span></span></code></pre></div><p>签完可以用 <code>display-sign</code> 自检：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#0a3069">&#34;</span><span style="color:#953800">$SDK</span><span style="color:#0a3069">/toolchains/lib/binary-sign-tool&#34;</span> display-sign -inFile tool
+</span></span></code></pre></div><p>输出里会打印 <code>.permission</code> 段内容、证书链（叶子 → 中间 CA → 根 CA）与有效期。</p>
+<h3 id="22-权限策略段-modulejson"><a href="#22-权限策略段-modulejson" class="headerlink" title="2.2 权限策略段 module.json"></a>2.2 权限策略段 <code>module.json</code></h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json5" data-lang="json5"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#57606a">// 二进制需要的权限写这里；调试证书签名的二进制可以声明权限
+</span></span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;requestPermissions&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;ohos.permission.kernel.LOAD_INDEPENDENT_LIBRARY&#34;</span> <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;ohos.permission.INHERIT_PARENT_PERMISSION&#34;</span> <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;ohos.permission.kernel.EXEMPT_ANONYMOUS_EXECUTABLE_MEMORY&#34;</span> <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;ohos.permission.kernel.IGNORE_LIBRARY_VALIDATION&#34;</span> <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;ohos.permission.kernel.ALLOW_WRITABLE_CODE_MEMORY&#34;</span> <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;debug-info&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;device-id-type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;udid&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a">// 调试证书签名的二进制为控制传播范围，必须写入运行它的设备 udid
+</span></span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;device-ids&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;&lt;你的设备 UDID&gt;&#34;</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre></div><p>设备 UDID 取法：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hdc shell bm get --udid
+</span></span></code></pre></div><blockquote>
+<p><strong>实测确认</strong>：<code>device-ids</code> 这一项缺失或为空时，程序会在运行时被直接拒掉，<br>
+日志是 <code>[VerityHdcStatusAndDeviceId]:[FAILED] verity deviceId for debug signer: udid not in module.json</code>。<br>
+填对了则是 <code>[SUCCESS] debug cert with valid udid</code>——<strong>这一步过了，后面的失败就跟 UDID 无关了</strong>。</p>
+</blockquote>
+<h3 id="23-签名后必须-chmod-x"><a href="#23-签名后必须-chmod-x" class="headerlink" title="2.3 签名后必须 chmod +x"></a>2.3 签名后必须 <code>chmod +x</code></h3>
+<p><code>binary-sign-tool</code> 是<strong>往预先存在的 <code>outFile</code> 里写</strong>，文件权限位沿用旧文件。如果 <code>outFile</code> 是<br>
+<code>cp</code> 出来的（源文件本来没有执行位），签完仍然不可执行，运行时报的是 <code>Permission denied</code><br>
+——很容易被误判成&quot;签名没用&quot;。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod <span style="color:#0550ae">755</span> tool <span style="color:#0550ae">&amp;&amp;</span> ./tool --version
+</span></span></code></pre></div><h3 id="24-顺带一提签名口令可能是密文"><a href="#24-顺带一提签名口令可能是密文" class="headerlink" title="2.4 顺带一提：签名口令可能是密文"></a>2.4 顺带一提：签名口令可能是密文</h3>
+<p>DevEco 自动签名写进 <code>build-profile.json5</code> 的 <code>storePassword</code> / <code>keyPassword</code> 并不是明文，而是一串<br>
+<code>00000019...</code> 形式的加密 blob（hvigor 的 <code>DecipherUtil</code> 加密）。它的结构是：</p>
+<pre tabindex="0"><code>blob = [4B BE e][IV][密文][16B GCM tag]，其中 IV 长度 = len(blob) - 4 - e
+根密钥 = AES-GCM( PBKDF2-SHA256(utf8(xor(fd0,fd1,fd2,component)), salt=material/ac, 10000, 16), material/ce )
+口令   = AES-GCM(根密钥, blob)
+</code></pre><p><code>material/</code> 目录就在 p12 旁边（<code>fd/</code> 三个文件 + <code>ac/</code> 盐 + <code>ce/</code> 加密的根密钥）。<br>
+如果只是想在脚本里复用 DevEco 的签名物料，按这个流程解一下即可；不打算复用的话，直接用自己申请的<br>
+调试证书更省事。</p>
+<hr>
+<h2 id="3-本机实测五种组合的结果"><a href="#3-本机实测五种组合的结果" class="headerlink" title="3. 本机实测：五种组合的结果"></a>3. 本机实测：五种组合的结果</h2>
+<p>测试对象统一是一份 <code>eza</code>（aarch64 musl 动态 ELF，PIE），设备是 HUAWEI MateBook Pro<br>
+（<code>HAD-W24 7.0.0.105(SP10C00E100R13P5)</code> / <code>OpenHarmony-7.0.0.105</code> / API 26 / 2in1），<br>
+开发者选项已开启，调试 HAP 可正常安装。文件都放在家目录（<code>/storage/Users/currentUser</code>，<br>
+注意这是 <strong>hmdfs</strong>）。签名工具为 SDK 自带的 aarch64 原生版（本机 JVM 起不来，<br>
+<code>Failed to mark memory page as executable</code>，官方 <code>hap-sign-tool.jar</code> 用不了）。</p>
+<table>
+	<thead>
+			<tr>
+					<th>#</th>
+					<th>签名方式</th>
+					<th><code>.permission</code> 段</th>
+					<th>结果</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>1</td>
+					<td><code>-selfSign 1</code>（adhoc，自签名）</td>
+					<td>无</td>
+					<td>✅ <strong>可执行</strong>（补 <code>chmod +x</code> 后）</td>
+			</tr>
+			<tr>
+					<td>2</td>
+					<td>二进制证书（叶子 <code>…,DevID</code>）</td>
+					<td>无</td>
+					<td>✅ <strong>可执行</strong></td>
+			</tr>
+			<tr>
+					<td>3</td>
+					<td>调试证书（<strong>DevEco 自动签名</strong>下发，叶子 <code>…,Development</code>）</td>
+					<td>无</td>
+					<td>❌ <code>udid not in module.json</code></td>
+			</tr>
+			<tr>
+					<td>4</td>
+					<td>同上 + <code>-moduleFile</code>（填了本机 UDID）</td>
+					<td>有</td>
+					<td>❌ <code>Operation not permitted</code>（EPERM）</td>
+			</tr>
+			<tr>
+					<td>5</td>
+					<td>调试证书（<strong>自己申请</strong>的通用测试证书，叶子 <code>…,Development</code>） + <code>-moduleFile</code></td>
+					<td>有</td>
+					<td>✅ <strong>可执行</strong></td>
+			</tr>
+			<tr>
+					<td>—</td>
+					<td>第 4 组放到 <code>/data/local/tmp</code></td>
+					<td>有</td>
+					<td>❌ <code>Permission denied</code>（另一条原因，见 3.3）</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="31-第-4-组为什么失败应用侧日志只给了半句话"><a href="#31-第-4-组为什么失败应用侧日志只给了半句话" class="headerlink" title="3.1 第 4 组为什么失败：应用侧日志只给了半句话"></a>3.1 第 4 组为什么失败：应用侧日志只给了半句话</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>I code_protect/BSS: [VerityHdcStatusAndDeviceId]:[SUCCESS] debug cert with valid udid
+</span></span><span style="display:flex;"><span>D code_protect/CODE_SIGN: [EnforceCodeSignForFile]:Start to enforce elf file, path = .../eza.signed
+</span></span><span style="display:flex;"><span>E code_protect/CODE_SIGN: [EnableCodeSignForFile]:Enable fs-verity failed, errno = &lt;129, Key was rejected by service&gt;
+</span></span><span style="display:flex;"><span>E code_protect/BSS: [BinSec][svc:certmgr][EnforceCodeSign]:enforce codeSign failed. ret: -768
+</span></span></code></pre></div><p><code>errno = 129</code> 是 <code>EKEYREJECTED</code>——&ldquo;key was rejected&rdquo;。<strong>光看这里会以为是自己签名姿势不对，或者文件系统不支持。</strong></p>
+<h3 id="32-真正的答案在内核日志里"><a href="#32-真正的答案在内核日志里" class="headerlink" title="3.2 真正的答案在内核日志里"></a>3.2 真正的答案在内核日志里</h3>
+<p>打开内核日志（<code>hilog -k on</code> + 持久化 kmsg）后再复现，<code>kmsg</code> 给出了完整链路：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&lt;1&gt; [fs_security_verity:1549] fsverity: fsverity_ioctl_enable_code_sign begin, file:eza.signed, vn_index=1701822
+</span></span><span style="display:flex;"><span>&lt;2&gt; [hmcrypt_rnd:1169] fsverity certchain, failed to verify signature
+</span></span><span style="display:flex;"><span>&lt;2&gt; [hmcrypt_rnd:1171] fsverity certchain, FILE: , LINE: 0, FUNC: PKCS7_signatureVerify, DATA: , FLAGS: 0
+</span></span><span style="display:flex;"><span>&lt;2&gt; [fs_security_verity:932]  FS Verity: verify signature failed, err=137
+</span></span><span style="display:flex;"><span>&lt;2&gt; [fs_security_verity:1194] FS verity: error while initializing fsverity info, err=E_HM_KEYREJECTED
+</span></span><span style="display:flex;"><span>&lt;2&gt; [fs_security_verity:1572] fsverity: fsverity_ioctl_enable_code_sign failed, err=E_HM_KEYREJECTED, file:eza.signed
+</span></span></code></pre></div><p><strong>内核在 fs-verity 的 code-sign 流程里验 PKCS7 签名链失败</strong>（<code>PKCS7_signatureVerify</code>），<br>
+于是 <code>E_HM_KEYREJECTED</code>，<code>code_protect</code> 判定强制验签失败，<code>exec</code> 返回 EPERM。</p>
+<p>也就是说：<strong>这不是文件系统问题，也不是路径/权限问题，而是这张证书签出来的签名内核不认。</strong></p>
+<h3 id="33-换成自己申请的调试证书立刻就能跑"><a href="#33-换成自己申请的调试证书立刻就能跑" class="headerlink" title="3.3 换成&#34;自己申请的&#34;调试证书，立刻就能跑"></a>3.3 换成&quot;自己申请的&quot;调试证书，立刻就能跑</h3>
+<p>同样一台机器、同一个 <code>module.json</code>、同一份 <code>eza</code>，只把证书换成<strong>自己申请的通用测试证书</strong><br>
+（叶子同样是 <code>…,Development</code>，签发者同样是 Huawei CBG Developer Relations CA G2），<br>
+结果：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ ~/eza-signed --version
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">eza - A modern, maintained replacement for ls
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">v0.23.4 [-git]
+</span></span></span></code></pre></div><p>两张证书的链结构、扩展（<code>keyUsage</code> / <code>extendedKeyUsage=codeSigning</code> / <code>basicConstraints</code> 等）<br>
+完全一致，差别只在叶子证书本身。<strong>所以：请用自己申请的调试证书——DevEco 自动签名那张，至少在我们的设备上过不了内核这一关。</strong>（此问题已提工单，等官方确认根因。）</p>
+<h3 id="34-datalocaltmp-那条是另一个问题"><a href="#34-datalocaltmp-那条是另一个问题" class="headerlink" title="3.4 /data/local/tmp 那条是另一个问题"></a>3.4 <code>/data/local/tmp</code> 那条是另一个问题</h3>
+<p>同一份签名产物放到 <code>/data/local/tmp</code>（<code>/data</code> 是 hmfs，与家目录的 hmdfs 不同），<br>
+报的是 <code>Permission denied</code>：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>E code_protect/BSS: [BinSec][svc:kmgr][Read]:read failed. ret: -1, msg: Permission denied
+</span></span></code></pre></div><p>文件属性是 <code>-rwxr-xr-x shell shell u:object_r:data_local_tmp:s0</code>，把目录权限从 <code>0771</code> 放宽到<br>
+<code>0755</code> 也无效——<code>code_protect</code> 的 BSS 读不了这个 SELinux label。<strong>结论：能跑的位置是普通目录<br>
+（家目录即可），<code>/data/local/tmp</code> 反而跑不了。</strong> 这一点和 Android/OpenHarmony 的传统印象是相反的。</p>
+<hr>
+<h2 id="4-排查工具箱"><a href="#4-排查工具箱" class="headerlink" title="4. 排查工具箱"></a>4. 排查工具箱</h2>
+<p>出问题时的完整取证流程（也是给华为提工单时他们要的那套）：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hdc shell
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">cd</span> data/log/hilog
+</span></span><span style="display:flex;"><span>hilog -w clear          <span style="color:#57606a"># 清历史，缩小日志体积</span>
+</span></span><span style="display:flex;"><span>hilog -b D              <span style="color:#57606a"># 打开 debug 级别（否则看不到 code_protect 的判定细节）</span>
+</span></span><span style="display:flex;"><span>hilog -k on             <span style="color:#57606a"># 让 hilogd 存 kmsg —— 关键！</span>
+</span></span><span style="display:flex;"><span>hilog -w start -t kmsg  <span style="color:#57606a"># kmsg 持久化任务</span>
+</span></span><span style="display:flex;"><span>hilog -w start -j <span style="color:#0550ae">20</span> -f hilog_full -l 32M -n <span style="color:#0550ae">40</span>   <span style="color:#57606a"># app/core 持久化任务</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">exit</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 复现问题……</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>hdc shell <span style="color:#0a3069">&#34;hilog -w stop&#34;</span>
+</span></span><span style="display:flex;"><span>hdc shell <span style="color:#0a3069">&#34;cd /data/log &amp;&amp; tar -czf /data/local/tmp/hilog-export.tar.gz hilog&#34;</span>
+</span></span><span style="display:flex;"><span>hdc file recv /data/local/tmp/hilog-export.tar.gz .
+</span></span></code></pre></div><p>几个实测踩到的点：</p>
+<table>
+	<thead>
+			<tr>
+					<th>坑</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>hdc file recv</code> 不支持整目录</td>
+					<td>会报 <code>[Fail]Error opening file</code>，改成设备侧 <code>tar</code> 再 recv 单文件</td>
+			</tr>
+			<tr>
+					<td><strong>必须带 <code>hilog_dict</code></strong></td>
+					<td><code>/data/log/hilog/hilog_dict.&lt;日期&gt;.zip</code> 是解析持久化日志的字典；顺带 <code>.dict_info.json</code>、<code>.processmap</code> 一起给，否则对方解不开</td>
+			</tr>
+			<tr>
+					<td>app/core 持久化文件是容器格式</td>
+					<td><code>hilog_full.*.gz</code> 解压出来不是文本，需要字典；<code>hilog_kmsg.*.gz</code> 才是纯文本</td>
+			</tr>
+			<tr>
+					<td>现场排查直接看缓冲区</td>
+					<td><code>hdc shell &quot;hilog -x | grep -E 'code_protect|CODE_SIGN'&quot;</code>，不用等持久化</td>
+			</tr>
+			<tr>
+					<td>导出后记得恢复</td>
+					<td><code>hilog -b I</code>（否则一直刷 debug 日志）、<code>hilog -w stop</code></td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="5-踩坑清单tldr"><a href="#5-踩坑清单tldr" class="headerlink" title="5. 踩坑清单（TL;DR）"></a>5. 踩坑清单（TL;DR）</h2>
+<ol>
+<li><strong>签名 ≠ 能跑</strong>：<code>write code sign data success</code> 只代表段写进去了，能不能加载由 <code>code_protect</code> + 内核判定，证据在 hilog/kmsg 里。</li>
+<li><strong><code>errno 129 / E_HM_KEYREJECTED</code> 别往文件系统上想</strong>，先看 kmsg 里的 <code>fsverity certchain</code> 一行——大概率是证书链/签名问题。</li>
+<li><strong>调试证书用自己申请的那张</strong>；DevEco 自动签名下发的那张，实测会被内核拒。</li>
+<li><strong><code>.permission</code> 段（含 <code>device-ids</code>）是调试证书签名的必填项</strong>，缺了就是 <code>udid not in module.json</code>。</li>
+<li><strong>签名后 <code>chmod +x</code></strong>：工具沿用 <code>outFile</code> 的旧权限位，不会自动加执行位。</li>
+<li><strong>adhoc 不能声明权限</strong>：<code>-selfSign 1</code> 签出来的程序写多少权限都不生效；要权限就得走调试证书。</li>
+<li><strong>交叉编译默认是 adhoc bin</strong>：要在应用里被拉起，弱沙箱应用没问题，强沙箱应用需要 <code>ALLOW_EXTERNAL_NATIVE_CODE</code>（且仍不支持 adhoc）。</li>
+<li>顺带一个和签名无关但很坑的点：鸿蒙 PC 上<strong>没有 <code>/bin/bash</code></strong>（bash 装在 <code>/data/service/hnp/bin/bash</code>），脚本 shebang 请写 <code>#!/usr/bin/env bash</code>，否则报 <code>bad interpreter</code>。</li>
+</ol>
+<hr>
+<h2 id="6-结论与建议"><a href="#6-结论与建议" class="headerlink" title="6. 结论与建议"></a>6. 结论与建议</h2>
+<table>
+	<thead>
+			<tr>
+					<th>场景</th>
+					<th>推荐做法</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>本机开发自用、不需要声明任何权限</td>
+					<td><code>binary-sign-tool sign -selfSign 1</code> + <code>chmod 755</code>，最省事</td>
+			</tr>
+			<tr>
+					<td>需要声明权限（JIT、继承父权限、独立加载库等）</td>
+					<td><strong>自己申请调试证书</strong>签名 + <code>.permission</code> 段写设备 UDID</td>
+			</tr>
+			<tr>
+					<td>要分发到大量设备/用户</td>
+					<td>需要二进制证书（面向华为认证开发者），个人开发者目前不适用</td>
+			</tr>
+			<tr>
+					<td>要在应用里拉起</td>
+					<td>注意第 1.2 节的沙箱权限矩阵；长期方案是 HNP 打包安装</td>
+			</tr>
+	</tbody>
+</table>
+<p>留给后续的两个问题：</p>
+<ol>
+<li>DevEco 自动签名下发的调试证书为什么过不了内核 <code>PKCS7_signatureVerify</code>？（已提工单）</li>
+<li><code>/data/local/tmp</code> 因为 SELinux label 不能被 <code>code_protect</code> 读取，官方推荐的&quot;临时二进制存放位置&quot;到底是哪？</li>
+</ol>
+<hr>
+<h2 id="附录命令速查"><a href="#附录命令速查" class="headerlink" title="附录：命令速查"></a>附录：命令速查</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 取设备 UDID</span>
+</span></span><span style="display:flex;"><span>hdc shell bm get --udid
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 自签名（adhoc）</span>
+</span></span><span style="display:flex;"><span>binary-sign-tool sign -inFile tool -outFile tool.signed -selfSign <span style="color:#0550ae">1</span>
+</span></span><span style="display:flex;"><span>chmod <span style="color:#0550ae">755</span> tool.signed
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 调试证书签名</span>
+</span></span><span style="display:flex;"><span>binary-sign-tool sign -keyAlias &lt;alias&gt; -signAlg SHA256withECDSA <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -appCertFile &lt;cert.cer&gt; -keystoreFile &lt;key.p12&gt; <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -keyPwd &lt;pwd&gt; -keystorePwd &lt;pwd&gt; <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -inFile tool -outFile tool.signed -moduleFile module.json
+</span></span><span style="display:flex;"><span>chmod <span style="color:#0550ae">755</span> tool.signed
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 查看签名信息（权限段 + 证书链）</span>
+</span></span><span style="display:flex;"><span>binary-sign-tool display-sign -inFile tool.signed
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 实时看验签判定</span>
+</span></span><span style="display:flex;"><span>hdc shell <span style="color:#0a3069">&#34;hilog -x | grep -E &#39;code_protect|CODE_SIGN&#39;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 打开内核日志后再复现（关键证据在这里）</span>
+</span></span><span style="display:flex;"><span>hdc shell <span style="color:#0a3069">&#34;hilog -k on; hilog -w start -t kmsg&#34;</span>
+</span></span><span style="display:flex;"><span>hdc shell <span style="color:#0a3069">&#34;hilog -t kmsg&#34;</span> <span style="color:#1f2328">|</span> grep -E <span style="color:#0a3069">&#34;fsverity|hmcrypt&#34;</span>
+</span></span></code></pre></div><blockquote>
+<p>说明：本文的官方规则部分整理自华为开发者支持在工单中的回复与《调试证书签名》文档；<br>
+实测部分全部来自 HUAWEI MateBook Pro（<code>OpenHarmony-7.0.0.105</code>，API 26，2in1）上的真实操作，<br>
+日志均为原文摘录（已隐去 UDID 与口令）。</p>
+</blockquote>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2026-09-22T20:30:00&#43;08:00" itemprop="dateUpdated">2026-09-22 20:30:00</time>
+          </span><br>
+          本文链接：<a href="/2026/09/22/matebookpro-binrary-debug-sign/" target="_blank" rel="external">https://ystyle.top/2026/09/22/matebookpro-binrary-debug-sign/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HarmonyOS/">HarmonyOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenHarmony/">OpenHarmony</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%B8%BF%E8%92%99PC/">鸿蒙PC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%AD%BE%E5%90%8D/">二进制签名</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HNP/">HNP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/code_sign/">code_sign</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f09%2f22%2fmatebookpro-binrary-debug-sign%2f&title=%e3%80%8a%e3%80%90%e9%b8%bf%e8%92%99PC%e3%80%91%e4%ba%8c%e8%bf%9b%e5%88%b6%e7%ad%be%e5%90%8d%e5%ae%9e%e6%88%98%ef%bc%9a%e4%b8%89%e7%b1%bb%e7%ad%be%e5%90%8d%e3%80%81%e6%b2%99%e7%ae%b1%e6%9d%83%e9%99%90%e7%9f%a9%e9%98%b5%ef%bc%8c%e4%bb%a5%e5%8f%8a%e4%b8%80%e5%bc%a0%e8%b0%83%e8%af%95%e8%af%81%e4%b9%a6%e7%9a%84%e5%9d%91%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f09%2f22%2fmatebookpro-binrary-debug-sign%2f&title=%e3%80%8a%e3%80%90%e9%b8%bf%e8%92%99PC%e3%80%91%e4%ba%8c%e8%bf%9b%e5%88%b6%e7%ad%be%e5%90%8d%e5%ae%9e%e6%88%98%ef%bc%9a%e4%b8%89%e7%b1%bb%e7%ad%be%e5%90%8d%e3%80%81%e6%b2%99%e7%ae%b1%e6%9d%83%e9%99%90%e7%9f%a9%e9%98%b5%ef%bc%8c%e4%bb%a5%e5%8f%8a%e4%b8%80%e5%bc%a0%e8%b0%83%e8%af%95%e8%af%81%e4%b9%a6%e7%9a%84%e5%9d%91%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e9%b8%bf%e8%92%99%20PC%20%e4%b8%8a%e4%ba%8c%e8%bf%9b%e5%88%b6%e5%bf%85%e9%a1%bb%e5%90%88%e6%b3%95%e7%ad%be%e5%90%8d%e6%89%8d%e8%83%bd%e5%8a%a0%e8%bd%bd%e8%bf%90%e8%a1%8c%e3%80%82%e6%9c%ac%e6%96%87%e6%8a%8a%e5%ae%98%e6%96%b9%e7%bb%99%e5%87%ba%e7%9a%84%e4%b8%89%e7%b1%bb%e7%ad%be%e5%90%8d%e8%a7%84%e5%88%99%e3%80%81%e5%ba%94%e7%94%a8%e6%8b%89%e8%b5%b7%e4%ba%8c%e8%bf%9b%e5%88%b6%e7%9a%84%e6%b2%99%e7%ae%b1%e6%9d%83%e9%99%90%e7%9f%a9%e9%98%b5%e6%95%b4%e7%90%86%e6%88%90%e8%a1%a8%ef%bc%8c%e5%86%8d%e8%a1%a5%e4%b8%8a%e6%88%91%e4%bb%ac%e5%9c%a8%20MateBook%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f09%2f22%2fmatebookpro-binrary-debug-sign%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e3%80%90%e9%b8%bf%e8%92%99PC%e3%80%91%e4%ba%8c%e8%bf%9b%e5%88%b6%e7%ad%be%e5%90%8d%e5%ae%9e%e6%88%98%ef%bc%9a%e4%b8%89%e7%b1%bb%e7%ad%be%e5%90%8d%e3%80%81%e6%b2%99%e7%ae%b1%e6%9d%83%e9%99%90%e7%9f%a9%e9%98%b5%ef%bc%8c%e4%bb%a5%e5%8f%8a%e4%b8%80%e5%bc%a0%e8%b0%83%e8%af%95%e8%af%81%e4%b9%a6%e7%9a%84%e5%9d%91%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f09%2f22%2fmatebookpro-binrary-debug-sign%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f09%2f22%2fmatebookpro-binrary-debug-sign%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2026/09/09/chronomem-oom-hunt/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">仓颉服务 - 忆时塔 OOM 追凶记</h4>
+        </a>
+      </div>
+      
+      
+    </nav>
+    
+
+    
+    
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+  </article>
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f09%2f22%2fmatebookpro-binrary-debug-sign%2f&title=%e3%80%8a%e3%80%90%e9%b8%bf%e8%92%99PC%e3%80%91%e4%ba%8c%e8%bf%9b%e5%88%b6%e7%ad%be%e5%90%8d%e5%ae%9e%e6%88%98%ef%bc%9a%e4%b8%89%e7%b1%bb%e7%ad%be%e5%90%8d%e3%80%81%e6%b2%99%e7%ae%b1%e6%9d%83%e9%99%90%e7%9f%a9%e9%98%b5%ef%bc%8c%e4%bb%a5%e5%8f%8a%e4%b8%80%e5%bc%a0%e8%b0%83%e8%af%95%e8%af%81%e4%b9%a6%e7%9a%84%e5%9d%91%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f09%2f22%2fmatebookpro-binrary-debug-sign%2f&title=%e3%80%8a%e3%80%90%e9%b8%bf%e8%92%99PC%e3%80%91%e4%ba%8c%e8%bf%9b%e5%88%b6%e7%ad%be%e5%90%8d%e5%ae%9e%e6%88%98%ef%bc%9a%e4%b8%89%e7%b1%bb%e7%ad%be%e5%90%8d%e3%80%81%e6%b2%99%e7%ae%b1%e6%9d%83%e9%99%90%e7%9f%a9%e9%98%b5%ef%bc%8c%e4%bb%a5%e5%8f%8a%e4%b8%80%e5%bc%a0%e8%b0%83%e8%af%95%e8%af%81%e4%b9%a6%e7%9a%84%e5%9d%91%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e9%b8%bf%e8%92%99%20PC%20%e4%b8%8a%e4%ba%8c%e8%bf%9b%e5%88%b6%e5%bf%85%e9%a1%bb%e5%90%88%e6%b3%95%e7%ad%be%e5%90%8d%e6%89%8d%e8%83%bd%e5%8a%a0%e8%bd%bd%e8%bf%90%e8%a1%8c%e3%80%82%e6%9c%ac%e6%96%87%e6%8a%8a%e5%ae%98%e6%96%b9%e7%bb%99%e5%87%ba%e7%9a%84%e4%b8%89%e7%b1%bb%e7%ad%be%e5%90%8d%e8%a7%84%e5%88%99%e3%80%81%e5%ba%94%e7%94%a8%e6%8b%89%e8%b5%b7%e4%ba%8c%e8%bf%9b%e5%88%b6%e7%9a%84%e6%b2%99%e7%ae%b1%e6%9d%83%e9%99%90%e7%9f%a9%e9%98%b5%e6%95%b4%e7%90%86%e6%88%90%e8%a1%a8%ef%bc%8c%e5%86%8d%e8%a1%a5%e4%b8%8a%e6%88%91%e4%bb%ac%e5%9c%a8%20MateBook%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f09%2f22%2fmatebookpro-binrary-debug-sign%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e3%80%90%e9%b8%bf%e8%92%99PC%e3%80%91%e4%ba%8c%e8%bf%9b%e5%88%b6%e7%ad%be%e5%90%8d%e5%ae%9e%e6%88%98%ef%bc%9a%e4%b8%89%e7%b1%bb%e7%ad%be%e5%90%8d%e3%80%81%e6%b2%99%e7%ae%b1%e6%9d%83%e9%99%90%e7%9f%a9%e9%98%b5%ef%bc%8c%e4%bb%a5%e5%8f%8a%e4%b8%80%e5%bc%a0%e8%b0%83%e8%af%95%e8%af%81%e4%b9%a6%e7%9a%84%e5%9d%91%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f09%2f22%2fmatebookpro-binrary-debug-sign%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f09%2f22%2fmatebookpro-binrary-debug-sign%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2026/09/22/matebookpro-binrary-debug-sign/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+</body>
+</html>

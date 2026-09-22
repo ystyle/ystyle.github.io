@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Wed, 09 Sep 2026 23:30:00 +0800</lastBuildDate>
+			<lastBuildDate>Tue, 22 Sep 2026 20:30:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/categories/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>鸿蒙PC</title>
+				<link>https://ystyle.top/categories/%E9%B8%BF%E8%92%99PC/</link>
+				<pubDate>Tue, 22 Sep 2026 20:30:00 +0800</pubDate>
+				<guid>https://ystyle.top/categories/%E9%B8%BF%E8%92%99PC/</guid>
+				<description></description>
+			</item>
 			<item>
 				<title>软件</title>
 				<link>https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/</link>
