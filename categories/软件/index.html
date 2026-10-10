@@ -149,6 +149,35 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-仓颉版BadgerDB移植记-1-无锁跳表" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2026-10-10T10:00:00&#43;08:00" itemprop="datePublished">2026-10-10</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2026/10/10/badger-cj-porting-notes/">把 BadgerDB 移植到仓颉（一）：没有裸指针怎么做无锁跳表</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          从 Go 移植 BadgerDB 到仓颉（一）
+仓颉没有裸指针，于是我把节点指针换成了数组下标
+Cangjie · LSM-Tree · badger-cj · 移植
+这是系列第一篇，讲怎么把它写出来：语言差异怎么绕、以及怎么用。
+后续三篇分别讲优化与误判、基准复核、以及怎样测才算数。
+
+          <a href="/2026/10/10/badger-cj-porting-notes/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/badger-cj/">badger-cj</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LSM-Tree/">LSM-Tree</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%BB%E6%A4%8D/">移植</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-chronomem-oom-hunt" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2026-09-09T23:30:00&#43;08:00" itemprop="datePublished">2026-09-09</time>
@@ -374,35 +403,6 @@
         <div class="post-footer">
           
           <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gorm/">gorm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B3%9B%E5%9E%8B/">泛型</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-aliyundrive-webdav" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2022-01-01T22:46:26&#43;08:00" itemprop="datePublished">2022-01-01</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2022/01/01/aliyundrive-webdav/">阿里云网盘映射本地硬盘</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-          下载aliyundrive-webdav 下载地址: https://github.com/messense/aliyundrive-webdav/releases/latest 解压并放在一个目录里
-准备脚本 把以下内容存为run.ps1
-$env:REFRESH_TOKEN=&#34;484b469b3ef74dcaba5cf21aeadae2ca&#34; $env:WEBDAV_AUTH_USER=&#34;admin&#34; $env:WEBDAV_AUTH_PASSWORD=&#34;123456&#34; Start-Process -FilePath aliyundrive-webdav.exe -ArgumentList (&#34;--port=8080&#34;) -Wait -WindowStyle Hidden 脚本配置说明:
-$env:REFRESH_TOKEN: 为阿里云网盘登陆后的token, 必需改为自己的
-获取阿里云网盘REFRESH_TOKEN的方法 $env:WEBDAV_AUTH_USER： webdav用户名
-
-          <a href="/2022/01/01/aliyundrive-webdav/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91%E7%BD%91%E7%9B%98/">阿里云网盘</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webdav/">webdav</a></li></ul>
           
         </div>
       </article>

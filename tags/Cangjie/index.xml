@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Wed, 09 Sep 2026 23:30:00 +0800</lastBuildDate>
+			<lastBuildDate>Sat, 10 Oct 2026 10:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/Cangjie/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>把 BadgerDB 移植到仓颉（一）：没有裸指针怎么做无锁跳表</title>
+				<link>https://ystyle.top/2026/10/10/badger-cj-porting-notes/</link>
+				<pubDate>Sat, 10 Oct 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/10/badger-cj-porting-notes/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;从 Go 移植 BadgerDB 到仓颉（一）&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;仓颉没有裸指针，于是我把节点指针换成了数组下标&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;code&gt;Cangjie&lt;/code&gt; · &lt;code&gt;LSM-Tree&lt;/code&gt; · &lt;code&gt;badger-cj&lt;/code&gt; · &lt;code&gt;移植&lt;/code&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这是系列第一篇，讲&lt;strong&gt;怎么把它写出来&lt;/strong&gt;：语言差异怎么绕、以及怎么用。&lt;br&gt;&#xA;后续三篇分别讲优化与误判、基准复核、以及怎样测才算数。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>仓颉服务 - 忆时塔 OOM 追凶记</title>
 				<link>https://ystyle.top/2026/09/09/chronomem-oom-hunt/</link>
