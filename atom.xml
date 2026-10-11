@@ -4,12 +4,34 @@
   <subtitle>请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="https://ystyle.top/"/>
-  <updated>2026-10-10T02:00:00.000Z</updated>
+  <updated>2026-10-11T02:00:00.000Z</updated>
   <id>https://ystyle.top/</id>
   <author>
     <name>YSTYLE</name>
   </author>
   <generator uri="https://gohugo.io/">Hugo</generator>
+  <entry>
+    <title>把 BadgerDB 移植到仓颉（二）：十次优化与一次误判</title>
+    <link href="https://ystyle.top/2026/10/11/badger-cj-perf-and-false-alarm/"/>
+    <id>https://ystyle.top/2026/10/11/badger-cj-perf-and-false-alarm/</id>
+    <published>2026-10-11T02:00:00.000Z</published>
+    <updated>2026-10-11T02:00:00.000Z</updated>
+    
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;从 Go 移植 BadgerDB 到仓颉（二）&lt;/strong&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;em&gt;十次优化，和一次「我以为是编译器 bug」的乌龙&lt;/em&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;code&gt;Cangjie&lt;/code&gt; · &lt;code&gt;性能优化&lt;/code&gt; · &lt;code&gt;badger-cj&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这是系列第二篇。第一篇讲&lt;a href=&#34;https://ystyle.top/2026/10/10/badger-cj-porting-notes/&#34;&gt;无锁跳表的实现&lt;/a&gt;
+，&lt;br&gt;
+本篇讲&lt;strong&gt;怎么把它调快&lt;/strong&gt;，以及一个把我引向错误方向的排查。&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
+    <category term="badger-cj" scheme="https://ystyle.top/tags/badger-cj/"/>
+    <category term="数据库" scheme="https://ystyle.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <category term="LSM-Tree" scheme="https://ystyle.top/tags/LSM-Tree/"/>
+    <category term="移植" scheme="https://ystyle.top/tags/%E7%A7%BB%E6%A4%8D/"/>
+    
+  </entry>
   <entry>
     <title>把 BadgerDB 移植到仓颉（一）：没有裸指针怎么做无锁跳表</title>
     <link href="https://ystyle.top/2026/10/10/badger-cj-porting-notes/"/>
@@ -454,40 +476,6 @@
     <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
     <category term="阿里云网盘" scheme="https://ystyle.top/tags/%E9%98%BF%E9%87%8C%E4%BA%91%E7%BD%91%E7%9B%98/"/>
     <category term="webdav" scheme="https://ystyle.top/tags/webdav/"/>
-    
-  </entry>
-  <entry>
-    <title>go mod 拉取 gogs 私有仓库</title>
-    <link href="https://ystyle.top/2021/06/22/go-mod-gogs-private/"/>
-    <id>https://ystyle.top/2021/06/22/go-mod-gogs-private/</id>
-    <published>2021-06-22T02:46:26.000Z</published>
-    <updated>2021-06-22T02:46:26.000Z</updated>
-    
-    <summary type="html">&lt;h3 id=&#34;环境变量设置&#34;&gt;&lt;a href=&#34;#环境变量设置&#34; class=&#34;headerlink&#34; title=&#34;环境变量设置&#34;&gt;&lt;/a&gt;环境变量设置&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;添加环境变量或设置go env&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;export GOPRIVATE=git.hofo.co
-# 或者
-go env -w GOPRIVATE=git.hofo.co
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;git设置&#34;&gt;&lt;a href=&#34;#git设置&#34; class=&#34;headerlink&#34; title=&#34;git设置&#34;&gt;&lt;/a&gt;git设置&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;在git设置http.extraheader
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;PRIVATE-TOKEN&lt;/code&gt;生成方式:  在点击gogs右上头像-用户设置-授权应用-生成新的token&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git config --global http.extraheader &lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;PRIVATE-TOKEN: 5737d215af7f9a41a2abe98631d312e9e9311d29d&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;在git添加url配置, &lt;code&gt;ystyle:5737d215af7f9a41a2abe98631d312e9e939d29d11&lt;/code&gt;是用户名和上一步生成的token&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git config --global url.&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;https://ystyle:5737d215af7f9a41a2abe98631d312e9e939d29d11@git.hofo.co&amp;#34;&lt;/span&gt;.insteadOf &lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;https://git.hofo.co&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary>
-    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
-    <category term="GIT" scheme="https://ystyle.top/tags/GIT/"/>
-    <category term="gogs" scheme="https://ystyle.top/tags/gogs/"/>
-    <category term="go" scheme="https://ystyle.top/tags/go/"/>
     
   </entry>
 </feed>

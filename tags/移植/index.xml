@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Sat, 10 Oct 2026 10:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Sun, 11 Oct 2026 10:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/%E7%A7%BB%E6%A4%8D/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>把 BadgerDB 移植到仓颉（二）：十次优化与一次误判</title>
+				<link>https://ystyle.top/2026/10/11/badger-cj-perf-and-false-alarm/</link>
+				<pubDate>Sun, 11 Oct 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/11/badger-cj-perf-and-false-alarm/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;从 Go 移植 BadgerDB 到仓颉（二）&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;十次优化，和一次「我以为是编译器 bug」的乌龙&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;code&gt;Cangjie&lt;/code&gt; · &lt;code&gt;性能优化&lt;/code&gt; · &lt;code&gt;badger-cj&lt;/code&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这是系列第二篇。第一篇讲&lt;a href=&#34;https://ystyle.top/2026/10/10/badger-cj-porting-notes/&#34;&gt;无锁跳表的实现&lt;/a&gt;&#xA;，&lt;br&gt;&#xA;本篇讲&lt;strong&gt;怎么把它调快&lt;/strong&gt;，以及一个把我引向错误方向的排查。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>把 BadgerDB 移植到仓颉（一）：没有裸指针怎么做无锁跳表</title>
 				<link>https://ystyle.top/2026/10/10/badger-cj-porting-notes/</link>

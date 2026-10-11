@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>把 BadgerDB 移植到仓颉（二）：十次优化与一次误判 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">把 BadgerDB 移植到仓颉（二）：十次优化与一次误判</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">把 BadgerDB 移植到仓颉（二）：十次优化与一次误判</h1>
+    <h5 class="subtitle">
+      <time datetime="2026-10-11T10:00:00&#43;08:00" itemprop="datePublished" class="page-time">2026-10-11</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e5%8d%81%e6%ac%a1%e4%bc%98%e5%8c%96%e6%8a%8a%e8%83%bd%e7%94%a8%e6%a6%a8%e6%88%90%e5%a4%9f%e5%bf%ab">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">一、十次优化：把「能用」榨成「够快」</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#11-crc32c%e6%8a%8a%e6%9f%a5%e6%89%be%e8%a1%a8%e4%bb%8e%e6%af%8f%e6%ac%a1%e9%87%8d%e5%bb%ba%e6%94%b9%e6%88%90%e8%bf%9b%e7%a8%8b%e5%86%85%e5%8f%aa%e5%bb%ba%e4%b8%80%e6%ac%a1">
+    <span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.1 CRC32C：把查找表从每次重建改成进程内只建一次</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#12-condition%e6%8a%8a%e8%bd%ae%e8%af%a2%e7%ad%89%e5%be%85%e5%8f%98%e6%88%90%e6%9d%a1%e4%bb%b6%e9%80%9a%e7%9f%a5">
+    <span class="post-toc-number">1.2.</span> <span class="post-toc-text">1.2 Condition：把轮询等待变成条件通知</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#13-%e8%ae%a9-flush-%e7%a6%bb%e5%bc%80%e5%86%99%e9%94%81">
+    <span class="post-toc-number">1.3.</span> <span class="post-toc-text">1.3 让 flush 离开写锁</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%8c%e4%b8%80%e4%b8%aa%e6%88%91%e4%bb%a5%e4%b8%ba%e5%8f%91%e7%8e%b0%e4%ba%86%e7%bc%96%e8%af%91%e5%99%a8bug%e7%9a%84%e4%b9%8c%e9%be%99">
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">二、一个「我以为发现了编译器 bug」的乌龙</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e8%b5%b7%e5%9b%a0crc-%e6%a0%a1%e9%aa%8c%e5%9c%a8--o2-%e4%b8%8b%e4%b8%8d%e7%a8%b3%e5%ae%9a">
+    <span class="post-toc-number">2.1.</span> <span class="post-toc-text">起因：CRC 校验在 -O2 下&#34;不稳定&#34;</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e7%bb%93%e8%ae%ba%e6%98%af%e6%88%91%e8%87%aa%e5%b7%b1%e5%86%99%e9%94%99%e4%ba%86">
+    <span class="post-toc-number">2.2.</span> <span class="post-toc-text">结论：是我自己写错了</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e6%b2%89%e6%b7%80%e6%88%90%e4%b8%89%e6%9d%a1">
+    <span class="post-toc-number">2.3.</span> <span class="post-toc-text">沉淀成三条</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e7%bb%93%e8%af%ad">
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">结语</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e7%9b%b8%e5%85%b3%e9%93%be%e6%8e%a5">
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">相关链接</span>
+  </a>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-仓颉版BadgerDB移植记-2-优化与误判" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">把 BadgerDB 移植到仓颉（二）：十次优化与一次误判</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2026-10-11T10:00:00&#43;08:00" itemprop="datePublished">2026-10-11</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <p align="center"><strong>从 Go 移植 BadgerDB 到仓颉（二）</strong></p>
+<p align="center"><em>十次优化，和一次「我以为是编译器 bug」的乌龙</em></p>
+<p align="center"><code>Cangjie</code> · <code>性能优化</code> · <code>badger-cj</code></p>
+<blockquote>
+<p>这是系列第二篇。第一篇讲<a href="https://ystyle.top/2026/10/10/badger-cj-porting-notes/">无锁跳表的实现</a>
+，<br>
+本篇讲<strong>怎么把它调快</strong>，以及一个把我引向错误方向的排查。</p>
+</blockquote>
+<hr>
+<h2 id="一十次优化把能用榨成够快"><a href="#一十次优化把能用榨成够快" class="headerlink" title="一、十次优化：把「能用」榨成「够快」"></a>一、十次优化：把「能用」榨成「够快」</h2>
+<p>功能跑通只是开始。真正的工程量在性能上——下面是历次优化中效果最显著的十项。</p>
+<blockquote>
+<p><strong>一个前提</strong>：下表里多数条目是&quot;改造前 vs 改造后&quot;的对照，而改造早已进入当前代码，<br>
+<strong>旧实现无法重跑</strong>。所以它们<strong>只保留定性描述</strong>——任何&quot;+X%&ldquo;都必须能在同一台机器上<br>
+重跑出来才算数。当前版本可复现的实测值见本系列第三篇。</p>
+</blockquote>
+<table>
+	<thead>
+			<tr>
+					<th>优化项</th>
+					<th>效果（定性）</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>CRC32C 全局查找表</strong></td>
+					<td>从剖析热点降到可忽略</td>
+					<td>原本每次调用重建 256 项查找表</td>
+			</tr>
+			<tr>
+					<td><strong>LogEntry::encode 批量拷贝</strong></td>
+					<td>WAL 写入明显提速</td>
+					<td>逐字节写改为 <code>copyTo</code></td>
+			</tr>
+			<tr>
+					<td><strong>Condition 替代轮询</strong></td>
+					<td>大事务等待从轮询周期量级降到即时唤醒</td>
+					<td>轮询等待改为条件通知</td>
+			</tr>
+			<tr>
+					<td><strong>移除 updateDiscardStats</strong></td>
+					<td>写入热路径少一次统计开销</td>
+					<td>从写入热路径移除</td>
+			</tr>
+			<tr>
+					<td><strong>WriteRequest 对象池化</strong></td>
+					<td>小事务减少分配</td>
+					<td>减少 GC 压力</td>
+			</tr>
+			<tr>
+					<td><strong>Arena 批量拷贝</strong></td>
+					<td>—</td>
+					<td><code>putBytes/getBytes</code> 用 <code>copyTo</code></td>
+			</tr>
+			<tr>
+					<td><strong>Node.compareKey 免建对象</strong></td>
+					<td>—</td>
+					<td>直接访问 Arena，避免临时对象</td>
+			</tr>
+			<tr>
+					<td><strong>Skiplist.add 内联</strong></td>
+					<td>Node 对象创建减半</td>
+					<td>—</td>
+			</tr>
+			<tr>
+					<td><strong>AtomicStorage 分段扩展</strong></td>
+					<td>初始化不再一次性预分配</td>
+					<td>避免大数组预分配</td>
+			</tr>
+			<tr>
+					<td><strong>让 flush 离开写锁</strong></td>
+					<td>运行期写吞吐约翻倍</td>
+					<td>详见 §1.3</td>
+			</tr>
+	</tbody>
+</table>
+<p>下面挑三个最有代表性的展开。</p>
+<h3 id="11-crc32c把查找表从每次重建改成进程内只建一次"><a href="#11-crc32c把查找表从每次重建改成进程内只建一次" class="headerlink" title="1.1 CRC32C：把查找表从每次重建改成进程内只建一次"></a>1.1 CRC32C：把查找表从每次重建改成进程内只建一次</h3>
+<p>优化前的写法很自然，代价却极高——<strong>每次校验都重建一次查找表</strong>：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// ❌ 每次调用都建表
+let table = makeCRCTable()
+</code></pre><p>CRC32C 的表是 256 项，每次重建意味着几百次运算只为算一个校验和。改成全局只建一次：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// ✅ 全局查找表，进程内只建一次
+let globalTable = Array&lt;UInt32&gt;(
+    256, { i =&gt; computeCRCEntry(i) })
+</code></pre><p><strong>这一改，CRC 校验从剖析里的主要热点降到可忽略。</strong>（原始记录是&quot;占 17% → 0.04%&quot;，属当时 workload 下的剖析占比，不易复现，故只保留定性表述。）</p>
+<h3 id="12-condition把轮询等待变成条件通知"><a href="#12-condition把轮询等待变成条件通知" class="headerlink" title="1.2 Condition：把轮询等待变成条件通知"></a>1.2 Condition：把轮询等待变成条件通知</h3>
+<p>优化前，等待写入完成靠<strong>轮询</strong>：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// ❌ 轮询等待
+while (!ready) {
+    sleep(1ms)
+}
+</code></pre><p>这不是&quot;慢一点&quot;的问题——它是<strong>延迟量级</strong>的问题。轮询周期是 1 毫秒，大事务需要多轮检查，延迟会按&quot;轮数 × 1 毫秒&quot;累积。换成条件变量后，等待方被精确唤醒：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// ✅ 条件通知，零延迟
+let cond = Condition()
+cond.wait(lock)     // 等待方挂起
+cond.signalAll()    // 完成后立刻通知
+</code></pre><p><strong>大事务等待从&quot;轮询周期量级&quot;降到&quot;即时唤醒&rdquo;。</strong>（原始记录写&quot;约 100 毫秒 → 约 1 毫秒&quot;，同属改造前后对照，旧实现无法重跑，故不再引用具体值。）</p>
+<h3 id="13-让-flush-离开写锁"><a href="#13-让-flush-离开写锁" class="headerlink" title="1.3 让 flush 离开写锁"></a>1.3 让 flush 离开写锁</h3>
+<p>前几项都在优化「算得更快」，这一项优化的是「<strong>不要再等</strong>」。</p>
+<p>原本 memtable 写满后，SSTable 的构建与落盘是在<strong>全局写锁内同步执行</strong>的——整批写入被每一轮 flush（约 1MB 表的构建 + 磁盘 I/O + MANIFEST 更新）整段阻塞。改成专职 flusher 协程并行处理后，运行期写吞吐约翻倍。</p>
+<p><strong>这一组数字里，&ldquo;改造后&quot;那一半是可复现的。</strong> 2026-10 在 v1.6.21 上同机复测（5 轮取中位数）：</p>
+<table>
+	<thead>
+			<tr>
+					<th>指标</th>
+					<th>实测中位数</th>
+					<th>离散度</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>运行期写吞吐</td>
+					<td><strong>97,370 次/秒</strong></td>
+					<td>±4.8%</td>
+			</tr>
+			<tr>
+					<td><code>close</code> 耗时</td>
+					<td><strong>54 毫秒</strong></td>
+					<td>±9.3%</td>
+			</tr>
+	</tbody>
+</table>
+<p>代价是 <code>close</code> 变慢（要等在途的表落盘完毕）。但这是<strong>正确的权衡</strong>：运行期吞吐是所有读写的常态成本，<code>close</code> 一辈子只发生一次。把成本从&quot;每次操作&quot;摊到&quot;关机一次&rdquo;，显然划算。</p>
+<hr>
+<hr>
+<h2 id="二一个我以为发现了编译器bug的乌龙"><a href="#二一个我以为发现了编译器bug的乌龙" class="headerlink" title="二、一个「我以为发现了编译器 bug」的乌龙"></a>二、一个「我以为发现了编译器 bug」的乌龙</h2>
+<p>这一节没有优化技巧，只有一个教训。但它可能是全文最值得看的部分。</p>
+<h3 id="起因crc-校验在--o2-下不稳定"><a href="#起因crc-校验在--o2-下不稳定" class="headerlink" title="起因：CRC 校验在 -O2 下&#34;不稳定&#34;"></a>起因：CRC 校验在 <code>-O2</code> 下&quot;不稳定&quot;</h3>
+<p>某次排查中，<code>crc-cj</code> 的 CRC32C 在高优化级别下出现了行为异常。为了定位，我做了三重实验：</p>
+<ol>
+<li>把依赖换成<strong>本地源码</strong>编译 → 现象依旧</li>
+<li>关掉优化（<code>-O0</code>）→ <strong>现象依旧</strong></li>
+<li>检查 <code>update</code> 函数 → 全是 XOR 和移位，没有溢出运算，<strong>也排除了溢出策略</strong></li>
+</ol>
+<p>优化级别和溢出都被排除了。最后压到最小复现：<strong>静态函数里，用闭包构造一个大数组，末元素的值等于期望值的按位取反</strong>。</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">private static func content(
+    L: Int64
+): Array&lt;Byte&gt; {
+    Array&lt;Byte&gt;(L, {j =&gt;
+        UInt8((j * 7 + 3) % 256)})
+}
+// 现象：L &gt;= 约 30000 时，
+// 末元素 got == want ^ 0xFF，其余全对
+</code></pre><p>现象非常确定，<code>-O2</code> 和 <code>-O0</code> 都能复现。我当时判断这是编译器的代码生成缺陷，整理了单文件最小复现上报到官方 issue。</p>
+<h3 id="结论是我自己写错了"><a href="#结论是我自己写错了" class="headerlink" title="结论：是我自己写错了"></a>结论：是我自己写错了</h3>
+<p>官方回复：<strong>误报</strong>。</p>
+<p>根因不在编译器，而在我那份复现程序里——它违反了仓颉的一条语义：</p>
+<blockquote>
+<p><strong><code>Array</code> 的切片是共享底层存储的视图，不是拷贝。</strong></p>
+</blockquote>
+<p>我的复现代码是这样的（简化后）：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">let direct = content(L)
+
+// ① 切片 —— 其实是视图！
+let copy = direct[0..direct.size]
+// ② 显式取反，写回了 direct
+let last = copy.size - 1
+copy[last] = UInt8(copy[last] ^ 0xFF)
+// ③ 未取反的期望值
+let wantLast = UInt8(
+    ((L - 1) * 7 + 3) % 256)
+// ④ 取反值 ≠ 原值 → 恒真
+if (copy[last] != wantLast) {
+    // ⑤ 打印出来当然差一个 ^0xFF
+    let d = direct[direct.size - 1]
+    println(&#34;got=${d}&#34;)
+}
+</code></pre><p>逐行看就明白了：第 ① 行我以为拿到了一个独立副本，实际是<strong>指向同一块内存的视图</strong>；第 ② 行&quot;显式取反&quot;直接改掉了原数组；第 ③④ 行拿<strong>取反后的值</strong>去比<strong>未取反的期望</strong>——这个断言在任何正确的编译器上都必然失败。</p>
+<p>那个看起来极其可信的 <code>got == want ^ 0xFF</code>，是<strong>程序自己制造出来的</strong>。</p>
+<h3 id="沉淀成三条"><a href="#沉淀成三条" class="headerlink" title="沉淀成三条"></a>沉淀成三条</h3>
+<p><strong>1. 仓颉的 <code>Array</code> 切片是视图，不是拷贝。</strong></p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">let copy = direct[1..4]
+// direct[1] 也变成了 -1
+copy[0] = -1
+</code></pre><p>写切片元素会<strong>直接落到原数组</strong>上。用切片做「写回探测」之前，必须明确这一点。需要真正的副本就显式复制。</p>
+<p><strong>2. 怀疑编译器之前，先怀疑自己代码里的别名与共享语义。</strong></p>
+<p>&ldquo;编译布局敏感&quot;&ldquo;同函数同参数不同调用点一翻一不翻&quot;这类观察，听起来特别像编译器缺陷——但它们同样可以被一个<strong>自身逻辑写错的测试</strong>完美解释。越是形态诡异的现象，越要先排除自己代码的别名问题。</p>
+<p><strong>3. 上报被驳回不是白费。</strong></p>
+<p>那次排查留下了一份完整的单文件最小复现、一份三重实验记录，以及这条&quot;切片是视图&quot;的确认。**代价是把怀疑对准了自己，收益是搞清了一条真实语义。**顺带说明：那次同期怀疑的另一个问题（并发 <code>close</code> 导致整批数据丢失）<strong>是真的 bug</strong>，已通过「rotate + 入队原子化」独立修复——真问题和假问题混在一起时，更要一个一个地钉死。</p>
+<hr>
+<hr>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+<p>这一篇讲了两件事：<strong>把性能从&quot;能用&quot;榨到&quot;够快&rdquo;</strong>（十次优化叠加，最大的一次让写吞吐翻倍），以及<strong>分辨真假问题</strong>。</p>
+<p>那次&quot;编译器 bug&quot;让我学到的东西，比任何一个成功的优化都多：<strong>当现象诡异到不像自己的错时，往往更该回头看看自己。</strong> 而同期那个真正的并发 bug，反倒是在平静的对照实验里被钉死的。</p>
+<blockquote>
+<p><strong>下一篇</strong>换个方向：写完之后我回头重跑了全部基准，结果删掉了自己写过的一半数字。</p>
+</blockquote>
+<hr>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2>
+<ul>
+<li>项目地址：<a href="https://atomgit.com/ystyle/badger-cj" target="_blank" rel="noopener">atomgit.com/ystyle/badger-cj</a>
+</li>
+<li>中心仓包：<a href="https://pkg.cangjie-lang.cn/packages/badgercj" target="_blank" rel="noopener">pkg.cangjie-lang.cn/packages/badgercj</a>
+</li>
+<li>参考实现：<a href="https://github.com/dgraph-io/badger" target="_blank" rel="noopener">Go BadgerDB v4</a>
+</li>
+<li>本系列：
+<ul>
+<li>第一篇：<a href="https://ystyle.top/2026/10/10/badger-cj-porting-notes/">没有裸指针怎么做无锁跳表</a>
+</li>
+<li>第二篇：<a href="https://ystyle.top/2026/10/11/badger-cj-perf-and-false-alarm/">十次优化与一次误判</a>
+</li>
+<li>第三篇：<a href="https://ystyle.top/2026/10/12/badger-cj-benchmark-audit/">重跑基准，三个结论翻了</a>
+</li>
+<li>第四篇：<a href="https://ystyle.top/2026/10/13/badger-cj-benchmark-method/">怎样测才算数</a>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2026-10-11T10:00:00&#43;08:00" itemprop="dateUpdated">2026-10-11 10:00:00</time>
+          </span><br>
+          本文链接：<a href="/2026/10/11/badger-cj-perf-and-false-alarm/" target="_blank" rel="external">https://ystyle.top/2026/10/11/badger-cj-perf-and-false-alarm/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/badger-cj/">badger-cj</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LSM-Tree/">LSM-Tree</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%BB%E6%A4%8D/">移植</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f11%2fbadger-cj-perf-and-false-alarm%2f&title=%e3%80%8a%e6%8a%8a%20BadgerDB%20%e7%a7%bb%e6%a4%8d%e5%88%b0%e4%bb%93%e9%a2%89%ef%bc%88%e4%ba%8c%ef%bc%89%ef%bc%9a%e5%8d%81%e6%ac%a1%e4%bc%98%e5%8c%96%e4%b8%8e%e4%b8%80%e6%ac%a1%e8%af%af%e5%88%a4%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f11%2fbadger-cj-perf-and-false-alarm%2f&title=%e3%80%8a%e6%8a%8a%20BadgerDB%20%e7%a7%bb%e6%a4%8d%e5%88%b0%e4%bb%93%e9%a2%89%ef%bc%88%e4%ba%8c%ef%bc%89%ef%bc%9a%e5%8d%81%e6%ac%a1%e4%bc%98%e5%8c%96%e4%b8%8e%e4%b8%80%e6%ac%a1%e8%af%af%e5%88%a4%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e4%bb%8e%20Go%20%e7%a7%bb%e6%a4%8d%20BadgerDB%20%e5%88%b0%e4%bb%93%e9%a2%89%ef%bc%88%e4%ba%8c%ef%bc%89%0a%e5%8d%81%e6%ac%a1%e4%bc%98%e5%8c%96%ef%bc%8c%e5%92%8c%e4%b8%80%e6%ac%a1%e3%80%8c%e6%88%91%e4%bb%a5%e4%b8%ba%e6%98%af%e7%bc%96%e8%af%91%e5%99%a8%20bug%e3%80%8d%e7%9a%84%e4%b9%8c%e9%be%99%0aCangjie%20%c2%b7%20%e6%80%a7%e8%83%bd%e4%bc%98%e5%8c%96%20%c2%b7%20badger-cj%0a%e8%bf%99%e6%98%af%e7%b3%bb%e5%88%97%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f11%2fbadger-cj-perf-and-false-alarm%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e6%8a%8a%20BadgerDB%20%e7%a7%bb%e6%a4%8d%e5%88%b0%e4%bb%93%e9%a2%89%ef%bc%88%e4%ba%8c%ef%bc%89%ef%bc%9a%e5%8d%81%e6%ac%a1%e4%bc%98%e5%8c%96%e4%b8%8e%e4%b8%80%e6%ac%a1%e8%af%af%e5%88%a4%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f11%2fbadger-cj-perf-and-false-alarm%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f11%2fbadger-cj-perf-and-false-alarm%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2026/10/10/badger-cj-porting-notes/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">把 BadgerDB 移植到仓颉（一）：没有裸指针怎么做无锁跳表</h4>
+        </a>
+      </div>
+      
+      
+    </nav>
+    
+
+    
+    
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+  </article>
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f11%2fbadger-cj-perf-and-false-alarm%2f&title=%e3%80%8a%e6%8a%8a%20BadgerDB%20%e7%a7%bb%e6%a4%8d%e5%88%b0%e4%bb%93%e9%a2%89%ef%bc%88%e4%ba%8c%ef%bc%89%ef%bc%9a%e5%8d%81%e6%ac%a1%e4%bc%98%e5%8c%96%e4%b8%8e%e4%b8%80%e6%ac%a1%e8%af%af%e5%88%a4%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f11%2fbadger-cj-perf-and-false-alarm%2f&title=%e3%80%8a%e6%8a%8a%20BadgerDB%20%e7%a7%bb%e6%a4%8d%e5%88%b0%e4%bb%93%e9%a2%89%ef%bc%88%e4%ba%8c%ef%bc%89%ef%bc%9a%e5%8d%81%e6%ac%a1%e4%bc%98%e5%8c%96%e4%b8%8e%e4%b8%80%e6%ac%a1%e8%af%af%e5%88%a4%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e4%bb%8e%20Go%20%e7%a7%bb%e6%a4%8d%20BadgerDB%20%e5%88%b0%e4%bb%93%e9%a2%89%ef%bc%88%e4%ba%8c%ef%bc%89%0a%e5%8d%81%e6%ac%a1%e4%bc%98%e5%8c%96%ef%bc%8c%e5%92%8c%e4%b8%80%e6%ac%a1%e3%80%8c%e6%88%91%e4%bb%a5%e4%b8%ba%e6%98%af%e7%bc%96%e8%af%91%e5%99%a8%20bug%e3%80%8d%e7%9a%84%e4%b9%8c%e9%be%99%0aCangjie%20%c2%b7%20%e6%80%a7%e8%83%bd%e4%bc%98%e5%8c%96%20%c2%b7%20badger-cj%0a%e8%bf%99%e6%98%af%e7%b3%bb%e5%88%97%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f11%2fbadger-cj-perf-and-false-alarm%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e6%8a%8a%20BadgerDB%20%e7%a7%bb%e6%a4%8d%e5%88%b0%e4%bb%93%e9%a2%89%ef%bc%88%e4%ba%8c%ef%bc%89%ef%bc%9a%e5%8d%81%e6%ac%a1%e4%bc%98%e5%8c%96%e4%b8%8e%e4%b8%80%e6%ac%a1%e8%af%af%e5%88%a4%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f11%2fbadger-cj-perf-and-false-alarm%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f11%2fbadger-cj-perf-and-false-alarm%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2026/10/11/badger-cj-perf-and-false-alarm/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+</body>
+</html>

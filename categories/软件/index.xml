@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Sat, 10 Oct 2026 10:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Sun, 11 Oct 2026 10:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>把 BadgerDB 移植到仓颉（二）：十次优化与一次误判</title>
+				<link>https://ystyle.top/2026/10/11/badger-cj-perf-and-false-alarm/</link>
+				<pubDate>Sun, 11 Oct 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/11/badger-cj-perf-and-false-alarm/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;从 Go 移植 BadgerDB 到仓颉（二）&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;十次优化，和一次「我以为是编译器 bug」的乌龙&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;code&gt;Cangjie&lt;/code&gt; · &lt;code&gt;性能优化&lt;/code&gt; · &lt;code&gt;badger-cj&lt;/code&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这是系列第二篇。第一篇讲&lt;a href=&#34;https://ystyle.top/2026/10/10/badger-cj-porting-notes/&#34;&gt;无锁跳表的实现&lt;/a&gt;&#xA;，&lt;br&gt;&#xA;本篇讲&lt;strong&gt;怎么把它调快&lt;/strong&gt;，以及一个把我引向错误方向的排查。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>把 BadgerDB 移植到仓颉（一）：没有裸指针怎么做无锁跳表</title>
 				<link>https://ystyle.top/2026/10/10/badger-cj-porting-notes/</link>
@@ -145,13 +152,6 @@
 				<pubDate>Sat, 25 Apr 2020 22:36:26 +0800</pubDate>
 				<guid>https://ystyle.top/2020/04/25/getting-start-utorrent/</guid>
 				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;软件设置并不能解决百分百的问题，BT是有死链的概念的，这种怎么设置都无法下载，还有些冷门内容速度慢是无法解决的，但大家可以尽量少用讯雷下载。 讯雷p2p只上传给自己的服务器，别的下载工具得不到p2p加速，并且还免费给讯雷做下载点&lt;/p&gt;</description>
-			</item>
-			<item>
-				<title>Windows Terminal 添加SSH到Tabs里</title>
-				<link>https://ystyle.top/2020/03/15/add-ssh-command-to-windows-terminal-tab/</link>
-				<pubDate>Sun, 15 Mar 2020 14:46:26 +0800</pubDate>
-				<guid>https://ystyle.top/2020/03/15/add-ssh-command-to-windows-terminal-tab/</guid>
-				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;注意替换路径&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h3 id=&#34;用git-bash带的SSH&#34;&gt;&lt;a href=&#34;#用git-bash带的SSH&#34; class=&#34;headerlink&#34; title=&#34;用git-bash带的SSH&#34;&gt;&lt;/a&gt;用git-bash带的SSH&lt;/h3&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;命令一定要用转义的双引号包起来, key的路径用git bash的路径方式，没key的话，删掉-i后面的就好，但每次都要输入密码. key登陆百度搜索SSH免密登陆&lt;/p&gt;</description>
 			</item>
 	</channel>
 </rss>
