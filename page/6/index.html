@@ -151,6 +151,30 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-oracle生成随机数" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2017-12-07T09:53:53&#43;08:00" itemprop="datePublished">2017-12-07</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2017/12/07/oracle-generate-random-numbers/">oracle生成随机数</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+           小数( 0 ~ 1) select dbms_random.value from dual; 指定范围内的小数 ( 0 ~ 100 ) select dbms_random.value(0,100) from dual; 指定范围内的整数 ( 0 ~ 100 ) select trunc(dbms_random.value(0,100)) from dual; 长度为20的随机数字串 select substr(cast(dbms_random.value as varchar2(38)),3,20) from dual; 正态分布的随机数 select dbms_random.normal from dual; 随机字符串 select dbms_random.string(opt, length) from dual; opt可取值如下： &lsquo;u&rsquo;,&lsquo;U&rsquo; : 大写字母 &rsquo;l&rsquo;,&lsquo;L&rsquo; : 小写字母 &lsquo;a&rsquo;,&lsquo;A&rsquo; : 大、小写字母 &lsquo;x&rsquo;,&lsquo;X&rsquo; : 数字、大写字母 &lsquo;p&rsquo;,&lsquo;P&rsquo; : 可打印字符 随机日期 select to_date(2454084+TRUNC(DBMS_RANDOM.VALUE(0,365)),&#39;J&#39;) from dual -- 通过下面的语句获得指定日期的基数 select to_char(sysdate,&#39;J&#39;) from dual; 生成GUID select sys_guid() from dual; 
+          <a href="/2017/12/07/oracle-generate-random-numbers/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oracle/">oracle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E6%95%B0/">随机数</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-用安卓设备DIY一个NAS" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2017-11-30T09:11:33&#43;08:00" itemprop="datePublished">2017-11-30</time>
@@ -380,26 +404,6 @@ go get github.com/revel/cmd/revel go get github.com/ystyle/leanote/app mv $GOPAT
       </article>
     </li>
     
-    <li class="post-list-item fade in">
-      <article id="post-index" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2017-03-25T20:24:04&#43;08:00" itemprop="datePublished">2017-03-25</time>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/friends/">友情链接</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-           熊猫大仙技术博客 Nicol的博客铭 FindSpace 遥遥工作室 life 深夜猿 深山野老 
-          <a href="/friends/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-        </div>
-      </article>
-    </li>
-    
   </ul>
   
 
@@ -446,6 +450,10 @@ go get github.com/revel/cmd/revel go get github.com/ystyle/leanote/app mv $GOPAT
     
       
       <a class="page-number" href="/page/10/">10</a>
+      
+    
+      
+      <a class="page-number" href="/page/11/">11</a>
       
     
     <a class="extend next" rel="next" href="/page/7/">下一页</a>

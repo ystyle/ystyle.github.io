@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Sun, 11 Oct 2026 10:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Mon, 12 Oct 2026 10:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>把 BadgerDB 移植到仓颉（三）：重跑基准，三个结论翻了</title>
+				<link>https://ystyle.top/2026/10/12/badger-cj-benchmark-audit/</link>
+				<pubDate>Mon, 12 Oct 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/12/badger-cj-benchmark-audit/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;从 Go 移植 BadgerDB 到仓颉（三）&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;重跑一遍基准，三个结论都翻了&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;code&gt;Cangjie&lt;/code&gt; · &lt;code&gt;基准测试&lt;/code&gt; · &lt;code&gt;badger-cj&lt;/code&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这是系列第三篇。前两篇讲&lt;a href=&#34;https://ystyle.top/2026/10/10/badger-cj-porting-notes/&#34;&gt;实现&lt;/a&gt;&#xA;与&lt;a href=&#34;https://ystyle.top/2026/10/11/badger-cj-perf-and-false-alarm/&#34;&gt;优化&lt;/a&gt;&#xA;，&lt;br&gt;&#xA;本篇讲&lt;strong&gt;复核&lt;/strong&gt;：把积累半年的基准数据重跑一遍之后，有三条结论被推翻，&lt;br&gt;&#xA;而且方向都是反的。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>把 BadgerDB 移植到仓颉（二）：十次优化与一次误判</title>
 				<link>https://ystyle.top/2026/10/11/badger-cj-perf-and-false-alarm/</link>

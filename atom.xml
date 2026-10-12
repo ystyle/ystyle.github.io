@@ -4,12 +4,36 @@
   <subtitle>请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="https://ystyle.top/"/>
-  <updated>2026-10-11T02:00:00.000Z</updated>
+  <updated>2026-10-12T02:00:00.000Z</updated>
   <id>https://ystyle.top/</id>
   <author>
     <name>YSTYLE</name>
   </author>
   <generator uri="https://gohugo.io/">Hugo</generator>
+  <entry>
+    <title>把 BadgerDB 移植到仓颉（三）：重跑基准，三个结论翻了</title>
+    <link href="https://ystyle.top/2026/10/12/badger-cj-benchmark-audit/"/>
+    <id>https://ystyle.top/2026/10/12/badger-cj-benchmark-audit/</id>
+    <published>2026-10-12T02:00:00.000Z</published>
+    <updated>2026-10-12T02:00:00.000Z</updated>
+    
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;从 Go 移植 BadgerDB 到仓颉（三）&lt;/strong&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;em&gt;重跑一遍基准，三个结论都翻了&lt;/em&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;code&gt;Cangjie&lt;/code&gt; · &lt;code&gt;基准测试&lt;/code&gt; · &lt;code&gt;badger-cj&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这是系列第三篇。前两篇讲&lt;a href=&#34;https://ystyle.top/2026/10/10/badger-cj-porting-notes/&#34;&gt;实现&lt;/a&gt;
+与&lt;a href=&#34;https://ystyle.top/2026/10/11/badger-cj-perf-and-false-alarm/&#34;&gt;优化&lt;/a&gt;
+，&lt;br&gt;
+本篇讲&lt;strong&gt;复核&lt;/strong&gt;：把积累半年的基准数据重跑一遍之后，有三条结论被推翻，&lt;br&gt;
+而且方向都是反的。&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
+    <category term="badger-cj" scheme="https://ystyle.top/tags/badger-cj/"/>
+    <category term="数据库" scheme="https://ystyle.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <category term="LSM-Tree" scheme="https://ystyle.top/tags/LSM-Tree/"/>
+    <category term="移植" scheme="https://ystyle.top/tags/%E7%A7%BB%E6%A4%8D/"/>
+    
+  </entry>
   <entry>
     <title>把 BadgerDB 移植到仓颉（二）：十次优化与一次误判</title>
     <link href="https://ystyle.top/2026/10/11/badger-cj-perf-and-false-alarm/"/>
@@ -430,52 +454,6 @@
     <category term="kubernetes" scheme="https://ystyle.top/tags/kubernetes/"/>
     <category term="wireguard-native" scheme="https://ystyle.top/tags/wireguard-native/"/>
     <category term="wireguard" scheme="https://ystyle.top/tags/wireguard/"/>
-    
-  </entry>
-  <entry>
-    <title>阿里云网盘映射本地硬盘</title>
-    <link href="https://ystyle.top/2022/01/01/aliyundrive-webdav/"/>
-    <id>https://ystyle.top/2022/01/01/aliyundrive-webdav/</id>
-    <published>2022-01-01T14:46:26.000Z</published>
-    <updated>2022-01-01T14:46:26.000Z</updated>
-    
-    <summary type="html">&lt;h3 id=&#34;下载aliyundrive-webdav&#34;&gt;&lt;a href=&#34;#下载aliyundrive-webdav&#34; class=&#34;headerlink&#34; title=&#34;下载aliyundrive-webdav&#34;&gt;&lt;/a&gt;下载aliyundrive-webdav&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;下载地址: &lt;a href=&#34;https://github.com/messense/aliyundrive-webdav/releases/latest&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://github.com/messense/aliyundrive-webdav/releases/latest&lt;/a&gt;
-&lt;/li&gt;
-&lt;li&gt;解压并放在一个目录里&lt;br&gt;
-
-&lt;figure class=&#34;image-bubble&#34;&gt;
-  &lt;div class=&#34;img-lightbox&#34;&gt;
-    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;
-    &lt;img src=&#34;https://dll.ystyle.top/images/2022-01/explorer_2022-01-01_23-16-55.png&#34; alt=&#34;&#34;&gt;
-  &lt;/div&gt;
-  &lt;div class=&#34;image-caption&#34;&gt;&lt;/div&gt;
-&lt;/figure&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;准备脚本&#34;&gt;&lt;a href=&#34;#准备脚本&#34; class=&#34;headerlink&#34; title=&#34;准备脚本&#34;&gt;&lt;/a&gt;准备脚本&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;把以下内容存为run.ps1&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#953800&#34;&gt;$env:REFRESH_TOKEN&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;484b469b3ef74dcaba5cf21aeadae2ca&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#953800&#34;&gt;$env:WEBDAV_AUTH_USER&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;admin&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#953800&#34;&gt;$env:WEBDAV_AUTH_PASSWORD&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;123456&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;Start-Process&lt;/span&gt; -FilePath &lt;span style=&#34;color:#6639ba&#34;&gt;aliyundrive-webdav&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;exe -ArgumentList &lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;--port=8080&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt; -Wait -WindowStyle Hidden
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;脚本配置说明:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;$env:REFRESH_TOKEN&lt;/code&gt;: 为阿里云网盘登陆后的token, 必需改为自己的&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/messense/aliyundrive-webdav#%E8%8E%B7%E5%8F%96-refresh_token&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;获取阿里云网盘REFRESH_TOKEN的方法&lt;/a&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;$env:WEBDAV_AUTH_USER&lt;/code&gt;： webdav用户名&lt;/p&gt;</summary>
-    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
-    <category term="阿里云网盘" scheme="https://ystyle.top/tags/%E9%98%BF%E9%87%8C%E4%BA%91%E7%BD%91%E7%9B%98/"/>
-    <category term="webdav" scheme="https://ystyle.top/tags/webdav/"/>
     
   </entry>
 </feed>
