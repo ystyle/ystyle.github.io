@@ -348,7 +348,7 @@
 </ul>
 <p>这篇就是回答这些的。不涉及原理（原理在<a href="/2026/10/13/harmonyos-pc-binary-sign-types/">解析篇</a>
 ），只给你能直接查的表和能直接抄的命令。</p>
-<p>一句话结论：<strong>自己本机用，自签名就够了；需要声明权限或在应用里被拉起，必须用自己申请的调试证书签名；要分发给别人，得是华为认证开发者拿到的二进制证书。</strong></p>
+<p>一句话结论：<strong>只在自己设备上跑，自签名就够了；只要需要交到别人手上（哪怕只给同事一台设备测一下）、需要声明权限、或者要在应用里被拉起来，就得用自己申请的调试证书签名；要公开发给大批用户，才是华为认证开发者那本二进制证书。</strong></p>
 <hr>
 <h2 id="1-一张表看完三种签名"><a href="#1-一张表看完三种签名" class="headerlink" title="1. 一张表看完三种签名"></a>1. 一张表看完三种签名</h2>
 <table>
@@ -381,8 +381,8 @@
 			</tr>
 			<tr>
 					<td><strong>能给别人用吗</strong></td>
-					<td>只能自己本机用</td>
-					<td>只能给 <code>device-ids</code> 名单里的设备</td>
+					<td>不能，只能自己本机用</td>
+					<td>只能给 <code>device-ids</code> 名单里的设备（<strong>小范围，如同事</strong>）</td>
 					<td>随便分发</td>
 			</tr>
 			<tr>
@@ -536,7 +536,47 @@
 <h2 id="4-场景对应hishell-里-vs-自己的应用里"><a href="#4-场景对应hishell-里-vs-自己的应用里" class="headerlink" title="4. 场景对应：HiShell 里 vs 自己的应用里"></a>4. 场景对应：HiShell 里 vs 自己的应用里</h2>
 <p>这应该是你最关心的部分。<strong>同一个二进制，在这两个地方的待遇完全不同。</strong></p>
 <h3 id="41-在-hishell-里直接跑"><a href="#41-在-hishell-里直接跑" class="headerlink" title="4.1 在 HiShell 里直接跑"></a>4.1 在 HiShell 里直接跑</h3>
-<p>就是连上设备、打开终端、敲 <code>./tool</code> 那种。对应关系很干脆：</p>
+<p>就是连上设备、打开终端、敲 <code>./tool</code> 那种。这里其实只要回答两个问题。</p>
+<p><strong>问题一：要不要交到别人手上跑？</strong></p>
+<table>
+	<thead>
+			<tr>
+					<th>场景</th>
+					<th>该用哪种签名</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>只在我自己这台设备上跑</td>
+					<td><strong>自签名</strong>就够了</td>
+			</tr>
+			<tr>
+					<td><strong>要给同事在自己设备上测一下（小范围分发）</strong></td>
+					<td><strong>必须用调试证书</strong></td>
+			</tr>
+			<tr>
+					<td>要公开发给大批用户</td>
+					<td><strong>二进制证书</strong></td>
+			</tr>
+	</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>这才是自签名和调试证书最主要的区别。</strong><br>
+自签名签出来的二进制<strong>换台设备就跑不起来</strong>——它没带任何身份信息，<br>
+别人的设备无从判断&quot;这东西是谁给的、能不能信&quot;。<br>
+所以一旦有人跟你说&quot;你编好的这个发我测一下&quot;，你就必须换成调试证书签名。</p>
+</blockquote>
+<p>小范围分发的成本其实不高，三步：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 1) 让同事在自己设备上执行，把 UDID 发给你</span>
+</span></span><span style="display:flex;"><span>hdc shell bm get --udid
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 2) 把对方 UDID 写进 module.json 的 device-ids（数组，可以填多个）</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#    &#34;debug-info&#34;: { &#34;device-id-type&#34;: &#34;udid&#34;,</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#                    &#34;device-ids&#34;: [&#34;&lt;同事的 UDID&gt;&#34;, &#34;&lt;另一个同事的 UDID&gt;&#34;] }</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 3) 用这个 module.json 重新签名，再把签好的文件发给同事</span>
+</span></span></code></pre></div><p>对方那边只需要<strong>打开开发者模式</strong>，不需要任何证书或工具。</p>
+<p><strong>问题二：需要声明权限吗？</strong></p>
 <table>
 	<thead>
 			<tr>
@@ -557,7 +597,12 @@
 					<td>填 <code>device-ids</code> + 开开发者模式</td>
 			</tr>
 			<tr>
-					<td>给别人也能跑</td>
+					<td>要给同事的设备也能跑</td>
+					<td><strong>调试证书</strong></td>
+					<td>把<strong>对方设备的 UDID</strong> 加进 <code>device-ids</code></td>
+			</tr>
+			<tr>
+					<td>要分发给大批用户</td>
 					<td><strong>二进制证书</strong></td>
 					<td>个人拿不到</td>
 			</tr>
@@ -658,13 +703,16 @@
 </table>
 <hr>
 <h2 id="5-怎么选三步"><a href="#5-怎么选三步" class="headerlink" title="5. 怎么选：三步"></a>5. 怎么选：三步</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>第 1 步：需要声明权限吗？或者在（强沙箱）应用里被拉起吗？
-</span></span><span style="display:flex;"><span>          ├─ 不需要 ──────────────→ 自签名（adhoc）
-</span></span><span style="display:flex;"><span>          └─ 需要 ──┐
-</span></span><span style="display:flex;"><span>                    ↓
-</span></span><span style="display:flex;"><span>第 2 步：要发给别人的设备用吗？
-</span></span><span style="display:flex;"><span>          ├─ 只给自己/名单上的设备 → 自己申请的调试证书
-</span></span><span style="display:flex;"><span>          └─ 要公开发布 ──────────→ 二进制证书（需华为认证）
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>第 1 步：这个二进制要不要交到别人手上跑？
+</span></span><span style="display:flex;"><span>          ├─ 要公开发给大批用户 ─────────→ 二进制证书（需华为认证）
+</span></span><span style="display:flex;"><span>          └─ 只给自己，或给一两个同事 ──┐
+</span></span><span style="display:flex;"><span>                                        ↓
+</span></span><span style="display:flex;"><span>第 2 步：下面三条，占任意一条吗？
+</span></span><span style="display:flex;"><span>          · 要交给别人（哪怕只有一台设备）
+</span></span><span style="display:flex;"><span>          · 要声明权限
+</span></span><span style="display:flex;"><span>          · 要在（强沙箱）应用里被拉起
+</span></span><span style="display:flex;"><span>          ├─ 一条都不占 ────────────────→ 自签名（adhoc）
+</span></span><span style="display:flex;"><span>          └─ 占了任意一条 ──────────────→ 自己申请的调试证书
 </span></span></code></pre></div><p>对照成表格：</p>
 <table>
 	<thead>
@@ -676,9 +724,14 @@
 	</thead>
 	<tbody>
 			<tr>
-					<td>本机自用、不要权限</td>
+					<td>只自己本机用、不要权限</td>
 					<td><strong>自签名</strong></td>
 					<td><code>-selfSign 1</code> + <code>chmod 755</code></td>
+			</tr>
+			<tr>
+					<td><strong>要让同事在自己设备上测</strong></td>
+					<td><strong>调试证书</strong></td>
+					<td>对方提供 UDID → 填 <code>device-ids</code></td>
 			</tr>
 			<tr>
 					<td>要声明权限</td>
