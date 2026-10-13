@@ -343,3 +343,5 @@ hdc shell "hilog -t kmsg" | grep -E "fsverity|hmcrypt"
 
 > 续篇：[《二进制签名解析：自签名、调试证书、二进制证书到底差在哪》](/2026/10/13/harmonyos-pc-binary-sign-types/)——
 > 从 OpenHarmony 源码里把三种签名的结构性差异讲清楚（`signature` 字段填什么、内核信任表怎么匹配、`ownerid` 怎么归类）。
+>
+> 只想快速决定"我该用哪种签名"，看这篇就够：[《二进制签名入门：证书从哪来、能要什么权限、该用哪一个》](/2026/10/13/harmonyos-pc-binary-sign-basics/)。

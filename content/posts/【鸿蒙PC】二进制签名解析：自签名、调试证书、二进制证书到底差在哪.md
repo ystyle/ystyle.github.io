@@ -26,6 +26,9 @@ slug: harmonyos-pc-binary-sign-types
 
 > 阅读约定：文中标注 **【源码】** 的结论读自 OpenHarmony 开源仓，标注 **【官方】** 的引自华为文档与工单回复，其余是我们的解释。
 > 实测环境与上篇一致：HUAWEI MateBook Pro（`OpenHarmony-7.0.0.105` / API 26 / 2in1）。
+>
+> 如果你还没确定自己该用哪种签名，先看这一篇：[《二进制签名入门：证书从哪来、能要什么权限、该用哪一个》](/2026/10/13/harmonyos-pc-binary-sign-basics/)。
+> 本文是它的"为什么"。
 
 ---
 
