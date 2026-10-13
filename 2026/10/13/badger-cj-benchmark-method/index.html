@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>把 BadgerDB 移植到仓颉（四）：怎样测才算数 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">把 BadgerDB 移植到仓颉（四）：怎样测才算数</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">把 BadgerDB 移植到仓颉（四）：怎样测才算数</h1>
+    <h5 class="subtitle">
+      <time datetime="2026-10-13T10:00:00&#43;08:00" itemprop="datePublished" class="page-time">2026-10-13</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e5%9b%9b%e4%b8%aa%e6%96%b9%e6%b3%95%e5%ad%a6%e7%bc%ba%e9%99%b7">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">一、四个方法学缺陷</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e7%bc%ba%e9%99%b7-1%e6%95%b0%e6%8d%ae%e7%9b%ae%e5%bd%95%e8%90%bd%e5%9c%a8-tmpfs-%e4%b8%8aio-%e6%88%90%e7%bb%a9%e8%99%9a%e9%ab%98%e4%b8%80%e4%b8%aa%e6%95%b0%e9%87%8f%e7%ba%a7">
+    <span class="post-toc-number">1.1.</span> <span class="post-toc-text">缺陷 1：数据目录落在 tmpfs 上，I/O 成绩虚高一个数量级</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e7%bc%ba%e9%99%b7-2%e8%b4%9f%e8%bd%bd%e5%a4%aa%e5%b0%8f%e5%8d%95%e6%ac%a1%e6%b5%8b%e9%87%8f%e6%b2%a1%e6%9c%89%e7%bb%9f%e8%ae%a1%e6%84%8f%e4%b9%89">
+    <span class="post-toc-number">1.2.</span> <span class="post-toc-text">缺陷 2：负载太小，单次测量没有统计意义</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e7%bc%ba%e9%99%b7-3%e7%8e%af%e5%a2%83%e6%8c%87%e7%ba%b9%e7%bc%ba%e5%a4%b1">
+    <span class="post-toc-number">1.3.</span> <span class="post-toc-text">缺陷 3：环境指纹缺失</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e7%bc%ba%e9%99%b7-4%e8%b7%a8%e8%af%ad%e8%a8%80%e5%af%b9%e7%85%a7%e7%9a%84%e8%a7%84%e6%a8%a1%e4%b8%8d%e5%af%b9%e9%bd%90">
+    <span class="post-toc-number">1.4.</span> <span class="post-toc-text">缺陷 4：跨语言对照的规模不对齐</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%8cGo%e4%be%a7%e8%bf%98%e6%9c%89%e4%b8%89%e4%b8%aa%e9%99%b7%e9%98%b1">
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">二、Go 侧还有三个陷阱</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e9%99%b7%e9%98%b1-1frac_10-%e8%af%bb%e7%9a%84%e6%98%af%e4%b8%80%e5%bc%a0%e6%b0%b8%e4%b9%85%e7%a9%ba%e8%a1%a8">
+    <span class="post-toc-number">2.1.</span> <span class="post-toc-text">陷阱 1：frac_10 读的是一张永久空表</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e9%99%b7%e9%98%b1-2key-%e9%95%bf%e5%ba%a6%e4%b8%8d%e7%ad%89%e4%bb%b7">
+    <span class="post-toc-number">2.2.</span> <span class="post-toc-text">陷阱 2：key 长度不等价</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e9%99%b7%e9%98%b1-3go-%e4%be%a7%e8%af%ad%e4%b9%89%e5%af%b9%e9%bd%90%e7%9a%84%e5%9f%ba%e5%87%86%e5%b9%b6%e4%b8%8d%e5%ad%98%e5%9c%a8">
+    <span class="post-toc-number">2.3.</span> <span class="post-toc-text">陷阱 3：Go 侧语义对齐的基准并不存在</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%89%e7%8e%b0%e5%9c%a8%e7%9a%84%e6%88%90%e7%bb%a9%e5%8f%af%e5%a4%8d%e7%8e%b0">
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">三、现在的成绩（可复现）</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%9b%9b%e4%b8%80%e5%a5%97%e8%83%bd%e6%a0%b8%e9%aa%8c%e7%9a%84%e6%b5%81%e7%a8%8b%e9%95%bf%e4%bb%80%e4%b9%88%e6%a0%b7">
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">四、一套能核验的流程长什么样</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%94%e4%b8%80%e4%b8%aa%e9%99%84%e5%b8%a6%e5%8f%91%e7%8e%b0%e9%82%a3%e4%bb%bd%e7%89%88%e6%9c%ac%e6%bc%94%e8%bf%9b%e8%a1%a8%e6%98%af%e9%94%99%e7%9a%84">
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">五、一个附带发现：那份版本演进表是错的</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e7%bb%93%e8%af%ad">
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">结语</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e7%9b%b8%e5%85%b3%e9%93%be%e6%8e%a5">
+    <span class="post-toc-number">7.</span> <span class="post-toc-text">相关链接</span>
+  </a>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-仓颉版BadgerDB移植记-4-怎样测才算数" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">把 BadgerDB 移植到仓颉（四）：怎样测才算数</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2026-10-13T10:00:00&#43;08:00" itemprop="datePublished">2026-10-13</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <p align="center"><strong>从 Go 移植 BadgerDB 到仓颉（四）</strong></p>
+<p align="center"><em>四个方法学缺陷、Go 侧三个陷阱，与一套可核验的流程</em></p>
+<p align="center"><code>Cangjie</code> · <code>基准测试</code> · <code>方法论</code></p>
+<blockquote>
+<p>这是系列最后一篇。第三篇讲了<a href="https://ystyle.top/2026/10/12/badger-cj-benchmark-audit/">三个被推翻的结论</a>
+，<br>
+本篇追问：<strong>它们为什么会错</strong>，以及怎样才能不再错。</p>
+</blockquote>
+<hr>
+<h2 id="一四个方法学缺陷"><a href="#一四个方法学缺陷" class="headerlink" title="一、四个方法学缺陷"></a>一、四个方法学缺陷</h2>
+<p>上面三个错误结论不是偶然。复盘下来，它们背后有四个<strong>系统性</strong>缺陷——不是&quot;精度不够&quot;，而是<strong>会直接给出错误结论</strong>。</p>
+<h3 id="缺陷-1数据目录落在-tmpfs-上io-成绩虚高一个数量级"><a href="#缺陷-1数据目录落在-tmpfs-上io-成绩虚高一个数量级" class="headerlink" title="缺陷 1：数据目录落在 tmpfs 上，I/O 成绩虚高一个数量级"></a>缺陷 1：数据目录落在 tmpfs 上，I/O 成绩虚高一个数量级</h3>
+<p>所有 <code>src/examples/*</code> 基准都把数据目录硬编码成了 <code>/tmp/...</code>：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ grep -rn <span style="color:#0a3069">&#39;&#34;/tmp&#39;</span> src/examples/ <span style="color:#1f2328">|</span> wc -l
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">9</span>
+</span></span></code></pre></div><p>而 <code>/tmp</code> 通常是 <strong>tmpfs</strong>——读写全在内存里，<strong>没有磁盘语义</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ findmnt -no FSTYPE /tmp
+</span></span><span style="display:flex;"><span>tmpfs
+</span></span></code></pre></div><p>实测后果：<code>sstable_write_perf</code> 在 tmpfs 上算出 sync 吞吐 <strong>4021 MB/s</strong>——这是内存速度，不是磁盘速度。报告里那些毫秒级的 SSTable 写入数字，<strong>在 tmpfs 上根本没有意义</strong>。</p>
+<p><strong>修法</strong>：不改被测源码（保持二进制与发布 revision 一致），而是用私有 mount namespace 重定向：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>unshare -rm bash -c <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  <span style="color:#0a3069">&#34;mount --bind &lt;真实盘目录&gt; /tmp \
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">   &amp;&amp; exec &lt;基准命令&gt;&#34;</span>
+</span></span></code></pre></div><blockquote>
+<p>⚠️ 这里有个连带坑：<code>cjvs env</code> 给出的 <code>CANGJIE_HOME</code> 位于 <code>/tmp/cjvs_multishells/...</code><br>
+（只是指向 <code>~/.config/cjvs/store/&lt;ver&gt;</code> 的软链）。一旦把 <code>/tmp</code> bind 掉，软链被遮住 →<br>
+进程报 <code>libcangjie-runtime.so</code> 找不到（exit 127）。<br>
+所以 bind 场景下必须同时把 <code>LD_LIBRARY_PATH</code> 指到 store 的真实路径。</p>
+</blockquote>
+<h3 id="缺陷-2负载太小单次测量没有统计意义"><a href="#缺陷-2负载太小单次测量没有统计意义" class="headerlink" title="缺陷 2：负载太小，单次测量没有统计意义"></a>缺陷 2：负载太小，单次测量没有统计意义</h3>
+<p><code>skiplist_perf</code> 全部 4 项总耗时仅约 <strong>64 毫秒</strong>（5000 ops / 16 线程）。单次运行的数字在 15 轮复测里的波动：</p>
+<table>
+	<thead>
+			<tr>
+					<th>指标</th>
+					<th>15 轮实测范围</th>
+					<th>相对离散度</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>并发写</td>
+					<td>341 – 468 ns/op</td>
+					<td><strong>±32%</strong></td>
+			</tr>
+			<tr>
+					<td>并发读</td>
+					<td>288 – 380 ns/op</td>
+					<td>±24%</td>
+			</tr>
+	</tbody>
+</table>
+<p>也就是说，<strong>单跑一次得到的&quot;330 ns/op&quot;和&quot;380 ns/op&quot;没有区别，都是噪声</strong>。历史报告里那些精确到个位数的 ns/op，<strong>精度是虚假的</strong>。</p>
+<p><strong>修法</strong>：每项连跑 N 轮（默认 5），报<strong>中位数 + 离散度</strong>；离散度 &gt; 15% 的项自动标 <code>⚠️波动大</code>——这类项<strong>不足以支撑结论，只宜作定性描述</strong>。</p>
+<h3 id="缺陷-3环境指纹缺失"><a href="#缺陷-3环境指纹缺失" class="headerlink" title="缺陷 3：环境指纹缺失"></a>缺陷 3：环境指纹缺失</h3>
+<p>没有 CPU、内核、编译器版本、commit 的记录，数字既不能复核也不能横向比较。现在报告头固定包含：</p>
+<pre tabindex="0"><code>测试日期 / 被测版本(commit)
+CPU 型号与核数 / 内存 / 内核版本
+仓颉编译器版本与优化级别 / 堆大小
+数据目录文件系统 / 轮次
+</code></pre><h3 id="缺陷-4跨语言对照的规模不对齐"><a href="#缺陷-4跨语言对照的规模不对齐" class="headerlink" title="缺陷 4：跨语言对照的规模不对齐"></a>缺陷 4：跨语言对照的规模不对齐</h3>
+<p>就是第三篇 §2.1 讲的那个问题。修法很直接：<strong>对照双方必须显式对齐规模、线程数与内存策略</strong>，并把不对齐的偏差记录下来（而不是假装没有）。</p>
+<hr>
+<hr>
+<h2 id="二Go侧还有三个陷阱"><a href="#二Go侧还有三个陷阱" class="headerlink" title="二、Go 侧还有三个陷阱"></a>二、Go 侧还有三个陷阱</h2>
+<p>重测 Go 对照时，又发现 Go 自己的基准也有坑。这一节可能比结论本身更有用。</p>
+<h3 id="陷阱-1frac_10-读的是一张永久空表"><a href="#陷阱-1frac_10-读的是一张永久空表" class="headerlink" title="陷阱 1：frac_10 读的是一张永久空表"></a>陷阱 1：<code>frac_10</code> 读的是一张永久空表</h3>
+<p>Go 的 <code>skl/skl_test.go</code> 里，<code>NewSkiplist(...)</code> 位于 <strong><code>b.Run</code> 闭包内部</strong>——每个 <code>frac_*</code> 子基准各建一张<strong>新空表</strong>。</p>
+<p>而 <code>frac_10</code> 的 <code>readFrac = 1.0</code>，<strong>只 Get、从不 Put</strong> → 表永远为空 → 命中率 0。同一次运行实测：</p>
+<table>
+	<thead>
+			<tr>
+					<th>子基准</th>
+					<th>数据状态</th>
+					<th>ns/op</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>frac_9</code>（90% 读 + 10% 写）</td>
+					<td>有真实数据</td>
+					<td><strong>55.6</strong></td>
+			</tr>
+			<tr>
+					<td><code>frac_10</code>（100% 读）</td>
+					<td><strong>表为空</strong></td>
+					<td><strong>10.5 – 17.7</strong></td>
+			</tr>
+	</tbody>
+</table>
+<p>所以原报告里&quot;Go 100% 读 3.7 ns/op&quot;<strong>不是一个读基准</strong>，而是&quot;在一张空表上走一趟 head 比较&quot;。它<strong>不能</strong>与仓颉&quot;预写满 5000 条后再并发读&quot;对照。</p>
+<blockquote>
+<p>附带一个坑：单独跑 <code>frac_10</code> 且不加 <code>-benchtime=&lt;N&gt;x</code> 会 <strong>OOM 崩溃</strong>——<br>
+arena 按 <code>(b.N+1) * MaxNodeSize</code> 分配，纯读时 <code>b.N</code> 被外推到约 13.5 亿 → 约 130GB arena。</p>
+</blockquote>
+<h3 id="陷阱-2key-长度不等价"><a href="#陷阱-2key-长度不等价" class="headerlink" title="陷阱 2：key 长度不等价"></a>陷阱 2：key 长度不等价</h3>
+<p>Go 的 <code>randomKey</code> 先造 8 字节，再由 <code>KeyWithTs</code> <strong>追加 8 字节时间戳</strong> → 实际参与比较的是 <strong>16 字节</strong>。而仓颉 <code>skiplist_perf</code> 用的是<strong>纯 8 字节</strong>。key 长度翻倍会影响比较分支数与 cache 占用。这个偏差<strong>无法消除，只能显式记录</strong>。</p>
+<h3 id="陷阱-3go-侧语义对齐的基准并不存在"><a href="#陷阱-3go-侧语义对齐的基准并不存在" class="headerlink" title="陷阱 3：Go 侧语义对齐的基准并不存在"></a>陷阱 3：Go 侧语义对齐的基准并不存在</h3>
+<table>
+	<thead>
+			<tr>
+					<th>项目</th>
+					<th>Go v4.9.1</th>
+					<th>能否对照</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>纯并发写</td>
+					<td><code>BenchmarkWrite</code></td>
+					<td>✅ 可用</td>
+			</tr>
+			<tr>
+					<td>并发读</td>
+					<td>只有 <code>frac_10</code>，且是空表</td>
+					<td>❌ 不可用</td>
+			</tr>
+			<tr>
+					<td>并发事务写</td>
+					<td><strong>完全没有</strong></td>
+					<td>❌ 不给数字</td>
+			</tr>
+	</tbody>
+</table>
+<p>关于第三行：Go 根包 22 个 <code>*_test.go</code> 里只有 <code>BenchmarkDbGrowth</code>（单线程）；<code>badger bank test</code> 是正确性不变式测试，其<strong>唯一的统计输出被注释掉</strong>了（<code>badger/cmd/bank.go:427-431</code>）；<code>badger benchmark write</code> 走 <code>OpenManaged</code> 单线程顺序 Set，语义不同。</p>
+<p><strong>所以跨语言对照只在&quot;纯并发写&quot;这一项上是干净的</strong>，其余要么明确标注不可比，要么不给数字。</p>
+<hr>
+<hr>
+<h2 id="三现在的成绩可复现"><a href="#三现在的成绩可复现" class="headerlink" title="三、现在的成绩（可复现）"></a>三、现在的成绩（可复现）</h2>
+<p>把不靠谱的数字清掉之后，这里补上站得住的那部分。</p>
+<p><strong>方法与前提</strong>：</p>
+<ul>
+<li>被测版本 <strong>v1.6.21</strong>（中心仓已发布）；</li>
+<li>跳表这类&quot;小负载&quot;基准连跑 <strong>30 轮</strong>取中位数，其余项 5 轮；</li>
+<li>数据目录显式落在<strong>真实盘</strong>（btrfs，非 tmpfs）；</li>
+<li>同时给出<strong>离散度</strong>，&gt;15% 的项标注&quot;波动大&quot;。</li>
+</ul>
+<p><strong>并发跳表（5000 ops / 16 线程，30 轮）</strong></p>
+<table>
+	<thead>
+			<tr>
+					<th>指标</th>
+					<th>中位数</th>
+					<th>离散度</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>并发写</td>
+					<td><strong>387 ns/op</strong>（约 258 万 op/s）</td>
+					<td>⚠️ ±40%</td>
+			</tr>
+			<tr>
+					<td>并发读</td>
+					<td><strong>333 ns/op</strong>（约 300 万 op/s）</td>
+					<td>⚠️ ±39%</td>
+			</tr>
+			<tr>
+					<td>顺序写</td>
+					<td>555 ns/op</td>
+					<td>⚠️ ±39%</td>
+			</tr>
+			<tr>
+					<td>顺序读</td>
+					<td>1,227 ns/op</td>
+					<td>⚠️ ±27%</td>
+			</tr>
+	</tbody>
+</table>
+<blockquote>
+<p>⚠️ 负载只有约 64 毫秒，<strong>点值本身不稳定</strong>。正确的说法是&quot;<strong>亚微秒级</strong>&quot;，<br>
+而不是&quot;330 ns&quot;。</p>
+</blockquote>
+<p><strong>并发事务写（50 并发事务，5 轮）</strong></p>
+<table>
+	<thead>
+			<tr>
+					<th>规模</th>
+					<th>吞吐量</th>
+					<th>离散度</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>50 × 100 = 5,000 keys</td>
+					<td>634,365 keys/s</td>
+					<td>±13%</td>
+			</tr>
+			<tr>
+					<td>50 × 1,000 = 50,000 keys</td>
+					<td><strong>730,396 keys/s</strong></td>
+					<td>±5%</td>
+			</tr>
+			<tr>
+					<td>50 × 2,000 = 100,000 keys</td>
+					<td>691,171 keys/s</td>
+					<td>±5%</td>
+			</tr>
+			<tr>
+					<td>50 × 3,000 = 150,000 keys</td>
+					<td>567,458 keys/s</td>
+					<td>±2%</td>
+			</tr>
+	</tbody>
+</table>
+<p>长事务（500 × 3000 = 150 万 key）：<strong>382,194 keys/s</strong>，事务成功率 100%。</p>
+<p><strong>批量写对每 key 成本的摊薄</strong>（同一写路径，40 万 key / 8 线程）</p>
+<table>
+	<thead>
+			<tr>
+					<th>事务粒度</th>
+					<th>每 key 成本</th>
+					<th>相对单键</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>单键事务</td>
+					<td>6,778–6,857 ns</td>
+					<td>1x</td>
+			</tr>
+			<tr>
+					<td>8 key/事务</td>
+					<td>2,216–2,494 ns</td>
+					<td><strong>快 2.7–3.1x</strong></td>
+			</tr>
+			<tr>
+					<td>64 key/事务</td>
+					<td>1,715–1,969 ns</td>
+					<td><strong>快 3.5–4.0x</strong></td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>这组数据背后有个反直觉的结论</strong>：写路径的同步成本<strong>没法靠&quot;框架内部批量提交&quot;摊薄</strong>（唤醒次数 = 请求数，每个 commit 必须被单独唤醒），真正的杠杆在<strong>用户侧的事务粒度</strong>。</p>
+<p><strong>DB 与内存路径微基准</strong></p>
+<table>
+	<thead>
+			<tr>
+					<th>基准</th>
+					<th>指标</th>
+					<th>中位数</th>
+					<th>离散度</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>examples.perf</code></td>
+					<td>DB 写（20 事务 × 200 key）</td>
+					<td>1,431 ns/op</td>
+					<td>±11%</td>
+			</tr>
+			<tr>
+					<td><code>examples.perf</code></td>
+					<td>DB 读（单事务内 4000 次读）</td>
+					<td>2,681 ns/op</td>
+					<td>±2.5%</td>
+			</tr>
+			<tr>
+					<td><code>cjpm bench</code></td>
+					<td>benchDBGet（单次 get）</td>
+					<td>5.54 µs</td>
+					<td>⚠️ ±69%</td>
+			</tr>
+			<tr>
+					<td><code>cjpm bench</code></td>
+					<td>benchPut（跳表单次 put）</td>
+					<td>1.04 µs</td>
+					<td>⚠️ ±46%</td>
+			</tr>
+			<tr>
+					<td><code>raw_write_perf</code></td>
+					<td>MemTable 直写 50 万 key</td>
+					<td>554,084 keys/s</td>
+					<td>±4.4%</td>
+			</tr>
+	</tbody>
+</table>
+<blockquote>
+<p>注意 <code>examples.perf</code> 与 <code>cjpm bench</code> 的<strong>口径不同</strong>（前者批内摊薄、后者单次调用），<br>
+数值不可互相比较——引用时必须带上是哪个基准。<br>
+另外 <code>benchDBGet</code> 离散度高达 ±69%，历史报告给它写的精确值<br>
+（4.834 / 3.447 µs）其实都落在本次实测范围（3.78–7.57 µs）内，<br>
+说明那不是&quot;版本差异&quot;，<strong>就是噪声</strong>。</p>
+</blockquote>
+<p><strong>异步 flusher（同一二进制开关对照）</strong></p>
+<table>
+	<thead>
+			<tr>
+					<th>指标</th>
+					<th>中位数</th>
+					<th>离散度</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>运行期写吞吐</td>
+					<td><strong>97,370 次/秒</strong></td>
+					<td>±4.8%</td>
+			</tr>
+			<tr>
+					<td><code>close</code> 耗时</td>
+					<td>54 毫秒</td>
+					<td>±9.3%</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<hr>
+<h2 id="四一套能核验的流程长什么样"><a href="#四一套能核验的流程长什么样" class="headerlink" title="四、一套能核验的流程长什么样"></a>四、一套能核验的流程长什么样</h2>
+<p>复盘下来，现在项目里固定做这几件事：</p>
+<p><strong>1. 只产出两类数据</strong></p>
+<ul>
+<li>① <strong>当前 revision 的绝对值</strong>；</li>
+<li>② <strong>同一二进制内的开关对照</strong>（如 sync vs io_uring）。</li>
+</ul>
+<p><strong>不做跨版本对比。</strong> 原因见本篇第五节。</p>
+<p><strong>2. 必须报离散度，不能只报最佳值</strong></p>
+<p>离散度 &gt; 15% 的项自动标记，这类数字<strong>只用于判断方向，不用于引用</strong>。</p>
+<p><strong>3. 环境指纹进报告头</strong></p>
+<p>CPU / 内存 / 内核 / 编译器版本 / commit / 数据目录文件系统 / 轮次，一个不少。</p>
+<p><strong>4. 一条命令跑完全部</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python3 scripts/bench/run-bench.py <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    --runs <span style="color:#0550ae">5</span>
+</span></span></code></pre></div><p>这样&quot;重跑一遍&quot;的成本从半天降到几分钟——<strong>这才是数字能被核对的前提</strong>。</p>
+<hr>
+<hr>
+<h2 id="五一个附带发现那份版本演进表是错的"><a href="#五一个附带发现那份版本演进表是错的" class="headerlink" title="五、一个附带发现：那份版本演进表是错的"></a>五、一个附带发现：那份版本演进表是错的</h2>
+<p>原报告的版本演进表长这样：</p>
+<table>
+	<thead>
+			<tr>
+					<th>版本</th>
+					<th>Skiplist Put</th>
+					<th>Skiplist Get</th>
+					<th>&hellip;</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>v1.3.1（优化前）</td>
+					<td>1958 ns</td>
+					<td>3990 ns</td>
+					<td></td>
+			</tr>
+			<tr>
+					<td>v1.6.1（CAS + findGe）</td>
+					<td>1324 ns</td>
+					<td>2241 ns</td>
+					<td></td>
+			</tr>
+			<tr>
+					<td>v1.6.1+（优化后）</td>
+					<td>1115 ns</td>
+					<td>1120 ns</td>
+					<td></td>
+			</tr>
+			<tr>
+					<td>v1.6.12</td>
+					<td>1067 ns</td>
+					<td>2130 ns</td>
+					<td></td>
+			</tr>
+	</tbody>
+</table>
+<p>看起来是条清晰的优化曲线。但核对 git 历史后发现两个问题：</p>
+<ol>
+<li><strong><code>v1.3.1</code> 这个 tag 在仓库里不存在</strong>（最早的是 <code>v1.2.0</code>）；</li>
+<li>表里那些优化提交集中在 <strong>2026-03-11 ~ 03-14</strong>，而<strong>最早的 tag 是 2026-03-21</strong>——也就是说，<strong>优化发生在第一个 tag 之前</strong>。</li>
+</ol>
+<p>所以表头那些&quot;vX.Y.Z 优化前 / 优化后&quot;的对照关系，<strong>在版本历史上没有依据</strong>。它大概是当时按语义手工标注的，不是真实版本对照。</p>
+<p><strong>这也是&quot;不做跨版本对比&quot;这条原则的由来</strong>：版本对照要成立，前提是每个版本都能真的检出、构建、并在同一环境下跑一遍。做不到，就不该把它写成表格。</p>
+<hr>
+<hr>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+<p>复盘下来，这几个错误的共同点是：<strong>错的不是测量精度，而是方法</strong>。而方法层面的错误有个特点——<strong>它们不会表现为数值偏差，会表现为方向性的错误结论</strong>。</p>
+<p>往上一层：<strong>你给出的每一个数字，别人是要拿它做判断的。</strong></p>
+<p>&ldquo;约 330 纳秒&quot;和&quot;亚微秒级、离散度 ±40%&ldquo;说出口的分量完全不同——前者像是可以依赖的事实，后者才是我真正测到的东西。</p>
+<p>这次复核删掉了一批好看的数字，换来一套能重跑、能核验、并且<strong>明确说自己不可靠在哪</strong>的流程。这比任何一个 &ldquo;+30%&rdquo; 都值钱。</p>
+<hr>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2>
+<ul>
+<li>项目地址：<a href="https://atomgit.com/ystyle/badger-cj" target="_blank" rel="noopener">atomgit.com/ystyle/badger-cj</a>
+</li>
+<li>中心仓包：<a href="https://pkg.cangjie-lang.cn/packages/badgercj" target="_blank" rel="noopener">pkg.cangjie-lang.cn/packages/badgercj</a>
+</li>
+<li>参考实现：<a href="https://github.com/dgraph-io/badger" target="_blank" rel="noopener">Go BadgerDB v4</a>
+</li>
+<li>本系列：
+<ul>
+<li>第一篇：<a href="https://ystyle.top/2026/10/10/badger-cj-porting-notes/">没有裸指针怎么做无锁跳表</a>
+</li>
+<li>第二篇：<a href="https://ystyle.top/2026/10/11/badger-cj-perf-and-false-alarm/">十次优化与一次误判</a>
+</li>
+<li>第三篇：<a href="https://ystyle.top/2026/10/12/badger-cj-benchmark-audit/">重跑基准，三个结论翻了</a>
+</li>
+<li>第四篇：<a href="https://ystyle.top/2026/10/13/badger-cj-benchmark-method/">怎样测才算数</a>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2026-10-13T10:00:00&#43;08:00" itemprop="dateUpdated">2026-10-13 10:00:00</time>
+          </span><br>
+          本文链接：<a href="/2026/10/13/badger-cj-benchmark-method/" target="_blank" rel="external">https://ystyle.top/2026/10/13/badger-cj-benchmark-method/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/badger-cj/">badger-cj</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LSM-Tree/">LSM-Tree</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%BB%E6%A4%8D/">移植</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f13%2fbadger-cj-benchmark-method%2f&title=%e3%80%8a%e6%8a%8a%20BadgerDB%20%e7%a7%bb%e6%a4%8d%e5%88%b0%e4%bb%93%e9%a2%89%ef%bc%88%e5%9b%9b%ef%bc%89%ef%bc%9a%e6%80%8e%e6%a0%b7%e6%b5%8b%e6%89%8d%e7%ae%97%e6%95%b0%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f13%2fbadger-cj-benchmark-method%2f&title=%e3%80%8a%e6%8a%8a%20BadgerDB%20%e7%a7%bb%e6%a4%8d%e5%88%b0%e4%bb%93%e9%a2%89%ef%bc%88%e5%9b%9b%ef%bc%89%ef%bc%9a%e6%80%8e%e6%a0%b7%e6%b5%8b%e6%89%8d%e7%ae%97%e6%95%b0%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e4%bb%8e%20Go%20%e7%a7%bb%e6%a4%8d%20BadgerDB%20%e5%88%b0%e4%bb%93%e9%a2%89%ef%bc%88%e5%9b%9b%ef%bc%89%0a%e5%9b%9b%e4%b8%aa%e6%96%b9%e6%b3%95%e5%ad%a6%e7%bc%ba%e9%99%b7%e3%80%81Go%20%e4%be%a7%e4%b8%89%e4%b8%aa%e9%99%b7%e9%98%b1%ef%bc%8c%e4%b8%8e%e4%b8%80%e5%a5%97%e5%8f%af%e6%a0%b8%e9%aa%8c%e7%9a%84%e6%b5%81%e7%a8%8b%0aCangjie%20%c2%b7%20%e5%9f%ba%e5%87%86%e6%b5%8b%e8%af%95%20%c2%b7%20%e6%96%b9%e6%b3%95%e8%ae%ba%0a%e8%bf%99%e6%98%af%e7%b3%bb%e5%88%97%e6%9c%80%e5%90%8e%e4%b8%80%e7%af%87%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f13%2fbadger-cj-benchmark-method%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e6%8a%8a%20BadgerDB%20%e7%a7%bb%e6%a4%8d%e5%88%b0%e4%bb%93%e9%a2%89%ef%bc%88%e5%9b%9b%ef%bc%89%ef%bc%9a%e6%80%8e%e6%a0%b7%e6%b5%8b%e6%89%8d%e7%ae%97%e6%95%b0%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f13%2fbadger-cj-benchmark-method%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f13%2fbadger-cj-benchmark-method%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2026/10/12/badger-cj-benchmark-audit/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">把 BadgerDB 移植到仓颉（三）：重跑基准，三个结论翻了</h4>
+        </a>
+      </div>
+      
+      
+    </nav>
+    
+
+    
+    
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+  </article>
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f13%2fbadger-cj-benchmark-method%2f&title=%e3%80%8a%e6%8a%8a%20BadgerDB%20%e7%a7%bb%e6%a4%8d%e5%88%b0%e4%bb%93%e9%a2%89%ef%bc%88%e5%9b%9b%ef%bc%89%ef%bc%9a%e6%80%8e%e6%a0%b7%e6%b5%8b%e6%89%8d%e7%ae%97%e6%95%b0%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f13%2fbadger-cj-benchmark-method%2f&title=%e3%80%8a%e6%8a%8a%20BadgerDB%20%e7%a7%bb%e6%a4%8d%e5%88%b0%e4%bb%93%e9%a2%89%ef%bc%88%e5%9b%9b%ef%bc%89%ef%bc%9a%e6%80%8e%e6%a0%b7%e6%b5%8b%e6%89%8d%e7%ae%97%e6%95%b0%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e4%bb%8e%20Go%20%e7%a7%bb%e6%a4%8d%20BadgerDB%20%e5%88%b0%e4%bb%93%e9%a2%89%ef%bc%88%e5%9b%9b%ef%bc%89%0a%e5%9b%9b%e4%b8%aa%e6%96%b9%e6%b3%95%e5%ad%a6%e7%bc%ba%e9%99%b7%e3%80%81Go%20%e4%be%a7%e4%b8%89%e4%b8%aa%e9%99%b7%e9%98%b1%ef%bc%8c%e4%b8%8e%e4%b8%80%e5%a5%97%e5%8f%af%e6%a0%b8%e9%aa%8c%e7%9a%84%e6%b5%81%e7%a8%8b%0aCangjie%20%c2%b7%20%e5%9f%ba%e5%87%86%e6%b5%8b%e8%af%95%20%c2%b7%20%e6%96%b9%e6%b3%95%e8%ae%ba%0a%e8%bf%99%e6%98%af%e7%b3%bb%e5%88%97%e6%9c%80%e5%90%8e%e4%b8%80%e7%af%87%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f13%2fbadger-cj-benchmark-method%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e6%8a%8a%20BadgerDB%20%e7%a7%bb%e6%a4%8d%e5%88%b0%e4%bb%93%e9%a2%89%ef%bc%88%e5%9b%9b%ef%bc%89%ef%bc%9a%e6%80%8e%e6%a0%b7%e6%b5%8b%e6%89%8d%e7%ae%97%e6%95%b0%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f13%2fbadger-cj-benchmark-method%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f13%2fbadger-cj-benchmark-method%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2026/10/13/badger-cj-benchmark-method/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+</body>
+</html>

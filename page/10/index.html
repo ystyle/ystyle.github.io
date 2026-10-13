@@ -151,6 +151,36 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-docker-安装oracle-数据库" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2015-07-16T20:16:58&#43;08:00" itemprop="datePublished">2015-07-16</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2015/07/16/docker-install-oracle/">docker 安装oracle 数据库</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          docker安装oracle 11G 数据库：
+docker-oracle-xe-11g 环境：
+Oracle Express Edition 11g Release 2 与 Ubuntu 14.04.1 LTS
+Dockerfile 地址 在 Docker中央库 .
+安装 docker pull wnameless/oracle-xe-11g 以22(sshd), 1521(oracle)号端口启动容器:
+docker run -d -p 49160:22 -p 49161:1521 wnameless/oracle-xe-11g 数据库连接信息:
+
+          <a href="/2015/07/16/docker-install-oracle/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-Git单文件恢复到历史版本" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2015-06-29T07:02:49&#43;08:00" itemprop="datePublished">2015-06-29</time>
@@ -389,35 +419,6 @@ section.posts img { max-width: 100%; height: auto; width: auto\9; } ###文章里
         <div class="post-footer">
           
           <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BF%83%E6%83%85/">心情</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-OpenShift部署Ghost" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2015-06-17T07:45:20&#43;08:00" itemprop="datePublished">2015-06-17</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2015/06/17/openshiftbu-shu-ghost/">OpenShift部署Ghost</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-          简介： 利用免费云服务部署个人博客
-###一、注册openshift
-点击注册 ###二、安装Ghost
-点 Applications - Add Applications
-找到 Ghost x.x.x 点进去 Public URL 随便写如：ghost 拉到下面点 Create Application
-
-          <a href="/2015/06/17/openshiftbu-shu-ghost/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ghost/">Ghost</a></li></ul>
           
         </div>
       </article>

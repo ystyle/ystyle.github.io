@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Mon, 12 Oct 2026 10:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Tue, 13 Oct 2026 10:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>把 BadgerDB 移植到仓颉（四）：怎样测才算数</title>
+				<link>https://ystyle.top/2026/10/13/badger-cj-benchmark-method/</link>
+				<pubDate>Tue, 13 Oct 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/13/badger-cj-benchmark-method/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;从 Go 移植 BadgerDB 到仓颉（四）&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;四个方法学缺陷、Go 侧三个陷阱，与一套可核验的流程&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;code&gt;Cangjie&lt;/code&gt; · &lt;code&gt;基准测试&lt;/code&gt; · &lt;code&gt;方法论&lt;/code&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这是系列最后一篇。第三篇讲了&lt;a href=&#34;https://ystyle.top/2026/10/12/badger-cj-benchmark-audit/&#34;&gt;三个被推翻的结论&lt;/a&gt;&#xA;，&lt;br&gt;&#xA;本篇追问：&lt;strong&gt;它们为什么会错&lt;/strong&gt;，以及怎样才能不再错。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>把 BadgerDB 移植到仓颉（三）：重跑基准，三个结论翻了</title>
 				<link>https://ystyle.top/2026/10/12/badger-cj-benchmark-audit/</link>

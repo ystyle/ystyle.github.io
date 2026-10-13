@@ -4,12 +4,34 @@
   <subtitle>请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="https://ystyle.top/"/>
-  <updated>2026-10-12T02:00:00.000Z</updated>
+  <updated>2026-10-13T02:00:00.000Z</updated>
   <id>https://ystyle.top/</id>
   <author>
     <name>YSTYLE</name>
   </author>
   <generator uri="https://gohugo.io/">Hugo</generator>
+  <entry>
+    <title>把 BadgerDB 移植到仓颉（四）：怎样测才算数</title>
+    <link href="https://ystyle.top/2026/10/13/badger-cj-benchmark-method/"/>
+    <id>https://ystyle.top/2026/10/13/badger-cj-benchmark-method/</id>
+    <published>2026-10-13T02:00:00.000Z</published>
+    <updated>2026-10-13T02:00:00.000Z</updated>
+    
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;从 Go 移植 BadgerDB 到仓颉（四）&lt;/strong&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;em&gt;四个方法学缺陷、Go 侧三个陷阱，与一套可核验的流程&lt;/em&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;code&gt;Cangjie&lt;/code&gt; · &lt;code&gt;基准测试&lt;/code&gt; · &lt;code&gt;方法论&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这是系列最后一篇。第三篇讲了&lt;a href=&#34;https://ystyle.top/2026/10/12/badger-cj-benchmark-audit/&#34;&gt;三个被推翻的结论&lt;/a&gt;
+，&lt;br&gt;
+本篇追问：&lt;strong&gt;它们为什么会错&lt;/strong&gt;，以及怎样才能不再错。&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
+    <category term="badger-cj" scheme="https://ystyle.top/tags/badger-cj/"/>
+    <category term="数据库" scheme="https://ystyle.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <category term="LSM-Tree" scheme="https://ystyle.top/tags/LSM-Tree/"/>
+    <category term="移植" scheme="https://ystyle.top/tags/%E7%A7%BB%E6%A4%8D/"/>
+    
+  </entry>
   <entry>
     <title>把 BadgerDB 移植到仓颉（三）：重跑基准，三个结论翻了</title>
     <link href="https://ystyle.top/2026/10/12/badger-cj-benchmark-audit/"/>
@@ -438,22 +460,6 @@
     <category term="loongarch" scheme="https://ystyle.top/tags/loongarch/"/>
     <category term="archlinux" scheme="https://ystyle.top/tags/archlinux/"/>
     <category term="龙芯" scheme="https://ystyle.top/tags/%E9%BE%99%E8%8A%AF/"/>
-    
-  </entry>
-  <entry>
-    <title>k3s云上master&#43;内网agent的部署方式</title>
-    <link href="https://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/"/>
-    <id>https://ystyle.top/2023/03/11/k3s-master-in-cloud-agent-in-local-intranet/</id>
-    <published>2023-03-11T13:02:26.000Z</published>
-    <updated>2023-03-11T13:02:26.000Z</updated>
-    
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;公网master和内网agent使用&lt;code&gt;wireguard-native&lt;/code&gt;通信， 只要在所有节点上安装了&lt;code&gt;wireguard&lt;/code&gt;模块，k3s会自动处理所有通信流量&lt;/p&gt;</summary>
-    <category term="运维" scheme="https://ystyle.top/categories/%E8%BF%90%E7%BB%B4/"/>
-    <category term="k3s" scheme="https://ystyle.top/tags/k3s/"/>
-    <category term="kubernetes" scheme="https://ystyle.top/tags/kubernetes/"/>
-    <category term="wireguard-native" scheme="https://ystyle.top/tags/wireguard-native/"/>
-    <category term="wireguard" scheme="https://ystyle.top/tags/wireguard/"/>
     
   </entry>
 </feed>
