@@ -218,6 +218,8 @@ hdc shell bm get --udid
 
 > 这也解释了一个常见困惑：为什么把本机 `brew` 装好的程序直接拷贝给别人，对方那边跑不起来。
 > 不是因为文件坏了，而是那个自签只对**签名时所在的那台机器**成立。
+>
+> 那对方自己重签一下行不行？行，但要先摘掉旧的签名段——见下一节 4.4。
 
 于是同一个 `brew install` 装出来的命令，在不同地方待遇不一样：
 
@@ -238,7 +240,36 @@ hdc shell bm get --udid
 > 这是一条 **ACL 权限**，拿不到的话，`brew install` 装的东西在你的应用里一个都跑不起来。
 > 社区里已经有过同类提问：[workbuddy 为什么不能用 brew 安装的依赖？](https://developer.huawei.com/consumer/cn/forum/topic/0201220553019874187?fid=0109140870620153026)
 
-### 4.4 最关键的一条对应关系
+### 4.4 别人发来的二进制，怎么在自己机器上用
+
+顺着上面那句"换台机器就得重签"，很自然会想：**那我在我这台上重新签一次不就行了？**
+
+可以，但**不能直接签**——文件里还带着对方那台机器留下的签名段，签名工具会直接拒绝：
+
+```text
+E [SignElf] .codesign section already exists
+```
+
+正确顺序是**先摘掉旧签名段，再签**：
+
+```bash
+# 1) 摘掉别人留下的签名段（ohos-sdk 自带 llvm-objcopy，在 native/llvm/bin/）
+llvm-objcopy --remove-section .codesign tool.recv tool.unsigned
+
+# 2) 在本机重新自签
+binary-sign-tool sign -inFile tool.unsigned -outFile tool.signed -selfSign 1
+
+# 3) 补回执行位（objcopy 的输出文件不带执行位）
+chmod 755 tool.signed
+```
+
+> ⚠️ 第 3 步别漏。漏了就会在"签名明明成功了"之后收到一个 `Permission denied`，
+> 很容易又绕回"是不是签名没用"的老坑里。
+
+同样的道理也适用于**别人给的预编译 `.so`**：从构建机带过来的动态库如果在你这台机器上加载失败，
+先按上面这套把 `.codesign` 摘掉重签一遍，比去查"是不是找不到库、是不是路径不对"要快得多。
+
+### 4.5 最关键的一条对应关系
 
 把上面两张表连起来看，会得到一个很容易踩的结论：
 
@@ -303,6 +334,11 @@ binary-sign-tool sign -keyAlias <alias> -signAlg SHA256withECDSA \
   -appCertFile  <cert.cer> -keystoreFile <key.p12> \
   -keyPwd <pwd> -keystorePwd <pwd> \
   -inFile tool -outFile tool.signed -moduleFile module.json
+chmod 755 tool.signed
+
+# ---- 别人发来的、已在别的机器上签过的二进制：先摘签名段再重签 ----
+llvm-objcopy --remove-section .codesign tool.recv tool.unsigned
+binary-sign-tool sign -inFile tool.unsigned -outFile tool.signed -selfSign 1
 chmod 755 tool.signed
 
 # ---- 看看签成了什么（权限段 + 证书链）----
