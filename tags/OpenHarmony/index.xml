@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Tue, 13 Oct 2026 16:30:00 +0800</lastBuildDate>
+			<lastBuildDate>Tue, 13 Oct 2026 16:40:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/OpenHarmony/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>【鸿蒙PC】二进制签名入门：证书从哪来、能要什么权限、该用哪一个</title>
+				<link>https://ystyle.top/2026/10/13/harmonyos-pc-binary-sign-basics/</link>
+				<pubDate>Tue, 13 Oct 2026 16:40:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/13/harmonyos-pc-binary-sign-basics/</guid>
+				<description>鸿蒙 PC 上不签名的二进制根本跑不起来，但官方文档一上来就摆出三种签名，反而让人卡在第一步：我到底该用哪种？这篇把三种签名的证书来源、能声明的权限、以及在 HiShell 里跑和在自己应用里拉起两种场景下的对应关系，整理成几张能直接查的表。不涉及原理，只回答该用哪个、要做什么。</description>
+			</item>
 			<item>
 				<title>【鸿蒙PC】二进制签名解析：自签名、调试证书、二进制证书到底差在哪</title>
 				<link>https://ystyle.top/2026/10/13/harmonyos-pc-binary-sign-types/</link>

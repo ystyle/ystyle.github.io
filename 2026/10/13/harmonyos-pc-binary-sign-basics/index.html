@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【鸿蒙PC】二进制签名入门：证书从哪来、能要什么权限、该用哪一个 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">【鸿蒙PC】二进制签名入门：证书从哪来、能要什么权限、该用哪一个</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">【鸿蒙PC】二进制签名入门：证书从哪来、能要什么权限、该用哪一个</h1>
+    <h5 class="subtitle">
+      <time datetime="2026-10-13T16:40:00&#43;08:00" itemprop="datePublished" class="page-time">2026-10-13</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E9%B8%BF%E8%92%99PC/">鸿蒙PC</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e6%91%98%e8%a6%81">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">摘要</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#1-%e4%b8%80%e5%bc%a0%e8%a1%a8%e7%9c%8b%e5%ae%8c%e4%b8%89%e7%a7%8d%e7%ad%be%e5%90%8d">
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">1. 一张表看完三种签名</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#2-%e8%af%81%e4%b9%a6%e4%bb%8e%e5%93%aa%e6%9d%a5">
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">2. 证书从哪来</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#21-%e8%87%aa%e7%ad%be%e5%90%8d%e6%a0%b9%e6%9c%ac%e6%b2%a1%e6%9c%89%e8%af%81%e4%b9%a6%e8%bf%99%e5%9b%9e%e4%ba%8b">
+    <span class="post-toc-number">3.1.</span> <span class="post-toc-text">2.1 自签名：根本没有证书这回事</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#22-%e8%b0%83%e8%af%95%e8%af%81%e4%b9%a6%e5%8d%8e%e4%b8%ba%e5%8f%91%e7%9a%84%e4%bd%86%e5%bf%85%e9%a1%bb%e8%87%aa%e5%b7%b1%e7%94%b3%e8%af%b7">
+    <span class="post-toc-number">3.2.</span> <span class="post-toc-text">2.2 调试证书：华为发的，但必须自己申请</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#23-%e4%ba%8c%e8%bf%9b%e5%88%b6%e8%af%81%e4%b9%a6%e4%b8%aa%e4%ba%ba%e5%bc%80%e5%8f%91%e8%80%85%e5%9f%ba%e6%9c%ac%e6%8b%bf%e4%b8%8d%e5%88%b0">
+    <span class="post-toc-number">3.3.</span> <span class="post-toc-text">2.3 二进制证书：个人开发者基本拿不到</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#3-%e9%9c%80%e8%a6%81%e4%bb%80%e4%b9%88%e6%9d%83%e9%99%90">
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">3. 需要什么权限</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#31-%e4%ba%8c%e8%bf%9b%e5%88%b6%e8%87%aa%e5%b7%b1%e5%a3%b0%e6%98%8e%e6%9d%83%e9%99%90">
+    <span class="post-toc-number">4.1.</span> <span class="post-toc-text">3.1 二进制自己声明权限</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#32-%e5%ba%94%e7%94%a8%e4%be%a7%e8%a6%81%e5%bc%80%e7%9a%84%e6%9d%83%e9%99%90">
+    <span class="post-toc-number">4.2.</span> <span class="post-toc-text">3.2 应用侧要开的权限</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#4-%e5%9c%ba%e6%99%af%e5%af%b9%e5%ba%94hishell-%e9%87%8c-vs-%e8%87%aa%e5%b7%b1%e7%9a%84%e5%ba%94%e7%94%a8%e9%87%8c">
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">4. 场景对应：HiShell 里 vs 自己的应用里</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#41-%e5%9c%a8-hishell-%e9%87%8c%e7%9b%b4%e6%8e%a5%e8%b7%91">
+    <span class="post-toc-number">5.1.</span> <span class="post-toc-text">4.1 在 HiShell 里直接跑</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#42-%e5%9c%a8%e8%87%aa%e5%b7%b1%e7%9a%84%e5%ba%94%e7%94%a8%e9%87%8c%e6%8b%89%e8%b5%b7">
+    <span class="post-toc-number">5.2.</span> <span class="post-toc-text">4.2 在自己的应用里拉起</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#43-%e6%9c%80%e5%85%b3%e9%94%ae%e7%9a%84%e4%b8%80%e6%9d%a1%e5%af%b9%e5%ba%94%e5%85%b3%e7%b3%bb">
+    <span class="post-toc-number">5.3.</span> <span class="post-toc-text">4.3 最关键的一条对应关系</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#5-%e6%80%8e%e4%b9%88%e9%80%89%e4%b8%89%e6%ad%a5">
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">5. 怎么选：三步</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#6-%e5%91%bd%e4%bb%a4%e9%80%9f%e6%9f%a5">
+    <span class="post-toc-number">7.</span> <span class="post-toc-text">6. 命令速查</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e7%9b%b8%e5%85%b3%e6%96%87%e7%ab%a0">
+    <span class="post-toc-number">8.</span> <span class="post-toc-text">相关文章</span>
+  </a>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-【鸿蒙PC】二进制签名入门：证书从哪来、能要什么权限、该用哪一个" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">【鸿蒙PC】二进制签名入门：证书从哪来、能要什么权限、该用哪一个</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2026-10-13T16:40:00&#43;08:00" itemprop="datePublished">2026-10-13</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E9%B8%BF%E8%92%99PC/">鸿蒙PC</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2>
+<p>鸿蒙 PC（2in1）上，<strong>没有合法签名的二进制跑不起来</strong>——直接 <code>./tool</code> 就是 <code>Permission denied</code>，不管你是从哪台机器交叉编译过来的。</p>
+<p>但真去看文档，第一步就会卡住：</p>
+<ul>
+<li>文档里有<strong>三种</strong>签名，名字很像，我该选哪个？</li>
+<li>签名要证书，证书从哪来？要不要钱？个人能不能申请？</li>
+<li>签完之后还是跑不起来，是签错了还是权限没给？</li>
+<li>同样是这个二进制，我在 HiShell 里敲能跑，为什么放到我自己的应用里就拉不起来？</li>
+</ul>
+<p>这篇就是回答这些的。不涉及原理（原理在<a href="/2026/10/13/harmonyos-pc-binary-sign-types/">解析篇</a>
+），只给你能直接查的表和能直接抄的命令。</p>
+<p>一句话结论：<strong>自己本机用，自签名就够了；需要声明权限或在应用里被拉起，必须用自己申请的调试证书签名；要分发给别人，得是华为认证开发者拿到的二进制证书。</strong></p>
+<hr>
+<h2 id="1-一张表看完三种签名"><a href="#1-一张表看完三种签名" class="headerlink" title="1. 一张表看完三种签名"></a>1. 一张表看完三种签名</h2>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th><strong>自签名（adhoc）</strong></th>
+					<th><strong>调试证书签名</strong></th>
+					<th><strong>二进制证书签名</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>证书从哪来</strong></td>
+					<td>不需要证书</td>
+					<td>华为颁发，<strong>自己申请</strong></td>
+					<td>华为颁发，面向认证开发者</td>
+			</tr>
+			<tr>
+					<td><strong>门槛</strong></td>
+					<td>零</td>
+					<td>有开发者账号即可</td>
+					<td>个人开发者基本拿不到</td>
+			</tr>
+			<tr>
+					<td><strong>能声明权限吗</strong></td>
+					<td>❌ 写了也不生效</td>
+					<td>✅（共享库 <code>.so</code> 除外）</td>
+					<td>✅</td>
+			</tr>
+			<tr>
+					<td><strong>能给别人用吗</strong></td>
+					<td>只能自己本机用</td>
+					<td>只能给 <code>device-ids</code> 名单里的设备</td>
+					<td>随便分发</td>
+			</tr>
+			<tr>
+					<td><strong>设备要开开发者模式吗</strong></td>
+					<td>—</td>
+					<td><strong>要</strong></td>
+					<td>不要</td>
+			</tr>
+			<tr>
+					<td><strong>典型用途</strong></td>
+					<td>本机编译自己用</td>
+					<td>开发调试</td>
+					<td>正式发布</td>
+			</tr>
+			<tr>
+					<td><strong>一句话</strong></td>
+					<td>能跑，但没身份</td>
+					<td>能干活的开发凭证</td>
+					<td>正式身份证</td>
+			</tr>
+	</tbody>
+</table>
+<blockquote>
+<p>三种签名签出来的文件结构其实是同一套，区别在&quot;谁来给你作证&quot;。想搞清楚这一点，看<a href="/2026/10/13/harmonyos-pc-binary-sign-types/">解析篇</a>
+。</p>
+</blockquote>
+<hr>
+<h2 id="2-证书从哪来"><a href="#2-证书从哪来" class="headerlink" title="2. 证书从哪来"></a>2. 证书从哪来</h2>
+<p>这是最容易绕晕的部分，因为三种签名里只有两种真的用到证书。</p>
+<h3 id="21-自签名根本没有证书这回事"><a href="#21-自签名根本没有证书这回事" class="headerlink" title="2.1 自签名：根本没有证书这回事"></a>2.1 自签名：根本没有证书这回事</h3>
+<p>命令里连证书参数都不用传：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>binary-sign-tool sign -inFile tool -outFile tool.signed -selfSign <span style="color:#0550ae">1</span>
+</span></span><span style="display:flex;"><span>chmod <span style="color:#0550ae">755</span> tool.signed
+</span></span></code></pre></div><p>工具会算一个&quot;文件有没有被改过&quot;的校验值写进去。<strong>它证明的是&quot;这个文件没被篡改&quot;，不是&quot;这是谁做的&quot;。</strong> 没有身份，自然也就没有权限可谈。</p>
+<h3 id="22-调试证书华为发的但必须自己申请"><a href="#22-调试证书华为发的但必须自己申请" class="headerlink" title="2.2 调试证书：华为发的，但必须自己申请"></a>2.2 调试证书：华为发的，但<strong>必须自己申请</strong></h3>
+<p>调试证书是华为签发的，个人开发者申请得到。但它有<strong>两条获取路径，其中一条是坑</strong>：</p>
+<table>
+	<thead>
+			<tr>
+					<th>获取方式</th>
+					<th>能不能用于二进制签名</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>✅ <strong>自己申请</strong>的调试证书</td>
+					<td><strong>能用</strong></td>
+			</tr>
+			<tr>
+					<td>❌ DevEco Studio「自动签名」下发的</td>
+					<td><strong>不能用</strong></td>
+			</tr>
+	</tbody>
+</table>
+<p>DevEco Studio 的自动签名看起来最省事——在 IDE 里点一下，<code>.p12</code> 和 <code>.cer</code> 就生成好了。<strong>但用它签出来的二进制，执行时会被内核拒掉</strong>，报的是 <code>Operation not permitted</code>，在应用日志里只能看到 <code>errno = 129</code>，真正的原因得翻内核日志才看得到。</p>
+<p>我们用同一个文件、同一个 <code>module.json</code>、同一台设备做了对照：<strong>唯一变量就是证书，换掉就能跑</strong>。所以这不是姿势问题，是那张证书本身不行。完整证据链在<a href="/2026/09/22/matebookpro-binrary-debug-sign/">实战篇</a>
+里。</p>
+<blockquote>
+<p>结论记住一句话：<strong>二进制签名一律用自己申请的调试证书，别用 IDE 自动签名给的。</strong></p>
+</blockquote>
+<h3 id="23-二进制证书个人开发者基本拿不到"><a href="#23-二进制证书个人开发者基本拿不到" class="headerlink" title="2.3 二进制证书：个人开发者基本拿不到"></a>2.3 二进制证书：个人开发者基本拿不到</h3>
+<p>&ldquo;二进制证书&quot;是华为发给<strong>认证开发者</strong>的，用来做面向用户的大范围分发：不限设备、不用开发者模式。对绝大多数个人开发者来说这条路暂时走不通——官方文档里也把它标注为&quot;面向华为认证的已知开发者&rdquo;。</p>
+<p>这也是为什么社区里的实践几乎都集中在前面两条路上。</p>
+<hr>
+<h2 id="3-需要什么权限"><a href="#3-需要什么权限" class="headerlink" title="3. 需要什么权限"></a>3. 需要什么权限</h2>
+<p>这里有两层权限，<strong>它们不是一回事，很多人会混</strong>：</p>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th>谁声明</th>
+					<th>写在哪</th>
+					<th>决定什么</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>二进制自己的权限</strong></td>
+					<td>二进制</td>
+					<td><code>module.json</code> → 签进 <code>.permission</code> 段</td>
+					<td>这个程序能不能用某些底层能力</td>
+			</tr>
+			<tr>
+					<td><strong>应用侧的权限</strong></td>
+					<td>拉起它的应用</td>
+					<td>应用的 <code>module.json</code></td>
+					<td>应用能不能拉起这个二进制</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="31-二进制自己声明权限"><a href="#31-二进制自己声明权限" class="headerlink" title="3.1 二进制自己声明权限"></a>3.1 二进制自己声明权限</h3>
+<p>只有<strong>调试证书签名</strong>和<strong>二进制证书签名</strong>的产物，声明的权限才生效；<strong>自签名（adhoc）写多少都白写</strong>。</p>
+<p>写法是在 <code>module.json</code> 里声明，签名时通过 <code>-moduleFile</code> 传进去：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json5" data-lang="json5"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;requestPermissions&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;ohos.permission.kernel.LOAD_INDEPENDENT_LIBRARY&#34;</span> <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;ohos.permission.INHERIT_PARENT_PERMISSION&#34;</span> <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;ohos.permission.kernel.EXEMPT_ANONYMOUS_EXECUTABLE_MEMORY&#34;</span> <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;ohos.permission.kernel.IGNORE_LIBRARY_VALIDATION&#34;</span> <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;ohos.permission.kernel.ALLOW_WRITABLE_CODE_MEMORY&#34;</span> <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;debug-info&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;device-id-type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;udid&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;device-ids&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;&lt;你的设备 UDID&gt;&#34;</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre></div><p>几个常见的对应关系：</p>
+<table>
+	<thead>
+			<tr>
+					<th>你想要的能力</th>
+					<th>对应的权限名</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>自己加载动态库</td>
+					<td><code>ohos.permission.kernel.LOAD_INDEPENDENT_LIBRARY</code></td>
+			</tr>
+			<tr>
+					<td>继承父进程权限</td>
+					<td><code>ohos.permission.INHERIT_PARENT_PERMISSION</code></td>
+			</tr>
+			<tr>
+					<td>JIT / 可写可执行内存</td>
+					<td><code>ohos.permission.kernel.ALLOW_WRITABLE_CODE_MEMORY</code></td>
+			</tr>
+			<tr>
+					<td>跳过动态库校验</td>
+					<td><code>ohos.permission.kernel.IGNORE_LIBRARY_VALIDATION</code></td>
+			</tr>
+			<tr>
+					<td>匿名可执行内存</td>
+					<td><code>ohos.permission.kernel.EXEMPT_ANONYMOUS_EXECUTABLE_MEMORY</code></td>
+			</tr>
+	</tbody>
+</table>
+<p>两点必须注意：</p>
+<ol>
+<li><strong><code>device-ids</code> 是调试证书签名的必填项</strong>，缺了直接报 <code>udid not in module.json</code>。取 UDID：<code>hdc shell bm get --udid</code>。</li>
+<li><strong>共享库（<code>.so</code>）不能声明权限</strong>——这条是官方明确的。要权限就签可执行程序。</li>
+</ol>
+<h3 id="32-应用侧要开的权限"><a href="#32-应用侧要开的权限" class="headerlink" title="3.2 应用侧要开的权限"></a>3.2 应用侧要开的权限</h3>
+<p>这决定&quot;你的应用能不能把这个二进制拉起来&quot;。规则和应用的沙箱强弱有关：</p>
+<ul>
+<li><strong>弱沙箱应用</strong>：具备 <code>ohos.permission.CUSTOM_SANDBOX</code>（这是一条 <strong>ACL 权限</strong>）</li>
+<li><strong>强沙箱应用</strong>：不具备该权限</li>
+</ul>
+<p>具体见下一节的矩阵。</p>
+<hr>
+<h2 id="4-场景对应hishell-里-vs-自己的应用里"><a href="#4-场景对应hishell-里-vs-自己的应用里" class="headerlink" title="4. 场景对应：HiShell 里 vs 自己的应用里"></a>4. 场景对应：HiShell 里 vs 自己的应用里</h2>
+<p>这应该是你最关心的部分。<strong>同一个二进制，在这两个地方的待遇完全不同。</strong></p>
+<h3 id="41-在-hishell-里直接跑"><a href="#41-在-hishell-里直接跑" class="headerlink" title="4.1 在 HiShell 里直接跑"></a>4.1 在 HiShell 里直接跑</h3>
+<p>就是连上设备、打开终端、敲 <code>./tool</code> 那种。对应关系很干脆：</p>
+<table>
+	<thead>
+			<tr>
+					<th>你想要的</th>
+					<th>该用哪种签名</th>
+					<th>还要做什么</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>自己写的小工具，能用就行</td>
+					<td><strong>自签名</strong></td>
+					<td><code>chmod 755</code></td>
+			</tr>
+			<tr>
+					<td>要声明权限（JIT、独立加载库…）</td>
+					<td><strong>调试证书</strong></td>
+					<td>填 <code>device-ids</code> + 开开发者模式</td>
+			</tr>
+			<tr>
+					<td>给别人也能跑</td>
+					<td><strong>二进制证书</strong></td>
+					<td>个人拿不到</td>
+			</tr>
+	</tbody>
+</table>
+<blockquote>
+<p>⚠️ 两个高频坑：</p>
+<ol>
+<li><strong>签完必须 <code>chmod +x</code></strong>。签名工具是往已有文件里写，会沿用旧权限位；<code>cp</code> 过来的文件没有执行位，签完照样 <code>Permission denied</code>，很容易误判成&quot;签名没用&quot;。</li>
+<li><strong>别放在 <code>/data/local/tmp</code></strong>。这个目录因为 SELinux 标签读不了，反而跑不起来。放家目录就行。</li>
+</ol>
+</blockquote>
+<h3 id="42-在自己的应用里拉起"><a href="#42-在自己的应用里拉起" class="headerlink" title="4.2 在自己的应用里拉起"></a>4.2 在自己的应用里拉起</h3>
+<p>应用里拉起二进制，除了签名本身，还要看<strong>应用的沙箱类型</strong>和<strong>有没有申请开关</strong>：</p>
+<table>
+	<thead>
+			<tr>
+					<th>应用类型</th>
+					<th><code>ALLOW_EXTERNAL_NATIVE_CODE</code></th>
+					<th>normal bin</th>
+					<th>debug bin</th>
+					<th>adhoc bin</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>弱沙箱</td>
+					<td>无</td>
+					<td>✅</td>
+					<td>✅</td>
+					<td>✅</td>
+			</tr>
+			<tr>
+					<td>弱沙箱</td>
+					<td>有</td>
+					<td>✅</td>
+					<td>✅</td>
+					<td>✅</td>
+			</tr>
+			<tr>
+					<td>强沙箱</td>
+					<td>无</td>
+					<td>❌</td>
+					<td>❌</td>
+					<td>❌</td>
+			</tr>
+			<tr>
+					<td>强沙箱</td>
+					<td>有</td>
+					<td>✅</td>
+					<td>✅</td>
+					<td>❌</td>
+			</tr>
+	</tbody>
+</table>
+<p>读法是三句话：</p>
+<ol>
+<li><strong>弱沙箱应用怎样都能拉起独立二进制。</strong> 因为它握有 <code>CUSTOM_SANDBOX</code> 这条 ACL 权限，本身就自带&quot;允许外部原生代码&quot;的身份。</li>
+<li><strong>强沙箱应用必须申请 <code>ALLOW_EXTERNAL_NATIVE_CODE</code></strong>，否则一律拉不起来。</li>
+<li><strong>就算申请了，强沙箱也拉不起 adhoc bin。</strong> 因为自签名没有身份，参与不了&quot;这个二进制是谁给的、能不能信&quot;的判断。</li>
+</ol>
+<h3 id="43-最关键的一条对应关系"><a href="#43-最关键的一条对应关系" class="headerlink" title="4.3 最关键的一条对应关系"></a>4.3 最关键的一条对应关系</h3>
+<p>把上面两张表连起来看，会得到一个很容易踩的结论：</p>
+<blockquote>
+<p><strong>用 DevEco Studio 的 clang 编译出来的二进制，默认就是 adhoc bin，不是 debug bin。</strong></p>
+</blockquote>
+<p>所以如果你的目标是&quot;在（强沙箱）应用里拉起自己编译的二进制&quot;，<strong>从编译那一刻起就已经注定失败了</strong>——必须补一步调试证书签名，把它从 <code>adhoc bin</code> 变成 <code>debug bin</code>。</p>
+<p>一句话对照：</p>
+<table>
+	<thead>
+			<tr>
+					<th>你手上是</th>
+					<th>在 HiShell 里</th>
+					<th>在弱沙箱应用里</th>
+					<th>在强沙箱应用里</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>adhoc bin</code>（交叉编译默认）</td>
+					<td>✅</td>
+					<td>✅</td>
+					<td>❌</td>
+			</tr>
+			<tr>
+					<td><code>debug bin</code>（调试证书签过）</td>
+					<td>✅</td>
+					<td>✅</td>
+					<td>✅</td>
+			</tr>
+			<tr>
+					<td><code>normal bin</code>（二进制证书签过）</td>
+					<td>✅</td>
+					<td>✅</td>
+					<td>✅</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="5-怎么选三步"><a href="#5-怎么选三步" class="headerlink" title="5. 怎么选：三步"></a>5. 怎么选：三步</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>第 1 步：需要声明权限吗？或者在（强沙箱）应用里被拉起吗？
+</span></span><span style="display:flex;"><span>          ├─ 不需要 ──────────────→ 自签名（adhoc）
+</span></span><span style="display:flex;"><span>          └─ 需要 ──┐
+</span></span><span style="display:flex;"><span>                    ↓
+</span></span><span style="display:flex;"><span>第 2 步：要发给别人的设备用吗？
+</span></span><span style="display:flex;"><span>          ├─ 只给自己/名单上的设备 → 自己申请的调试证书
+</span></span><span style="display:flex;"><span>          └─ 要公开发布 ──────────→ 二进制证书（需华为认证）
+</span></span></code></pre></div><p>对照成表格：</p>
+<table>
+	<thead>
+			<tr>
+					<th>你的情况</th>
+					<th>用哪种</th>
+					<th>关键动作</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>本机自用、不要权限</td>
+					<td><strong>自签名</strong></td>
+					<td><code>-selfSign 1</code> + <code>chmod 755</code></td>
+			</tr>
+			<tr>
+					<td>要声明权限</td>
+					<td><strong>调试证书</strong></td>
+					<td><strong>自己申请</strong>的证书 + <code>device-ids</code> + 开发者模式</td>
+			</tr>
+			<tr>
+					<td>要在应用里被拉起</td>
+					<td>看第 4.2 节矩阵</td>
+					<td>注意交叉编译默认是 <code>adhoc bin</code></td>
+			</tr>
+			<tr>
+					<td>要分发给大量用户</td>
+					<td><strong>二进制证书</strong></td>
+					<td>需华为认证</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="6-命令速查"><a href="#6-命令速查" class="headerlink" title="6. 命令速查"></a>6. 命令速查</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># ---- 取设备 UDID（调试证书签名要用）----</span>
+</span></span><span style="display:flex;"><span>hdc shell bm get --udid
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># ---- 自签名（adhoc）----</span>
+</span></span><span style="display:flex;"><span>binary-sign-tool sign -inFile tool -outFile tool.signed -selfSign <span style="color:#0550ae">1</span>
+</span></span><span style="display:flex;"><span>chmod <span style="color:#0550ae">755</span> tool.signed
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># ---- 调试证书签名 ----</span>
+</span></span><span style="display:flex;"><span>binary-sign-tool sign -keyAlias &lt;alias&gt; -signAlg SHA256withECDSA <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -appCertFile  &lt;cert.cer&gt; -keystoreFile &lt;key.p12&gt; <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -keyPwd &lt;pwd&gt; -keystorePwd &lt;pwd&gt; <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -inFile tool -outFile tool.signed -moduleFile module.json
+</span></span><span style="display:flex;"><span>chmod <span style="color:#0550ae">755</span> tool.signed
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># ---- 看看签成了什么（权限段 + 证书链）----</span>
+</span></span><span style="display:flex;"><span>binary-sign-tool display-sign -inFile tool.signed
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># ---- 跑不起来时看日志 ----</span>
+</span></span><span style="display:flex;"><span>hdc shell <span style="color:#0a3069">&#34;hilog -x | grep -E &#39;code_protect|CODE_SIGN&#39;&#34;</span>
+</span></span></code></pre></div><hr>
+<h2 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h2>
+<ul>
+<li><a href="/2026/09/22/matebookpro-binrary-debug-sign/">《二进制签名实战：三类签名、沙箱权限矩阵，以及一张调试证书的坑》</a>
+——完整的踩坑记录：五种签名组合实测、内核日志取证、为什么 IDE 自动签名的证书不能用</li>
+<li><a href="/2026/10/13/harmonyos-pc-binary-sign-types/">《二进制签名解析：自签名、调试证书、二进制证书到底差在哪》</a>
+——原理篇：从 OpenHarmony 源码看三种签名在文件结构和内核校验上的真实差异</li>
+</ul>
+<blockquote>
+<p>说明：本文的规则部分整理自华为开发者支持与官方文档，命令均在实际设备<br>
+（HUAWEI MateBook Pro，<code>OpenHarmony-7.0.0.105</code>，API 26，2in1）上验证过。<br>
+如果只想快速决定用哪种签名，看到第 5 节就够了。</p>
+</blockquote>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2026-10-13T16:40:00&#43;08:00" itemprop="dateUpdated">2026-10-13 16:40:00</time>
+          </span><br>
+          本文链接：<a href="/2026/10/13/harmonyos-pc-binary-sign-basics/" target="_blank" rel="external">https://ystyle.top/2026/10/13/harmonyos-pc-binary-sign-basics/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HarmonyOS/">HarmonyOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenHarmony/">OpenHarmony</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%B8%BF%E8%92%99PC/">鸿蒙PC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%AD%BE%E5%90%8D/">二进制签名</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HNP/">HNP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/code_sign/">code_sign</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f13%2fharmonyos-pc-binary-sign-basics%2f&title=%e3%80%8a%e3%80%90%e9%b8%bf%e8%92%99PC%e3%80%91%e4%ba%8c%e8%bf%9b%e5%88%b6%e7%ad%be%e5%90%8d%e5%85%a5%e9%97%a8%ef%bc%9a%e8%af%81%e4%b9%a6%e4%bb%8e%e5%93%aa%e6%9d%a5%e3%80%81%e8%83%bd%e8%a6%81%e4%bb%80%e4%b9%88%e6%9d%83%e9%99%90%e3%80%81%e8%af%a5%e7%94%a8%e5%93%aa%e4%b8%80%e4%b8%aa%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f13%2fharmonyos-pc-binary-sign-basics%2f&title=%e3%80%8a%e3%80%90%e9%b8%bf%e8%92%99PC%e3%80%91%e4%ba%8c%e8%bf%9b%e5%88%b6%e7%ad%be%e5%90%8d%e5%85%a5%e9%97%a8%ef%bc%9a%e8%af%81%e4%b9%a6%e4%bb%8e%e5%93%aa%e6%9d%a5%e3%80%81%e8%83%bd%e8%a6%81%e4%bb%80%e4%b9%88%e6%9d%83%e9%99%90%e3%80%81%e8%af%a5%e7%94%a8%e5%93%aa%e4%b8%80%e4%b8%aa%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e9%b8%bf%e8%92%99%20PC%20%e4%b8%8a%e4%b8%8d%e7%ad%be%e5%90%8d%e7%9a%84%e4%ba%8c%e8%bf%9b%e5%88%b6%e6%a0%b9%e6%9c%ac%e8%b7%91%e4%b8%8d%e8%b5%b7%e6%9d%a5%ef%bc%8c%e4%bd%86%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3%e4%b8%80%e4%b8%8a%e6%9d%a5%e5%b0%b1%e6%91%86%e5%87%ba%e4%b8%89%e7%a7%8d%e7%ad%be%e5%90%8d%ef%bc%8c%e5%8f%8d%e8%80%8c%e8%ae%a9%e4%ba%ba%e5%8d%a1%e5%9c%a8%e7%ac%ac%e4%b8%80%e6%ad%a5%ef%bc%9a%e6%88%91%e5%88%b0%e5%ba%95%e8%af%a5%e7%94%a8%e5%93%aa%e7%a7%8d%ef%bc%9f%e8%bf%99%e7%af%87%e6%8a%8a%e4%b8%89%e7%a7%8d%e7%ad%be%e5%90%8d%e7%9a%84%e8%af%81%e4%b9%a6%e6%9d%a5%e6%ba%90%e3%80%81%e8%83%bd%e5%a3%b0%e6%98%8e%e7%9a%84%e6%9d%83%e9%99%90%e3%80%81%e4%bb%a5%e5%8f%8a%e5%9c%a8%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f13%2fharmonyos-pc-binary-sign-basics%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e3%80%90%e9%b8%bf%e8%92%99PC%e3%80%91%e4%ba%8c%e8%bf%9b%e5%88%b6%e7%ad%be%e5%90%8d%e5%85%a5%e9%97%a8%ef%bc%9a%e8%af%81%e4%b9%a6%e4%bb%8e%e5%93%aa%e6%9d%a5%e3%80%81%e8%83%bd%e8%a6%81%e4%bb%80%e4%b9%88%e6%9d%83%e9%99%90%e3%80%81%e8%af%a5%e7%94%a8%e5%93%aa%e4%b8%80%e4%b8%aa%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f13%2fharmonyos-pc-binary-sign-basics%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f13%2fharmonyos-pc-binary-sign-basics%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2026/10/13/harmonyos-pc-binary-sign-types/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">【鸿蒙PC】二进制签名解析：自签名、调试证书、二进制证书到底差在哪</h4>
+        </a>
+      </div>
+      
+      
+    </nav>
+    
+
+    
+    
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+  </article>
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f13%2fharmonyos-pc-binary-sign-basics%2f&title=%e3%80%8a%e3%80%90%e9%b8%bf%e8%92%99PC%e3%80%91%e4%ba%8c%e8%bf%9b%e5%88%b6%e7%ad%be%e5%90%8d%e5%85%a5%e9%97%a8%ef%bc%9a%e8%af%81%e4%b9%a6%e4%bb%8e%e5%93%aa%e6%9d%a5%e3%80%81%e8%83%bd%e8%a6%81%e4%bb%80%e4%b9%88%e6%9d%83%e9%99%90%e3%80%81%e8%af%a5%e7%94%a8%e5%93%aa%e4%b8%80%e4%b8%aa%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f13%2fharmonyos-pc-binary-sign-basics%2f&title=%e3%80%8a%e3%80%90%e9%b8%bf%e8%92%99PC%e3%80%91%e4%ba%8c%e8%bf%9b%e5%88%b6%e7%ad%be%e5%90%8d%e5%85%a5%e9%97%a8%ef%bc%9a%e8%af%81%e4%b9%a6%e4%bb%8e%e5%93%aa%e6%9d%a5%e3%80%81%e8%83%bd%e8%a6%81%e4%bb%80%e4%b9%88%e6%9d%83%e9%99%90%e3%80%81%e8%af%a5%e7%94%a8%e5%93%aa%e4%b8%80%e4%b8%aa%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e9%b8%bf%e8%92%99%20PC%20%e4%b8%8a%e4%b8%8d%e7%ad%be%e5%90%8d%e7%9a%84%e4%ba%8c%e8%bf%9b%e5%88%b6%e6%a0%b9%e6%9c%ac%e8%b7%91%e4%b8%8d%e8%b5%b7%e6%9d%a5%ef%bc%8c%e4%bd%86%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3%e4%b8%80%e4%b8%8a%e6%9d%a5%e5%b0%b1%e6%91%86%e5%87%ba%e4%b8%89%e7%a7%8d%e7%ad%be%e5%90%8d%ef%bc%8c%e5%8f%8d%e8%80%8c%e8%ae%a9%e4%ba%ba%e5%8d%a1%e5%9c%a8%e7%ac%ac%e4%b8%80%e6%ad%a5%ef%bc%9a%e6%88%91%e5%88%b0%e5%ba%95%e8%af%a5%e7%94%a8%e5%93%aa%e7%a7%8d%ef%bc%9f%e8%bf%99%e7%af%87%e6%8a%8a%e4%b8%89%e7%a7%8d%e7%ad%be%e5%90%8d%e7%9a%84%e8%af%81%e4%b9%a6%e6%9d%a5%e6%ba%90%e3%80%81%e8%83%bd%e5%a3%b0%e6%98%8e%e7%9a%84%e6%9d%83%e9%99%90%e3%80%81%e4%bb%a5%e5%8f%8a%e5%9c%a8%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f13%2fharmonyos-pc-binary-sign-basics%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e3%80%90%e9%b8%bf%e8%92%99PC%e3%80%91%e4%ba%8c%e8%bf%9b%e5%88%b6%e7%ad%be%e5%90%8d%e5%85%a5%e9%97%a8%ef%bc%9a%e8%af%81%e4%b9%a6%e4%bb%8e%e5%93%aa%e6%9d%a5%e3%80%81%e8%83%bd%e8%a6%81%e4%bb%80%e4%b9%88%e6%9d%83%e9%99%90%e3%80%81%e8%af%a5%e7%94%a8%e5%93%aa%e4%b8%80%e4%b8%aa%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f13%2fharmonyos-pc-binary-sign-basics%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f13%2fharmonyos-pc-binary-sign-basics%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2026/10/13/harmonyos-pc-binary-sign-basics/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+</body>
+</html>

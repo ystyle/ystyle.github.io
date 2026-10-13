@@ -151,6 +151,30 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-使用Docker快速上手鸿蒙" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2020-09-11T01:00:26&#43;08:00" itemprop="datePublished">2020-09-11</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2020/09/11/compile-openharmony-indokcer/">使用Docker快速上手鸿蒙</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          准备 在机器上安装好Docker 编译鸿蒙系统镜像 打开终端执行以下命令 mkdir ~/OpenHarmony cd ~/OpenHarmony docker run --rm -ti -v ${PWD}/out:/OpenHarmony/out ystyle/open-harmony 编译成功后各镜像在out目录下面, 默认编译的是Hi3861开发板的系统镜像, 可自行烧录到固定测试 如果要编译其它板子可以设置dokcer镜像的环境变量HARDWARE 目前支持: wifiiot、ipcamera_hi3516dv300、ipcamera_hi3518ev300 更新代码并编译 mkdir ~/OpenHarmony cd ~/OpenHarmony docker run --rm -ti -e HARDWARE=ipcamera_hi3516dv300 -v ${PWD}/out:/OpenHarmony/out ystyle/open-harmony bash repo sync -c python build.py ${HARDWARE} -b debug 编写应用程序 示例在这Hi3861开发板第二个示例程序 
+          <a href="/2020/09/11/compile-openharmony-indokcer/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%B8%BF%E8%92%99/">鸿蒙</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-转换在线漫画为mobi格式" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2020-09-04T12:46:26&#43;08:00" itemprop="datePublished">2020-09-04</time>
@@ -375,32 +399,6 @@ FROM ubuntu:16.04 MAINTAINER https://www.openarkcompiler.cn # Setting up the bui
         <div class="post-footer">
           
           <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BoltDB/">BoltDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/storm/">storm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-kde5在更新系统后不想重启怎么办" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2019-12-12T15:24:26&#43;08:00" itemprop="datePublished">2019-12-12</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2019/12/12/donot-restart-kde-after-update-system/">kde在更新系统后不想重启怎么办</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-           用Archlinux经常更新系统， 如果遇到kde更新了的话，不重启系统的话很多kde的应用会打不开， 如果不想重启系统应该怎么办？
-不重启系统情况下重启KDE5 在更新系统完成后输入:
-
-          <a href="/2019/12/12/donot-restart-kde-after-update-system/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kde/">kde</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/archlinux/">archlinux</a></li></ul>
           
         </div>
       </article>
