@@ -4,12 +4,29 @@
   <subtitle>请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="https://ystyle.top/"/>
-  <updated>2026-10-13T02:00:00.000Z</updated>
+  <updated>2026-10-13T08:30:00.000Z</updated>
   <id>https://ystyle.top/</id>
   <author>
     <name>YSTYLE</name>
   </author>
   <generator uri="https://gohugo.io/">Hugo</generator>
+  <entry>
+    <title>【鸿蒙PC】二进制签名解析：自签名、调试证书、二进制证书到底差在哪</title>
+    <link href="https://ystyle.top/2026/10/13/harmonyos-pc-binary-sign-types/"/>
+    <id>https://ystyle.top/2026/10/13/harmonyos-pc-binary-sign-types/</id>
+    <published>2026-10-13T08:30:00.000Z</published>
+    <updated>2026-10-13T08:30:00.000Z</updated>
+    
+    <summary type="html">鸿蒙 PC 上不给二进制签名就跑不起来，但官方文档把「自签名 / 调试证书签名 / 二进制证书签名」并列成三张对照表之后，反而更难看清它们到底是不是三种不同的东西。本文从开源实现里读回来一份答案：三种签名共用同一个 .codesign 段、同一个 fs-verity 描述符结构，区别只在 signature 字段里填什么、以及内核对它的信任等级。权限、分发范围、设备要求上的全部差异，都是从这一个字段推出来的。</summary>
+    <category term="鸿蒙PC" scheme="https://ystyle.top/categories/%E9%B8%BF%E8%92%99PC/"/>
+    <category term="HarmonyOS" scheme="https://ystyle.top/tags/HarmonyOS/"/>
+    <category term="OpenHarmony" scheme="https://ystyle.top/tags/OpenHarmony/"/>
+    <category term="鸿蒙PC" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/"/>
+    <category term="二进制签名" scheme="https://ystyle.top/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%AD%BE%E5%90%8D/"/>
+    <category term="code_sign" scheme="https://ystyle.top/tags/code_sign/"/>
+    <category term="fs-verity" scheme="https://ystyle.top/tags/fs-verity/"/>
+    
+  </entry>
   <entry>
     <title>把 BadgerDB 移植到仓颉（四）：怎样测才算数</title>
     <link href="https://ystyle.top/2026/10/13/badger-cj-benchmark-method/"/>
@@ -106,7 +123,7 @@
     <published>2026-09-22T12:30:00.000Z</published>
     <updated>2026-09-22T12:30:00.000Z</updated>
     
-    <summary type="html">鸿蒙 PC 上二进制必须合法签名才能加载运行。本文把官方给出的三类签名规则、应用拉起二进制的沙箱权限矩阵整理成表，再补上我们在 MateBook Pro（OpenHarmony-7.0.0.105）上实测出的五种组合结果——包括一张 DevEco 自动签名调试证书被内核 fs-verity 拒掉的完整证据链，以及换成自申请调试证书后立刻能跑的对照实验。</summary>
+    <summary type="html">鸿蒙 PC 上二进制必须合法签名才能加载运行。本文把官方给出的三类签名规则、应用拉起二进制的沙箱权限矩阵整理成表，再补上我们在 MateBook Pro（OpenHarmony-7.0.0.105）上实测出的五种组合结果——包括一张 DevEco 自动签名调试证书被内核 fs-verity 拒掉的完整证据链，以及换成自申请调试证书后立刻能跑的对照实验。结论已确认：IDE 自动签名生成的调试证书不能用于二进制签名。</summary>
     <category term="鸿蒙PC" scheme="https://ystyle.top/categories/%E9%B8%BF%E8%92%99PC/"/>
     <category term="HarmonyOS" scheme="https://ystyle.top/tags/HarmonyOS/"/>
     <category term="OpenHarmony" scheme="https://ystyle.top/tags/OpenHarmony/"/>
@@ -438,28 +455,6 @@
     <category term="qemu" scheme="https://ystyle.top/tags/qemu/"/>
     <category term="loongarch" scheme="https://ystyle.top/tags/loongarch/"/>
     <category term="archlinux" scheme="https://ystyle.top/tags/archlinux/"/>
-    
-  </entry>
-  <entry>
-    <title>在archlinux aur上提交龙芯loongarch的软件包</title>
-    <link href="https://ystyle.top/2023/07/19/push-loongarch64-app-to-archlinux-aur/"/>
-    <id>https://ystyle.top/2023/07/19/push-loongarch64-app-to-archlinux-aur/</id>
-    <published>2023-07-19T06:46:26.000Z</published>
-    <updated>2023-07-19T06:46:26.000Z</updated>
-    
-    <summary type="html">&lt;figure class=&#34;image-bubble&#34;&gt;
-  &lt;div class=&#34;img-lightbox&#34;&gt;
-    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;
-    &lt;img src=&#34;https://github.com/ystyle/ystyle.github.io/assets/4478635/1813826c-da90-426f-9d19-e9a459f3f262&#34; alt=&#34;image&#34;&gt;
-  &lt;/div&gt;
-  &lt;div class=&#34;image-caption&#34;&gt;image&lt;/div&gt;
-&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;发现安装好龙芯后, laur软件仓库就自带了yay和paru, 可以直接使用pacman安装. 我有一个软件kaf-cli是go写的可以直接编译到龙芯上.本文记录一下PKGBUILD的写法&lt;/p&gt;</summary>
-    <category term="系统" scheme="https://ystyle.top/categories/%E7%B3%BB%E7%BB%9F/"/>
-    <category term="loongarch" scheme="https://ystyle.top/tags/loongarch/"/>
-    <category term="archlinux" scheme="https://ystyle.top/tags/archlinux/"/>
-    <category term="龙芯" scheme="https://ystyle.top/tags/%E9%BE%99%E8%8A%AF/"/>
     
   </entry>
 </feed>

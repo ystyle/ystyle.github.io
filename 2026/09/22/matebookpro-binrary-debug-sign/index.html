@@ -371,8 +371,8 @@
 <li>自签名（adhoc）和调试证书签名到底差在哪？为什么&quot;能跑&quot;和&quot;能声明权限&quot;是两件事？</li>
 <li>签名成功 ≠ 能运行。我们在实测中遇到的现象是：<code>binary-sign-tool</code> 报 <code>write code sign data success</code>，但执行时 <code>Operation not permitted</code>，<strong>内核日志里才看得到真正原因</strong>。</li>
 </ul>
-<p>本文分两部分：先把华为开发者支持给出的<strong>官方规则</strong>（三类签名对比、应用拉起二进制的强弱沙箱权限矩阵、调试证书签名流程）整理成可查的表；再给出我们在 HUAWEI MateBook Pro（<code>HAD-W24 7.0.0.105</code> / <code>OpenHarmony-7.0.0.105</code> / API 26 / 2in1）上的<strong>实测结果</strong>——五种签名组合逐一验证，并用内核 <code>kmsg</code> 日志定位到一张调试证书失败的真实原因。</p>
-<p>一句话结论：<strong>自签名（adhoc）能跑但不能声明权限；调试证书签名能用，但请务必用&quot;自己申请的&quot;那张证书——DevEco 自动签名下发的那张调试证书，在我们的设备上被内核的 PKCS7 校验拒掉了。</strong></p>
+<p>本文分两部分：先把华为开发者支持给出的<strong>官方规则</strong>（三类签名对比、应用拉起二进制的强弱沙箱权限矩阵、调试证书签名流程）整理成可查的表；再给出我们在 HUAWEI MateBook Pro（<code>HAD-W24 7.0.0.105</code> / <code>OpenHarmony-7.0.0.105</code> / API 26 / 2in1）上的<strong>实测结果</strong>——五种签名组合逐一验证，并用内核 <code>kmsg</code> 日志定位到一张调试证书失败的真实原因，最终确认<strong>这张由 IDE 自动签名生成的调试证书不能用于二进制签名</strong>。</p>
+<p>一句话结论：<strong>自签名（adhoc）能跑但不能声明权限；调试证书签名能用，但必须用&quot;自己申请的&quot;那张证书——DevEco Studio（IDE）自动签名生成的调试证书不能用，它签出来的二进制会被内核的 PKCS7 校验拒掉。</strong></p>
 <hr>
 <h2 id="1-官方规则三类签名"><a href="#1-官方规则三类签名" class="headerlink" title="1. 官方规则：三类签名"></a>1. 官方规则：三类签名</h2>
 <h3 id="11-三种签名类型的区别"><a href="#11-三种签名类型的区别" class="headerlink" title="1.1 三种签名类型的区别"></a>1.1 三种签名类型的区别</h3>
@@ -616,7 +616,11 @@
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">eza - A modern, maintained replacement for ls
 </span></span></span><span style="display:flex;"><span><span style="color:#1f2328">v0.23.4 [-git]
 </span></span></span></code></pre></div><p>两张证书的链结构、扩展（<code>keyUsage</code> / <code>extendedKeyUsage=codeSigning</code> / <code>basicConstraints</code> 等）<br>
-完全一致，差别只在叶子证书本身。<strong>所以：请用自己申请的调试证书——DevEco 自动签名那张，至少在我们的设备上过不了内核这一关。</strong>（此问题已提工单，等官方确认根因。）</p>
+完全一致，差别只在叶子证书本身。<strong>结论：DevEco Studio（IDE）自动签名生成的调试证书不能用于二进制签名</strong>——<br>
+它签出来的 ELF 过不了内核 fs-verity 的 PKCS7 校验这一关（见 3.2 的 <code>PKCS7_signatureVerify</code>）。<br>
+这个判断的依据是：同一台设备、同一份 <code>module.json</code>、同一个文件路径、同一个文件内容，<br>
+唯一变化的就是证书，结果就从 <code>EPERM</code> 变成可执行——<strong>变量只有一个，原因就只可能在证书本身</strong>。<br>
+二进制签名请改用自己申请的调试证书。</p>
 <h3 id="34-datalocaltmp-那条是另一个问题"><a href="#34-datalocaltmp-那条是另一个问题" class="headerlink" title="3.4 /data/local/tmp 那条是另一个问题"></a>3.4 <code>/data/local/tmp</code> 那条是另一个问题</h3>
 <p>同一份签名产物放到 <code>/data/local/tmp</code>（<code>/data</code> 是 hmfs，与家目录的 hmdfs 不同），<br>
 报的是 <code>Permission denied</code>：</p>
@@ -677,7 +681,7 @@
 <ol>
 <li><strong>签名 ≠ 能跑</strong>：<code>write code sign data success</code> 只代表段写进去了，能不能加载由 <code>code_protect</code> + 内核判定，证据在 hilog/kmsg 里。</li>
 <li><strong><code>errno 129 / E_HM_KEYREJECTED</code> 别往文件系统上想</strong>，先看 kmsg 里的 <code>fsverity certchain</code> 一行——大概率是证书链/签名问题。</li>
-<li><strong>调试证书用自己申请的那张</strong>；DevEco 自动签名下发的那张，实测会被内核拒。</li>
+<li><strong>调试证书必须用自己申请的那张</strong>；IDE（DevEco Studio）自动签名生成的调试证书不能用，会被内核拒。</li>
 <li><strong><code>.permission</code> 段（含 <code>device-ids</code>）是调试证书签名的必填项</strong>，缺了就是 <code>udid not in module.json</code>。</li>
 <li><strong>签名后 <code>chmod +x</code></strong>：工具沿用 <code>outFile</code> 的旧权限位，不会自动加执行位。</li>
 <li><strong>adhoc 不能声明权限</strong>：<code>-selfSign 1</code> 签出来的程序写多少权限都不生效；要权限就得走调试证书。</li>
@@ -712,10 +716,12 @@
 			</tr>
 	</tbody>
 </table>
-<p>留给后续的两个问题：</p>
+<p>已经确认的一条结论，和仍然待明确的一个问题：</p>
 <ol>
-<li>DevEco 自动签名下发的调试证书为什么过不了内核 <code>PKCS7_signatureVerify</code>？（已提工单）</li>
-<li><code>/data/local/tmp</code> 因为 SELinux label 不能被 <code>code_protect</code> 读取，官方推荐的&quot;临时二进制存放位置&quot;到底是哪？</li>
+<li><strong>已确认：IDE（DevEco Studio）自动签名生成的调试证书不能用于二进制签名。</strong> 它签出的 ELF 会在内核<br>
+fs-verity 的 <code>PKCS7_signatureVerify</code> 处被拒（<code>E_HM_KEYREJECTED</code>），换成自己申请的调试证书即可通过。<br>
+两组实验之间变量只有&quot;证书&quot;一个，所以可以断定原因出在证书本身，与 <code>module.json</code>、路径、文件系统无关。</li>
+<li><strong>仍待明确</strong>：<code>/data/local/tmp</code> 因为 SELinux label 不能被 <code>code_protect</code> 读取，官方推荐的&quot;临时二进制存放位置&quot;到底是哪？</li>
 </ol>
 <hr>
 <h2 id="附录命令速查"><a href="#附录命令速查" class="headerlink" title="附录：命令速查"></a>附录：命令速查</h2>
@@ -746,6 +752,11 @@
 <p>说明：本文的官方规则部分整理自华为开发者支持在工单中的回复与《调试证书签名》文档；<br>
 实测部分全部来自 HUAWEI MateBook Pro（<code>OpenHarmony-7.0.0.105</code>，API 26，2in1）上的真实操作，<br>
 日志均为原文摘录（已隐去 UDID 与口令）。</p>
+</blockquote>
+<blockquote>
+<p>续篇：<a href="/2026/10/13/harmonyos-pc-binary-sign-types/">《二进制签名解析：自签名、调试证书、二进制证书到底差在哪》</a>
+——<br>
+从 OpenHarmony 源码里把三种签名的结构性差异讲清楚（<code>signature</code> 字段填什么、内核信任表怎么匹配、<code>ownerid</code> 怎么归类）。</p>
 </blockquote>
 
       </div>
