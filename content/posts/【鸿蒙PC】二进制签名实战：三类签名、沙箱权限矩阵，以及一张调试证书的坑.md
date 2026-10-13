@@ -4,7 +4,7 @@ date: 2026-09-22T20:30:00+08:00
 lastmod: 2026-09-22T20:30:00+08:00
 draft: false
 author: "ystyle"
-summary: "鸿蒙 PC 上二进制必须合法签名才能加载运行。本文把官方给出的三类签名规则、应用拉起二进制的沙箱权限矩阵整理成表，再补上我们在 MateBook Pro（OpenHarmony-7.0.0.105）上实测出的五种组合结果——包括一张 DevEco 自动签名调试证书被内核 fs-verity 拒掉的完整证据链，以及换成自申请调试证书后立刻能跑的对照实验。"
+summary: "鸿蒙 PC 上二进制必须合法签名才能加载运行。本文把官方给出的三类签名规则、应用拉起二进制的沙箱权限矩阵整理成表，再补上我们在 MateBook Pro（OpenHarmony-7.0.0.105）上实测出的五种组合结果——包括一张 DevEco 自动签名调试证书被内核 fs-verity 拒掉的完整证据链，以及换成自申请调试证书后立刻能跑的对照实验。结论已确认：IDE 自动签名生成的调试证书不能用于二进制签名。"
 tags: ["HarmonyOS", "OpenHarmony", "鸿蒙PC", "二进制签名", "HNP", "code_sign"]
 categories: ["鸿蒙PC"]
 toc: true
@@ -20,9 +20,9 @@ slug: matebookpro-binrary-debug-sign
 - 自签名（adhoc）和调试证书签名到底差在哪？为什么"能跑"和"能声明权限"是两件事？
 - 签名成功 ≠ 能运行。我们在实测中遇到的现象是：`binary-sign-tool` 报 `write code sign data success`，但执行时 `Operation not permitted`，**内核日志里才看得到真正原因**。
 
-本文分两部分：先把华为开发者支持给出的**官方规则**（三类签名对比、应用拉起二进制的强弱沙箱权限矩阵、调试证书签名流程）整理成可查的表；再给出我们在 HUAWEI MateBook Pro（`HAD-W24 7.0.0.105` / `OpenHarmony-7.0.0.105` / API 26 / 2in1）上的**实测结果**——五种签名组合逐一验证，并用内核 `kmsg` 日志定位到一张调试证书失败的真实原因。
+本文分两部分：先把华为开发者支持给出的**官方规则**（三类签名对比、应用拉起二进制的强弱沙箱权限矩阵、调试证书签名流程）整理成可查的表；再给出我们在 HUAWEI MateBook Pro（`HAD-W24 7.0.0.105` / `OpenHarmony-7.0.0.105` / API 26 / 2in1）上的**实测结果**——五种签名组合逐一验证，并用内核 `kmsg` 日志定位到一张调试证书失败的真实原因，最终确认**这张由 IDE 自动签名生成的调试证书不能用于二进制签名**。
 
-一句话结论：**自签名（adhoc）能跑但不能声明权限；调试证书签名能用，但请务必用"自己申请的"那张证书——DevEco 自动签名下发的那张调试证书，在我们的设备上被内核的 PKCS7 校验拒掉了。**
+一句话结论：**自签名（adhoc）能跑但不能声明权限；调试证书签名能用，但必须用"自己申请的"那张证书——DevEco Studio（IDE）自动签名生成的调试证书不能用，它签出来的二进制会被内核的 PKCS7 校验拒掉。**
 
 ---
 
@@ -224,7 +224,11 @@ v0.23.4 [-git]
 ```
 
 两张证书的链结构、扩展（`keyUsage` / `extendedKeyUsage=codeSigning` / `basicConstraints` 等）
-完全一致，差别只在叶子证书本身。**所以：请用自己申请的调试证书——DevEco 自动签名那张，至少在我们的设备上过不了内核这一关。**（此问题已提工单，等官方确认根因。）
+完全一致，差别只在叶子证书本身。**结论：DevEco Studio（IDE）自动签名生成的调试证书不能用于二进制签名**——
+它签出来的 ELF 过不了内核 fs-verity 的 PKCS7 校验这一关（见 3.2 的 `PKCS7_signatureVerify`）。
+这个判断的依据是：同一台设备、同一份 `module.json`、同一个文件路径、同一个文件内容，
+唯一变化的就是证书，结果就从 `EPERM` 变成可执行——**变量只有一个，原因就只可能在证书本身**。
+二进制签名请改用自己申请的调试证书。
 
 ### 3.4 `/data/local/tmp` 那条是另一个问题
 
@@ -278,7 +282,7 @@ hdc file recv /data/local/tmp/hilog-export.tar.gz .
 
 1. **签名 ≠ 能跑**：`write code sign data success` 只代表段写进去了，能不能加载由 `code_protect` + 内核判定，证据在 hilog/kmsg 里。
 2. **`errno 129 / E_HM_KEYREJECTED` 别往文件系统上想**，先看 kmsg 里的 `fsverity certchain` 一行——大概率是证书链/签名问题。
-3. **调试证书用自己申请的那张**；DevEco 自动签名下发的那张，实测会被内核拒。
+3. **调试证书必须用自己申请的那张**；IDE（DevEco Studio）自动签名生成的调试证书不能用，会被内核拒。
 4. **`.permission` 段（含 `device-ids`）是调试证书签名的必填项**，缺了就是 `udid not in module.json`。
 5. **签名后 `chmod +x`**：工具沿用 `outFile` 的旧权限位，不会自动加执行位。
 6. **adhoc 不能声明权限**：`-selfSign 1` 签出来的程序写多少权限都不生效；要权限就得走调试证书。
@@ -296,10 +300,12 @@ hdc file recv /data/local/tmp/hilog-export.tar.gz .
 | 要分发到大量设备/用户 | 需要二进制证书（面向华为认证开发者），个人开发者目前不适用 |
 | 要在应用里拉起 | 注意第 1.2 节的沙箱权限矩阵；长期方案是 HNP 打包安装 |
 
-留给后续的两个问题：
+已经确认的一条结论，和仍然待明确的一个问题：
 
-1. DevEco 自动签名下发的调试证书为什么过不了内核 `PKCS7_signatureVerify`？（已提工单）
-2. `/data/local/tmp` 因为 SELinux label 不能被 `code_protect` 读取，官方推荐的"临时二进制存放位置"到底是哪？
+1. **已确认：IDE（DevEco Studio）自动签名生成的调试证书不能用于二进制签名。** 它签出的 ELF 会在内核
+   fs-verity 的 `PKCS7_signatureVerify` 处被拒（`E_HM_KEYREJECTED`），换成自己申请的调试证书即可通过。
+   两组实验之间变量只有"证书"一个，所以可以断定原因出在证书本身，与 `module.json`、路径、文件系统无关。
+2. **仍待明确**：`/data/local/tmp` 因为 SELinux label 不能被 `code_protect` 读取，官方推荐的"临时二进制存放位置"到底是哪？
 
 ---
 
@@ -334,3 +340,6 @@ hdc shell "hilog -t kmsg" | grep -E "fsverity|hmcrypt"
 > 说明：本文的官方规则部分整理自华为开发者支持在工单中的回复与《调试证书签名》文档；
 > 实测部分全部来自 HUAWEI MateBook Pro（`OpenHarmony-7.0.0.105`，API 26，2in1）上的真实操作，
 > 日志均为原文摘录（已隐去 UDID 与口令）。
+
+> 续篇：[《二进制签名解析：自签名、调试证书、二进制证书到底差在哪》](/2026/10/13/harmonyos-pc-binary-sign-types/)——
+> 从 OpenHarmony 源码里把三种签名的结构性差异讲清楚（`signature` 字段填什么、内核信任表怎么匹配、`ownerid` 怎么归类）。
