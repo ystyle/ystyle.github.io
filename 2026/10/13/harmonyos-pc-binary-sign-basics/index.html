@@ -279,8 +279,17 @@
     
     <li class="post-toc-item post-toc-level-3">
   
-  <a class="post-toc-link" href="#43-%e6%9c%80%e5%85%b3%e9%94%ae%e7%9a%84%e4%b8%80%e6%9d%a1%e5%af%b9%e5%ba%94%e5%85%b3%e7%b3%bb">
-    <span class="post-toc-number">5.3.</span> <span class="post-toc-text">4.3 最关键的一条对应关系</span>
+  <a class="post-toc-link" href="#43-%e4%b8%80%e4%b8%aa%e7%9c%9f%e5%ae%9e%e4%be%8b%e5%ad%90brew-%e8%a3%85%e5%87%ba%e6%9d%a5%e7%9a%84%e5%91%bd%e4%bb%a4%e8%a1%8c%e8%bd%af%e4%bb%b6">
+    <span class="post-toc-number">5.3.</span> <span class="post-toc-text">4.3 一个真实例子：brew 装出来的命令行软件</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#44-%e6%9c%80%e5%85%b3%e9%94%ae%e7%9a%84%e4%b8%80%e6%9d%a1%e5%af%b9%e5%ba%94%e5%85%b3%e7%b3%bb">
+    <span class="post-toc-number">5.4.</span> <span class="post-toc-text">4.4 最关键的一条对应关系</span>
   </a>
   
 </li>
@@ -664,7 +673,45 @@
 <li><strong>强沙箱应用必须申请 <code>ALLOW_EXTERNAL_NATIVE_CODE</code></strong>，否则一律拉不起来。</li>
 <li><strong>就算申请了，强沙箱也拉不起 adhoc bin。</strong> 因为自签名没有身份，参与不了&quot;这个二进制是谁给的、能不能信&quot;的判断。</li>
 </ol>
-<h3 id="43-最关键的一条对应关系"><a href="#43-最关键的一条对应关系" class="headerlink" title="4.3 最关键的一条对应关系"></a>4.3 最关键的一条对应关系</h3>
+<h3 id="43-一个真实例子brew-装出来的命令行软件"><a href="#43-一个真实例子brew-装出来的命令行软件" class="headerlink" title="4.3 一个真实例子：brew 装出来的命令行软件"></a>4.3 一个真实例子：brew 装出来的命令行软件</h3>
+<p>这条特别容易踩，因为它正好把上面两张表串起来了。</p>
+<p>鸿蒙 PC 上社区的 <strong>Harmonybrew</strong>（Homebrew 的鸿蒙移植）装出来的命令行软件，<strong>基本都是 adhoc bin（自签名）</strong><br>
+——为了让 <code>brew install</code> 即装即用，tap 在打包时就用自签工具把产物签好了；它不可能（也没道理）给每个包去申请调试证书。</p>
+<p>于是同一个 <code>brew install</code> 装出来的命令，在不同地方待遇不一样：</p>
+<table>
+	<thead>
+			<tr>
+					<th>你在哪执行</th>
+					<th>能不能跑</th>
+					<th>原因</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>HiShell</strong>（系统自带终端）</td>
+					<td>✅</td>
+					<td>它是系统终端，不走应用的沙箱判定</td>
+			</tr>
+			<tr>
+					<td><strong>第三方终端模拟器 / 工具类应用</strong></td>
+					<td><strong>取决于它有没有弱沙箱权限</strong></td>
+					<td>见上面 4.2 的矩阵</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>关键结论：在 HiShell 之外的应用里要执行 brew 装的东西，那个应用必须拿到弱沙箱权限<br>
+<code>ohos.permission.CUSTOM_SANDBOX</code>。</strong></p>
+<p>这里有个反直觉的点：<strong>申请 <code>ALLOW_EXTERNAL_NATIVE_CODE</code> 是没用的。</strong><br>
+回到 4.2 的矩阵——强沙箱应用就算申请了这个开关，<strong>依然拉不起 adhoc bin</strong>。<br>
+对 brew 这类自签产物来说，唯一的出路就是弱沙箱。</p>
+<blockquote>
+<p>💡 所以如果你要做一个终端模拟器，或者任何需要执行外部命令行程序的应用（编辑器、工具集、AI CLI 的宿主…），<br>
+<strong>第一个要确认的问题不是&quot;界面怎么做&quot;，而是&quot;我能不能申请到 <code>ohos.permission.CUSTOM_SANDBOX</code>&quot;。</strong><br>
+这是一条 <strong>ACL 权限</strong>，拿不到的话，<code>brew install</code> 装的东西在你的应用里一个都跑不起来。<br>
+社区里已经有过同类提问：<a href="https://developer.huawei.com/consumer/cn/forum/topic/0201220553019874187?fid=0109140870620153026" target="_blank" rel="noopener">workbuddy 为什么不能用 brew 安装的依赖？</a>
+</p>
+</blockquote>
+<h3 id="44-最关键的一条对应关系"><a href="#44-最关键的一条对应关系" class="headerlink" title="4.4 最关键的一条对应关系"></a>4.4 最关键的一条对应关系</h3>
 <p>把上面两张表连起来看，会得到一个很容易踩的结论：</p>
 <blockquote>
 <p><strong>用 DevEco Studio 的 clang 编译出来的二进制，默认就是 adhoc bin，不是 debug bin。</strong></p>
@@ -750,6 +797,11 @@
 			</tr>
 	</tbody>
 </table>
+<blockquote>
+<p>⚠️ 还有一种情况<strong>签名层面你无能为力</strong>：要在自己的应用里跑 brew 装好的命令行软件。<br>
+那是别人的自签产物，你改不了它的签名。此时唯一能做的是让<strong>你自己的应用</strong>拿到弱沙箱权限<br>
+<code>ohos.permission.CUSTOM_SANDBOX</code>（见 4.3）。</p>
+</blockquote>
 <hr>
 <h2 id="6-命令速查"><a href="#6-命令速查" class="headerlink" title="6. 命令速查"></a>6. 命令速查</h2>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># ---- 取设备 UDID（调试证书签名要用）----</span>
