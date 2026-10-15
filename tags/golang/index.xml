@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Fri, 07 Apr 2017 16:39:19 +0800</lastBuildDate>
+			<lastBuildDate>Thu, 15 Oct 2026 10:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Go 一行注释就能把整个文件绑到平台，仓颉为什么不行？</title>
+				<link>https://ystyle.top/2026/10/15/cangjie-multiplatform-for-go-devs/</link>
+				<pubDate>Thu, 15 Oct 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/15/cangjie-multiplatform-for-go-devs/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;从 Go 的 &lt;code&gt;//go:build&lt;/code&gt; 到仓颉的 &lt;code&gt;common&lt;/code&gt;/&lt;code&gt;specific&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;拆开「仓颉不能按文件分平台」这句话：它其实有三种粒度，以及一个真实项目绕的弯&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;code&gt;Cangjie&lt;/code&gt; · &lt;code&gt;Go&lt;/code&gt; · &lt;code&gt;跨平台&lt;/code&gt; · &lt;code&gt;mmap-cj&lt;/code&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;如果你写过 Go，多半见过 &lt;code&gt;src/net/fd_js.go&lt;/code&gt; 这类文件——开头一行 &lt;code&gt;//go:build js&lt;/code&gt;，整个文件就只属于 js 平台。转到仓颉之后你会发现：&lt;strong&gt;没有等价的一行注释&lt;/strong&gt;。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>leanote添探索功能</title>
 				<link>https://ystyle.top/2017/04/07/leanote-Add-the-search-function/</link>

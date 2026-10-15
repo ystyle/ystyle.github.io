@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>入门 on 东方星痕</title>
+		<link>https://ystyle.top/tags/%E5%85%A5%E9%97%A8/</link>
+		<description>Recent content in 入门 on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Thu, 15 Oct 2026 11:00:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/%E5%85%A5%E9%97%A8/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>一段代码，两个系统：仓颉怎么处理「跨平台」这件事</title>
+				<link>https://ystyle.top/2026/10/15/cangjie-multiplatform-from-zero/</link>
+				<pubDate>Thu, 15 Oct 2026 11:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/15/cangjie-multiplatform-from-zero/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;写给第一次接触「跨平台」的仓颉学习者&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;从「为什么要跨平台」讲到亲手跑通一个例子&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;code&gt;Cangjie&lt;/code&gt; · &lt;code&gt;入门&lt;/code&gt; · &lt;code&gt;跨平台&lt;/code&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这篇不假设你学过任何其他编程语言，也不假设你懂操作系统内部。&lt;/p&gt;&#xA;&lt;p&gt;如果你刚学仓颉，听到「跨平台」「条件编译」「common/specific」这些词一头雾水——这篇就是给你的。我们从一个最朴素的问题开始：&lt;strong&gt;同一段代码，为什么不能在所有电脑上跑？&lt;/strong&gt;&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

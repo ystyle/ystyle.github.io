@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>一段代码，两个系统：仓颉怎么处理「跨平台」这件事 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">一段代码，两个系统：仓颉怎么处理「跨平台」这件事</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">一段代码，两个系统：仓颉怎么处理「跨平台」这件事</h1>
+    <h5 class="subtitle">
+      <time datetime="2026-10-15T11:00:00&#43;08:00" itemprop="datePublished" class="page-time">2026-10-15</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e5%85%88%e6%90%9e%e6%b8%85%e6%a5%9a%e4%bb%80%e4%b9%88%e5%8f%ab%e5%b9%b3%e5%8f%b0">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">一、先搞清楚：什么叫「平台」</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e8%bf%99%e4%bb%b6%e4%ba%8b%e4%bc%9a%e5%8f%98%e6%88%90%e9%9a%be%e9%a2%98">
+    <span class="post-toc-number">1.1.</span> <span class="post-toc-text">为什么这件事会变成难题</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%8c%e6%9c%80%e7%ae%80%e5%8d%95%e7%9a%84%e5%8a%9e%e6%b3%95when%e6%9d%a1%e4%bb%b6%e7%bc%96%e8%af%91">
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">二、最简单的办法：@When 条件编译</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%ae%83%e6%98%af%e6%80%8e%e4%b9%88%e5%81%9a%e5%88%b0%e7%9a%84">
+    <span class="post-toc-number">2.1.</span> <span class="post-toc-text">它是怎么做到的</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%86%99%e9%94%99%e4%ba%86%e4%bc%9a%e6%80%8e%e6%a0%b7%e6%8a%a5%e9%94%99%e7%89%b9%e5%88%ab%e7%9b%b4%e7%99%bd">
+    <span class="post-toc-number">2.2.</span> <span class="post-toc-text">写错了会怎样？报错特别直白</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#when-%e9%87%8c%e8%83%bd%e5%86%99%e4%bb%80%e4%b9%88%e6%9d%a1%e4%bb%b6">
+    <span class="post-toc-number">2.3.</span> <span class="post-toc-text">@When 里能写什么条件</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%a4%e4%b8%aa%e6%96%b0%e6%89%8b%e5%ae%b9%e6%98%93%e8%b8%a9%e7%9a%84%e5%9c%b0%e6%96%b9">
+    <span class="post-toc-number">2.4.</span> <span class="post-toc-text">两个新手容易踩的地方</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%89%e9%ba%bb%e7%83%a6%e6%9d%a5%e4%ba%86%e6%af%8f%e4%b8%aa%e5%87%bd%e6%95%b0%e9%83%bd%e8%a6%81%e6%a0%87%e4%b8%80%e9%81%8d">
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">三、麻烦来了：每个函数都要标一遍</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%9b%9b%e6%8c%89%e7%9b%ae%e5%bd%95%e5%88%86source-set--features">
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">四、按目录分：source-set + features</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#41-%e9%a1%b9%e7%9b%ae%e9%95%bf%e8%bf%99%e6%a0%b7">
+    <span class="post-toc-number">4.1.</span> <span class="post-toc-text">4.1 项目长这样</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#42-%e4%b8%89%e4%bb%bd%e4%bb%a3%e7%a0%81%e5%88%86%e5%88%ab%e5%86%99%e4%bb%80%e4%b9%88">
+    <span class="post-toc-number">4.2.</span> <span class="post-toc-text">4.2 三份代码分别写什么</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#43-%e9%85%8d%e7%bd%ae-cjpmtoml">
+    <span class="post-toc-number">4.3.</span> <span class="post-toc-text">4.3 配置 cjpm.toml</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#44-%e7%bc%96%e8%af%91%e8%bf%90%e8%a1%8c">
+    <span class="post-toc-number">4.4.</span> <span class="post-toc-text">4.4 编译运行</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#45-%e4%b8%89%e4%b8%aa%e6%96%b0%e6%a6%82%e5%bf%b5%e7%94%a8%e5%a4%a7%e7%99%bd%e8%af%9d%e8%a7%a3%e9%87%8a">
+    <span class="post-toc-number">4.5.</span> <span class="post-toc-text">4.5 三个新概念，用大白话解释</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#46-%e6%88%91%e8%b8%a9%e8%bf%87%e7%9a%84%e5%9d%91%e7%85%a7%e7%9d%80%e6%8a%84%e8%83%bd%e7%9c%81%e5%8d%8a%e5%b0%8f%e6%97%b6">
+    <span class="post-toc-number">4.6.</span> <span class="post-toc-text">4.6 我踩过的坑（照着抄能省半小时）</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%94common-%e5%92%8cspecific%e4%b8%80%e4%b8%aa%e8%b4%9f%e8%b4%a3%e8%af%b4%e4%b8%80%e4%b8%aa%e8%b4%9f%e8%b4%a3%e5%81%9a">
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">五、common 和 specific：一个负责「说」，一个负责「做」</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#51-%e5%ae%83%e4%bb%ac%e8%a7%a3%e5%86%b3%e4%bb%80%e4%b9%88%e9%97%ae%e9%a2%98">
+    <span class="post-toc-number">5.1.</span> <span class="post-toc-text">5.1 它们解决什么问题</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#511-%e7%94%a8%e4%bd%a0%e7%86%9f%e6%82%89%e7%9a%84-interface-%e6%9d%a5%e7%90%86%e8%a7%a3">
+    <span class="post-toc-number">5.2.</span> <span class="post-toc-text">5.1.1 用你熟悉的 interface 来理解</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#52-%e4%b8%80%e5%8f%a5%e8%af%9d%e4%be%8b%e5%ad%90">
+    <span class="post-toc-number">5.3.</span> <span class="post-toc-text">5.2 一句话例子</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#53-%e4%b8%89%e6%9d%a1%e6%9c%80%e9%87%8d%e8%a6%81%e7%9a%84%e8%a7%84%e7%9f%a9">
+    <span class="post-toc-number">5.4.</span> <span class="post-toc-text">5.3 三条最重要的规矩</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#54-%e4%bb%80%e4%b9%88%e6%97%b6%e5%80%99%e7%94%a8%e5%93%aa%e4%b8%aa">
+    <span class="post-toc-number">5.5.</span> <span class="post-toc-text">5.4 什么时候用哪个</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%85%ad%e4%b8%80%e4%b8%aa%e7%9c%9f%e5%ae%9e%e7%9a%84%e9%a1%b9%e7%9b%aemmap-cj">
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">六、一个真实的项目：mmap-cj</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%8a%a0%e4%ba%86%e5%bc%80%e5%85%b3%e8%bf%98%e6%9c%89%e4%b8%80%e4%b8%aa%e6%9b%b4%e9%ba%bb%e7%83%a6%e7%9a%84%e9%97%ae%e9%a2%98">
+    <span class="post-toc-number">6.1.</span> <span class="post-toc-text">加了开关，还有一个更麻烦的问题</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e8%bf%99%e4%b8%aa%e9%97%ae%e9%a2%98%e5%b7%b2%e7%bb%8f%e4%b8%8a%e6%8a%a5%e5%b9%b6%e4%bf%ae%e5%a5%bd%e4%ba%86">
+    <span class="post-toc-number">6.2.</span> <span class="post-toc-text">这个问题已经上报并修好了</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%bb%a3%e4%bb%b7%e6%98%af%e4%bb%80%e4%b9%88">
+    <span class="post-toc-number">6.3.</span> <span class="post-toc-text">代价是什么</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%83%e6%80%bb%e7%bb%93%e4%b8%80%e4%b8%8b">
+    <span class="post-toc-number">7.</span> <span class="post-toc-text">七、总结一下</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%89%e7%a7%8d%e5%b7%a5%e5%85%b7%e4%b8%89%e7%a7%8d%e7%b2%92%e5%ba%a6">
+    <span class="post-toc-number">7.1.</span> <span class="post-toc-text">三种工具，三种粒度</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e7%bb%99%e5%88%9d%e5%ad%a6%e8%80%85%e7%9a%84%e5%bb%ba%e8%ae%ae">
+    <span class="post-toc-number">7.2.</span> <span class="post-toc-text">给初学者的建议</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e6%9c%80%e5%90%8e">
+    <span class="post-toc-number">7.3.</span> <span class="post-toc-text">最后</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e9%99%84%e6%96%87%e4%b8%ad%e5%91%bd%e4%bb%a4%e9%80%9f%e6%9f%a5">
+    <span class="post-toc-number">8.</span> <span class="post-toc-text">附：文中命令速查</span>
+  </a>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-仓颉跨平台入门" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">一段代码，两个系统：仓颉怎么处理「跨平台」这件事</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2026-10-15T11:00:00&#43;08:00" itemprop="datePublished">2026-10-15</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <p align="center"><strong>写给第一次接触「跨平台」的仓颉学习者</strong></p>
+<p align="center"><em>从「为什么要跨平台」讲到亲手跑通一个例子</em></p>
+<p align="center"><code>Cangjie</code> · <code>入门</code> · <code>跨平台</code></p>
+<blockquote>
+<p>这篇不假设你学过任何其他编程语言，也不假设你懂操作系统内部。</p>
+<p>如果你刚学仓颉，听到「跨平台」「条件编译」「common/specific」这些词一头雾水——这篇就是给你的。我们从一个最朴素的问题开始：<strong>同一段代码，为什么不能在所有电脑上跑？</strong></p>
+<p>文中每个例子都可以自己敲一遍，命令和输出都是我在 Linux 上真跑出来的。</p>
+</blockquote>
+<hr>
+<h2 id="一先搞清楚什么叫平台"><a href="#一先搞清楚什么叫平台" class="headerlink" title="一、先搞清楚：什么叫「平台」"></a>一、先搞清楚：什么叫「平台」</h2>
+<p>「平台」这个词听着虚，其实特别实。它指的是<strong>你这台电脑的底层环境</strong>，主要包含两件事：</p>
+<ul>
+<li><strong>操作系统（OS）</strong>：Windows、Linux、macOS……每个系统的「规矩」都不一样。</li>
+<li><strong>处理器架构（CPU）</strong>：常见的是 <code>x86_64</code>（Intel/AMD 的 64 位）和 <code>aarch64</code>（ARM 的 64 位，手机、苹果 M 系列芯片都是它）。</li>
+</ul>
+<p>举个大白话的例子：<strong>你想让程序「把一段数据写进磁盘文件」</strong>。</p>
+<ul>
+<li>在 Linux 上，你调用一个叫 <code>open</code> 的系统函数；</li>
+<li>在 Windows 上，你要调用 <code>CreateFileW</code>；</li>
+<li>名字不一样、参数也不一样。</li>
+</ul>
+<p>这些函数不是仓颉发明的，是<strong>操作系统本身提供的</strong>。仓颉程序要想跟操作系统打交道，就得按那个系统的规矩来。</p>
+<blockquote>
+<p>所以「跨平台」的意思就是：<strong>你写的代码，能不能在不止一个系统上正常工作。</strong></p>
+</blockquote>
+<h3 id="为什么这件事会变成难题"><a href="#为什么这件事会变成难题" class="headerlink" title="为什么这件事会变成难题"></a>为什么这件事会变成难题</h3>
+<p>假设你写了一个小工具，功能是「把数据写进文件」。它一开始只考虑 Linux：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// 只有 Linux 这么写才对
+open(&#34;文件路径&#34;, ...)
+</code></pre><p>现在你想让 Windows 用户也能用。Windows 上没有 <code>open</code>，只有 <code>CreateFileW</code>。于是你有两个选择：</p>
+<ol>
+<li><strong>写两份代码</strong>，一份 Linux 一份 Windows，让程序自己挑；</li>
+<li><strong>写一份代码</strong>，让它根据目标系统自动变成对应的样子。</li>
+</ol>
+<p>仓颉选的是第二条路。而且它给了你<strong>三种不同粒度的工具</strong>。下面一个一个讲。</p>
+<hr>
+<h2 id="二最简单的办法when条件编译"><a href="#二最简单的办法when条件编译" class="headerlink" title="二、最简单的办法：@When 条件编译"></a>二、最简单的办法：<code>@When</code> 条件编译</h2>
+<p>「条件编译」四个字拆开看：<strong>按条件</strong>决定<strong>哪些代码参与编译</strong>。</p>
+<p>先看一个完整的、能直接跑的例子：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">@When[os == &#34;Linux&#34;]
+func platformName(): String {
+    &#34;Linux&#34;
+}
+
+@When[os == &#34;Windows&#34;]
+func platformName(): String {
+    &#34;Windows&#34;
+}
+
+@When[os == &#34;macOS&#34;]
+func platformName(): String {
+    &#34;macOS&#34;
+}
+
+main() {
+    println(&#34;你现在用的系统是：${platformName()}&#34;)
+}
+</code></pre><p>把它存成 <code>hello.cj</code>，然后编译运行：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ cjc hello.cj -o hello
+</span></span><span style="display:flex;"><span>$ ./hello
+</span></span><span style="display:flex;"><span>你现在用的系统是：Linux
+</span></span></code></pre></div><p><strong>在 Windows 上编译同一份文件，输出就会变成 <code>Windows</code>；在 Mac 上会变成 <code>macOS</code>。</strong> 你什么都没改，同一份源码，三个系统各跑各的。</p>
+<h3 id="它是怎么做到的"><a href="#它是怎么做到的" class="headerlink" title="它是怎么做到的"></a>它是怎么做到的</h3>
+<p><code>@When[os == &quot;Linux&quot;]</code> 的意思是：<strong>「只有当目标系统是 Linux 时，下面这个函数才参与编译」</strong>。</p>
+<p>于是在 Linux 上编译时，编译器眼里只有第一个 <code>platformName</code>；Windows 和 macOS 那两个<strong>根本不存在</strong>——它们在编译开始前就被排除了。</p>
+<blockquote>
+<p><strong>这是理解一切的钥匙</strong>：不是「运行时挑一个」，而是「<strong>编译时就把不需要的扔掉</strong>」。</p>
+<p>所以不参与编译的代码，即使里面有当前系统不认识的函数名，也完全不会报错——因为它压根没被编译器看见。</p>
+</blockquote>
+<h3 id="写错了会怎样报错特别直白"><a href="#写错了会怎样报错特别直白" class="headerlink" title="写错了会怎样？报错特别直白"></a>写错了会怎样？报错特别直白</h3>
+<p>假设你写了一个「只有 Windows 才有」的函数，却在 Linux 上调用它：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">@When[os == &#34;Windows&#34;]
+func windowsOnly(): Unit {
+    println(&#34;这行只有 Windows 会编译&#34;)
+}
+
+main() {
+    windowsOnly()
+}
+</code></pre><p>在 Linux 上编译：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>error: undeclared identifier &#39;windowsOnly&#39;
+</span></span></code></pre></div><p>意思是「我不认识 <code>windowsOnly</code> 这个名字」——因为在 Linux 上，这个函数<strong>根本没被编译进去</strong>。这个报错非常好懂，也是初学者最容易遇到的：<strong>你以为你写了，其实在你当前的系统上它不存在。</strong></p>
+<h3 id="when-里能写什么条件"><a href="#when-里能写什么条件" class="headerlink" title="@When 里能写什么条件"></a><code>@When</code> 里能写什么条件</h3>
+<table>
+	<thead>
+			<tr>
+					<th>条件</th>
+					<th>能填的值</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>os</code></td>
+					<td><code>&quot;Windows&quot;</code> / <code>&quot;Linux&quot;</code> / <code>&quot;macOS&quot;</code></td>
+					<td>目标操作系统</td>
+			</tr>
+			<tr>
+					<td><code>arch</code></td>
+					<td><code>&quot;x86_64&quot;</code> / <code>&quot;aarch64&quot;</code></td>
+					<td>目标处理器架构</td>
+			</tr>
+			<tr>
+					<td><code>backend</code></td>
+					<td><code>&quot;cjnative&quot;</code> / <code>&quot;cjvm&quot;</code></td>
+					<td>后端类型</td>
+			</tr>
+			<tr>
+					<td><code>debug</code></td>
+					<td>不填值，只能写 <code>!debug</code></td>
+					<td>是否开了 <code>-g</code> 调试模式</td>
+			</tr>
+			<tr>
+					<td><code>test</code></td>
+					<td>不填值，只能写 <code>!test</code></td>
+					<td>是否在跑单元测试</td>
+			</tr>
+	</tbody>
+</table>
+<p>还能用 <code>!=</code> 取反：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">@When[os != &#34;Windows&#34;]
+func notForWindows(): Unit {
+    println(&#34;除了 Windows 都能编译这行&#34;)
+}
+</code></pre><h3 id="两个新手容易踩的地方"><a href="#两个新手容易踩的地方" class="headerlink" title="两个新手容易踩的地方"></a>两个新手容易踩的地方</h3>
+<p><strong>第一，<code>@When</code> 不能连着叠两层：</strong></p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">@When[os == &#34;Windows&#34;]
+@When[os == &#34;Linux&#34;]     // ❌ 报错：duplicated annotation: &#39;@When&#39;
+func foo() {}
+</code></pre><p>想同时满足两个条件，应该用 <code>&amp;&amp;</code> 写到一起（实测可以正常编译）：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">@When[os == &#34;Linux&#34; &amp;&amp; arch == &#34;x86_64&#34;]
+func foo() {}
+</code></pre><p><strong>第二，<code>os ==</code> 后面的值必须首字母大写。</strong> <code>&quot;Linux&quot;</code> 对，<code>&quot;linux&quot;</code> 不对。</p>
+<blockquote>
+<p>顺便记住一个对比：后面讲的 <code>cjpm</code> 配置里，平台名是<strong>小写点分</strong>的 <code>os.linux</code>。<strong>一个是 <code>&quot;Linux&quot;</code>，一个是 <code>os.linux</code></strong>，别写混。这个坑我下面还会再提一次。</p>
+</blockquote>
+<hr>
+<h2 id="三麻烦来了每个函数都要标一遍"><a href="#三麻烦来了每个函数都要标一遍" class="headerlink" title="三、麻烦来了：每个函数都要标一遍"></a>三、麻烦来了：每个函数都要标一遍</h2>
+<p><code>@When</code> 很好懂，但它有个明显的缺点：<strong>它挂在每个函数（或每个声明）上。</strong></p>
+<p>写三五个函数还好，可如果你在写一个「只有 Linux 才有的完整功能模块」，里面有几十个函数、几十个常量呢？</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">@When[os == &#34;Linux&#34;]
+foreign func mmap(...): CPointer&lt;Unit&gt;
+
+@When[os == &#34;Linux&#34;]
+foreign func munmap(...): Int32
+
+@When[os == &#34;Linux&#34;]
+foreign func msync(...): Int32
+
+@When[os == &#34;Linux&#34;]
+private const PROT_READ: Int32 = 0x1
+
+// ……还有二十个
+</code></pre><p><strong>每一个都得单独标注一遍。</strong> 这就是后面要讲的真实项目里发生过的事——它最终就是这么写的，一个文件里标了 8 遍。</p>
+<p>这时候你会想要一个更省事的办法：<strong>「能不能直接说『这个文件属于 Linux』，一次性搞定？」</strong></p>
+<p>能。这就是第二种工具。</p>
+<hr>
+<h2 id="四按目录分source-set--features"><a href="#四按目录分source-set--features" class="headerlink" title="四、按目录分：source-set + features"></a>四、按目录分：<code>source-set</code> + <code>features</code></h2>
+<p>先说清楚一件事：<strong>普通 <code>.cj</code> 文件，你直接 <code>cjc 文件名.cj</code> 就能编译</strong>（就像第二节那样）。<strong>下面这套要用 <code>cjpm</code>——仓颉的项目管理工具，它管的是一个完整的项目，不是一个文件。</strong></p>
+<p><code>cjpm</code> 的思路是：<strong>用目录把代码分开，再告诉它「哪个目录属于哪个平台」。</strong></p>
+<h3 id="41-项目长这样"><a href="#41-项目长这样" class="headerlink" title="4.1 项目长这样"></a>4.1 项目长这样</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>cjdemo/
+</span></span><span style="display:flex;"><span>├── cjpm.toml           ← 项目配置，告诉 cjpm 目录和平台的对应关系
+</span></span><span style="display:flex;"><span>├── common/             ← 所有平台共用的代码
+</span></span><span style="display:flex;"><span>│   └── platform.cj
+</span></span><span style="display:flex;"><span>├── linux/              ← 只有 Linux 用的代码
+</span></span><span style="display:flex;"><span>│   └── linux.cj
+</span></span><span style="display:flex;"><span>└── windows/            ← 只有 Windows 用的代码
+</span></span><span style="display:flex;"><span>    └── windows.cj
+</span></span></code></pre></div><h3 id="42-三份代码分别写什么"><a href="#42-三份代码分别写什么" class="headerlink" title="4.2 三份代码分别写什么"></a>4.2 三份代码分别写什么</h3>
+<p><strong><code>common/platform.cj</code></strong>——公共部分，只写「有什么」，不写「怎么做」：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">@NonProduct
+features {}
+package cjdemo
+
+public common func Platform(): String
+</code></pre><p><strong><code>linux/linux.cj</code></strong>——Linux 的具体做法：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">features {os.linux}
+package cjdemo
+
+public specific func Platform(): String { &#34;Linux&#34; }
+
+main() {
+    println(Platform())
+}
+</code></pre><p><strong><code>windows/windows.cj</code></strong>——Windows 的具体做法：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">features {os.windows}
+package cjdemo
+
+public specific func Platform(): String { &#34;Windows&#34; }
+
+main() {
+    println(Platform())
+}
+</code></pre><h3 id="43-配置-cjpmtoml"><a href="#43-配置-cjpmtoml" class="headerlink" title="4.3 配置 cjpm.toml"></a>4.3 配置 <code>cjpm.toml</code></h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">profile</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">experimental</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">package</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">cjc-version</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;1.2.0&#34;</span>      <span style="color:#57606a"># 必填，漏了会报 can&#39;t be empty</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">name</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;cjdemo&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">output-type</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;executable&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">version</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;1.0.0&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[[</span><span style="color:#1f2328">source-set</span><span style="color:#1f2328">]]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">name</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;common&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">src-dir</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;./common&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">features</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">[]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[[</span><span style="color:#1f2328">source-set</span><span style="color:#1f2328">]]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">src-dir</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;./linux&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">features</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;os.linux&#34;</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">product</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[[</span><span style="color:#1f2328">source-set</span><span style="color:#1f2328">]]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">src-dir</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;./windows&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">features</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;os.windows&#34;</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">product</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span>
+</span></span></code></pre></div><h3 id="44-编译运行"><a href="#44-编译运行" class="headerlink" title="4.4 编译运行"></a>4.4 编译运行</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ cjpm build --no-feature-deduce --enable-features<span style="color:#0550ae">=</span>os.linux
+</span></span><span style="display:flex;"><span>cjpm build success
+</span></span><span style="display:flex;"><span>$ ./target/release/bin/linux/product/main
+</span></span><span style="display:flex;"><span>Linux
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ cjpm build --no-feature-deduce --enable-features<span style="color:#0550ae">=</span>os.windows
+</span></span><span style="display:flex;"><span>cjpm build success
+</span></span><span style="display:flex;"><span>$ ./target/release/bin/windows/product/main
+</span></span><span style="display:flex;"><span>Windows
+</span></span></code></pre></div><p><strong>同一台 Linux 电脑上，两个产物分别打印出 <code>Linux</code> 和 <code>Windows</code>。</strong></p>
+<blockquote>
+<p>⚠️ 注意：这<strong>不是</strong>在 Linux 上编译出 Windows 程序。两个 <code>main</code> 都是 Linux 程序，只是<strong>编译时选进了不同的代码目录</strong>，所以打印的内容不同。真正的交叉编译要用 <code>--target</code>。</p>
+</blockquote>
+<h3 id="45-三个新概念用大白话解释"><a href="#45-三个新概念用大白话解释" class="headerlink" title="4.5 三个新概念，用大白话解释"></a>4.5 三个新概念，用大白话解释</h3>
+<p><strong><code>features</code>（特性）</strong>——一个「开关的名字」。<code>os.linux</code> 就是「Linux 这个开关」。</p>
+<p>仓颉内置了这些：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>os.android   os.ohos   os.ios   os.linux   os.windows   os.darwin
+</span></span></code></pre></div><p><strong><code>source-set</code>（源码集）</strong>——「一组源码文件所在的目录」。你在 <code>cjpm.toml</code> 里说「<code>./linux</code> 这个目录，对应 <code>os.linux</code> 开关」，编译时打开 <code>os.linux</code>，这个目录就会被编进去。</p>
+<p><strong>文件头的 <code>features {}</code></strong>——每个源码文件<strong>自己也要声明</strong>属于哪个开关。<strong>必须写在 <code>package</code> 上面</strong>：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">features {os.linux}     // ← 必须在 package 之前
+package cjdemo
+</code></pre><p>公共目录的文件写空的 <code>features {}</code>，并且要加一个 <code>@NonProduct</code> 标记：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">@NonProduct
+features {}
+package cjdemo
+</code></pre><h3 id="46-我踩过的坑照着抄能省半小时"><a href="#46-我踩过的坑照着抄能省半小时" class="headerlink" title="4.6 我踩过的坑（照着抄能省半小时）"></a>4.6 我踩过的坑（照着抄能省半小时）</h3>
+<p>这些都是我实测撞出来的，<strong>写错一个就跑不起来</strong>：</p>
+<table>
+	<thead>
+			<tr>
+					<th>你可能会犯的错</th>
+					<th>报错长什么样</th>
+					<th>怎么回事</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>公共文件忘了 <code>@NonProduct</code></td>
+					<td><code>Feature header of package 'cjdemo' is missing '@NonProduct' annotation</code></td>
+					<td>公共源码集要标这个</td>
+			</tr>
+			<tr>
+					<td>两个目录写了相同的 <code>features</code></td>
+					<td><code>source set 'app' with the same features is declared at ...</code></td>
+					<td><strong>一个开关组合只能给一个目录</strong></td>
+			</tr>
+			<tr>
+					<td><code>main</code> 写在公共目录里</td>
+					<td><code>'main' is missing</code></td>
+					<td><code>main</code> 必须放在平台目录里</td>
+			</tr>
+			<tr>
+					<td>公共文件里写了没有函数体的函数</td>
+					<td><code>body of function 'Platform' is missing</code></td>
+					<td>光写签名不行，得加 <code>common</code></td>
+			</tr>
+	</tbody>
+</table>
+<p>最后一条是重点，下一节专门讲。</p>
+<hr>
+<h2 id="五common-和specific一个负责说一个负责做"><a href="#五common-和specific一个负责说一个负责做" class="headerlink" title="五、common 和 specific：一个负责「说」，一个负责「做」"></a>五、<code>common</code> 和 <code>specific</code>：一个负责「说」，一个负责「做」</h2>
+<h3 id="51-它们解决什么问题"><a href="#51-它们解决什么问题" class="headerlink" title="5.1 它们解决什么问题"></a>5.1 它们解决什么问题</h3>
+<p>看上面 <code>common/platform.cj</code> 里的这一行：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">public common func Platform(): String
+</code></pre><p><strong>注意：它没有函数体</strong>——只有名字和类型，没有大括号，没写「怎么做」。</p>
+<p>普通函数这样写是<strong>错误的</strong>（编译器会说 <code>body of function is missing</code>，函数体缺失）。但加上 <code>common</code> 就合法了，因为它的意思是：</p>
+<blockquote>
+<p><strong>「本包一定要有一个叫 <code>Platform</code>、返回 <code>String</code> 的函数。具体怎么做，看是哪个平台。」</strong></p>
+</blockquote>
+<p>它是一份<strong>约定</strong>（也叫「契约」）。<code>common</code> = <strong>公共的、要说的</strong>。</p>
+<p>然后在每个平台目录里，用 <code>specific</code> 给出具体做法：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">public specific func Platform(): String { &#34;Linux&#34; }
+</code></pre><p><code>specific</code> = <strong>特定平台的、实际做的</strong>。</p>
+<p><strong>这就是 <code>common</code> 和 <code>specific</code> 的分工：</strong></p>
+<table>
+	<thead>
+			<tr>
+					<th>关键字</th>
+					<th>在哪</th>
+					<th>干什么</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>common</code></td>
+					<td>公共部分代码</td>
+					<td><strong>说</strong>：这个接口存在，长什么样</td>
+			</tr>
+			<tr>
+					<td><code>specific</code></td>
+					<td>平台部分代码</td>
+					<td><strong>做</strong>：这个平台的具体实现</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="511-用你熟悉的-interface-来理解"><a href="#511-用你熟悉的-interface-来理解" class="headerlink" title="5.1.1 用你熟悉的 interface 来理解"></a>5.1.1 用你熟悉的 <code>interface</code> 来理解</h3>
+<p>上面说的是「契约」，这个词有点抽象。<strong>仓颉本身就有一个表达「契约」的东西：<code>interface</code>（接口）</strong>——<code>common</code> 的思路和它是一回事。</p>
+<p>先看接口是怎么用的：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">interface Speaker {
+    func speak(): String        // 只规定「要有这个方法」，不写怎么做
+}
+
+class Dog &lt;: Speaker {
+    public func speak(): String { &#34;汪&#34; }   // 具体怎么做，由 Dog 说了算
+}
+</code></pre><p><code>interface</code> 说「<strong>必须有什么</strong>」，<code>class</code> 用 <code>&lt;:</code> 说「<strong>我来实现</strong>」。<strong><code>common</code> 和 <code>specific</code> 就是这个关系的跨平台版本</strong>：</p>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th>普通接口写法</th>
+					<th>跨平台写法</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>规定「有什么」</strong></td>
+					<td><code>interface Speaker { func speak(): String }</code></td>
+					<td><code>public common func Platform(): String</code></td>
+			</tr>
+			<tr>
+					<td><strong>给出具体实现</strong></td>
+					<td><code>class Dog &lt;: Speaker { func speak(): String }</code></td>
+					<td><code>public specific func Platform(): String { &quot;Linux&quot; }</code></td>
+			</tr>
+			<tr>
+					<td><strong>谁负责实现</strong></td>
+					<td>一个类</td>
+					<td>每个平台各写一份</td>
+			</tr>
+			<tr>
+					<td><strong>编译器检查什么</strong></td>
+					<td>实现了接口的方法没有、签名对不对</td>
+					<td>每个平台都有对应实现、签名对不对</td>
+			</tr>
+	</tbody>
+</table>
+<p>两者可以叠加使用，我实测过这段是合法且能跑的：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// 公共部分
+public interface Speaker {
+    func speak(): String
+}
+
+public common class Dog &lt;: Speaker {
+    public init() {}
+    public common func speak(): String      // 这个类在公共部分只立契约
+}
+</code></pre><pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// Linux 平台部分
+public specific class Dog &lt;: Speaker {
+    public specific func speak(): String { &#34;汪&#34; }
+}
+</code></pre><p>运行输出 <code>汪</code>。</p>
+<p><strong>一句话记住差别</strong>：</p>
+<ul>
+<li><code>interface</code> 管的是「<strong>同一份代码内</strong>，谁能被当成谁用」；</li>
+<li><code>common</code>/<code>specific</code> 管的是「<strong>跨平台</strong>，这个功能在每个系统上长什么样」。</li>
+</ul>
+<p>所以你可以这样理解：<strong><code>common</code> 像一份「必须各平台都实现的接口」，<code>specific</code> 就是各平台各自的实现。</strong> 区别在于——接口的实现在编译时是定好的，而 <code>specific</code> 的实现由<strong>你这次编译的目标平台</strong>决定。</p>
+<blockquote>
+<p>这也解释了一个初学者常有的疑惑：为什么 <code>common</code> 声明的函数可以不写函数体？因为它的角色就是「接口」，本来就不该有实现。</p>
+</blockquote>
+<h3 id="52-一句话例子"><a href="#52-一句话例子" class="headerlink" title="5.2 一句话例子"></a>5.2 一句话例子</h3>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// 公共部分：只说不做
+package cmp
+
+public common func foo(): Unit {
+    println(&#34;I am common&#34;)
+}
+</code></pre><pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// 平台部分：真正做
+package cmp
+
+public specific func foo(): Unit {
+    println(&#34;I am specific&#34;)
+}
+</code></pre><p>（两个文件都是 <code>package cmp</code>——<strong>它们属于同一个包</strong>，只是放在不同目录。）</p>
+<h3 id="53-三条最重要的规矩"><a href="#53-三条最重要的规矩" class="headerlink" title="5.3 三条最重要的规矩"></a>5.3 三条最重要的规矩</h3>
+<ol>
+<li><strong><code>common</code> 已经写了完整实现，就可以不写 <code>specific</code></strong>；<code>common</code> <strong>只写了签名（没有函数体），就必须有</strong> <code>specific</code>。</li>
+<li><strong><code>specific</code> 的样子必须和 <code>common</code> 对得上</strong>：参数类型一样、返回值一样（或是它的子类型）、其他修饰符一样。</li>
+<li><strong>一个 <code>specific</code> 只能对应一个 <code>common</code></strong>，不能两个平台函数去对应同一个 <code>common</code>。</li>
+</ol>
+<p>这些规矩<strong>编译器会严格检查</strong>。写错了会直接报错：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>error: &#39;common&#39; function return type must be specified
+</span></span><span style="display:flex;"><span>error: &#39;specific&#39; function &#39;bar&#39; can not find &#39;common&#39; match
+</span></span><span style="display:flex;"><span>error: &#39;common&#39; function &#39;foo&#39; can not find &#39;specific&#39; match
+</span></span></code></pre></div><p>第二、三条的意思是「你写了个平台实现，但找不到对应的约定」和「你立了个约定，但没人实现」。<strong>这种错误在拼错名字、漏写实现时特别常见</strong>，看到就知道是配对没对上。</p>
+<h3 id="54-什么时候用哪个"><a href="#54-什么时候用哪个" class="headerlink" title="5.4 什么时候用哪个"></a>5.4 什么时候用哪个</h3>
+<table>
+	<thead>
+			<tr>
+					<th>你的情况</th>
+					<th>用哪个</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>一个函数在不同系统实现不同</td>
+					<td><code>common</code> + <code>specific</code></td>
+			</tr>
+			<tr>
+					<td>一整个目录都是某个系统专用</td>
+					<td><code>source-set</code> + <code>features</code></td>
+			</tr>
+			<tr>
+					<td>只有几个地方要区分系统</td>
+					<td>直接 <code>@When</code></td>
+			</tr>
+			<tr>
+					<td>既要统一接口、又要分平台</td>
+					<td><code>common</code>/<code>specific</code> <strong>配合</strong> <code>source-set</code></td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>重要</strong>：<code>source-set</code> 和 <code>common</code>/<code>specific</code> <strong>不是二选一</strong>，而是配合的——</p>
+<ul>
+<li><code>source-set</code> 管「<strong>这次编译，哪些目录参与</strong>」；</li>
+<li><code>common</code>/<code>specific</code> 管「<strong>公共部分怎么立约定</strong>」。</li>
+</ul>
+<p>第四节的例子里，公共文件那行 <code>public common func Platform(): String</code> 两个都用上了：<code>common</code> 让它合法，<code>source-set</code> 让它只被编译一次。</p>
+<hr>
+<h2 id="六一个真实的项目mmap-cj"><a href="#六一个真实的项目mmap-cj" class="headerlink" title="六、一个真实的项目：mmap-cj"></a>六、一个真实的项目：<code>mmap-cj</code></h2>
+<p>讲了这么多机制，来看一个真实项目怎么选的。</p>
+<p><a href="https://atomgit.com/ystyle/mmap-cj" target="_blank" rel="noopener"><code>mmap-cj</code></a>
+ 是一个「内存映射文件」库——简单说，就是让程序像读写内存一样读写磁盘文件，速度很快。它要同时支持 Linux、macOS、Windows，而这三个系统的底层函数完全不同。</p>
+<p>它的开发过程很有意思，<strong>换了两次方案</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2026-04-11  第一次：common/specific + source-set 目录布局
+</span></span><span style="display:flex;"><span>2026-07-17  重构目录结构
+</span></span><span style="display:flex;"><span>2026-10-06  第二次：切回 @When 条件编译 ← 转折点
+</span></span></code></pre></div><p><strong>为什么一开始用 <code>source-set</code>，后来又切回麻烦的 <code>@When</code>？</strong></p>
+<p>作者在提交记录里写得很清楚：</p>
+<blockquote>
+<p><code>source-set</code> 是 <code>cjpm</code> 的<strong>实验特性</strong>：<strong>使用者（也就是依赖这个库的项目）必须同样声明 <code>experimental = true</code> 才能编译本库</strong>，否则报错。</p>
+</blockquote>
+<p>我实际验证了一遍。假设有个项目要使用这个库（不开实验开关）：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>$ cjpm build
+</span></span><span style="display:flex;"><span>Error: path of src directory &#39;src&#39; in .../mmap-cj/cjpm.toml does not exist
+</span></span><span style="display:flex;"><span>Error: cjpm build failed
+</span></span></code></pre></div><p><strong>连编译都过不去，测试更跑不了</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>$ cjpm test
+</span></span><span style="display:flex;"><span>Error: path of src directory &#39;src&#39; in .../mmap-cj/cjpm.toml does not exist
+</span></span><span style="display:flex;"><span>Error: cjpm test failed
+</span></span></code></pre></div><p>使用方必须在自己项目里加上这一行才行：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">profile</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">experimental</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span>
+</span></span></code></pre></div><h3 id="加了开关还有一个更麻烦的问题"><a href="#加了开关还有一个更麻烦的问题" class="headerlink" title="加了开关，还有一个更麻烦的问题"></a>加了开关，还有一个更麻烦的问题</h3>
+<p>按理说，加上那一行就该好了。但我实测发现：<strong><code>build</code> 能过了，<code>test</code> 还是过不去。</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>$ cjpm build
+</span></span><span style="display:flex;"><span>cjpm build success          # ← 好了
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ cjpm test
+</span></span><span style="display:flex;"><span>Error: cjpm test failed      # ← 还是挂
+</span></span></code></pre></div><p>而且这个报错很不好查——它只回一句 <code>cjpm test failed</code>，看不出原因。深挖进去才发现，是<strong>链接测试程序时漏掉了这个库</strong>（报了一堆 <code>undefined reference</code>）。</p>
+<p><strong>这就不只是「多写一行配置」的问题了：只要用了 <code>source-set</code> 布局的库，这个项目的单元测试就等于没法跑。</strong></p>
+<h3 id="这个问题已经上报并修好了"><a href="#这个问题已经上报并修好了" class="headerlink" title="这个问题已经上报并修好了"></a>这个问题已经上报并修好了</h3>
+<p>发现这个问题后，它被整理成 issue 报给了仓颉官方：</p>
+<ul>
+<li><a href="https://gitcode.com/Cangjie/UsersForum/issues/3515" target="_blank" rel="noopener">issue #3515：cjpm test 无法解析 <code>[[source-set]]</code> 依赖</a>
+</li>
+<li><a href="https://gitcode.com/Cangjie/cangjie_tools/pulls/1311" target="_blank" rel="noopener">修复 PR #1311</a>
+：给测试流程补上依赖库的路径和链接</li>
+</ul>
+<p><strong>修好之后，这个问题就不存在了。</strong> 但在修复发布之前，<code>mmap-cj</code> 得先能用——它的使用者 <code>badger-cj</code> 有几百个测试等着跑。</p>
+<p><strong>这就是它切回 <code>@When</code> 的真正原因</strong>：<code>@When</code> 是普通功能，不需要开实验开关，<code>build</code> 和 <code>test</code> 都正常。换成 <code>@When</code> 版之后，使用方什么都不用改：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>$ cjpm build
+</span></span><span style="display:flex;"><span>cjpm build success
+</span></span><span style="display:flex;"><span>ok: @When 版库，消费者不开 experimental 也能构建
+</span></span></code></pre></div><p>顺带一提，这个影响是真实的——另一个项目 <code>badger-cj</code> 就依赖 <code>mmap-cj</code>，它的配置文件里明确写着：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">profile</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 依赖 mmap-cj 使用 experimental 的 [[source-set]] 多平台布局，消费侧需同样开启</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">experimental</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span>
+</span></span></code></pre></div><p><strong>一个库用了实验特性，逼着所有用它的项目一起打开实验开关。</strong> 对一个要给别人用的库来说，这个代价太大了。</p>
+<h3 id="代价是什么"><a href="#代价是什么" class="headerlink" title="代价是什么"></a>代价是什么</h3>
+<p>切回 <code>@When</code> 之后，代价就是第三节说的那个：<strong>每个声明都要标一遍</strong>。<code>mmap-cj</code> 现在是这样：</p>
+<table>
+	<thead>
+			<tr>
+					<th>文件</th>
+					<th style="text-align: right">行数</th>
+					<th style="text-align: right"><code>@When</code> 出现次数</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>src/mmap_linux.cj</code></td>
+					<td style="text-align: right">178</td>
+					<td style="text-align: right">8</td>
+			</tr>
+			<tr>
+					<td><code>src/mmap_darwin.cj</code></td>
+					<td style="text-align: right">180</td>
+					<td style="text-align: right">8</td>
+			</tr>
+			<tr>
+					<td><code>src/mmap_windows.cj</code></td>
+					<td style="text-align: right">250</td>
+					<td style="text-align: right">8</td>
+			</tr>
+			<tr>
+					<td><code>src/mmap_test.cj</code></td>
+					<td style="text-align: right">235</td>
+					<td style="text-align: right">4</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>这就是真实的取舍</strong>：</p>
+<ul>
+<li><code>source-set</code> 写起来干净整齐，但它带着「实验特性」这个副作用，会影响所有使用者；</li>
+<li><code>@When</code> 啰嗦重复，但它是普通功能，谁用都没负担。</li>
+</ul>
+<p>对一个<strong>要发布给别人用</strong>的库，作者最终选了后者。</p>
+<blockquote>
+<p>补充一句公道话：<code>mmap-cj</code> 自己的测试，两套方案都是 6 个用例全过。问题不在<strong>库自己</strong>能不能测，而在<strong>别人依赖它之后</strong>能不能测——后者才是库要负责的事。</p>
+</blockquote>
+<hr>
+<h2 id="七总结一下"><a href="#七总结一下" class="headerlink" title="七、总结一下"></a>七、总结一下</h2>
+<h3 id="三种工具三种粒度"><a href="#三种工具三种粒度" class="headerlink" title="三种工具，三种粒度"></a>三种工具，三种粒度</h3>
+<table>
+	<thead>
+			<tr>
+					<th>工具</th>
+					<th>管多大范围</th>
+					<th>一句话理解</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>@When</code></td>
+					<td>一个函数 / 一条 import</td>
+					<td>「这行代码只在某平台编译」</td>
+			</tr>
+			<tr>
+					<td><code>source-set</code></td>
+					<td>整个目录</td>
+					<td>「这个目录只在某平台编译」</td>
+			</tr>
+			<tr>
+					<td><code>common</code>/<code>specific</code></td>
+					<td>一个声明</td>
+					<td>「这个接口各平台都有，实现各自不同」</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="给初学者的建议"><a href="#给初学者的建议" class="headerlink" title="给初学者的建议"></a>给初学者的建议</h3>
+<ol>
+<li><strong>先学 <code>@When</code></strong>。它最简单、最不容易出错，而且<strong>不需要实验开关</strong>，是目前最实用的。</li>
+<li><strong><code>@When</code> 里写 <code>&quot;Linux&quot;</code>（大写），<code>cjpm</code> 配置里写 <code>os.linux</code>（小写）</strong>。这是我提醒第三次了，因为它们真的很像。</li>
+<li><strong>写给别人用的库，慎用 <code>source-set</code></strong>——它会让使用者也得开 <code>experimental</code>。</li>
+<li><strong><code>common</code>/<code>specific</code> 是「约定 + 实现」</strong>，不是 Go 里那种「整个文件绑定平台」。它更适合「我要保证所有平台都有这个接口」的场景。</li>
+<li><strong>遇到「函数体缺失」的报错</strong>，想想是不是漏了 <code>common</code>；遇到「找不到匹配」，想想是不是名字或类型写错了。</li>
+</ol>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3>
+<p>「跨平台」听起来是很高级的话题，但核心就一句话：</p>
+<blockquote>
+<p><strong>有些代码只有某个系统能懂，所以要按系统把它们分开——而分开的粒度，有大有小。</strong></p>
+</blockquote>
+<p>仓颉给了你三把不同大小的刀。知道有哪三把、各自多大，就已经超过大多数人了。</p>
+<hr>
+<h2 id="附文中命令速查"><a href="#附文中命令速查" class="headerlink" title="附：文中命令速查"></a>附：文中命令速查</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a"># 编译单个文件（试试第二节的例子）</span>
+</span></span><span style="display:flex;"><span>cjc hello.cj -o hello
+</span></span><span style="display:flex;"><span>./hello
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># cjpm 项目：按平台编译（第四节的例子）</span>
+</span></span><span style="display:flex;"><span>cjpm build --no-feature-deduce --enable-features<span style="color:#0550ae">=</span>os.linux
+</span></span><span style="display:flex;"><span>cjpm build --no-feature-deduce --enable-features<span style="color:#0550ae">=</span>os.windows
+</span></span></code></pre></div><blockquote>
+<p>本文所有输出均为 <code>cjc 1.2.0</code> / <code>cjpm 1.2.0</code> 在 x86_64 Linux 上实际运行结果。<br>
+其中的 <code>source-set</code> 与 <code>common</code>/<code>specific</code> 自 1.1.0 起提供，目前是实验特性；<code>@When</code> 是常规功能，可以直接用。</p>
+</blockquote>
+<hr>
+<p align="center">
+<p><a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="https://img.shields.io/badge/powered_by-dsh-4D6BFE?style=flat-square&amp;logo=deepseek&amp;logoColor=white" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
+</a>
+</p>
+</p>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2026-10-15T11:00:00&#43;08:00" itemprop="dateUpdated">2026-10-15 11:00:00</time>
+          </span><br>
+          本文链接：<a href="/2026/10/15/cangjie-multiplatform-from-zero/" target="_blank" rel="external">https://ystyle.top/2026/10/15/cangjie-multiplatform-from-zero/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/">跨平台</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mmap-cj/">mmap-cj</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f15%2fcangjie-multiplatform-from-zero%2f&title=%e3%80%8a%e4%b8%80%e6%ae%b5%e4%bb%a3%e7%a0%81%ef%bc%8c%e4%b8%a4%e4%b8%aa%e7%b3%bb%e7%bb%9f%ef%bc%9a%e4%bb%93%e9%a2%89%e6%80%8e%e4%b9%88%e5%a4%84%e7%90%86%e3%80%8c%e8%b7%a8%e5%b9%b3%e5%8f%b0%e3%80%8d%e8%bf%99%e4%bb%b6%e4%ba%8b%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f15%2fcangjie-multiplatform-from-zero%2f&title=%e3%80%8a%e4%b8%80%e6%ae%b5%e4%bb%a3%e7%a0%81%ef%bc%8c%e4%b8%a4%e4%b8%aa%e7%b3%bb%e7%bb%9f%ef%bc%9a%e4%bb%93%e9%a2%89%e6%80%8e%e4%b9%88%e5%a4%84%e7%90%86%e3%80%8c%e8%b7%a8%e5%b9%b3%e5%8f%b0%e3%80%8d%e8%bf%99%e4%bb%b6%e4%ba%8b%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e5%86%99%e7%bb%99%e7%ac%ac%e4%b8%80%e6%ac%a1%e6%8e%a5%e8%a7%a6%e3%80%8c%e8%b7%a8%e5%b9%b3%e5%8f%b0%e3%80%8d%e7%9a%84%e4%bb%93%e9%a2%89%e5%ad%a6%e4%b9%a0%e8%80%85%0a%e4%bb%8e%e3%80%8c%e4%b8%ba%e4%bb%80%e4%b9%88%e8%a6%81%e8%b7%a8%e5%b9%b3%e5%8f%b0%e3%80%8d%e8%ae%b2%e5%88%b0%e4%ba%b2%e6%89%8b%e8%b7%91%e9%80%9a%e4%b8%80%e4%b8%aa%e4%be%8b%e5%ad%90%0aCangjie%20%c2%b7%20%e5%85%a5%e9%97%a8%20%c2%b7%20%e8%b7%a8%e5%b9%b3%e5%8f%b0%0a%e8%bf%99%e7%af%87%e4%b8%8d%e5%81%87%e8%ae%be%e4%bd%a0%e5%ad%a6%e8%bf%87%e4%bb%bb%e4%bd%95%e5%85%b6%e4%bb%96%e7%bc%96%e7%a8%8b%e8%af%ad%e8%a8%80%ef%bc%8c%e4%b9%9f%e4%b8%8d%e5%81%87%e8%ae%be%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f15%2fcangjie-multiplatform-from-zero%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e4%b8%80%e6%ae%b5%e4%bb%a3%e7%a0%81%ef%bc%8c%e4%b8%a4%e4%b8%aa%e7%b3%bb%e7%bb%9f%ef%bc%9a%e4%bb%93%e9%a2%89%e6%80%8e%e4%b9%88%e5%a4%84%e7%90%86%e3%80%8c%e8%b7%a8%e5%b9%b3%e5%8f%b0%e3%80%8d%e8%bf%99%e4%bb%b6%e4%ba%8b%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f15%2fcangjie-multiplatform-from-zero%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f15%2fcangjie-multiplatform-from-zero%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2026/10/15/cangjie-multiplatform-for-go-devs/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">Go 一行注释就能把整个文件绑到平台，仓颉为什么不行？</h4>
+        </a>
+      </div>
+      
+      
+    </nav>
+    
+
+    
+    
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+  </article>
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f15%2fcangjie-multiplatform-from-zero%2f&title=%e3%80%8a%e4%b8%80%e6%ae%b5%e4%bb%a3%e7%a0%81%ef%bc%8c%e4%b8%a4%e4%b8%aa%e7%b3%bb%e7%bb%9f%ef%bc%9a%e4%bb%93%e9%a2%89%e6%80%8e%e4%b9%88%e5%a4%84%e7%90%86%e3%80%8c%e8%b7%a8%e5%b9%b3%e5%8f%b0%e3%80%8d%e8%bf%99%e4%bb%b6%e4%ba%8b%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f15%2fcangjie-multiplatform-from-zero%2f&title=%e3%80%8a%e4%b8%80%e6%ae%b5%e4%bb%a3%e7%a0%81%ef%bc%8c%e4%b8%a4%e4%b8%aa%e7%b3%bb%e7%bb%9f%ef%bc%9a%e4%bb%93%e9%a2%89%e6%80%8e%e4%b9%88%e5%a4%84%e7%90%86%e3%80%8c%e8%b7%a8%e5%b9%b3%e5%8f%b0%e3%80%8d%e8%bf%99%e4%bb%b6%e4%ba%8b%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e5%86%99%e7%bb%99%e7%ac%ac%e4%b8%80%e6%ac%a1%e6%8e%a5%e8%a7%a6%e3%80%8c%e8%b7%a8%e5%b9%b3%e5%8f%b0%e3%80%8d%e7%9a%84%e4%bb%93%e9%a2%89%e5%ad%a6%e4%b9%a0%e8%80%85%0a%e4%bb%8e%e3%80%8c%e4%b8%ba%e4%bb%80%e4%b9%88%e8%a6%81%e8%b7%a8%e5%b9%b3%e5%8f%b0%e3%80%8d%e8%ae%b2%e5%88%b0%e4%ba%b2%e6%89%8b%e8%b7%91%e9%80%9a%e4%b8%80%e4%b8%aa%e4%be%8b%e5%ad%90%0aCangjie%20%c2%b7%20%e5%85%a5%e9%97%a8%20%c2%b7%20%e8%b7%a8%e5%b9%b3%e5%8f%b0%0a%e8%bf%99%e7%af%87%e4%b8%8d%e5%81%87%e8%ae%be%e4%bd%a0%e5%ad%a6%e8%bf%87%e4%bb%bb%e4%bd%95%e5%85%b6%e4%bb%96%e7%bc%96%e7%a8%8b%e8%af%ad%e8%a8%80%ef%bc%8c%e4%b9%9f%e4%b8%8d%e5%81%87%e8%ae%be%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f15%2fcangjie-multiplatform-from-zero%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e4%b8%80%e6%ae%b5%e4%bb%a3%e7%a0%81%ef%bc%8c%e4%b8%a4%e4%b8%aa%e7%b3%bb%e7%bb%9f%ef%bc%9a%e4%bb%93%e9%a2%89%e6%80%8e%e4%b9%88%e5%a4%84%e7%90%86%e3%80%8c%e8%b7%a8%e5%b9%b3%e5%8f%b0%e3%80%8d%e8%bf%99%e4%bb%b6%e4%ba%8b%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f15%2fcangjie-multiplatform-from-zero%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f15%2fcangjie-multiplatform-from-zero%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2026/10/15/cangjie-multiplatform-from-zero/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+</body>
+</html>

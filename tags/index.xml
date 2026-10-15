@@ -10,9 +10,44 @@
 		
 		
 		
-			<lastBuildDate>Tue, 13 Oct 2026 16:40:00 +0800</lastBuildDate>
+			<lastBuildDate>Thu, 15 Oct 2026 11:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Cangjie</title>
+				<link>https://ystyle.top/tags/Cangjie/</link>
+				<pubDate>Thu, 15 Oct 2026 11:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/Cangjie/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>mmap-cj</title>
+				<link>https://ystyle.top/tags/mmap-cj/</link>
+				<pubDate>Thu, 15 Oct 2026 11:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/mmap-cj/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>跨平台</title>
+				<link>https://ystyle.top/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/</link>
+				<pubDate>Thu, 15 Oct 2026 11:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>入门</title>
+				<link>https://ystyle.top/tags/%E5%85%A5%E9%97%A8/</link>
+				<pubDate>Thu, 15 Oct 2026 11:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/%E5%85%A5%E9%97%A8/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>golang</title>
+				<link>https://ystyle.top/tags/golang/</link>
+				<pubDate>Thu, 15 Oct 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/golang/</guid>
+				<description></description>
+			</item>
 			<item>
 				<title>code_sign</title>
 				<link>https://ystyle.top/tags/code_sign/</link>
@@ -70,13 +105,6 @@
 				<description></description>
 			</item>
 			<item>
-				<title>Cangjie</title>
-				<link>https://ystyle.top/tags/Cangjie/</link>
-				<pubDate>Tue, 13 Oct 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/Cangjie/</guid>
-				<description></description>
-			</item>
-			<item>
 				<title>LSM-Tree</title>
 				<link>https://ystyle.top/tags/LSM-Tree/</link>
 				<pubDate>Tue, 13 Oct 2026 10:00:00 +0800</pubDate>
@@ -123,34 +151,6 @@
 				<link>https://ystyle.top/tags/%E6%88%B4%E6%A3%AE%E7%90%83/</link>
 				<pubDate>Sun, 06 Sep 2026 09:30:00 +0800</pubDate>
 				<guid>https://ystyle.top/tags/%E6%88%B4%E6%A3%AE%E7%90%83/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>核取变</title>
-				<link>https://ystyle.top/tags/%E6%A0%B8%E5%8F%96%E5%8F%98/</link>
-				<pubDate>Sun, 06 Sep 2026 09:30:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/%E6%A0%B8%E5%8F%96%E5%8F%98/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>科幻</title>
-				<link>https://ystyle.top/tags/%E7%A7%91%E5%B9%BB/</link>
-				<pubDate>Sun, 06 Sep 2026 09:30:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/%E7%A7%91%E5%B9%BB/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>太空城</title>
-				<link>https://ystyle.top/tags/%E5%A4%AA%E7%A9%BA%E5%9F%8E/</link>
-				<pubDate>Sun, 06 Sep 2026 09:30:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/%E5%A4%AA%E7%A9%BA%E5%9F%8E/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>box64</title>
-				<link>https://ystyle.top/tags/box64/</link>
-				<pubDate>Tue, 30 Jun 2026 22:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/box64/</guid>
 				<description></description>
 			</item>
 	</channel>

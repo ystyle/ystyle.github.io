@@ -4,12 +4,51 @@
   <subtitle>请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="https://ystyle.top/"/>
-  <updated>2026-10-13T08:40:00.000Z</updated>
+  <updated>2026-10-15T03:00:00.000Z</updated>
   <id>https://ystyle.top/</id>
   <author>
     <name>YSTYLE</name>
   </author>
   <generator uri="https://gohugo.io/">Hugo</generator>
+  <entry>
+    <title>一段代码，两个系统：仓颉怎么处理「跨平台」这件事</title>
+    <link href="https://ystyle.top/2026/10/15/cangjie-multiplatform-from-zero/"/>
+    <id>https://ystyle.top/2026/10/15/cangjie-multiplatform-from-zero/</id>
+    <published>2026-10-15T03:00:00.000Z</published>
+    <updated>2026-10-15T03:00:00.000Z</updated>
+    
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;写给第一次接触「跨平台」的仓颉学习者&lt;/strong&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;em&gt;从「为什么要跨平台」讲到亲手跑通一个例子&lt;/em&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;code&gt;Cangjie&lt;/code&gt; · &lt;code&gt;入门&lt;/code&gt; · &lt;code&gt;跨平台&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这篇不假设你学过任何其他编程语言，也不假设你懂操作系统内部。&lt;/p&gt;
+&lt;p&gt;如果你刚学仓颉，听到「跨平台」「条件编译」「common/specific」这些词一头雾水——这篇就是给你的。我们从一个最朴素的问题开始：&lt;strong&gt;同一段代码，为什么不能在所有电脑上跑？&lt;/strong&gt;&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
+    <category term="跨平台" scheme="https://ystyle.top/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/"/>
+    <category term="入门" scheme="https://ystyle.top/tags/%E5%85%A5%E9%97%A8/"/>
+    <category term="mmap-cj" scheme="https://ystyle.top/tags/mmap-cj/"/>
+    
+  </entry>
+  <entry>
+    <title>Go 一行注释就能把整个文件绑到平台，仓颉为什么不行？</title>
+    <link href="https://ystyle.top/2026/10/15/cangjie-multiplatform-for-go-devs/"/>
+    <id>https://ystyle.top/2026/10/15/cangjie-multiplatform-for-go-devs/</id>
+    <published>2026-10-15T02:00:00.000Z</published>
+    <updated>2026-10-15T02:00:00.000Z</updated>
+    
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;从 Go 的 &lt;code&gt;//go:build&lt;/code&gt; 到仓颉的 &lt;code&gt;common&lt;/code&gt;/&lt;code&gt;specific&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;em&gt;拆开「仓颉不能按文件分平台」这句话：它其实有三种粒度，以及一个真实项目绕的弯&lt;/em&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;code&gt;Cangjie&lt;/code&gt; · &lt;code&gt;Go&lt;/code&gt; · &lt;code&gt;跨平台&lt;/code&gt; · &lt;code&gt;mmap-cj&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果你写过 Go，多半见过 &lt;code&gt;src/net/fd_js.go&lt;/code&gt; 这类文件——开头一行 &lt;code&gt;//go:build js&lt;/code&gt;，整个文件就只属于 js 平台。转到仓颉之后你会发现：&lt;strong&gt;没有等价的一行注释&lt;/strong&gt;。&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
+    <category term="golang" scheme="https://ystyle.top/tags/golang/"/>
+    <category term="跨平台" scheme="https://ystyle.top/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/"/>
+    <category term="mmap-cj" scheme="https://ystyle.top/tags/mmap-cj/"/>
+    
+  </entry>
   <entry>
     <title>【鸿蒙PC】二进制签名入门：证书从哪来、能要什么权限、该用哪一个</title>
     <link href="https://ystyle.top/2026/10/13/harmonyos-pc-binary-sign-basics/"/>
@@ -404,46 +443,6 @@
     <category term="vue3" scheme="https://ystyle.top/tags/vue3/"/>
     <category term="Rollup" scheme="https://ystyle.top/tags/Rollup/"/>
     <category term="matebook-pro" scheme="https://ystyle.top/tags/matebook-pro/"/>
-    
-  </entry>
-  <entry>
-    <title>hypyland实现alt &#43; tab切换到任意工作区的窗口</title>
-    <link href="https://ystyle.top/2023/10/13/hyprland-alt-tab-switch-to-any-widnow/"/>
-    <id>https://ystyle.top/2023/10/13/hyprland-alt-tab-switch-to-any-widnow/</id>
-    <published>2023-10-13T02:46:26.000Z</published>
-    <updated>2023-10-13T07:08:26.000Z</updated>
-    
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;hypyland使用过程中，遇到开了很多工作区和很多窗口时，找指定的窗口会比较麻烦&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;依赖&#34;&gt;&lt;a href=&#34;#依赖&#34; class=&#34;headerlink&#34; title=&#34;依赖&#34;&gt;&lt;/a&gt;依赖&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;一键安装 &lt;code&gt;yay -S jq rofi-lbonn-wayland-git&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;jq&lt;/li&gt;
-&lt;li&gt;rofi&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;脚本&#34;&gt;&lt;a href=&#34;#脚本&#34; class=&#34;headerlink&#34; title=&#34;脚本&#34;&gt;&lt;/a&gt;脚本&lt;/h3&gt;
-&lt;p&gt;把以下脚本存放到&lt;code&gt;~/.config/hypr/scripts/switch_windows&lt;/code&gt;&lt;/p&gt;</summary>
-    <category term="系统" scheme="https://ystyle.top/categories/%E7%B3%BB%E7%BB%9F/"/>
-    <category term="hyprland" scheme="https://ystyle.top/tags/hyprland/"/>
-    <category term="wayland" scheme="https://ystyle.top/tags/wayland/"/>
-    
-  </entry>
-  <entry>
-    <title>使用泛型设计gorm扩展字段</title>
-    <link href="https://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/"/>
-    <id>https://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/</id>
-    <published>2023-09-25T09:37:26.000Z</published>
-    <updated>2023-09-25T09:37:26.000Z</updated>
-    
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;大型项目经常需要在标准的用户表或员工表加些扩展字段，如果你有一套标准的用户管理系统的话，要么每个项目复制过来改一遍或者添加十几个固定的自定义字段Def1~Def10， 现在可以用在gorm定义模型时使用泛型来解决这个问题&lt;/p&gt;</summary>
-    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
-    <category term="go" scheme="https://ystyle.top/tags/go/"/>
-    <category term="gorm" scheme="https://ystyle.top/tags/gorm/"/>
-    <category term="泛型" scheme="https://ystyle.top/tags/%E6%B3%9B%E5%9E%8B/"/>
     
   </entry>
 </feed>

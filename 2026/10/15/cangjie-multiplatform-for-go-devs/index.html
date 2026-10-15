@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Go 一行注释就能把整个文件绑到平台，仓颉为什么不行？ | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">Go 一行注释就能把整个文件绑到平台，仓颉为什么不行？</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">Go 一行注释就能把整个文件绑到平台，仓颉为什么不行？</h1>
+    <h5 class="subtitle">
+      <time datetime="2026-10-15T10:00:00&#43;08:00" itemprop="datePublished" class="page-time">2026-10-15</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e5%85%88%e6%8a%8ago%e9%82%a3%e4%b8%80%e8%a1%8c%e8%af%bb%e6%98%8e%e7%99%bd">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">一、先把 Go 那一行读明白</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%8c%e4%bb%93%e9%a2%89%e4%b8%ba%e4%bb%80%e4%b9%88%e4%b8%8d%e8%83%bd%e7%9b%b4%e6%8e%a5%e7%85%a7%e6%8a%84">
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">二、仓颉为什么不能直接照抄</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%89%e6%9c%ba%e5%88%b6%e4%b8%80when%e6%9d%a1%e4%bb%b6%e7%bc%96%e8%af%91%e6%9c%80%e6%8e%a5%e8%bf%91%e4%bd%86%e7%b2%92%e5%ba%a6%e6%9b%b4%e7%bb%86">
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">三、机制一：@When 条件编译（最接近、但粒度更细）</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%9b%9b%e6%9c%ba%e5%88%b6%e4%ba%8csource-set--features%e5%af%b9%e6%a0%87gobuild">
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">四、机制二：source-set + features（对标 //go:build）</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#41-cjpmtoml-%e9%87%8c%e5%a3%b0%e6%98%8e%e6%98%a0%e5%b0%84">
+    <span class="post-toc-number">4.1.</span> <span class="post-toc-text">4.1 cjpm.toml 里声明映射</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#42-%e6%96%87%e4%bb%b6%e5%a4%b4%e8%bf%98%e5%be%97%e8%87%aa%e5%b7%b1%e5%a3%b0%e6%98%8e">
+    <span class="post-toc-number">4.2.</span> <span class="post-toc-text">4.2 文件头还得自己声明</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#43-%e4%b8%a4%e5%a5%97%e6%9c%ba%e5%88%b6%e6%98%af%e9%85%8d%e5%90%88%e7%9a%84%e4%b8%8d%e6%98%af%e4%ba%8c%e9%80%89%e4%b8%80">
+    <span class="post-toc-number">4.3.</span> <span class="post-toc-text">4.3 两套机制是配合的，不是二选一</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#44-%e6%9e%84%e5%bb%ba%e4%b8%8e%e4%ba%a7%e7%89%a9">
+    <span class="post-toc-number">4.4.</span> <span class="post-toc-text">4.4 构建与产物</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%94%e6%9c%ba%e5%88%b6%e4%b8%89common--specific%e5%a3%b0%e6%98%8e%e7%ba%a7%e5%a5%91%e7%ba%a6go%e6%b2%a1%e6%9c%89%e5%af%b9%e5%ba%94%e7%89%a9">
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">五、机制三：common / specific（声明级契约，Go 没有对应物）</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%85%ad%e4%b8%80%e4%b8%aa%e7%9c%9f%e5%ae%9e%e9%a1%b9%e7%9b%ae%e7%bb%95%e7%9a%84%e5%bc%af">
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">六、一个真实项目绕的弯</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e5%88%87%e5%9b%9e%e5%8e%bb">
+    <span class="post-toc-number">6.1.</span> <span class="post-toc-text">为什么切回去</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%bd%86%e7%9c%9f%e6%ad%a3%e8%87%b4%e5%91%bd%e7%9a%84%e6%98%af%e8%bf%99%e4%b8%aa%e6%89%93%e5%bc%80%e4%ba%86%e5%bc%80%e5%85%b3test-%e4%be%9d%e7%84%b6%e8%b7%91%e4%b8%8d%e4%ba%86">
+    <span class="post-toc-number">6.2.</span> <span class="post-toc-text">但真正致命的是这个：打开了开关，test 依然跑不了</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e8%bf%99%e4%b8%aa%e9%97%ae%e9%a2%98%e5%b7%b2%e7%bb%8f%e4%b8%8a%e6%8a%a5%e5%b9%b6%e4%bf%ae%e5%a5%bd%e4%ba%86">
+    <span class="post-toc-number">6.3.</span> <span class="post-toc-text">这个问题已经上报并修好了</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e9%82%a3-mmap-cj-%e5%bd%93%e6%97%b6%e8%af%a5%e6%80%8e%e4%b9%88%e9%80%89">
+    <span class="post-toc-number">6.4.</span> <span class="post-toc-text">那 mmap-cj 当时该怎么选</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e8%bf%99%e4%b8%8d%e6%98%af%e7%ba%b8%e9%9d%a2%e6%8e%a8%e6%bc%94%e7%9c%9f%e5%ae%9e%e7%9a%84%e7%ac%ac%e4%b8%89%e6%96%b9%e6%b6%88%e8%b4%b9%e8%80%85%e5%b7%b2%e7%bb%8f%e6%92%9e%e4%b8%8a%e4%ba%86">
+    <span class="post-toc-number">6.5.</span> <span class="post-toc-text">这不是纸面推演，真实的第三方消费者已经撞上了</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%bb%a3%e4%bb%b7%e4%b9%9f%e6%98%af%e7%9c%9f%e5%ae%9e%e7%9a%84">
+    <span class="post-toc-number">6.6.</span> <span class="post-toc-text">代价也是真实的</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%83%e5%af%b9%e7%85%a7%e9%80%9f%e6%9f%a5%e8%a1%a8">
+    <span class="post-toc-number">7.</span> <span class="post-toc-text">七、对照速查表</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%85%ab%e8%b8%a9%e5%9d%91%e6%b8%85%e5%8d%95">
+    <span class="post-toc-number">8.</span> <span class="post-toc-text">八、踩坑清单</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e7%bb%93%e8%af%ad">
+    <span class="post-toc-number">9.</span> <span class="post-toc-text">结语</span>
+  </a>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-Go用户看仓颉跨平台" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">Go 一行注释就能把整个文件绑到平台，仓颉为什么不行？</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2026-10-15T10:00:00&#43;08:00" itemprop="datePublished">2026-10-15</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <p align="center"><strong>从 Go 的 <code>//go:build</code> 到仓颉的 <code>common</code>/<code>specific</code></strong></p>
+<p align="center"><em>拆开「仓颉不能按文件分平台」这句话：它其实有三种粒度，以及一个真实项目绕的弯</em></p>
+<p align="center"><code>Cangjie</code> · <code>Go</code> · <code>跨平台</code> · <code>mmap-cj</code></p>
+<blockquote>
+<p>如果你写过 Go，多半见过 <code>src/net/fd_js.go</code> 这类文件——开头一行 <code>//go:build js</code>，整个文件就只属于 js 平台。转到仓颉之后你会发现：<strong>没有等价的一行注释</strong>。</p>
+<p>这篇写给有 Go 背景的人。结论是：仓颉不是「不行」，而是<strong>把这件事拆成了三种粒度</strong>，你得先知道有哪三种，再决定用哪种。</p>
+<p>文中所有仓颉命令与报错，都是本机 <code>cjc/cjpm 1.2.0</code> 实跑出来的；项目案例是真实的 <code>mmap-cj</code>——它先后用了两套方案，中间还切回去过一次。</p>
+</blockquote>
+<hr>
+<h2 id="一先把go那一行读明白"><a href="#一先把go那一行读明白" class="headerlink" title="一、先把 Go 那一行读明白"></a>一、先把 Go 那一行读明白</h2>
+<p><code>src/net/fd_js.go</code> 是这样的：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#57606a">// Fake networking for js/wasm. It is intended to allow tests of other package to pass.</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//go:build js          // ← 整个文件只在 js 平台编译</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">package</span><span style="color:#fff"> </span><span style="color:#1f2328">net</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#0a3069">&#34;os&#34;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#0a3069">&#34;syscall&#34;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">func</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span><span style="color:#1f2328">fd</span><span style="color:#fff"> </span><span style="color:#0550ae">*</span><span style="color:#1f2328">netFD</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#6639ba">closeRead</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#cf222e">error</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">fd</span><span style="color:#1f2328">.</span><span style="color:#1f2328">fakeNetFD</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">fd</span><span style="color:#1f2328">.</span><span style="color:#1f2328">fakeNetFD</span><span style="color:#1f2328">.</span><span style="color:#6639ba">closeRead</span><span style="color:#1f2328">()</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">os</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewSyscallError</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;closeRead&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">syscall</span><span style="color:#1f2328">.</span><span style="color:#1f2328">ENOTSUP</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre></div><p>关键在于：<strong>Go 的 <code>net</code> 包不是「一个实现 + 若干平台覆盖」，而是「同一批文件里，每个平台挑一组编译」。</strong></p>
+<p><code>src/net/</code> 目录下躺着 <code>fd_js.go</code>、<code>fd_plan9.go</code>、<code>fd_posix.go</code>、<code>fd_unix.go</code>、<code>fd_wasip1.go</code>、<code>fd_windows.go</code>。在 js 平台上编译时，<code>fd_unix.go</code> <strong>压根不参与编译</strong>——所以 <code>closeRead</code> 的 js 版本是全包唯一的那一份，不存在「覆盖」这回事。</p>
+<p>Go 判断文件归属用三道闸门，<strong>全都不需要写配置</strong>：</p>
+<table>
+	<thead>
+			<tr>
+					<th>闸门</th>
+					<th><code>fd_js.go</code> 里对应什么</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>① 文件名后缀</td>
+					<td><code>_js</code>（<code>xxx_GOOS.go</code>、<code>xxx_GOARCH.go</code>、<code>xxx_GOOS_GOARCH.go</code> 会被隐式当作约束）</td>
+			</tr>
+			<tr>
+					<td>② 构建约束注释</td>
+					<td><code>//go:build js</code>（布尔表达式，支持 <code>||</code> <code>&amp;&amp;</code> <code>!</code> 和括号）</td>
+			</tr>
+			<tr>
+					<td>③ 环境变量</td>
+					<td><code>GOOS=js GOARCH=wasm</code>，决定上面两个标签是否满足</td>
+			</tr>
+	</tbody>
+</table>
+<p>还能组表达式：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#57606a">//go:build (linux &amp;&amp; 386) || (darwin &amp;&amp; !cgo)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//go:build !(cgo &amp;&amp; (linux || darwin))</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//go:build ignore     // 永不参与构建</span><span style="color:#fff">
+</span></span></span></code></pre></div><p>顺带一个细节，说明这套机制有多「物理」：同目录的 <code>fd_fake.go</code> 用的约束是 <code>//go:build js || wasip1</code>——也就是说，<strong>一个平台可以由多个文件共同组成</strong>，文件之间不需要有任何对应关系。</p>
+<blockquote>
+<p><strong>一句话</strong>：Go 的哲学是<strong>编译期物理排除</strong>。不参与编译的文件就是一坨文本，里面的符号未定义也不会报错。于是你可以放心写「只有这个平台才有」的 API。</p>
+</blockquote>
+<hr>
+<h2 id="二仓颉为什么不能直接照抄"><a href="#二仓颉为什么不能直接照抄" class="headerlink" title="二、仓颉为什么不能直接照抄"></a>二、仓颉为什么不能直接照抄</h2>
+<p>因为仓颉想回答的问题不太一样。</p>
+<p>Go 的 <code>//go:build</code> 解决的是「<strong>平台专有代码放哪儿</strong>」——一个文件组织问题。谁跟谁配对、签名一致不一致，Go 不管。</p>
+<p>而仓颉在设计 <code>common</code>/<code>specific</code> 时，想解决的是「<strong>跨平台 API 的契约怎么立</strong>」——一个接口契约问题：这个函数在所有平台都该存在，但各平台实现不同，<strong>而且签名必须一致</strong>。</p>
+<p>这是两种诉求。所以仓颉长出了三种不同粒度的机制：</p>
+<table>
+	<thead>
+			<tr>
+					<th>层次</th>
+					<th>粒度</th>
+					<th>机制</th>
+					<th>成熟度</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>声明级</td>
+					<td>单个函数 / 类 / 成员</td>
+					<td><code>common</code> / <code>specific</code> 修饰符</td>
+					<td>1.1.0 起，<strong>实验性</strong></td>
+			</tr>
+			<tr>
+					<td>文件 / 目录级</td>
+					<td><strong>整个文件、整个目录</strong></td>
+					<td><code>cjpm</code> 的 <code>source-set</code> + <code>features</code></td>
+					<td>1.1.0 起，<strong>实验性</strong></td>
+			</tr>
+			<tr>
+					<td>声明 / 导入级</td>
+					<td>单个声明、单条 import</td>
+					<td><code>@When[os == &quot;Linux&quot;]</code></td>
+					<td>已有，非实验</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>真正对标 Go <code>//go:build</code> 的是第二层</strong>——<code>cjpm</code> 的 <code>source-set</code>。但它需要你在 <code>cjpm.toml</code> 里显式声明「目录 ↔ feature」的映射，远不如一行注释省事。这就是体感差距的来源。</p>
+<hr>
+<h2 id="三机制一when条件编译最接近但粒度更细"><a href="#三机制一when条件编译最接近但粒度更细" class="headerlink" title="三、机制一：@When 条件编译（最接近、但粒度更细）"></a>三、机制一：<code>@When</code> 条件编译（最接近、但粒度更细）</h2>
+<p>这是最容易上手的一套，也是<strong>目前最实用</strong>的一套。</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">@When[os == &#34;Linux&#34;]
+func foo() {
+    print(&#34;Linux, &#34;)
+}
+
+@When[os == &#34;Windows&#34;]
+func foo() {
+    print(&#34;Windows, &#34;)
+}
+
+@When[os != &#34;Windows&#34;]
+func fee() {
+    println(&#34;NOT Windows&#34;)
+}
+
+@When[os != &#34;Linux&#34;]
+func fee() {
+    println(&#34;NOT Linux&#34;)
+}
+
+main() {
+    foo()
+    fee()
+}
+</code></pre><p>我在 Linux 上实跑，输出：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Linux, NOT Windows
+</span></span></code></pre></div><p>内置条件变量（<code>manual/source_zh_cn/compile_and_build/conditional_compilation.md</code>）：</p>
+<table>
+	<thead>
+			<tr>
+					<th>条件</th>
+					<th>取值 / 运算符</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>os</code></td>
+					<td><code>Windows</code> / <code>Linux</code> / <code>macOS</code>，支持 <code>==</code> <code>!=</code></td>
+			</tr>
+			<tr>
+					<td><code>backend</code></td>
+					<td><code>cjnative</code> / <code>cjvm</code>，支持 <code>==</code> <code>!=</code></td>
+			</tr>
+			<tr>
+					<td><code>arch</code></td>
+					<td><code>x86_64</code> / <code>aarch64</code>，支持 <code>==</code> <code>!=</code></td>
+			</tr>
+			<tr>
+					<td><code>cjc_version</code></td>
+					<td><code>xx.xx.xx</code>，支持 <code>==</code> <code>!=</code> <code>&gt;</code> <code>&lt;</code> <code>&gt;=</code> <code>&lt;=</code></td>
+			</tr>
+			<tr>
+					<td><code>debug</code></td>
+					<td>仅逻辑非 <code>!</code>（是否开 <code>-g</code>）</td>
+			</tr>
+			<tr>
+					<td><code>test</code></td>
+					<td>仅逻辑非 <code>!</code>（是否 <code>--test</code>）</td>
+			</tr>
+	</tbody>
+</table>
+<p>多条件可以组合：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">@When[(test || feature == &#34;lion&#34;) &amp;&amp; !debug]
+func fee() { println(&#34;feature lion&#34;) }
+</code></pre><p>自定义条件走 <code>--cfg</code>：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cjc --cfg <span style="color:#0a3069">&#34;feature = lion, platform = dsp&#34;</span> source.cj
+</span></span></code></pre></div><p><strong>和 Go 的差别</strong>：<code>@When</code> 挂在<strong>声明或 import</strong> 上，不是文件上。所以每个顶层声明都得单独标一遍。</p>
+<p>限制有两条要记：</p>
+<ul>
+<li>
+<p><strong>不支持嵌套</strong>。连续两个 <code>@When</code> 会报错——注意实际文案与文档不同，1.2.0 上是：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>error: duplicated annotation: &#39;@When&#39;
+</span></span></code></pre></div><p>（文档里写的是旧文案 <code>illegal nested when conditional compilation</code>。）<br>
+想同时满足两个条件，写成 <code>@When[os == &quot;Linux&quot; &amp;&amp; arch == &quot;x86_64&quot;]</code> 即可，实测输出 <code>both</code>。</p>
+</li>
+<li>
+<p>由<strong>宏展开</strong>产生的代码里含 <code>@When[...]</code> 会编译报错（它在导入前处理）。</p>
+</li>
+</ul>
+<p>写错平台会怎样？很好懂——<strong>找不到那个符号</strong>：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">@When[os == &#34;Windows&#34;]
+func windowsOnly(): Unit { println(&#34;这行只有 Windows 会编译&#34;) }
+
+main() {
+    windowsOnly()
+}
+</code></pre><p>在 Linux 上编译：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>error: undeclared identifier &#39;windowsOnly&#39;
+</span></span></code></pre></div><blockquote>
+<p>这正是「编译期物理排除」的效果：Windows 那一份根本没进编译，所以 <code>windowsOnly</code> 这个名字在 Linux 上不存在。跟 Go 行为一致。</p>
+</blockquote>
+<hr>
+<h2 id="四机制二source-set--features对标gobuild"><a href="#四机制二source-set--features对标gobuild" class="headerlink" title="四、机制二：source-set + features（对标 //go:build）"></a>四、机制二：<code>source-set</code> + <code>features</code>（对标 <code>//go:build</code>）</h2>
+<p>想要 Go 那种「整个目录绑平台」，就得用这层。</p>
+<h3 id="41-cjpmtoml-里声明映射"><a href="#41-cjpmtoml-里声明映射" class="headerlink" title="4.1 cjpm.toml 里声明映射"></a>4.1 <code>cjpm.toml</code> 里声明映射</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">profile</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">experimental</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span>          <span style="color:#57606a"># 实验特性，必须开</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">package</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">cjc-version</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;1.2.0&#34;</span>      <span style="color:#57606a"># 必填，漏了会报 can&#39;t be empty</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">name</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;cjdemo&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">output-type</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;executable&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">version</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;1.0.0&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[[</span><span style="color:#1f2328">source-set</span><span style="color:#1f2328">]]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">name</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;common&#34;</span>              <span style="color:#57606a"># 可选，仅用于调试报错</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">src-dir</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;./common&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">features</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">[]</span>                <span style="color:#57606a"># 空 = 公共源码集，所有产品源码集都带上</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[[</span><span style="color:#1f2328">source-set</span><span style="color:#1f2328">]]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">src-dir</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;./linux&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">features</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;os.linux&#34;</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">product</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span>               <span style="color:#57606a"># 显式声明为「产品源码集」</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[[</span><span style="color:#1f2328">source-set</span><span style="color:#1f2328">]]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">src-dir</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;./windows&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">features</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;os.windows&#34;</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">product</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span>
+</span></span></code></pre></div><p>概念（官方文档口径）：</p>
+<ul>
+<li><strong>源码集（source-set）</strong>：特定 feature 下要编译的源码目录；</li>
+<li><strong>产品源码集</strong>：合入所有上游源码集后能编译出二进制的那个；没有出边的都算，有出边的可显式配 <code>product = true</code>；</li>
+<li><strong>公共源码集</strong>：<code>features</code> 为空的源码集，所有产品源码集编译时都包含它。</li>
+</ul>
+<p>内置 feature 是这批：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>os.android   os.ohos   os.ios   os.linux   os.windows   os.darwin
+</span></span></code></pre></div><blockquote>
+<p>⚠️ 命名口径不一致，很容易写混：<strong><code>cjpm</code> feature 用小写点分</strong>（<code>os.linux</code>），而 <strong><code>@When</code> 里 <code>os</code> 的值是首字母大写字符串</strong>（<code>@When[os == &quot;Linux&quot;]</code>）。两套东西。</p>
+</blockquote>
+<h3 id="42-文件头还得自己声明"><a href="#42-文件头还得自己声明" class="headerlink" title="4.2 文件头还得自己声明"></a>4.2 文件头还得自己声明</h3>
+<p>光配 <code>cjpm.toml</code> 不够，<strong>源码文件里也要声明自己的 feature</strong>，而且必须写在 <code>package</code> 之前：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">features {}                 // 公共源码集
+package cjdemo
+</code></pre><pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">features {os.linux}         // 平台源码集，与 toml 里的 features 保持一致
+package cjdemo
+</code></pre><p>非产品源码集要加 <code>@NonProduct</code>：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">@NonProduct
+features {}
+package cjdemo
+</code></pre><h3 id="43-两套机制是配合的不是二选一"><a href="#43-两套机制是配合的不是二选一" class="headerlink" title="4.3 两套机制是配合的，不是二选一"></a>4.3 两套机制是配合的，不是二选一</h3>
+<p>我实测搭了一个最小工程，撞了几堵墙，这些文档没直说：</p>
+<table>
+	<thead>
+			<tr>
+					<th>现象</th>
+					<th>报错</th>
+					<th>原因</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>公共源码集忘了 <code>@NonProduct</code></td>
+					<td><code>Feature header of package 'cjdemo' is missing '@NonProduct' annotation</code></td>
+					<td>有出边的源码集要标 <code>@NonProduct</code></td>
+			</tr>
+			<tr>
+					<td>两个 source-set 的 <code>features</code> 完全相同</td>
+					<td><code>source set 'app' with the same features is declared at ...</code></td>
+					<td><strong>一个 feature 组合只能对应一个目录</strong></td>
+			</tr>
+			<tr>
+					<td><code>main</code> 放在非产品源码集</td>
+					<td><code>'main' is missing</code></td>
+					<td><code>main</code> 必须在产品源码集里</td>
+			</tr>
+			<tr>
+					<td>公共部分写了无函数体的 <code>func</code></td>
+					<td><code>body of function 'Platform' is missing</code></td>
+					<td>源码集<strong>不提供</strong>契约机制</td>
+			</tr>
+	</tbody>
+</table>
+<p>最后一条尤其关键：<strong>公共源码集里的无体函数，必须加 <code>common</code> 才合法。</strong></p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// common/platform.cj
+@NonProduct
+features {}
+package cjdemo
+
+public common func Platform(): String      // ← 只留签名，加 common 才认
+</code></pre><pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// linux/linux.cj
+features {os.linux}
+package cjdemo
+
+public specific func Platform(): String { &#34;Linux&#34; }
+
+main() {
+    println(Platform())
+}
+</code></pre><p>也就是说：<strong><code>source-set</code> 负责「哪个目录参与这次编译」，<code>common</code>/<code>specific</code> 负责「公共部分怎么声明契约」</strong>，两者是配合关系。</p>
+<h3 id="44-构建与产物"><a href="#44-构建与产物" class="headerlink" title="4.4 构建与产物"></a>4.4 构建与产物</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cjpm build --no-feature-deduce --enable-features<span style="color:#0550ae">=</span>os.linux
+</span></span><span style="display:flex;"><span>cjpm build --no-feature-deduce --enable-features<span style="color:#0550ae">=</span>os.windows
+</span></span></code></pre></div><p>产物落在 <code>target/release/bin/&lt;source-set名&gt;/product/</code>：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>target/release/bin/
+</span></span><span style="display:flex;"><span>├── linux/product/main
+</span></span><span style="display:flex;"><span>└── windows/product/main
+</span></span></code></pre></div><p>实测（同一台 Linux 机器）：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>$ ./target/release/bin/linux/product/main
+</span></span><span style="display:flex;"><span>Linux
+</span></span><span style="display:flex;"><span>$ ./target/release/bin/windows/product/main
+</span></span><span style="display:flex;"><span>Windows
+</span></span></code></pre></div><blockquote>
+<p>⚠️ <strong>这不是交叉编译</strong>。两个 <code>main</code> 都是当前平台的产物，只是<strong>编译期选进了不同的源码集</strong>。想真跨到别的架构/系统，那是 <code>--target</code> 的事。</p>
+</blockquote>
+<hr>
+<h2 id="五机制三common--specific声明级契约go没有对应物"><a href="#五机制三common--specific声明级契约go没有对应物" class="headerlink" title="五、机制三：common / specific（声明级契约，Go 没有对应物）"></a>五、机制三：<code>common</code> / <code>specific</code>（声明级契约，Go 没有对应物）</h2>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// 公共部分代码
+package cmp
+
+public common func foo(): Unit {
+    println(&#34;I am common&#34;)
+}
+</code></pre><pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// 平台部分代码
+package cmp
+
+public specific func foo(): Unit {
+    println(&#34;I am specific&#34;)
+}
+</code></pre><p><strong>两个文件都是 <code>package cmp</code></strong>——公共部分和平台部分属于同一个包，区别只是放在哪个目录、由哪次编译参与。</p>
+<p>支撑范围相当全：全局函数、<code>class</code>/<code>struct</code>/<code>enum</code>/<code>interface</code> 及其成员、<code>extend</code>、泛型声明都支持。<strong>不支持</strong>的：静态成员变量、主构造函数、静态初始化器；<code>@Frozen</code> 修饰 <code>common/specific</code> 行为异常（文档「约束」节）。</p>
+<p>三条最重要的规则：</p>
+<ol>
+<li><code>common</code> 有<strong>完整实现</strong>时，可以<strong>不写</strong> <code>specific</code>；<code>common</code> <strong>只有签名</strong>时，<strong>必须</strong>有对应的 <code>specific</code>。</li>
+<li><code>specific</code> 的签名必须匹配：参数类型一致、返回值相同或<strong>子类型</strong>、修饰符（除 <code>common</code>/<code>specific</code> 外）一致。</li>
+<li><strong>每个 <code>specific</code> 必须匹配唯一的 <code>common</code></strong>。</li>
+</ol>
+<p>「<code>specific</code> 会覆盖 <code>common</code>」这条我实测确认了——两边都写实现时，跑出来是：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>I am specific
+</span></span></code></pre></div><p>而匹配关系是<strong>编译期强校验</strong>的，全部实测报错：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>error: &#39;common&#39; function return type must be specified
+</span></span><span style="display:flex;"><span>error: &#39;common&#39; and &#39;private&#39; modifiers conflict on function declaration
+</span></span><span style="display:flex;"><span>error: at least one constructor is required in common class &#39;A&#39;
+</span></span><span style="display:flex;"><span>error: &#39;specific&#39; function &#39;bar&#39; can not find &#39;common&#39; match
+</span></span><span style="display:flex;"><span>error: &#39;common&#39; function &#39;foo&#39; can not find &#39;specific&#39; match
+</span></span></code></pre></div><p><strong>这几条恰好说明了两边的根本差异</strong>：Go 是<strong>排除法</strong>，不建立文件之间的对应关系；仓颉是<strong>配对法</strong>，<code>common</code> 漏了实现、<code>specific</code> 多写了东西，编译器两遍都会查出来。</p>
+<hr>
+<h2 id="六一个真实项目绕的弯"><a href="#六一个真实项目绕的弯" class="headerlink" title="六、一个真实项目绕的弯"></a>六、一个真实项目绕的弯</h2>
+<p>理论说完，来看 <a href="https://atomgit.com/ystyle/mmap-cj" target="_blank" rel="noopener"><code>mmap-cj</code></a>
+——一个跨平台内存映射文件库（Linux/macOS/Windows）。它的 git 历史比任何文档都有说服力：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2026-04-11  590d9e4  最初提交
+</span></span><span style="display:flex;"><span>                     方案：common/specific + cjpm source-set
+</span></span><span style="display:flex;"><span>                     src/common/mmap.cj（common class MmapFile）
+</span></span><span style="display:flex;"><span>                     src/linux/mmap_impl.cj（11 处 specific）
+</span></span><span style="display:flex;"><span>2026-07-17  fcb774e  重构为顶层 source-set 目录布局
+</span></span><span style="display:flex;"><span>                     src/common → common/、src/linux → linux/
+</span></span><span style="display:flex;"><span>2026-10-06  bbf668a  分支 feat/source-set-layout 定稿
+</span></span><span style="display:flex;"><span>2026-10-06  698e673  切回单 src 布局，用 @When 替代 source-set   ← 关键转折
+</span></span><span style="display:flex;"><span>2026-10-06  cc40de1  v1.1.0（master）
+</span></span></code></pre></div><p>source-set 版完整代码在分支 <a href="https://atomgit.com/ystyle/mmap-cj/tree/feat/source-set-layout" target="_blank" rel="noopener"><code>feat/source-set-layout</code></a>
+，可以和 master 对着看。</p>
+<h3 id="为什么切回去"><a href="#为什么切回去" class="headerlink" title="为什么切回去"></a>为什么切回去</h3>
+<p>提交信息写得很直白：</p>
+<blockquote>
+<p>source-set（多平台源码集）是 cjpm 的 experimental 特性：<strong>消费者必须同样声明 <code>[profile] experimental = true</code> 才能编译本库</strong>，否则报 <code>path of src directory 'src' ... does not exist</code>；而其正式发布尚需时间。改为单 src + <code>@When</code> 条件编译后，本库不再依赖 experimental，普通 cjpm 即可构建与测试。</p>
+</blockquote>
+<p>我把这个因果链完整复现了一遍。</p>
+<p><strong>消费者（不开 experimental）依赖 source-set 版库：</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>$ cjpm build
+</span></span><span style="display:flex;"><span>Error: path of src directory &#39;src&#39; in .../mmap-cj/cjpm.toml does not exist
+</span></span><span style="display:flex;"><span>Error: cjpm build failed
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ cjpm test
+</span></span><span style="display:flex;"><span>Error: path of src directory &#39;src&#39; in .../mmap-cj/cjpm.toml does not exist
+</span></span><span style="display:flex;"><span>Error: cjpm test failed
+</span></span></code></pre></div><p><strong>同一个消费者，只是加上那一行：</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">profile</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">experimental</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>cjpm build success
+</span></span></code></pre></div><p><strong>换成 <code>@When</code> 版的库，消费者什么都不用改：</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>$ cjpm build
+</span></span><span style="display:flex;"><span>cjpm build success
+</span></span><span style="display:flex;"><span>ok: @When 版库，消费者不开 experimental 也能构建
+</span></span></code></pre></div><p>原因是：consumer 没开 experimental 时，<code>cjpm</code> 会<strong>忽略依赖库 <code>cjpm.toml</code> 里的 <code>[[source-set]]</code> 配置</strong>，回退到按默认 <code>src</code> 目录查找——而 source-set 版的库根本没有 <code>src/</code>，于是报错。</p>
+<h3 id="但真正致命的是这个打开了开关test-依然跑不了"><a href="#但真正致命的是这个打开了开关test-依然跑不了" class="headerlink" title="但真正致命的是这个：打开了开关，test 依然跑不了"></a>但真正致命的是这个：打开了开关，<code>test</code> 依然跑不了</h3>
+<p>上面那一步还只是「配置问题」。我按提示加上 <code>experimental = true</code> 之后，遇到了一个更硬的问题：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>$ cjpm build
+</span></span><span style="display:flex;"><span>cjpm build success          # ← 构建过了
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ cjpm test
+</span></span><span style="display:flex;"><span>Error: cjpm test failed      # ← 测试还是挂
+</span></span></code></pre></div><p>我把两种情况<strong>在同一台机器、同一个消费者工程上对照跑</strong>了一遍，矩阵很清楚：</p>
+<table>
+	<thead>
+			<tr>
+					<th>消费者 <code>experimental</code></th>
+					<th>依赖的库</th>
+					<th><code>cjpm build</code></th>
+					<th><code>cjpm test</code></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>关</td>
+					<td>source-set 版</td>
+					<td>❌</td>
+					<td>❌</td>
+			</tr>
+			<tr>
+					<td><strong>开</strong></td>
+					<td><strong>source-set 版</strong></td>
+					<td><strong>✅</strong></td>
+					<td><strong>❌</strong></td>
+			</tr>
+			<tr>
+					<td>关 / 开</td>
+					<td><code>@When</code> 版</td>
+					<td>✅</td>
+					<td>✅</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>也就是说：只要依赖了 source-set 布局的库，这个项目的单元测试就没法跑——不管你怎么配。</strong></p>
+<p>失败发生在<strong>链接</strong>阶段，看不出具体原因（<code>cjpm</code> 只回一句 <code>cjpm test failed</code>）。我把链接命令捞出来过滤，才看到真正缺的东西：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>undefined reference to `_CN6mmapcj8MmapFile5closeHv&#39;
+</span></span><span style="display:flex;"><span>undefined reference to `_CN6mmapcj8MmapFile5writeHRNat5ArrayIhEl&#39;
+</span></span><span style="display:flex;"><span>undefined reference to `_CN6mmapcj8MmapFile6&lt;init&gt;HRNat6StringElb&#39;
+</span></span><span style="display:flex;"><span>undefined reference to `mmapcj:MmapFile.ti&#39;
+</span></span></code></pre></div><p>而且那条链接命令里<strong>根本没有 <code>-lmmapcj</code></strong>——同一构建里普通依赖的库都链接了，唯独漏了这个。</p>
+<blockquote>
+<p>顺便说，为什么 <code>build</code> 能过而 <code>test</code> 不能：两边的链接命令是<strong>分别生成</strong>的。<code>build</code> 那条走对了路径，<code>test</code> 这条没有。</p>
+</blockquote>
+<h3 id="这个问题已经上报并修好了"><a href="#这个问题已经上报并修好了" class="headerlink" title="这个问题已经上报并修好了"></a>这个问题已经上报并修好了</h3>
+<p>这不是我一个人的环境问题。它被整理成 issue 上报：</p>
+<ul>
+<li><strong>issue</strong>：<a href="https://gitcode.com/Cangjie/UsersForum/issues/3515" target="_blank" rel="noopener"><code>Cangjie/UsersForum#3515</code> — cjpm test 无法解析 <code>[[source-set]]</code> 依赖</a>
+</li>
+<li><strong>修复 PR</strong>：<a href="https://gitcode.com/Cangjie/cangjie_tools/pulls/1311" target="_blank" rel="noopener"><code>Cangjie/cangjie_tools#1311</code></a>
+</li>
+<li><strong>回归用例 PR</strong>：<a href="https://gitcode.com/Cangjie/cangjie_test/pulls/2261" target="_blank" rel="noopener"><code>Cangjie/cangjie_test#2261</code></a>
+</li>
+</ul>
+<p>issue 里定位到两个缺陷，和我在上面观察到的现象一一对应：</p>
+<ol>
+<li><strong>编译 test runner 时没传依赖的 <code>--import-path</code></strong>（同一构建里其它包都带了，唯独这条没有）；</li>
+<li><strong>链接测试二进制时没链接该依赖的静态库</strong>。</li>
+</ol>
+<p>修复补在两处：给 test runner 编译补上依赖产物目录（注意 source-set 包的产物在 <code>&lt;pkg&gt;/&lt;outputSuffix&gt;/</code> 这类<strong>带后缀的子目录</strong>里，不能只给 <code>targetDir</code>）、链接路径补上 <code>outputSuffix</code>；同时让 test runner 编译与普通包一致地带上 <code>--experimental</code>。</p>
+<p>修好之后，那些依赖 source-set 库的项目就能正常 <code>cjpm test</code> 了。</p>
+<h3 id="那-mmap-cj-当时该怎么选"><a href="#那-mmap-cj-当时该怎么选" class="headerlink" title="那 mmap-cj 当时该怎么选"></a>那 <code>mmap-cj</code> 当时该怎么选</h3>
+<p>把时间线摊开看，它面临的是一个<strong>先有鸡还是先有蛋</strong>的处境：</p>
+<ul>
+<li><code>source-set</code> 是<strong>实验特性</strong>，会把「开实验开关」的成本转嫁给所有消费者；</li>
+<li>而消费者<strong>即便开了开关，测试仍然跑不了</strong>（就是上面那个 cjpm 缺陷）；</li>
+<li><code>mmap-cj</code> 是别人要用的库，被 <code>badger-cj</code> 依赖着——<code>badger-cj</code> 有几百个单元测试等着跑。</li>
+</ul>
+<p>于是它切回了 <code>@When</code>：<strong>不用实验开关，消费者 build 和 test 全通。</strong> 代价就是下一节说的、满屏的重复标注。</p>
+<blockquote>
+<p>这个决定不是「<code>source-set</code> 不好」，而是<strong>在缺陷修好之前，一条能测的路比一条不能测的路更重要</strong>。</p>
+</blockquote>
+<h3 id="这不是纸面推演真实的第三方消费者已经撞上了"><a href="#这不是纸面推演真实的第三方消费者已经撞上了" class="headerlink" title="这不是纸面推演，真实的第三方消费者已经撞上了"></a>这不是纸面推演，真实的第三方消费者已经撞上了</h3>
+<p><code>badger-cj</code> 目前依赖 <code>mmap-cj</code>，它的 <code>cjpm.toml</code> 第一段就写着：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">profile</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 依赖 mmap-cj 使用 experimental 的 [[source-set]] 多平台布局，消费侧需同样开启</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># （否则 cjpm 忽略其 source-set 配置、按默认 src 查找而报错）</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">experimental</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span>
+</span></span></code></pre></div><p><strong>一个库的实验特性，逼着所有下游一起打开实验开关</strong>——这就是 <code>mmap-cj</code> 切回 <code>@When</code> 的直接原因。而开关打开后测试仍然失败，则把这条路彻底堵死了。</p>
+<h3 id="代价也是真实的"><a href="#代价也是真实的" class="headerlink" title="代价也是真实的"></a>代价也是真实的</h3>
+<p>切回 <code>@When</code> 后，<code>master</code> 上的 <code>@When</code> 密度是这样的：</p>
+<table>
+	<thead>
+			<tr>
+					<th>文件</th>
+					<th style="text-align: right">行数</th>
+					<th style="text-align: right"><code>@When</code> 数量</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>src/mmap_linux.cj</code></td>
+					<td style="text-align: right">178</td>
+					<td style="text-align: right">8</td>
+			</tr>
+			<tr>
+					<td><code>src/mmap_darwin.cj</code></td>
+					<td style="text-align: right">180</td>
+					<td style="text-align: right">8</td>
+			</tr>
+			<tr>
+					<td><code>src/mmap_windows.cj</code></td>
+					<td style="text-align: right">250</td>
+					<td style="text-align: right">8</td>
+			</tr>
+			<tr>
+					<td><code>src/mmap_test.cj</code></td>
+					<td style="text-align: right">235</td>
+					<td style="text-align: right">4</td>
+			</tr>
+			<tr>
+					<td><code>src/mmap.cj</code></td>
+					<td style="text-align: right">16</td>
+					<td style="text-align: right">1（只在注释里提到）</td>
+			</tr>
+	</tbody>
+</table>
+<p>每个顶层声明（FFI 声明、常量、实现类）都得单独标一遍 <code>@When[os == &quot;...&quot;]</code>。<strong>声明一多，就是成片的重复标注</strong>——这也是 Go 那种文件级方案的诱人之处。</p>
+<p>顺带说，<code>@When</code> 版实测 <code>cjpm test</code> 6/6 通过，source-set 版 <code>cjpm test --enable-features=os.linux</code> 同样 6/6 通过。<strong>两套方案都能用，差别在消费成本。</strong></p>
+<hr>
+<h2 id="七对照速查表"><a href="#七对照速查表" class="headerlink" title="七、对照速查表"></a>七、对照速查表</h2>
+<table>
+	<thead>
+			<tr>
+					<th>你想在 Go 里做的事</th>
+					<th>仓颉对应写法</th>
+					<th>备注</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>//go:build js</code> + <code>fd_js.go</code></td>
+					<td><code>cjpm</code> source-set（目录）+ 文件头 <code>features {os...}</code></td>
+					<td>需改 <code>cjpm.toml</code>，且是实验特性</td>
+			</tr>
+			<tr>
+					<td>同包内多平台同名函数</td>
+					<td><code>common func F()</code> + 各平台 <code>specific func F()</code></td>
+					<td>签名强制配对</td>
+			</tr>
+			<tr>
+					<td>只按平台择一，不要契约</td>
+					<td><code>@When[os == &quot;...&quot;]</code> 标在每个声明上</td>
+					<td><strong>当前最实用</strong></td>
+			</tr>
+			<tr>
+					<td><code>//go:build !windows</code></td>
+					<td><code>@When[os != &quot;Windows&quot;]</code></td>
+					<td></td>
+			</tr>
+			<tr>
+					<td><code>-tags myfeature</code></td>
+					<td><code>--cfg &quot;myfeature = xxx&quot;</code> 或自定义 feature</td>
+					<td></td>
+			</tr>
+			<tr>
+					<td><code>GOOS=js GOARCH=wasm go build</code></td>
+					<td><code>cjpm build --target=...</code></td>
+					<td></td>
+			</tr>
+			<tr>
+					<td>文件名后缀 <code>_linux.go</code></td>
+					<td>无等价物</td>
+					<td>必须显式配置或标注</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="八踩坑清单"><a href="#八踩坑清单" class="headerlink" title="八、踩坑清单"></a>八、踩坑清单</h2>
+<ol>
+<li><strong>别把 <code>common/specific</code> 当成 Go 的 <code>//go:build</code></strong>。前者是声明级契约（强制校验签名），后者是文件级排除（零校验）。</li>
+<li><strong><code>os</code> 取值大小写不一致</strong>：<code>@When[os == &quot;Linux&quot;]</code> 大写，<code>cjpm</code> feature <code>os.linux</code> 小写。</li>
+<li><strong><code>source-set</code> 一个 feature 组合只能对应一个目录</strong>。</li>
+<li><strong><code>main</code> 必须在产品源码集里</strong>。</li>
+<li><strong>公共源码集要 <code>@NonProduct</code></strong>，文件头的 <code>features</code> 必须和 <code>cjpm.toml</code> 完全一致。</li>
+<li><strong><code>source-set</code> 会传染，而且会传染两次</strong>：库用了，消费者得开 <code>experimental</code>；在旧版 cjpm 上，<strong>开了开关测试仍跑不了</strong>（链接漏依赖库，issue #3515）。给第三方用的库，慎用。</li>
+<li><strong><code>source-set</code> 不是交叉编译</strong>，目标平台仍由 <code>--target</code> 决定。</li>
+<li><strong>两套跨平台机制都是实验特性</strong>。<code>cjc</code> 侧要 <code>--experimental</code>，<code>cjpm</code> 侧要 <code>[profile] experimental = true</code>。</li>
+</ol>
+<blockquote>
+<p>一个附带的实测发现：官方文档里 <code>cjc</code> 三段式编译的第二步写的是把 chir 当位置参数传，但 1.2.0 上会报 <code>common .chir files count should be equal to common .cjo files count</code>。<strong>能跑通的是用 <code>--common-part-chir</code> 显式传</strong>（<code>cjc --help</code> 里有这个选项）。另外 <code>--output-dir</code> 指向的目录<strong>必须先存在</strong>。</p>
+</blockquote>
+<hr>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+<p>回到最初那句「Go 可以声明整个文件对应某个平台，仓颉不行」——更准确的说法是：</p>
+<p><strong>仓颉有对标 Go 的那一层（<code>cjpm</code> source-set），能力和 Go 对得上；但它是实验特性、要写配置，而且会把「实验性」的成本转嫁给消费者。</strong></p>
+<p><code>mmap-cj</code> 走过的弯是个典型样本：<code>source-set</code> 本身没问题（它自己的 6 个测试全过），问题出在<strong>别人依赖它之后</strong>——消费者不仅要跟着开实验开关，在当时的 cjpm 上还会撞上「测试链接漏依赖库」的缺陷，连单元测试都跑不了。</p>
+<p>好消息是那条路已经修了（<a href="https://gitcode.com/Cangjie/UsersForum/issues/3515" target="_blank" rel="noopener">issue #3515</a>
+ → <a href="https://gitcode.com/Cangjie/cangjie_tools/pulls/1311" target="_blank" rel="noopener">PR #1311</a>
+）。<strong>等 <code>source-set</code> 转正、不再需要消费者开开关，它会重新变得有吸引力。</strong></p>
+<p>在那之前，给第三方用的库，<code>@When</code> 更稳妥——它啰嗦，但它不挑使用者。</p>
+<hr>
+<p><em>本文仓颉侧命令与报错均由 <code>cjc 1.2.0</code> / <code>cjpm 1.2.0</code> 在 x86_64 Linux 实测；项目案例来自 <code>mmap-cj</code> 真实 git 历史；Go 侧依据 <code>golang/go@master</code> 源码与官方文档。</em></p>
+<hr>
+<p align="center">
+<p><a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="https://img.shields.io/badge/powered_by-dsh-4D6BFE?style=flat-square&amp;logo=deepseek&amp;logoColor=white" alt="">
+  </div>
+  <div class="image-caption"></div>
+</figure>
+</a>
+</p>
+</p>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2026-10-15T10:00:00&#43;08:00" itemprop="dateUpdated">2026-10-15 10:00:00</time>
+          </span><br>
+          本文链接：<a href="/2026/10/15/cangjie-multiplatform-for-go-devs/" target="_blank" rel="external">https://ystyle.top/2026/10/15/cangjie-multiplatform-for-go-devs/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/golang/">golang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/">跨平台</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mmap-cj/">mmap-cj</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f15%2fcangjie-multiplatform-for-go-devs%2f&title=%e3%80%8aGo%20%e4%b8%80%e8%a1%8c%e6%b3%a8%e9%87%8a%e5%b0%b1%e8%83%bd%e6%8a%8a%e6%95%b4%e4%b8%aa%e6%96%87%e4%bb%b6%e7%bb%91%e5%88%b0%e5%b9%b3%e5%8f%b0%ef%bc%8c%e4%bb%93%e9%a2%89%e4%b8%ba%e4%bb%80%e4%b9%88%e4%b8%8d%e8%a1%8c%ef%bc%9f%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f15%2fcangjie-multiplatform-for-go-devs%2f&title=%e3%80%8aGo%20%e4%b8%80%e8%a1%8c%e6%b3%a8%e9%87%8a%e5%b0%b1%e8%83%bd%e6%8a%8a%e6%95%b4%e4%b8%aa%e6%96%87%e4%bb%b6%e7%bb%91%e5%88%b0%e5%b9%b3%e5%8f%b0%ef%bc%8c%e4%bb%93%e9%a2%89%e4%b8%ba%e4%bb%80%e4%b9%88%e4%b8%8d%e8%a1%8c%ef%bc%9f%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e4%bb%8e%20Go%20%e7%9a%84%20%2f%2fgo%3abuild%20%e5%88%b0%e4%bb%93%e9%a2%89%e7%9a%84%20common%2fspecific%0a%e6%8b%86%e5%bc%80%e3%80%8c%e4%bb%93%e9%a2%89%e4%b8%8d%e8%83%bd%e6%8c%89%e6%96%87%e4%bb%b6%e5%88%86%e5%b9%b3%e5%8f%b0%e3%80%8d%e8%bf%99%e5%8f%a5%e8%af%9d%ef%bc%9a%e5%ae%83%e5%85%b6%e5%ae%9e%e6%9c%89%e4%b8%89%e7%a7%8d%e7%b2%92%e5%ba%a6%ef%bc%8c%e4%bb%a5%e5%8f%8a%e4%b8%80%e4%b8%aa%e7%9c%9f%e5%ae%9e%e9%a1%b9%e7%9b%ae%e7%bb%95%e7%9a%84%e5%bc%af%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f15%2fcangjie-multiplatform-for-go-devs%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8aGo%20%e4%b8%80%e8%a1%8c%e6%b3%a8%e9%87%8a%e5%b0%b1%e8%83%bd%e6%8a%8a%e6%95%b4%e4%b8%aa%e6%96%87%e4%bb%b6%e7%bb%91%e5%88%b0%e5%b9%b3%e5%8f%b0%ef%bc%8c%e4%bb%93%e9%a2%89%e4%b8%ba%e4%bb%80%e4%b9%88%e4%b8%8d%e8%a1%8c%ef%bc%9f%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f15%2fcangjie-multiplatform-for-go-devs%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f15%2fcangjie-multiplatform-for-go-devs%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2026/10/13/harmonyos-pc-binary-sign-basics/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">【鸿蒙PC】二进制签名入门：证书从哪来、能要什么权限、该用哪一个</h4>
+        </a>
+      </div>
+      
+      
+      <div class="waves-block waves-effect next">
+        <a href="/2026/10/15/cangjie-multiplatform-from-zero/" id="post-next" class="post-nav-link">
+          <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+          <h4 class="title">一段代码，两个系统：仓颉怎么处理「跨平台」这件事</h4>
+        </a>
+      </div>
+      
+    </nav>
+    
+
+    
+    
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+  </article>
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f15%2fcangjie-multiplatform-for-go-devs%2f&title=%e3%80%8aGo%20%e4%b8%80%e8%a1%8c%e6%b3%a8%e9%87%8a%e5%b0%b1%e8%83%bd%e6%8a%8a%e6%95%b4%e4%b8%aa%e6%96%87%e4%bb%b6%e7%bb%91%e5%88%b0%e5%b9%b3%e5%8f%b0%ef%bc%8c%e4%bb%93%e9%a2%89%e4%b8%ba%e4%bb%80%e4%b9%88%e4%b8%8d%e8%a1%8c%ef%bc%9f%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f15%2fcangjie-multiplatform-for-go-devs%2f&title=%e3%80%8aGo%20%e4%b8%80%e8%a1%8c%e6%b3%a8%e9%87%8a%e5%b0%b1%e8%83%bd%e6%8a%8a%e6%95%b4%e4%b8%aa%e6%96%87%e4%bb%b6%e7%bb%91%e5%88%b0%e5%b9%b3%e5%8f%b0%ef%bc%8c%e4%bb%93%e9%a2%89%e4%b8%ba%e4%bb%80%e4%b9%88%e4%b8%8d%e8%a1%8c%ef%bc%9f%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e4%bb%8e%20Go%20%e7%9a%84%20%2f%2fgo%3abuild%20%e5%88%b0%e4%bb%93%e9%a2%89%e7%9a%84%20common%2fspecific%0a%e6%8b%86%e5%bc%80%e3%80%8c%e4%bb%93%e9%a2%89%e4%b8%8d%e8%83%bd%e6%8c%89%e6%96%87%e4%bb%b6%e5%88%86%e5%b9%b3%e5%8f%b0%e3%80%8d%e8%bf%99%e5%8f%a5%e8%af%9d%ef%bc%9a%e5%ae%83%e5%85%b6%e5%ae%9e%e6%9c%89%e4%b8%89%e7%a7%8d%e7%b2%92%e5%ba%a6%ef%bc%8c%e4%bb%a5%e5%8f%8a%e4%b8%80%e4%b8%aa%e7%9c%9f%e5%ae%9e%e9%a1%b9%e7%9b%ae%e7%bb%95%e7%9a%84%e5%bc%af%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f15%2fcangjie-multiplatform-for-go-devs%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8aGo%20%e4%b8%80%e8%a1%8c%e6%b3%a8%e9%87%8a%e5%b0%b1%e8%83%bd%e6%8a%8a%e6%95%b4%e4%b8%aa%e6%96%87%e4%bb%b6%e7%bb%91%e5%88%b0%e5%b9%b3%e5%8f%b0%ef%bc%8c%e4%bb%93%e9%a2%89%e4%b8%ba%e4%bb%80%e4%b9%88%e4%b8%8d%e8%a1%8c%ef%bc%9f%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f15%2fcangjie-multiplatform-for-go-devs%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f15%2fcangjie-multiplatform-for-go-devs%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2026/10/15/cangjie-multiplatform-for-go-devs/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+</body>
+</html>

@@ -2,6 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://ystyle.top/tags/Cangjie/</loc>
+    <lastmod>2026-10-15T11:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/mmap-cj/</loc>
+    <lastmod>2026-10-15T11:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/</loc>
+    <lastmod>2026-10-15T11:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/</loc>
+    <lastmod>2026-10-15T11:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/%E5%85%A5%E9%97%A8/</loc>
+    <lastmod>2026-10-15T11:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/</loc>
+    <lastmod>2026-10-15T11:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/2026/10/15/cangjie-multiplatform-from-zero/</loc>
+    <lastmod>2026-10-15T11:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/2026/10/15/cangjie-multiplatform-for-go-devs/</loc>
+    <lastmod>2026-10-15T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/golang/</loc>
+    <lastmod>2026-10-15T10:00:00+08:00</lastmod>
+  </url><url>
     <loc>https://ystyle.top/2026/10/13/harmonyos-pc-binary-sign-basics/</loc>
     <lastmod>2026-10-13T16:40:00+08:00</lastmod>
   </url><url>
@@ -15,9 +42,6 @@
     <lastmod>2026-10-13T16:40:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/OpenHarmony/</loc>
-    <lastmod>2026-10-13T16:40:00+08:00</lastmod>
-  </url><url>
-    <loc>https://ystyle.top/</loc>
     <lastmod>2026-10-13T16:40:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%AD%BE%E5%90%8D/</loc>
@@ -38,16 +62,10 @@
     <loc>https://ystyle.top/tags/badger-cj/</loc>
     <lastmod>2026-10-13T10:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://ystyle.top/tags/Cangjie/</loc>
-    <lastmod>2026-10-13T10:00:00+08:00</lastmod>
-  </url><url>
     <loc>https://ystyle.top/tags/LSM-Tree/</loc>
     <lastmod>2026-10-13T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/2026/10/13/badger-cj-benchmark-method/</loc>
-    <lastmod>2026-10-13T10:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/</loc>
     <lastmod>2026-10-13T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
@@ -550,9 +568,6 @@
   </url><url>
     <loc>https://ystyle.top/tags/%E4%BB%A3%E7%90%86/</loc>
     <lastmod>2017-05-26T12:58:54+08:00</lastmod>
-  </url><url>
-    <loc>https://ystyle.top/tags/golang/</loc>
-    <lastmod>2017-04-07T16:39:19+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/leanote/</loc>
     <lastmod>2017-04-07T16:39:19+08:00</lastmod>
