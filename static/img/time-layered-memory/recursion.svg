@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 258" width="100%" role="img" aria-label="summary recursion">
+<defs>
+<marker id="c1" markerWidth="8" markerHeight="8" refX="6" refY="2.6" orient="auto"><path d="M0,0 L6,2.6 L0,5.2 z" fill="#b4823c"/></marker>
+<marker id="c2" markerWidth="8" markerHeight="8" refX="6" refY="2.6" orient="auto"><path d="M0,0 L6,2.6 L0,5.2 z" fill="#c0392b"/></marker>
+</defs>
+<text x="8" y="16" font-family="sans-serif" font-size="10.5px" fill="#4a5766">原始条目（某类型的一天）</text>
+<rect x="8" y="24" width="150" height="26" fill="#eef3fa" stroke="#3f5a7d" stroke-width="1.3" rx="4"/>
+<text x="83" y="41" text-anchor="middle" font-family="monospace" font-size="11px" fill="#16202c">e1 e2 ... en</text>
+<text x="8" y="76" font-family="sans-serif" font-size="10.5px" fill="#4a5766">第 1 层 —— 10min 窗口</text>
+<rect x="8" y="84" width="86" height="26" fill="#fdf6ec" stroke="#b4823c" stroke-width="1.3" rx="4"/>
+<text x="51" y="101" text-anchor="middle" font-family="monospace" font-size="11px" fill="#16202c">S(10m)</text>
+<rect x="106" y="84" width="86" height="26" fill="#fdf6ec" stroke="#b4823c" stroke-width="1.3" rx="4"/>
+<text x="149" y="101" text-anchor="middle" font-family="monospace" font-size="11px" fill="#16202c">S(10m)</text>
+<rect x="204" y="84" width="86" height="26" fill="#fdf6ec" stroke="#b4823c" stroke-width="1.3" rx="4"/>
+<text x="247" y="101" text-anchor="middle" font-family="monospace" font-size="11px" fill="#16202c">...</text>
+<text x="330" y="76" font-family="sans-serif" font-size="10.5px" fill="#4a5766">第 2 层 —— 1h</text>
+<rect x="330" y="84" width="120" height="26" fill="#fdf6ec" stroke="#b4823c" stroke-width="1.3" rx="4"/>
+<text x="390" y="101" text-anchor="middle" font-family="monospace" font-size="11px" fill="#16202c">S(1h)</text>
+<text x="520" y="76" font-family="sans-serif" font-size="10.5px" fill="#4a5766">第 3 层 —— day</text>
+<rect x="520" y="84" width="150" height="26" fill="#fdf6ec" stroke="#b4823c" stroke-width="1.3" rx="4"/>
+<text x="595" y="101" text-anchor="middle" font-family="monospace" font-size="11px" fill="#16202c">S(day)</text>
+<path d="M51,50 L51,84" stroke="#b4823c" stroke-width="1.2" fill="none" marker-end="url(#c1)"/>
+<path d="M149,50 L149,84" stroke="#b4823c" stroke-width="1.2" fill="none" marker-end="url(#c1)"/>
+<path d="M247,50 L247,84" stroke="#b4823c" stroke-width="1.2" fill="none" marker-end="url(#c1)"/>
+<text x="262" y="46" font-family="sans-serif" font-size="10.5px" fill="#4a5766">每个 10min 窗口由它自己的原始条目总结</text>
+<path d="M94,97 L330,97" stroke="#b4823c" stroke-width="1.2" fill="none" marker-end="url(#c1)"/>
+<text x="212" y="92" text-anchor="middle" font-family="sans-serif" font-size="10.5px" fill="#4a5766">聚合 6 x S(10m)</text>
+<path d="M450,97 L520,97" stroke="#b4823c" stroke-width="1.2" fill="none" marker-end="url(#c1)"/>
+<text x="485" y="92" text-anchor="middle" font-family="sans-serif" font-size="10.5px" fill="#4a5766">聚合 24 x S(1h)</text>
+<path d="M8,140 L700,140" stroke="#c0392b" stroke-width="1.3" fill="none" stroke-dasharray="5 3" marker-end="url(#c2)"/>
+<path d="M95,140 L95,152" stroke="#c0392b" stroke-width="1.3" fill="none" stroke-dasharray="5 3" marker-end="url(#c2)"/>
+<text x="95" y="168" font-family="sans-serif" font-size="10.5px" fill="#4a5766">recompute = true</text>
+<text x="95" y="182" font-family="sans-serif" font-size="10.5px" fill="#4a5766">直接从原始条目重算该窗口，跳过整条链</text>
+<text x="8" y="212" font-family="sans-serif" font-size="10.5px" fill="#4a5766">成本：每层每分组一次 LLM 调用 —— 粗层永不重读原始条目。</text>
+<text x="8" y="230" font-family="sans-serif" font-size="10.5px" fill="#4a5766">溯源：refs 记录材料实际取自哪一层。</text>
+<text x="8" y="248" font-family="sans-serif" font-size="10.5px" fill="#4a5766">漂移：链式转述便宜但会漂移；recompute 保真但费 token —— 由调用方权衡。</text>
+</svg>

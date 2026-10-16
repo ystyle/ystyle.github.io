@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 300" width="100%" role="img" aria-label="window size versus observed cliff">
+<style>.ax{stroke:#9aa3ad;stroke-width:1}.gr{stroke:#e3e7ea;stroke-width:1}.lb{font-family:system-ui,-apple-system,Segoe UI,sans-serif;font-size:11px;fill:#4a5766}.tt{font-family:system-ui,-apple-system,Segoe UI,sans-serif;font-size:12px;fill:#1f2933;font-weight:600}.ln{fill:none;stroke-width:2}</style>
+<line class="gr" x1="58" y1="248.0" x2="436" y2="248.0"/>
+<text class="lb" x="50" y="252.0" text-anchor="end">0d</text>
+<line class="gr" x1="58" y1="197.5" x2="436" y2="197.5"/>
+<text class="lb" x="50" y="201.5" text-anchor="end">5d</text>
+<line class="gr" x1="58" y1="147.1" x2="436" y2="147.1"/>
+<text class="lb" x="50" y="151.1" text-anchor="end">10d</text>
+<line class="gr" x1="58" y1="96.6" x2="436" y2="96.6"/>
+<text class="lb" x="50" y="100.6" text-anchor="end">15d</text>
+<line class="gr" x1="58" y1="46.2" x2="436" y2="46.2"/>
+<text class="lb" x="50" y="50.2" text-anchor="end">20d</text>
+<line class="ax" x1="58" y1="26" x2="58" y2="248"/>
+<line class="ax" x1="58" y1="248" x2="436" y2="248"/>
+<path class="ln" d="M 222.3 237.9 L 271.7 227.8 L 300.7 217.7 L 337.1 197.5 L 386.5 147.1 L 436.0 46.2" stroke="#9aa3ad" stroke-dasharray="4 3"/>
+<text class="lb" x="432" y="38" text-anchor="end">预测（窗口 ÷ 10 事件/天）</text>
+<path class="ln" d="M 222.3 248.0 L 271.7 237.9 L 300.7 227.8 L 337.1 217.7 L 386.5 197.5 L 436.0 177.4" stroke="#166534"/>
+<circle cx="222.3" cy="248.0" r="3.5" fill="#166534"/>
+<text class="lb" x="222.3" y="266" text-anchor="middle">10</text>
+<circle cx="271.7" cy="237.9" r="3.5" fill="#166534"/>
+<text class="lb" x="271.7" y="266" text-anchor="middle">20</text>
+<circle cx="300.7" cy="227.8" r="3.5" fill="#166534"/>
+<text class="lb" x="300.7" y="266" text-anchor="middle">30</text>
+<circle cx="337.1" cy="217.7" r="3.5" fill="#166534"/>
+<text class="lb" x="337.1" y="266" text-anchor="middle">50</text>
+<circle cx="386.5" cy="197.5" r="3.5" fill="#166534"/>
+<text class="lb" x="386.5" y="266" text-anchor="middle">100</text>
+<circle cx="436.0" cy="177.4" r="3.5" fill="#166534"/>
+<text class="lb" x="436.0" y="266" text-anchor="middle">200</text>
+<text class="lb" x="247" y="288" text-anchor="middle">近因窗口 top_k（对数刻度）</text>
+<text class="tt" x="58" y="16">实测断崖</text>
+</svg>
