@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 312" width="100%" role="img" aria-label="architecture">
+<defs>
+<marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#5b6b80"/></marker>
+<marker id="ard" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#b4823c"/></marker>
+</defs>
+<text x="8" y="16" font-family="sans-serif" font-size="10.5px" fill="#4a5766">MCP 客户端（任意工具：IDE agent、聊天客户端、自研 agent）</text>
+<rect x="190" y="26" width="380" height="30" fill="#f7f9fc" stroke="#5b6b80" stroke-width="1.3" rx="5"/>
+<text x="380" y="45" text-anchor="middle" font-family="monospace" font-size="11.5px" fill="#16202c">streamable-HTTP  ·  POST /mcp  ·  tools: mem/*</text>
+<rect x="230" y="76" width="300" height="34" fill="#eef3fa" stroke="#3f5a7d" stroke-width="1.5" rx="5"/>
+<text x="380" y="98" text-anchor="middle" font-family="sans-serif" font-size="12.5px" fill="#16202c">忆时塔守护进程（单进程）</text>
+<path d="M380,56 L380,76" stroke="#5b6b80" stroke-width="1.3" fill="none" marker-end="url(#ar)"/>
+<path d="M300,110 L300,140" stroke="#5b6b80" stroke-width="1.3" fill="none" marker-end="url(#ar)"/>
+<path d="M460,110 L460,140" stroke="#5b6b80" stroke-width="1.3" fill="none" marker-end="url(#ar)"/>
+<rect x="150" y="140" width="300" height="46" fill="#f7f9fc" stroke="#5b6b80" stroke-width="1.3" rx="5"/>
+<text x="300" y="159" text-anchor="middle" font-family="sans-serif" font-size="12.5px" fill="#16202c">MaterializeScheduler (@1m)</text>
+<text x="300" y="175" text-anchor="middle" font-family="sans-serif" font-size="10.5px" fill="#4a5766">引用链 —— 零 LLM</text>
+<rect x="470" y="140" width="280" height="46" fill="#fdf6ec" stroke="#b4823c" stroke-width="1.3" rx="5"/>
+<text x="610" y="159" text-anchor="middle" font-family="sans-serif" font-size="12.5px" fill="#16202c">SummarizeScheduler (*/10m)</text>
+<text x="610" y="175" text-anchor="middle" font-family="sans-serif" font-size="10.5px" fill="#4a5766">语义摘要 —— 有 LLM 成本，按类型 opt-in</text>
+<path d="M300,186 L300,214" stroke="#5b6b80" stroke-width="1.3" fill="none" marker-end="url(#ar)"/>
+<path d="M610,186 L610,214" stroke="#b4823c" stroke-width="1.3" fill="none" stroke-dasharray="4 3" marker-end="url(#ard)"/>
+<rect x="120" y="214" width="620" height="72" fill="#f7f9fc" stroke="#5b6b80" stroke-width="1.3" rx="5"/>
+<text x="140" y="234" font-family="monospace" font-size="11.5px" fill="#16202c">&lt;type&gt;</text>
+<text x="140" y="250" font-family="sans-serif" font-size="10.5px" fill="#4a5766">原始条目（不可变、append-only）</text>
+<text x="140" y="272" font-family="monospace" font-size="11.5px" fill="#16202c">tsdb · 每类型一个 series</text>
+<text x="430" y="234" font-family="monospace" font-size="11.5px" fill="#16202c">&lt;type&gt;.summary</text>
+<text x="430" y="250" font-family="sans-serif" font-size="10.5px" fill="#4a5766">SummaryRecord（append-only，可被再次总结）</text>
+<text x="430" y="272" font-family="sans-serif" font-size="10.5px" fill="#4a5766">refs → 更细层，直至原始条目</text>
+<text x="120" y="302" font-family="sans-serif" font-size="10.5px" fill="#4a5766">摘要本身也是时序条目，因此可被再次总结</text>
+</svg>

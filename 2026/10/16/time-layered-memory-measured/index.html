@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>给 Agent 造一座记忆塔（二）：我去测了它，错了两次 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">给 Agent 造一座记忆塔（二）：我去测了它，错了两次</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">给 Agent 造一座记忆塔（二）：我去测了它，错了两次</h1>
+    <h5 class="subtitle">
+      <time datetime="2026-10-16T10:00:00&#43;08:00" itemprop="datePublished" class="page-time">2026-10-16</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e6%80%8e%e4%b9%88%e6%b5%8b%e7%9a%84">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">一、怎么测的</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%a4%e4%bb%bd%e5%88%bb%e6%84%8f%e4%b8%8d%e5%90%8c%e7%9a%84%e8%af%ad%e6%96%99">
+    <span class="post-toc-number">1.1.</span> <span class="post-toc-text">两份刻意不同的语料</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%ba%94%e6%9d%a1%e8%87%82%e5%90%83%e5%90%8c%e4%b8%80%e4%bb%bd%e8%be%93%e5%85%a5">
+    <span class="post-toc-number">1.2.</span> <span class="post-toc-text">五条臂吃同一份输入</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%89%e4%b8%aa%e6%8a%8a%e6%b5%8b%e9%87%8f%e5%81%9a%e5%af%b9%e7%9a%84%e5%89%8d%e6%8f%90">
+    <span class="post-toc-number">1.3.</span> <span class="post-toc-text">三个把测量做对的前提</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%8c%e7%bb%93%e6%9e%9c%e4%b8%80%e8%bf%91%e5%9b%a0%e5%9f%ba%e7%ba%bf%e7%9a%84%e5%a4%b1%e6%95%88%e6%98%af%e6%96%ad%e5%b4%96%e4%b8%8d%e6%98%af%e8%a1%b0%e5%87%8f">
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">二、结果一：近因基线的失效是断崖，不是衰减</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e8%a1%a5%e5%85%85%e7%bb%9f%e8%ae%a1%e5%8a%9f%e6%95%88">
+    <span class="post-toc-number">2.1.</span> <span class="post-toc-text">补充：统计功效</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e9%a1%ba%e5%b8%a6%e4%b8%80%e4%b8%aa%e9%87%8f%e5%8c%96%e5%90%8c%e4%b8%80%e6%ac%a1%e6%80%bb%e7%bb%93%e4%b8%a4%e6%ac%a1%e5%8f%aa%e6%9c%89%e5%9b%9b%e5%88%86%e4%b9%8b%e4%b8%80%e9%87%8d%e5%90%88">
+    <span class="post-toc-number">2.2.</span> <span class="post-toc-text">顺带一个量化：同一次总结，两次只有四分之一重合</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%89%e7%bb%93%e6%9e%9c%e4%ba%8c%e9%80%92%e5%bd%92%e6%80%bb%e7%bb%93%e7%9a%84%e4%bf%9d%e7%9c%9f%e5%ba%a6%e5%8f%96%e5%86%b3%e4%ba%8e%e8%be%93%e5%85%a5%e5%a4%9a%e6%a0%b7%e5%ba%a6">
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">三、结果二：递归总结的保真度取决于输入多样度</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%b0%9d%e8%af%95%e4%b8%80%e6%8a%8a%e6%95%b4%e5%a4%a9%e6%91%98%e8%a6%81%e5%af%b9%e6%95%b4%e5%91%a8%e6%91%98%e8%a6%81%e6%af%94">
+    <span class="post-toc-number">3.1.</span> <span class="post-toc-text">尝试一：把整天摘要对整周摘要比</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%b0%9d%e8%af%95%e4%ba%8c%e5%8d%95%e7%8b%ac%e4%b8%80%e5%a4%a9-vs-%e8%af%a5%e5%91%a8%e7%9a%84%e5%af%b9%e5%ba%94%e9%a1%b9%e7%9b%ae%e6%ae%b5">
+    <span class="post-toc-number">3.2.</span> <span class="post-toc-text">尝试二：单独一天 vs 该周的对应项目段</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%b0%9d%e8%af%95%e4%b8%89%e9%87%87%e7%94%a8%e4%b8%a4%e4%be%a7%e9%83%bd%e9%99%90%e5%88%b6%e5%88%b0%e5%90%8c%e4%b8%80%e9%a1%b9%e7%9b%ae%e5%90%8c%e4%b8%80-7-%e5%a4%a9%e7%aa%97%e5%8f%a3">
+    <span class="post-toc-number">3.3.</span> <span class="post-toc-text">尝试三（采用）：两侧都限制到同一项目、同一 7 天窗口</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%89%e6%9d%a1%e6%8e%a8%e8%ae%ba">
+    <span class="post-toc-number">3.4.</span> <span class="post-toc-text">三条推论</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%9b%9b%e7%bb%93%e6%9e%9c%e4%b8%89%e7%9c%9f%e5%ae%9e%e8%af%ad%e6%96%99%e4%b8%8a%e6%b4%bb%e4%b8%8b%e6%9d%a5%e7%9a%84%e6%98%af%e5%90%8d%e5%ad%97">
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">四、结果三：真实语料上，活下来的是名字</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e7%9b%b2%e6%b5%8b%e4%b8%8d%e8%b5%b0-llm-%e4%b9%9f%e8%83%bd%e5%8f%ac%e5%9b%9e%e7%b2%be%e7%a1%ae%e4%ba%8b%e5%ae%9e">
+    <span class="post-toc-number">4.1.</span> <span class="post-toc-text">盲测：不走 LLM 也能召回精确事实</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e9%93%be%e4%b8%8a%e5%85%88%e4%b8%a2%e4%bb%80%e4%b9%88">
+    <span class="post-toc-number">4.2.</span> <span class="post-toc-text">链上先丢什么</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e4%b8%aa%e8%bf%90%e7%bb%b4%e5%b1%82%e9%9d%a2%e7%9a%84%e5%8f%91%e7%8e%b0">
+    <span class="post-toc-number">4.3.</span> <span class="post-toc-text">一个运维层面的发现</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%94%e6%96%b9%e6%b3%95%e8%ae%ba%e4%b8%a4%e4%b8%aa%e9%99%b7%e9%98%b1%e4%b8%8e%e4%b8%80%e4%b8%aa%e8%b4%9f%e9%9d%a2%e7%bb%93%e6%9e%9c">
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">五、方法论：两个陷阱与一个负面结果</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e9%99%b7%e9%98%b1%e4%b8%80%e4%b8%80%e4%b8%aa%e6%8a%8a%e7%bb%93%e8%ae%ba%e5%8f%8d%e8%bd%ac%e7%9a%84%e9%95%bf%e5%ba%a6%e5%81%87%e8%b1%a1">
+    <span class="post-toc-number">5.1.</span> <span class="post-toc-text">陷阱一：一个把结论反转的长度假象</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e9%99%b7%e9%98%b1%e4%ba%8c%e4%b8%80%e4%b8%aa%e6%8a%8a%e5%a4%b1%e8%b4%a5%e5%88%b6%e9%80%a0%e5%87%ba%e6%9d%a5%e7%9a%84%e6%8a%bd%e5%8f%96%e6%ad%a7%e4%b9%89">
+    <span class="post-toc-number">5.2.</span> <span class="post-toc-text">陷阱二：一个把失败制造出来的抽取歧义</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e8%b4%9f%e9%9d%a2%e7%bb%93%e6%9e%9cllm-%e5%88%a4%e5%ae%9a%e8%80%85%e5%a4%b8%e5%a4%a7%e4%ba%86%e4%b8%a2%e5%a4%b1">
+    <span class="post-toc-number">5.3.</span> <span class="post-toc-text">负面结果：LLM 判定者夸大了丢失</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e5%a4%84%e8%87%aa%e6%88%91%e6%9b%b4%e6%ad%a3">
+    <span class="post-toc-number">5.4.</span> <span class="post-toc-text">一处自我更正</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%85%ad%e6%88%91%e5%9b%a0%e6%ad%a4%e4%be%9d%e9%9d%a0%e4%bb%80%e4%b9%88">
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">六、我因此依靠什么</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%83%e8%bf%99%e4%bb%bd%e8%af%84%e4%bc%b0%e6%b2%a1%e8%af%b4%e5%88%b0%e7%9a%84">
+    <span class="post-toc-number">7.</span> <span class="post-toc-text">七、这份评估没说到的</span>
+  </a>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-时间分层记忆-2-实测与陷阱" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">给 Agent 造一座记忆塔（二）：我去测了它，错了两次</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2026-10-16T10:00:00&#43;08:00" itemprop="datePublished">2026-10-16</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <p align="center"><strong>忆时塔（Chronomem）实测笔记 · 下篇</strong></p>
+<p align="center"><em>结果最好看的部分，是「我的测量方法错了」</em></p>
+<blockquote>
+<p>这是<strong>实证论文</strong>的博客版——position 论文（AiraXiv 2610.0035）提出评估计划，<br>
+<a href="https://ystyle.top/2026/10/16/time-layered-memory-tower/">上篇</a>
+讲那份设计，<br>
+本文报告执行结果。评估工具与原始结果归档：<br>
+<a href="https://atomgit.com/ystyle/chronomem" target="_blank" rel="noopener">atomgit.com/ystyle/chronomem</a>
+（<code>bench/</code> 与 <code>bench/results/</code>）。</p>
+</blockquote>
+<p>上篇讲设计：忆时塔把记忆按时间分层，用「精确回想」（沿引用链下钻，不调 LLM）和「语义回想」（读摘要）两条成本不同的路，占住扁平存储与一次性压缩之间的位置。</p>
+<p>这篇讲实测。设计论文以一份评估计划收尾、没有任何结果；我把那个计划执行了。</p>
+<p>执行下来最有价值的发现<strong>不是忆时塔表现多好，而是测量这件事本身有多容易错</strong>——我最初的测量方法错了两次，两次都产出了看起来可信、甚至像是可发表的数字，而且<strong>错的方向会把结论整个反转</strong>。</p>
+<h2 id="一怎么测的"><a href="#一怎么测的" class="headerlink" title="一、怎么测的"></a>一、怎么测的</h2>
+<h3 id="两份刻意不同的语料"><a href="#两份刻意不同的语料" class="headerlink" title="两份刻意不同的语料"></a>两份刻意不同的语料</h3>
+<p><strong>合成 trace。</strong> 一个带 seed 的生成器产出 N 个模拟日的 agent 活动：每天产生少量<strong>事实</strong>（一条带记录结果的决策）加填充活动，另有一组探针问题，问的是更早日子里的事实。三个 seed：7/11/23。</p>
+<p><strong>真实部署语料。</strong> 我自己那套忆时塔，2026-08-29 起连续跑，单用户。评估时持有 <strong>480 条工作日志、1201 条 agent 活动记录、63 条教训记录</strong>，工作日志有 37 个天级、6 个周级摘要窗口。这份语料<strong>没有标准答案</strong>，所以只用于「存活」测量，不测准确率。</p>
+<h3 id="五条臂吃同一份输入"><a href="#五条臂吃同一份输入" class="headerlink" title="五条臂吃同一份输入"></a>五条臂吃同一份输入</h3>
+<table>
+	<thead>
+			<tr>
+					<th>后端</th>
+					<th>机制</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>flat-recency</code></td>
+					<td>保留全部，但只暴露最近 20 条</td>
+			</tr>
+			<tr>
+					<td><code>one-shot-compaction</code></td>
+					<td>每 2 天把历史重写成一份运行简报，丢弃细节</td>
+			</tr>
+			<tr>
+					<td><code>chronomem-exact</code></td>
+					<td>沿引用链下钻到原始条目（不调 LLM）</td>
+			</tr>
+			<tr>
+					<td><code>chronomem-day</code></td>
+					<td>读<strong>天级</strong>摘要</td>
+			</tr>
+			<tr>
+					<td><code>chronomem-week</code></td>
+					<td>读包含该事实的<strong>周级</strong>摘要</td>
+			</tr>
+	</tbody>
+</table>
+<p>五条臂吃同一份 trace、答同一组探针，并由<strong>同一个抽取器</strong>读取——因为弱抽取器会同等压低所有臂，对照关系得以保全；而每条臂各配一个读取器，就会把「臂的差异」和「读取器的差异」混在一起。</p>
+<p><strong>第一版对照缺了一条臂，而且缺得很要命。</strong> 最初摘要臂只读<strong>天级</strong>摘要。可这是一篇主张关乎<em>分层</em>的论文——被命名为「分层」的那一侧只测了一层，而<strong>粗层从未被提问过</strong>。补上 <code>chronomem-week</code> 之后才看得见：两条摘要臂不是同一测量的两种粒度，天级臂读的是事实所在的窗口（问题与材料范围一致），周级臂读的是覆盖另外六天的窗口（答案是压缩后的若干项之一）。<strong>这个不对称恰恰是架构主张的取舍，只有两条臂都在才看得见。</strong></p>
+<h3 id="三个把测量做对的前提"><a href="#三个把测量做对的前提" class="headerlink" title="三个把测量做对的前提"></a>三个把测量做对的前提</h3>
+<p>开发过程中被测量本身确立的约束，值得单独列出来，因为每一条都曾经让结果失真：</p>
+<ul>
+<li><strong>答案要按轮转分配，不能均匀随机。</strong> 小探针集上均匀抽样会聚集——9 个探针里曾有一个选项占了 7 个，等于给了 78% 的多数类基线，<strong>不留任何检出真实差异的余地</strong>。轮转把基线压到约 1/选项数。</li>
+<li><strong>每天的主题不能重复抽。</strong> 同一天重复一个主题会让「第 N 天 X 选了什么」变成歧义问题。54 个（天，主题）组合里有 6 个歧义，而它们解释了分层后端<strong>每一次</strong>失分——系统确实记住了事实，是抽取器取了另一个。</li>
+<li><strong>探针必须永远回看，且滞后随运行增长。</strong> 当天探针会被任何近因窗口答对；固定短滞后同样如此（30 天 trace 上，1 天滞后时 20 条窗口仍得 90.6%）。<strong>滞后必须随日号增长</strong>，那才是分层存储应当取胜的那条轴。</li>
+</ul>
+<p>每个事实在文本里还带一个<strong>不透明的引用号</strong>（<code>ref ZQ01</code>），摘要会逐字保留它，使抽取无歧义——因为摘要的散文结论惯常把多个主题和多个选项写进一句话。</p>
+<h2 id="二结果一近因基线的失效是断崖不是衰减"><a href="#二结果一近因基线的失效是断崖不是衰减" class="headerlink" title="二、结果一：近因基线的失效是断崖，不是衰减"></a>二、结果一：近因基线的失效是断崖，不是衰减</h2>
+<p>30 天合成 trace，300 事件、32 探针、三个 seed。先看<strong>会丢信息的三条臂</strong>——注意近因窗口那条的断崖：</p>
+<table>
+	<thead>
+			<tr>
+					<th>滞后（天）</th>
+					<th>近因窗口</th>
+					<th>天级摘要</th>
+					<th>周级摘要</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>1</td>
+					<td>100%</td>
+					<td>100%</td>
+					<td>0%</td>
+			</tr>
+			<tr>
+					<td>2</td>
+					<td><strong>0%</strong></td>
+					<td>50%</td>
+					<td>0%</td>
+			</tr>
+			<tr>
+					<td>3–4</td>
+					<td>0%</td>
+					<td>25%</td>
+					<td>0%</td>
+			</tr>
+			<tr>
+					<td>5–6</td>
+					<td>0%</td>
+					<td>25%</td>
+					<td>0%</td>
+			</tr>
+			<tr>
+					<td>7–13</td>
+					<td>0%</td>
+					<td>57.1%</td>
+					<td>28.6%</td>
+			</tr>
+			<tr>
+					<td>14–29</td>
+					<td>0%</td>
+					<td>66.7%</td>
+					<td>33.3%</td>
+			</tr>
+			<tr>
+					<td><strong>整体</strong></td>
+					<td><strong>6.2%</strong></td>
+					<td><strong>53.1%</strong></td>
+					<td><strong>18.8%</strong></td>
+			</tr>
+	</tbody>
+</table>
+<p>再看<strong>另两条</strong>：一次性压缩（两个变体）与精确回想。这条对照是「100 分差距只由对应关系造成」那句话的来源：</p>
+<table>
+	<thead>
+			<tr>
+					<th>滞后（天）</th>
+					<th>一次性压缩（破坏性）</th>
+					<th>一次性压缩（保守）</th>
+					<th>精确回想</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>1</td>
+					<td>0%</td>
+					<td><strong>100%</strong></td>
+					<td><strong>100%</strong></td>
+			</tr>
+			<tr>
+					<td>2</td>
+					<td>0%</td>
+					<td>100%</td>
+					<td>100%</td>
+			</tr>
+			<tr>
+					<td>3–4</td>
+					<td>0%</td>
+					<td>100%</td>
+					<td>100%</td>
+			</tr>
+			<tr>
+					<td>5–6</td>
+					<td>0%</td>
+					<td>100%</td>
+					<td>100%</td>
+			</tr>
+			<tr>
+					<td>7–13</td>
+					<td>0%</td>
+					<td>100%</td>
+					<td>100%</td>
+			</tr>
+			<tr>
+					<td>14–29</td>
+					<td>0%</td>
+					<td>100%</td>
+					<td>100%</td>
+			</tr>
+			<tr>
+					<td><strong>整体</strong></td>
+					<td><strong>0.0%</strong></td>
+					<td><strong>100.0%</strong></td>
+					<td><strong>100.0%</strong></td>
+			</tr>
+	</tbody>
+</table>
+<p>两条摘要臂是单次运行（单个 seed），每桶探针数只有 2–14 个，所以<strong>分桶数字噪声大，整体数更可信</strong>。</p>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/img/time-layered-memory/fig1.png" alt="五臂召回保留率随滞后的变化：精确回想全程 100%，近因窗口第一天满分后归零">
+  </div>
+  <div class="image-caption">五臂召回保留率随滞后的变化：精确回想全程 100%，近因窗口第一天满分后归零</div>
+</figure>
+<p><em>图 1 · 各臂的召回保留率 vs 滞后。精确回想全程平在 100%——<strong>它不随事实变老而衰减</strong>。近因基线在滞后一天时满分、从第二天起归零，是断崖而非斜坡。一次性压缩在每一档都是零，<strong>包括最近的窗口</strong>。两条摘要臂会丢信息但<strong>非单调</strong>下降，因为摘要在生成时即定形、之后不随年龄改变。</em></p>
+<p>三点观察，按「有多出乎意料」递减：</p>
+<p><strong>（a）近因基线的跌落是断崖。</strong> 滞后 1 天满分，第 2 天起直接归零。窗口容纳 20 条、trace 每天约 10 条事件，边界落在约 2 天处。跨越这条边界时<strong>内容本身没有任何变化</strong>——那段信息只是不在目标文本里了。</p>
+<p>这不是「逐渐遗忘」，是<strong>结构性失效</strong>。六点消融（下图）显示断崖随容量移动：</p>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/img/time-layered-memory/fig2.png" alt="消融实验：实测断崖随近因窗口容量移动">
+  </div>
+  <div class="image-caption">消融实验：实测断崖随近因窗口容量移动</div>
+</figure>
+<p><em>图 2 · 消融：实测断崖随窗口容量移动。灰色虚线是预测——容量为 <code>top_k</code> 条的窗口覆盖 <code>top_k ÷ 10 事件/天</code> 天；绿线是实测。实测略低于预测，因为桶边界稀疏——断崖只能落在边界上，而相邻那一桶要求其中每个探针都答对。</em></p>
+<p><strong>（b）一次性压缩在所有档位都是零——但这个零里有一部分是我自己造成的。</strong> 这是对我初稿最尖锐的质疑，而且它说得对：我把压缩器写成把取值转述掉，这个零有我的成分。</p>
+<p>为了把两者分开，我加了<strong>保守压缩臂</strong>：同样的压缩节奏，但<strong>保留每一个「引用号→取值」配对</strong>，只丢上下文和散文。结果它每一档都是 100%。</p>
+<p>也就是说：<strong>100 分的差距，只由每问 11 个 token 造成</strong>（196 对 185）。压缩里真正承重的，是<strong>条目与取值之间的对应关系</strong>——转述一旦把这个对应关系拆散，信息就没了，哪怕字数差不多。</p>
+<p><strong>（c）分层存储的损失是压缩损失，不是时间衰减。</strong> 精确回想每一档都保持 100%，<strong>且跨 seed 零方差</strong>（六个桶全部 std 0.0）。</p>
+<p>而语义回想<strong>并不随滞后单调下降</strong>——14–29 天的 66.7% 反而<strong>高于</strong> 3–4 天的 25%。原因很直白：<strong>摘要生成一次后不随年龄改变</strong>。它丢的是压缩在生成那一刻丢掉的东西；<strong>时间不是变量</strong>。</p>
+<h3 id="补充统计功效"><a href="#补充统计功效" class="headerlink" title="补充：统计功效"></a>补充：统计功效</h3>
+<p>分桶只有 2–14 个探针，所以我补了 95% Wilson 区间（小样本二项比例的合适区间；正态近似在这些样本量下会给出 [0,1] 之外的界）。以「区间不重叠」为保守判据：</p>
+<table>
+	<thead>
+			<tr>
+					<th>对比</th>
+					<th>滞后 1</th>
+					<th>7–13</th>
+					<th>14–29</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>精确 vs 近因</td>
+					<td>重叠</td>
+					<td><strong>不重叠</strong></td>
+					<td><strong>不重叠</strong></td>
+			</tr>
+			<tr>
+					<td>精确 vs 一次性压缩</td>
+					<td>重叠</td>
+					<td><strong>不重叠</strong></td>
+					<td><strong>不重叠</strong></td>
+			</tr>
+			<tr>
+					<td>天级 vs 周级摘要</td>
+					<td>重叠</td>
+					<td><strong>重叠</strong></td>
+					<td><strong>重叠</strong></td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>所以「精确回想优于基线」在 7 天以后是统计上站得住的；而「天级优于周级」在当前样本量下站不住。</strong> 后者的差异是真实存在的趋势，但不是这个样本量能断言的。</p>
+<h3 id="顺带一个量化同一次总结两次只有四分之一重合"><a href="#顺带一个量化同一次总结两次只有四分之一重合" class="headerlink" title="顺带一个量化：同一次总结，两次只有四分之一重合"></a>顺带一个量化：同一次总结，两次只有四分之一重合</h3>
+<p>语义回想的离散度来自 LLM 采样，而且<strong>很大</strong>。取两个真实生产窗口，把原始条目导入独立实例，各自用 <code>recompute</code> 重新总结 <strong>5 次</strong>（输入相同、参数相同、温度保持端点默认 0.7）：</p>
+<table>
+	<thead>
+			<tr>
+					<th>来源窗口（输入规模）</th>
+					<th>长度 SD</th>
+					<th>版本间平均相似度</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>2026-09-15（12 条 / 13724 字符）</td>
+					<td><strong>265</strong></td>
+					<td><strong>0.263</strong></td>
+			</tr>
+			<tr>
+					<td>2026-09-12（33 条 / 29198 字符）</td>
+					<td><strong>437</strong></td>
+					<td><strong>0.250</strong></td>
+			</tr>
+	</tbody>
+</table>
+<p>五次输出的具体长度分别是 <code>1789, 1686, 1332, 1205, 1258</code> 与 <code>2350, 1562, 1456, 1432, 2189</code>。</p>
+<p><strong>同一窗口的两次总结只有约四分之一的文本重合</strong>，而且差异是实质性的——同一天一次写成「权限为 <code>admin-only</code>」，另一次写成「团队权限链路重构（A1/A2）」。</p>
+<p>我没有去调低温度，这是刻意的：<strong>部署的摘要是无人值守的调度器生成的，冻结温度会让报告的保持率描述一个部署并不使用的配置。</strong></p>
+<p>所以摘要的桶均值是<strong>宽分布的中心</strong>，不是精确值；单次运行的分桶数字只有指示意义。</p>
+<h2 id="三结果二递归总结的保真度取决于输入多样度"><a href="#三结果二递归总结的保真度取决于输入多样度" class="headerlink" title="三、结果二：递归总结的保真度取决于输入多样度"></a>三、结果二：递归总结的保真度取决于输入多样度</h2>
+<p>这一节是我<strong>错了两次</strong>的地方。</p>
+<p>我要刻画的这一步是：<em>某项目在一周内的摘要 → 该项目的周摘要</em>。</p>
+<h3 id="尝试一把整天摘要对整周摘要比"><a href="#尝试一把整天摘要对整周摘要比" class="headerlink" title="尝试一：把整天摘要对整周摘要比"></a>尝试一：把整天摘要对整周摘要比</h3>
+<p>保留率算出来 81–84%，暗示粗层几乎无损。</p>
+<p><strong>这不是有效比较</strong>：一个周包覆盖 5–7 天、比天包长约 3.4 倍，所以它既包含被测当天，又包含另外六天。目标文本更大，某个 token 就更可能因巧合出现——<strong>这与压缩无关</strong>。</p>
+<p>把这个假象推到极端会更明显：在一个「整天 vs 整周」的变体里，它强到让<strong>更粗的层级看起来比更细的还保真</strong>（数量上 42% 对 29%）。</p>
+<blockquote>
+<p>一个<strong>粗层比细层更保真</strong>的压缩测量，测的是文本长度，不是压缩。这个结果本该立刻引起怀疑。</p>
+</blockquote>
+<h3 id="尝试二单独一天-vs-该周的对应项目段"><a href="#尝试二单独一天-vs-该周的对应项目段" class="headerlink" title="尝试二：单独一天 vs 该周的对应项目段"></a>尝试二：单独一天 vs 该周的对应项目段</h3>
+<p>仍然不对等——周段覆盖整周。</p>
+<h3 id="尝试三采用两侧都限制到同一项目同一-7-天窗口"><a href="#尝试三采用两侧都限制到同一项目同一-7-天窗口" class="headerlink" title="尝试三（采用）：两侧都限制到同一项目、同一 7 天窗口"></a>尝试三（采用）：两侧都限制到同一项目、同一 7 天窗口</h3>
+<p>这才是递归真正做的变换，因为总结器就是按 group key 聚合某个项目的子摘要。</p>
+<p>来自三个已闭合周的 40 个项目-周对：</p>
+<table>
+	<thead>
+			<tr>
+					<th>输入天数</th>
+					<th>对数</th>
+					<th>数量保留</th>
+					<th>长度比</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>1</strong></td>
+					<td>29</td>
+					<td><strong>90%</strong></td>
+					<td><strong>0.94x</strong></td>
+			</tr>
+			<tr>
+					<td><strong>≥2</strong></td>
+					<td>11</td>
+					<td><strong>58%</strong></td>
+					<td><strong>0.53x</strong></td>
+			</tr>
+			<tr>
+					<td>全部（混合）</td>
+					<td>40</td>
+					<td>—</td>
+					<td>0.82x</td>
+			</tr>
+	</tbody>
+</table>
+<p>其中「标识符」与「因果连接词」两项：</p>
+<table>
+	<thead>
+			<tr>
+					<th>输入天数</th>
+					<th>标识符保留</th>
+					<th>因果连接词保留</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>1</strong></td>
+					<td>97%</td>
+					<td>90%</td>
+			</tr>
+			<tr>
+					<td><strong>≥2</strong></td>
+					<td>65%</td>
+					<td><strong>48%</strong></td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>单输入的情形根本不是压缩。</strong></p>
+<p>这 29 对里，周摘要与其所依据的天摘要<strong>逐字节相同</strong>——在 755、1112、972 字符的文本上实测相似度 <strong>1.0000</strong>。</p>
+<p>这点值得停一下：<strong>LLM 不可能逐字复现 755 个汉字</strong>。所以模型做的事是<strong>选择原样复述输入</strong>。那里的「90% 保留」意味着「<strong>没有发生压缩</strong>」，而不是「压缩是无损的」。</p>
+<p>压缩只在输入多样时出现，且趋势随输入规模延续：</p>
+<table>
+	<thead>
+			<tr>
+					<th>输入天数</th>
+					<th>长度比</th>
+					<th>数量保留</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>1</td>
+					<td>0.94x</td>
+					<td>90%</td>
+			</tr>
+			<tr>
+					<td>2</td>
+					<td>0.64x</td>
+					<td>66%</td>
+			</tr>
+			<tr>
+					<td>3</td>
+					<td>0.15x</td>
+					<td>30%</td>
+			</tr>
+			<tr>
+					<td>4</td>
+					<td>0.20x</td>
+					<td>21%</td>
+			</tr>
+	</tbody>
+</table>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/img/time-layered-memory/fig3.png" alt="递归步：数量保留率随合并进周摘要的输入天数下降">
+  </div>
+  <div class="image-caption">递归步：数量保留率随合并进周摘要的输入天数下降</div>
+</figure>
+<p><em>图 3 · 递归步按「被要求合并多少」成正比地损失。数量保留率 vs 合并进该项目周摘要的输入天数。单天点（n=29）接近 100%，因为该步在<strong>复述</strong>输入而非压缩它；需要合并的天数越多、保留越低。标 <code>*</code> 的点只含一个项目，绘制但不连线，否则单个观测会把曲线带偏。</em></p>
+<h3 id="三条推论"><a href="#三条推论" class="headerlink" title="三条推论"></a>三条推论</h3>
+<p><strong>（a）跨输入规模平均会抬高保真度。</strong> 把 29 个单输入对混进平均后，长度比从 0.53x 变成 0.82x，表观保真度显著上升。<strong>任何对递归总结器的评估都必须按输入多样度分层</strong>，否则会把「什么都没做」的那些情形当成成功来报。</p>
+<p><strong>（b）两跳差一个数量级。</strong> <code>原始 → 天</code> 压缩 3.1–4.2 倍；<code>天 → 周</code> 只有 0.53 倍。原因不是层级，而是<strong>输入</strong>：第一跳吃的是原始条目，第二跳吃的是已经被压过一次的摘要。所以「每层压缩比固定为 k」<strong>不是这套架构的属性</strong>。</p>
+<p><strong>（c）这条链不是定点压缩器。</strong> 成立的表述是：<strong>这条链从不丢失它没被给到的信息，且压缩量正比于输入的多样度。</strong></p>
+<h2 id="四结果三真实语料上活下来的是名字"><a href="#四结果三真实语料上活下来的是名字" class="headerlink" title="四、结果三：真实语料上，活下来的是名字"></a>四、结果三：真实语料上，活下来的是名字</h2>
+<h3 id="盲测不走-llm-也能召回精确事实"><a href="#盲测不走-llm-也能召回精确事实" class="headerlink" title="盲测：不走 LLM 也能召回精确事实"></a>盲测：不走 LLM 也能召回精确事实</h3>
+<p><strong>设计。</strong> 我先自己从工作日志里读出六个事实（一次 OOM 事故的根因与两项修复；一次重试/退避策略变更及其理由；一次产品改名以及有意不改的部分；一处关于两组件关系的文档订正；三天摘要缺失的根因；一次模型 A/B 对照及其 prefill 吞吐）。然后派一个 agent，其<strong>唯一</strong>信息源是经由 MCP 的记忆服务——<strong>不访问仓库、不上网、不用先验知识</strong>。</p>
+<p><strong>结果：6/6 全对，且全部经由 <code>exact</code> 路径答出</strong>（沿引用链下钻，回路中不调用 LLM）。</p>
+<p>答出的内容包括精确的操作细节：常驻内存 30–60 MB 对瞬时峰值 217–240 MB、堆上限由 256 MB 提到 1 GB、prefill 吞吐 317 对 267 tok/s，以及改名时<strong>有意保留</strong>的那几个键及其理由。</p>
+<p>这正是上篇那个成本不对称的主张，现在是被<strong>测量</strong>而非被论证的：<strong>单靠无 LLM 路径，就能召回两个月前的具体操作性事实。</strong></p>
+<p>一个限定要说清：这只表明<strong>被保留下来的那些是可召回的</strong>，不表明重要的东西都被记录下来了。</p>
+<h3 id="链上先丢什么"><a href="#链上先丢什么" class="headerlink" title="链上先丢什么"></a>链上先丢什么</h3>
+<p>同一语料上，<strong>最先损失的是量化证据与因果机制；专有名词与标识符存活最久</strong>。</p>
+<ul>
+<li><strong>数量</strong>：一次打包清理把清单从 244 个文件收到 101 个。<strong>两个数字在天级与周级摘要中都不存在</strong>，留下的是「0.4.1 版已发布」。一项下载护栏从 1/3 提到 3/3、峰值 RSS 恒定在 284 MiB；周摘要里 <code>护栏</code>、<code>3/3</code>、<code>284</code> 一个都没有。</li>
+<li><strong>机制</strong>：「排序比较器拿一个含 <code>@version</code> 的标签当主键，于是版本序退化成字典序」，在两个更粗层级上都只剩**「排序」**这一个词。标识符 <code>pkgLabel</code>、<code>@version</code> 以及「字典序」全部消失。</li>
+<li><strong>规则是最脆的</strong>：可复用的规则（「改内置函数语义前先查 API 文档」）几乎从不以规则形态存活，只在一条不相干的待办（「同步 docs-site」）里留下痕迹。</li>
+</ul>
+<p>两点限定：其一，<strong>被用来下结论</strong>的数量会被丢掉，而充当<strong>状态或验收口径</strong>的数量常常存活——所以不是「数字会丢」，而是「<strong>证据性的数字会丢</strong>」。其二，这个顺序只在<strong>真正发生压缩</strong>的地方成立。</p>
+<h3 id="一个运维层面的发现"><a href="#一个运维层面的发现" class="headerlink" title="一个运维层面的发现"></a>一个运维层面的发现</h3>
+<p>这次评估里有一条合成基准<strong>不可能产出</strong>的证据。</p>
+<p>我的周摘要只覆盖了 6 个已闭合周中的 4 个。缺失的两周（09-07、09-14）<strong>并非随机缺席</strong>：同一时期的一个调度缺陷（compact 条目超出端点的 32768 token 上下文 → HTTP 400 → 失败 → 无限重试）导致总结器有两天<strong>产出为零条记录</strong>。正常批次在周一 00:10–00:20 生成，那两周从未出现在这个节奏点上。</p>
+<p>而由于调度器<strong>只总结最近一个已闭合窗口</strong>，这个缺口<strong>持续存在</strong>。补算这两周（对每个窗口显式调一次 <code>mem/summarize</code>）把周覆盖恢复到 6 周，并把链式测量从 <strong>0/6 可召回提升到 3/6</strong>。</p>
+<p><strong>记忆系统自身的一次故障，在它自己的记忆里留下了一个可测量、可持久的缺口</strong>——而且缺口的形状（恰好限于故障期、天级摘要完好）反过来指认了成因。</p>
+<h2 id="五方法论两个陷阱与一个负面结果"><a href="#五方法论两个陷阱与一个负面结果" class="headerlink" title="五、方法论：两个陷阱与一个负面结果"></a>五、方法论：两个陷阱与一个负面结果</h2>
+<p>这是我最想让人看到的一节。</p>
+<h3 id="陷阱一一个把结论反转的长度假象"><a href="#陷阱一一个把结论反转的长度假象" class="headerlink" title="陷阱一：一个把结论反转的长度假象"></a>陷阱一：一个把结论反转的长度假象</h3>
+<p><strong>现象</strong>：把整天摘要对整周摘要比较，得到<strong>周层保留率高于天层</strong>（数量上 42% 对 29%）。</p>
+<p><strong>为什么错</strong>：周包长约 3.4 倍、多覆盖六天，某个 token 更可能因巧合而出现。两侧限制到同一项目同一窗口后，顺序就反了过来。</p>
+<p><strong>推广</strong>：任何在长度与范围不同的文本上算出的保留指标都值得怀疑。<strong>破绽是与机制相矛盾的排序</strong>——粗层不可能比它的输入更保真。</p>
+<h3 id="陷阱二一个把失败制造出来的抽取歧义"><a href="#陷阱二一个把失败制造出来的抽取歧义" class="headerlink" title="陷阱二：一个把失败制造出来的抽取歧义"></a>陷阱二：一个把失败制造出来的抽取歧义</h3>
+<p>探针原本按（主题，天）定位答案。摘要的散文结论惯常把多个主题与多个选项写进一句话（「keb 与 vun 分别应用了选项 A 与选项 C」），于是「取首个选项字母」的读取器会返回<strong>另一个主题</strong>的答案——而那个错误答案<strong>是貌似合理的</strong>，所以看起来不像 bug。</p>
+<p>分层后端显示的<strong>每一次</strong>失分都追溯到这一点。改为逐事实的不透明引用号后，该后端得 100%。</p>
+<p>还有个更隐蔽的变体：摘要把一天压成一行是常态，长这样——</p>
+<blockquote>
+<p><code>- Day 1: ZT02 选方案 B (keb), ZR01 选方案 A (rix)</code></p>
+</blockquote>
+<p>（注意这一行里塞了<strong>两个</strong>事实：<code>ZT02→B</code> 和 <code>ZR01→A</code>。）</p>
+<p>取段内首个选项的读取器会用 <code>B</code> 回答 <code>ZR01</code>。那个字母是同一段里的<strong>合法选项</strong>，所以这次失分看起来像「答错了」而不是读取器 bug——而且<strong>层级越粗、事实被压得越密，这个假象越强</strong>。它让粗层臂在六天以内的每一档都报 0%，而正确选项<strong>明明就在文本里</strong>。</p>
+<p>修法是位置感知的：定位引用号，读它<strong>之后</strong>的选项（当引用号跟在选项后时，读它<strong>之前最近</strong>的那一个）。</p>
+<p><strong>推广</strong>：当某个后端的失败集中在一个答案取值上，或当它们只出现在某一层而正确答案明明就在文本里时——<strong>先怀疑读取器，再怀疑系统</strong>。</p>
+<h3 id="负面结果llm-判定者夸大了丢失"><a href="#负面结果llm-判定者夸大了丢失" class="headerlink" title="负面结果：LLM 判定者夸大了丢失"></a>负面结果：LLM 判定者夸大了丢失</h3>
+<p>判断一个事实是否「存活」在机械上并无定义，所以我请了独立的 LLM 判定者。它们的输出<strong>自信而详细</strong>。</p>
+<p>在我深入核验的具体主张里，<strong>两个都错了</strong>：</p>
+<ol>
+<li>判定者称「同一周的周摘要逐字节相同（同一 md5、15796 字符）」<br>
+→ ✅ <strong>成立</strong>。</li>
+<li>判定者称「周摘要就是最后一天的天摘要集合」<br>
+→ ❌ <strong>推翻</strong>——逐日比对只有 0–1 个分组逐字相同。</li>
+<li>判定者称某天摘要「完全略去了 chronomem 组；整条因果链与全部数字都没了」<br>
+→ ❌ <strong>推翻</strong>——该组存在且完整，包含根因链与 <code>OOM</code>、<code>sseCond</code>、<code>CLOSE_WAIT</code>、<code>心跳</code> 等词。</li>
+</ol>
+<p>两个被推翻的主张<strong>朝同一个方向偏</strong>：断言了一个并不存在的缺失。判定者的<strong>计数</strong>（intact/partial/absent 分布）同样因此不可引用。</p>
+<p>判定者仍有一项用处：<strong>它们指向了正确的现象</strong>——「周输出逐字节相同」这件事是真的，而追查它引出了上一节按输入规模的分析。但<strong>方向与数字必须来自机械的重新测量</strong>。</p>
+<p>这个失效模式会影响任何依赖模型判断「这是否存活」的记忆系统评估：<strong>判定者看不见只以摘要形态呈现给它的东西，而不加小心的评估者同样看不见。</strong></p>
+<h3 id="一处自我更正"><a href="#一处自我更正" class="headerlink" title="一处自我更正"></a>一处自我更正</h3>
+<p>本节初稿曾用「237 与 453 字符」作为采样方差的证据。那个数字来自调用两次 <code>recompute</code> 后比较 <code>mem/recall</code> 的两次返回——<strong>但 <code>recall</code> 会把该窗口的全部历史版本按最新在前拼接返回</strong>，所以第二次返回是「第一版 + 第二版」，不是第二个样本。</p>
+<p><strong>那个数字测的是累积，不是方差。</strong> 上文那张 5 次重跑的表才是正确的。</p>
+<h2 id="六我因此依靠什么"><a href="#六我因此依靠什么" class="headerlink" title="六、我因此依靠什么"></a>六、我因此依靠什么</h2>
+<p>上面每一条量化主张，都来自<strong>可重新运行、且输出随仓库归档</strong>的脚本：带 seed 的 trace 生成器、五臂运行器、消融、token 存活与递归步测量、链式核查。判定者的输出也归档了，但<strong>标注为仅作方向参考</strong>。</p>
+<p>工具本身有 31 个回归用例，外加一个变异检查——它刻意以<strong>十一种方式破坏实现</strong>（包括上述陷阱），如果测试套件没有察觉就判失败。这些是在踩过那些坑之后补的，理由很简单：</p>
+<blockquote>
+<p><strong>如果测试从未碰到它所声称覆盖的东西，测试通过本身说明不了什么。</strong></p>
+</blockquote>
+<h2 id="七这份评估没说到的"><a href="#七这份评估没说到的" class="headerlink" title="七、这份评估没说到的"></a>七、这份评估没说到的</h2>
+<ul>
+<li><strong>只有三个 seed。</strong> 精确回想各桶零方差使其 100% 稳健；摘要数字带高达 38% 的分桶标准差，应读作中心而非点估计。</li>
+<li><strong>合成 trace 的量级不可迁移。</strong> 机制层面的结论（容量断崖、破坏性压缩）可以，具体数字不行。</li>
+<li><strong>真实语料没有标准答案。</strong> 所以那一节是存活测量与盲测召回，不是准确率。</li>
+<li><strong>只测了 <code>天 → 周</code> 这一跳。</strong> 服务也支持更细层级（10min/30min/1h/3h），本文未刻画。</li>
+<li><strong>层级链止于 <code>week</code>。</strong> 超出最粗已启用层级的跨度，不是被更粗地总结，而是由 <code>exact</code> 路径 + 对原始序列翻页覆盖（实测 300 条跨 2 页无截断）。尚未测量的是<strong>原始序列长到翻页不再实用</strong>的那种跨度——那是部署量级问题，不是总结层级的封顶。</li>
+<li><strong>单一部署、单用户、约两个月。</strong> 未验证多租户、鉴权、加密。</li>
+<li><strong>压缩只有一种实现。</strong> 一次性压缩基线是我自己写的；更强的压缩器会改变它的数字，但不会改变那个结构性论断——<strong>它无法回答关于已被它丢弃的内容的问题</strong>。</li>
+</ul>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2026-10-16T10:00:00&#43;08:00" itemprop="dateUpdated">2026-10-16 10:00:00</time>
+          </span><br>
+          本文链接：<a href="/2026/10/16/time-layered-memory-measured/" target="_blank" rel="external">https://ystyle.top/2026/10/16/time-layered-memory-measured/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MCP/">MCP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BF%86%E6%97%B6%E5%A1%94/">忆时塔</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Agent%E8%AE%B0%E5%BF%86/">Agent记忆</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/">基准测试</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f16%2ftime-layered-memory-measured%2f&title=%e3%80%8a%e7%bb%99%20Agent%20%e9%80%a0%e4%b8%80%e5%ba%a7%e8%ae%b0%e5%bf%86%e5%a1%94%ef%bc%88%e4%ba%8c%ef%bc%89%ef%bc%9a%e6%88%91%e5%8e%bb%e6%b5%8b%e4%ba%86%e5%ae%83%ef%bc%8c%e9%94%99%e4%ba%86%e4%b8%a4%e6%ac%a1%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f16%2ftime-layered-memory-measured%2f&title=%e3%80%8a%e7%bb%99%20Agent%20%e9%80%a0%e4%b8%80%e5%ba%a7%e8%ae%b0%e5%bf%86%e5%a1%94%ef%bc%88%e4%ba%8c%ef%bc%89%ef%bc%9a%e6%88%91%e5%8e%bb%e6%b5%8b%e4%ba%86%e5%ae%83%ef%bc%8c%e9%94%99%e4%ba%86%e4%b8%a4%e6%ac%a1%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e5%bf%86%e6%97%b6%e5%a1%94%ef%bc%88Chronomem%ef%bc%89%e5%ae%9e%e6%b5%8b%e7%ac%94%e8%ae%b0%20%c2%b7%20%e4%b8%8b%e7%af%87%0a%e7%bb%93%e6%9e%9c%e6%9c%80%e5%a5%bd%e7%9c%8b%e7%9a%84%e9%83%a8%e5%88%86%ef%bc%8c%e6%98%af%e3%80%8c%e6%88%91%e7%9a%84%e6%b5%8b%e9%87%8f%e6%96%b9%e6%b3%95%e9%94%99%e4%ba%86%e3%80%8d%0a%e8%bf%99%e6%98%af%e5%ae%9e%e8%af%81%e8%ae%ba%e6%96%87%e7%9a%84%e5%8d%9a%e5%ae%a2%e7%89%88%e2%80%94%e2%80%94position%20%e8%ae%ba%e6%96%87%ef%bc%88AiraXiv%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f16%2ftime-layered-memory-measured%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e7%bb%99%20Agent%20%e9%80%a0%e4%b8%80%e5%ba%a7%e8%ae%b0%e5%bf%86%e5%a1%94%ef%bc%88%e4%ba%8c%ef%bc%89%ef%bc%9a%e6%88%91%e5%8e%bb%e6%b5%8b%e4%ba%86%e5%ae%83%ef%bc%8c%e9%94%99%e4%ba%86%e4%b8%a4%e6%ac%a1%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f16%2ftime-layered-memory-measured%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f16%2ftime-layered-memory-measured%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2026/10/16/time-layered-memory-tower/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">给 Agent 造一座记忆塔（一）：扁平存储与一次性压缩之间</h4>
+        </a>
+      </div>
+      
+      
+    </nav>
+    
+
+    
+    
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+  </article>
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f16%2ftime-layered-memory-measured%2f&title=%e3%80%8a%e7%bb%99%20Agent%20%e9%80%a0%e4%b8%80%e5%ba%a7%e8%ae%b0%e5%bf%86%e5%a1%94%ef%bc%88%e4%ba%8c%ef%bc%89%ef%bc%9a%e6%88%91%e5%8e%bb%e6%b5%8b%e4%ba%86%e5%ae%83%ef%bc%8c%e9%94%99%e4%ba%86%e4%b8%a4%e6%ac%a1%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f16%2ftime-layered-memory-measured%2f&title=%e3%80%8a%e7%bb%99%20Agent%20%e9%80%a0%e4%b8%80%e5%ba%a7%e8%ae%b0%e5%bf%86%e5%a1%94%ef%bc%88%e4%ba%8c%ef%bc%89%ef%bc%9a%e6%88%91%e5%8e%bb%e6%b5%8b%e4%ba%86%e5%ae%83%ef%bc%8c%e9%94%99%e4%ba%86%e4%b8%a4%e6%ac%a1%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e5%bf%86%e6%97%b6%e5%a1%94%ef%bc%88Chronomem%ef%bc%89%e5%ae%9e%e6%b5%8b%e7%ac%94%e8%ae%b0%20%c2%b7%20%e4%b8%8b%e7%af%87%0a%e7%bb%93%e6%9e%9c%e6%9c%80%e5%a5%bd%e7%9c%8b%e7%9a%84%e9%83%a8%e5%88%86%ef%bc%8c%e6%98%af%e3%80%8c%e6%88%91%e7%9a%84%e6%b5%8b%e9%87%8f%e6%96%b9%e6%b3%95%e9%94%99%e4%ba%86%e3%80%8d%0a%e8%bf%99%e6%98%af%e5%ae%9e%e8%af%81%e8%ae%ba%e6%96%87%e7%9a%84%e5%8d%9a%e5%ae%a2%e7%89%88%e2%80%94%e2%80%94position%20%e8%ae%ba%e6%96%87%ef%bc%88AiraXiv%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f16%2ftime-layered-memory-measured%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e7%bb%99%20Agent%20%e9%80%a0%e4%b8%80%e5%ba%a7%e8%ae%b0%e5%bf%86%e5%a1%94%ef%bc%88%e4%ba%8c%ef%bc%89%ef%bc%9a%e6%88%91%e5%8e%bb%e6%b5%8b%e4%ba%86%e5%ae%83%ef%bc%8c%e9%94%99%e4%ba%86%e4%b8%a4%e6%ac%a1%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f16%2ftime-layered-memory-measured%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f16%2ftime-layered-memory-measured%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2026/10/16/time-layered-memory-measured/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+</body>
+</html>

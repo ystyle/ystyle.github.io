@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>给 Agent 造一座记忆塔（一）：扁平存储与一次性压缩之间 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">给 Agent 造一座记忆塔（一）：扁平存储与一次性压缩之间</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">给 Agent 造一座记忆塔（一）：扁平存储与一次性压缩之间</h1>
+    <h5 class="subtitle">
+      <time datetime="2026-10-16T10:00:00&#43;08:00" itemprop="datePublished" class="page-time">2026-10-16</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e6%97%a5%e5%b8%b8%e9%87%8c%e6%97%a9%e5%b0%b1%e6%9c%89%e7%ad%94%e6%a1%88%e4%ba%86">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">一、日常里早就有答案了</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%8c%e5%a1%94%e9%95%bf%e4%bb%80%e4%b9%88%e6%a0%b7">
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">二、塔长什么样</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%89%e6%a0%b8%e5%bf%83%e4%b8%bb%e5%bc%a0%e5%9b%9e%e6%83%b3%e4%b8%8d%e6%98%af%e4%b8%80%e7%a7%8d%e6%93%8d%e4%bd%9c">
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">三、核心主张：回想不是一种操作</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e4%b8%aa%e5%bf%85%e9%a1%bb%e8%af%b4%e7%a0%b4%e7%9a%84%e6%88%90%e6%9c%ac%e8%b4%a6">
+    <span class="post-toc-number">3.1.</span> <span class="post-toc-text">一个必须说破的成本账</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%9b%9b%e6%91%98%e8%a6%81%e6%98%af%e6%97%b6%e5%ba%8f%e6%9d%a1%e7%9b%ae%e6%89%80%e4%bb%a5%e5%8f%af%e4%bb%a5%e9%80%92%e5%bd%92">
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">四、摘要是时序条目，所以可以递归</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%94%e8%af%ad%e4%b9%89%e6%80%bb%e7%bb%93%e7%9a%84%e4%ba%94%e9%81%93%e6%8a%a4%e6%a0%8f">
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">五、语义总结的五道护栏</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%85%ad%e4%b8%ba%e4%bb%80%e4%b9%88%e5%81%9a%e6%88%90-mcp-%e6%9c%8d%e5%8a%a1">
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">六、为什么做成 MCP 服务</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%83%e5%92%8c%e5%88%ab%e7%9a%84%e8%ae%b0%e5%bf%86%e7%b3%bb%e7%bb%9f%e5%b7%ae%e5%9c%a8%e5%93%aa">
+    <span class="post-toc-number">7.</span> <span class="post-toc-text">七、和别的记忆系统差在哪</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%85%ab%e5%93%aa%e4%ba%9b%e5%81%9a%e5%ae%8c%e4%ba%86%e5%93%aa%e4%ba%9b%e6%b2%a1%e5%81%9a">
+    <span class="post-toc-number">8.</span> <span class="post-toc-text">八、哪些做完了，哪些没做</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b9%9d%e4%b8%8b%e4%b8%80%e6%ad%a5">
+    <span class="post-toc-number">9.</span> <span class="post-toc-text">九、下一步</span>
+  </a>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-时间分层记忆-1-为什么要造塔" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">给 Agent 造一座记忆塔（一）：扁平存储与一次性压缩之间</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2026-10-16T10:00:00&#43;08:00" itemprop="datePublished">2026-10-16</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <p align="center"><strong>忆时塔（Chronomem）设计笔记 · 上篇</strong></p>
+<p align="center"><em>扁平存储与一次性压缩之间，还缺一种记忆</em></p>
+<blockquote>
+<p>这套设计我写成了 <strong>position 论文</strong>（AiraXiv <strong>2610.0035</strong>），<br>
+对应的实证论文是<a href="https://ystyle.top/2026/10/16/time-layered-memory-measured/">下篇</a>
+的主题。<br>
+代码与完整技术设计：<a href="https://atomgit.com/ystyle/chronomem" target="_blank" rel="noopener">atomgit.com/ystyle/chronomem</a>
+。<br>
+本文是博客版，讲动机与设计取舍；严格定义与参考文献见论文。</p>
+</blockquote>
+<p>一个跨周、跨月持续干活的 Agent——迭代一个代码库、写一篇论文、长期维护一个项目——最缺的能力很朴素：<strong>记住很久以前发生的事</strong>。</p>
+<p>今天的外部记忆方案基本分两派，而且它们的失败方式正好相反：</p>
+<ul>
+<li><strong>扁平存储</strong>：全都存下来，按近因或相似度检索。细节保全了，但<strong>没有任何压缩</strong>——过了几个月，没有任何一层能告诉你「这一阵子大概发生了什么」，除非把全部内容读一遍。</li>
+<li><strong>一次性压缩</strong>：定期把整段历史压成一份报告。压缩有了，但<strong>证据毁了</strong>——决定被记住了，而「为什么选它、当时怎么做的」这些原始事件没了，且无法重新推导。</li>
+</ul>
+<p>忆时塔（Chronomem）想占的是两者中间那块地。我把设计写成了 position 论文，把测量写成了实证论文；这篇讲设计。</p>
+<h2 id="一日常里早就有答案了"><a href="#一日常里早就有答案了" class="headerlink" title="一、日常里早就有答案了"></a>一、日常里早就有答案了</h2>
+<p>这个设计不是我凭空想的——它抄的是两种早就存在的日常机制。</p>
+<p><strong>日报体系。</strong> 干活的记录 → 日报 → 周报 → 月报。每一层都比下一层简洁，而且<strong>每一层都能独立回答「这个尺度上发生了什么」</strong>：想知道今天干了啥，看日报；想知道这个月干了啥，看月报，不用把三十天的日报重读一遍。</p>
+<p><strong>财务汇总报表。</strong> 这个更严格，性质也更值得借：<strong>账本永不删除</strong>，报表是<strong>渐进重算</strong>出来的，而且<strong>每张报表都能审计回底层分录</strong>。报表不是账本的「有损替代」，而是账本之上的一个可再生成的视图。</p>
+<p>忆时塔把这两件事工程化到 Agent 记忆上。从报表实践里，我刻意迁移的是<strong>纪律</strong>而不是聚合语义：</p>
+<table>
+	<thead>
+			<tr>
+					<th>纪律</th>
+					<th>在忆时塔里的对应</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>明细层不可变</td>
+					<td>原始条目 append-only，永不改写</td>
+			</tr>
+			<tr>
+					<td>可审计的下钻</td>
+					<td>每条摘要都带 <code>refs</code>，沿引用链能走回原始条目</td>
+			</tr>
+			<tr>
+					<td>幂等的渐进重算</td>
+					<td>物化是幂等的，重复跑不会产生第二份</td>
+			</tr>
+	</tbody>
+</table>
+<p>这里有个关键差异要说清楚，否则会低估难度：<strong>ERP 的合并报表是对结构化分录、按法定固定日历做确定性求和</strong>。而这里每一层要用 LLM 去总结任意的 JSON 事件和自然语言记录——<strong>汇总本身成了不确定的</strong>。粒度链要按记忆类型自己配，而「导航」与「压缩」之间的成本差异，也从实现细节变成了首要的设计变量。</p>
+<h2 id="二塔长什么样"><a href="#二塔长什么样" class="headerlink" title="二、塔长什么样"></a>二、塔长什么样</h2>
+<p>一句话：<strong>记忆按时间堆叠成塔，一层一个物化粒度，越久越粗、越久越高。</strong></p>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/img/time-layered-memory/arch.png" alt="忆时塔架构：客户端经 MCP 接入单一守护进程，两个独立调度器分别物化引用链与语义摘要">
+  </div>
+  <div class="image-caption">忆时塔架构：客户端经 MCP 接入单一守护进程，两个独立调度器分别物化引用链与语义摘要</div>
+</figure>
+<p><em>图 1 · 架构。客户端经 MCP 接入单一守护进程；两个独立调度器分别物化一个类型的两个 series——引用链（零成本、分钟级）与语义摘要（有 LLM 成本、按类型 opt-in）。摘要存于自己那条 append-only series，并通过 refs 指向更细层，这正是递归总结得以成立的原因。</em></p>
+<pre tabindex="0"><code>粒度链（每个记忆类型可自定义）
+    week   ──┐   越久越粗
+    day    ──┤
+    1h     ──┤
+    30min  ──┤
+    10min  ──┘   越久越高
+       ↑
+    原始条目（append-only，永不删除）
+</code></pre><p>每一层同时干两件事：</p>
+<ol>
+<li><strong>导航结构</strong>：持有指向更细层的引用，一路走到底就是原始条目；</li>
+<li><strong>可选的语义摘要</strong>：一眼能读懂「这个尺度上发生了什么」。</li>
+</ol>
+<p>粒度从 <code>{10min, 30min, 1h, 3h, day, week, month}</code> 里取，默认 <code>10min → 30min → 1h → day → week</code>。</p>
+<p><strong>粒度链是按类型配的，这点很重要。</strong> 高频通道（比如 agent 活动流，一分钟好几条）要保留分钟级层级，才能支持「当天内精确回想」；而稀疏通道（比如一天一条的工作日志）用 <code>day → week</code> 就够了——否则会建出大量几乎是空的细桶，白占空间。</p>
+<p><code>week</code> 是默认的语义总结封顶。理由很实在：<strong>一整年的周级摘要只有约 52 条</strong>，加载便宜，而「回忆一整年」这种需求极少需要更细。</p>
+<h2 id="三核心主张回想不是一种操作"><a href="#三核心主张回想不是一种操作" class="headerlink" title="三、核心主张：回想不是一种操作"></a>三、核心主张：回想不是一种操作</h2>
+<p>这是整篇设计的支点。</p>
+<p>大部分人把「回忆」当成一个动作：给个查询，返回内容。但我认为这里必须拆成两条<strong>成本结构完全不同</strong>的路：</p>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th>精确回想</th>
+					<th>语义回想</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>做法</td>
+					<td>沿引用链下钻到原始条目</td>
+					<td>读 LLM 生成的窗口摘要</td>
+			</tr>
+			<tr>
+					<td>服务端 LLM</td>
+					<td><strong>不调</strong></td>
+					<td>调（生成或读取时）</td>
+			</tr>
+			<tr>
+					<td>保真度</td>
+					<td>无损</td>
+					<td>有损（压缩）</td>
+			</tr>
+			<tr>
+					<td>返回体量</td>
+					<td>原始体量，<strong>不压缩</strong></td>
+					<td>摘要体量，真正变小</td>
+			</tr>
+			<tr>
+					<td>前提</td>
+					<td>无</td>
+					<td><strong>摘要必须已存在</strong></td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>第一条路是「导航」，不是「压缩」。</strong> 这点很容易被误解，我特意在论文里写死：精确下钻能把粗窗口解析成原始条目，但<strong>返回的就是原始体量</strong>——它没有让任何东西变小，只是让你能按时间定位。</p>
+<p><strong>第二条路才是真正压缩粗窗口的形态</strong>，而且它有个硬前提：摘要必须先存在（之前生成过，或者现在花钱生成）。</p>
+<h3 id="一个必须说破的成本账"><a href="#一个必须说破的成本账" class="headerlink" title="一个必须说破的成本账"></a>一个必须说破的成本账</h3>
+<p>「精确回想不花 token」这句话，<strong>只在服务端一侧成立</strong>。真实账本是双侧的：</p>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th>服务端</th>
+					<th>客户端</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>精确回想</strong></td>
+					<td>不调 LLM</td>
+					<td><strong>返回的原始条目要注入 prompt——随体量增长</strong></td>
+			</tr>
+			<tr>
+					<td><strong>语义回想</strong></td>
+					<td>生成/缓存摘要时调 LLM</td>
+					<td>注入摘要文本——更小，但非零</td>
+			</tr>
+			<tr>
+					<td><strong>结构物化</strong></td>
+					<td>不调 LLM</td>
+					<td>无（客户端根本看不到桶）</td>
+			</tr>
+	</tbody>
+</table>
+<p>所以精确回想并非「端到端免费」：<strong>它把 token 成本转移给了客户端，换来保真</strong>；语义回想则是把成本留在服务端，代价是丢细节。</p>
+<p>这个区分回头看很平凡，但我认为现有系统把它模糊了，模糊的代价是三个具体问题：</p>
+<ol>
+<li><strong>触发策略</strong>：结构物化（引用链）是每分钟跑、零 token 的作业。语义总结正相反——没有护栏的调度器会在空窗口或低价值窗口上<strong>悄悄烧 token</strong>，还会对注定失败的窗口反复重试。</li>
+<li><strong>语义漂移</strong>：对摘要再总结很便宜，但会漂移；从原始数据重算保真，但贵。如果这两者不显式暴露，就成了一个静默的质量问题。</li>
+<li><strong>上下文卫生</strong>：服务应该只存和取，<strong>永不主动把内容塞回客户端上下文</strong>。取多少，由客户端决定。</li>
+</ol>
+<h2 id="四摘要是时序条目所以可以递归"><a href="#四摘要是时序条目所以可以递归" class="headerlink" title="四、摘要是时序条目，所以可以递归"></a>四、摘要是时序条目，所以可以递归</h2>
+<p>这是整个设计里我最满意的一点。</p>
+<p><code>mem/summarize</code> 读一个窗口（按粒度+锚点，或按显式 <code>from/to</code> 处理「任务阶段」这种不规则窗口），让 LLM 产出结构化摘要——固定几个锚点章节：<strong>决策 / 结论 / 待办 / 状态变更 / 关键词</strong>——然后追加一条 <code>SummaryRecord</code> 到该类型的 <code>.summary</code> series。</p>
+<p>关键在于：<strong>这条摘要是追加到一条时序 series 里的，和原始条目一样是一等公民。</strong></p>
+<p>于是它能被再次总结：</p>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/img/time-layered-memory/recursion.png" alt="自底向上的递归总结：每层由下一层总结而来，recompute 可绕过链条">
+  </div>
+  <div class="image-caption">自底向上的递归总结：每层由下一层总结而来，recompute 可绕过链条</div>
+</figure>
+<p><em>图 2 · 自底向上的递归总结。每一层由它下面一层总结而来；更细层缺失时按需现算；<code>recompute</code> 绕过链条、直接从原始条目重建窗口。每条摘要本身都是 append-only，链条上没有任何东西被销毁。</em></p>
+<pre tabindex="0"><code>原始条目 → S(10min) → S(1h)
+        → S(day) → S(week)
+</code></pre><p>这就是结构塔在语义上的对应物，实现了<strong>递归、非破坏的压缩</strong>——链条上没有任何东西被销毁。</p>
+<p>而且总结<strong>默认自底向上</strong>：在总结一个粗窗口之前，服务会先确保它内部每个更细子窗口都有摘要（缺的按原始条目先补出来），再用这些子摘要聚合。好处是<strong>粗粒度总结的成本是「每个分组一次调用」，而不是把整个窗口重读一遍</strong>。</p>
+<p>摘要记录里除了内容，还存了生成口径：<code>{strategy, chunks, inputTokens, clippedEntries}</code>——记录这次是一步直连产出还是分块 map-reduce 聚合、以及为预算截断了多少条目。这类字段平时不起眼，出问题时是唯一能定位的东西。</p>
+<p><strong>想绕开链条也行</strong>：<code>recompute</code> 直接从原始条目重算该窗口，跳过整条链。链式转述便宜但会漂移，重算保真但费 token——<strong>把这个权衡交给调用方，而不是替它悄悄选一个</strong>。</p>
+<h2 id="五语义总结的五道护栏"><a href="#五语义总结的五道护栏" class="headerlink" title="五、语义总结的五道护栏"></a>五、语义总结的五道护栏</h2>
+<p>前面说语义总结会「悄悄烧 token」，这不是假想。所以忆时塔把它做成<strong>按类型 opt-in</strong>（新建类型默认关闭），开启后用五道护栏约束：</p>
+<ol>
+<li><strong>只总结最近一个已闭合窗口</strong>，且有沉降期——窗口还在被写入时，绝不总结；</li>
+<li><strong>按窗口、按分组幂等</strong>，成功即清空重试账；</li>
+<li><strong>空窗口零成本</strong>，直接跳过；</li>
+<li><strong>连续失败会退避</strong>，到达上限后登记为「已放弃」并留痕——而不是每十分钟永远重试；</li>
+<li><strong>每轮提交数有上限</strong>，积压不会变成无界突发。</li>
+</ol>
+<p>内置的 <code>worklog</code> 类型开箱即用（每个已闭合的自然日、每个项目一条摘要），任意新建类型默认关闭。回想时遇到「摘要缺失」也是显式路径（<code>summarize_on_miss</code>），不偷偷替你算。</p>
+<h2 id="六为什么做成-mcp-服务"><a href="#六为什么做成-mcp-服务" class="headerlink" title="六、为什么做成 MCP 服务"></a>六、为什么做成 MCP 服务</h2>
+<p>忆时塔不是库，是一个<strong>常驻守护进程</strong>，只暴露一个 streamable-HTTP MCP 端点。任何支持 MCP 的客户端都能接入：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-jsonc" data-lang="jsonc"><span style="display:flex;"><span><span style="color:#57606a">// opencode.json
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;mcp&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;chronomem&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;remote&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;url&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;http://127.0.0.1:8900&#34;</span> <span style="color:#1f2328">}</span> <span style="color:#1f2328">}</span> <span style="color:#1f2328">}</span>
+</span></span></code></pre></div><p>我认为<strong>把记忆做成协议而不是私有库，本身就是系统层面的贡献</strong>：异构工具可以共享同一个记忆底座，而它们之间<strong>零代码耦合</strong>。今天用 opencode 干活、明天换 Cherry Studio 聊天，记忆是同一份。</p>
+<p>存储上是单一时序数据库，每个记忆类型占两个 series——原始条目一个，摘要一个。类型可以自己建，名字白名单 <code>[A-Za-z0-9_/-]</code>（防路径穿越），比如：</p>
+<pre tabindex="0"><code>worklog          工作日志
+proj/decisions   项目决策
+tool/errors      工具报错
+</code></pre><p>工具面目前是 13 个 <code>mem/*</code>，覆盖类型管理、追加、结构回想、语义总结、以及总结任务的异步状态查询。</p>
+<h2 id="七和别的记忆系统差在哪"><a href="#七和别的记忆系统差在哪" class="headerlink" title="七、和别的记忆系统差在哪"></a>七、和别的记忆系统差在哪</h2>
+<p>这块得说实话：<strong>忆时塔的每个组件都借自别处</strong>。</p>
+<ul>
+<li>分层时间窗 + 物化聚合是时序数据库的标配（TimescaleDB 连续聚合、Prometheus 降采样），忆时塔基于自研的 <code>tsdb</code> 库复用了这套机制；</li>
+<li>分层记忆管理不是新想法（MemGPT 引入分层上下文；Generative Agents 把记忆流与反思结合；A-MEM、Mem0、HiMem 等各有发展）；</li>
+<li>明确区分「精确回想 vs 语义回想」作为<strong>显式成本模型</strong>、摘要是<strong>一等公民时序条目</strong>、以及把整个底座标准化在 MCP 后面——这三条是我的差异点。</li>
+</ul>
+<p>还有一条轴值得单独说：<strong>主题记忆 vs 时间记忆</strong>。</p>
+<p>「LLM wiki」那类系统按主题/语义词条组织知识，类比维基百科——把来源<strong>编译</strong>成一份由 LLM 持续维护的持久 wiki。忆时塔按<strong>时间</strong>组织，类比账本。这两条轴是互补的，不是竞争的：</p>
+<blockquote>
+<p>论文是「过程」（时间），参考手册是「知识体」（主题）。</p>
+</blockquote>
+<p>我认为很多「记忆」系统把这两条轴混为一谈了，而轴的选择应该跟随用途——你要回忆的是「这件事怎么发生的」，还是「这个东西是什么」？</p>
+<h2 id="八哪些做完了哪些没做"><a href="#八哪些做完了哪些没做" class="headerlink" title="八、哪些做完了，哪些没做"></a>八、哪些做完了，哪些没做</h2>
+<p>写设计文章最容易犯的错，是把「设计」讲得像「已实现」。所以逐条标清楚：</p>
+<table>
+	<thead>
+			<tr>
+					<th>组件</th>
+					<th>状态</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>记忆类型、类型级粒度链</td>
+					<td><strong>已实现</strong>（运行时动态，加类型不用改码）</td>
+			</tr>
+			<tr>
+					<td>日历对齐的自然窗口（day/week/month，时区可配）</td>
+					<td><strong>已实现</strong></td>
+			</tr>
+			<tr>
+					<td>引用链物化 + <code>exact</code> 下钻（服务端零 LLM）</td>
+					<td><strong>已实现</strong></td>
+			</tr>
+			<tr>
+					<td>语义摘要 + 递归自底向上总结</td>
+					<td><strong>已实现</strong>（<code>recompute</code> 可绕链条）</td>
+			</tr>
+			<tr>
+					<td>带护栏的定时自动总结</td>
+					<td><strong>已实现</strong>（沉降/幂等/退避/每轮上限）</td>
+			</tr>
+			<tr>
+					<td>MCP 工具面（13 个 <code>mem/*</code>）</td>
+					<td><strong>已实现</strong></td>
+			</tr>
+			<tr>
+					<td>内嵌 Web 控制台（与 MCP 同端口）</td>
+					<td><strong>已实现</strong></td>
+			</tr>
+			<tr>
+					<td>会话活动自动采集</td>
+					<td><strong>已实现</strong>（宿主插件形式随仓分发）</td>
+			</tr>
+			<tr>
+					<td>数值聚合（指标型零 LLM 概览层）</td>
+					<td>规划中（当前只有 count/latest/sample）</td>
+			</tr>
+			<tr>
+					<td>保留期 / 淘汰</td>
+					<td>规划中（类型可声明，但不生效，实际全量保留）</td>
+			</tr>
+			<tr>
+					<td>MCP resources</td>
+					<td>规划中（目前只有 tools）</td>
+			</tr>
+			<tr>
+					<td>鉴权、加密、多租户</td>
+					<td>规划中（当前单用户、仅本机）</td>
+			</tr>
+	</tbody>
+</table>
+<p>两处我觉得必须主动交代的局限：</p>
+<p><strong>一致性受物化边界约束。</strong> 粗粒度视图<strong>只反映到它上次物化为止</strong>的记录，之后写入的条目不在其中。它会返回一个<strong>陈旧但自洽</strong>的窗口——看上去完全合理，不带任何错误信号。所以我把「物化视图的一致性」当成<strong>待测量的显式属性</strong>，而不是默认成立的前提。</p>
+<p><strong>保留期只是声明式的。</strong> 类型元数据里能声明保留窗口，但没有任何机制执行它——实际是全量保留。</p>
+<h2 id="九下一步"><a href="#九下一步" class="headerlink" title="九、下一步"></a>九、下一步</h2>
+<p>position 论文以一份评估计划收尾，没有任何结果：受控的长周期 Agent 任务对照、沿摘要链的语义漂移研究、以及我自己部署上的工作日志用例。</p>
+<p>那部分我已经执行完了——结果里最有意思的不是忆时塔表现多好，而是<strong>我最初的测量方法错了两次，且错到会把结论反转</strong>。</p>
+<blockquote>
+<p>下篇讲实测：近因基线的失效为什么是断崖而非衰减、为什么「周摘要和天摘要逐字节相同」意味着<strong>根本没压缩</strong>、盲测 6/6 背后是什么、以及两个让结论反向的测量陷阱和一个关于 LLM 判定者的负面结果。</p>
+</blockquote>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2026-10-16T10:00:00&#43;08:00" itemprop="dateUpdated">2026-10-16 10:00:00</time>
+          </span><br>
+          本文链接：<a href="/2026/10/16/time-layered-memory-tower/" target="_blank" rel="external">https://ystyle.top/2026/10/16/time-layered-memory-tower/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MCP/">MCP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BF%86%E6%97%B6%E5%A1%94/">忆时塔</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Agent%E8%AE%B0%E5%BF%86/">Agent记忆</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/chronomem/">chronomem</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f16%2ftime-layered-memory-tower%2f&title=%e3%80%8a%e7%bb%99%20Agent%20%e9%80%a0%e4%b8%80%e5%ba%a7%e8%ae%b0%e5%bf%86%e5%a1%94%ef%bc%88%e4%b8%80%ef%bc%89%ef%bc%9a%e6%89%81%e5%b9%b3%e5%ad%98%e5%82%a8%e4%b8%8e%e4%b8%80%e6%ac%a1%e6%80%a7%e5%8e%8b%e7%bc%a9%e4%b9%8b%e9%97%b4%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f16%2ftime-layered-memory-tower%2f&title=%e3%80%8a%e7%bb%99%20Agent%20%e9%80%a0%e4%b8%80%e5%ba%a7%e8%ae%b0%e5%bf%86%e5%a1%94%ef%bc%88%e4%b8%80%ef%bc%89%ef%bc%9a%e6%89%81%e5%b9%b3%e5%ad%98%e5%82%a8%e4%b8%8e%e4%b8%80%e6%ac%a1%e6%80%a7%e5%8e%8b%e7%bc%a9%e4%b9%8b%e9%97%b4%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e5%bf%86%e6%97%b6%e5%a1%94%ef%bc%88Chronomem%ef%bc%89%e8%ae%be%e8%ae%a1%e7%ac%94%e8%ae%b0%20%c2%b7%20%e4%b8%8a%e7%af%87%0a%e6%89%81%e5%b9%b3%e5%ad%98%e5%82%a8%e4%b8%8e%e4%b8%80%e6%ac%a1%e6%80%a7%e5%8e%8b%e7%bc%a9%e4%b9%8b%e9%97%b4%ef%bc%8c%e8%bf%98%e7%bc%ba%e4%b8%80%e7%a7%8d%e8%ae%b0%e5%bf%86%0a%e8%bf%99%e5%a5%97%e8%ae%be%e8%ae%a1%e6%88%91%e5%86%99%e6%88%90%e4%ba%86%20position%20%e8%ae%ba%e6%96%87%ef%bc%88AiraXiv%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f16%2ftime-layered-memory-tower%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e7%bb%99%20Agent%20%e9%80%a0%e4%b8%80%e5%ba%a7%e8%ae%b0%e5%bf%86%e5%a1%94%ef%bc%88%e4%b8%80%ef%bc%89%ef%bc%9a%e6%89%81%e5%b9%b3%e5%ad%98%e5%82%a8%e4%b8%8e%e4%b8%80%e6%ac%a1%e6%80%a7%e5%8e%8b%e7%bc%a9%e4%b9%8b%e9%97%b4%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f16%2ftime-layered-memory-tower%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f16%2ftime-layered-memory-tower%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2026/10/15/cangjie-multiplatform-from-zero/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">一段代码，两个系统：仓颉怎么处理「跨平台」这件事</h4>
+        </a>
+      </div>
+      
+      
+      <div class="waves-block waves-effect next">
+        <a href="/2026/10/16/time-layered-memory-measured/" id="post-next" class="post-nav-link">
+          <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+          <h4 class="title">给 Agent 造一座记忆塔（二）：我去测了它，错了两次</h4>
+        </a>
+      </div>
+      
+    </nav>
+    
+
+    
+    
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+  </article>
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f16%2ftime-layered-memory-tower%2f&title=%e3%80%8a%e7%bb%99%20Agent%20%e9%80%a0%e4%b8%80%e5%ba%a7%e8%ae%b0%e5%bf%86%e5%a1%94%ef%bc%88%e4%b8%80%ef%bc%89%ef%bc%9a%e6%89%81%e5%b9%b3%e5%ad%98%e5%82%a8%e4%b8%8e%e4%b8%80%e6%ac%a1%e6%80%a7%e5%8e%8b%e7%bc%a9%e4%b9%8b%e9%97%b4%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f16%2ftime-layered-memory-tower%2f&title=%e3%80%8a%e7%bb%99%20Agent%20%e9%80%a0%e4%b8%80%e5%ba%a7%e8%ae%b0%e5%bf%86%e5%a1%94%ef%bc%88%e4%b8%80%ef%bc%89%ef%bc%9a%e6%89%81%e5%b9%b3%e5%ad%98%e5%82%a8%e4%b8%8e%e4%b8%80%e6%ac%a1%e6%80%a7%e5%8e%8b%e7%bc%a9%e4%b9%8b%e9%97%b4%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e5%bf%86%e6%97%b6%e5%a1%94%ef%bc%88Chronomem%ef%bc%89%e8%ae%be%e8%ae%a1%e7%ac%94%e8%ae%b0%20%c2%b7%20%e4%b8%8a%e7%af%87%0a%e6%89%81%e5%b9%b3%e5%ad%98%e5%82%a8%e4%b8%8e%e4%b8%80%e6%ac%a1%e6%80%a7%e5%8e%8b%e7%bc%a9%e4%b9%8b%e9%97%b4%ef%bc%8c%e8%bf%98%e7%bc%ba%e4%b8%80%e7%a7%8d%e8%ae%b0%e5%bf%86%0a%e8%bf%99%e5%a5%97%e8%ae%be%e8%ae%a1%e6%88%91%e5%86%99%e6%88%90%e4%ba%86%20position%20%e8%ae%ba%e6%96%87%ef%bc%88AiraXiv%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f16%2ftime-layered-memory-tower%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e7%bb%99%20Agent%20%e9%80%a0%e4%b8%80%e5%ba%a7%e8%ae%b0%e5%bf%86%e5%a1%94%ef%bc%88%e4%b8%80%ef%bc%89%ef%bc%9a%e6%89%81%e5%b9%b3%e5%ad%98%e5%82%a8%e4%b8%8e%e4%b8%80%e6%ac%a1%e6%80%a7%e5%8e%8b%e7%bc%a9%e4%b9%8b%e9%97%b4%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f16%2ftime-layered-memory-tower%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f16%2ftime-layered-memory-tower%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2026/10/16/time-layered-memory-tower/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+</body>
+</html>

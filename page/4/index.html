@@ -151,6 +151,57 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-鸿蒙开发板HI3516用命令行连接wifi" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2020-12-18T20:11:48&#43;08:00" itemprop="datePublished">2020-12-18</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2020/12/18/hi3516-connect-wifi/">鸿蒙开发板HI3516用命令行连接wifi</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+           鸿蒙的HI3516编译里已经有wpa_supplicant相关工程了，但编译时没有包进去, 所以只要修改配置文件后就能编译出来了
+主要修改文件: communication/BUILD.gn#L17-18 行之间添加， 以下第2行
+
+          <a href="/2020/12/18/hi3516-connect-wifi/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%B8%BF%E8%92%99/">鸿蒙</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wifi/">wifi</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
+      <article id="post-Quest2 激活与无线串流的设置" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2020-12-06T01:30:26&#43;08:00" itemprop="datePublished">2020-12-06</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2020/12/06/quest2/">Quest2 使用Netch激活与无线串流的设置</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          Quest2 激活与无线串流的设置 更新后自带Airlink串流，不需要买virtual desktop了 连网激活 需要可上网，与tcp、udp转发， 激活更新系统时需要udp转发才能正常更新系统, 本方法完美支持，只需要有支持wifi网卡的电脑
+
+          <a href="/2020/12/06/quest2/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/quest2/">quest2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/">工具</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-移植lua到鸿蒙" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2020-11-07T23:52:26&#43;08:00" itemprop="datePublished">2020-11-07</time>
@@ -345,56 +396,6 @@ FROM ubuntu:16.04 MAINTAINER https://www.openarkcompiler.cn # Setting up the bui
         <div class="post-footer">
           
           <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/uTorrent/">uTorrent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BT/">BT</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-Windows Terminal 添加SSH到Tabs里" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2020-03-15T14:46:26&#43;08:00" itemprop="datePublished">2020-03-15</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2020/03/15/add-ssh-command-to-windows-terminal-tab/">Windows Terminal 添加SSH到Tabs里</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-           注意替换路径
-用git-bash带的SSH 命令一定要用转义的双引号包起来, key的路径用git bash的路径方式，没key的话，删掉-i后面的就好，但每次都要输入密码. key登陆百度搜索SSH免密登陆
-
-          <a href="/2020/03/15/add-ssh-command-to-windows-terminal-tab/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/">ssh</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/terminal/">terminal</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-KDE添加右键菜单" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2020-02-21T15:11:48&#43;08:00" itemprop="datePublished">2020-02-21</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2020/02/21/add-custom-context-menu-to-kde-dolphin/">KDE添加右键菜单</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-          文件存放位置 位置 $HOME/.local/share/kservices5/ /usr/share/kservices5/ 文件后缀: .desktop 示例 [Desktop Entry] Actions=OptimisePNG; MimeType=image/png; Type=Service X-KDE-ServiceTypes=KonqPopupMenu/Plugin Icon=tools-wizard.png [Desktop Action OptimisePNG] Name=Optimise PNG Image Icon=tools-wizard.png Exec=optipng -o7 %f 说明 [Desktop Entry] Actions: 在该菜单中的菜单项，多个用英文分号隔开 MimeType: 在指定的文件类型中启动该菜单 inode/directory 在目录中启用 image/png 只在png图片启用 all/allfiles在所有文件中启用（不包括文件夹） image/allfiles 在所有图片启用 Type=Service: 表示服务，不会在开始菜单中显示， 改为Application表示应用，会显示在开始菜单 X-KDE-ServiceTypes=KonqPopupMenu/Plugin: 只在kde中支持， 表示显示在右键-动作下边 X-KDE-Priority=TopLevel 表示显示在顶级菜单中，右键直接显示 Icon Type=Service 时图标不会显示 [Desktop Action OptimisePNG] OptimisePNG为自定义的动作，填写在上边的Actions里 Name菜单项名称 Icon菜单显示图标 Exec点击菜单时执行的命令 %f 文件列表。用于可一次打开多个本地文件的应用程序。每个文件都作为单独的参数传递给可执行程序。 %F 即使选择了多个文件，也只有一个文件名（包括路径）。读取桌面条目的系统应认识到所讨论的程序无法处理多个文件参数，并且如果该程序无法处理其他文件参数，则应该为每个选定文件生成并执行该程序的多个副本。如果文件不在本地文件系统上（即，在HTTP或FTP位置），则文件将被复制到本地文件系统，%f并将展开以指向临时文件。用于不了解URL语法的程序。 [Desktop Action XXXX] 的条目在一个文件中可以有多个 如果新建无误后显示不出来的话， 执行一下kbuildsycoca5如果有错误会有提示` 
-          <a href="/2020/02/21/add-custom-context-menu-to-kde-dolphin/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kde/">kde</a></li></ul>
           
         </div>
       </article>

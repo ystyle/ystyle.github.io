@@ -2,22 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://ystyle.top/tags/Cangjie/</loc>
-    <lastmod>2026-10-15T11:00:00+08:00</lastmod>
+    <loc>https://ystyle.top/tags/Agent%E8%AE%B0%E5%BF%86/</loc>
+    <lastmod>2026-10-16T10:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://ystyle.top/tags/mmap-cj/</loc>
-    <lastmod>2026-10-15T11:00:00+08:00</lastmod>
+    <loc>https://ystyle.top/tags/Cangjie/</loc>
+    <lastmod>2026-10-16T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/chronomem/</loc>
+    <lastmod>2026-10-16T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/MCP/</loc>
+    <lastmod>2026-10-16T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/</loc>
+    <lastmod>2026-10-16T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/2026/10/16/time-layered-memory-measured/</loc>
+    <lastmod>2026-10-16T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/2026/10/16/time-layered-memory-tower/</loc>
+    <lastmod>2026-10-16T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</loc>
+    <lastmod>2026-10-16T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/</loc>
+    <lastmod>2026-10-16T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/%E5%BF%86%E6%97%B6%E5%A1%94/</loc>
+    <lastmod>2026-10-16T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/mmap-cj/</loc>
     <lastmod>2026-10-15T11:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/</loc>
     <lastmod>2026-10-15T11:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/%E5%85%A5%E9%97%A8/</loc>
-    <lastmod>2026-10-15T11:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/</loc>
     <lastmod>2026-10-15T11:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/2026/10/15/cangjie-multiplatform-from-zero/</loc>
@@ -87,9 +108,6 @@
     <lastmod>2026-09-22T20:30:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/json-rpc/</loc>
-    <lastmod>2026-09-09T23:30:00+08:00</lastmod>
-  </url><url>
-    <loc>https://ystyle.top/tags/MCP/</loc>
     <lastmod>2026-09-09T23:30:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/2026/09/09/chronomem-oom-hunt/</loc>

@@ -10,9 +10,23 @@
 		
 		
 		
-			<lastBuildDate>Wed, 09 Sep 2026 23:30:00 +0800</lastBuildDate>
+			<lastBuildDate>Fri, 16 Oct 2026 10:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/MCP/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>给 Agent 造一座记忆塔（二）：我去测了它，错了两次</title>
+				<link>https://ystyle.top/2026/10/16/time-layered-memory-measured/</link>
+				<pubDate>Fri, 16 Oct 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/16/time-layered-memory-measured/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;忆时塔（Chronomem）实测笔记 · 下篇&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;结果最好看的部分，是「我的测量方法错了」&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这是&lt;strong&gt;实证论文&lt;/strong&gt;的博客版——position 论文（AiraXiv 2610.0035）提出评估计划，&lt;br&gt;&#xA;&lt;a href=&#34;https://ystyle.top/2026/10/16/time-layered-memory-tower/&#34;&gt;上篇&lt;/a&gt;&#xA;讲那份设计，&lt;br&gt;&#xA;本文报告执行结果。评估工具与原始结果归档：&lt;br&gt;&#xA;&lt;a href=&#34;https://atomgit.com/ystyle/chronomem&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;atomgit.com/ystyle/chronomem&lt;/a&gt;&#xA;（&lt;code&gt;bench/&lt;/code&gt; 与 &lt;code&gt;bench/results/&lt;/code&gt;）。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>给 Agent 造一座记忆塔（一）：扁平存储与一次性压缩之间</title>
+				<link>https://ystyle.top/2026/10/16/time-layered-memory-tower/</link>
+				<pubDate>Fri, 16 Oct 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/16/time-layered-memory-tower/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;忆时塔（Chronomem）设计笔记 · 上篇&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;扁平存储与一次性压缩之间，还缺一种记忆&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这套设计我写成了 &lt;strong&gt;position 论文&lt;/strong&gt;（AiraXiv &lt;strong&gt;2610.0035&lt;/strong&gt;），&lt;br&gt;&#xA;对应的实证论文是&lt;a href=&#34;https://ystyle.top/2026/10/16/time-layered-memory-measured/&#34;&gt;下篇&lt;/a&gt;&#xA;的主题。&lt;br&gt;&#xA;代码与完整技术设计：&lt;a href=&#34;https://atomgit.com/ystyle/chronomem&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;atomgit.com/ystyle/chronomem&lt;/a&gt;&#xA;。&lt;br&gt;&#xA;本文是博客版，讲动机与设计取舍；严格定义与参考文献见论文。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>仓颉服务 - 忆时塔 OOM 追凶记</title>
 				<link>https://ystyle.top/2026/09/09/chronomem-oom-hunt/</link>

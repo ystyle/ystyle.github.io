@@ -4,12 +4,60 @@
   <subtitle>请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="https://ystyle.top/"/>
-  <updated>2026-10-15T03:00:00.000Z</updated>
+  <updated>2026-10-16T02:00:00.000Z</updated>
   <id>https://ystyle.top/</id>
   <author>
     <name>YSTYLE</name>
   </author>
   <generator uri="https://gohugo.io/">Hugo</generator>
+  <entry>
+    <title>给 Agent 造一座记忆塔（二）：我去测了它，错了两次</title>
+    <link href="https://ystyle.top/2026/10/16/time-layered-memory-measured/"/>
+    <id>https://ystyle.top/2026/10/16/time-layered-memory-measured/</id>
+    <published>2026-10-16T02:00:00.000Z</published>
+    <updated>2026-10-16T02:00:00.000Z</updated>
+    
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;忆时塔（Chronomem）实测笔记 · 下篇&lt;/strong&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;em&gt;结果最好看的部分，是「我的测量方法错了」&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这是&lt;strong&gt;实证论文&lt;/strong&gt;的博客版——position 论文（AiraXiv 2610.0035）提出评估计划，&lt;br&gt;
+&lt;a href=&#34;https://ystyle.top/2026/10/16/time-layered-memory-tower/&#34;&gt;上篇&lt;/a&gt;
+讲那份设计，&lt;br&gt;
+本文报告执行结果。评估工具与原始结果归档：&lt;br&gt;
+&lt;a href=&#34;https://atomgit.com/ystyle/chronomem&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;atomgit.com/ystyle/chronomem&lt;/a&gt;
+（&lt;code&gt;bench/&lt;/code&gt; 与 &lt;code&gt;bench/results/&lt;/code&gt;）。&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
+    <category term="MCP" scheme="https://ystyle.top/tags/MCP/"/>
+    <category term="忆时塔" scheme="https://ystyle.top/tags/%E5%BF%86%E6%97%B6%E5%A1%94/"/>
+    <category term="Agent记忆" scheme="https://ystyle.top/tags/Agent%E8%AE%B0%E5%BF%86/"/>
+    <category term="基准测试" scheme="https://ystyle.top/tags/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  <entry>
+    <title>给 Agent 造一座记忆塔（一）：扁平存储与一次性压缩之间</title>
+    <link href="https://ystyle.top/2026/10/16/time-layered-memory-tower/"/>
+    <id>https://ystyle.top/2026/10/16/time-layered-memory-tower/</id>
+    <published>2026-10-16T02:00:00.000Z</published>
+    <updated>2026-10-16T02:00:00.000Z</updated>
+    
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;忆时塔（Chronomem）设计笔记 · 上篇&lt;/strong&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;em&gt;扁平存储与一次性压缩之间，还缺一种记忆&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这套设计我写成了 &lt;strong&gt;position 论文&lt;/strong&gt;（AiraXiv &lt;strong&gt;2610.0035&lt;/strong&gt;），&lt;br&gt;
+对应的实证论文是&lt;a href=&#34;https://ystyle.top/2026/10/16/time-layered-memory-measured/&#34;&gt;下篇&lt;/a&gt;
+的主题。&lt;br&gt;
+代码与完整技术设计：&lt;a href=&#34;https://atomgit.com/ystyle/chronomem&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;atomgit.com/ystyle/chronomem&lt;/a&gt;
+。&lt;br&gt;
+本文是博客版，讲动机与设计取舍；严格定义与参考文献见论文。&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
+    <category term="MCP" scheme="https://ystyle.top/tags/MCP/"/>
+    <category term="忆时塔" scheme="https://ystyle.top/tags/%E5%BF%86%E6%97%B6%E5%A1%94/"/>
+    <category term="Agent记忆" scheme="https://ystyle.top/tags/Agent%E8%AE%B0%E5%BF%86/"/>
+    <category term="chronomem" scheme="https://ystyle.top/tags/chronomem/"/>
+    
+  </entry>
   <entry>
     <title>一段代码，两个系统：仓颉怎么处理「跨平台」这件事</title>
     <link href="https://ystyle.top/2026/10/15/cangjie-multiplatform-from-zero/"/>
@@ -385,63 +433,6 @@
     <category term="neovim" scheme="https://ystyle.top/tags/neovim/"/>
     <category term="livub" scheme="https://ystyle.top/tags/livub/"/>
     <category term="luajit" scheme="https://ystyle.top/tags/luajit/"/>
-    <category term="matebook-pro" scheme="https://ystyle.top/tags/matebook-pro/"/>
-    
-  </entry>
-  <entry>
-    <title>鸿蒙PC Matebook Pro上安装仓颉编译器每日构建版</title>
-    <link href="https://ystyle.top/2025/12/27/matebookpro-run-cangjie-compiler/"/>
-    <id>https://ystyle.top/2025/12/27/matebookpro-run-cangjie-compiler/</id>
-    <published>2025-12-27T07:00:00.000Z</published>
-    <updated>2025-12-27T07:00:00.000Z</updated>
-    
-    <summary type="html">&lt;figure class=&#34;image-bubble&#34;&gt;
-  &lt;div class=&#34;img-lightbox&#34;&gt;
-    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;
-    &lt;img src=&#34;https://dll.ystyle.top/images/2025-12/5e398f57bb264562850d933612e65a3d.png&#34; alt=&#34;使用示例&#34;&gt;
-  &lt;/div&gt;
-  &lt;div class=&#34;image-caption&#34;&gt;使用示例&lt;/div&gt;
-&lt;/figure&gt;
-&lt;h2 id=&#34;准备工作&#34;&gt;&lt;a href=&#34;#准备工作&#34; class=&#34;headerlink&#34; title=&#34;准备工作&#34;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;在鸿蒙PC上使用应用商店安装CodeArts IDE&lt;/li&gt;
-&lt;li&gt;下载仓颉编译器每日构建版本: &lt;a href=&#34;https://gitcode.com/Cangjie/nightly_build/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;cangjie-sdk-ohos-aarch64-1.1.0-alpha.2025xxxxxxxxxxxxx.tar.gz&lt;/a&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;从CodeArts-IDE提取签名工具&#34;&gt;&lt;a href=&#34;#从CodeArts-IDE提取签名工具&#34; class=&#34;headerlink&#34; title=&#34;从CodeArts IDE提取签名工具&#34;&gt;&lt;/a&gt;从CodeArts IDE提取签名工具&lt;/h2&gt;
-&lt;p&gt;新方法，直接在应用商店安装： &lt;code&gt;DevBox&lt;/code&gt;， 然后在HisShell就可以直接使用 &lt;code&gt;binary-sign-tool&lt;/code&gt;了&lt;/p&gt;</summary>
-    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
-    <category term="鸿蒙" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
-    <category term="鸿蒙PC" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/"/>
-    <category term="仓颉" scheme="https://ystyle.top/tags/%E4%BB%93%E9%A2%89/"/>
-    <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
-    <category term="cangjie-lang" scheme="https://ystyle.top/tags/cangjie-lang/"/>
-    <category term="matebook-pro" scheme="https://ystyle.top/tags/matebook-pro/"/>
-    
-  </entry>
-  <entry>
-    <title>鸿蒙pc上Vite 7 &#43; Rollup原生模块问题的解决方案</title>
-    <link href="https://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/"/>
-    <id>https://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/</id>
-    <published>2025-12-08T13:00:00.000Z</published>
-    <updated>2025-12-08T13:00:00.000Z</updated>
-    
-    <summary type="html">&lt;h2 id=&#34;环境信息&#34;&gt;&lt;a href=&#34;#环境信息&#34; class=&#34;headerlink&#34; title=&#34;环境信息&#34;&gt;&lt;/a&gt;环境信息&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;操作系统&lt;/strong&gt;：HarmonyOS HongMeng Kernel 1.11.0 (OpenHarmony)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Node.js版本&lt;/strong&gt;：22.7.0&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Vite版本&lt;/strong&gt;：7.2.6&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Rollup版本&lt;/strong&gt;：4.53.3&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;项目类型&lt;/strong&gt;：Vue 3 + TypeScript + Vite&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;问题描述&#34;&gt;&lt;a href=&#34;#问题描述&#34; class=&#34;headerlink&#34; title=&#34;问题描述&#34;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;
-&lt;p&gt;在鸿蒙系统上运行&lt;code&gt;npm run dev&lt;/code&gt;时出现以下错误：&lt;/p&gt;</summary>
-    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
-    <category term="鸿蒙" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
-    <category term="鸿蒙PC" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/"/>
-    <category term="vite" scheme="https://ystyle.top/tags/vite/"/>
-    <category term="vue3" scheme="https://ystyle.top/tags/vue3/"/>
-    <category term="Rollup" scheme="https://ystyle.top/tags/Rollup/"/>
     <category term="matebook-pro" scheme="https://ystyle.top/tags/matebook-pro/"/>
     
   </entry>
