@@ -432,7 +432,9 @@
 <p>这是最容易绕晕的部分，因为三种签名里只有两种真的用到证书。</p>
 <h3 id="21-自签名根本没有证书这回事"><a href="#21-自签名根本没有证书这回事" class="headerlink" title="2.1 自签名：根本没有证书这回事"></a>2.1 自签名：根本没有证书这回事</h3>
 <p>命令里连证书参数都不用传：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>binary-sign-tool sign -inFile tool -outFile tool.signed -selfSign <span style="color:#0550ae">1</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>binary-sign-tool sign <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -inFile tool <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -outFile tool.signed -selfSign <span style="color:#0550ae">1</span>
 </span></span><span style="display:flex;"><span>chmod <span style="color:#0550ae">755</span> tool.signed
 </span></span></code></pre></div><p>工具会算一个&quot;文件有没有被改过&quot;的校验值写进去。<strong>它证明的是&quot;这个文件没被篡改&quot;，不是&quot;这是谁做的&quot;。</strong> 没有身份，自然也就没有权限可谈。</p>
 <h3 id="22-调试证书华为发的但必须自己申请"><a href="#22-调试证书华为发的但必须自己申请" class="headerlink" title="2.2 调试证书：华为发的，但必须自己申请"></a>2.2 调试证书：华为发的，但<strong>必须自己申请</strong></h3>
@@ -496,11 +498,9 @@
 <p>写法是在 <code>module.json</code> 里声明，签名时通过 <code>-moduleFile</code> 传进去：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json5" data-lang="json5"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;requestPermissions&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;ohos.permission.kernel.LOAD_INDEPENDENT_LIBRARY&#34;</span> <span style="color:#1f2328">},</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;ohos.permission.INHERIT_PARENT_PERMISSION&#34;</span> <span style="color:#1f2328">},</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;ohos.permission.kernel.EXEMPT_ANONYMOUS_EXECUTABLE_MEMORY&#34;</span> <span style="color:#1f2328">},</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;ohos.permission.kernel.IGNORE_LIBRARY_VALIDATION&#34;</span> <span style="color:#1f2328">},</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;ohos.permission.kernel.ALLOW_WRITABLE_CODE_MEMORY&#34;</span> <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a">// 权限全名见下表，替换 &lt;权限名&gt;
+</span></span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;&lt;权限名 1&gt;&#34;</span> <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;&lt;权限名 2&gt;&#34;</span> <span style="color:#1f2328">}</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#1f2328">],</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;debug-info&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;device-id-type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;udid&#34;</span><span style="color:#1f2328">,</span>
@@ -585,14 +585,22 @@
 所以一旦有人跟你说&quot;你编好的这个发我测一下&quot;，就必须换成调试证书签名。</p>
 </blockquote>
 <p>小范围分发的成本其实不高，三步：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 1) 让同事在自己设备上执行，把 UDID 发给你</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 1) 让同事在自己设备上执行，</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#    把 UDID 发给你</span>
 </span></span><span style="display:flex;"><span>hdc shell bm get --udid
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a"># 2) 把对方 UDID 写进 module.json 的 device-ids（数组，可以填多个）</span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">#    &#34;debug-info&#34;: { &#34;device-id-type&#34;: &#34;udid&#34;,</span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">#                    &#34;device-ids&#34;: [&#34;&lt;同事的 UDID&gt;&#34;, &#34;&lt;另一个同事的 UDID&gt;&#34;] }</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 2) 把对方 UDID 写进 module.json 的</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#    device-ids（数组，可以填多个）</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#    &#34;debug-info&#34;: {</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#      &#34;device-id-type&#34;: &#34;udid&#34;,</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#      &#34;device-ids&#34;: [</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#        &#34;&lt;同事的 UDID&gt;&#34;,</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#        &#34;&lt;另一个同事的 UDID&gt;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#      ]</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#    }</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a"># 3) 用这个 module.json 重新签名，再把签好的文件发给同事</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 3) 用这个 module.json 重新签名，</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#    再把签好的文件发给同事</span>
 </span></span></code></pre></div><p>对方那边只需要<strong>打开开发者模式</strong>，不需要任何证书或工具。</p>
 <p><strong>问题二：需要声明权限吗？</strong></p>
 <table>
@@ -729,16 +737,22 @@
 </blockquote>
 <h3 id="44-别人发来的二进制怎么在自己机器上用"><a href="#44-别人发来的二进制怎么在自己机器上用" class="headerlink" title="4.4 别人发来的二进制，怎么在自己机器上用"></a>4.4 别人发来的二进制，怎么在自己机器上用</h3>
 <p>顺着上面那句&quot;换台机器就得重签&quot;，很自然会想：<strong>那我在我这台上重新签一次不就行了？</strong></p>
-<p>可以，但<strong>不能直接签</strong>——文件里还带着对方那台机器留下的签名段，签名工具会直接拒绝：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>E [SignElf] .codesign section already exists
-</span></span></code></pre></div><p>正确顺序是<strong>先摘掉旧签名段，再签</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 1) 摘掉别人留下的签名段（ohos-sdk 自带 llvm-objcopy，在 native/llvm/bin/）</span>
-</span></span><span style="display:flex;"><span>llvm-objcopy --remove-section .codesign tool.recv tool.unsigned
+<p>可以，但<strong>不能直接签</strong>——文件里还带着对方那台机器留下的签名段，签名工具会直接报<br>
+<code>E [SignElf] .codesign section already exists</code>：</p>
+<p>正确顺序是<strong>先摘掉旧签名段，再签</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 1) 摘掉别人留下的签名段</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#    （ohos-sdk 自带 llvm-objcopy，</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#      在 native/llvm/bin/）</span>
+</span></span><span style="display:flex;"><span>llvm-objcopy --remove-section .codesign <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  tool.recv tool.unsigned
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># 2) 在本机重新自签</span>
-</span></span><span style="display:flex;"><span>binary-sign-tool sign -inFile tool.unsigned -outFile tool.signed -selfSign <span style="color:#0550ae">1</span>
+</span></span><span style="display:flex;"><span>binary-sign-tool sign <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -inFile tool.unsigned <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -outFile tool.signed -selfSign <span style="color:#0550ae">1</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a"># 3) 补回执行位（objcopy 的输出文件不带执行位）</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 3) 补回执行位</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#    （objcopy 的输出文件不带执行位）</span>
 </span></span><span style="display:flex;"><span>chmod <span style="color:#0550ae">755</span> tool.signed
 </span></span></code></pre></div><blockquote>
 <p>⚠️ 第 3 步别漏。漏了就会在&quot;签名明明成功了&quot;之后收到一个 <code>Permission denied</code>，<br>
@@ -786,15 +800,18 @@
 <hr>
 <h2 id="5-怎么选三步"><a href="#5-怎么选三步" class="headerlink" title="5. 怎么选：三步"></a>5. 怎么选：三步</h2>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>第 1 步：这个二进制要不要交到别人手上跑？
-</span></span><span style="display:flex;"><span>          ├─ 要公开发给大批用户 ─────────→ 二进制证书（需华为认证）
-</span></span><span style="display:flex;"><span>          └─ 只给自己，或给一两个同事 ──┐
-</span></span><span style="display:flex;"><span>                                        ↓
+</span></span><span style="display:flex;"><span>    ├─ 要公开发给大批用户
+</span></span><span style="display:flex;"><span>    │     ──→ 二进制证书（需华为认证）
+</span></span><span style="display:flex;"><span>    └─ 只给自己，或给一两个同事 ┐
+</span></span><span style="display:flex;"><span>                                ↓
 </span></span><span style="display:flex;"><span>第 2 步：下面三条，占任意一条吗？
-</span></span><span style="display:flex;"><span>          · 要交给别人（哪怕只有一台设备）
-</span></span><span style="display:flex;"><span>          · 要声明权限
-</span></span><span style="display:flex;"><span>          · 要在（强沙箱）应用里被拉起
-</span></span><span style="display:flex;"><span>          ├─ 一条都不占 ────────────────→ 自签名（adhoc）
-</span></span><span style="display:flex;"><span>          └─ 占了任意一条 ──────────────→ 自己申请的调试证书
+</span></span><span style="display:flex;"><span>    · 要交给别人（哪怕只有一台设备）
+</span></span><span style="display:flex;"><span>    · 要声明权限
+</span></span><span style="display:flex;"><span>    · 要在（强沙箱）应用里被拉起
+</span></span><span style="display:flex;"><span>    ├─ 一条都不占
+</span></span><span style="display:flex;"><span>    │     ──→ 自签名（adhoc）
+</span></span><span style="display:flex;"><span>    └─ 占了任意一条
+</span></span><span style="display:flex;"><span>          ──→ 自己申请的调试证书
 </span></span></code></pre></div><p>对照成表格：</p>
 <table>
 	<thead>
@@ -844,26 +861,37 @@
 </span></span><span style="display:flex;"><span>hdc shell bm get --udid
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># ---- 自签名（adhoc）----</span>
-</span></span><span style="display:flex;"><span>binary-sign-tool sign -inFile tool -outFile tool.signed -selfSign <span style="color:#0550ae">1</span>
+</span></span><span style="display:flex;"><span>binary-sign-tool sign <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -inFile tool <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -outFile tool.signed -selfSign <span style="color:#0550ae">1</span>
 </span></span><span style="display:flex;"><span>chmod <span style="color:#0550ae">755</span> tool.signed
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># ---- 调试证书签名 ----</span>
-</span></span><span style="display:flex;"><span>binary-sign-tool sign -keyAlias &lt;alias&gt; -signAlg SHA256withECDSA <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span>  -appCertFile  &lt;cert.cer&gt; -keystoreFile &lt;key.p12&gt; <span style="color:#0a3069">\
+</span></span><span style="display:flex;"><span>binary-sign-tool sign -keyAlias &lt;alias&gt; <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -signAlg SHA256withECDSA <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -appCertFile  &lt;cert.cer&gt; <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -keystoreFile &lt;key.p12&gt; <span style="color:#0a3069">\
 </span></span></span><span style="display:flex;"><span>  -keyPwd &lt;pwd&gt; -keystorePwd &lt;pwd&gt; <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span>  -inFile tool -outFile tool.signed -moduleFile module.json
+</span></span></span><span style="display:flex;"><span>  -inFile tool -outFile tool.signed <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -moduleFile module.json
 </span></span><span style="display:flex;"><span>chmod <span style="color:#0550ae">755</span> tool.signed
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a"># ---- 别人发来的、已在别的机器上签过的二进制：先摘签名段再重签 ----</span>
-</span></span><span style="display:flex;"><span>llvm-objcopy --remove-section .codesign tool.recv tool.unsigned
-</span></span><span style="display:flex;"><span>binary-sign-tool sign -inFile tool.unsigned -outFile tool.signed -selfSign <span style="color:#0550ae">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># ---- 别人发来的二进制 ----</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 已在别机签过：先摘签名段再重签</span>
+</span></span><span style="display:flex;"><span>llvm-objcopy --remove-section .codesign <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  tool.recv tool.unsigned
+</span></span><span style="display:flex;"><span>binary-sign-tool sign <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -inFile tool.unsigned <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -outFile tool.signed -selfSign <span style="color:#0550ae">1</span>
 </span></span><span style="display:flex;"><span>chmod <span style="color:#0550ae">755</span> tool.signed
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a"># ---- 看看签成了什么（权限段 + 证书链）----</span>
-</span></span><span style="display:flex;"><span>binary-sign-tool display-sign -inFile tool.signed
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># ---- 看签成了什么（权限段+证书链）----</span>
+</span></span><span style="display:flex;"><span>binary-sign-tool display-sign <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -inFile tool.signed
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># ---- 跑不起来时看日志 ----</span>
-</span></span><span style="display:flex;"><span>hdc shell <span style="color:#0a3069">&#34;hilog -x | grep -E &#39;code_protect|CODE_SIGN&#39;&#34;</span>
+</span></span><span style="display:flex;"><span>hdc shell <span style="color:#0a3069">&#34;hilog -x | grep -E \
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">  &#39;code_protect|CODE_SIGN&#39;&#34;</span>
 </span></span></code></pre></div><hr>
 <h2 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h2>
 <ul>

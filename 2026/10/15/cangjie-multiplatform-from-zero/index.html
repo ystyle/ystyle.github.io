@@ -530,7 +530,8 @@ func platformName(): String {
 }
 
 main() {
-    println(&#34;你现在用的系统是：${platformName()}&#34;)
+    let name = platformName()
+    println(&#34;你现在用的系统是：${name}&#34;)
 }
 </code></pre><p>把它存成 <code>hello.cj</code>，然后编译运行：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ cjc hello.cj -o hello
@@ -601,8 +602,9 @@ func notForWindows(): Unit {
 }
 </code></pre><h3 id="两个新手容易踩的地方"><a href="#两个新手容易踩的地方" class="headerlink" title="两个新手容易踩的地方"></a>两个新手容易踩的地方</h3>
 <p><strong>第一，<code>@When</code> 不能连着叠两层：</strong></p>
-<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">@When[os == &#34;Windows&#34;]
-@When[os == &#34;Linux&#34;]     // ❌ 报错：duplicated annotation: &#39;@When&#39;
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// ❌ 报错：duplicated annotation: &#39;@When&#39;
+@When[os == &#34;Windows&#34;]
+@When[os == &#34;Linux&#34;]
 func foo() {}
 </code></pre><p>想同时满足两个条件，应该用 <code>&amp;&amp;</code> 写到一起（实测可以正常编译）：</p>
 <pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">@When[os == &#34;Linux&#34; &amp;&amp; arch == &#34;x86_64&#34;]
@@ -637,12 +639,12 @@ private const PROT_READ: Int32 = 0x1
 <p><code>cjpm</code> 的思路是：<strong>用目录把代码分开，再告诉它「哪个目录属于哪个平台」。</strong></p>
 <h3 id="41-项目长这样"><a href="#41-项目长这样" class="headerlink" title="4.1 项目长这样"></a>4.1 项目长这样</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>cjdemo/
-</span></span><span style="display:flex;"><span>├── cjpm.toml           ← 项目配置，告诉 cjpm 目录和平台的对应关系
-</span></span><span style="display:flex;"><span>├── common/             ← 所有平台共用的代码
+</span></span><span style="display:flex;"><span>├── cjpm.toml    ← 项目配置：目录↔平台
+</span></span><span style="display:flex;"><span>├── common/      ← 所有平台共用代码
 </span></span><span style="display:flex;"><span>│   └── platform.cj
-</span></span><span style="display:flex;"><span>├── linux/              ← 只有 Linux 用的代码
+</span></span><span style="display:flex;"><span>├── linux/       ← Linux 专用代码
 </span></span><span style="display:flex;"><span>│   └── linux.cj
-</span></span><span style="display:flex;"><span>└── windows/            ← 只有 Windows 用的代码
+</span></span><span style="display:flex;"><span>└── windows/     ← Windows 专用代码
 </span></span><span style="display:flex;"><span>    └── windows.cj
 </span></span></code></pre></div><h3 id="42-三份代码分别写什么"><a href="#42-三份代码分别写什么" class="headerlink" title="4.2 三份代码分别写什么"></a>4.2 三份代码分别写什么</h3>
 <p><strong><code>common/platform.cj</code></strong>——公共部分，只写「有什么」，不写「怎么做」：</p>
@@ -655,7 +657,9 @@ public common func Platform(): String
 <pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">features {os.linux}
 package cjdemo
 
-public specific func Platform(): String { &#34;Linux&#34; }
+public specific func Platform(): String {
+    &#34;Linux&#34;
+}
 
 main() {
     println(Platform())
@@ -664,7 +668,9 @@ main() {
 <pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">features {os.windows}
 package cjdemo
 
-public specific func Platform(): String { &#34;Windows&#34; }
+public specific func Platform(): String {
+    &#34;Windows&#34;
+}
 
 main() {
     println(Platform())
@@ -674,7 +680,8 @@ main() {
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">experimental</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">package</span><span style="color:#1f2328">]</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">cjc-version</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;1.2.0&#34;</span>      <span style="color:#57606a"># 必填，漏了会报 can&#39;t be empty</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#57606a"># 必填，漏了会报 can&#39;t be empty</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">cjc-version</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;1.2.0&#34;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#1f2328">name</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;cjdemo&#34;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#1f2328">output-type</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;executable&#34;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#1f2328">version</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;1.0.0&#34;</span>
@@ -694,14 +701,17 @@ main() {
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">features</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;os.windows&#34;</span><span style="color:#1f2328">]</span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">product</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span>
 </span></span></code></pre></div><h3 id="44-编译运行"><a href="#44-编译运行" class="headerlink" title="4.4 编译运行"></a>4.4 编译运行</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ cjpm build --no-feature-deduce --enable-features<span style="color:#0550ae">=</span>os.linux
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ cjpm build --no-feature-deduce <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    --enable-features<span style="color:#0550ae">=</span>os.linux
 </span></span><span style="display:flex;"><span>cjpm build success
 </span></span><span style="display:flex;"><span>$ ./target/release/bin/linux/product/main
 </span></span><span style="display:flex;"><span>Linux
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>$ cjpm build --no-feature-deduce --enable-features<span style="color:#0550ae">=</span>os.windows
+</span></span><span style="display:flex;"><span>$ cjpm build --no-feature-deduce <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    --enable-features<span style="color:#0550ae">=</span>os.windows
 </span></span><span style="display:flex;"><span>cjpm build success
-</span></span><span style="display:flex;"><span>$ ./target/release/bin/windows/product/main
+</span></span><span style="display:flex;"><span>$ ./target/release/bin/windows/<span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>product/main
 </span></span><span style="display:flex;"><span>Windows
 </span></span></code></pre></div><p><strong>同一台 Linux 电脑上，两个产物分别打印出 <code>Linux</code> 和 <code>Windows</code>。</strong></p>
 <blockquote>
@@ -710,10 +720,12 @@ main() {
 <h3 id="45-三个新概念用大白话解释"><a href="#45-三个新概念用大白话解释" class="headerlink" title="4.5 三个新概念，用大白话解释"></a>4.5 三个新概念，用大白话解释</h3>
 <p><strong><code>features</code>（特性）</strong>——一个「开关的名字」。<code>os.linux</code> 就是「Linux 这个开关」。</p>
 <p>仓颉内置了这些：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>os.android   os.ohos   os.ios   os.linux   os.windows   os.darwin
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>os.android  os.ohos  os.ios
+</span></span><span style="display:flex;"><span>os.linux  os.windows  os.darwin
 </span></span></code></pre></div><p><strong><code>source-set</code>（源码集）</strong>——「一组源码文件所在的目录」。你在 <code>cjpm.toml</code> 里说「<code>./linux</code> 这个目录，对应 <code>os.linux</code> 开关」，编译时打开 <code>os.linux</code>，这个目录就会被编进去。</p>
 <p><strong>文件头的 <code>features {}</code></strong>——每个源码文件<strong>自己也要声明</strong>属于哪个开关。<strong>必须写在 <code>package</code> 上面</strong>：</p>
-<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">features {os.linux}     // ← 必须在 package 之前
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// 必须在 package 之前
+features {os.linux}
 package cjdemo
 </code></pre><p>公共目录的文件写空的 <code>features {}</code>，并且要加一个 <code>@NonProduct</code> 标记：</p>
 <pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">@NonProduct
@@ -765,7 +777,9 @@ package cjdemo
 </blockquote>
 <p>它是一份<strong>约定</strong>（也叫「契约」）。<code>common</code> = <strong>公共的、要说的</strong>。</p>
 <p>然后在每个平台目录里，用 <code>specific</code> 给出具体做法：</p>
-<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">public specific func Platform(): String { &#34;Linux&#34; }
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">public specific func Platform(): String {
+    &#34;Linux&#34;
+}
 </code></pre><p><code>specific</code> = <strong>特定平台的、实际做的</strong>。</p>
 <p><strong>这就是 <code>common</code> 和 <code>specific</code> 的分工：</strong></p>
 <table>
@@ -793,11 +807,13 @@ package cjdemo
 <p>上面说的是「契约」，这个词有点抽象。<strong>仓颉本身就有一个表达「契约」的东西：<code>interface</code>（接口）</strong>——<code>common</code> 的思路和它是一回事。</p>
 <p>先看接口是怎么用的：</p>
 <pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">interface Speaker {
-    func speak(): String        // 只规定「要有这个方法」，不写怎么做
+    // 只规定「要有这个方法」，不写怎么做
+    func speak(): String
 }
 
 class Dog &lt;: Speaker {
-    public func speak(): String { &#34;汪&#34; }   // 具体怎么做，由 Dog 说了算
+    public func speak(): String { &#34;汪&#34; }
+    // 具体怎么做，由 Dog 说了算
 }
 </code></pre><p><code>interface</code> 说「<strong>必须有什么</strong>」，<code>class</code> 用 <code>&lt;:</code> 说「<strong>我来实现</strong>」。<strong><code>common</code> 和 <code>specific</code> 就是这个关系的跨平台版本</strong>：</p>
 <table>
@@ -839,11 +855,14 @@ public interface Speaker {
 
 public common class Dog &lt;: Speaker {
     public init() {}
-    public common func speak(): String      // 这个类在公共部分只立契约
+    // 这个类在公共部分只立契约
+    public common func speak(): String
 }
 </code></pre><pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// Linux 平台部分
 public specific class Dog &lt;: Speaker {
-    public specific func speak(): String { &#34;汪&#34; }
+    public specific func speak(): String {
+        &#34;汪&#34;
+    }
 }
 </code></pre><p>运行输出 <code>汪</code>。</p>
 <p><strong>一句话记住差别</strong>：</p>
@@ -876,9 +895,12 @@ public specific func foo(): Unit {
 <li><strong>一个 <code>specific</code> 只能对应一个 <code>common</code></strong>，不能两个平台函数去对应同一个 <code>common</code>。</li>
 </ol>
 <p>这些规矩<strong>编译器会严格检查</strong>。写错了会直接报错：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>error: &#39;common&#39; function return type must be specified
-</span></span><span style="display:flex;"><span>error: &#39;specific&#39; function &#39;bar&#39; can not find &#39;common&#39; match
-</span></span><span style="display:flex;"><span>error: &#39;common&#39; function &#39;foo&#39; can not find &#39;specific&#39; match
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>error: &#39;common&#39; function return type
+</span></span><span style="display:flex;"><span>       must be specified
+</span></span><span style="display:flex;"><span>error: &#39;specific&#39; function &#39;bar&#39;
+</span></span><span style="display:flex;"><span>       can not find &#39;common&#39; match
+</span></span><span style="display:flex;"><span>error: &#39;common&#39; function &#39;foo&#39;
+</span></span><span style="display:flex;"><span>       can not find &#39;specific&#39; match
 </span></span></code></pre></div><p>第二、三条的意思是「你写了个平台实现，但找不到对应的约定」和「你立了个约定，但没人实现」。<strong>这种错误在拼错名字、漏写实现时特别常见</strong>，看到就知道是配对没对上。</p>
 <h3 id="54-什么时候用哪个"><a href="#54-什么时候用哪个" class="headerlink" title="5.4 什么时候用哪个"></a>5.4 什么时候用哪个</h3>
 <table>
@@ -919,9 +941,11 @@ public specific func foo(): Unit {
 <p><a href="https://atomgit.com/ystyle/mmap-cj" target="_blank" rel="noopener"><code>mmap-cj</code></a>
  是一个「内存映射文件」库——简单说，就是让程序像读写内存一样读写磁盘文件，速度很快。它要同时支持 Linux、macOS、Windows，而这三个系统的底层函数完全不同。</p>
 <p>它的开发过程很有意思，<strong>换了两次方案</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2026-04-11  第一次：common/specific + source-set 目录布局
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2026-04-11  第一次：
+</span></span><span style="display:flex;"><span>  common/specific + source-set 目录布局
 </span></span><span style="display:flex;"><span>2026-07-17  重构目录结构
-</span></span><span style="display:flex;"><span>2026-10-06  第二次：切回 @When 条件编译 ← 转折点
+</span></span><span style="display:flex;"><span>2026-10-06  第二次：
+</span></span><span style="display:flex;"><span>  切回 @When 条件编译 ← 转折点
 </span></span></code></pre></div><p><strong>为什么一开始用 <code>source-set</code>，后来又切回麻烦的 <code>@When</code>？</strong></p>
 <p>作者在提交记录里写得很清楚：</p>
 <blockquote>
@@ -929,11 +953,13 @@ public specific func foo(): Unit {
 </blockquote>
 <p>我实际验证了一遍。假设有个项目要使用这个库（不开实验开关）：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>$ cjpm build
-</span></span><span style="display:flex;"><span>Error: path of src directory &#39;src&#39; in .../mmap-cj/cjpm.toml does not exist
+</span></span><span style="display:flex;"><span>Error: path of src directory &#39;src&#39;
+</span></span><span style="display:flex;"><span>  in .../mmap-cj/cjpm.toml does not exist
 </span></span><span style="display:flex;"><span>Error: cjpm build failed
 </span></span></code></pre></div><p><strong>连编译都过不去，测试更跑不了</strong>：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>$ cjpm test
-</span></span><span style="display:flex;"><span>Error: path of src directory &#39;src&#39; in .../mmap-cj/cjpm.toml does not exist
+</span></span><span style="display:flex;"><span>Error: path of src directory &#39;src&#39;
+</span></span><span style="display:flex;"><span>  in .../mmap-cj/cjpm.toml does not exist
 </span></span><span style="display:flex;"><span>Error: cjpm test failed
 </span></span></code></pre></div><p>使用方必须在自己项目里加上这一行才行：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">profile</span><span style="color:#1f2328">]</span>
@@ -959,10 +985,13 @@ public specific func foo(): Unit {
 <p><strong>这就是它切回 <code>@When</code> 的真正原因</strong>：<code>@When</code> 是普通功能，不需要开实验开关，<code>build</code> 和 <code>test</code> 都正常。换成 <code>@When</code> 版之后，使用方什么都不用改：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>$ cjpm build
 </span></span><span style="display:flex;"><span>cjpm build success
-</span></span><span style="display:flex;"><span>ok: @When 版库，消费者不开 experimental 也能构建
+</span></span><span style="display:flex;"><span>ok: @When 版库，消费者不开
+</span></span><span style="display:flex;"><span>experimental 也能构建
 </span></span></code></pre></div><p>顺带一提，这个影响是真实的——另一个项目 <code>badger-cj</code> 就依赖 <code>mmap-cj</code>，它的配置文件里明确写着：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">profile</span><span style="color:#1f2328">]</span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a"># 依赖 mmap-cj 使用 experimental 的 [[source-set]] 多平台布局，消费侧需同样开启</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 依赖 mmap-cj 使用 experimental 的</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># [[source-set]] 多平台布局，</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 消费侧需同样开启</span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">experimental</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span>
 </span></span></code></pre></div><p><strong>一个库用了实验特性，逼着所有用它的项目一起打开实验开关。</strong> 对一个要给别人用的库来说，这个代价太大了。</p>
 <h3 id="代价是什么"><a href="#代价是什么" class="headerlink" title="代价是什么"></a>代价是什么</h3>
@@ -1057,8 +1086,10 @@ public specific func foo(): Unit {
 </span></span><span style="display:flex;"><span>./hello
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># cjpm 项目：按平台编译（第四节的例子）</span>
-</span></span><span style="display:flex;"><span>cjpm build --no-feature-deduce --enable-features<span style="color:#0550ae">=</span>os.linux
-</span></span><span style="display:flex;"><span>cjpm build --no-feature-deduce --enable-features<span style="color:#0550ae">=</span>os.windows
+</span></span><span style="display:flex;"><span>cjpm build --no-feature-deduce <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    --enable-features<span style="color:#0550ae">=</span>os.linux
+</span></span><span style="display:flex;"><span>cjpm build --no-feature-deduce <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>    --enable-features<span style="color:#0550ae">=</span>os.windows
 </span></span></code></pre></div><blockquote>
 <p>本文所有输出均为 <code>cjc 1.2.0</code> / <code>cjpm 1.2.0</code> 在 x86_64 Linux 上实际运行结果。<br>
 其中的 <code>source-set</code> 与 <code>common</code>/<code>specific</code> 自 1.1.0 起提供，目前是实验特性；<code>@When</code> 是常规功能，可以直接用。</p>
