@@ -54,7 +54,9 @@ slug: harmonyos-pc-binary-sign-basics
 命令里连证书参数都不用传：
 
 ```bash
-binary-sign-tool sign -inFile tool -outFile tool.signed -selfSign 1
+binary-sign-tool sign \
+  -inFile tool \
+  -outFile tool.signed -selfSign 1
 chmod 755 tool.signed
 ```
 
@@ -101,11 +103,9 @@ DevEco Studio 的自动签名看起来最省事——在 IDE 里点一下，`.p1
 ```json5
 {
   "requestPermissions": [
-    { "name": "ohos.permission.kernel.LOAD_INDEPENDENT_LIBRARY" },
-    { "name": "ohos.permission.INHERIT_PARENT_PERMISSION" },
-    { "name": "ohos.permission.kernel.EXEMPT_ANONYMOUS_EXECUTABLE_MEMORY" },
-    { "name": "ohos.permission.kernel.IGNORE_LIBRARY_VALIDATION" },
-    { "name": "ohos.permission.kernel.ALLOW_WRITABLE_CODE_MEMORY" }
+    // 权限全名见下表，替换 <权限名>
+    { "name": "<权限名 1>" },
+    { "name": "<权限名 2>" }
   ],
   "debug-info": {
     "device-id-type": "udid",
@@ -164,14 +164,22 @@ DevEco Studio 的自动签名看起来最省事——在 IDE 里点一下，`.p1
 小范围分发的成本其实不高，三步：
 
 ```bash
-# 1) 让同事在自己设备上执行，把 UDID 发给你
+# 1) 让同事在自己设备上执行，
+#    把 UDID 发给你
 hdc shell bm get --udid
 
-# 2) 把对方 UDID 写进 module.json 的 device-ids（数组，可以填多个）
-#    "debug-info": { "device-id-type": "udid",
-#                    "device-ids": ["<同事的 UDID>", "<另一个同事的 UDID>"] }
+# 2) 把对方 UDID 写进 module.json 的
+#    device-ids（数组，可以填多个）
+#    "debug-info": {
+#      "device-id-type": "udid",
+#      "device-ids": [
+#        "<同事的 UDID>",
+#        "<另一个同事的 UDID>"
+#      ]
+#    }
 
-# 3) 用这个 module.json 重新签名，再把签好的文件发给同事
+# 3) 用这个 module.json 重新签名，
+#    再把签好的文件发给同事
 ```
 
 对方那边只需要**打开开发者模式**，不需要任何证书或工具。
@@ -244,22 +252,25 @@ hdc shell bm get --udid
 
 顺着上面那句"换台机器就得重签"，很自然会想：**那我在我这台上重新签一次不就行了？**
 
-可以，但**不能直接签**——文件里还带着对方那台机器留下的签名段，签名工具会直接拒绝：
-
-```text
-E [SignElf] .codesign section already exists
-```
+可以，但**不能直接签**——文件里还带着对方那台机器留下的签名段，签名工具会直接报
+`E [SignElf] .codesign section already exists`：
 
 正确顺序是**先摘掉旧签名段，再签**：
 
 ```bash
-# 1) 摘掉别人留下的签名段（ohos-sdk 自带 llvm-objcopy，在 native/llvm/bin/）
-llvm-objcopy --remove-section .codesign tool.recv tool.unsigned
+# 1) 摘掉别人留下的签名段
+#    （ohos-sdk 自带 llvm-objcopy，
+#      在 native/llvm/bin/）
+llvm-objcopy --remove-section .codesign \
+  tool.recv tool.unsigned
 
 # 2) 在本机重新自签
-binary-sign-tool sign -inFile tool.unsigned -outFile tool.signed -selfSign 1
+binary-sign-tool sign \
+  -inFile tool.unsigned \
+  -outFile tool.signed -selfSign 1
 
-# 3) 补回执行位（objcopy 的输出文件不带执行位）
+# 3) 补回执行位
+#    （objcopy 的输出文件不带执行位）
 chmod 755 tool.signed
 ```
 
@@ -291,15 +302,18 @@ chmod 755 tool.signed
 
 ```text
 第 1 步：这个二进制要不要交到别人手上跑？
-          ├─ 要公开发给大批用户 ─────────→ 二进制证书（需华为认证）
-          └─ 只给自己，或给一两个同事 ──┐
-                                        ↓
+    ├─ 要公开发给大批用户
+    │     ──→ 二进制证书（需华为认证）
+    └─ 只给自己，或给一两个同事 ┐
+                                ↓
 第 2 步：下面三条，占任意一条吗？
-          · 要交给别人（哪怕只有一台设备）
-          · 要声明权限
-          · 要在（强沙箱）应用里被拉起
-          ├─ 一条都不占 ────────────────→ 自签名（adhoc）
-          └─ 占了任意一条 ──────────────→ 自己申请的调试证书
+    · 要交给别人（哪怕只有一台设备）
+    · 要声明权限
+    · 要在（强沙箱）应用里被拉起
+    ├─ 一条都不占
+    │     ──→ 自签名（adhoc）
+    └─ 占了任意一条
+          ──→ 自己申请的调试证书
 ```
 
 对照成表格：
@@ -326,26 +340,37 @@ chmod 755 tool.signed
 hdc shell bm get --udid
 
 # ---- 自签名（adhoc）----
-binary-sign-tool sign -inFile tool -outFile tool.signed -selfSign 1
+binary-sign-tool sign \
+  -inFile tool \
+  -outFile tool.signed -selfSign 1
 chmod 755 tool.signed
 
 # ---- 调试证书签名 ----
-binary-sign-tool sign -keyAlias <alias> -signAlg SHA256withECDSA \
-  -appCertFile  <cert.cer> -keystoreFile <key.p12> \
+binary-sign-tool sign -keyAlias <alias> \
+  -signAlg SHA256withECDSA \
+  -appCertFile  <cert.cer> \
+  -keystoreFile <key.p12> \
   -keyPwd <pwd> -keystorePwd <pwd> \
-  -inFile tool -outFile tool.signed -moduleFile module.json
+  -inFile tool -outFile tool.signed \
+  -moduleFile module.json
 chmod 755 tool.signed
 
-# ---- 别人发来的、已在别的机器上签过的二进制：先摘签名段再重签 ----
-llvm-objcopy --remove-section .codesign tool.recv tool.unsigned
-binary-sign-tool sign -inFile tool.unsigned -outFile tool.signed -selfSign 1
+# ---- 别人发来的二进制 ----
+# 已在别机签过：先摘签名段再重签
+llvm-objcopy --remove-section .codesign \
+  tool.recv tool.unsigned
+binary-sign-tool sign \
+  -inFile tool.unsigned \
+  -outFile tool.signed -selfSign 1
 chmod 755 tool.signed
 
-# ---- 看看签成了什么（权限段 + 证书链）----
-binary-sign-tool display-sign -inFile tool.signed
+# ---- 看签成了什么（权限段+证书链）----
+binary-sign-tool display-sign \
+  -inFile tool.signed
 
 # ---- 跑不起来时看日志 ----
-hdc shell "hilog -x | grep -E 'code_protect|CODE_SIGN'"
+hdc shell "hilog -x | grep -E \
+  'code_protect|CODE_SIGN'"
 ```
 
 ---
