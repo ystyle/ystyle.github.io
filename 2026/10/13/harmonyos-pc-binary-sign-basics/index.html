@@ -366,7 +366,7 @@
 </ul>
 <p>这篇就是回答这些的。不涉及原理（原理在<a href="/2026/10/13/harmonyos-pc-binary-sign-types/">解析篇</a>
 ），只给你能直接查的表和能直接抄的命令。</p>
-<p>一句话结论：<strong>只在自己设备上跑，自签名就够了；只要需要交到别人手上（哪怕只给同事一台设备测一下）、需要声明权限、或者要在应用里被拉起来，就得用自己申请的调试证书签名；要公开发给大批用户，才是华为认证开发者那本二进制证书。</strong></p>
+<p>一句话结论：<strong>不要权限、也不进沙箱应用的话，自签名就够了——而且签好的文件可以拷到别的鸿蒙 PC 上直接跑（adhoc 不绑设备）；一旦需要声明权限、或要在应用里被拉起来，就得用自己申请的调试证书签名（这个才绑 UDID）；要公开发给大批用户，才是华为认证开发者那本二进制证书。</strong></p>
 <hr>
 <h2 id="1-一张表看完三种签名"><a href="#1-一张表看完三种签名" class="headerlink" title="1. 一张表看完三种签名"></a>1. 一张表看完三种签名</h2>
 <table>
@@ -398,9 +398,15 @@
 					<td>✅</td>
 			</tr>
 			<tr>
+					<td><strong>绑设备吗</strong></td>
+					<td><strong>不绑</strong>，文件可拷到别的鸿蒙 PC 直接跑</td>
+					<td><strong>绑</strong>，只能给 <code>device-ids</code> 里的设备</td>
+					<td>不绑</td>
+			</tr>
+			<tr>
 					<td><strong>能给别人用吗</strong></td>
-					<td>不能，只能自己本机用</td>
-					<td>只能给 <code>device-ids</code> 名单里的设备（<strong>小范围，如同事</strong>）</td>
+					<td>能（但对方仍受权限/沙箱限制）</td>
+					<td>只能给 <code>device-ids</code> 名单里的设备</td>
 					<td>随便分发</td>
 			</tr>
 			<tr>
@@ -411,8 +417,8 @@
 			</tr>
 			<tr>
 					<td><strong>典型用途</strong></td>
-					<td>本机编译自己用</td>
-					<td>开发调试</td>
+					<td>本机编译自己用、小范围互传</td>
+					<td>开发调试、需权限的场景</td>
 					<td>正式发布</td>
 			</tr>
 			<tr>
@@ -437,6 +443,12 @@
 </span></span></span><span style="display:flex;"><span>  -outFile tool.signed -selfSign <span style="color:#0550ae">1</span>
 </span></span><span style="display:flex;"><span>chmod <span style="color:#0550ae">755</span> tool.signed
 </span></span></code></pre></div><p>工具会算一个&quot;文件有没有被改过&quot;的校验值写进去。<strong>它证明的是&quot;这个文件没被篡改&quot;，不是&quot;这是谁做的&quot;。</strong> 没有身份，自然也就没有权限可谈。</p>
+<blockquote>
+<p>补一句容易误解的：自签名<strong>不绑定设备</strong>。它往文件末尾的 <code>.codesign</code> 段里放的是<br>
+这份文件自身的摘要与大小，<strong>不含任何设备标识</strong>——所以签好的文件拷到别的鸿蒙 PC 上<br>
+一样能跑，不需要重签。真正绑定设备的是<strong>调试证书</strong>（<code>device-ids</code> 里那份 UDID 名单）。<br>
+两者的区别见 4.1。</p>
+</blockquote>
 <h3 id="22-调试证书华为发的但必须自己申请"><a href="#22-调试证书华为发的但必须自己申请" class="headerlink" title="2.2 调试证书：华为发的，但必须自己申请"></a>2.2 调试证书：华为发的，但<strong>必须自己申请</strong></h3>
 <p>调试证书是华为签发的，个人开发者申请得到。但它有<strong>两条获取路径，其中一条是坑</strong>：</p>
 <table>
@@ -565,11 +577,15 @@
 	</thead>
 	<tbody>
 			<tr>
-					<td>只在我自己这台设备上跑</td>
+					<td>自己在自己设备上跑</td>
 					<td><strong>自签名</strong>就够了</td>
 			</tr>
 			<tr>
-					<td><strong>要给同事在自己设备上测一下（小范围分发）</strong></td>
+					<td>只在小圈子里互传（同事、朋友拿去跑一下）</td>
+					<td><strong>自签名也能跑</strong>——它不是设备绑定的</td>
+			</tr>
+			<tr>
+					<td>需要声明权限、或要在应用里被拉起</td>
 					<td><strong>必须用调试证书</strong></td>
 			</tr>
 			<tr>
@@ -579,12 +595,22 @@
 	</tbody>
 </table>
 <blockquote>
-<p>💡 <strong>这才是自签名和调试证书最主要的区别。</strong><br>
-自签名的含义就是&quot;<strong>签给这台机器用</strong>&quot;：签完本机能跑，换台机器就得在那台上重签一次。<br>
-它也不带任何身份信息——别人的设备既认不出&quot;这是谁给的&quot;，也没有为它背书的凭证。<br>
-所以一旦有人跟你说&quot;你编好的这个发我测一下&quot;，就必须换成调试证书签名。</p>
+<p>💡 <strong>这里有个常见误解，值得单独说清楚。</strong></p>
+<p>很多资料（包括本文早期版本）会说&quot;自签名是签给这台机器用的，换台机器就得重签&quot;。<br>
+<strong>这是不准确的。</strong> 自签名往 <code>.codesign</code> 段里写的是<strong>文件自身的摘要</strong>，<br>
+不含设备标识——所以文件本身是<strong>可移植的</strong>，拷到别的鸿蒙 PC 上照样通过验签。</p>
+<p>真正让&quot;别人的机器跑不了&quot;的，通常不是签名，而是<strong>下面这两件事</strong>：</p>
+<ol>
+<li><strong>依赖没跟着走</strong>：程序能跑，但它 <code>dlopen</code> 的 <code>.so</code> 没签名——报错长得一样<br>
+（都是 <code>permission denied</code>），看内核日志才能分辨。</li>
+<li><strong>要声明权限 / 要在应用里被拉起</strong>：这时需要调试证书，而调试证书才真的绑设备<br>
+（<code>device-ids</code> 里的 UDID 名单）。</li>
+</ol>
+<p>所以判断标准不是&quot;给不给别人&quot;，而是**&ldquo;要不要权限、要不要被沙箱应用拉起&rdquo;**。</p>
 </blockquote>
-<p>小范围分发的成本其实不高，三步：</p>
+<p>如果只是想把一个<strong>不需要额外权限</strong>的小工具传给同事直接跑，其实连调试证书都不必：<br>
+把文件发过去（连同它依赖的 <code>.so</code>），对方 <code>chmod +x</code> 即可。<strong>不需要登记对方 UDID。</strong></p>
+<p>反过来，一旦涉及权限或沙箱应用，就得走调试证书，那时才需要 UDID：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 1) 让同事在自己设备上执行，</span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a">#    把 UDID 发给你</span>
 </span></span><span style="display:flex;"><span>hdc shell bm get --udid
@@ -623,7 +649,7 @@
 					<td>填 <code>device-ids</code> + 开开发者模式</td>
 			</tr>
 			<tr>
-					<td>要给同事的设备也能跑</td>
+					<td>要给同事的设备<strong>声明权限</strong>跑</td>
 					<td><strong>调试证书</strong></td>
 					<td>把<strong>对方设备的 UDID</strong> 加进 <code>device-ids</code></td>
 			</tr>
@@ -694,12 +720,15 @@
 <p>这条特别容易踩，因为它正好把上面两张表串起来了。</p>
 <p>鸿蒙 PC 上社区的 <strong>Harmonybrew</strong>（Homebrew 的鸿蒙移植）装出来的命令行软件，<strong>基本都是 adhoc bin（自签名）</strong>。</p>
 <p>原因很直接：<code>brew install</code> 是把东西下载到<strong>你这台机器</strong>上，然后<strong>就地自签一次</strong>。<br>
-它不会、也没法替你去申请二进制证书或调试证书——那要绑定开发者身份，调试证书还得逐个登记设备 UDID。<br>
-而<strong>自签的含义就是&quot;签给这台机器用&quot;：签完本机能跑，换一台机器就得在那台上重签一次。</strong></p>
+它不会、也没法替你去申请二进制证书或调试证书——那要绑定开发者身份，调试证书还得逐个登记设备 UDID。</p>
 <blockquote>
-<p>这也解释了一个常见困惑：为什么把本机 <code>brew</code> 装好的程序直接拷贝给别人，对方那边跑不起来。<br>
-不是因为文件坏了，而是那个自签只对<strong>签名时所在的那台机器</strong>成立。</p>
-<p>那对方自己重签一下行不行？行，但要先摘掉旧的签名段——见下一节 4.4。</p>
+<p><strong>一个常见但错误的说法</strong>：把 <code>brew</code> 装好的程序拷贝给别人，对方跑不起来，<br>
+是因为&quot;自签只对签名时那台机器成立&quot;。</p>
+<p><strong>这不准确。</strong> 自签名不含设备信息，文件本身是可以拷走的。<br>
+拷贝后跑不起来，通常是<strong>依赖没跟着走</strong>（它要的 <code>.so</code> 没签或路径变了），<br>
+或者是<strong>在沙箱应用里被拉起</strong>——这两种情况的报错都是 <code>permission denied</code>，<br>
+光看终端分不出来，得看内核日志（<code>hilog -t kmsg</code>，按进程名或 <code>xpm</code> 过滤）。</p>
+<p>真要重签的话，先摘掉旧的签名段再签，流程见 4.4。</p>
 </blockquote>
 <p>于是同一个 <code>brew install</code> 装出来的命令，在不同地方待遇不一样：</p>
 <table>
@@ -736,8 +765,15 @@
 </p>
 </blockquote>
 <h3 id="44-别人发来的二进制怎么在自己机器上用"><a href="#44-别人发来的二进制怎么在自己机器上用" class="headerlink" title="4.4 别人发来的二进制，怎么在自己机器上用"></a>4.4 别人发来的二进制，怎么在自己机器上用</h3>
-<p>顺着上面那句&quot;换台机器就得重签&quot;，很自然会想：<strong>那我在我这台上重新签一次不就行了？</strong></p>
-<p>可以，但<strong>不能直接签</strong>——文件里还带着对方那台机器留下的签名段，签名工具会直接报<br>
+<p>先把结论说清楚：<strong>别人发来的、已经自签过的文件，通常直接就能跑</strong>——<br>
+自签名不含设备信息，不需要你重签。</p>
+<p>需要重签的是这几种情况：</p>
+<ul>
+<li>对方发来的是<strong>未签名</strong>的裸二进制；</li>
+<li>文件在传输中被改过（校验值对不上）；</li>
+<li>你想<strong>换一种签名</strong>（比如从 adhoc 换成调试证书，以便声明权限）。</li>
+</ul>
+<p>重签时会遇到一个坑：<strong>不能直接签</strong>——文件里还带着旧签名段，工具会直接报<br>
 <code>E [SignElf] .codesign section already exists</code>：</p>
 <p>正确顺序是<strong>先摘掉旧签名段，再签</strong>：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 1) 摘掉别人留下的签名段</span>
@@ -759,7 +795,8 @@
 很容易又绕回&quot;是不是签名没用&quot;的老坑里。</p>
 </blockquote>
 <p>同样的道理也适用于<strong>别人给的预编译 <code>.so</code></strong>：从构建机带过来的动态库如果在你这台机器上加载失败，<br>
-先按上面这套把 <code>.codesign</code> 摘掉重签一遍，比去查&quot;是不是找不到库、是不是路径不对&quot;要快得多。</p>
+常见原因是它<strong>根本没签名</strong>（构建机没开链接器签名），而不是签名&quot;过期&quot;。<br>
+先按上面这套把 <code>.so</code> 自签一遍，比去查&quot;是不是找不到库、是不是路径不对&quot;要快得多。</p>
 <h3 id="45-最关键的一条对应关系"><a href="#45-最关键的一条对应关系" class="headerlink" title="4.5 最关键的一条对应关系"></a>4.5 最关键的一条对应关系</h3>
 <p>把上面两张表连起来看，会得到一个很容易踩的结论：</p>
 <blockquote>
@@ -799,19 +836,19 @@
 </table>
 <hr>
 <h2 id="5-怎么选三步"><a href="#5-怎么选三步" class="headerlink" title="5. 怎么选：三步"></a>5. 怎么选：三步</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>第 1 步：这个二进制要不要交到别人手上跑？
-</span></span><span style="display:flex;"><span>    ├─ 要公开发给大批用户
-</span></span><span style="display:flex;"><span>    │     ──→ 二进制证书（需华为认证）
-</span></span><span style="display:flex;"><span>    └─ 只给自己，或给一两个同事 ┐
-</span></span><span style="display:flex;"><span>                                ↓
-</span></span><span style="display:flex;"><span>第 2 步：下面三条，占任意一条吗？
-</span></span><span style="display:flex;"><span>    · 要交给别人（哪怕只有一台设备）
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>第 1 步：要公开发给大批用户吗？
+</span></span><span style="display:flex;"><span>    └─ 是 ──→ 二进制证书（需华为认证）
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>第 2 步：下面两条，占任意一条吗？
 </span></span><span style="display:flex;"><span>    · 要声明权限
 </span></span><span style="display:flex;"><span>    · 要在（强沙箱）应用里被拉起
 </span></span><span style="display:flex;"><span>    ├─ 一条都不占
 </span></span><span style="display:flex;"><span>    │     ──→ 自签名（adhoc）
+</span></span><span style="display:flex;"><span>    │         （自己用、给同事互传都行
+</span></span><span style="display:flex;"><span>    │           ——文件拷过去就能跑）
 </span></span><span style="display:flex;"><span>    └─ 占了任意一条
 </span></span><span style="display:flex;"><span>          ──→ 自己申请的调试证书
+</span></span><span style="display:flex;"><span>              （这个才需要对方 UDID）
 </span></span></code></pre></div><p>对照成表格：</p>
 <table>
 	<thead>
@@ -823,14 +860,14 @@
 	</thead>
 	<tbody>
 			<tr>
-					<td>只自己本机用、不要权限</td>
+					<td>不要权限、不进沙箱应用</td>
 					<td><strong>自签名</strong></td>
 					<td><code>-selfSign 1</code> + <code>chmod 755</code></td>
 			</tr>
 			<tr>
-					<td><strong>要让同事在自己设备上测</strong></td>
-					<td><strong>调试证书</strong></td>
-					<td>对方提供 UDID → 填 <code>device-ids</code></td>
+					<td>把工具给同事跑（同样不要权限）</td>
+					<td><strong>自签名</strong></td>
+					<td>直接把文件和依赖的 <code>.so</code> 发过去</td>
 			</tr>
 			<tr>
 					<td>要声明权限</td>
@@ -849,6 +886,10 @@
 			</tr>
 	</tbody>
 </table>
+<blockquote>
+<p>💡 判断的关键<strong>不是&quot;给不给别人&quot;</strong>，而是**&ldquo;要不要权限 / 要不要被沙箱应用拉起&rdquo;**。<br>
+自签名不绑设备，所以&quot;给别人&quot;本身并不构成必须用调试证书的理由。</p>
+</blockquote>
 <blockquote>
 <p>⚠️ 还有一种情况，<strong>签名的类型根本轮不到你选</strong>：要在自己的应用里跑 brew 装好的命令行软件。<br>
 它是 <code>brew install</code> 时在<strong>你本机</strong>下载后就地自签的——既没有二进制证书，也没有调试证书，<br>
@@ -904,6 +945,16 @@
 <p>说明：本文的规则部分整理自华为开发者支持与官方文档，命令均在实际设备<br>
 （HUAWEI MateBook Pro，<code>OpenHarmony-7.0.0.105</code>，API 26，2in1）上验证过。<br>
 如果只想快速决定用哪种签名，看到第 5 节就够了。</p>
+</blockquote>
+<blockquote>
+<p><strong>更正记录（2026-10-16）</strong>：本文早期版本称&quot;自签名是签给这台机器用的，<br>
+换台机器就得重签&quot;——<strong>这个说法是错的</strong>，感谢 <a href="https://www.zhihu.com/people/hqzing" target="_blank" rel="noopener">hqzing</a>
+<br>
+指出。自签名往 <code>.codesign</code> 段里写的是文件自身的摘要与大小（<code>flags</code> 置 <code>0x10</code><br>
+表示跳过证书链校验），<strong>不含任何设备标识</strong>，所以产物是可移植的。<br>
+真正绑定设备的是调试证书的 <code>device-ids</code>。<br>
+详细的自签名字节布局与算法，见其<a href="https://zhuanlan.zhihu.com/p/2057577759229195597" target="_blank" rel="noopener">《鸿蒙 PC 底层开发技术详解（七）：二进制自签名算法的实现》</a>
+。</p>
 </blockquote>
 
       </div>
