@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>tsdb on 东方星痕</title>
+		<link>https://ystyle.top/tags/tsdb/</link>
+		<description>Recent content in tsdb on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Mon, 19 Oct 2026 11:00:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/tsdb/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>tsdb-cj 的四次静默失效：代码能跑、测试能过，但什么都没发生</title>
+				<link>https://ystyle.top/2026/10/19/tsdb-silent-failures/</link>
+				<pubDate>Mon, 19 Oct 2026 11:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/19/tsdb-silent-failures/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;tsdb-cj 排查笔记&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;最危险的不是崩溃，是「看起来在工作」&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;tsdb-cj 是基于 &lt;a href=&#34;https://ystyle.top/2026/10/10/badger-cj-porting-notes/&#34;&gt;badger-cj&lt;/a&gt;&#xA; 的嵌入式时序数据库，&lt;br&gt;&#xA;也是&lt;a href=&#34;https://ystyle.top/2026/10/16/time-layered-memory-tower/&#34;&gt;忆时塔&lt;/a&gt;&#xA;分层记忆的存储底座。&lt;br&gt;&#xA;本文不谈它的设计，只讲一次审计里挖出来的四类问题——它们的共同点是：&lt;br&gt;&#xA;&lt;strong&gt;代码能跑、测试能过、日志无错，但功能根本没生效。&lt;/strong&gt;&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

@@ -151,6 +151,56 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-用安卓设备DIY一个NAS" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2017-11-30T09:11:33&#43;08:00" itemprop="datePublished">2017-11-30</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2017/11/30/diy-a-nas-with-android-device/">用安卓设备DIY一个NAS</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          网站地址 以安卓IP地址192.168.1.7为例 ssh连接地址: ssh ystyle@192.168.1.7 supervisor 管理地址： http://192.168.1.7:9001/ aria2 web ui http://webui-aria2.ghostry.cn/ 设置-连接设置填写aria2 的rpc地址 aria2 rpc地址： 192.168.1.7:6800 syncthing 管理页面：http://127.0.0.1:8384/ 安卓设置需要安装的软件 kingroot 设备需要root linux deploy 安装linux Linux系统安装软件 bash completion screenfetch htop vim supervisor aria2 syncthing 安卓部署Linux记录 获取root权限 安装linux deploy 点右下角的图标进去配置界面 选择好linux发行版与版本 架构用默认的就好，手机64位的可选择arm64之类的 设置用户名和密码 本地化选择zh_CN.UTF-8 启用SSH(若喜欢图形界面可以选择桌面环境和VNC的组合) 退出设置到主界面 点右上角三点 选择 安装 等待系统安装完毕。其中过程出现 fail,download fail之类的重新执行安装过程 重新安装需要点击主界面的停止，卸载已挂载的文件系统，再点右上菜单的清空 继续执行安装操作 &gt;&gt;&gt; deploy ... &lt;&lt;&lt; deploy之间没出现错误说明安装完成 点击主界面的启动，出现&gt;&gt;&gt; start ... ... &lt;&lt;&lt; start则启动完成 若启动过程出现 extra/ssh fail 之类的，执行重新安装操作 左边三横线新建配置文件后，若需要安装其它系统/或切换系统，则要先点主界面的停止按钮 若要配置多个系统，右下属性里安装路径的*.img换成其它名字 安装linux 软件 在电脑上或手机上安装ssh 客户端
+
+          <a href="/2017/11/30/diy-a-nas-with-android-device/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nas/">nas</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
+      <article id="post-解决手动删除lxss文件夹后提示LX-子系统有安装、卸载或维护操作未完成的问题" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2017-11-27T11:38:08&#43;08:00" itemprop="datePublished">2017-11-27</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2017/11/27/lx-subsystem-installation-uninstall-or-maintenance-operation-is-not-completed/">解决手动删除lxss文件夹后提示LX 子系统有安装、卸载或维护操作未完成的问题</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          出错表现 输入 lxrun /uninstall /full /y 出现以下内容
+PS D:\Code\linux\WSL-Distribution-Switcher&gt; lxrun /uninstall /full /y 这将在 Windows 中卸载 Ubuntu。 这将删除 Ubuntu 环境以及任何修改、新应用程序和用户数据。 正在卸载... LX 子系统有安装、卸载或维护操作未完成。 解决方案 结束 bash进程 结束 lxrun.exe 进程(同名或相关的都结果掉) 重新执行lxrun /uninstall /full /y 
+          <a href="/2017/11/27/lx-subsystem-installation-uninstall-or-maintenance-operation-is-not-completed/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wsl/">wsl</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/win10/">win10</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-用docker搭建ELK" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2017-09-27T09:05:31&#43;08:00" itemprop="datePublished">2017-09-27</time>
@@ -345,57 +395,6 @@ go get github.com/revel/cmd/revel go get github.com/ystyle/leanote/app mv $GOPAT
           <a href="/friends/" class="post-more waves-effect waves-button">Continue reading...</a>
         </div>
         <div class="post-footer">
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-electron-react-boilerplate-开环境搭建" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2017-02-27T15:14:13&#43;08:00" itemprop="datePublished">2017-02-27</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/">electron-react-boilerplate 开环境搭建</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-           因为electron下载被墙的原因, electorn很难下载成功, electorn的react, redux的开发插件也装不上, 本文记录了解决这些问题时的方法
-
-          <a href="/2017/02/27/electron-react-boilerplate-kai-huan-jing-da-jian/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/electron/">electron</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-tensorflow-在windows-下使用gpu" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2017-01-06T04:49:17&#43;08:00" itemprop="datePublished">2017-01-06</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2017/01/06/tensorflow-zai-windows-xia-shi-yong-gpu/">tensorflow 在windows 下使用gpu</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-          tensorflow 在windows 下怎么使用gpu 需要安装的工具 python 3.5.x tensorflow-gpu (1.13.0) Cuda Toolkit 8.0 cuDNN 6.x Visual C++ 2015 64 bit 安装 Visual C++ 2015 64 bit 下载地址 点页面中间的下载， 然后选择64位
-下载Visual C++ 2015 下载后双击安装就好了
-
-          <a href="/2017/01/06/tensorflow-zai-windows-xia-shi-yong-gpu/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow-gpu/">tensorflow-gpu</a></li></ul>
           
         </div>
       </article>

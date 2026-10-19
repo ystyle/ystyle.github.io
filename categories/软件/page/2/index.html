@@ -149,6 +149,60 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-chronomem-oom-hunt" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2026-09-09T23:30:00&#43;08:00" itemprop="datePublished">2026-09-09</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2026/09/09/chronomem-oom-hunt/">仓颉服务 - 忆时塔 OOM 追凶记</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          一次横跨六个仓颉自研库的排查
+从一条空 message 的异常，到 662 个 CLOSE_WAIT —— 长连接泄漏如何伪装成存储 OOM
+2026-08-19 → 2026-09-09 · Cangjie · badger-cj · mcp-cj · json-rpc
+一条空消息 事情的开始，是一条几乎不包含任何信息的报错。
+我在本地跑着一个常驻的 MCP 服务——一个基于时序数据库、用于会话记录存储的记忆系统（下面就叫它「线上这个服务」）。它会在后台定期执行维护任务。
+
+          <a href="/2026/09/09/chronomem-oom-hunt/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MCP/">MCP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/badger-cj/">badger-cj</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/json-rpc/">json-rpc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E6%9F%A5%E5%AE%9E%E5%BD%95/">排查实录</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
+      <article id="post-鸿蒙PC上使用box64运行x86_64鸿蒙SDK编译HAP" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2026-06-30T22:00:00&#43;08:00" itemprop="datePublished">2026-06-30</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2026/06/30/matebookpro-box64-harmony-sdk/">鸿蒙PC上使用box64运行x86_64鸿蒙SDK编译HAP</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+           本文记录在鸿蒙PC融合开发引擎的openEuler aarch64容器中，通过box64模拟x86_64兼容层，运行鸿蒙命令行工具编译HAP的完整过程。
+
+          <a href="/2026/06/30/matebookpro-box64-harmony-sdk/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%B8%BF%E8%92%99/">鸿蒙</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%B8%BF%E8%92%99PC/">鸿蒙PC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/box64/">box64</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SDK/">SDK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HAP/">HAP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E8%AF%91/">编译</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/matebook-pro/">matebook-pro</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-鸿蒙PC融合开发引擎中编译安装Neovim与AstroNvim配置指南" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2026-04-03T21:35:00&#43;08:00" itemprop="datePublished">2026-04-03</time>
@@ -349,55 +403,6 @@ $env:REFRESH_TOKEN: 为阿里云网盘登陆后的token, 必需改为自己的
         <div class="post-footer">
           
           <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91%E7%BD%91%E7%9B%98/">阿里云网盘</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webdav/">webdav</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-go mod 拉取 gogs 私有仓库" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2021-06-22T10:46:26&#43;08:00" itemprop="datePublished">2021-06-22</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2021/06/22/go-mod-gogs-private/">go mod 拉取 gogs 私有仓库</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-          环境变量设置 添加环境变量或设置go env export GOPRIVATE=git.hofo.co # 或者 go env -w GOPRIVATE=git.hofo.co git设置 在git设置http.extraheader PRIVATE-TOKEN生成方式: 在点击gogs右上头像-用户设置-授权应用-生成新的token git config --global http.extraheader &#34;PRIVATE-TOKEN: 5737d215af7f9a41a2abe98631d312e9e9311d29d&#34; 在git添加url配置, ystyle:5737d215af7f9a41a2abe98631d312e9e939d29d11是用户名和上一步生成的token git config --global url.&#34;https://ystyle:5737d215af7f9a41a2abe98631d312e9e939d29d11@git.hofo.co&#34;.insteadOf &#34;https://git.hofo.co&#34; 
-          <a href="/2021/06/22/go-mod-gogs-private/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GIT/">GIT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gogs/">gogs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-Quest2 激活与无线串流的设置" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2020-12-06T01:30:26&#43;08:00" itemprop="datePublished">2020-12-06</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2020/12/06/quest2/">Quest2 使用Netch激活与无线串流的设置</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-          Quest2 激活与无线串流的设置 更新后自带Airlink串流，不需要买virtual desktop了 连网激活 需要可上网，与tcp、udp转发， 激活更新系统时需要udp转发才能正常更新系统, 本方法完美支持，只需要有支持wifi网卡的电脑
-
-          <a href="/2020/12/06/quest2/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/quest2/">quest2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/">工具</a></li></ul>
           
         </div>
       </article>

@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>storm-cj 的索引代价：44 倍查询换来的写入腰斩 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">storm-cj 的索引代价：44 倍查询换来的写入腰斩</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">storm-cj 的索引代价：44 倍查询换来的写入腰斩</h1>
+    <h5 class="subtitle">
+      <time datetime="2026-10-19T10:00:00&#43;08:00" itemprop="datePublished" class="page-time">2026-10-19</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e5%85%88%e8%af%b4%e7%bb%93%e8%ae%ba">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">一、先说结论</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%8c%e7%b4%a2%e5%bc%95%e6%98%af%e6%80%8e%e4%b9%88%e5%b7%a5%e4%bd%9c%e7%9a%84">
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">二、索引是怎么工作的</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#21-%e4%b8%80%e6%ac%a1%e6%9f%a5%e8%af%a2%e7%9a%84%e4%b8%a4%e6%9d%a1%e8%b7%af">
+    <span class="post-toc-number">2.1.</span> <span class="post-toc-text">2.1 一次查询的两条路</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#22-%e7%b4%a2%e5%bc%95%e9%95%bf%e4%bb%80%e4%b9%88%e6%a0%b7">
+    <span class="post-toc-number">2.2.</span> <span class="post-toc-text">2.2 索引长什么样</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#23-%e6%a0%87%e6%b3%a8%e5%8d%b3%e7%b4%a2%e5%bc%95">
+    <span class="post-toc-number">2.3.</span> <span class="post-toc-text">2.3 标注即索引</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%89%e4%bb%a3%e4%bb%b7%e4%bb%8e%e5%93%aa%e6%9d%a5">
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">三、代价从哪来</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#31-%e4%b8%89%e6%9d%a1%e5%bc%80%e9%94%80">
+    <span class="post-toc-number">3.1.</span> <span class="post-toc-text">3.1 三条开销</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#32-%e4%b8%80%e6%ac%a1%e5%85%b3%e9%94%ae%e4%bc%98%e5%8c%96%e7%b4%a2%e5%bc%95%e4%ba%8b%e5%8a%a1%e5%90%88%e5%b9%b6">
+    <span class="post-toc-number">3.2.</span> <span class="post-toc-text">3.2 一次关键优化：索引事务合并</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#33-%e4%b8%80%e4%b8%aa%e5%8f%8d%e7%9b%b4%e8%a7%89%e7%9a%84%e5%a4%b1%e8%b4%a5%e5%b0%9d%e8%af%95">
+    <span class="post-toc-number">3.3.</span> <span class="post-toc-text">3.3 一个反直觉的失败尝试</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%9b%9b%e8%bf%99%e7%ac%94%e8%b4%a6%e6%80%8e%e4%b9%88%e7%ae%97">
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">四、这笔账怎么算</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#41-%e4%bb%80%e4%b9%88%e6%97%b6%e5%80%99%e5%80%bc%e5%be%97">
+    <span class="post-toc-number">4.1.</span> <span class="post-toc-text">4.1 什么时候值得</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#42-%e4%b8%80%e4%b8%aa%e5%ae%b9%e6%98%93%e5%bf%bd%e7%95%a5%e7%9a%84%e7%82%b9">
+    <span class="post-toc-number">4.2.</span> <span class="post-toc-text">4.2 一个容易忽略的点</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%94%e5%ae%83%e8%a2%ab%e8%b0%81%e7%94%a8%e7%9d%80">
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">五、它被谁用着</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%85%ad%e5%b0%8f%e7%bb%93">
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">六、小结</span>
+  </a>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-仓颉文档数据库-1-索引的代价" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">storm-cj 的索引代价：44 倍查询换来的写入腰斩</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2026-10-19T10:00:00&#43;08:00" itemprop="datePublished">2026-10-19</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <p align="center"><strong>storm-cj（bstorm）设计笔记 · 上篇</strong></p>
+<p align="center"><em>把写吞吐砍掉一半，换 44 倍查询——这笔账怎么算</em></p>
+<blockquote>
+<p>这是仓颉版 storm 的第一篇。上一篇关于 storm 的文章还是 2019 年写的<br>
+<a href="/2019/12/22/how-to-use-storm-db/">Go 版 storm 的使用</a>
+——bstorm 的灵感就来自它，<br>
+但实现完全不同：Go 版架在 BoltDB 上，bstorm 架在<a href="/2026/10/10/badger-cj-porting-notes/">自研的 LSM 引擎 badger-cj</a>
+ 上。<br>
+本文讲索引带来的取舍，不讲 LSM 基础（那个在前四篇里）。</p>
+</blockquote>
+<h2 id="一先说结论"><a href="#一先说结论" class="headerlink" title="一、先说结论"></a>一、先说结论</h2>
+<p>bstorm 是<strong>嵌入式 JSON 文档数据库</strong>：直接存 JSON 对象，用 <code>@Index</code> / <code>@Unique</code> 标注就能建索引，写读都走同一套 API。</p>
+<p>一次围绕索引的优化做完，benchmark 表格长这样（300k 条数据）：</p>
+<table>
+	<thead>
+			<tr>
+					<th>指标</th>
+					<th>优化前</th>
+					<th>优化后</th>
+					<th>变化</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>eq(age, 50)</code> 查询</td>
+					<td>2015 ms</td>
+					<td><strong>46 ms</strong></td>
+					<td><strong>44 倍快</strong></td>
+			</tr>
+			<tr>
+					<td><code>range(30-60)</code> 查询</td>
+					<td>2191 ms</td>
+					<td><strong>334 ms</strong></td>
+					<td>6.6 倍快</td>
+			</tr>
+			<tr>
+					<td><code>eq(city, &quot;北京&quot;)</code> 查询</td>
+					<td>2041 ms</td>
+					<td><strong>325 ms</strong></td>
+					<td>6.3 倍快</td>
+			</tr>
+			<tr>
+					<td><strong>写入速度</strong></td>
+					<td>21k/s</td>
+					<td><strong>11.5k/s</strong></td>
+					<td><strong>接近腰斩</strong></td>
+			</tr>
+	</tbody>
+</table>
+<p>前三行是收益，最后一行是代价。</p>
+<p><strong>很多项目介绍只写前三行。</strong> 这篇想把它讲完整：索引到底买来了什么、又拿走了什么、什么时候这笔账划算。</p>
+<h2 id="二索引是怎么工作的"><a href="#二索引是怎么工作的" class="headerlink" title="二、索引是怎么工作的"></a>二、索引是怎么工作的</h2>
+<h3 id="21-一次查询的两条路"><a href="#21-一次查询的两条路" class="headerlink" title="2.1 一次查询的两条路"></a>2.1 一次查询的两条路</h3>
+<p>假设有个 <code>User</code> 类型，<code>age</code> 上有索引。你查 <code>age == 50</code>，引擎有两条路：</p>
+<pre tabindex="0"><code>路径 A（全表扫描）
+  遍历所有 key → 逐条 db.get 取 value
+  → 解析 JSON → 判断 age 是否 50
+  代价：O(全表) 次随机读 + 全量 JSON 解析
+
+路径 B（走索引）
+  在索引区 seek 前缀 → 拿到一批主键
+  → 按主键取回对象
+  代价：一次前缀扫描 + 按命中数取回
+</code></pre><p><code>46ms</code> vs <code>2015ms</code> 的差距，就是这两条路的差距。300k 条数据里命中约几百条，路径 B 只需要处理这几百条。</p>
+<h3 id="22-索引长什么样"><a href="#22-索引长什么样" class="headerlink" title="2.2 索引长什么样"></a>2.2 索引长什么样</h3>
+<p>bstorm 的索引不是独立的数据结构，而是<strong>同一棵 LSM 里的另一批 key</strong>：</p>
+<pre tabindex="0"><code>主数据：  u:&lt;id&gt;            → JSON
+普通索引：
+  __idx:&lt;type&gt;:&lt;field&gt;
+        :&lt;value&gt;:&lt;id&gt;       → （空）
+唯一索引：
+  __uidx:&lt;type&gt;:&lt;field&gt;
+        :&lt;value&gt;            → &lt;id&gt;
+</code></pre><p>这样做的直接好处：<strong>索引和数据在同一个事务里</strong>，不需要两套一致性机制。代价是写入时要多写几个 key（见第三节）。</p>
+<p>查询时，<code>findByIndex</code> 就是 seek 到 <code>__idx:&lt;type&gt;:&lt;field&gt;:&lt;value&gt;:</code> 前缀，然后顺着扫：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">iter.seek(prefix)
+while (iter.validForPrefix(prefix)) {
+    let key = iter.item().keyCopy()
+    let pid = extractIdFromIdxKey(key)
+    keys.add(buildPrimaryKeyFromId(
+        typeName, pid))
+    iter.next()
+}
+</code></pre><p>（这是简化版，实际代码还带着事务参数与错误处理。）</p>
+<h3 id="23-标注即索引"><a href="#23-标注即索引" class="headerlink" title="2.3 标注即索引"></a>2.3 标注即索引</h3>
+<p>建索引不需要写 DDL，在模型字段上加标注就行：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">@Index[&#34;age&#34;]   // 普通索引
+@Index[&#34;city&#34;]  // 普通索引
+@Index[&#34;email&#34;, unique: true]  // 唯一索引
+</code></pre><p><code>save()</code> / <code>delete()</code> 时框架自动维护索引：先算新值、再算旧值（更新场景），然后增删对应的索引 key。</p>
+<p><strong>增量维护的关键在「旧值」</strong>：更新一条记录时，如果 <code>age</code> 从 50 改成 51，必须删掉旧的 <code>__idx:...:50:&lt;id&gt;</code>，否则索引会指向一个不再满足条件的对象——这类问题查起来极费劲，因为查询结果是「多了几条不该有的」。</p>
+<h2 id="三代价从哪来"><a href="#三代价从哪来" class="headerlink" title="三、代价从哪来"></a>三、代价从哪来</h2>
+<h3 id="31-三条开销"><a href="#31-三条开销" class="headerlink" title="3.1 三条开销"></a>3.1 三条开销</h3>
+<p>写入从 21k/s 掉到 9k/s（后来优化到 11.5k/s），开销来自三处：</p>
+<table>
+	<thead>
+			<tr>
+					<th>开销</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>JSON 序列化</strong></td>
+					<td>要把被索引字段取出来，序列化成索引 key 的一部分</td>
+			</tr>
+			<tr>
+					<td><strong>索引 key 构建</strong></td>
+					<td>拼接 <code>__idx:type:field:value:id</code> 这样的字节串（还要考虑转义）</td>
+			</tr>
+			<tr>
+					<td><strong>事务提交</strong></td>
+					<td>主数据 + N 个索引 = N+1 次写，如果不合并事务就是 N+1 次提交</td>
+			</tr>
+	</tbody>
+</table>
+<p>第三条是最大头。优化前每条记录要提交 <code>1 + 索引数</code> 次事务，LSM 里每次提交都有固定成本。</p>
+<h3 id="32-一次关键优化索引事务合并"><a href="#32-一次关键优化索引事务合并" class="headerlink" title="3.2 一次关键优化：索引事务合并"></a>3.2 一次关键优化：索引事务合并</h3>
+<p>把「主数据写」和「索引写」放进<strong>同一个事务</strong>：</p>
+<pre tabindex="0"><code>优化前：
+  txn.set(主数据); txn.commit()
+  txn.set(索引1);  txn.commit()
+  txn.set(索引2);  txn.commit()
+  ← 3 次提交
+
+优化后：
+  txn.set(主数据); txn.set(索引1)
+  txn.set(索引2);  txn.commit()
+  ← 1 次提交
+</code></pre><p>就这一处，写入从 <strong>9k/s 回到 11.5k/s</strong>——报告里明写「9k/s → 11.5k/s 的提升来自索引事务合并」。</p>
+<blockquote>
+<p>顺带一个数字感：<strong>无索引时 21k/s 是纯 badger 写入速度</strong>。也就是说 21k → 11.5k 这个缺口，就是「有索引」这件事的总成本。</p>
+</blockquote>
+<h3 id="33-一个反直觉的失败尝试"><a href="#33-一个反直觉的失败尝试" class="headerlink" title="3.3 一个反直觉的失败尝试"></a>3.3 一个反直觉的失败尝试</h3>
+<p>benchmark 报告的待办里有这么一条，我觉得比成功的部分更值得说：</p>
+<blockquote>
+<p><del>范围查询 (Gte/Lt) 接入索引查找</del> → <strong>试过，LSM 回表比流式慢，无效</strong></p>
+</blockquote>
+<p>在 B 树数据库里，范围查询走索引是常识。但在 LSM 上，这条路可能<strong>更慢</strong>：</p>
+<pre tabindex="0"><code>走索引：
+  先扫索引区拿到一批主键（散乱）
+  → 逐个 db.get 回表
+  → 在 LSM 上，散乱主键的随机读代价很高
+
+流式扫：
+  直接顺序扫主数据区，边扫边判断
+  → LSM 的顺序读非常快
+  → 还能享受同一 block 的局部性
+</code></pre><p>所以 <code>range(30-60)</code> 最终是 <strong>334ms</strong>（6.6 倍提速），但它的提速来自<strong>覆盖索引计数 + 流式扫描</strong>，不是「走索引查范围」。</p>
+<p><strong>这条记在报告的待办里，而不是删掉</strong>——因为它是一个可能被反复尝试的坑。</p>
+<h2 id="四这笔账怎么算"><a href="#四这笔账怎么算" class="headerlink" title="四、这笔账怎么算"></a>四、这笔账怎么算</h2>
+<h3 id="41-什么时候值得"><a href="#41-什么时候值得" class="headerlink" title="4.1 什么时候值得"></a>4.1 什么时候值得</h3>
+<table>
+	<thead>
+			<tr>
+					<th>你的场景</th>
+					<th>判断</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>写多读少，且查询很少用 <code>eq</code></td>
+					<td><strong>别建索引</strong>，21k/s 比 11.5k/s 快一倍</td>
+			</tr>
+			<tr>
+					<td>读多写少，经常按某字段精确查</td>
+					<td><strong>建</strong>，44 倍是数量级差异</td>
+			</tr>
+			<tr>
+					<td>查询形态混杂</td>
+					<td>只给真正高频的 <code>eq</code> 字段建索引</td>
+			</tr>
+			<tr>
+					<td>需要唯一性约束</td>
+					<td><strong>必须建唯一索引</strong>，这不是性能问题而是正确性</td>
+			</tr>
+	</tbody>
+</table>
+<p>一句话：<strong>索引的收益是「查询次数 × 每次省下的时间」，成本是「写入次数 × 每次多花的时间」</strong>。把两边的次数估出来，账就清楚了。</p>
+<h3 id="42-一个容易忽略的点"><a href="#42-一个容易忽略的点" class="headerlink" title="4.2 一个容易忽略的点"></a>4.2 一个容易忽略的点</h3>
+<p>索引的写入成本是<strong>按索引个数线性叠加</strong>的——建 1 个索引掉 9k/s，建 5 个不会还是 9k/s。</p>
+<p>但收益不是线性叠加的：只有<strong>真正被查询用到</strong>的索引才有收益。所以原则是：</p>
+<blockquote>
+<p><strong>加索引前先确认它会被查。</strong> 一个从不被 <code>eq</code> 命中的索引，是纯成本。</p>
+</blockquote>
+<h2 id="五它被谁用着"><a href="#五它被谁用着" class="headerlink" title="五、它被谁用着"></a>五、它被谁用着</h2>
+<p>除了它自己的基准套件，bstorm 还有 5 个真实下游项目：</p>
+<table>
+	<thead>
+			<tr>
+					<th>项目</th>
+					<th>用途</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>cjreg</code></td>
+					<td>仓颉私有中心仓与多仓工具：发布计划、包元数据、多仓解析</td>
+			</tr>
+			<tr>
+					<td><code>jisi-pavilion</code></td>
+					<td>集思阁：多 Agent 群聊协作与记忆继承的 MCP 服务</td>
+			</tr>
+			<tr>
+					<td><code>atelier-starline</code></td>
+					<td>人机共享的常驻状态看板</td>
+			</tr>
+			<tr>
+					<td><code>novel-timeline</code></td>
+					<td>小说时间线约束引擎（冲突检测）</td>
+			</tr>
+			<tr>
+					<td><code>storm-bench</code></td>
+					<td>它自己的性能基准套件（<code>path</code> 依赖）</td>
+			</tr>
+	</tbody>
+</table>
+<p>这个列表对设计有实际影响：<strong>这些是长期跑的应用，不是一次性脚本</strong>。它们会积累数据、会升级依赖、会在生产里出问题。所以 bstorm 的迭代重点不只是「快」，还有：</p>
+<ul>
+<li><strong>持久性与重开</strong>：删除后重开数据库，数据必须真的没了（有专门回归用例钉住）</li>
+<li><strong>优雅退出</strong>：进程收到 SIGTERM 要先把数据落盘再退（从 badger-cj 逐层转发上来）</li>
+<li><strong>删索引的跨重开一致性</strong>：索引 key 和数据 key 必须在同一事务里删干净</li>
+</ul>
+<p>这些不在 benchmark 表格里，但对上面那 6 个项目是生死线。</p>
+<h2 id="六小结"><a href="#六小结" class="headerlink" title="六、小结"></a>六、小结</h2>
+<ul>
+<li>索引让 <code>eq</code> 查询快 <strong>44 倍</strong>，代价是写入从 <strong>21k/s 掉到 11.5k/s</strong></li>
+<li>成本主要来自「事务提交次数」，合并事务能挽回一大半</li>
+<li><strong>范围查询走索引在 LSM 上可能更慢</strong>——这条是试过才知道的</li>
+<li>加索引前先确认它会被查；索引成本按个数线性叠加，收益不叠加</li>
+</ul>
+<blockquote>
+<p><strong>本文只讲索引。</strong> 关于 LSM 本体、WAL 崩溃恢复、Value Log GC，<br>
+见<a href="/2026/10/10/badger-cj-porting-notes/">从 Go 移植 BadgerDB 到仓颉四篇</a>
+；<br>
+关于这些底座之上怎么把「参数被悄悄丢掉」这类 bug 一个个挖出来，<br>
+见<a href="/2026/10/16/time-layered-memory-tower/">时间分层记忆</a>
+系列的排查部分。</p>
+</blockquote>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2026-10-19T10:00:00&#43;08:00" itemprop="dateUpdated">2026-10-19 10:00:00</time>
+          </span><br>
+          本文链接：<a href="/2026/10/19/bstorm-index-tradeoff/" target="_blank" rel="external">https://ystyle.top/2026/10/19/bstorm-index-tradeoff/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bstorm/">bstorm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B4%A2%E5%BC%95/">索引</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">性能优化</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2fbstorm-index-tradeoff%2f&title=%e3%80%8astorm-cj%20%e7%9a%84%e7%b4%a2%e5%bc%95%e4%bb%a3%e4%bb%b7%ef%bc%9a44%20%e5%80%8d%e6%9f%a5%e8%af%a2%e6%8d%a2%e6%9d%a5%e7%9a%84%e5%86%99%e5%85%a5%e8%85%b0%e6%96%a9%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2fbstorm-index-tradeoff%2f&title=%e3%80%8astorm-cj%20%e7%9a%84%e7%b4%a2%e5%bc%95%e4%bb%a3%e4%bb%b7%ef%bc%9a44%20%e5%80%8d%e6%9f%a5%e8%af%a2%e6%8d%a2%e6%9d%a5%e7%9a%84%e5%86%99%e5%85%a5%e8%85%b0%e6%96%a9%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=storm-cj%ef%bc%88bstorm%ef%bc%89%e8%ae%be%e8%ae%a1%e7%ac%94%e8%ae%b0%20%c2%b7%20%e4%b8%8a%e7%af%87%0a%e6%8a%8a%e5%86%99%e5%90%9e%e5%90%90%e7%a0%8d%e6%8e%89%e4%b8%80%e5%8d%8a%ef%bc%8c%e6%8d%a2%2044%20%e5%80%8d%e6%9f%a5%e8%af%a2%e2%80%94%e2%80%94%e8%bf%99%e7%ac%94%e8%b4%a6%e6%80%8e%e4%b9%88%e7%ae%97%0a%e8%bf%99%e6%98%af%e4%bb%93%e9%a2%89%e7%89%88%20storm%20%e7%9a%84%e7%ac%ac%e4%b8%80%e7%af%87%e3%80%82%e4%b8%8a%e4%b8%80%e7%af%87%e5%85%b3%e4%ba%8e%20storm%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2fbstorm-index-tradeoff%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8astorm-cj%20%e7%9a%84%e7%b4%a2%e5%bc%95%e4%bb%a3%e4%bb%b7%ef%bc%9a44%20%e5%80%8d%e6%9f%a5%e8%af%a2%e6%8d%a2%e6%9d%a5%e7%9a%84%e5%86%99%e5%85%a5%e8%85%b0%e6%96%a9%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2fbstorm-index-tradeoff%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2fbstorm-index-tradeoff%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2026/10/16/time-layered-memory-measured/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">给 Agent 造一座记忆塔（二）：我去测了它，错了两次</h4>
+        </a>
+      </div>
+      
+      
+      <div class="waves-block waves-effect next">
+        <a href="/2026/10/19/tsdb-silent-failures/" id="post-next" class="post-nav-link">
+          <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+          <h4 class="title">tsdb-cj 的四次静默失效：代码能跑、测试能过，但什么都没发生</h4>
+        </a>
+      </div>
+      
+    </nav>
+    
+
+    
+    
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+  </article>
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2fbstorm-index-tradeoff%2f&title=%e3%80%8astorm-cj%20%e7%9a%84%e7%b4%a2%e5%bc%95%e4%bb%a3%e4%bb%b7%ef%bc%9a44%20%e5%80%8d%e6%9f%a5%e8%af%a2%e6%8d%a2%e6%9d%a5%e7%9a%84%e5%86%99%e5%85%a5%e8%85%b0%e6%96%a9%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2fbstorm-index-tradeoff%2f&title=%e3%80%8astorm-cj%20%e7%9a%84%e7%b4%a2%e5%bc%95%e4%bb%a3%e4%bb%b7%ef%bc%9a44%20%e5%80%8d%e6%9f%a5%e8%af%a2%e6%8d%a2%e6%9d%a5%e7%9a%84%e5%86%99%e5%85%a5%e8%85%b0%e6%96%a9%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=storm-cj%ef%bc%88bstorm%ef%bc%89%e8%ae%be%e8%ae%a1%e7%ac%94%e8%ae%b0%20%c2%b7%20%e4%b8%8a%e7%af%87%0a%e6%8a%8a%e5%86%99%e5%90%9e%e5%90%90%e7%a0%8d%e6%8e%89%e4%b8%80%e5%8d%8a%ef%bc%8c%e6%8d%a2%2044%20%e5%80%8d%e6%9f%a5%e8%af%a2%e2%80%94%e2%80%94%e8%bf%99%e7%ac%94%e8%b4%a6%e6%80%8e%e4%b9%88%e7%ae%97%0a%e8%bf%99%e6%98%af%e4%bb%93%e9%a2%89%e7%89%88%20storm%20%e7%9a%84%e7%ac%ac%e4%b8%80%e7%af%87%e3%80%82%e4%b8%8a%e4%b8%80%e7%af%87%e5%85%b3%e4%ba%8e%20storm%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2fbstorm-index-tradeoff%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8astorm-cj%20%e7%9a%84%e7%b4%a2%e5%bc%95%e4%bb%a3%e4%bb%b7%ef%bc%9a44%20%e5%80%8d%e6%9f%a5%e8%af%a2%e6%8d%a2%e6%9d%a5%e7%9a%84%e5%86%99%e5%85%a5%e8%85%b0%e6%96%a9%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2fbstorm-index-tradeoff%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2fbstorm-index-tradeoff%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2026/10/19/bstorm-index-tradeoff/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+</body>
+</html>

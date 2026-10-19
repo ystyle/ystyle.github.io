@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>tsdb-cj 的四次静默失效：代码能跑、测试能过，但什么都没发生 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">tsdb-cj 的四次静默失效：代码能跑、测试能过，但什么都没发生</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">tsdb-cj 的四次静默失效：代码能跑、测试能过，但什么都没发生</h1>
+    <h5 class="subtitle">
+      <time datetime="2026-10-19T11:00:00&#43;08:00" itemprop="datePublished" class="page-time">2026-10-19</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e4%b8%ba%e4%bb%80%e4%b9%88%e8%bf%99%e7%b1%bb%e9%97%ae%e9%a2%98%e6%9c%80%e8%b4%b5">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">一、为什么这类问题最贵</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%8c%e5%a4%b1%e6%95%88%e4%b8%80ttl-%e5%bd%a2%e5%8f%82%e8%a2%ab%e4%b8%a2%e6%8e%89%e4%ba%86">
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">二、失效一：TTL 形参被丢掉了</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e7%8e%b0%e8%b1%a1">
+    <span class="post-toc-number">2.1.</span> <span class="post-toc-text">现象</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e4%bc%9a%e8%bf%99%e6%a0%b7">
+    <span class="post-toc-number">2.2.</span> <span class="post-toc-text">为什么会这样</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e9%9a%be%e5%8f%91%e7%8e%b0">
+    <span class="post-toc-number">2.3.</span> <span class="post-toc-text">为什么难发现</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%89%e5%a4%b1%e6%95%88%e4%ba%8c%e5%8f%aa%e6%b8%85%e4%ba%86%e4%b8%80%e5%8d%8a">
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">三、失效二：只清了一半</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e7%8e%b0%e8%b1%a1-1">
+    <span class="post-toc-number">3.1.</span> <span class="post-toc-text">现象</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e4%bc%9a%e8%bf%99%e6%a0%b7-1">
+    <span class="post-toc-number">3.2.</span> <span class="post-toc-text">为什么会这样</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e6%95%99%e8%ae%ad">
+    <span class="post-toc-number">3.3.</span> <span class="post-toc-text">教训</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%9b%9b%e5%a4%b1%e6%95%88%e4%b8%89%e4%b8%80%e4%b8%aa%e5%86%92%e5%8f%b7%e4%b8%b2%e4%ba%86%e6%95%b0%e6%8d%ae">
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">四、失效三：一个冒号串了数据</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e6%9c%ba%e5%88%b6">
+    <span class="post-toc-number">4.1.</span> <span class="post-toc-text">机制</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%bf%ae%e6%b3%95">
+    <span class="post-toc-number">4.2.</span> <span class="post-toc-text">修法</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e8%bf%99%e7%b1%bb%e6%9c%80%e5%8d%b1%e9%99%a9">
+    <span class="post-toc-number">4.3.</span> <span class="post-toc-text">为什么这类最危险</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%94%e5%a4%b1%e6%95%88%e5%9b%9b%e4%b8%80%e4%b8%aa%e5%b7%ae-96-%e5%b0%8f%e6%97%b6%e5%90%8e%e5%ae%8c%e5%85%a8%e8%90%bd%e7%a9%ba%e7%9a%84%e7%aa%97%e5%8f%a3">
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">五、失效四：一个差 96 小时后完全落空的窗口</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e7%8e%b0%e8%b1%a1-2">
+    <span class="post-toc-number">5.1.</span> <span class="post-toc-text">现象</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e6%b2%a1%e8%a2%ab%e7%ab%8b%e5%88%bb%e5%8f%91%e7%8e%b0">
+    <span class="post-toc-number">5.2.</span> <span class="post-toc-text">为什么没被立刻发现</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e5%90%8e%e6%9e%9c%e8%bf%99%e4%b9%88%e4%b8%a5%e9%87%8d">
+    <span class="post-toc-number">5.3.</span> <span class="post-toc-text">为什么后果这么严重</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%bf%ae%e6%b3%95-1">
+    <span class="post-toc-number">5.4.</span> <span class="post-toc-text">修法</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%85%ad%e8%bf%99%e5%9b%9b%e7%a7%8d%e6%9c%89%e4%bb%80%e4%b9%88%e5%85%b1%e5%90%8c%e7%82%b9">
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">六、这四种有什么共同点</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#1-%e6%96%b0%e5%88%86%e6%94%af%e5%bf%85%e9%a1%bb%e5%a4%8d%e5%88%bb%e6%97%a7%e5%88%86%e6%94%af%e7%9a%84%e5%85%a8%e9%83%a8%e5%bd%a2%e5%8f%82">
+    <span class="post-toc-number">6.1.</span> <span class="post-toc-text">1. 新分支必须复刻旧分支的全部形参</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#2-%e5%a4%9a%e5%89%8d%e7%bc%80%e5%ae%9e%e4%bd%93%e5%88%a0%e9%99%a4%e5%bf%85%e9%a1%bb%e9%9b%86%e4%b8%ad%e7%ae%a1%e7%90%86">
+    <span class="post-toc-number">6.2.</span> <span class="post-toc-text">2. 多前缀实体，删除必须集中管理</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#3-%e6%8b%bc%e6%8e%a5%e5%bc%8f-key-%e8%a6%81%e6%9c%89%e8%be%b9%e7%95%8c%e5%ae%88%e5%8d%ab">
+    <span class="post-toc-number">6.3.</span> <span class="post-toc-text">3. 拼接式 key 要有边界守卫</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%83%e8%bf%98%e6%9c%89%e4%b8%80%e4%b8%aa%e6%96%b9%e6%b3%95%e8%ae%ba">
+    <span class="post-toc-number">7.</span> <span class="post-toc-text">七、还有一个方法论</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e9%99%84%e8%bf%99%e4%ba%9b%e9%97%ae%e9%a2%98%e7%9a%84%e6%95%b0%e9%87%8f%e7%ba%a7">
+    <span class="post-toc-number">8.</span> <span class="post-toc-text">附：这些问题的数量级</span>
+  </a>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-时序库的四次静默失效" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">tsdb-cj 的四次静默失效：代码能跑、测试能过，但什么都没发生</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2026-10-19T11:00:00&#43;08:00" itemprop="datePublished">2026-10-19</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <p align="center"><strong>tsdb-cj 排查笔记</strong></p>
+<p align="center"><em>最危险的不是崩溃，是「看起来在工作」</em></p>
+<blockquote>
+<p>tsdb-cj 是基于 <a href="/2026/10/10/badger-cj-porting-notes/">badger-cj</a>
+ 的嵌入式时序数据库，<br>
+也是<a href="/2026/10/16/time-layered-memory-tower/">忆时塔</a>
+分层记忆的存储底座。<br>
+本文不谈它的设计，只讲一次审计里挖出来的四类问题——它们的共同点是：<br>
+<strong>代码能跑、测试能过、日志无错，但功能根本没生效。</strong></p>
+</blockquote>
+<h2 id="一为什么这类问题最贵"><a href="#一为什么这类问题最贵" class="headerlink" title="一、为什么这类问题最贵"></a>一、为什么这类问题最贵</h2>
+<p>程序崩溃是<strong>响亮的失败</strong>：栈trace 摆在那里，你只需要修。</p>
+<p>静默失效是<strong>安静的失败</strong>：调用方传了参数、服务返回成功、测试全绿，但那个参数从未被使用。</p>
+<p>它贵在三个地方：</p>
+<ol>
+<li><strong>发现得晚</strong>：没有触发条件，只有「某天你恰好需要那个功能」才会暴露</li>
+<li><strong>定位得慢</strong>：报错信息不会指向它，因为根本没有报错</li>
+<li><strong>会伪装成别的问题</strong>：TTL 不生效看起来像「过期依赖没触发」，实际是参数被丢了</li>
+</ol>
+<p>下面四种，全都是这个形状。</p>
+<h2 id="二失效一ttl-形参被丢掉了"><a href="#二失效一ttl-形参被丢掉了" class="headerlink" title="二、失效一：TTL 形参被丢掉了"></a>二、失效一：TTL 形参被丢掉了</h2>
+<h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3>
+<p><code>bucket()</code> 有个 <code>ttl</code> 参数，语义是「这个物化桶多久后自动过期」。调用方传了：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">ts.bucket(&#34;chat&#34;, &#34;1h&#34;, &#34;w1&#34;,
+    &#34;summary&#34;, refs,
+    ttl: Some(Duration.hour))
+</code></pre><p>桶能建、能读、能下钻，一切正常。<strong>但它永远不会过期。</strong></p>
+<h3 id="为什么会这样"><a href="#为什么会这样" class="headerlink" title="为什么会这样"></a>为什么会这样</h3>
+<p>代码里有两条分支：旧格式桶（<code>windowStartMs == 0</code>）和新格式桶（表式引用行）。新格式那条分支是后来加的，写的时候直接 <code>txn.set(...)</code>，<strong>把 <code>ttl</code> 形参忘了</strong>。</p>
+<p>签名上有 <code>ttl</code>，调用方传了 <code>ttl</code>，编译器不会报错（仓颉里具名参数在函数体内未被使用不一定是硬错误），测试也不会失败——因为<strong>没有测试覆盖「新格式桶 + TTL」的组合</strong>。</p>
+<p>回归用例的注释写得很直白：</p>
+<pre tabindex="0"><code>// 回归：新格式桶（引用走表式 k: 行）
+// 必须同样尊重 ttl。
+// 此前该分支直接 txn.set /
+// 丢掉了 ttl 形参
+// ——调用方传了 TTL，
+//   却永远不过期（静默失效）。
+</code></pre><h3 id="为什么难发现"><a href="#为什么难发现" class="headerlink" title="为什么难发现"></a>为什么难发现</h3>
+<p>TTL 的验证需要<strong>时间流逝</strong>。单元测试通常不会真的等一小时；而如果不写「设一个 1 秒 TTL 然后 sleep 2 秒」这种用例，这条路径就永远是空白。</p>
+<p><strong>这类问题只能靠审计发现，或者靠生产环境里「数据一直在涨」的告警。</strong></p>
+<h2 id="三失效二只清了一半"><a href="#三失效二只清了一半" class="headerlink" title="三、失效二：只清了一半"></a>三、失效二：只清了一半</h2>
+<h3 id="现象-1"><a href="#现象-1" class="headerlink" title="现象"></a>现象</h3>
+<p><code>clearSeries()</code> 清空一个系列的全部物化桶。调用后你以为数据没了。</p>
+<h3 id="为什么会这样-1"><a href="#为什么会这样-1" class="headerlink" title="为什么会这样"></a>为什么会这样</h3>
+<p>新格式桶把「桶记录」和「引用行」存在<strong>两个独立的 key 前缀</strong>下：</p>
+<pre tabindex="0"><code>b:&lt;series&gt;:&lt;level&gt;:&lt;bucket&gt;
+  ← 桶记录（元信息）
+
+k:&lt;series&gt;:&lt;level&gt;:&lt;bucket&gt;:&lt;seq&gt;
+  ← 表式引用行（实际的 refs）
+</code></pre><p>清理代码只扫了 <code>b:</code> 前缀。</p>
+<p>于是 <code>k:</code> 前缀下的引用行全部留着——<strong>成了永远读不到的幽灵行</strong>：</p>
+<ul>
+<li>存储只增不减（清空系列后体积不降）</li>
+<li>引用计数持续虚高（<code>refRowsCount</code> 把孤儿行也算进去）</li>
+<li>更麻烦的是<strong>同 key 重新物化时</strong>：新旧引用行叠加，引用数翻倍、下钻返回幽灵引用</li>
+</ul>
+<p>代码注释把这个坑写清楚了：</p>
+<pre tabindex="0"><code>// 桶记录与引用行是两个独立 key 前缀：
+// 只扫 b: 会留下永远读不到的幽灵行
+// （存储只增不减、refRowsCount 持续虚高，
+//  且同 key 重新物化时新旧行叠加
+//  导致引用数虚高）。
+</code></pre><h3 id="教训"><a href="#教训" class="headerlink" title="教训"></a>教训</h3>
+<p><strong>当你为一个实体设计多个 key 前缀时，「删除」必须覆盖全部前缀。</strong> 这不是靠记住，要靠一个函数集中管理前缀常量——清理逻辑只引用那个函数，而不是手写字符串。</p>
+<h2 id="四失效三一个冒号串了数据"><a href="#四失效三一个冒号串了数据" class="headerlink" title="四、失效三：一个冒号串了数据"></a>四、失效三：一个冒号串了数据</h2>
+<p>这类失效最隐蔽：<strong>数据没丢，但查错了。</strong></p>
+<h3 id="机制"><a href="#机制" class="headerlink" title="机制"></a>机制</h3>
+<p>标签索引的 key 这样拼：</p>
+<pre tabindex="0"><code>__idx:&lt;tag&gt;:&lt;value&gt;:&lt;series&gt;:&lt;ts&gt;
+</code></pre><p>（实际格式略有出入，关键是 <code>tag</code> 和 <code>value</code> 直接拼进 key。）</p>
+<p>问题出现了：</p>
+<table>
+	<thead>
+			<tr>
+					<th>传入</th>
+					<th>拼出的 key</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>tag=&quot;a&quot;</code>, <code>value=&quot;b:c&quot;</code></td>
+					<td><code>__idx:a:b:c:...</code></td>
+			</tr>
+			<tr>
+					<td><code>tag=&quot;a:b&quot;</code>, <code>value=&quot;c&quot;</code></td>
+					<td><code>__idx:a:b:c:...</code></td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>两组不同的标签，拼出了完全相同的前缀。</strong> 于是 <code>filter(tag=&quot;a&quot;, value=&quot;b:c&quot;)</code> 会把 <code>tag=&quot;a:b&quot;</code> 的数据也一起返回。</p>
+<h3 id="修法"><a href="#修法" class="headerlink" title="修法"></a>修法</h3>
+<p>在两个入口（<code>append</code> 和 <code>appendBatch</code>）统一校验：<strong>含 <code>:</code> 的 tag 名或值直接拒绝</strong>。</p>
+<p>且校验位置很讲究——注释里写：</p>
+<pre tabindex="0"><code>// 批内标签校验与 append 保持一致。
+// 校验写在取锁与事务之前：
+// 失败不得落半个批次、也不占写锁。
+</code></pre><p>两条纪律：<strong>入口校验要一致</strong>（否则单条能进、批量不能进，或反之），<strong>校验要在取锁之前</strong>（失败不该占着锁）。</p>
+<h3 id="为什么这类最危险"><a href="#为什么这类最危险" class="headerlink" title="为什么这类最危险"></a>为什么这类最危险</h3>
+<p>TTL 不生效你知道「没生效」；幽灵行你知道「体积不对」。而<strong>标签串数据是静默的错误结果</strong>——查询返回了数据，看起来合理，只是混进了不该有的东西。</p>
+<p>如果你的下游在做聚合统计，这种错误会直接体现在数字里，而你会先怀疑聚合逻辑。</p>
+<h2 id="五失效四一个差-96-小时后完全落空的窗口"><a href="#五失效四一个差-96-小时后完全落空的窗口" class="headerlink" title="五、失效四：一个差 96 小时后完全落空的窗口"></a>五、失效四：一个差 96 小时后完全落空的窗口</h2>
+<p>这个不算「失效」，但它是同一个病根：<strong>以为差不多，其实差得刚好全错</strong>。</p>
+<h3 id="现象-2"><a href="#现象-2" class="headerlink" title="现象"></a>现象</h3>
+<p>按周总结时要算「本周的起点」。代码用了一个常量：</p>
+<pre tabindex="0"><code>周一 = 当天零点 - 3 天
+</code></pre><p>这个公式<strong>只在当天恰好是周四时成立</strong>。周四减 3 天确实是周一；周一减 3 天会跑到上周五，差 96 小时。</p>
+<h3 id="为什么没被立刻发现"><a href="#为什么没被立刻发现" class="headerlink" title="为什么没被立刻发现"></a>为什么没被立刻发现</h3>
+<p>因为是手工测试时「今天恰好是周四」——公式对上了，验证通过。</p>
+<h3 id="为什么后果这么严重"><a href="#为什么后果这么严重" class="headerlink" title="为什么后果这么严重"></a>为什么后果这么严重</h3>
+<p>摘要取回用的是<strong>窗口全等匹配</strong>（<code>windowFrom</code> / <code>windowTo</code> 必须完全相等），不是区间重叠：</p>
+<pre tabindex="0"><code>查询：周窗口 [10-19 00:00, 10-26 00:00)
+已存：[10-15 00:00, 10-22 00:00)
+      ← 差 96 小时
+
+结果：不是「近似命中」，
+      而是直接落空 → 返回「无摘要」
+</code></pre><p><strong>「差一点」在区间匹配里等于「完全错误」。</strong> 而且错误形态是「查不到」，会让人以为是总结没跑，往另一个方向查。</p>
+<h3 id="修法-1"><a href="#修法-1" class="headerlink" title="修法"></a>修法</h3>
+<p>不用常量推算，直接用 <code>Timeline</code> 的日历对齐能力（它内部按 ISO 周一起算）。</p>
+<blockquote>
+<p>这条的教训不在代码，而在验证方法：<strong>只在一个时刻验证过的时间逻辑，等于没验证。</strong> 涉及周/月对齐的代码，至少要覆盖 7 天里每一天的输入。</p>
+</blockquote>
+<h2 id="六这四种有什么共同点"><a href="#六这四种有什么共同点" class="headerlink" title="六、这四种有什么共同点"></a>六、这四种有什么共同点</h2>
+<p>回头看，它们各自的表象不同，但生成机制高度一致：</p>
+<table>
+	<thead>
+			<tr>
+					<th>#</th>
+					<th>失效</th>
+					<th>为什么</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>二</td>
+					<td>TTL 被丢</td>
+					<td><strong>新分支复刻时漏了参数</strong></td>
+			</tr>
+			<tr>
+					<td>三</td>
+					<td>只清一半</td>
+					<td><strong>多 key 前缀，删除只覆盖了一个</strong></td>
+			</tr>
+			<tr>
+					<td>四</td>
+					<td>冒号串数据</td>
+					<td><strong>拼接式 key 缺少边界校验</strong></td>
+			</tr>
+			<tr>
+					<td>五</td>
+					<td>差 96 小时</td>
+					<td><strong>用常量推算日历，且只在一天验证过</strong></td>
+			</tr>
+	</tbody>
+</table>
+<p>可以归纳成三条可执行的纪律：</p>
+<h3 id="1-新分支必须复刻旧分支的全部形参"><a href="#1-新分支必须复刻旧分支的全部形参" class="headerlink" title="1. 新分支必须复刻旧分支的全部形参"></a>1. 新分支必须复刻旧分支的<strong>全部</strong>形参</h3>
+<p>写「新格式」分支时，把旧分支的形参列表拿出来逐条对照。编译器通常不会救你（参数未被使用未必是硬错误），测试也不会（除非你为新分支补齐同样的用例矩阵）。</p>
+<h3 id="2-多前缀实体删除必须集中管理"><a href="#2-多前缀实体删除必须集中管理" class="headerlink" title="2. 多前缀实体，删除必须集中管理"></a>2. 多前缀实体，删除必须集中管理</h3>
+<p>如果 <code>b:</code> 和 <code>k:</code> 是同一个逻辑实体的两半，那么**「清空」必须同时清两半**。把前缀定义收敛到一处，清理函数只依赖那处——而不是在两个地方各写一遍字符串。</p>
+<h3 id="3-拼接式-key-要有边界守卫"><a href="#3-拼接式-key-要有边界守卫" class="headerlink" title="3. 拼接式 key 要有边界守卫"></a>3. 拼接式 key 要有边界守卫</h3>
+<p>任何 <code>a + &quot;:&quot; + b</code> 形式的 key，都要问一句：<strong>a 或 b 里出现分隔符会怎样？</strong> 要么转义，要么在入口拒绝。不要假设调用方不会传。</p>
+<h2 id="七还有一个方法论"><a href="#七还有一个方法论" class="headerlink" title="七、还有一个方法论"></a>七、还有一个方法论</h2>
+<p>这次审计里最有用的一条，其实不是上面三条纪律，而是：</p>
+<blockquote>
+<p><strong>写完一个功能，先用「参数真的生效了吗」的方式验一遍，而不是「函数被调用了吗」。</strong></p>
+</blockquote>
+<p>举例：</p>
+<ul>
+<li>设 TTL → 等它过期，确认读不到（不是「确认 set 成功」）</li>
+<li>清空系列 → 查存储体积 / 引用计数，确认归零（不是「确认函数返回成功」）</li>
+<li>写标签 → 用构造出的歧义输入（带冒号的）反向验证不会串</li>
+</ul>
+<p><strong>「调用成功」和「生效」是两件事，而后者才是你真正需要的。</strong></p>
+<hr>
+<h2 id="附这些问题的数量级"><a href="#附这些问题的数量级" class="headerlink" title="附：这些问题的数量级"></a>附：这些问题的数量级</h2>
+<p>tsdb-cj 目前 114 个测试用例。这次审计一次性修掉 4 处静默失效 + 1 处窗口对齐错误，改动 8 个文件、390 行新增。</p>
+<p>值得说的是：<strong>这 4 处都不是新引入的 bug，而是从早期版本就存在</strong>——它们陪着代码跑了几十个版本、通过了每次全量测试。这大概就是「静默」二字最贴切的注脚。</p>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2026-10-19T11:00:00&#43;08:00" itemprop="dateUpdated">2026-10-19 11:00:00</time>
+          </span><br>
+          本文链接：<a href="/2026/10/19/tsdb-silent-failures/" target="_blank" rel="external">https://ystyle.top/2026/10/19/tsdb-silent-failures/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tsdb/">tsdb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E6%9F%A5%E5%AE%9E%E5%BD%95/">排查实录</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2ftsdb-silent-failures%2f&title=%e3%80%8atsdb-cj%20%e7%9a%84%e5%9b%9b%e6%ac%a1%e9%9d%99%e9%bb%98%e5%a4%b1%e6%95%88%ef%bc%9a%e4%bb%a3%e7%a0%81%e8%83%bd%e8%b7%91%e3%80%81%e6%b5%8b%e8%af%95%e8%83%bd%e8%bf%87%ef%bc%8c%e4%bd%86%e4%bb%80%e4%b9%88%e9%83%bd%e6%b2%a1%e5%8f%91%e7%94%9f%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2ftsdb-silent-failures%2f&title=%e3%80%8atsdb-cj%20%e7%9a%84%e5%9b%9b%e6%ac%a1%e9%9d%99%e9%bb%98%e5%a4%b1%e6%95%88%ef%bc%9a%e4%bb%a3%e7%a0%81%e8%83%bd%e8%b7%91%e3%80%81%e6%b5%8b%e8%af%95%e8%83%bd%e8%bf%87%ef%bc%8c%e4%bd%86%e4%bb%80%e4%b9%88%e9%83%bd%e6%b2%a1%e5%8f%91%e7%94%9f%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=tsdb-cj%20%e6%8e%92%e6%9f%a5%e7%ac%94%e8%ae%b0%0a%e6%9c%80%e5%8d%b1%e9%99%a9%e7%9a%84%e4%b8%8d%e6%98%af%e5%b4%a9%e6%ba%83%ef%bc%8c%e6%98%af%e3%80%8c%e7%9c%8b%e8%b5%b7%e6%9d%a5%e5%9c%a8%e5%b7%a5%e4%bd%9c%e3%80%8d%0atsdb-cj%20%e6%98%af%e5%9f%ba%e4%ba%8e%20badger-cj%20%e7%9a%84%e5%b5%8c%e5%85%a5%e5%bc%8f%e6%97%b6%e5%ba%8f%e6%95%b0%e6%8d%ae%e5%ba%93%ef%bc%8c%0a%e4%b9%9f%e6%98%af%e5%bf%86%e6%97%b6%e5%a1%94%20%e5%88%86%e5%b1%82%e8%ae%b0%e5%bf%86%e7%9a%84%e5%ad%98%e5%82%a8%e5%ba%95%e5%ba%a7%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2ftsdb-silent-failures%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8atsdb-cj%20%e7%9a%84%e5%9b%9b%e6%ac%a1%e9%9d%99%e9%bb%98%e5%a4%b1%e6%95%88%ef%bc%9a%e4%bb%a3%e7%a0%81%e8%83%bd%e8%b7%91%e3%80%81%e6%b5%8b%e8%af%95%e8%83%bd%e8%bf%87%ef%bc%8c%e4%bd%86%e4%bb%80%e4%b9%88%e9%83%bd%e6%b2%a1%e5%8f%91%e7%94%9f%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2ftsdb-silent-failures%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2ftsdb-silent-failures%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2026/10/19/bstorm-index-tradeoff/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">storm-cj 的索引代价：44 倍查询换来的写入腰斩</h4>
+        </a>
+      </div>
+      
+      
+    </nav>
+    
+
+    
+    
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+  </article>
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2ftsdb-silent-failures%2f&title=%e3%80%8atsdb-cj%20%e7%9a%84%e5%9b%9b%e6%ac%a1%e9%9d%99%e9%bb%98%e5%a4%b1%e6%95%88%ef%bc%9a%e4%bb%a3%e7%a0%81%e8%83%bd%e8%b7%91%e3%80%81%e6%b5%8b%e8%af%95%e8%83%bd%e8%bf%87%ef%bc%8c%e4%bd%86%e4%bb%80%e4%b9%88%e9%83%bd%e6%b2%a1%e5%8f%91%e7%94%9f%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2ftsdb-silent-failures%2f&title=%e3%80%8atsdb-cj%20%e7%9a%84%e5%9b%9b%e6%ac%a1%e9%9d%99%e9%bb%98%e5%a4%b1%e6%95%88%ef%bc%9a%e4%bb%a3%e7%a0%81%e8%83%bd%e8%b7%91%e3%80%81%e6%b5%8b%e8%af%95%e8%83%bd%e8%bf%87%ef%bc%8c%e4%bd%86%e4%bb%80%e4%b9%88%e9%83%bd%e6%b2%a1%e5%8f%91%e7%94%9f%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=tsdb-cj%20%e6%8e%92%e6%9f%a5%e7%ac%94%e8%ae%b0%0a%e6%9c%80%e5%8d%b1%e9%99%a9%e7%9a%84%e4%b8%8d%e6%98%af%e5%b4%a9%e6%ba%83%ef%bc%8c%e6%98%af%e3%80%8c%e7%9c%8b%e8%b5%b7%e6%9d%a5%e5%9c%a8%e5%b7%a5%e4%bd%9c%e3%80%8d%0atsdb-cj%20%e6%98%af%e5%9f%ba%e4%ba%8e%20badger-cj%20%e7%9a%84%e5%b5%8c%e5%85%a5%e5%bc%8f%e6%97%b6%e5%ba%8f%e6%95%b0%e6%8d%ae%e5%ba%93%ef%bc%8c%0a%e4%b9%9f%e6%98%af%e5%bf%86%e6%97%b6%e5%a1%94%20%e5%88%86%e5%b1%82%e8%ae%b0%e5%bf%86%e7%9a%84%e5%ad%98%e5%82%a8%e5%ba%95%e5%ba%a7%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2ftsdb-silent-failures%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8atsdb-cj%20%e7%9a%84%e5%9b%9b%e6%ac%a1%e9%9d%99%e9%bb%98%e5%a4%b1%e6%95%88%ef%bc%9a%e4%bb%a3%e7%a0%81%e8%83%bd%e8%b7%91%e3%80%81%e6%b5%8b%e8%af%95%e8%83%bd%e8%bf%87%ef%bc%8c%e4%bd%86%e4%bb%80%e4%b9%88%e9%83%bd%e6%b2%a1%e5%8f%91%e7%94%9f%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2ftsdb-silent-failures%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2ftsdb-silent-failures%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2026/10/19/tsdb-silent-failures/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+</body>
+</html>

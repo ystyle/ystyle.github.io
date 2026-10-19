@@ -4,12 +4,59 @@
   <subtitle>请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="https://ystyle.top/"/>
-  <updated>2026-10-16T02:00:00.000Z</updated>
+  <updated>2026-10-19T03:00:00.000Z</updated>
   <id>https://ystyle.top/</id>
   <author>
     <name>YSTYLE</name>
   </author>
   <generator uri="https://gohugo.io/">Hugo</generator>
+  <entry>
+    <title>tsdb-cj 的四次静默失效：代码能跑、测试能过，但什么都没发生</title>
+    <link href="https://ystyle.top/2026/10/19/tsdb-silent-failures/"/>
+    <id>https://ystyle.top/2026/10/19/tsdb-silent-failures/</id>
+    <published>2026-10-19T03:00:00.000Z</published>
+    <updated>2026-10-19T03:00:00.000Z</updated>
+    
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;tsdb-cj 排查笔记&lt;/strong&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;em&gt;最危险的不是崩溃，是「看起来在工作」&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;tsdb-cj 是基于 &lt;a href=&#34;/2026/10/10/badger-cj-porting-notes/&#34;&gt;badger-cj&lt;/a&gt;
+ 的嵌入式时序数据库，&lt;br&gt;
+也是&lt;a href=&#34;/2026/10/16/time-layered-memory-tower/&#34;&gt;忆时塔&lt;/a&gt;
+分层记忆的存储底座。&lt;br&gt;
+本文不谈它的设计，只讲一次审计里挖出来的四类问题——它们的共同点是：&lt;br&gt;
+&lt;strong&gt;代码能跑、测试能过、日志无错，但功能根本没生效。&lt;/strong&gt;&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
+    <category term="tsdb" scheme="https://ystyle.top/tags/tsdb/"/>
+    <category term="数据库" scheme="https://ystyle.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <category term="排查实录" scheme="https://ystyle.top/tags/%E6%8E%92%E6%9F%A5%E5%AE%9E%E5%BD%95/"/>
+    
+  </entry>
+  <entry>
+    <title>storm-cj 的索引代价：44 倍查询换来的写入腰斩</title>
+    <link href="https://ystyle.top/2026/10/19/bstorm-index-tradeoff/"/>
+    <id>https://ystyle.top/2026/10/19/bstorm-index-tradeoff/</id>
+    <published>2026-10-19T02:00:00.000Z</published>
+    <updated>2026-10-19T02:00:00.000Z</updated>
+    
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;storm-cj（bstorm）设计笔记 · 上篇&lt;/strong&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;em&gt;把写吞吐砍掉一半，换 44 倍查询——这笔账怎么算&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这是仓颉版 storm 的第一篇。上一篇关于 storm 的文章还是 2019 年写的&lt;br&gt;
+&lt;a href=&#34;/2019/12/22/how-to-use-storm-db/&#34;&gt;Go 版 storm 的使用&lt;/a&gt;
+——bstorm 的灵感就来自它，&lt;br&gt;
+但实现完全不同：Go 版架在 BoltDB 上，bstorm 架在&lt;a href=&#34;/2026/10/10/badger-cj-porting-notes/&#34;&gt;自研的 LSM 引擎 badger-cj&lt;/a&gt;
+ 上。&lt;br&gt;
+本文讲索引带来的取舍，不讲 LSM 基础（那个在前四篇里）。&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
+    <category term="bstorm" scheme="https://ystyle.top/tags/bstorm/"/>
+    <category term="数据库" scheme="https://ystyle.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <category term="索引" scheme="https://ystyle.top/tags/%E7%B4%A2%E5%BC%95/"/>
+    <category term="性能优化" scheme="https://ystyle.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
   <entry>
     <title>给 Agent 造一座记忆塔（二）：我去测了它，错了两次</title>
     <link href="https://ystyle.top/2026/10/16/time-layered-memory-measured/"/>
@@ -393,47 +440,6 @@
     <category term="AI" scheme="https://ystyle.top/tags/AI/"/>
     <category term="Protocol" scheme="https://ystyle.top/tags/Protocol/"/>
     <category term="Abandoned" scheme="https://ystyle.top/tags/Abandoned/"/>
-    
-  </entry>
-  <entry>
-    <title>鸿蒙PC Matebook Pro上全局安装GIT</title>
-    <link href="https://ystyle.top/2025/12/28/matebookpro-install-git/"/>
-    <id>https://ystyle.top/2025/12/28/matebookpro-install-git/</id>
-    <published>2025-12-28T02:30:00.000Z</published>
-    <updated>2025-12-28T02:30:00.000Z</updated>
-    
-    <summary type="html">&lt;h2 id=&#34;新方法&#34;&gt;&lt;a href=&#34;#新方法&#34; class=&#34;headerlink&#34; title=&#34;新方法&#34;&gt;&lt;/a&gt;新方法&lt;/h2&gt;
-&lt;p&gt;直接在应用商店搜索安装&lt;code&gt;GitNext&lt;/code&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;准备工作&#34;&gt;&lt;a href=&#34;#准备工作&#34; class=&#34;headerlink&#34; title=&#34;准备工作&#34;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;在鸿蒙应用商店安装 CodeArts IDE&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;从CodeArts-IDE提取签名工具&#34;&gt;&lt;a href=&#34;#从CodeArts-IDE提取签名工具&#34; class=&#34;headerlink&#34; title=&#34;从CodeArts IDE提取签名工具&#34;&gt;&lt;/a&gt;从CodeArts IDE提取签名工具&lt;/h2&gt;
-&lt;p&gt;打开IDE, 随便创建一个项目打开，在终端执行以下命令&lt;/p&gt;</summary>
-    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
-    <category term="鸿蒙" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
-    <category term="鸿蒙PC" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/"/>
-    <category term="GIT" scheme="https://ystyle.top/tags/GIT/"/>
-    <category term="matebook-pro" scheme="https://ystyle.top/tags/matebook-pro/"/>
-    
-  </entry>
-  <entry>
-    <title>Neovim移植鸿蒙PC：三方库适配实战与挑战解析</title>
-    <link href="https://ystyle.top/2025/12/27/matebookpro-port-nvim-deps/"/>
-    <id>https://ystyle.top/2025/12/27/matebookpro-port-nvim-deps/</id>
-    <published>2025-12-27T11:00:00.000Z</published>
-    <updated>2025-12-27T11:00:00.000Z</updated>
-    
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;本文记录将Neovim编辑器移植到HarmonyOS PC过程中，对11个核心依赖库的适配实战经验，涵盖平台差异分析、API限制处理、构建系统改造等关键问题。&lt;/p&gt;</summary>
-    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
-    <category term="鸿蒙" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99/"/>
-    <category term="鸿蒙PC" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/"/>
-    <category term="neovim" scheme="https://ystyle.top/tags/neovim/"/>
-    <category term="livub" scheme="https://ystyle.top/tags/livub/"/>
-    <category term="luajit" scheme="https://ystyle.top/tags/luajit/"/>
-    <category term="matebook-pro" scheme="https://ystyle.top/tags/matebook-pro/"/>
     
   </entry>
 </feed>

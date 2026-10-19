@@ -10,9 +10,23 @@
 		
 		
 		
-			<lastBuildDate>Fri, 16 Oct 2026 10:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Mon, 19 Oct 2026 11:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>tsdb-cj 的四次静默失效：代码能跑、测试能过，但什么都没发生</title>
+				<link>https://ystyle.top/2026/10/19/tsdb-silent-failures/</link>
+				<pubDate>Mon, 19 Oct 2026 11:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/19/tsdb-silent-failures/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;tsdb-cj 排查笔记&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;最危险的不是崩溃，是「看起来在工作」&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;tsdb-cj 是基于 &lt;a href=&#34;https://ystyle.top/2026/10/10/badger-cj-porting-notes/&#34;&gt;badger-cj&lt;/a&gt;&#xA; 的嵌入式时序数据库，&lt;br&gt;&#xA;也是&lt;a href=&#34;https://ystyle.top/2026/10/16/time-layered-memory-tower/&#34;&gt;忆时塔&lt;/a&gt;&#xA;分层记忆的存储底座。&lt;br&gt;&#xA;本文不谈它的设计，只讲一次审计里挖出来的四类问题——它们的共同点是：&lt;br&gt;&#xA;&lt;strong&gt;代码能跑、测试能过、日志无错，但功能根本没生效。&lt;/strong&gt;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>storm-cj 的索引代价：44 倍查询换来的写入腰斩</title>
+				<link>https://ystyle.top/2026/10/19/bstorm-index-tradeoff/</link>
+				<pubDate>Mon, 19 Oct 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/19/bstorm-index-tradeoff/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;storm-cj（bstorm）设计笔记 · 上篇&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;把写吞吐砍掉一半，换 44 倍查询——这笔账怎么算&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这是仓颉版 storm 的第一篇。上一篇关于 storm 的文章还是 2019 年写的&lt;br&gt;&#xA;&lt;a href=&#34;https://ystyle.top/2019/12/22/how-to-use-storm-db/&#34;&gt;Go 版 storm 的使用&lt;/a&gt;&#xA;——bstorm 的灵感就来自它，&lt;br&gt;&#xA;但实现完全不同：Go 版架在 BoltDB 上，bstorm 架在&lt;a href=&#34;https://ystyle.top/2026/10/10/badger-cj-porting-notes/&#34;&gt;自研的 LSM 引擎 badger-cj&lt;/a&gt;&#xA; 上。&lt;br&gt;&#xA;本文讲索引带来的取舍，不讲 LSM 基础（那个在前四篇里）。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>给 Agent 造一座记忆塔（二）：我去测了它，错了两次</title>
 				<link>https://ystyle.top/2026/10/16/time-layered-memory-measured/</link>
@@ -138,20 +152,6 @@
 				<pubDate>Sat, 01 Jan 2022 22:46:26 +0800</pubDate>
 				<guid>https://ystyle.top/2022/01/01/aliyundrive-webdav/</guid>
 				<description>&lt;h3 id=&#34;下载aliyundrive-webdav&#34;&gt;&lt;a href=&#34;#下载aliyundrive-webdav&#34; class=&#34;headerlink&#34; title=&#34;下载aliyundrive-webdav&#34;&gt;&lt;/a&gt;下载aliyundrive-webdav&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;下载地址: &lt;a href=&#34;https://github.com/messense/aliyundrive-webdav/releases/latest&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://github.com/messense/aliyundrive-webdav/releases/latest&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;解压并放在一个目录里&lt;br&gt;&#xA;&#xA;&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://dll.ystyle.top/images/2022-01/explorer_2022-01-01_23-16-55.png&#34; alt=&#34;&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;准备脚本&#34;&gt;&lt;a href=&#34;#准备脚本&#34; class=&#34;headerlink&#34; title=&#34;准备脚本&#34;&gt;&lt;/a&gt;准备脚本&lt;/h3&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;把以下内容存为run.ps1&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#953800&#34;&gt;$env:REFRESH_TOKEN&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;484b469b3ef74dcaba5cf21aeadae2ca&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#953800&#34;&gt;$env:WEBDAV_AUTH_USER&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;admin&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#953800&#34;&gt;$env:WEBDAV_AUTH_PASSWORD&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;123456&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;Start-Process&lt;/span&gt; -FilePath &lt;span style=&#34;color:#6639ba&#34;&gt;aliyundrive-webdav&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;exe -ArgumentList &lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;--port=8080&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt; -Wait -WindowStyle Hidden&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;脚本配置说明:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;code&gt;$env:REFRESH_TOKEN&lt;/code&gt;: 为阿里云网盘登陆后的token, 必需改为自己的&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/messense/aliyundrive-webdav#%E8%8E%B7%E5%8F%96-refresh_token&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;获取阿里云网盘REFRESH_TOKEN的方法&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;code&gt;$env:WEBDAV_AUTH_USER&lt;/code&gt;： webdav用户名&lt;/p&gt;</description>
-			</item>
-			<item>
-				<title>go mod 拉取 gogs 私有仓库</title>
-				<link>https://ystyle.top/2021/06/22/go-mod-gogs-private/</link>
-				<pubDate>Tue, 22 Jun 2021 10:46:26 +0800</pubDate>
-				<guid>https://ystyle.top/2021/06/22/go-mod-gogs-private/</guid>
-				<description>&lt;h3 id=&#34;环境变量设置&#34;&gt;&lt;a href=&#34;#环境变量设置&#34; class=&#34;headerlink&#34; title=&#34;环境变量设置&#34;&gt;&lt;/a&gt;环境变量设置&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;添加环境变量或设置go env&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;export GOPRIVATE=git.hofo.co&#xA;# 或者&#xA;go env -w GOPRIVATE=git.hofo.co&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;git设置&#34;&gt;&lt;a href=&#34;#git设置&#34; class=&#34;headerlink&#34; title=&#34;git设置&#34;&gt;&lt;/a&gt;git设置&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;在git设置http.extraheader&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;PRIVATE-TOKEN&lt;/code&gt;生成方式:  在点击gogs右上头像-用户设置-授权应用-生成新的token&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git config --global http.extraheader &lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;PRIVATE-TOKEN: 5737d215af7f9a41a2abe98631d312e9e9311d29d&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;&#xA;&lt;li&gt;在git添加url配置, &lt;code&gt;ystyle:5737d215af7f9a41a2abe98631d312e9e939d29d11&lt;/code&gt;是用户名和上一步生成的token&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git config --global url.&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;https://ystyle:5737d215af7f9a41a2abe98631d312e9e939d29d11@git.hofo.co&amp;#34;&lt;/span&gt;.insteadOf &lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;https://git.hofo.co&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-			</item>
-			<item>
-				<title>Quest2 使用Netch激活与无线串流的设置</title>
-				<link>https://ystyle.top/2020/12/06/quest2/</link>
-				<pubDate>Sun, 06 Dec 2020 01:30:26 +0800</pubDate>
-				<guid>https://ystyle.top/2020/12/06/quest2/</guid>
-				<description>&lt;h1 id=&#34;Quest2-激活与无线串流的设置&#34;&gt;&lt;a href=&#34;#Quest2-激活与无线串流的设置&#34; class=&#34;headerlink&#34; title=&#34;Quest2 激活与无线串流的设置&#34;&gt;&lt;/a&gt;Quest2 激活与无线串流的设置&lt;/h1&gt;&#xA;&lt;h3 id=&#34;更新后自带Airlink串流，不需要买virtual-desktop了&#34;&gt;&lt;a href=&#34;#更新后自带Airlink串流，不需要买virtual-desktop了&#34; class=&#34;headerlink&#34; title=&#34;更新后自带Airlink串流，不需要买virtual desktop了&#34;&gt;&lt;/a&gt;更新后自带Airlink串流，不需要买virtual desktop了&lt;/h3&gt;&#xA;&lt;h3 id=&#34;连网激活&#34;&gt;&lt;a href=&#34;#连网激活&#34; class=&#34;headerlink&#34; title=&#34;连网激活&#34;&gt;&lt;/a&gt;连网激活&lt;/h3&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;需要可上网，与tcp、udp转发， 激活更新系统时需要udp转发才能正常更新系统, 本方法完美支持，只需要有支持wifi网卡的电脑&lt;/p&gt;</description>
 			</item>
 	</channel>
 </rss>

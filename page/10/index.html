@@ -151,6 +151,57 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-Docker-搭建redis-集群" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2015-10-20T15:47:13&#43;08:00" itemprop="datePublished">2015-10-20</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2015/10/20/Docker-%E6%90%AD%E5%BB%BAredis-%E9%9B%86%E7%BE%A4/">Docker 搭建redis 集群</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          Docker 搭建redis 集群 准备工作 创建一个目录用保存redis-slave的配置文件
+mkdir/data/docker/redis/ wget https://raw.githubusercontent.com/antirez/redis/3.0/redis.conf \ -O /data/docker/redis/redis.conf 安装redis docker pull redis 修改redis-slave配置文件 # 修改 /data/docker/redis/redis.conf 的slaveof属性为redis-master 6379 cd /data/docker/redis/ sed -i &#39;s/# slaveof &lt;masterip&gt; &lt;masterport&gt;/slaveof redis-master 6379/g&#39; redis.conf 启动服务 启动redis-master、 redis-slave1、 redis-slave2、 redis-slave3
+
+          <a href="/2015/10/20/Docker-%E6%90%AD%E5%BB%BAredis-%E9%9B%86%E7%BE%A4/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
+      <article id="post-送给程序员：关于性格内向者的10个误解" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2015-10-02T08:15:24&#43;08:00" itemprop="datePublished">2015-10-02</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E9%AD%94%E7%9B%92/">魔盒</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2015/10/02/song-gei-cheng-xu-yuan-guan-yu-xing-ge-nei-xiang-zhe-de-10ge-wu-jie/">送给程序员：关于性格内向者的10个误解</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+           我非常幸运的发现了这本《内向者优势——如何在外向的世界中获得成功》 （英文名：The Introvert Advantage (How To Thrive in an Extrovert World) ）的好书，我感觉就好像是有人专门为我们这个罕见的小群体写了一部百科全书一样，它不仅对我的很多怪癖做了解释，还帮助我从一个崭新且积极的角度重新定义了我的整个人生。
+
+          <a href="/2015/10/02/song-gei-cheng-xu-yuan-guan-yu-xing-ge-nei-xiang-zhe-de-10ge-wu-jie/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%90%91/">内向</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%A7%E6%A0%BC/">性格</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-Centos-7-docker-启动容器iptables报No-chain-target-match-by-that-name" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2015-09-24T03:53:48&#43;08:00" itemprop="datePublished">2015-09-24</time>
@@ -362,67 +413,6 @@ docker run -d -p 49160:22 -p 49161:1521 wnameless/oracle-xe-11g 数据库连接�
         <div class="post-footer">
           
           <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GIT/">GIT</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-缘尽世间" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2015-06-26T16:43:22&#43;08:00" itemprop="datePublished">2015-06-26</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E9%AD%94%E7%9B%92/">魔盒</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2015/06/26/yuan-jin-shi-jian/">缘尽世间</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-           天地间
-有你我的缘
-交汇在前世和今生之间
-忘不了你一身的绒血
-回响在轮回的夜
-回忆的瞬间
-看见你的眼
-停留在最初和你遇见
-放不下今生的一段缘
-消失在山的另一面
-问苍天
-悲欢离合谁是谁非
-
-          <a href="/2015/06/26/yuan-jin-shi-jian/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9F%B3%E4%B9%90/">音乐</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-每日一笑" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2015-06-23T08:32:17&#43;08:00" itemprop="datePublished">2015-06-23</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E9%AD%94%E7%9B%92/">魔盒</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2015/06/23/mei-ri-xiao-2/">每日一笑</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-          晚上十二点后睡觉等于慢性自杀，不吃早餐等于慢性自杀，经常烧烤等于慢性自杀，手机24小时开机等于慢性自杀，长期呆室内等于慢性自杀，缺乏锻炼等于慢性自杀。 我突然发现，我一天啥都没干，光TM自杀了！
-
-          <a href="/2015/06/23/mei-ri-xiao-2/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%91%E8%AF%9D/">笑话</a></li></ul>
           
         </div>
       </article>

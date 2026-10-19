@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>bstorm on 东方星痕</title>
+		<link>https://ystyle.top/tags/bstorm/</link>
+		<description>Recent content in bstorm on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Mon, 19 Oct 2026 10:00:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/bstorm/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>storm-cj 的索引代价：44 倍查询换来的写入腰斩</title>
+				<link>https://ystyle.top/2026/10/19/bstorm-index-tradeoff/</link>
+				<pubDate>Mon, 19 Oct 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/19/bstorm-index-tradeoff/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;storm-cj（bstorm）设计笔记 · 上篇&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;把写吞吐砍掉一半，换 44 倍查询——这笔账怎么算&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这是仓颉版 storm 的第一篇。上一篇关于 storm 的文章还是 2019 年写的&lt;br&gt;&#xA;&lt;a href=&#34;https://ystyle.top/2019/12/22/how-to-use-storm-db/&#34;&gt;Go 版 storm 的使用&lt;/a&gt;&#xA;——bstorm 的灵感就来自它，&lt;br&gt;&#xA;但实现完全不同：Go 版架在 BoltDB 上，bstorm 架在&lt;a href=&#34;https://ystyle.top/2026/10/10/badger-cj-porting-notes/&#34;&gt;自研的 LSM 引擎 badger-cj&lt;/a&gt;&#xA; 上。&lt;br&gt;&#xA;本文讲索引带来的取舍，不讲 LSM 基础（那个在前四篇里）。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

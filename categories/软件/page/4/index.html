@@ -149,6 +149,59 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-嵌入式数据库storm的使用" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2019-12-22T14:46:26&#43;08:00" itemprop="datePublished">2019-12-22</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2019/12/22/how-to-use-storm-db/">嵌入式数据库storm的使用</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+           storm是一个使用BoltDB的上层orm框架
+地址: 数据查看工具 : https://github.com/br0xen/boltbrowser 驱动 : https://github.com/asdine/storm 初始化 db, err := storm.Open(&#34;my.db&#34;) defer db.Close() 定义对象模型 type User struct { ID int // primary key Group string `storm:&#34;index&#34;` // this field will be indexed Email string `storm:&#34;unique&#34;` // this field will be indexed with a unique constraint Name string // this field will not be indexed Age int `storm:&#34;index&#34;` } 自增可以在主键上添加tag: storm:&quot;id,increment=2&quot; =2是自增步长
+
+          <a href="/2019/12/22/how-to-use-storm-db/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BoltDB/">BoltDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/storm/">storm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
+      <article id="post-Beat Saber mod安装整理" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2019-04-05T14:46:26&#43;08:00" itemprop="datePublished">2019-04-05</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2019/04/05/beat-saber-mod-install/">Beat Saber mod安装方法</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          一定要先把Plugins目录删掉 下载安装ModAssistant 新版的mod管理器 下载连接: https://github.com/Assistant/ModAssistant/releases/latest 不要用BeatDrop了， bug太多了 使用方法 点击I Agree同意
+选择需要的mod然后点右下角的Install or Update
+至于设置，不设置也可以，但我是这么选择的
+最简安装需要的mod mod 名称 说明 SongLoader 自定义歌曲加载 ScoreSaber 分数上传 SongBrowser 歌曲排序过滤 Counters+ 游戏内统计插件 BeatSaverDownloader 游戏内歌曲下载插件 Custom Sabers 自定义光剑 SyncSaber Bsaber歌单同步插件要注册bsaber 其它mod推荐 mod 名称 说明 Custom Colors 自定义颜色 Custom Avatars 自定义人物 Custom Platforms 自定义场景 Camera+ 第一/三人称切换 BeatSaberDrinkWater 健康提醒功能：提醒您在玩多长时间/数量的歌曲后喝点水！ YUR Fit Calorie Tracker 计算游戏消耗的卡路里 AutoPause 网络/fps不好时自动暂停 相关网站 第三方曲谱 排名网站 bsaber Beat drop MOD/音乐管理器 这里能下载歌曲、光剑、舞台、人物 新的mod网站 Beat saber的wiki(英文) 里边有mod的安装方法之类的 
+          <a href="/2019/04/05/beat-saber-mod-install/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Beat-Saber/">Beat Saber</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VR/">VR</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-使用dat代替resilio sync分享数据" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2018-12-03T15:57:33&#43;08:00" itemprop="datePublished">2018-12-03</time>

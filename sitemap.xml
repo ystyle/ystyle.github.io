@@ -2,19 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://ystyle.top/tags/Agent%E8%AE%B0%E5%BF%86/</loc>
-    <lastmod>2026-10-16T10:00:00+08:00</lastmod>
-  </url><url>
     <loc>https://ystyle.top/tags/Cangjie/</loc>
+    <lastmod>2026-10-19T11:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/tsdb/</loc>
+    <lastmod>2026-10-19T11:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/2026/10/19/tsdb-silent-failures/</loc>
+    <lastmod>2026-10-19T11:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/</loc>
+    <lastmod>2026-10-19T11:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/%E6%8E%92%E6%9F%A5%E5%AE%9E%E5%BD%95/</loc>
+    <lastmod>2026-10-19T11:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/</loc>
+    <lastmod>2026-10-19T11:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2026-10-19T11:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/bstorm/</loc>
+    <lastmod>2026-10-19T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/2026/10/19/bstorm-index-tradeoff/</loc>
+    <lastmod>2026-10-19T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/%E7%B4%A2%E5%BC%95/</loc>
+    <lastmod>2026-10-19T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2026-10-19T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/Agent%E8%AE%B0%E5%BF%86/</loc>
     <lastmod>2026-10-16T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/chronomem/</loc>
     <lastmod>2026-10-16T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/MCP/</loc>
-    <lastmod>2026-10-16T10:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://ystyle.top/</loc>
     <lastmod>2026-10-16T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/2026/10/16/time-layered-memory-measured/</loc>
@@ -24,9 +51,6 @@
     <lastmod>2026-10-16T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</loc>
-    <lastmod>2026-10-16T10:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/</loc>
     <lastmod>2026-10-16T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/%E5%BF%86%E6%97%B6%E5%A1%94/</loc>
@@ -89,9 +113,6 @@
     <loc>https://ystyle.top/2026/10/13/badger-cj-benchmark-method/</loc>
     <lastmod>2026-10-13T10:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://ystyle.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2026-10-13T10:00:00+08:00</lastmod>
-  </url><url>
     <loc>https://ystyle.top/tags/%E7%A7%BB%E6%A4%8D/</loc>
     <lastmod>2026-10-13T10:00:00+08:00</lastmod>
   </url><url>
@@ -111,9 +132,6 @@
     <lastmod>2026-09-09T23:30:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/2026/09/09/chronomem-oom-hunt/</loc>
-    <lastmod>2026-09-09T23:30:00+08:00</lastmod>
-  </url><url>
-    <loc>https://ystyle.top/tags/%E6%8E%92%E6%9F%A5%E5%AE%9E%E5%BD%95/</loc>
     <lastmod>2026-09-09T23:30:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/%E6%88%B4%E6%A3%AE%E7%90%83/</loc>
