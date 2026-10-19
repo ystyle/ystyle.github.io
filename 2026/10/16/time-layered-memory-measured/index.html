@@ -781,7 +781,7 @@
 <p><strong>（c）这条链不是定点压缩器。</strong> 成立的表述是：<strong>这条链从不丢失它没被给到的信息，且压缩量正比于输入的多样度。</strong></p>
 <h2 id="四结果三真实语料上活下来的是名字"><a href="#四结果三真实语料上活下来的是名字" class="headerlink" title="四、结果三：真实语料上，活下来的是名字"></a>四、结果三：真实语料上，活下来的是名字</h2>
 <h3 id="盲测不走-llm-也能召回精确事实"><a href="#盲测不走-llm-也能召回精确事实" class="headerlink" title="盲测：不走 LLM 也能召回精确事实"></a>盲测：不走 LLM 也能召回精确事实</h3>
-<p><strong>设计。</strong> 我先自己从工作日志里读出六个事实（一次 OOM 事故的根因与两项修复；一次重试/退避策略变更及其理由；一次产品改名以及有意不改的部分；一处关于两组件关系的文档订正；三天摘要缺失的根因；一次模型 A/B 对照及其 prefill 吞吐）。然后派一个 agent，其<strong>唯一</strong>信息源是经由 MCP 的记忆服务——<strong>不访问仓库、不上网、不用先验知识</strong>。</p>
+<p><strong>设计。</strong> 我先自己从工作日志里读出六个事实（一次 OOM 事故的原因与两项修复；一次重试/退避策略变更及其理由；一次产品改名以及有意不改的部分；一处关于两组件关系的文档订正；三天摘要缺失的原因；一次模型 A/B 对照及其 prefill 吞吐）。然后派一个 agent，其<strong>唯一</strong>信息源是经由 MCP 的记忆服务——<strong>不访问仓库、不上网、不用先验知识</strong>。</p>
 <p><strong>结果：6/6 全对，且全部经由 <code>exact</code> 路径答出</strong>（沿引用链下钻，回路中不调用 LLM）。</p>
 <p>答出的内容包括精确的操作细节：常驻内存 30–60 MB 对瞬时峰值 217–240 MB、堆上限由 256 MB 提到 1 GB、prefill 吞吐 317 对 267 tok/s，以及改名时<strong>有意保留</strong>的那几个键及其理由。</p>
 <p>这正是上篇那个成本不对称的主张，现在是被<strong>测量</strong>而非被论证的：<strong>单靠无 LLM 路径，就能召回两个月前的具体操作性事实。</strong></p>
@@ -825,7 +825,7 @@
 <li>判定者称「周摘要就是最后一天的天摘要集合」<br>
 → ❌ <strong>推翻</strong>——逐日比对只有 0–1 个分组逐字相同。</li>
 <li>判定者称某天摘要「完全略去了 chronomem 组；整条因果链与全部数字都没了」<br>
-→ ❌ <strong>推翻</strong>——该组存在且完整，包含根因链与 <code>OOM</code>、<code>sseCond</code>、<code>CLOSE_WAIT</code>、<code>心跳</code> 等词。</li>
+→ ❌ <strong>推翻</strong>——该组存在且完整，包含原因链与 <code>OOM</code>、<code>sseCond</code>、<code>CLOSE_WAIT</code>、<code>心跳</code> 等词。</li>
 </ol>
 <p>两个被推翻的主张<strong>朝同一个方向偏</strong>：断言了一个并不存在的缺失。判定者的<strong>计数</strong>（intact/partial/absent 分布）同样因此不可引用。</p>
 <p>判定者仍有一项用处：<strong>它们指向了正确的现象</strong>——「周输出逐字节相同」这件事是真的，而追查它引出了上一节按输入规模的分析。但<strong>方向与数字必须来自机械的重新测量</strong>。</p>

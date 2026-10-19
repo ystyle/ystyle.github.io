@@ -427,7 +427,7 @@ cond.signalAll()    // 完成后立刻通知
 </code></pre><p>现象非常确定，<code>-O2</code> 和 <code>-O0</code> 都能复现。我当时判断这是编译器的代码生成缺陷，整理了单文件最小复现上报到官方 issue。</p>
 <h3 id="结论是我自己写错了"><a href="#结论是我自己写错了" class="headerlink" title="结论：是我自己写错了"></a>结论：是我自己写错了</h3>
 <p>官方回复：<strong>误报</strong>。</p>
-<p>根因不在编译器，而在我那份复现程序里——它违反了仓颉的一条语义：</p>
+<p>问题不在编译器，而在我那份复现程序里——它违反了仓颉的一条语义：</p>
 <blockquote>
 <p><strong><code>Array</code> 的切片是共享底层存储的视图，不是拷贝。</strong></p>
 </blockquote>

@@ -355,7 +355,7 @@ try {
 </span></span></code></pre></div><p>这条链在 9 月 5 日爆发了两次。第一次是 <strong>08:57 起写路径全断 3 小时以上</strong>，本地用 16MB 的 <code>memTableSize</code> 复现出「第 18 条必 OOM」，同一款空消息异常。</p>
 <p>修复分两步落地：</p>
 <ol>
-<li><strong><code>memTableSize</code> 默认 16MB → 4MB</strong>（arena 32MB → 8MB）。根因不是「内存给小了」，而是 <strong>同步 flush 的峰值与 memtable 规模不匹配</strong>——当时拍板的思路是：<em>数据量这么小，不该去调大内存</em>。</li>
+<li><strong><code>memTableSize</code> 默认 16MB → 4MB</strong>（arena 32MB → 8MB）。真正的原因不是「内存给小了」，而是 <strong>同步 flush 的峰值与 memtable 规模不匹配</strong>——当时拍板的思路是：<em>数据量这么小，不该去调大内存</em>。</li>
 <li><strong>入口限长</strong>。另一路排查发现，一个 <strong>950KB 的病态 body</strong> 在处理链上瞬时分配了约 <strong>200MB</strong>，直接把 256MB 的堆顶爆（GC 日志里 <code>GCReason: oom</code> 在 261MB 处是铁证）。于是在 HTTP 层加了 <strong>Content-Length 预检</strong>（&gt;512KB 直接 413，零解析零读入），业务层再加 <strong>payload 限长 256KB</strong>。</li>
 </ol>
 <p>限长上线后的端到端验证很直观：<strong>50 个 950KB 病态请求连发，全部 413 秒回，零 OOM</strong>；而修复前大约 15 条就会把服务卡死。</p>
@@ -392,7 +392,7 @@ try {
 </ol>
 <p>修复后 <code>receiveLoop</code> 在边界捕获系统级 <code>Error</code>，只记录、不逃逸。这条经验后来被推广到所有「主循环」型代码。</p>
 <h3 id="mcp-cj：SSE-长连接里的幽灵"><a href="#mcp-cj：SSE-长连接里的幽灵" class="headerlink" title="mcp-cj：SSE 长连接里的幽灵"></a>mcp-cj：SSE 长连接里的幽灵</h3>
-<p><code>mcp-cj</code> 是 MCP 服务端框架。早在 8 月 26 日，它就因为「断连写异常杀死服务器 + SSE 不刷响应头」做过一轮健壮性加固（v2.3.5）。但那只是<strong>症状层</strong>的包扎。真正的根因要到 9 月 9 日才现形。</p>
+<p><code>mcp-cj</code> 是 MCP 服务端框架。早在 8 月 26 日，它就因为「断连写异常杀死服务器 + SSE 不刷响应头」做过一轮健壮性加固（v2.3.5）。但那只是<strong>症状层</strong>的包扎。真正的原因要到 9 月 9 日才现形。</p>
 <h2 id="转折点：一句朴素的直觉"><a href="#转折点：一句朴素的直觉" class="headerlink" title="转折点：一句朴素的直觉"></a>转折点：一句朴素的直觉</h2>
 <blockquote>
 <p>「我怎么感觉我每次进去界面后都出了问题（虽然可能不相关）。」</p>
