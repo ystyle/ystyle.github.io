@@ -449,7 +449,7 @@ llvm-objcopy --remove-section .codesign in.so out.so
 # ---- 实时看验签判定 ----
 hdc shell "hilog -x | grep -E 'code_protect|CODE_SIGN'"
 
-# ---- 打开内核日志后再复现（根因证据在这里）----
+# ---- 打开内核日志后再复现（原因证据在这里）----
 hdc shell "hilog -k on; hilog -w start -t kmsg"
 hdc shell "hilog -t kmsg" | grep -E "fsverity|hmcrypt"
 ```
