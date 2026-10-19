@@ -867,7 +867,13 @@
 <h3 id="51-为什么-adhoc-能跑却不能声明权限"><a href="#51-为什么-adhoc-能跑却不能声明权限" class="headerlink" title="5.1 为什么 adhoc 能跑，却不能声明权限"></a>5.1 为什么 adhoc 能跑，却不能声明权限</h3>
 <p>因为<strong>完整性和来源是两件事</strong>，而 adhoc 只解决了前一件。</p>
 <p><code>signature</code> 字段填的是描述符自身的摘要，它能证明的只有一件事：<em>&ldquo;这份文件从签名那一刻起，一个字节都没被改过。&rdquo;</em> 它证明不了&quot;这是谁签的&quot;——因为这个摘要不是任何主体签出来的，<strong>没有一个可以为之背书的身份</strong>。</p>
-<p>而权限授予的对象恰恰是身份。回头看签名工具那段代码就很直白：自签名分支里<strong>根本没有证书参与</strong>，产出的也不是 PKCS7，只是一个自证的摘要。既然&quot;签发者&quot;这个信息从一开始就不存在，运行时自然也换不出任何身份——你不是&quot;某个被信任的签发者&quot;，只是&quot;本机上存在的一个文件&quot;。</p>
+<p>而权限授予的对象恰恰是身份。回头看签名工具那段代码就很直白：自签名分支里<strong>根本没有证书参与</strong>，产出的也不是 PKCS7，只是一个自证的摘要。既然&quot;签发者&quot;这个信息从一开始就不存在，运行时自然也换不出任何身份——你不是&quot;某个被信任的签发者&quot;，只是&quot;一个自我校验通过的 ELF 文件&quot;。</p>
+<blockquote>
+<p>⚠️ 顺带纠一个常见误解：<strong>自签名不绑定设备。</strong> <code>.codesign</code> 段里只有文件自身的大小、<br>
+merkle 根哈希和摘要，<strong>没有任何设备标识</strong>，所以产物可以拷到别的鸿蒙 PC 上直接运行。<br>
+绑定设备的是<strong>调试证书</strong>——它走 <code>device-ids</code> 里的 UDID 白名单（见 5.2）。<br>
+也就是说 adhoc 的&quot;弱&quot;在于<strong>没有身份</strong>，而不是&quot;只在这台机器上有效&quot;。</p>
+</blockquote>
 <p>所以 <strong>【官方】</strong>&ldquo;自签名的二进制（adhoc）权限策略段运行过程不会生效&quot;这句话要这么理解：<strong>不是策略段没写进去，而是没有一个主体来认领它。</strong> 你就算把 <code>-moduleFile</code> 传进去、<code>.permission</code> 段也确实被写进了 ELF，运行时依然不会有任何权限上身。</p>
 <h3 id="52-为什么调试证书要求开发者模式--绑定-udid"><a href="#52-为什么调试证书要求开发者模式--绑定-udid" class="headerlink" title="5.2 为什么调试证书要求开发者模式 + 绑定 UDID"></a>5.2 为什么调试证书要求开发者模式 + 绑定 UDID</h3>
 <p>这两条是同一个设计意图的<strong>两道锁</strong>：把&quot;开发期凭证&quot;的影响半径压到开发者自己的机器上。</p>
