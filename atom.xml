@@ -11,19 +11,19 @@
   </author>
   <generator uri="https://gohugo.io/">Hugo</generator>
   <entry>
-    <title>holt-cj：720 行的图数据库，能干什么、干不了什么</title>
+    <title>holt-cj 1.1.0：从 720 行长到 3300 行的图数据库</title>
     <link href="https://ystyle.top/2026/10/22/holt-cj-graph-db/"/>
     <id>https://ystyle.top/2026/10/22/holt-cj-graph-db/</id>
     <published>2026-10-22T02:00:00.000Z</published>
-    <updated>2026-10-22T02:00:00.000Z</updated>
+    <updated>2026-10-22T07:30:00.000Z</updated>
     
-    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;holt-cj 介绍&lt;/strong&gt;&lt;/p&gt;
-&lt;p align=&#34;center&#34;&gt;&lt;em&gt;一个小图库的边界清单&lt;/em&gt;&lt;/p&gt;
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;holt-cj 1.1.0 介绍&lt;/strong&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;em&gt;能力补齐了，限制也写清楚了&lt;/em&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;holt-cj 是基于 &lt;a href=&#34;/2026/10/10/badger-cj-porting-notes/&#34;&gt;badger-cj&lt;/a&gt;
  的嵌入式图数据库。&lt;br&gt;
-它只有 720 行实现代码，所以本文不打算把它讲成一个大项目——&lt;br&gt;
-而是&lt;strong&gt;把它的能力和边界一条条列清楚&lt;/strong&gt;，方便你判断能不能用。&lt;/p&gt;</summary>
+这个库在 1.1.0 里做了一次大改：&lt;strong&gt;实现从 720 行长到 3273 行&lt;/strong&gt;，&lt;br&gt;
+补上了属性索引、变长遍历和图算法。本文按新版重写。&lt;/p&gt;</summary>
     <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
     <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
     <category term="holt" scheme="https://ystyle.top/tags/holt/"/>

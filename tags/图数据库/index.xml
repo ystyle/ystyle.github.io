@@ -10,15 +10,15 @@
 		
 		
 		
-			<lastBuildDate>Thu, 22 Oct 2026 10:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Thu, 22 Oct 2026 15:30:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
 			<item>
-				<title>holt-cj：720 行的图数据库，能干什么、干不了什么</title>
+				<title>holt-cj 1.1.0：从 720 行长到 3300 行的图数据库</title>
 				<link>https://ystyle.top/2026/10/22/holt-cj-graph-db/</link>
 				<pubDate>Thu, 22 Oct 2026 10:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/2026/10/22/holt-cj-graph-db/</guid>
-				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;holt-cj 介绍&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;一个小图库的边界清单&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;holt-cj 是基于 &lt;a href=&#34;https://ystyle.top/2026/10/10/badger-cj-porting-notes/&#34;&gt;badger-cj&lt;/a&gt;&#xA; 的嵌入式图数据库。&lt;br&gt;&#xA;它只有 720 行实现代码，所以本文不打算把它讲成一个大项目——&lt;br&gt;&#xA;而是&lt;strong&gt;把它的能力和边界一条条列清楚&lt;/strong&gt;，方便你判断能不能用。&lt;/p&gt;</description>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;holt-cj 1.1.0 介绍&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;能力补齐了，限制也写清楚了&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;holt-cj 是基于 &lt;a href=&#34;https://ystyle.top/2026/10/10/badger-cj-porting-notes/&#34;&gt;badger-cj&lt;/a&gt;&#xA; 的嵌入式图数据库。&lt;br&gt;&#xA;这个库在 1.1.0 里做了一次大改：&lt;strong&gt;实现从 720 行长到 3273 行&lt;/strong&gt;，&lt;br&gt;&#xA;补上了属性索引、变长遍历和图算法。本文按新版重写。&lt;/p&gt;</description>
 			</item>
 	</channel>
 </rss>
