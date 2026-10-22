@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>缓存 on 东方星痕</title>
+		<link>https://ystyle.top/tags/%E7%BC%93%E5%AD%98/</link>
+		<description>Recent content in 缓存 on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Thu, 22 Oct 2026 10:00:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/%E7%BC%93%E5%AD%98/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>sunku-cj：当 Redis 的 API 装进进程内</title>
+				<link>https://ystyle.top/2026/10/22/sunku-cj-embedded-redis/</link>
+				<pubDate>Thu, 22 Oct 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/22/sunku-cj-embedded-redis/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;sunku-cj 介绍&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;API 可以一模一样，架构位置不能&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;sunku-cj 是仓颉生态里的「Redis 兼容本地 KV 数据库」，架在 &lt;a href=&#34;https://ystyle.top/2026/10/10/badger-cj-porting-notes/&#34;&gt;badger-cj&lt;/a&gt;&#xA; 之上。&lt;br&gt;&#xA;本文不吹它「兼容 Redis」，而是把「同构到什么程度、在哪一层不能同构」讲清楚。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

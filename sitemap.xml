@@ -3,7 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://ystyle.top/tags/Cangjie/</loc>
-    <lastmod>2026-10-19T11:00:00+08:00</lastmod>
+    <lastmod>2026-10-22T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/Redis/</loc>
+    <lastmod>2026-10-22T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/sunku/</loc>
+    <lastmod>2026-10-22T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/2026/10/22/sunku-cj-embedded-redis/</loc>
+    <lastmod>2026-10-22T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/</loc>
+    <lastmod>2026-10-22T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/%E7%BC%93%E5%AD%98/</loc>
+    <lastmod>2026-10-22T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/</loc>
+    <lastmod>2026-10-22T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2026-10-22T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/tsdb/</loc>
     <lastmod>2026-10-19T11:00:00+08:00</lastmod>
@@ -11,16 +32,7 @@
     <loc>https://ystyle.top/2026/10/19/tsdb-silent-failures/</loc>
     <lastmod>2026-10-19T11:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://ystyle.top/</loc>
-    <lastmod>2026-10-19T11:00:00+08:00</lastmod>
-  </url><url>
     <loc>https://ystyle.top/tags/%E6%8E%92%E6%9F%A5%E5%AE%9E%E5%BD%95/</loc>
-    <lastmod>2026-10-19T11:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/</loc>
-    <lastmod>2026-10-19T11:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://ystyle.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2026-10-19T11:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/bstorm/</loc>
@@ -766,9 +778,6 @@
   </url><url>
     <loc>https://ystyle.top/2015/12/03/windows-jdk-ban-ben-guan-li-qi-jvms-fa-bu/</loc>
     <lastmod>2016-02-22T18:01:35+08:00</lastmod>
-  </url><url>
-    <loc>https://ystyle.top/tags/redis/</loc>
-    <lastmod>2015-11-09T20:48:43+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/2015/10/29/springshi-yong-rediscun-chu-session/</loc>
     <lastmod>2015-10-29T23:49:37+08:00</lastmod>

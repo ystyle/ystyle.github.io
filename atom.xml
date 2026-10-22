@@ -4,12 +4,33 @@
   <subtitle>请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="https://ystyle.top/"/>
-  <updated>2026-10-19T03:00:00.000Z</updated>
+  <updated>2026-10-22T02:00:00.000Z</updated>
   <id>https://ystyle.top/</id>
   <author>
     <name>YSTYLE</name>
   </author>
   <generator uri="https://gohugo.io/">Hugo</generator>
+  <entry>
+    <title>sunku-cj：当 Redis 的 API 装进进程内</title>
+    <link href="https://ystyle.top/2026/10/22/sunku-cj-embedded-redis/"/>
+    <id>https://ystyle.top/2026/10/22/sunku-cj-embedded-redis/</id>
+    <published>2026-10-22T02:00:00.000Z</published>
+    <updated>2026-10-22T02:00:00.000Z</updated>
+    
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;sunku-cj 介绍&lt;/strong&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;em&gt;API 可以一模一样，架构位置不能&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;sunku-cj 是仓颉生态里的「Redis 兼容本地 KV 数据库」，架在 &lt;a href=&#34;/2026/10/10/badger-cj-porting-notes/&#34;&gt;badger-cj&lt;/a&gt;
+ 之上。&lt;br&gt;
+本文不吹它「兼容 Redis」，而是把「同构到什么程度、在哪一层不能同构」讲清楚。&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
+    <category term="sunku" scheme="https://ystyle.top/tags/sunku/"/>
+    <category term="Redis" scheme="https://ystyle.top/tags/Redis/"/>
+    <category term="缓存" scheme="https://ystyle.top/tags/%E7%BC%93%E5%AD%98/"/>
+    <category term="数据库" scheme="https://ystyle.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
   <entry>
     <title>tsdb-cj 的四次静默失效：代码能跑、测试能过，但什么都没发生</title>
     <link href="https://ystyle.top/2026/10/19/tsdb-silent-failures/"/>
@@ -421,25 +442,6 @@
     <category term="OzoneC" scheme="https://ystyle.top/tags/OzoneC/"/>
     <category term="融合开发引擎" scheme="https://ystyle.top/tags/%E8%9E%8D%E5%90%88%E5%BC%80%E5%8F%91%E5%BC%95%E6%93%8E/"/>
     <category term="matebook-pro" scheme="https://ystyle.top/tags/matebook-pro/"/>
-    
-  </entry>
-  <entry>
-    <title>MCP-Term：一个未出生即夭折的想法</title>
-    <link href="https://ystyle.top/2026/03/19/mcp-term-abandoned/"/>
-    <id>https://ystyle.top/2026/03/19/mcp-term-abandoned/</id>
-    <published>2026-03-19T12:00:00.000Z</published>
-    <updated>2026-03-19T12:00:00.000Z</updated>
-    
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;⚠️ 已弃坑&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;此项目在讨论阶段即放弃，无任何代码实现。&lt;br&gt;
-放弃原因：市场风向转变，目标场景已被钉钉、Obsidian CLI, anything CLI 等原生工具覆盖。&lt;br&gt;
-记录此文仅为保存思考过程。&lt;/p&gt;</summary>
-    <category term="思考" scheme="https://ystyle.top/categories/%E6%80%9D%E8%80%83/"/>
-    <category term="MCP" scheme="https://ystyle.top/tags/MCP/"/>
-    <category term="AI" scheme="https://ystyle.top/tags/AI/"/>
-    <category term="Protocol" scheme="https://ystyle.top/tags/Protocol/"/>
-    <category term="Abandoned" scheme="https://ystyle.top/tags/Abandoned/"/>
     
   </entry>
 </feed>

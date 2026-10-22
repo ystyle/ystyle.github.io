@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>sunku-cj：当 Redis 的 API 装进进程内 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">sunku-cj：当 Redis 的 API 装进进程内</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">sunku-cj：当 Redis 的 API 装进进程内</h1>
+    <h5 class="subtitle">
+      <time datetime="2026-10-22T10:00:00&#43;08:00" itemprop="datePublished" class="page-time">2026-10-22</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e5%ae%83%e6%98%af%e4%bb%80%e4%b9%88">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">一、它是什么</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%8c%e4%b8%ba%e4%bb%80%e4%b9%88%e4%bc%9a%e6%9c%89%e8%bf%99%e4%b8%aa%e4%b8%9c%e8%a5%bf">
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">二、为什么会有这个东西</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%89%e8%83%bd%e5%81%9a%e4%bb%80%e4%b9%88%e6%a0%b8%e5%af%b9%e8%bf%87%e6%ba%90%e7%a0%81">
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">三、能做什么（核对过源码）</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#31-%e4%ba%94%e7%a7%8d%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%e8%a6%86%e7%9b%96%e5%ae%8c%e6%95%b4">
+    <span class="post-toc-number">3.1.</span> <span class="post-toc-text">3.1 五种数据结构，覆盖完整</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#32-%e4%b8%a4%e7%a7%8d%e5%ad%98%e5%82%a8%e6%a8%a1%e5%bc%8f">
+    <span class="post-toc-number">3.2.</span> <span class="post-toc-text">3.2 两种存储模式</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#33-ttl">
+    <span class="post-toc-number">3.3.</span> <span class="post-toc-text">3.3 TTL</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%9b%9b%e4%b8%8d%e8%83%bd%e5%81%9a%e4%bb%80%e4%b9%88%e8%bf%99%e5%87%a0%e6%9d%a1%e6%af%94%e4%b8%8a%e9%9d%a2%e6%9b%b4%e9%87%8d%e8%a6%81">
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">四、不能做什么（这几条比上面更重要）</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#41-%e5%ae%83%e4%b8%8d%e6%98%afredis-%e7%9a%84%e6%9b%bf%e4%bb%a3%e5%93%81%e6%98%afredis-%e7%9a%84%e4%b8%80%e4%b8%aa%e4%bd%8d%e7%bd%ae">
+    <span class="post-toc-number">4.1.</span> <span class="post-toc-text">4.1 它不是「Redis 的替代品」，是「Redis 的一个位置」</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#42-blpop-%e6%98%af%e8%bd%ae%e8%af%a2%e4%b8%8d%e6%98%af%e6%9d%a1%e4%bb%b6%e5%8f%98%e9%87%8f%e5%94%a4%e9%86%92">
+    <span class="post-toc-number">4.2.</span> <span class="post-toc-text">4.2 blpop 是轮询，不是条件变量唤醒</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#43-ttl-%e5%8f%aa%e6%9c%89%e6%83%b0%e6%80%a7%e8%bf%87%e6%9c%9f">
+    <span class="post-toc-number">4.3.</span> <span class="post-toc-text">4.3 TTL 只有惰性过期</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#44-%e5%b9%b6%e5%8f%91%e8%bf%99%e9%87%8c%e7%9a%84%e8%af%ad%e4%b9%89%e5%92%8c-redis-%e4%b8%8d%e4%b8%80%e6%a0%b7">
+    <span class="post-toc-number">4.4.</span> <span class="post-toc-text">4.4 并发：这里的语义和 Redis 不一样</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#45-%e5%85%b6%e4%bb%96redis-%e6%9c%89%e5%ae%83%e6%b2%a1%e6%9c%89%e7%9a%84">
+    <span class="post-toc-number">4.5.</span> <span class="post-toc-text">4.5 其他「Redis 有、它没有」的</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%94%e4%bb%80%e4%b9%88%e5%9c%ba%e6%99%af%e8%af%a5%e7%94%a8%e5%ae%83">
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">五、什么场景该用它</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%85%ad%e6%80%8e%e4%b9%88%e7%94%a8%e4%b8%80%e4%b8%aa%e5%ae%9e%e9%99%85%e4%be%8b%e5%ad%90">
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">六、怎么用：一个实际例子</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%83%e5%b0%8f%e7%bb%93">
+    <span class="post-toc-number">7.</span> <span class="post-toc-text">七、小结</span>
+  </a>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-sunku-cj-进程内的Redis" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">sunku-cj：当 Redis 的 API 装进进程内</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2026-10-22T10:00:00&#43;08:00" itemprop="datePublished">2026-10-22</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <p align="center"><strong>sunku-cj 介绍</strong></p>
+<p align="center"><em>API 可以一模一样，架构位置不能</em></p>
+<blockquote>
+<p>sunku-cj 是仓颉生态里的「Redis 兼容本地 KV 数据库」，架在 <a href="/2026/10/10/badger-cj-porting-notes/">badger-cj</a>
+ 之上。<br>
+本文不吹它「兼容 Redis」，而是把「同构到什么程度、在哪一层不能同构」讲清楚。</p>
+</blockquote>
+<h2 id="一它是什么"><a href="#一它是什么" class="headerlink" title="一、它是什么"></a>一、它是什么</h2>
+<p>一句话：<strong>用 Redis 的命令写进程内 KV</strong>。</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">import sunku.*
+
+// 纯内存
+let cache = Sunku.memory()
+// 持久化到磁盘
+// let cache = Sunku.open(&#34;/data/db&#34;)
+
+cache.set(&#34;user:1&#34;, &#34;张三&#34;)
+cache.setex(&#34;session:abc&#34;, &#34;token&#34;,
+    Duration.hour)
+cache.incr(&#34;counter&#34;, by: 1)
+
+cache.zadd(&#34;rank&#34;, 100.0, &#34;alice&#34;)
+cache.lpush(&#34;queue&#34;, &#34;task-1&#34;)
+cache.sadd(&#34;tags&#34;, &#34;cangjie&#34;)
+</code></pre><p>方法名就是 Redis 命令名。五种数据结构都覆盖，合计约 120 个公开方法：</p>
+<table>
+	<thead>
+			<tr>
+					<th>结构</th>
+					<th>方法数</th>
+					<th>覆盖的命令（部分）</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>String</td>
+					<td>29</td>
+					<td><code>set</code> <code>setex</code> <code>psetex</code> <code>get</code> <code>del</code> <code>incr</code> <code>incrby</code> <code>incrbyfloat</code> <code>append</code> <code>strlen</code> <code>getrange</code> <code>setrange</code> <code>getbit</code> <code>setbit</code> <code>bitcount</code></td>
+			</tr>
+			<tr>
+					<td>Hash</td>
+					<td>17</td>
+					<td><code>hset</code> <code>hget</code> <code>hgetall</code> <code>hdel</code> <code>hexists</code> <code>hincrby</code> <code>hkeys</code> <code>hvals</code> <code>hlen</code> <code>hmset</code> <code>hmget</code> <code>hsetnx</code></td>
+			</tr>
+			<tr>
+					<td>List</td>
+					<td>23</td>
+					<td><code>lpush</code> <code>rpush</code> <code>lpop</code> <code>rpop</code> <code>lrange</code> <code>lindex</code> <code>lset</code> <code>ltrim</code> <code>lrem</code> <code>linsert</code> <code>blpop</code> <code>brpop</code> <code>brpoplpush</code> <code>lpos</code></td>
+			</tr>
+			<tr>
+					<td>Set</td>
+					<td>23</td>
+					<td><code>sadd</code> <code>srem</code> <code>smembers</code> <code>sismember</code> <code>scard</code> <code>sinter</code> <code>sunion</code> <code>sdiff</code> <code>smove</code> <code>spop</code> <code>srandmember</code> <code>sscan</code></td>
+			</tr>
+			<tr>
+					<td>ZSet</td>
+					<td>28</td>
+					<td><code>zadd</code> <code>zrem</code> <code>zscore</code> <code>zrank</code> <code>zrange</code> <code>zrangebyscore</code> <code>zincrby</code> <code>zcount</code> <code>zremrangeby*</code> <code>zunionstore</code> <code>zinterstore</code> <code>zpopmin</code> <code>bzpopmin</code></td>
+			</tr>
+			<tr>
+					<td>Key</td>
+					<td>13</td>
+					<td><code>exists</code> <code>expire</code> <code>expireat</code> <code>pexpire</code> <code>ttl</code> <code>persist</code> <code>key</code></td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>这不是「像 Redis」，是「照着 Redis 的签名抄的」</strong>——连 <code>setex</code> / <code>psetex</code>（秒和毫秒的区别）、<code>incrbyfloat</code>、<code>zrangebyscore</code> 这些细节都对上了。</p>
+<h2 id="二为什么会有这个东西"><a href="#二为什么会有这个东西" class="headerlink" title="二、为什么会有这个东西"></a>二、为什么会有这个东西</h2>
+<p>在仓颉里用 Redis，通常要起一个服务、走网络、序列化。如果你的程序本身就是<strong>单进程</strong>的，这套开销是白付的：</p>
+<pre tabindex="0"><code>用 Redis：
+  你的程序 ──TCP──&gt; Redis 进程 ──&gt; 内存
+              ↑
+        序列化、上下文切换、
+        连接池管理
+
+用 sunku：
+  你的程序 ──函数调用──&gt; 本地 LSM / 内存
+</code></pre><p>差别不只是「快一点」：</p>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th>Redis</th>
+					<th>sunku</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>部署</td>
+					<td>起一个服务（Docker / systemd）</td>
+					<td>一个依赖，零额外进程</td>
+			</tr>
+			<tr>
+					<td>运维</td>
+					<td>要监控、要备份、要考虑认证</td>
+					<td>库怎么部署它就怎么部署</td>
+			</tr>
+			<tr>
+					<td>故障面</td>
+					<td>网络断了就没了</td>
+					<td>没有网络这一层</td>
+			</tr>
+			<tr>
+					<td>数据边界</td>
+					<td>多个客户端共享</td>
+					<td><strong>只有本进程能访问</strong></td>
+			</tr>
+	</tbody>
+</table>
+<p>所以它的合适位置是：<strong>你的程序自己就是那个「唯一使用者」的时候</strong>。</p>
+<h2 id="三能做什么核对过源码"><a href="#三能做什么核对过源码" class="headerlink" title="三、能做什么（核对过源码）"></a>三、能做什么（核对过源码）</h2>
+<h3 id="31-五种数据结构覆盖完整"><a href="#31-五种数据结构覆盖完整" class="headerlink" title="3.1 五种数据结构，覆盖完整"></a>3.1 五种数据结构，覆盖完整</h3>
+<p>我逐个文件核对过实现行数，没有「声明了但没实现」的占位：</p>
+<table>
+	<thead>
+			<tr>
+					<th>结构</th>
+					<th>实现</th>
+					<th>测试</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>String</td>
+					<td>513 行</td>
+					<td>323 行</td>
+			</tr>
+			<tr>
+					<td>ZSet</td>
+					<td>686 行</td>
+					<td>481 行</td>
+			</tr>
+			<tr>
+					<td>Set</td>
+					<td>363 行</td>
+					<td>275 行</td>
+			</tr>
+			<tr>
+					<td>List</td>
+					<td>494 行</td>
+					<td>387 行</td>
+			</tr>
+			<tr>
+					<td>Hash</td>
+					<td>233 行</td>
+					<td>171 行</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>测试 2159 行 vs 实现 2853 行</strong>——测试比想象中厚，这对一个存储库是好事。</p>
+<h3 id="32-两种存储模式"><a href="#32-两种存储模式" class="headerlink" title="3.2 两种存储模式"></a>3.2 两种存储模式</h3>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// 纯内存，进程退出即丢
+Sunku.memory()
+// 指定 memtable 大小
+Sunku.memory(memTableSize: ...)
+// 持久化（LSM 落盘）
+Sunku.open(&#34;/data/db&#34;)
+</code></pre><p>持久化模式直接复用 badger-cj，所以继承了它的能力：WAL、SSTable、compaction、优雅退出落盘。</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// SIGTERM → flush 落盘 → 退出
+cache.registerSignalShutdown()
+</code></pre><p>对一个要跑在容器里的程序，这条很实用：<code>docker stop</code> 时数据不会丢。</p>
+<h3 id="33-ttl"><a href="#33-ttl" class="headerlink" title="3.3 TTL"></a>3.3 TTL</h3>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">cache.setex(&#34;k&#34;, &#34;v&#34;, Duration.hour)
+cache.pexpire(&#34;k&#34;, 5000)   // 毫秒
+cache.ttl(&#34;k&#34;)             // 剩余时间
+cache.persist(&#34;k&#34;)         // 去掉过期
+</code></pre><p>实现方式是<strong>写时把 <code>expiresAt</code> 存进 LSM</strong>（<code>Entry.withExpiresAt</code>），读到过期就视作不存在。</p>
+<h2 id="四不能做什么这几条比上面更重要"><a href="#四不能做什么这几条比上面更重要" class="headerlink" title="四、不能做什么（这几条比上面更重要）"></a>四、不能做什么（这几条比上面更重要）</h2>
+<h3 id="41-它不是redis-的替代品是redis-的一个位置"><a href="#41-它不是redis-的替代品是redis-的一个位置" class="headerlink" title="4.1 它不是「Redis 的替代品」，是「Redis 的一个位置」"></a>4.1 它不是「Redis 的替代品」，是「Redis 的一个位置」</h3>
+<p>这是最容易误解的一点。<strong>sunku 是进程内库，不是网络服务。</strong></p>
+<pre tabindex="0"><code>Redis 在架构里的位置：
+
+  ┌────────┐ ┌────────┐ ┌────────┐
+  │ 进程 A │ │ 进程 B │ │ 进程 C │
+  └───┬────┘ └───┬────┘ └───┬────┘
+      └──────────┼──────────┘
+                 ▼
+            ┌─────────┐
+            │  Redis  │
+            └─────────┘
+        唯一真相，所有进程共享
+
+
+sunku 在架构里的位置：
+
+  ┌─────────────────┐ ┌─────────────────┐
+  │ 进程 A          │ │ 进程 B          │
+  │ ┌─────────────┐ │ │ ┌─────────────┐ │
+  │ │   sunku     │ │ │ │   sunku     │ │
+  │ └─────────────┘ │ │ └─────────────┘ │
+  └─────────────────┘ └─────────────────┘
+
+     各自一份，互不可见
+</code></pre><p>所以「Redis 当主缓存、sunku 当二级缓存」这个想法<strong>方向是反的</strong>。</p>
+<p>真正的两级缓存通常长这样：</p>
+<table>
+	<thead>
+			<tr>
+					<th>层</th>
+					<th>位置</th>
+					<th>延迟量级</th>
+					<th>用什么</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>L1</td>
+					<td>进程内</td>
+					<td>纳秒</td>
+					<td><strong>sunku 在这个位置</strong></td>
+			</tr>
+			<tr>
+					<td>L2</td>
+					<td>进程间共享</td>
+					<td>毫秒</td>
+					<td>Redis</td>
+			</tr>
+			<tr>
+					<td>L3</td>
+					<td>持久化</td>
+					<td>毫秒~秒</td>
+					<td>数据库</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>sunku 天生就是 L1 的材料</strong>：零网络、零序列化（对仓颉对象）、单进程独占。</p>
+<h3 id="42-blpop-是轮询不是条件变量唤醒"><a href="#42-blpop-是轮询不是条件变量唤醒" class="headerlink" title="4.2 blpop 是轮询，不是条件变量唤醒"></a>4.2 <code>blpop</code> 是轮询，不是条件变量唤醒</h3>
+<p>Redis 的 <code>BLPOP</code> 是阻塞的：没有元素就挂在条件变量上，<code>LPUSH</code> 一到立刻唤醒。</p>
+<p>sunku 的实现在做这个：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">public func blpop(keys: Array&lt;String&gt;,
+        timeout: Duration)
+        : ?(String, String) {
+    let deadline =
+        DateTime.now() + timeout
+    let checkInterval =
+        Duration.millisecond * 100
+
+    while (DateTime.now() &lt; deadline) {
+        for (key in keys) {
+            match (lpop(key)) {
+                case Some(v) =&gt;
+                    return Some((key, v))
+                case None =&gt; continue
+            }
+        }
+        // ← 每 100ms 轮询一次
+        sleep(checkInterval)
+    }
+    ...
+}
+</code></pre><p><strong>语义对上，延迟多最多 100ms。</strong> 做任务队列时这个差别是能感觉到的；做普通缓存则无所谓。</p>
+<h3 id="43-ttl-只有惰性过期"><a href="#43-ttl-只有惰性过期" class="headerlink" title="4.3 TTL 只有惰性过期"></a>4.3 TTL 只有惰性过期</h3>
+<p>Redis 有两套机制：<strong>惰性删除</strong>（读到才判）+ <strong>定期删除</strong>（后台扫一批）。sunku 只有前者。</p>
+<p>后果：<strong>已过期的 key 会一直占着磁盘，直到有人读到它。</strong></p>
+<p>对一个长期运行的缓存进程，这意味两件事：</p>
+<ul>
+<li>内存/磁盘曲线只涨不落，除非访问模式恰好覆盖到那些 key</li>
+<li>想主动清理，只能自己扫 <code>key</code> 列表逐个 <code>ttl</code> 判断</li>
+</ul>
+<h3 id="44-并发这里的语义和-redis-不一样"><a href="#44-并发这里的语义和-redis-不一样" class="headerlink" title="4.4 并发：这里的语义和 Redis 不一样"></a>4.4 并发：这里的语义和 Redis 不一样</h3>
+<p>这条我核对源码后确认，值得单独说。</p>
+<p>Redis 是<strong>单线程执行命令</strong>的，所以 <code>INCR</code> 天然原子。sunku 跑在你的多线程程序里，而它的事务使用方式是：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// src/sunku_string.cj 的 incr（节选）
+let txn = db.newTransaction(update: true)
+// ↓ 事务外读
+let currentValue =
+    match (db.get(keyBytes)) {
+    case Some(vs) =&gt; ...
+}
+let newValue = currentValue + by
+txn.setEntry(entry)
+txn.commit()
+</code></pre><p><strong>读用的是 <code>db.get</code>（事务外），写用的是 <code>txn.setEntry</code>（事务内）。</strong></p>
+<p>底层 badger-cj 有 SSI 冲突检测，但它依赖事务<strong>记录读集</strong>（<code>txn.get</code> 时把 key 记进 <code>reads</code>）。事务外读不入账，冲突检测就看不见这次竞争。</p>
+<p>实测统计：整个库 <strong>65 处 <code>db.get</code>，0 处 <code>txn.get</code></strong>。</p>
+<p>所以：</p>
+<table>
+	<thead>
+			<tr>
+					<th>场景</th>
+					<th>是否安全</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>单线程</td>
+					<td>✅ 没问题</td>
+			</tr>
+			<tr>
+					<td>多线程各自操作<strong>不同 key</strong></td>
+					<td>✅ 没问题（写入本身是事务的）</td>
+			</tr>
+			<tr>
+					<td>多线程对<strong>同一个 key</strong> 做 <code>incr</code>/<code>zadd</code> 这类「读-改-写」</td>
+					<td>⚠️ <strong>可能丢更新</strong></td>
+			</tr>
+			<tr>
+					<td>多线程各自 <code>set</code> 同一个 key</td>
+					<td>✅ 后写覆盖，语义明确</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>如果你要并发用，避开「多线程对同一 key 做读-改-写」这个模式</strong>，或者在应用层自己加锁。</p>
+<h3 id="45-其他redis-有它没有的"><a href="#45-其他redis-有它没有的" class="headerlink" title="4.5 其他「Redis 有、它没有」的"></a>4.5 其他「Redis 有、它没有」的</h3>
+<table>
+	<thead>
+			<tr>
+					<th>Redis 有</th>
+					<th>sunku</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>网络协议（RESP）、多客户端</td>
+					<td>无</td>
+			</tr>
+			<tr>
+					<td>pub/sub</td>
+					<td>无</td>
+			</tr>
+			<tr>
+					<td>事务 <code>MULTI/EXEC</code>、Lua 脚本</td>
+					<td>无（但底层是 LSM 事务）</td>
+			</tr>
+			<tr>
+					<td>RDB / AOF 持久化</td>
+					<td>直接架在 LSM 上，没有独立的持久化格式</td>
+			</tr>
+			<tr>
+					<td>主从复制、哨兵、集群</td>
+					<td>无</td>
+			</tr>
+			<tr>
+					<td><code>SCAN</code> 游标（完整实现）</td>
+					<td>只有 <code>zscan</code> / <code>sscan</code> 等局部扫描</td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="五什么场景该用它"><a href="#五什么场景该用它" class="headerlink" title="五、什么场景该用它"></a>五、什么场景该用它</h2>
+<p>按上面的边界，能用的场景其实很清楚：</p>
+<p><strong>✅ 合适</strong></p>
+<ul>
+<li><strong>单进程程序的本地缓存</strong>：要 TTL、要五种结构、不想起 Redis</li>
+<li><strong>CLI 工具 / 脚本的状态存储</strong>：跑完就走，不需要服务</li>
+<li><strong>测试替身</strong>：写测试时用 <code>Sunku.memory()</code> 替代 Redis，不用起容器</li>
+<li><strong>离线数据处理的临时工作区</strong>：五种结构在手，比裸 KV 好用</li>
+<li><strong>单机的边缘/嵌入式程序</strong>：本来就没有「多进程共享」的需求</li>
+</ul>
+<p><strong>⚠️ 不合适</strong></p>
+<ul>
+<li><strong>多进程共享状态</strong>——这是最核心的一条</li>
+<li><strong>需要和别的语言/服务共享缓存</strong>（Redis 的价值就在协议标准化）</li>
+<li><strong>多线程高频更新同一个计数器</strong>（见 4.4）</li>
+<li><strong>需要 pub/sub 或 Lua 做原子复合操作</strong></li>
+<li><strong>需要主从/集群做高可用</strong></li>
+</ul>
+<h2 id="六怎么用一个实际例子"><a href="#六怎么用一个实际例子" class="headerlink" title="六、怎么用：一个实际例子"></a>六、怎么用：一个实际例子</h2>
+<p>假设你在写一个本地 CLI，要缓存远程 API 的响应，避免重复请求：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">import sunku.*
+
+class ApiCache {
+    let store: Sunku
+
+    init(dir: String) {
+        store = Sunku.open(dir)
+        // 退出时落盘
+        store.registerSignalShutdown()
+    }
+
+    func getOrFetch(url: String,
+            fetch: () -&gt; String): String {
+        // 先查缓存（1 小时有效）
+        match (store.get(url)) {
+            case Some(v) =&gt; return v
+            case None =&gt; ()
+        }
+        // 未命中就请求并写入
+        let body = fetch()
+        store.setex(url, body,
+            Duration.hour)
+        body
+    }
+
+    // 记每个域名的调用次数（ZSet 排名）
+    func recordHost(host: String): Unit {
+        store.zincrby(&#34;hosts&#34;, 1.0, host)
+    }
+
+    // 看调用最多的域名
+    func topHosts(n: Int64):
+            ArrayList&lt;(String, Float64)&gt; {
+        store.zrevrange(&#34;hosts&#34;, 0, n - 1,
+            withScores: true)
+    }
+}
+</code></pre><p>这段代码在 Redis 下几乎一模一样——除了 <code>Sunku.open()</code> 换成了连接池，这正说明<strong>API 同构是有价值</strong>的：迁移成本主要在初始化和生命周期，不在业务逻辑。</p>
+<h2 id="七小结"><a href="#七小结" class="headerlink" title="七、小结"></a>七、小结</h2>
+<ul>
+<li><strong>API 同构是真的</strong>：120 个方法，命令名、参数顺序、语义都对着 Redis 抄</li>
+<li><strong>架构位置不能同构</strong>：它是进程内库，只能当 <strong>L1</strong>，不能当 Redis 那种进程间共享的 <strong>L2</strong></li>
+<li>三条已知边界：<code>blpop</code> 轮询（+100ms）、TTL 只有惰性过期、并发读-改-写需要自己注意</li>
+<li>合适的场景：单进程、单机、测试替身、CLI 工具——<strong>只要你不需要「多进程共享」，它就是 Redis 的轻量替代</strong></li>
+</ul>
+<blockquote>
+<p>下一篇：另一个仓颉数据库 <a href="/2026/10/22/holt-cj-graph-db/">holt-cj</a>
+——图数据库，<br>
+关注的是「顶点和边怎么存、怎么遍历」。</p>
+</blockquote>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2026-10-22T10:00:00&#43;08:00" itemprop="dateUpdated">2026-10-22 10:00:00</time>
+          </span><br>
+          本文链接：<a href="/2026/10/22/sunku-cj-embedded-redis/" target="_blank" rel="external">https://ystyle.top/2026/10/22/sunku-cj-embedded-redis/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sunku/">sunku</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/">缓存</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f22%2fsunku-cj-embedded-redis%2f&title=%e3%80%8asunku-cj%ef%bc%9a%e5%bd%93%20Redis%20%e7%9a%84%20API%20%e8%a3%85%e8%bf%9b%e8%bf%9b%e7%a8%8b%e5%86%85%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f22%2fsunku-cj-embedded-redis%2f&title=%e3%80%8asunku-cj%ef%bc%9a%e5%bd%93%20Redis%20%e7%9a%84%20API%20%e8%a3%85%e8%bf%9b%e8%bf%9b%e7%a8%8b%e5%86%85%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=sunku-cj%20%e4%bb%8b%e7%bb%8d%0aAPI%20%e5%8f%af%e4%bb%a5%e4%b8%80%e6%a8%a1%e4%b8%80%e6%a0%b7%ef%bc%8c%e6%9e%b6%e6%9e%84%e4%bd%8d%e7%bd%ae%e4%b8%8d%e8%83%bd%0asunku-cj%20%e6%98%af%e4%bb%93%e9%a2%89%e7%94%9f%e6%80%81%e9%87%8c%e7%9a%84%e3%80%8cRedis%20%e5%85%bc%e5%ae%b9%e6%9c%ac%e5%9c%b0%20KV%20%e6%95%b0%e6%8d%ae%e5%ba%93%e3%80%8d%ef%bc%8c%e6%9e%b6%e5%9c%a8%20badger-cj%20%e4%b9%8b%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f22%2fsunku-cj-embedded-redis%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8asunku-cj%ef%bc%9a%e5%bd%93%20Redis%20%e7%9a%84%20API%20%e8%a3%85%e8%bf%9b%e8%bf%9b%e7%a8%8b%e5%86%85%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f22%2fsunku-cj-embedded-redis%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f22%2fsunku-cj-embedded-redis%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2026/10/19/tsdb-silent-failures/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">tsdb-cj 的四次静默失效：代码能跑、测试能过，但什么都没发生</h4>
+        </a>
+      </div>
+      
+      
+    </nav>
+    
+
+    
+    
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+  </article>
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f22%2fsunku-cj-embedded-redis%2f&title=%e3%80%8asunku-cj%ef%bc%9a%e5%bd%93%20Redis%20%e7%9a%84%20API%20%e8%a3%85%e8%bf%9b%e8%bf%9b%e7%a8%8b%e5%86%85%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f22%2fsunku-cj-embedded-redis%2f&title=%e3%80%8asunku-cj%ef%bc%9a%e5%bd%93%20Redis%20%e7%9a%84%20API%20%e8%a3%85%e8%bf%9b%e8%bf%9b%e7%a8%8b%e5%86%85%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=sunku-cj%20%e4%bb%8b%e7%bb%8d%0aAPI%20%e5%8f%af%e4%bb%a5%e4%b8%80%e6%a8%a1%e4%b8%80%e6%a0%b7%ef%bc%8c%e6%9e%b6%e6%9e%84%e4%bd%8d%e7%bd%ae%e4%b8%8d%e8%83%bd%0asunku-cj%20%e6%98%af%e4%bb%93%e9%a2%89%e7%94%9f%e6%80%81%e9%87%8c%e7%9a%84%e3%80%8cRedis%20%e5%85%bc%e5%ae%b9%e6%9c%ac%e5%9c%b0%20KV%20%e6%95%b0%e6%8d%ae%e5%ba%93%e3%80%8d%ef%bc%8c%e6%9e%b6%e5%9c%a8%20badger-cj%20%e4%b9%8b%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f22%2fsunku-cj-embedded-redis%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8asunku-cj%ef%bc%9a%e5%bd%93%20Redis%20%e7%9a%84%20API%20%e8%a3%85%e8%bf%9b%e8%bf%9b%e7%a8%8b%e5%86%85%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f22%2fsunku-cj-embedded-redis%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f22%2fsunku-cj-embedded-redis%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2026/10/22/sunku-cj-embedded-redis/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+</body>
+</html>
