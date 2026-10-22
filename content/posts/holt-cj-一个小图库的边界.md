@@ -1,8 +1,8 @@
 ---
-title: "holt-cj：720 行的图数据库，能干什么、干不了什么"
-subtitle: 顶点、边、Gremlin 风格遍历——以及一个还没实现的索引
+title: "holt-cj 1.1.0：从 720 行长到 3300 行的图数据库"
+subtitle: 属性索引、变长遍历、六种图算法——以及四条仍然存在的限制
 date: 2026-10-22 10:00:00
-lastmod: 2026-10-22 10:00:00
+lastmod: 2026-10-22 15:30:00
 slug: holt-cj-graph-db
 categories:
   - 软件
@@ -13,17 +13,17 @@ tags:
   - 数据库
 ---
 
-<p align="center"><strong>holt-cj 介绍</strong></p>
+<p align="center"><strong>holt-cj 1.1.0 介绍</strong></p>
 
-<p align="center"><em>一个小图库的边界清单</em></p>
+<p align="center"><em>能力补齐了，限制也写清楚了</em></p>
 
 > holt-cj 是基于 [badger-cj](/2026/10/10/badger-cj-porting-notes/) 的嵌入式图数据库。
-> 它只有 720 行实现代码，所以本文不打算把它讲成一个大项目——
-> 而是**把它的能力和边界一条条列清楚**，方便你判断能不能用。
+> 这个库在 1.1.0 里做了一次大改：**实现从 720 行长到 3273 行**，
+> 补上了属性索引、变长遍历和图算法。本文按新版重写。
 
 ## 一、它是什么
 
-一句话：**嵌入式图数据库，顶点 + 边 + 属性 + 遍历。**
+一句话：**嵌入式图数据库，顶点 + 边 + 属性索引 + Gremlin 风格遍历 + 图算法。**
 
 ```cangjie
 import holt.*
@@ -32,7 +32,7 @@ import jsonvalue.*
 let g = Holt.openInMemory()
 // let g = Holt.open("/data/graph")
 
-// 建两个顶点（多标签 + JsonValue 属性）
+// 建顶点（多标签 + JsonValue 属性）
 let alice = g.createVertex(
     ArrayList<String>(["Person"]),
     HashMap<String, JsonValue>([
@@ -45,233 +45,283 @@ let bob = g.createVertex(
     ArrayList<String>(["Person"]), ...
 )
 
-// 建一条边
+// 建边
 g.createEdge("knows", alice.id, bob.id,
     HashMap<String, JsonValue>([
         ("since", JsonValue.Number(2020))
     ]))
 ```
 
-数据模型很直接：
+数据模型：**顶点** = ULID + 多标签 + `HashMap<String, JsonValue>`；
+**边** = ULID + 谓词 + 起终点 + 属性。
 
-- **顶点**：ULID 标识 + 多标签（`Array<String>`）+ 属性（`HashMap<String, JsonValue>`）
-- **边**：ULID 标识 + 谓词（label）+ 起点 + 终点 + 属性
-- **属性值**：`JsonValue`，可以是字符串/数字/布尔/数组/对象
+## 二、1.1.0 加了什么
 
-## 二、核心 API
+这是本文的重点——因为**上一版的能力缺口基本都补上了**。
 
-### 2.1 顶点与边
+| 能力 | 1.0.x | **1.1.0** |
+| --- | --- | --- |
+| 顶点/边/多标签/属性 | ✅ | ✅ |
+| 邻接查询（`eout:`/`ein:`） | ✅ | ✅ |
+| **顶点标签索引（`vl:`）** | ❌ | ✅ |
+| **属性索引（精确/范围）** | ❌ 空操作 | ✅ **可注册/回填/重建** |
+| Gremlin 风格遍历 | 6 个步骤 | **25 个方法** |
+| **变长路径** | ❌ | ✅ `repeatOut/In/Both` |
+| **最短路径** | ❌ | ✅ BFS + Dijkstra |
+| **图算法** | ❌ | ✅ PageRank/连通分量/拓扑/环 |
+| 事务 | ✅ | ✅ 索引同事务维护 |
 
-| 操作 | 方法 |
+### 2.1 属性索引：真的能用了
+
+上一版的 `createIndex()` 方法体只有两行注释——**调了不报错，但什么也不做**。
+现在是完整实现（`property_index.cj`，537 行）：
+
+```cangjie
+// 注册索引（会回填存量顶点）
+g.createIndex(IndexType.Exact, "Person",
+    ArrayList<String>(["age"]))
+
+// 查已注册的索引
+let idx = g.getIndexes()
+
+// 删掉
+g.dropIndex("Person@age")
+```
+
+支持的形态：
+
+| 类型 | 说明 |
 | --- | --- |
-| 建/读写顶点 | `createVertex` `getVertex` `updateVertex` `deleteVertex(cascade)` |
-| 建/读写边 | `createEdge` `getEdge` `updateEdge` `deleteEdge` |
-| 按标签查 | `has(label)` |
-| 邻接 | `getOutgoingEdges` `getIncomingEdges` `getNeighbors(dir)` |
+| **精确索引**（`Exact`） | `has(key, value)` 走索引 |
+| **范围索引**（`Range`） | `hasBetween(key, lo, hi)` 走索引 |
+| **复合索引** | 多字段，最左连续字段等值 + 下一字段范围 |
 
-`deleteVertex(id, cascade: true)` 会级联删掉关联的边——这个设计是必要的，否则会留下悬空的边。
+几个实现细节值得说：
 
-### 2.2 遍历：Gremlin 风格
+- **作用域按 label**：`Person@age` 和 `Employee@age` 是两个索引
+- **只索引标量**：String / Number / Bool，不索引数组和对象
+- **回填分批**：存量顶点每 500 个一批，避免长事务撑大内存
+- **同事务维护**：写顶点时在同一事务里更新索引项，旧值用于删过期项
+- **可重建**：`rebuildIndexes()` 全量重写且幂等；打开 1.0.x 旧库自动触发
 
-这是它最有意思的部分。遍历是**惰性构建**的：每一步只是往列表里追加动作，`toList()` 才真正执行。
+索引 key 的布局：
+
+```
+索引项：vi:<索引名>:<字段值段...><vid 段>
+元数据：_idx:<索引名> → JSON
+```
+
+**值段经过编码，保证字节序 = 语义序**——所以范围扫描可直接按字节序 seek，
+不用解码比较。
+
+### 2.2 遍历：从 6 个方法到 25 个
 
 ```cangjie
 let result = g.V()
-    // 按标签过滤
-    .has("Person")
-    // 按属性过滤
+    .hasLabel("Person")
     .has("age", JsonValue.Number(30))
-    // 沿出边走到邻居
     .out(["knows"])
+    .dedup()
+    .order()
     .limit(10)
     .toList()
 ```
 
-支持的步骤：
+完整步骤清单：
 
-| 步骤 | 作用 |
+| 类别 | 步骤 |
 | --- | --- |
-| `V()` / `V(ids)` | 全量起点 / 指定起点 |
-| `hasLabel(label)` | 按标签过滤 |
-| `has(key, value)` | 按属性过滤 |
-| `out(labels)` / `in(labels)` / `both(labels)` | 沿边走出去 |
-| `limit(n)` | 截断 |
-| `toList()` / `next()` | 求值 |
+| 起点 | `V()` `V(ids)` |
+| 过滤 | `has` `hasLabel` `hasNot` `hasBetween` `where` |
+| 导航 | `out` `in` `both` `outE` `inE` `bothE` `outV` `inV` |
+| 变长 | `repeatOut` `repeatIn` `repeatBoth` |
+| 变换 | `values` `path` |
+| 聚合 | `count` `dedup` `order` `limit` `range` |
+| 求值 | `toList()` `next()` |
 
-**注意：目前不需要先 `V()`**——`V(ids)` 和 `V()` 都能直接开始。
+两个值得一提的设计：
 
-### 2.3 事务与运维
+**拉取式游标 + 单事务流式执行。** 遍历不是「每步物化一个列表」，而是按需拉取；
+整个遍历在一个事务里完成，保证看到一致快照。
 
-```cangjie
-// 显式事务
-g.transaction({ txn =>
-    txn.createVertex(...)
-    txn.createEdge(...)
-})
+**起点规划。** 从 `V()` 开始时，引擎按成本选起点：
 
-// 备份/恢复（流式）
-g.backup(writer)
-g.restore(reader)
-
-// 统计
-let stats = g.getStats()
+```
+V(ids) 直接给
+  → 用给定的
+有属性索引命中
+  → 走 vi: 索引
+纯 hasLabel
+  → 走 vl: 标签索引
+都没有
+  → 全量扫 v:
 ```
 
-外加 `registerSignalShutdown()` / `registerShutdownHook()`——和 sunku 一样从 badger-cj 继承的优雅退出能力。
+这解决了上一版「`V()` 永远是全量扫描」的问题。
+
+### 2.3 图算法：包级函数
+
+不用自己写 BFS 了：
+
+```cangjie
+// 最短路径：无权图用 BFS
+let path = shortestPath(g, fromVid, toVid)
+
+// 带权：按边属性权重做 Dijkstra
+let weighted = shortestPathWeighted(
+    g, fromVid, toVid, "weight")
+
+// 其他
+let ranks   = pageRank(g)
+let comps   = weaklyConnectedComponents(g)
+let sorted  = topologicalSort(g)
+let hasLoop = hasCycle(g)
+```
+
+外加 `hasPath` / `successors` / `predecessors` / `from` / `vertices` 这些基础工具。
+
+对「嵌入式小图库」来说这套能力已经够用——**依赖分析、路径查找、环路检测**
+这些常见需求都有直接支持。
+
+### 2.4 事务与索引一致性
+
+1.1.0 修了一处事务问题：**索引维护现在和顶点写入在同一事务内**。这意味着：
+
+- 写顶点失败 → 索引项也不会留下
+- 不会出现「索引里有、数据里没有」的孤儿项
 
 ## 三、它是怎么存的
 
-看懂存储布局，才能理解它的性能特征。key 前缀一共五种：
+看懂 key 布局，才能判断什么样的查询快。
 
 | 前缀 | 存什么 |
 | --- | --- |
-| `v:<vid>` | 顶点（标签 + 属性） |
-| `e:<eid>` | 边（谓词 + outVid + inVid + 属性） |
-| `eout:<vid>:<label>:<eid>` | 出边索引（按「顶点 + 谓词」） |
+| `v:<vid>` | 顶点 |
+| `e:<eid>` | 边 |
+| `eout:<vid>:<label>:<eid>` | 出边索引 |
 | `ein:<vid>:<label>:<eid>` | 入边索引 |
 | `el:<label>:<eid>` | 边标签索引 |
+| `vl:<label>:<vid>` | **顶点标签索引**（1.1.0） |
+| `vi:<索引名>:...` | **属性索引项**（1.1.0） |
+| `_idx:<索引名>` | 属性索引元数据 |
 
-**这五个前缀是实打实的**，所以这两种查询是真正的索引查找：
+所以这些查询**都走索引**：
 
 ```cangjie
-// 一次前缀扫描
+// 邻接：eout: 前缀
 g.getOutgoingEdges(vid)
-// 更窄的前缀
 g.getOutgoingEdges(vid, "knows")
-// 走 el: 前缀
-g.has("Person")
+
+// 标签：vl: 索引
+g.V().hasLabel("Person")
+
+// 属性（需先注册索引）：vi: 索引
+g.V().has("age", JsonValue.Number(30))
 ```
 
-这也是为什么「按谓词找边」「找某顶点的邻居」在这个库上是快的。
+**最后一条是 1.1.0 和 1.0.x 最大的区别**——上一版这里会退化成全量内存过滤。
 
-## 四、边界：三件还没做好的事
+## 四、仍然存在的四条限制
 
-这一节是本文的重点。**买之前先知道哪里会撞墙**。
+能力补齐了，但边界依然清楚。这几条来自 README 的「已知限制」。
 
-### 4.1 属性索引是空的
-
-这是最重要的一条。`createIndex()` 的方法体是这样的：
+### 4.1 内存模式只适合测试/小数据
 
 ```cangjie
-public func createIndex(kind: IndexType,
-        label: String,
-        keys: ArrayList<String>): Unit {
-    // 边标签索引始终启用（el: 前缀）
-    // 属性索引直接依赖 PropValue 类型，
-    // 不需要额外操作
-}
+Holt.openInMemory()   // 测试用
+Holt.open("/data/db") // 生产用
 ```
 
-**方法体里只有两行注释，没有实际动作。** `getIndexes()` 则直接返回硬编码的空列表：
+原因不在 holt 自己，而在底层 badgercj：1.6.7~1.6.21 的 in-memory 模式在
+memtable 高频轮转时**偶发丢写**（写管道对同一请求重复 done，导致 commit
+提前唤醒）。
 
-```cangjie
-public func getIndexes():
-        ArrayList<IndexMeta> {
-    ArrayList<IndexMeta>()
-}
-```
+1.1.0 起依赖 badgercj **1.6.22** 已修复，但**批量导入仍建议用 `open(path)`**。
 
-所以 `createIndex()` 调了也不会报错，但**不会有任何索引被创建**。
+### 4.2 属性索引的三条边界
 
-### 4.2 属性过滤走内存
+| 边界 | 说明 |
+| --- | --- |
+| **按 label 作用域** | `Person@age` 与 `Employee@age` 是两个索引 |
+| **只索引标量** | String/Number/Bool；数组和对象不索引 |
+| **复合索引受限** | 最左连续字段等值 + 下一字段范围 |
 
-因为属性索引不存在，`.has(key, value)` 的实现是往过滤器列表里塞一个闭包：
+第三条展开一点。多字段索引 `Person@age,name` 支持：
 
-```cangjie
-public func has(key: String,
-        value: JsonValue)
-        : VertexTraversal {
-    filters.add({ v: Vertex =>
-        let got = v.props.get(key)
-        if (got.isNone()) { false }
-        else {
-            jsonEq(got.getOrThrow(),
-                value)
-        }
-    })
-    this
-}
-```
+- `age == 30` ✅ 最左字段等值
+- `age == 30 && name == "Alice"` ✅
+- `age > 20 && name == "Alice"` ✅ 等值 + 下一字段范围
+- `name == "Alice"` ❌ 跳过最左字段，用不上这个索引
 
-它做的是：**把顶点读进内存，然后逐个判断属性**。
+这是标准的复合索引语义，不是缺陷——但**设计索引时要知道**。
 
-后果：
+### 4.3 `IndexCache` 非线程安全
 
-- `has(label)` 走 `el:` 索引，快
-- `has(key, value)` **不走索引**，是逐顶点过滤
-- 数据量大时，`.has("age", 30)` 的代价与「顶点总数 × 属性比较」成正比
+> 同一 `Holt` 实例按单线程写使用。
 
-### 4.3 `V()` 是全量扫描
+很实在的一条：索引缓存不是线程安全的。多线程写同一个 `Holt` 实例会有问题，
+**写要串行**。
 
-没有 `V(ids)` 指定起点时，`execute()` 会扫 `v:` 前缀把**所有顶点 ID** 读出来，再逐个 `getVertex`：
+### 4.4 事务是单写者语义
 
-```cangjie
-// 全量扫描
-let ids = holt.db.view({ txn =>
-    // 扫 v: 前缀拿所有 ID
-    let r = ArrayList<String>()
-    let opt =
-        IteratorOptions(
-            prefix: strb("v:"))
-    let iter = txn.newIterator(opt: opt)
-    iter.rewind()
-    while (iter.valid()) {
-        ... r.add(...) ...
-    }
-    r
-})
-for (id in ids) {
-    // ↓ N 次单点读
-    let v = holt.getVertex(id)
-    if (v.isSome()) {
-        vertices.add(v.getOrThrow())
-    }
-}
-```
+> 读旧值用于索引维护，不在 badger 事务冲突检测范围内。
 
-**先扫一遍 key 拿全量 ID，再逐个读音**——顶点多了会很慢。所以实际使用时，**尽量从 `V(ids)` 或已有顶点出发**，而不是从 `V()` 开始。
+也就是说：事务的原子性是有的（单事务原子落库、索引同事务维护），但
+**并发写冲突检测不是强保证**。
 
-## 五、和「一个完整图数据库」差多远
+这跟 [sunku-cj](/2026/10/22/sunku-cj-embedded-redis/) 里提到的那个问题同一类根源——
+读写分离在事务外。区别是 holt 这边**明确写进了文档**。
 
-| 能力 | 一个完整图库（Neo4j / Dgraph） | holt-cj |
+### 4.5 明确不做的
+
+| 不做 | 说明 |
+| --- | --- |
+| 分布式 / 多进程共享 | 嵌入式单进程定位 |
+| 全文索引 | 只有标量属性索引 |
+| Cypher / Gremlin 解析器 | 只用 fluent API |
+
+## 五、和「一个完整图数据库」的距离
+
+| 能力 | Neo4j / Dgraph | holt-cj 1.1.0 |
 | --- | --- | --- |
-| 顶点 + 边 + 属性 | ✅ | ✅ |
-| 多标签 | ✅ | ✅ |
-| 邻接查询（按谓词） | ✅ | ✅（`eout:`/`ein:` 索引） |
-| Gremlin/Cypher 风格遍历 | ✅ | ⚠️ 基本步骤有，无 `where`/`aggregate`/`order` |
-| **属性索引** | ✅ | ❌ **未实现** |
-| 变长路径（`*1..3`） | ✅ | ❌ |
-| 最短路径算法 | ✅ | ❌ |
-| 图算法（PageRank 等） | ✅ | ❌ |
-| 分布式 | ✅ | ❌（嵌入式单机） |
-| 事务 | ✅ | ✅（复用 LSM 事务） |
+| 顶点/边/属性/多标签 | ✅ | ✅ |
+| 邻接查询 | ✅ | ✅ 三种前缀索引 |
+| 属性索引（精确/范围） | ✅ | ✅ |
+| 复合索引 | ✅ | ⚠️ 受限（最左连续） |
+| Gremlin 风格遍历 | ✅ | ✅ 25 个方法 |
+| 变长路径 | ✅ | ✅ 固定步数 repeat |
+| 最短路径 | ✅ | ✅ BFS + Dijkstra |
+| 图算法 | ✅ | ✅ 5 种 |
+| 全文索引 | ✅ | ❌ |
+| 查询语言解析器 | ✅ | ❌ fluent API |
+| 分布式 | ✅ | ❌ |
 
-**定位很清楚**：它是「**能用 Gremlin 风格写遍历的嵌入式小图库**」，不是「轻量版 Neo4j」。
+**定位**：一个**能力相当完整、但只在单进程内可用**的嵌入式图库。
 
 ## 六、什么场景合适
 
 **✅ 合适**
 
-- **数据量中等、关系简单的本地图**：几千到几万个顶点，查询主要靠「邻接」而不是「属性过滤」
-- **嵌入式场景**：CLI 工具、单机应用、离线分析
-- **不想为图关系写一堆关联表**：用 `eout:`/`ein:` 表达「谁指向谁」，比 SQL 中间表直观
-- **测试替身**：写图算法测试时，不用起 Neo4j
-- **关系数据的一次性分析**：加载、遍历、导出
+- **依赖/调用关系分析**：包依赖、服务调用链、代码引用图
+- **路径查找**：两个实体间最短路径、可达性判断
+- **环路检测**：构建系统、任务调度里的循环依赖
+- **中等数据量的本地图**：几万到几十万顶点，嵌入式部署
+- **单机应用 / CLI / 离线分析**
+- **不想为图关系写一堆关联表**：`eout:`/`ein:` 比 SQL 中间表直观
 
 **⚠️ 不合适**
 
-- **按属性找顶点**（这是最大的限制——`has(key, value)` 是全量过滤）
-- **需要路径算法**（最短路径、变长路径）
-- **顶点数量到十万级以上**（`V()` 全量扫描会拖慢）
-- **需要持久化图算法结果 / 图计算框架**
-- **多进程共享图**
+- **多进程/多机共享图**（嵌入式定位）
+- **需要全文检索**顶点属性（只有标量索引）
+- **需要写查询语句**（只能 fluent API）
+- **高并发写同一实例**（`IndexCache` 非线程安全 + 单写者语义）
+- **超大图（亿级顶点）**——没有分布式和分区
 
 ## 七、一个实际例子：依赖关系图
 
-用「项目依赖」来演示它合适的样子——这类图的特点是**关系比属性重要**：
+用「项目依赖」演示——这类图的特点是**关系比属性重要**：
 
 ```cangjie
-// 每个项目一个顶点
 let libs = ["badger-cj", "storm-cj",
             "tsdb-cj", "sunku-cj"]
 let vs = HashMap<String, Vertex>()
@@ -286,44 +336,50 @@ for (name in libs) {
     vs.add(name, v)
 }
 
-// 依赖边：storm 依赖 badger
+// 建依赖边
 g.createEdge("depends",
     vs["storm-cj"].id,
     vs["badger-cj"].id,
     HashMap<String, JsonValue>())
 
-// 问：storm-cj 直接依赖谁？
-// 走 eout: 索引，快
+// 问 1：storm-cj 直接依赖谁？
+// 走 eout: 索引
 let direct = g.getOutgoingEdges(
     vs["storm-cj"].id, "depends")
-for (e in direct) {
-    let target = g.getVertex(e.inVid)
-    println(target.getOrThrow().props)
-}
 
-// 问：谁依赖 badger-cj？
-// 走 ein: 索引，快
+// 问 2：谁依赖 badger-cj？
+// 走 ein: 索引
 let users = g.getIncomingEdges(
     vs["badger-cj"].id, "depends")
 
-// 遍历：从 storm-cj 出发，
-// 找它依赖的依赖
-let deps = g.V([vs["storm-cj"].id])
-    .out(["depends"])
-    .out(["depends"])
-    .toList()
+// 问 3：有路径吗？最短路径是什么？
+if (hasPath(g, vs["storm-cj"].id,
+            vs["sunku-cj"].id)) {
+    let p = shortestPath(g,
+        vs["storm-cj"].id,
+        vs["sunku-cj"].id)
+}
+
+// 问 4：有没有循环依赖？
+let bad = hasCycle(g)
 ```
 
-这段代码里所有查询都走索引——因为它们都是**邻接查询**。这正是这个库擅长的。
-
-反过来，如果你要问「哪些库的版本号是 1.6.20」，那就是属性过滤，会退化成全量扫描。
+这四个问题在新版里**都有直接 API**——第 3、4 个在 1.0.x 里要自己写。
 
 ## 八、小结
 
-- **720 行**（4 个源文件），实现小而完整
-- **真的做了的**：顶点/边/多标签/JsonValue 属性、三种邻接索引（`eout:`/`ein:`/`el:`）、Gremlin 风格惰性遍历、事务、备份恢复、级联删除
-- **还没做的**：**属性索引（`createIndex` 是空操作）**、变长路径、图算法、分布式
-- **合适的场景**：邻接查询为主的嵌入式图、中等数据量、单进程
+1.1.0 是一次实质性的能力补齐：
 
-> 想对比一下上面提到的 LSM 底座，见[从 Go 移植 BadgerDB 到仓颉](/2026/10/10/badger-cj-porting-notes/)；
-> 想看在它之上的另一个库，见 [sunku-cj](/2026/10/22/sunku-cj-embedded-redis/)。
+- **实现 720 → 3273 行**，9 个模块
+- 补上**属性索引**（精确/范围/复合）、**顶点标签索引**、
+  **变长遍历**、**6 种图算法**
+- 遍历从 6 个方法扩到 **25 个**
+- 修复了**索引与数据的事务一致性**
+- **四条限制写进 README**：内存模式定位、索引作用域与类型、
+  `IndexCache` 非线程安全、单写者事务语义
+
+如果你在找一个「单进程、能力够用、不用起服务」的图存储，
+它现在的能力面已经覆盖了大部分实际需求。
+
+> 底座见[从 Go 移植 BadgerDB 到仓颉](/2026/10/10/badger-cj-porting-notes/)，
+> 同期另一个库见 [sunku-cj](/2026/10/22/sunku-cj-embedded-redis/)。
