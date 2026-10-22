@@ -14,6 +14,13 @@
 		
 			<atom:link href="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
 			<item>
+				<title>holt-cj：720 行的图数据库，能干什么、干不了什么</title>
+				<link>https://ystyle.top/2026/10/22/holt-cj-graph-db/</link>
+				<pubDate>Thu, 22 Oct 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/22/holt-cj-graph-db/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;holt-cj 介绍&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;一个小图库的边界清单&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;holt-cj 是基于 &lt;a href=&#34;https://ystyle.top/2026/10/10/badger-cj-porting-notes/&#34;&gt;badger-cj&lt;/a&gt;&#xA; 的嵌入式图数据库。&lt;br&gt;&#xA;它只有 720 行实现代码，所以本文不打算把它讲成一个大项目——&lt;br&gt;&#xA;而是&lt;strong&gt;把它的能力和边界一条条列清楚&lt;/strong&gt;，方便你判断能不能用。&lt;/p&gt;</description>
+			</item>
+			<item>
 				<title>sunku-cj：当 Redis 的 API 装进进程内</title>
 				<link>https://ystyle.top/2026/10/22/sunku-cj-embedded-redis/</link>
 				<pubDate>Thu, 22 Oct 2026 10:00:00 +0800</pubDate>
@@ -145,13 +152,6 @@
 				<pubDate>Mon, 08 Dec 2025 21:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/</guid>
 				<description>&lt;h2 id=&#34;环境信息&#34;&gt;&lt;a href=&#34;#环境信息&#34; class=&#34;headerlink&#34; title=&#34;环境信息&#34;&gt;&lt;/a&gt;环境信息&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;操作系统&lt;/strong&gt;：HarmonyOS HongMeng Kernel 1.11.0 (OpenHarmony)&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Node.js版本&lt;/strong&gt;：22.7.0&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Vite版本&lt;/strong&gt;：7.2.6&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Rollup版本&lt;/strong&gt;：4.53.3&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;项目类型&lt;/strong&gt;：Vue 3 + TypeScript + Vite&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;问题描述&#34;&gt;&lt;a href=&#34;#问题描述&#34; class=&#34;headerlink&#34; title=&#34;问题描述&#34;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&#xA;&lt;p&gt;在鸿蒙系统上运行&lt;code&gt;npm run dev&lt;/code&gt;时出现以下错误：&lt;/p&gt;</description>
-			</item>
-			<item>
-				<title>使用泛型设计gorm扩展字段</title>
-				<link>https://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/</link>
-				<pubDate>Mon, 25 Sep 2023 17:37:26 +0800</pubDate>
-				<guid>https://ystyle.top/2023/09/25/design_gorm_extension_fields_using_generics/</guid>
-				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;大型项目经常需要在标准的用户表或员工表加些扩展字段，如果你有一套标准的用户管理系统的话，要么每个项目复制过来改一遍或者添加十几个固定的自定义字段Def1~Def10， 现在可以用在gorm定义模型时使用泛型来解决这个问题&lt;/p&gt;</description>
 			</item>
 	</channel>
 </rss>
