@@ -1,8 +1,8 @@
 ---
 title: "holt-cj：720 行的图数据库，能干什么、干不了什么"
 subtitle: 顶点、边、Gremlin 风格遍历——以及一个还没实现的索引
-date: 2026-10-22 11:00:00
-lastmod: 2026-10-22 11:00:00
+date: 2026-10-22 10:00:00
+lastmod: 2026-10-22 10:00:00
 slug: holt-cj-graph-db
 categories:
   - 软件
