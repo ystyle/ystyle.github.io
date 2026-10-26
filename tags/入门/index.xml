@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Thu, 15 Oct 2026 11:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Mon, 26 Oct 2026 17:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/%E5%85%A5%E9%97%A8/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>atelier 怎么用：三种形态、四个概念、一条最短路径</title>
+				<link>https://ystyle.top/2026/10/26/atelier-getting-started/</link>
+				<pubDate>Mon, 26 Oct 2026 17:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/26/atelier-getting-started/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;atelier 源码拆解 · 零&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;先能跑起来，再谈它怎么实现&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://ystyle.top/2026/10/26/atelier-agent-harness/&#34;&gt;第一篇&lt;/a&gt;&#xA;讲它要解决哪六个问题，&lt;br&gt;&#xA;&lt;a href=&#34;https://ystyle.top/2026/10/26/atelier-lessons-in-corrections/&#34;&gt;第二篇&lt;/a&gt;&#xA;讲它踩过的坑。&lt;br&gt;&#xA;但两篇都默认你已经知道它是什么、怎么装、怎么跑——&lt;strong&gt;这篇补上&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;如果你只想知道「这东西跟我有关系吗」，看第一节就够。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>一段代码，两个系统：仓颉怎么处理「跨平台」这件事</title>
 				<link>https://ystyle.top/2026/10/15/cangjie-multiplatform-from-zero/</link>

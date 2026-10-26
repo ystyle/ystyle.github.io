@@ -151,6 +151,32 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-嵌入式数据库storm的使用" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2019-12-22T14:46:26&#43;08:00" itemprop="datePublished">2019-12-22</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2019/12/22/how-to-use-storm-db/">嵌入式数据库storm的使用</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+           storm是一个使用BoltDB的上层orm框架
+地址: 数据查看工具 : https://github.com/br0xen/boltbrowser 驱动 : https://github.com/asdine/storm 初始化 db, err := storm.Open(&#34;my.db&#34;) defer db.Close() 定义对象模型 type User struct { ID int // primary key Group string `storm:&#34;index&#34;` // this field will be indexed Email string `storm:&#34;unique&#34;` // this field will be indexed with a unique constraint Name string // this field will not be indexed Age int `storm:&#34;index&#34;` } 自增可以在主键上添加tag: storm:&quot;id,increment=2&quot; =2是自增步长
+
+          <a href="/2019/12/22/how-to-use-storm-db/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BoltDB/">BoltDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/storm/">storm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-kde5在更新系统后不想重启怎么办" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2019-12-12T15:24:26&#43;08:00" itemprop="datePublished">2019-12-12</time>
@@ -377,32 +403,6 @@ Archlinux简略安装配置过程 用yuk7/ArchWSL 安装Archlinux 进行基础�
         <div class="post-footer">
           
           <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssl/">ssl</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/https/">https</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-Let-s-Encrypt-证书转-PKCS1-传统私钥格式" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2018-05-11T10:58:46&#43;08:00" itemprop="datePublished">2018-05-11</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2018/05/11/Lets-Encrypt-convert-to-pkcs1/">Let&#39;s Encrypt 证书转 PKCS1 (传统私钥格式)</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-          Let&rsquo;s Encrypt 证书转 PKCS1 (传统私钥格式) openssl rsa -in privkey1.pem -out pkcs1.pem privkey1.pem 文件格式
------BEGIN PRIVATE KEY----- MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALkFbpP0ZVpob96k YOM+ljfA3QOsG342iO/GQSClR04DGAB6mp4ZtKq1cB34w44FsfEg4TCsUL2y2TKl CDGsHj21cMj7gmPwy4ojXkcSYjyTv61EM6UnlMVIvYn0oDca5BvJUCGWnGX5idXv KPE/2XV2RsCmDWLFJ3ko49tpDTRZAgMBAAECgYBiKrOk5MLx2P+iDW0qpQZmxnl9 fU+JA75cGcBsZcUTayjM+EAZKmJlQKcf/+Eh9XuYCG3yuTqNq9r5t/5E/KF+DTNb uhfLSmbwPChbv7R87NDiwRh6irNr9WuRjBHkHEFr4rJPUcKLi5eiDIOVBPWnRlPS JqpkF9MCl3JWSZxAQQJBAOF8+X4guXRuHQfw5GgyabEBkyfb3f517jjU6UCMvcKw XjKFRR1q8BhYzREBXkwm0pRNHhmlFeQH+mqSDJPGmv0CQQDSDqlBGlwbG6Wvbvnx mU4t0vwHWfW5ut7jrggpDTM18REqFH+PtTwsYX7eaFm6hIR2SXAsInxky8iGRXS/ wmONAkEA22pc7JqzW9R6c2u5FptXtWIu665LSn0/HhYwExvg2z37q3V7V7DjiQ2A HngSZk+wwZZ5H8NAlfAdgO41RucPkQJADtIZ/w3tEbyRpB8gY3t9mJ4aSip+u+wD be0Jhlv4EQZBP8bSeUFATaFTYj3alt5iujXUREjqnfIC4/ZilmUQwQJAY3OGqyFh 8OJbBThDdplaRGu/vi4heTUdCgUfUG2HNAlNvMof8sSpk3xZVq7dt/jXIDHZiho6 wgkm05RNhx+HXg== -----END PRIVATE KEY----- pkcs1.pem文件格式
-
-          <a href="/2018/05/11/Lets-Encrypt-convert-to-pkcs1/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
           
         </div>
       </article>

@@ -151,6 +151,31 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-harl" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2020-10-25T01:30:26&#43;08:00" itemprop="datePublished">2020-10-25</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2020/10/25/harl/">harl-鸿蒙应用开发实机热更新工具</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          鸿蒙应用开发实机热更新工具 依赖 debug 版本的hi3516镜像(release版本不支持shell) nfs v3 配置过程 配置过程可能遇到的问题 serial(串口) dev tools (可以从鸿蒙编译目录/out/ipcamera_hi3516dv300/dev_tools/bin复制到nfs挂载目录) aa (管理APP启动，关闭) bm (安装卸载APP) USAGE ➜ harl.exe NAME: harl - Open Harmony OS Dev tools USAGE: harl.exe [global options] command [command options] [arguments...] VERSION: v0.1.2 COMMANDS: init, i init .harm.yml watch, w watch and reload app install install hap uninstall uninstall hap shell open a shell reboot reboot help, h Shows a list of commands or help for one command GLOBAL OPTIONS: --help, -h show help (default: false) --version, -v print the version (default: false) 下载应用 cd /your-project-dir 切换到项目目录 harl init 初始化配置文件 harl w 监听项目文件修改 监听时支持输入命令, 若看不到提示符请在调试日志暂停打印时按回车 可以用^run [command name]的方式执行command里定义的脚本 如执行示例配置文件的setup脚本， ^run setup 目前命令只支持在项目目录执行 配置文件 .harl.yaml
+
+          <a href="/2020/10/25/harl/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%B8%BF%E8%92%99/">鸿蒙</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/">工具</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-使用Docker快速上手鸿蒙" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2020-09-11T01:00:26&#43;08:00" itemprop="datePublished">2020-09-11</time>
@@ -373,32 +398,6 @@ FROM ubuntu:16.04 MAINTAINER https://www.openarkcompiler.cn # Setting up the bui
         <div class="post-footer">
           
           <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B0%8F%E8%AF%B4/">小说</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kindle/">kindle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/epub/">epub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mobi/">mobi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kaf-cli/">kaf-cli</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kaf/">kaf</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-嵌入式数据库storm的使用" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2019-12-22T14:46:26&#43;08:00" itemprop="datePublished">2019-12-22</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2019/12/22/how-to-use-storm-db/">嵌入式数据库storm的使用</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-           storm是一个使用BoltDB的上层orm框架
-地址: 数据查看工具 : https://github.com/br0xen/boltbrowser 驱动 : https://github.com/asdine/storm 初始化 db, err := storm.Open(&#34;my.db&#34;) defer db.Close() 定义对象模型 type User struct { ID int // primary key Group string `storm:&#34;index&#34;` // this field will be indexed Email string `storm:&#34;unique&#34;` // this field will be indexed with a unique constraint Name string // this field will not be indexed Age int `storm:&#34;index&#34;` } 自增可以在主键上添加tag: storm:&quot;id,increment=2&quot; =2是自增步长
-
-          <a href="/2019/12/22/how-to-use-storm-db/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BoltDB/">BoltDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/storm/">storm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li></ul>
           
         </div>
       </article>

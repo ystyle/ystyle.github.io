@@ -10,35 +10,42 @@
 		
 		
 		
-			<lastBuildDate>Mon, 26 Oct 2026 11:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Mon, 26 Oct 2026 17:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>Agent</title>
 				<link>https://ystyle.top/tags/Agent/</link>
-				<pubDate>Mon, 26 Oct 2026 11:00:00 +0800</pubDate>
+				<pubDate>Mon, 26 Oct 2026 17:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/tags/Agent/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>atelier</title>
 				<link>https://ystyle.top/tags/atelier/</link>
-				<pubDate>Mon, 26 Oct 2026 11:00:00 +0800</pubDate>
+				<pubDate>Mon, 26 Oct 2026 17:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/tags/atelier/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Cangjie</title>
 				<link>https://ystyle.top/tags/Cangjie/</link>
-				<pubDate>Mon, 26 Oct 2026 11:00:00 +0800</pubDate>
+				<pubDate>Mon, 26 Oct 2026 17:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/tags/Cangjie/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Harness</title>
 				<link>https://ystyle.top/tags/Harness/</link>
-				<pubDate>Mon, 26 Oct 2026 11:00:00 +0800</pubDate>
+				<pubDate>Mon, 26 Oct 2026 17:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/tags/Harness/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>入门</title>
+				<link>https://ystyle.top/tags/%E5%85%A5%E9%97%A8/</link>
+				<pubDate>Mon, 26 Oct 2026 17:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/%E5%85%A5%E9%97%A8/</guid>
 				<description></description>
 			</item>
 			<item>
@@ -144,13 +151,6 @@
 				<link>https://ystyle.top/tags/MCP/</link>
 				<pubDate>Fri, 16 Oct 2026 10:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/tags/MCP/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>基准测试</title>
-				<link>https://ystyle.top/tags/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</link>
-				<pubDate>Fri, 16 Oct 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</guid>
 				<description></description>
 			</item>
 	</channel>

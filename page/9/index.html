@@ -151,6 +151,32 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-Nodejs-yarn换淘宝源" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2016-10-30T18:36:19&#43;08:00" itemprop="datePublished">2016-10-30</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2016/10/30/nodejs-yarnhuan-tao-bao-yuan/">Nodejs yarn换淘宝源</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          Nodejs yarn换淘宝源 如果觉得安装速度慢，安装源和原来 npm 是一样的，可以通用，修改方法如下：
+yarn config get registry # -&gt; https://registry.yarnpkg.com 可以改成 taobao 的源：
+
+          <a href="/2016/10/30/nodejs-yarnhuan-tao-bao-yuan/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nodejs/">Nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/yarn/">yarn</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-maven-deploy-部署jar到私服" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2016-10-27T17:11:51&#43;08:00" itemprop="datePublished">2016-10-27</time>
@@ -375,33 +401,6 @@ eval $(docker-machine.exe env swarm-master) docker run -d -p 3376:3376 -t \ -v /
         <div class="post-footer">
           
           <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swarm/">swarm</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-docker-swarm-etcd-集群搭建" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2016-03-18T23:16:21&#43;08:00" itemprop="datePublished">2016-03-18</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2016/03/18/docker-swarm-etcd-ji-qun-da-jian/">docker &#43; swarm &#43; etcd 集群搭建</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-          安装Swarm集群 环境信息 服务器:
-192.168.99.100 centos-node1 192.168.99.101 centos-node2 192.168.99.102 centos-node3 集群信息:
-etc服务器: 192.168.99.100:2379 swarm manage: 192.168.99.101:3376 swarm-node1: 192.168.99.100:2375 swarm-node2: 192.168.99.101:2375 swarm-node3: 192.168.99.102:2375 准备 在所有的机器上安装dokcer 在centos-node1 上docker pull ystyle/etcd (官方的下载不了,自己做了个一样的) 在所有机器上dokcer pull swarm 以上三步可以用docker-machine完成 开放所有机器的2375端口, centos-node1的2379端口,centos-node2的3376端口 安装etcd k-v数据库 在centos-node1上执行:
-
-          <a href="/2016/03/18/docker-swarm-etcd-ji-qun-da-jian/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swarm/">swarm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/etcd/">etcd</a></li></ul>
           
         </div>
       </article>
