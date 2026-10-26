@@ -484,13 +484,13 @@
       </div>
 
       <div class="post-content" id="post-content" itemprop="postContent">
-        <p align="center"><strong>atelier 设计笔记 · 二</strong></p>
-<p align="center"><em>设计文档里不会写的那些判断失误</em></p>
+        <p align="center"><strong>atelier 源码拆解 · 二</strong></p>
+<p align="center"><em>代码注释里留下的那些判断失误</em></p>
 <blockquote>
 <p><a href="/2026/10/26/atelier-agent-harness/">上一篇</a>
 讲 atelier 长什么样。<br>
 这篇讲它是怎么长成这样的——<strong>包括三次判断被自己推翻</strong>。</p>
-<p>素材来自项目的工作日志与代码注释。凡是文中引用的教训，代码里都留着对应痕迹。</p>
+<p>本文的依据全部来自代码注释与提交记录。凡是文中提到的教训，代码里都留着对应痕迹。</p>
 </blockquote>
 <h2 id="一先看结论"><a href="#一先看结论" class="headerlink" title="一、先看结论"></a>一、先看结论</h2>
 <p>atelier 现在有 2058 个测试用例、15 个包。但真正塑造它的是几个<strong>错误判断</strong>：</p>
@@ -528,7 +528,7 @@
 <h2 id="二第一次自我纠正抽象层没有消费者"><a href="#二第一次自我纠正抽象层没有消费者" class="headerlink" title="二、第一次自我纠正：抽象层没有消费者"></a>二、第一次自我纠正：抽象层没有消费者</h2>
 <h3 id="我最初的设计"><a href="#我最初的设计" class="headerlink" title="我最初的设计"></a>我最初的设计</h3>
 <p>主循环跑完，需要一个「结果摘要」给宿主看。我设计了 <code>RunProjection</code>：</p>
-<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// 设计稿（已被删除）
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// 已经删掉的结构体，这里只留个样子
 struct RunProjection {
     let status: String
     let turns: Int64
@@ -549,7 +549,7 @@ struct RunProjection {
 </blockquote>
 <p>用这个判据重新看，<code>RunProjection</code> 和 <code>outcomeOf</code> 一行都删不掉任何东西——它们是纯粹的负担。</p>
 <blockquote>
-<p>这条教训后来写进了工作日志：<strong>「加一层抽象」和「统一判据」往往都是错的直觉。</strong></p>
+<p>于是留下一条通用判据：<strong>「加一层抽象」和「统一判据」往往都是错的直觉。</strong></p>
 </blockquote>
 <h2 id="三第二次自我纠正两个正交维度不能合并"><a href="#三第二次自我纠正两个正交维度不能合并" class="headerlink" title="三、第二次自我纠正：两个正交维度不能合并"></a>三、第二次自我纠正：两个正交维度不能合并</h2>
 <h3 id="我想做什么"><a href="#我想做什么" class="headerlink" title="我想做什么"></a>我想做什么</h3>
@@ -852,7 +852,7 @@ internal class RunScope {
       </a>
     </li>
     <li>
-      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f26%2fatelier-lessons-in-corrections%2f&title=%e3%80%8aatelier%20%e6%98%af%e8%a2%ab%e8%bf%99%e4%ba%9b%e9%94%99%e8%af%af%e5%88%a4%e6%96%ad%e7%a3%a8%e5%87%ba%e6%9d%a5%e7%9a%84%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=atelier%20%e8%ae%be%e8%ae%a1%e7%ac%94%e8%ae%b0%20%c2%b7%20%e4%ba%8c%0a%e8%ae%be%e8%ae%a1%e6%96%87%e6%a1%a3%e9%87%8c%e4%b8%8d%e4%bc%9a%e5%86%99%e7%9a%84%e9%82%a3%e4%ba%9b%e5%88%a4%e6%96%ad%e5%a4%b1%e8%af%af%0a%e4%b8%8a%e4%b8%80%e7%af%87%20%e8%ae%b2%20atelier%20%e9%95%bf%e4%bb%80%e4%b9%88%e6%a0%b7%e3%80%82%0a%e8%bf%99%e7%af%87%e8%ae%b2%e5%ae%83%e6%98%af%e6%80%8e%e4%b9%88%e9%95%bf%e6%88%90%e8%bf%99%e6%a0%b7%e7%9a%84%e2%80%94%e2%80%94%e5%8c%85%e6%8b%ac%e4%b8%89%e6%ac%a1%e5%88%a4%e6%96%ad%e8%a2%ab%e8%87%aa%e5%b7%b1%e6%8e%a8%e7%bf%bb%e3%80%82%20%e2%80%a6" data-title=" QQ">
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f26%2fatelier-lessons-in-corrections%2f&title=%e3%80%8aatelier%20%e6%98%af%e8%a2%ab%e8%bf%99%e4%ba%9b%e9%94%99%e8%af%af%e5%88%a4%e6%96%ad%e7%a3%a8%e5%87%ba%e6%9d%a5%e7%9a%84%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=atelier%20%e6%ba%90%e7%a0%81%e6%8b%86%e8%a7%a3%20%c2%b7%20%e4%ba%8c%0a%e4%bb%a3%e7%a0%81%e6%b3%a8%e9%87%8a%e9%87%8c%e7%95%99%e4%b8%8b%e7%9a%84%e9%82%a3%e4%ba%9b%e5%88%a4%e6%96%ad%e5%a4%b1%e8%af%af%0a%e4%b8%8a%e4%b8%80%e7%af%87%20%e8%ae%b2%20atelier%20%e9%95%bf%e4%bb%80%e4%b9%88%e6%a0%b7%e3%80%82%0a%e8%bf%99%e7%af%87%e8%ae%b2%e5%ae%83%e6%98%af%e6%80%8e%e4%b9%88%e9%95%bf%e6%88%90%e8%bf%99%e6%a0%b7%e7%9a%84%e2%80%94%e2%80%94%e5%8c%85%e6%8b%ac%e4%b8%89%e6%ac%a1%e5%88%a4%e6%96%ad%e8%a2%ab%e8%87%aa%e5%b7%b1%e6%8e%a8%e7%bf%bb%e3%80%82%0a%e6%9c%ac%20%e2%80%a6" data-title=" QQ">
         <i class="icon icon-qq"></i>
       </a>
     </li>
@@ -969,7 +969,7 @@ internal class RunScope {
       </a>
     </li>
     <li>
-      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f26%2fatelier-lessons-in-corrections%2f&title=%e3%80%8aatelier%20%e6%98%af%e8%a2%ab%e8%bf%99%e4%ba%9b%e9%94%99%e8%af%af%e5%88%a4%e6%96%ad%e7%a3%a8%e5%87%ba%e6%9d%a5%e7%9a%84%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=atelier%20%e8%ae%be%e8%ae%a1%e7%ac%94%e8%ae%b0%20%c2%b7%20%e4%ba%8c%0a%e8%ae%be%e8%ae%a1%e6%96%87%e6%a1%a3%e9%87%8c%e4%b8%8d%e4%bc%9a%e5%86%99%e7%9a%84%e9%82%a3%e4%ba%9b%e5%88%a4%e6%96%ad%e5%a4%b1%e8%af%af%0a%e4%b8%8a%e4%b8%80%e7%af%87%20%e8%ae%b2%20atelier%20%e9%95%bf%e4%bb%80%e4%b9%88%e6%a0%b7%e3%80%82%0a%e8%bf%99%e7%af%87%e8%ae%b2%e5%ae%83%e6%98%af%e6%80%8e%e4%b9%88%e9%95%bf%e6%88%90%e8%bf%99%e6%a0%b7%e7%9a%84%e2%80%94%e2%80%94%e5%8c%85%e6%8b%ac%e4%b8%89%e6%ac%a1%e5%88%a4%e6%96%ad%e8%a2%ab%e8%87%aa%e5%b7%b1%e6%8e%a8%e7%bf%bb%e3%80%82%20%e2%80%a6" data-title=" QQ">
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f26%2fatelier-lessons-in-corrections%2f&title=%e3%80%8aatelier%20%e6%98%af%e8%a2%ab%e8%bf%99%e4%ba%9b%e9%94%99%e8%af%af%e5%88%a4%e6%96%ad%e7%a3%a8%e5%87%ba%e6%9d%a5%e7%9a%84%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=atelier%20%e6%ba%90%e7%a0%81%e6%8b%86%e8%a7%a3%20%c2%b7%20%e4%ba%8c%0a%e4%bb%a3%e7%a0%81%e6%b3%a8%e9%87%8a%e9%87%8c%e7%95%99%e4%b8%8b%e7%9a%84%e9%82%a3%e4%ba%9b%e5%88%a4%e6%96%ad%e5%a4%b1%e8%af%af%0a%e4%b8%8a%e4%b8%80%e7%af%87%20%e8%ae%b2%20atelier%20%e9%95%bf%e4%bb%80%e4%b9%88%e6%a0%b7%e3%80%82%0a%e8%bf%99%e7%af%87%e8%ae%b2%e5%ae%83%e6%98%af%e6%80%8e%e4%b9%88%e9%95%bf%e6%88%90%e8%bf%99%e6%a0%b7%e7%9a%84%e2%80%94%e2%80%94%e5%8c%85%e6%8b%ac%e4%b8%89%e6%ac%a1%e5%88%a4%e6%96%ad%e8%a2%ab%e8%87%aa%e5%b7%b1%e6%8e%a8%e7%bf%bb%e3%80%82%0a%e6%9c%ac%20%e2%80%a6" data-title=" QQ">
         <i class="icon icon-qq"></i>
       </a>
     </li>

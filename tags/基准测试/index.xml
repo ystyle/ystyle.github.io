@@ -18,7 +18,7 @@
 				<link>https://ystyle.top/2026/10/16/time-layered-memory-measured/</link>
 				<pubDate>Fri, 16 Oct 2026 10:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/2026/10/16/time-layered-memory-measured/</guid>
-				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;忆时塔（Chronomem）实测笔记 · 下篇&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;结果最好看的部分，是「我的测量方法错了」&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这是&lt;strong&gt;实证论文&lt;/strong&gt;的博客版——position 论文（AiraXiv 2610.0035）提出评估计划，&lt;br&gt;&#xA;&lt;a href=&#34;https://ystyle.top/2026/10/16/time-layered-memory-tower/&#34;&gt;上篇&lt;/a&gt;&#xA;讲那份设计，&lt;br&gt;&#xA;本文报告执行结果。评估工具与原始结果归档：&lt;br&gt;&#xA;&lt;a href=&#34;https://atomgit.com/ystyle/chronomem&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;atomgit.com/ystyle/chronomem&lt;/a&gt;&#xA;（&lt;code&gt;bench/&lt;/code&gt; 与 &lt;code&gt;bench/results/&lt;/code&gt;）。&lt;/p&gt;</description>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;忆时塔（Chronomem）实测报告 · 下篇&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;结果最好看的部分，是「我的测量方法错了」&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这是&lt;strong&gt;实证论文&lt;/strong&gt;的博客版——position 论文（AiraXiv 2610.0035）提出评估计划，&lt;br&gt;&#xA;&lt;a href=&#34;https://ystyle.top/2026/10/16/time-layered-memory-tower/&#34;&gt;上篇&lt;/a&gt;&#xA;讲那份设计，&lt;br&gt;&#xA;本文报告执行结果。评估工具与原始结果归档：&lt;br&gt;&#xA;&lt;a href=&#34;https://atomgit.com/ystyle/chronomem&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;atomgit.com/ystyle/chronomem&lt;/a&gt;&#xA;（&lt;code&gt;bench/&lt;/code&gt; 与 &lt;code&gt;bench/results/&lt;/code&gt;）。&lt;/p&gt;</description>
 			</item>
 	</channel>
 </rss>

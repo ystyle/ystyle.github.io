@@ -218,11 +218,11 @@ sunku-cj 是仓颉生态里的「Redis 兼容本地 KV 数据库」，架在 bad
         </h3>
         <div class="post-content" id="post-content" itemprop="postContent">
           
-          tsdb-cj 排查笔记
+          tsdb-cj 排查实录
 最危险的不是崩溃，是「看起来在工作」
 tsdb-cj 是基于 badger-cj 的嵌入式时序数据库，
 也是忆时塔 分层记忆的存储底座。
-本文不谈它的设计，只讲一次审计里挖出来的四类问题——它们的共同点是：
+本文不谈它的设计，只讲一次系统性排查里挖出来的四类问题——它们的共同点是：
 代码能跑、测试能过、日志无错，但功能根本没生效。
 
           <a href="/2026/10/19/tsdb-silent-failures/" class="post-more waves-effect waves-button">Continue reading...</a>
@@ -248,7 +248,7 @@ tsdb-cj 是基于 badger-cj 的嵌入式时序数据库，
         </h3>
         <div class="post-content" id="post-content" itemprop="postContent">
           
-          storm-cj（bstorm）设计笔记 · 上篇
+          storm-cj（bstorm）源码拆解 · 上篇
 把写吞吐砍掉一半，换 44 倍查询——这笔账怎么算
 这是仓颉版 storm 的第一篇。上一篇关于 storm 的文章还是 2019 年写的
 Go 版 storm 的使用 ——bstorm 的灵感就来自它，

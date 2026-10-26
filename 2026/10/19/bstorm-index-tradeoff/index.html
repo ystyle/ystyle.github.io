@@ -319,7 +319,7 @@
       </div>
 
       <div class="post-content" id="post-content" itemprop="postContent">
-        <p align="center"><strong>storm-cj（bstorm）设计笔记 · 上篇</strong></p>
+        <p align="center"><strong>storm-cj（bstorm）源码拆解 · 上篇</strong></p>
 <p align="center"><em>把写吞吐砍掉一半，换 44 倍查询——这笔账怎么算</em></p>
 <blockquote>
 <p>这是仓颉版 storm 的第一篇。上一篇关于 storm 的文章还是 2019 年写的<br>
@@ -448,14 +448,14 @@ while (iter.validForPrefix(prefix)) {
   txn.set(主数据); txn.set(索引1)
   txn.set(索引2);  txn.commit()
   ← 1 次提交
-</code></pre><p>就这一处，写入从 <strong>9k/s 回到 11.5k/s</strong>——报告里明写「9k/s → 11.5k/s 的提升来自索引事务合并」。</p>
+</code></pre><p>就这一处，写入从 <strong>9k/s 回到 11.5k/s</strong>。这个提升只来自索引事务合并，不是任何单点优化。</p>
 <blockquote>
 <p>顺带一个数字感：<strong>无索引时 21k/s 是纯 badger 写入速度</strong>。也就是说 21k → 11.5k 这个缺口，就是「有索引」这件事的总成本。</p>
 </blockquote>
 <h3 id="33-一个反直觉的失败尝试"><a href="#33-一个反直觉的失败尝试" class="headerlink" title="3.3 一个反直觉的失败尝试"></a>3.3 一个反直觉的失败尝试</h3>
-<p>benchmark 报告的待办里有这么一条，我觉得比成功的部分更值得说：</p>
+<p>基准测试里有一条<strong>试过又撤掉</strong>的优化，我觉得比成功的部分更值得说：</p>
 <blockquote>
-<p><del>范围查询 (Gte/Lt) 接入索引查找</del> → <strong>试过，LSM 回表比流式慢，无效</strong></p>
+<p>范围查询 (Gte/Lt) 接入索引查找 → <strong>实测：LSM 回表比流式慢，无效</strong></p>
 </blockquote>
 <p>在 B 树数据库里，范围查询走索引是常识。但在 LSM 上，这条路可能<strong>更慢</strong>：</p>
 <pre tabindex="0"><code>走索引：
@@ -468,7 +468,7 @@ while (iter.validForPrefix(prefix)) {
   → LSM 的顺序读非常快
   → 还能享受同一 block 的局部性
 </code></pre><p>所以 <code>range(30-60)</code> 最终是 <strong>334ms</strong>（6.6 倍提速），但它的提速来自<strong>覆盖索引计数 + 流式扫描</strong>，不是「走索引查范围」。</p>
-<p><strong>这条记在报告的待办里，而不是删掉</strong>——因为它是一个可能被反复尝试的坑。</p>
+<p><strong>这条结论留了下来，而不是删掉</strong>——因为它是一个可能被反复尝试的坑。</p>
 <h2 id="四这笔账怎么算"><a href="#四这笔账怎么算" class="headerlink" title="四、这笔账怎么算"></a>四、这笔账怎么算</h2>
 <h3 id="41-什么时候值得"><a href="#41-什么时候值得" class="headerlink" title="4.1 什么时候值得"></a>4.1 什么时候值得</h3>
 <table>
@@ -597,7 +597,7 @@ while (iter.validForPrefix(prefix)) {
       </a>
     </li>
     <li>
-      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2fbstorm-index-tradeoff%2f&title=%e3%80%8astorm-cj%20%e7%9a%84%e7%b4%a2%e5%bc%95%e4%bb%a3%e4%bb%b7%ef%bc%9a44%20%e5%80%8d%e6%9f%a5%e8%af%a2%e6%8d%a2%e6%9d%a5%e7%9a%84%e5%86%99%e5%85%a5%e8%85%b0%e6%96%a9%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=storm-cj%ef%bc%88bstorm%ef%bc%89%e8%ae%be%e8%ae%a1%e7%ac%94%e8%ae%b0%20%c2%b7%20%e4%b8%8a%e7%af%87%0a%e6%8a%8a%e5%86%99%e5%90%9e%e5%90%90%e7%a0%8d%e6%8e%89%e4%b8%80%e5%8d%8a%ef%bc%8c%e6%8d%a2%2044%20%e5%80%8d%e6%9f%a5%e8%af%a2%e2%80%94%e2%80%94%e8%bf%99%e7%ac%94%e8%b4%a6%e6%80%8e%e4%b9%88%e7%ae%97%0a%e8%bf%99%e6%98%af%e4%bb%93%e9%a2%89%e7%89%88%20storm%20%e7%9a%84%e7%ac%ac%e4%b8%80%e7%af%87%e3%80%82%e4%b8%8a%e4%b8%80%e7%af%87%e5%85%b3%e4%ba%8e%20storm%20%e2%80%a6" data-title=" QQ">
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2fbstorm-index-tradeoff%2f&title=%e3%80%8astorm-cj%20%e7%9a%84%e7%b4%a2%e5%bc%95%e4%bb%a3%e4%bb%b7%ef%bc%9a44%20%e5%80%8d%e6%9f%a5%e8%af%a2%e6%8d%a2%e6%9d%a5%e7%9a%84%e5%86%99%e5%85%a5%e8%85%b0%e6%96%a9%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=storm-cj%ef%bc%88bstorm%ef%bc%89%e6%ba%90%e7%a0%81%e6%8b%86%e8%a7%a3%20%c2%b7%20%e4%b8%8a%e7%af%87%0a%e6%8a%8a%e5%86%99%e5%90%9e%e5%90%90%e7%a0%8d%e6%8e%89%e4%b8%80%e5%8d%8a%ef%bc%8c%e6%8d%a2%2044%20%e5%80%8d%e6%9f%a5%e8%af%a2%e2%80%94%e2%80%94%e8%bf%99%e7%ac%94%e8%b4%a6%e6%80%8e%e4%b9%88%e7%ae%97%0a%e8%bf%99%e6%98%af%e4%bb%93%e9%a2%89%e7%89%88%20storm%20%e7%9a%84%e7%ac%ac%e4%b8%80%e7%af%87%e3%80%82%e4%b8%8a%e4%b8%80%e7%af%87%e5%85%b3%e4%ba%8e%20storm%20%e2%80%a6" data-title=" QQ">
         <i class="icon icon-qq"></i>
       </a>
     </li>
@@ -721,7 +721,7 @@ while (iter.validForPrefix(prefix)) {
       </a>
     </li>
     <li>
-      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2fbstorm-index-tradeoff%2f&title=%e3%80%8astorm-cj%20%e7%9a%84%e7%b4%a2%e5%bc%95%e4%bb%a3%e4%bb%b7%ef%bc%9a44%20%e5%80%8d%e6%9f%a5%e8%af%a2%e6%8d%a2%e6%9d%a5%e7%9a%84%e5%86%99%e5%85%a5%e8%85%b0%e6%96%a9%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=storm-cj%ef%bc%88bstorm%ef%bc%89%e8%ae%be%e8%ae%a1%e7%ac%94%e8%ae%b0%20%c2%b7%20%e4%b8%8a%e7%af%87%0a%e6%8a%8a%e5%86%99%e5%90%9e%e5%90%90%e7%a0%8d%e6%8e%89%e4%b8%80%e5%8d%8a%ef%bc%8c%e6%8d%a2%2044%20%e5%80%8d%e6%9f%a5%e8%af%a2%e2%80%94%e2%80%94%e8%bf%99%e7%ac%94%e8%b4%a6%e6%80%8e%e4%b9%88%e7%ae%97%0a%e8%bf%99%e6%98%af%e4%bb%93%e9%a2%89%e7%89%88%20storm%20%e7%9a%84%e7%ac%ac%e4%b8%80%e7%af%87%e3%80%82%e4%b8%8a%e4%b8%80%e7%af%87%e5%85%b3%e4%ba%8e%20storm%20%e2%80%a6" data-title=" QQ">
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2fbstorm-index-tradeoff%2f&title=%e3%80%8astorm-cj%20%e7%9a%84%e7%b4%a2%e5%bc%95%e4%bb%a3%e4%bb%b7%ef%bc%9a44%20%e5%80%8d%e6%9f%a5%e8%af%a2%e6%8d%a2%e6%9d%a5%e7%9a%84%e5%86%99%e5%85%a5%e8%85%b0%e6%96%a9%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=storm-cj%ef%bc%88bstorm%ef%bc%89%e6%ba%90%e7%a0%81%e6%8b%86%e8%a7%a3%20%c2%b7%20%e4%b8%8a%e7%af%87%0a%e6%8a%8a%e5%86%99%e5%90%9e%e5%90%90%e7%a0%8d%e6%8e%89%e4%b8%80%e5%8d%8a%ef%bc%8c%e6%8d%a2%2044%20%e5%80%8d%e6%9f%a5%e8%af%a2%e2%80%94%e2%80%94%e8%bf%99%e7%ac%94%e8%b4%a6%e6%80%8e%e4%b9%88%e7%ae%97%0a%e8%bf%99%e6%98%af%e4%bb%93%e9%a2%89%e7%89%88%20storm%20%e7%9a%84%e7%ac%ac%e4%b8%80%e7%af%87%e3%80%82%e4%b8%8a%e4%b8%80%e7%af%87%e5%85%b3%e4%ba%8e%20storm%20%e2%80%a6" data-title=" QQ">
         <i class="icon icon-qq"></i>
       </a>
     </li>

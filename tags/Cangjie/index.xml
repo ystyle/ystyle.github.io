@@ -18,14 +18,14 @@
 				<link>https://ystyle.top/2026/10/26/atelier-lessons-in-corrections/</link>
 				<pubDate>Mon, 26 Oct 2026 11:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/2026/10/26/atelier-lessons-in-corrections/</guid>
-				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;atelier 设计笔记 · 二&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;设计文档里不会写的那些判断失误&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://ystyle.top/2026/10/26/atelier-agent-harness/&#34;&gt;上一篇&lt;/a&gt;&#xA;讲 atelier 长什么样。&lt;br&gt;&#xA;这篇讲它是怎么长成这样的——&lt;strong&gt;包括三次判断被自己推翻&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;素材来自项目的工作日志与代码注释。凡是文中引用的教训，代码里都留着对应痕迹。&lt;/p&gt;</description>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;atelier 源码拆解 · 二&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;代码注释里留下的那些判断失误&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://ystyle.top/2026/10/26/atelier-agent-harness/&#34;&gt;上一篇&lt;/a&gt;&#xA;讲 atelier 长什么样。&lt;br&gt;&#xA;这篇讲它是怎么长成这样的——&lt;strong&gt;包括三次判断被自己推翻&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;本文的依据全部来自代码注释与提交记录。凡是文中提到的教训，代码里都留着对应痕迹。&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>把模型变成 Agent 的那层脚手架：atelier</title>
 				<link>https://ystyle.top/2026/10/26/atelier-agent-harness/</link>
 				<pubDate>Mon, 26 Oct 2026 10:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/2026/10/26/atelier-agent-harness/</guid>
-				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;atelier 设计笔记 · 一&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;把模型变成 Agent，中间差着一层&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;atelier 是一个纯仓颉实现的 &lt;strong&gt;Agent Harness&lt;/strong&gt;——按它自己的说法，&lt;br&gt;&#xA;「把模型变成 Agent 的那层脚手架」。三个成员合计 &lt;strong&gt;45860 行&lt;/strong&gt;（不含测试）、&lt;br&gt;&#xA;&lt;strong&gt;2058 个测试用例&lt;/strong&gt;。&lt;/p&gt;</description>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;atelier 源码拆解 · 一&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;把模型变成 Agent，中间差着一层&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;atelier 是一个纯仓颉实现的 &lt;strong&gt;Agent Harness&lt;/strong&gt;——按它自己的说法，&lt;br&gt;&#xA;「把模型变成 Agent 的那层脚手架」。三个成员合计 &lt;strong&gt;45860 行&lt;/strong&gt;（不含测试）、&lt;br&gt;&#xA;&lt;strong&gt;2058 个测试用例&lt;/strong&gt;。&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>holt-cj 1.1.0：从 720 行长到 3300 行的图数据库</title>
@@ -46,28 +46,28 @@
 				<link>https://ystyle.top/2026/10/19/tsdb-silent-failures/</link>
 				<pubDate>Mon, 19 Oct 2026 11:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/2026/10/19/tsdb-silent-failures/</guid>
-				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;tsdb-cj 排查笔记&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;最危险的不是崩溃，是「看起来在工作」&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;tsdb-cj 是基于 &lt;a href=&#34;https://ystyle.top/2026/10/10/badger-cj-porting-notes/&#34;&gt;badger-cj&lt;/a&gt;&#xA; 的嵌入式时序数据库，&lt;br&gt;&#xA;也是&lt;a href=&#34;https://ystyle.top/2026/10/16/time-layered-memory-tower/&#34;&gt;忆时塔&lt;/a&gt;&#xA;分层记忆的存储底座。&lt;br&gt;&#xA;本文不谈它的设计，只讲一次审计里挖出来的四类问题——它们的共同点是：&lt;br&gt;&#xA;&lt;strong&gt;代码能跑、测试能过、日志无错，但功能根本没生效。&lt;/strong&gt;&lt;/p&gt;</description>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;tsdb-cj 排查实录&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;最危险的不是崩溃，是「看起来在工作」&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;tsdb-cj 是基于 &lt;a href=&#34;https://ystyle.top/2026/10/10/badger-cj-porting-notes/&#34;&gt;badger-cj&lt;/a&gt;&#xA; 的嵌入式时序数据库，&lt;br&gt;&#xA;也是&lt;a href=&#34;https://ystyle.top/2026/10/16/time-layered-memory-tower/&#34;&gt;忆时塔&lt;/a&gt;&#xA;分层记忆的存储底座。&lt;br&gt;&#xA;本文不谈它的设计，只讲一次系统性排查里挖出来的四类问题——它们的共同点是：&lt;br&gt;&#xA;&lt;strong&gt;代码能跑、测试能过、日志无错，但功能根本没生效。&lt;/strong&gt;&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>storm-cj 的索引代价：44 倍查询换来的写入腰斩</title>
 				<link>https://ystyle.top/2026/10/19/bstorm-index-tradeoff/</link>
 				<pubDate>Mon, 19 Oct 2026 10:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/2026/10/19/bstorm-index-tradeoff/</guid>
-				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;storm-cj（bstorm）设计笔记 · 上篇&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;把写吞吐砍掉一半，换 44 倍查询——这笔账怎么算&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这是仓颉版 storm 的第一篇。上一篇关于 storm 的文章还是 2019 年写的&lt;br&gt;&#xA;&lt;a href=&#34;https://ystyle.top/2019/12/22/how-to-use-storm-db/&#34;&gt;Go 版 storm 的使用&lt;/a&gt;&#xA;——bstorm 的灵感就来自它，&lt;br&gt;&#xA;但实现完全不同：Go 版架在 BoltDB 上，bstorm 架在&lt;a href=&#34;https://ystyle.top/2026/10/10/badger-cj-porting-notes/&#34;&gt;自研的 LSM 引擎 badger-cj&lt;/a&gt;&#xA; 上。&lt;br&gt;&#xA;本文讲索引带来的取舍，不讲 LSM 基础（那个在前四篇里）。&lt;/p&gt;</description>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;storm-cj（bstorm）源码拆解 · 上篇&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;把写吞吐砍掉一半，换 44 倍查询——这笔账怎么算&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这是仓颉版 storm 的第一篇。上一篇关于 storm 的文章还是 2019 年写的&lt;br&gt;&#xA;&lt;a href=&#34;https://ystyle.top/2019/12/22/how-to-use-storm-db/&#34;&gt;Go 版 storm 的使用&lt;/a&gt;&#xA;——bstorm 的灵感就来自它，&lt;br&gt;&#xA;但实现完全不同：Go 版架在 BoltDB 上，bstorm 架在&lt;a href=&#34;https://ystyle.top/2026/10/10/badger-cj-porting-notes/&#34;&gt;自研的 LSM 引擎 badger-cj&lt;/a&gt;&#xA; 上。&lt;br&gt;&#xA;本文讲索引带来的取舍，不讲 LSM 基础（那个在前四篇里）。&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>给 Agent 造一座记忆塔（二）：我去测了它，错了两次</title>
 				<link>https://ystyle.top/2026/10/16/time-layered-memory-measured/</link>
 				<pubDate>Fri, 16 Oct 2026 10:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/2026/10/16/time-layered-memory-measured/</guid>
-				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;忆时塔（Chronomem）实测笔记 · 下篇&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;结果最好看的部分，是「我的测量方法错了」&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这是&lt;strong&gt;实证论文&lt;/strong&gt;的博客版——position 论文（AiraXiv 2610.0035）提出评估计划，&lt;br&gt;&#xA;&lt;a href=&#34;https://ystyle.top/2026/10/16/time-layered-memory-tower/&#34;&gt;上篇&lt;/a&gt;&#xA;讲那份设计，&lt;br&gt;&#xA;本文报告执行结果。评估工具与原始结果归档：&lt;br&gt;&#xA;&lt;a href=&#34;https://atomgit.com/ystyle/chronomem&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;atomgit.com/ystyle/chronomem&lt;/a&gt;&#xA;（&lt;code&gt;bench/&lt;/code&gt; 与 &lt;code&gt;bench/results/&lt;/code&gt;）。&lt;/p&gt;</description>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;忆时塔（Chronomem）实测报告 · 下篇&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;结果最好看的部分，是「我的测量方法错了」&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这是&lt;strong&gt;实证论文&lt;/strong&gt;的博客版——position 论文（AiraXiv 2610.0035）提出评估计划，&lt;br&gt;&#xA;&lt;a href=&#34;https://ystyle.top/2026/10/16/time-layered-memory-tower/&#34;&gt;上篇&lt;/a&gt;&#xA;讲那份设计，&lt;br&gt;&#xA;本文报告执行结果。评估工具与原始结果归档：&lt;br&gt;&#xA;&lt;a href=&#34;https://atomgit.com/ystyle/chronomem&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;atomgit.com/ystyle/chronomem&lt;/a&gt;&#xA;（&lt;code&gt;bench/&lt;/code&gt; 与 &lt;code&gt;bench/results/&lt;/code&gt;）。&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>给 Agent 造一座记忆塔（一）：扁平存储与一次性压缩之间</title>
 				<link>https://ystyle.top/2026/10/16/time-layered-memory-tower/</link>
 				<pubDate>Fri, 16 Oct 2026 10:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/2026/10/16/time-layered-memory-tower/</guid>
-				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;忆时塔（Chronomem）设计笔记 · 上篇&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;扁平存储与一次性压缩之间，还缺一种记忆&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这套设计我写成了 &lt;strong&gt;position 论文&lt;/strong&gt;（AiraXiv &lt;strong&gt;2610.0035&lt;/strong&gt;），&lt;br&gt;&#xA;对应的实证论文是&lt;a href=&#34;https://ystyle.top/2026/10/16/time-layered-memory-measured/&#34;&gt;下篇&lt;/a&gt;&#xA;的主题。&lt;br&gt;&#xA;代码与完整技术设计：&lt;a href=&#34;https://atomgit.com/ystyle/chronomem&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;atomgit.com/ystyle/chronomem&lt;/a&gt;&#xA;。&lt;br&gt;&#xA;本文是博客版，讲动机与设计取舍；严格定义与参考文献见论文。&lt;/p&gt;</description>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;忆时塔（Chronomem）设计论文导读 · 上篇&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;扁平存储与一次性压缩之间，还缺一种记忆&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这套设计我写成了 &lt;strong&gt;position 论文&lt;/strong&gt;（AiraXiv &lt;strong&gt;2610.0035&lt;/strong&gt;），&lt;br&gt;&#xA;对应的实证论文是&lt;a href=&#34;https://ystyle.top/2026/10/16/time-layered-memory-measured/&#34;&gt;下篇&lt;/a&gt;&#xA;的主题。&lt;br&gt;&#xA;代码与完整技术设计：&lt;a href=&#34;https://atomgit.com/ystyle/chronomem&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;atomgit.com/ystyle/chronomem&lt;/a&gt;&#xA;。&lt;br&gt;&#xA;本文是博客版，讲动机与设计取舍；严格定义与参考文献见论文。&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>一段代码，两个系统：仓颉怎么处理「跨平台」这件事</title>

@@ -17,13 +17,13 @@
     <published>2026-10-26T03:00:00.000Z</published>
     <updated>2026-10-26T03:00:00.000Z</updated>
     
-    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;atelier 设计笔记 · 二&lt;/strong&gt;&lt;/p&gt;
-&lt;p align=&#34;center&#34;&gt;&lt;em&gt;设计文档里不会写的那些判断失误&lt;/em&gt;&lt;/p&gt;
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;atelier 源码拆解 · 二&lt;/strong&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;em&gt;代码注释里留下的那些判断失误&lt;/em&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;/2026/10/26/atelier-agent-harness/&#34;&gt;上一篇&lt;/a&gt;
 讲 atelier 长什么样。&lt;br&gt;
 这篇讲它是怎么长成这样的——&lt;strong&gt;包括三次判断被自己推翻&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;素材来自项目的工作日志与代码注释。凡是文中引用的教训，代码里都留着对应痕迹。&lt;/p&gt;</summary>
+&lt;p&gt;本文的依据全部来自代码注释与提交记录。凡是文中提到的教训，代码里都留着对应痕迹。&lt;/p&gt;</summary>
     <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
     <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
     <category term="atelier" scheme="https://ystyle.top/tags/atelier/"/>
@@ -39,7 +39,7 @@
     <published>2026-10-26T02:00:00.000Z</published>
     <updated>2026-10-26T02:00:00.000Z</updated>
     
-    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;atelier 设计笔记 · 一&lt;/strong&gt;&lt;/p&gt;
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;atelier 源码拆解 · 一&lt;/strong&gt;&lt;/p&gt;
 &lt;p align=&#34;center&#34;&gt;&lt;em&gt;把模型变成 Agent，中间差着一层&lt;/em&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;atelier 是一个纯仓颉实现的 &lt;strong&gt;Agent Harness&lt;/strong&gt;——按它自己的说法，&lt;br&gt;
@@ -102,14 +102,14 @@
     <published>2026-10-19T03:00:00.000Z</published>
     <updated>2026-10-19T03:00:00.000Z</updated>
     
-    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;tsdb-cj 排查笔记&lt;/strong&gt;&lt;/p&gt;
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;tsdb-cj 排查实录&lt;/strong&gt;&lt;/p&gt;
 &lt;p align=&#34;center&#34;&gt;&lt;em&gt;最危险的不是崩溃，是「看起来在工作」&lt;/em&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;tsdb-cj 是基于 &lt;a href=&#34;/2026/10/10/badger-cj-porting-notes/&#34;&gt;badger-cj&lt;/a&gt;
  的嵌入式时序数据库，&lt;br&gt;
 也是&lt;a href=&#34;/2026/10/16/time-layered-memory-tower/&#34;&gt;忆时塔&lt;/a&gt;
 分层记忆的存储底座。&lt;br&gt;
-本文不谈它的设计，只讲一次审计里挖出来的四类问题——它们的共同点是：&lt;br&gt;
+本文不谈它的设计，只讲一次系统性排查里挖出来的四类问题——它们的共同点是：&lt;br&gt;
 &lt;strong&gt;代码能跑、测试能过、日志无错，但功能根本没生效。&lt;/strong&gt;&lt;/p&gt;</summary>
     <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
     <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
@@ -125,7 +125,7 @@
     <published>2026-10-19T02:00:00.000Z</published>
     <updated>2026-10-19T02:00:00.000Z</updated>
     
-    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;storm-cj（bstorm）设计笔记 · 上篇&lt;/strong&gt;&lt;/p&gt;
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;storm-cj（bstorm）源码拆解 · 上篇&lt;/strong&gt;&lt;/p&gt;
 &lt;p align=&#34;center&#34;&gt;&lt;em&gt;把写吞吐砍掉一半，换 44 倍查询——这笔账怎么算&lt;/em&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;这是仓颉版 storm 的第一篇。上一篇关于 storm 的文章还是 2019 年写的&lt;br&gt;
@@ -149,7 +149,7 @@
     <published>2026-10-16T02:00:00.000Z</published>
     <updated>2026-10-16T02:00:00.000Z</updated>
     
-    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;忆时塔（Chronomem）实测笔记 · 下篇&lt;/strong&gt;&lt;/p&gt;
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;忆时塔（Chronomem）实测报告 · 下篇&lt;/strong&gt;&lt;/p&gt;
 &lt;p align=&#34;center&#34;&gt;&lt;em&gt;结果最好看的部分，是「我的测量方法错了」&lt;/em&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;这是&lt;strong&gt;实证论文&lt;/strong&gt;的博客版——position 论文（AiraXiv 2610.0035）提出评估计划，&lt;br&gt;
@@ -173,7 +173,7 @@
     <published>2026-10-16T02:00:00.000Z</published>
     <updated>2026-10-16T02:00:00.000Z</updated>
     
-    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;忆时塔（Chronomem）设计笔记 · 上篇&lt;/strong&gt;&lt;/p&gt;
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;忆时塔（Chronomem）设计论文导读 · 上篇&lt;/strong&gt;&lt;/p&gt;
 &lt;p align=&#34;center&#34;&gt;&lt;em&gt;扁平存储与一次性压缩之间，还缺一种记忆&lt;/em&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;这套设计我写成了 &lt;strong&gt;position 论文&lt;/strong&gt;（AiraXiv &lt;strong&gt;2610.0035&lt;/strong&gt;），&lt;br&gt;

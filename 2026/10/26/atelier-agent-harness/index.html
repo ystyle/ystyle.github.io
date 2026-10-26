@@ -417,7 +417,7 @@
       </div>
 
       <div class="post-content" id="post-content" itemprop="postContent">
-        <p align="center"><strong>atelier 设计笔记 · 一</strong></p>
+        <p align="center"><strong>atelier 源码拆解 · 一</strong></p>
 <p align="center"><em>把模型变成 Agent，中间差着一层</em></p>
 <blockquote>
 <p>atelier 是一个纯仓颉实现的 <strong>Agent Harness</strong>——按它自己的说法，<br>
@@ -665,7 +665,18 @@
 <p>这个设计解决了一个真实问题：如果 run 级工具写进根表，两个并发会话会互相看见对方的工具，可能按别人的工作目录过信任闸门。</p>
 <h3 id="43-工具声明影响缓存"><a href="#43-工具声明影响缓存" class="headerlink" title="4.3 工具声明影响缓存"></a>4.3 工具声明影响缓存</h3>
 <p>一个容易忽略的点：<strong>工具列表的顺序会毁掉提示词前缀缓存</strong>。</p>
-<p>如果每次请求工具声明的顺序都不同，provider 侧的前缀缓存就失效了。所以工具声明要稳定排序——这是 <code>B3</code> 那条待办里记的（一行改动，直接影响成本和延迟）。</p>
+<p>如果每次请求工具声明的顺序都不同，provider 侧的前缀缓存就失效了。</p>
+<p><strong>顺序为什么会抖</strong>：可见工具列表每轮重算（MCP 冷却要随回合推进），而「按 <code>prefix_*</code> 通配匹配」那条分支遍历的是工具注册表——注册表底层是 <code>HashMap</code>，迭代顺序取决于<strong>插入历史</strong>。运行中按需注册 MCP 工具、或不同会话先加载了不同的工具集，都会改变这个历史。</p>
+<p>于是同一批工具可能排出不同顺序。而前缀缓存按「前缀单元完整匹配」计价，<strong>只要从第一个工具起就不同，整段都按未命中算</strong>。</p>
+<p>修法是在解析出口统一排一次（插入排序，工具数量很小）：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// 按工具名就地稳定排序。
+// 存在的理由只有一条：字节稳定性——
+// 工具声明与 PTC SDK 段都是提示词前缀
+// 的一部分，批次相同但顺序不同的前缀
+// 等于两次不同的前缀。
+func sortToolsByName(
+    tools: ArrayList&lt;Tool&gt;)
+</code></pre><p>一行调用，直接同时影响成本和延迟。</p>
 <h2 id="五问题四信任与权限"><a href="#五问题四信任与权限" class="headerlink" title="五、问题四：信任与权限"></a>五、问题四：信任与权限</h2>
 <p>模型想执行一条命令，该不该放行？这是 Agent 最危险的地方。</p>
 <h3 id="51-三态判定"><a href="#51-三态判定" class="headerlink" title="5.1 三态判定"></a>5.1 三态判定</h3>
@@ -989,7 +1000,7 @@ let h = Harness.open(spec)
       </a>
     </li>
     <li>
-      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f26%2fatelier-agent-harness%2f&title=%e3%80%8a%e6%8a%8a%e6%a8%a1%e5%9e%8b%e5%8f%98%e6%88%90%20Agent%20%e7%9a%84%e9%82%a3%e5%b1%82%e8%84%9a%e6%89%8b%e6%9e%b6%ef%bc%9aatelier%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=atelier%20%e8%ae%be%e8%ae%a1%e7%ac%94%e8%ae%b0%20%c2%b7%20%e4%b8%80%0a%e6%8a%8a%e6%a8%a1%e5%9e%8b%e5%8f%98%e6%88%90%20Agent%ef%bc%8c%e4%b8%ad%e9%97%b4%e5%b7%ae%e7%9d%80%e4%b8%80%e5%b1%82%0aatelier%20%e6%98%af%e4%b8%80%e4%b8%aa%e7%ba%af%e4%bb%93%e9%a2%89%e5%ae%9e%e7%8e%b0%e7%9a%84%20Agent%20Harness%e2%80%94%e2%80%94%e6%8c%89%e5%ae%83%e8%87%aa%e5%b7%b1%e7%9a%84%e8%af%b4%e6%b3%95%ef%bc%8c%0a%e3%80%8c%e6%8a%8a%20%e2%80%a6" data-title=" QQ">
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f26%2fatelier-agent-harness%2f&title=%e3%80%8a%e6%8a%8a%e6%a8%a1%e5%9e%8b%e5%8f%98%e6%88%90%20Agent%20%e7%9a%84%e9%82%a3%e5%b1%82%e8%84%9a%e6%89%8b%e6%9e%b6%ef%bc%9aatelier%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=atelier%20%e6%ba%90%e7%a0%81%e6%8b%86%e8%a7%a3%20%c2%b7%20%e4%b8%80%0a%e6%8a%8a%e6%a8%a1%e5%9e%8b%e5%8f%98%e6%88%90%20Agent%ef%bc%8c%e4%b8%ad%e9%97%b4%e5%b7%ae%e7%9d%80%e4%b8%80%e5%b1%82%0aatelier%20%e6%98%af%e4%b8%80%e4%b8%aa%e7%ba%af%e4%bb%93%e9%a2%89%e5%ae%9e%e7%8e%b0%e7%9a%84%20Agent%20Harness%e2%80%94%e2%80%94%e6%8c%89%e5%ae%83%e8%87%aa%e5%b7%b1%e7%9a%84%e8%af%b4%e6%b3%95%ef%bc%8c%0a%e3%80%8c%e6%8a%8a%20%e2%80%a6" data-title=" QQ">
         <i class="icon icon-qq"></i>
       </a>
     </li>
@@ -1113,7 +1124,7 @@ let h = Harness.open(spec)
       </a>
     </li>
     <li>
-      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f26%2fatelier-agent-harness%2f&title=%e3%80%8a%e6%8a%8a%e6%a8%a1%e5%9e%8b%e5%8f%98%e6%88%90%20Agent%20%e7%9a%84%e9%82%a3%e5%b1%82%e8%84%9a%e6%89%8b%e6%9e%b6%ef%bc%9aatelier%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=atelier%20%e8%ae%be%e8%ae%a1%e7%ac%94%e8%ae%b0%20%c2%b7%20%e4%b8%80%0a%e6%8a%8a%e6%a8%a1%e5%9e%8b%e5%8f%98%e6%88%90%20Agent%ef%bc%8c%e4%b8%ad%e9%97%b4%e5%b7%ae%e7%9d%80%e4%b8%80%e5%b1%82%0aatelier%20%e6%98%af%e4%b8%80%e4%b8%aa%e7%ba%af%e4%bb%93%e9%a2%89%e5%ae%9e%e7%8e%b0%e7%9a%84%20Agent%20Harness%e2%80%94%e2%80%94%e6%8c%89%e5%ae%83%e8%87%aa%e5%b7%b1%e7%9a%84%e8%af%b4%e6%b3%95%ef%bc%8c%0a%e3%80%8c%e6%8a%8a%20%e2%80%a6" data-title=" QQ">
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f26%2fatelier-agent-harness%2f&title=%e3%80%8a%e6%8a%8a%e6%a8%a1%e5%9e%8b%e5%8f%98%e6%88%90%20Agent%20%e7%9a%84%e9%82%a3%e5%b1%82%e8%84%9a%e6%89%8b%e6%9e%b6%ef%bc%9aatelier%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=atelier%20%e6%ba%90%e7%a0%81%e6%8b%86%e8%a7%a3%20%c2%b7%20%e4%b8%80%0a%e6%8a%8a%e6%a8%a1%e5%9e%8b%e5%8f%98%e6%88%90%20Agent%ef%bc%8c%e4%b8%ad%e9%97%b4%e5%b7%ae%e7%9d%80%e4%b8%80%e5%b1%82%0aatelier%20%e6%98%af%e4%b8%80%e4%b8%aa%e7%ba%af%e4%bb%93%e9%a2%89%e5%ae%9e%e7%8e%b0%e7%9a%84%20Agent%20Harness%e2%80%94%e2%80%94%e6%8c%89%e5%ae%83%e8%87%aa%e5%b7%b1%e7%9a%84%e8%af%b4%e6%b3%95%ef%bc%8c%0a%e3%80%8c%e6%8a%8a%20%e2%80%a6" data-title=" QQ">
         <i class="icon icon-qq"></i>
       </a>
     </li>

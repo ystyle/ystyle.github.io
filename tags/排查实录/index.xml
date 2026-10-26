@@ -18,14 +18,14 @@
 				<link>https://ystyle.top/2026/10/26/atelier-lessons-in-corrections/</link>
 				<pubDate>Mon, 26 Oct 2026 11:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/2026/10/26/atelier-lessons-in-corrections/</guid>
-				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;atelier 设计笔记 · 二&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;设计文档里不会写的那些判断失误&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://ystyle.top/2026/10/26/atelier-agent-harness/&#34;&gt;上一篇&lt;/a&gt;&#xA;讲 atelier 长什么样。&lt;br&gt;&#xA;这篇讲它是怎么长成这样的——&lt;strong&gt;包括三次判断被自己推翻&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;素材来自项目的工作日志与代码注释。凡是文中引用的教训，代码里都留着对应痕迹。&lt;/p&gt;</description>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;atelier 源码拆解 · 二&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;代码注释里留下的那些判断失误&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://ystyle.top/2026/10/26/atelier-agent-harness/&#34;&gt;上一篇&lt;/a&gt;&#xA;讲 atelier 长什么样。&lt;br&gt;&#xA;这篇讲它是怎么长成这样的——&lt;strong&gt;包括三次判断被自己推翻&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;本文的依据全部来自代码注释与提交记录。凡是文中提到的教训，代码里都留着对应痕迹。&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>tsdb-cj 的四次静默失效：代码能跑、测试能过，但什么都没发生</title>
 				<link>https://ystyle.top/2026/10/19/tsdb-silent-failures/</link>
 				<pubDate>Mon, 19 Oct 2026 11:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/2026/10/19/tsdb-silent-failures/</guid>
-				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;tsdb-cj 排查笔记&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;最危险的不是崩溃，是「看起来在工作」&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;tsdb-cj 是基于 &lt;a href=&#34;https://ystyle.top/2026/10/10/badger-cj-porting-notes/&#34;&gt;badger-cj&lt;/a&gt;&#xA; 的嵌入式时序数据库，&lt;br&gt;&#xA;也是&lt;a href=&#34;https://ystyle.top/2026/10/16/time-layered-memory-tower/&#34;&gt;忆时塔&lt;/a&gt;&#xA;分层记忆的存储底座。&lt;br&gt;&#xA;本文不谈它的设计，只讲一次审计里挖出来的四类问题——它们的共同点是：&lt;br&gt;&#xA;&lt;strong&gt;代码能跑、测试能过、日志无错，但功能根本没生效。&lt;/strong&gt;&lt;/p&gt;</description>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;tsdb-cj 排查实录&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;最危险的不是崩溃，是「看起来在工作」&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;tsdb-cj 是基于 &lt;a href=&#34;https://ystyle.top/2026/10/10/badger-cj-porting-notes/&#34;&gt;badger-cj&lt;/a&gt;&#xA; 的嵌入式时序数据库，&lt;br&gt;&#xA;也是&lt;a href=&#34;https://ystyle.top/2026/10/16/time-layered-memory-tower/&#34;&gt;忆时塔&lt;/a&gt;&#xA;分层记忆的存储底座。&lt;br&gt;&#xA;本文不谈它的设计，只讲一次系统性排查里挖出来的四类问题——它们的共同点是：&lt;br&gt;&#xA;&lt;strong&gt;代码能跑、测试能过、日志无错，但功能根本没生效。&lt;/strong&gt;&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>仓颉服务 - 忆时塔 OOM 追凶记</title>

@@ -417,14 +417,14 @@
       </div>
 
       <div class="post-content" id="post-content" itemprop="postContent">
-        <p align="center"><strong>tsdb-cj 排查笔记</strong></p>
+        <p align="center"><strong>tsdb-cj 排查实录</strong></p>
 <p align="center"><em>最危险的不是崩溃，是「看起来在工作」</em></p>
 <blockquote>
 <p>tsdb-cj 是基于 <a href="/2026/10/10/badger-cj-porting-notes/">badger-cj</a>
  的嵌入式时序数据库，<br>
 也是<a href="/2026/10/16/time-layered-memory-tower/">忆时塔</a>
 分层记忆的存储底座。<br>
-本文不谈它的设计，只讲一次审计里挖出来的四类问题——它们的共同点是：<br>
+本文不谈它的设计，只讲一次系统性排查里挖出来的四类问题——它们的共同点是：<br>
 <strong>代码能跑、测试能过、日志无错，但功能根本没生效。</strong></p>
 </blockquote>
 <h2 id="一为什么这类问题最贵"><a href="#一为什么这类问题最贵" class="headerlink" title="一、为什么这类问题最贵"></a>一、为什么这类问题最贵</h2>
@@ -456,7 +456,7 @@
 //   却永远不过期（静默失效）。
 </code></pre><h3 id="为什么难发现"><a href="#为什么难发现" class="headerlink" title="为什么难发现"></a>为什么难发现</h3>
 <p>TTL 的验证需要<strong>时间流逝</strong>。单元测试通常不会真的等一小时；而如果不写「设一个 1 秒 TTL 然后 sleep 2 秒」这种用例，这条路径就永远是空白。</p>
-<p><strong>这类问题只能靠审计发现，或者靠生产环境里「数据一直在涨」的告警。</strong></p>
+<p><strong>这类问题只能靠主动排查发现，或者靠生产环境里「数据一直在涨」的告警。</strong></p>
 <h2 id="三失效二只清了一半"><a href="#三失效二只清了一半" class="headerlink" title="三、失效二：只清了一半"></a>三、失效二：只清了一半</h2>
 <h3 id="现象-1"><a href="#现象-1" class="headerlink" title="现象"></a>现象</h3>
 <p><code>clearSeries()</code> 清空一个系列的全部物化桶。调用后你以为数据没了。</p>
@@ -581,7 +581,7 @@ k:&lt;series&gt;:&lt;level&gt;:&lt;bucket&gt;:&lt;seq&gt;
 <h3 id="3-拼接式-key-要有边界守卫"><a href="#3-拼接式-key-要有边界守卫" class="headerlink" title="3. 拼接式 key 要有边界守卫"></a>3. 拼接式 key 要有边界守卫</h3>
 <p>任何 <code>a + &quot;:&quot; + b</code> 形式的 key，都要问一句：<strong>a 或 b 里出现分隔符会怎样？</strong> 要么转义，要么在入口拒绝。不要假设调用方不会传。</p>
 <h2 id="七还有一个方法论"><a href="#七还有一个方法论" class="headerlink" title="七、还有一个方法论"></a>七、还有一个方法论</h2>
-<p>这次审计里最有用的一条，其实不是上面三条纪律，而是：</p>
+<p>这次排查里最有用的一条，其实不是上面三条纪律，而是：</p>
 <blockquote>
 <p><strong>写完一个功能，先用「参数真的生效了吗」的方式验一遍，而不是「函数被调用了吗」。</strong></p>
 </blockquote>
@@ -594,7 +594,7 @@ k:&lt;series&gt;:&lt;level&gt;:&lt;bucket&gt;:&lt;seq&gt;
 <p><strong>「调用成功」和「生效」是两件事，而后者才是你真正需要的。</strong></p>
 <hr>
 <h2 id="附这些问题的数量级"><a href="#附这些问题的数量级" class="headerlink" title="附：这些问题的数量级"></a>附：这些问题的数量级</h2>
-<p>tsdb-cj 目前 114 个测试用例。这次审计一次性修掉 4 处静默失效 + 1 处窗口对齐错误，改动 8 个文件、390 行新增。</p>
+<p>tsdb-cj 目前 114 个测试用例。这次排查一次性修掉 4 处静默失效 + 1 处窗口对齐错误，改动 8 个文件、390 行新增。</p>
 <p>值得说的是：<strong>这 4 处都不是新引入的 bug，而是从早期版本就存在</strong>——它们陪着代码跑了几十个版本、通过了每次全量测试。这大概就是「静默」二字最贴切的注脚。</p>
 
       </div>
@@ -635,7 +635,7 @@ k:&lt;series&gt;:&lt;level&gt;:&lt;bucket&gt;:&lt;seq&gt;
       </a>
     </li>
     <li>
-      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2ftsdb-silent-failures%2f&title=%e3%80%8atsdb-cj%20%e7%9a%84%e5%9b%9b%e6%ac%a1%e9%9d%99%e9%bb%98%e5%a4%b1%e6%95%88%ef%bc%9a%e4%bb%a3%e7%a0%81%e8%83%bd%e8%b7%91%e3%80%81%e6%b5%8b%e8%af%95%e8%83%bd%e8%bf%87%ef%bc%8c%e4%bd%86%e4%bb%80%e4%b9%88%e9%83%bd%e6%b2%a1%e5%8f%91%e7%94%9f%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=tsdb-cj%20%e6%8e%92%e6%9f%a5%e7%ac%94%e8%ae%b0%0a%e6%9c%80%e5%8d%b1%e9%99%a9%e7%9a%84%e4%b8%8d%e6%98%af%e5%b4%a9%e6%ba%83%ef%bc%8c%e6%98%af%e3%80%8c%e7%9c%8b%e8%b5%b7%e6%9d%a5%e5%9c%a8%e5%b7%a5%e4%bd%9c%e3%80%8d%0atsdb-cj%20%e6%98%af%e5%9f%ba%e4%ba%8e%20badger-cj%20%e7%9a%84%e5%b5%8c%e5%85%a5%e5%bc%8f%e6%97%b6%e5%ba%8f%e6%95%b0%e6%8d%ae%e5%ba%93%ef%bc%8c%0a%e4%b9%9f%e6%98%af%e5%bf%86%e6%97%b6%e5%a1%94%20%e5%88%86%e5%b1%82%e8%ae%b0%e5%bf%86%e7%9a%84%e5%ad%98%e5%82%a8%e5%ba%95%e5%ba%a7%20%e2%80%a6" data-title=" QQ">
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2ftsdb-silent-failures%2f&title=%e3%80%8atsdb-cj%20%e7%9a%84%e5%9b%9b%e6%ac%a1%e9%9d%99%e9%bb%98%e5%a4%b1%e6%95%88%ef%bc%9a%e4%bb%a3%e7%a0%81%e8%83%bd%e8%b7%91%e3%80%81%e6%b5%8b%e8%af%95%e8%83%bd%e8%bf%87%ef%bc%8c%e4%bd%86%e4%bb%80%e4%b9%88%e9%83%bd%e6%b2%a1%e5%8f%91%e7%94%9f%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=tsdb-cj%20%e6%8e%92%e6%9f%a5%e5%ae%9e%e5%bd%95%0a%e6%9c%80%e5%8d%b1%e9%99%a9%e7%9a%84%e4%b8%8d%e6%98%af%e5%b4%a9%e6%ba%83%ef%bc%8c%e6%98%af%e3%80%8c%e7%9c%8b%e8%b5%b7%e6%9d%a5%e5%9c%a8%e5%b7%a5%e4%bd%9c%e3%80%8d%0atsdb-cj%20%e6%98%af%e5%9f%ba%e4%ba%8e%20badger-cj%20%e7%9a%84%e5%b5%8c%e5%85%a5%e5%bc%8f%e6%97%b6%e5%ba%8f%e6%95%b0%e6%8d%ae%e5%ba%93%ef%bc%8c%0a%e4%b9%9f%e6%98%af%e5%bf%86%e6%97%b6%e5%a1%94%20%e5%88%86%e5%b1%82%e8%ae%b0%e5%bf%86%e7%9a%84%e5%ad%98%e5%82%a8%e5%ba%95%e5%ba%a7%20%e2%80%a6" data-title=" QQ">
         <i class="icon icon-qq"></i>
       </a>
     </li>
@@ -759,7 +759,7 @@ k:&lt;series&gt;:&lt;level&gt;:&lt;bucket&gt;:&lt;seq&gt;
       </a>
     </li>
     <li>
-      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2ftsdb-silent-failures%2f&title=%e3%80%8atsdb-cj%20%e7%9a%84%e5%9b%9b%e6%ac%a1%e9%9d%99%e9%bb%98%e5%a4%b1%e6%95%88%ef%bc%9a%e4%bb%a3%e7%a0%81%e8%83%bd%e8%b7%91%e3%80%81%e6%b5%8b%e8%af%95%e8%83%bd%e8%bf%87%ef%bc%8c%e4%bd%86%e4%bb%80%e4%b9%88%e9%83%bd%e6%b2%a1%e5%8f%91%e7%94%9f%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=tsdb-cj%20%e6%8e%92%e6%9f%a5%e7%ac%94%e8%ae%b0%0a%e6%9c%80%e5%8d%b1%e9%99%a9%e7%9a%84%e4%b8%8d%e6%98%af%e5%b4%a9%e6%ba%83%ef%bc%8c%e6%98%af%e3%80%8c%e7%9c%8b%e8%b5%b7%e6%9d%a5%e5%9c%a8%e5%b7%a5%e4%bd%9c%e3%80%8d%0atsdb-cj%20%e6%98%af%e5%9f%ba%e4%ba%8e%20badger-cj%20%e7%9a%84%e5%b5%8c%e5%85%a5%e5%bc%8f%e6%97%b6%e5%ba%8f%e6%95%b0%e6%8d%ae%e5%ba%93%ef%bc%8c%0a%e4%b9%9f%e6%98%af%e5%bf%86%e6%97%b6%e5%a1%94%20%e5%88%86%e5%b1%82%e8%ae%b0%e5%bf%86%e7%9a%84%e5%ad%98%e5%82%a8%e5%ba%95%e5%ba%a7%20%e2%80%a6" data-title=" QQ">
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f19%2ftsdb-silent-failures%2f&title=%e3%80%8atsdb-cj%20%e7%9a%84%e5%9b%9b%e6%ac%a1%e9%9d%99%e9%bb%98%e5%a4%b1%e6%95%88%ef%bc%9a%e4%bb%a3%e7%a0%81%e8%83%bd%e8%b7%91%e3%80%81%e6%b5%8b%e8%af%95%e8%83%bd%e8%bf%87%ef%bc%8c%e4%bd%86%e4%bb%80%e4%b9%88%e9%83%bd%e6%b2%a1%e5%8f%91%e7%94%9f%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=tsdb-cj%20%e6%8e%92%e6%9f%a5%e5%ae%9e%e5%bd%95%0a%e6%9c%80%e5%8d%b1%e9%99%a9%e7%9a%84%e4%b8%8d%e6%98%af%e5%b4%a9%e6%ba%83%ef%bc%8c%e6%98%af%e3%80%8c%e7%9c%8b%e8%b5%b7%e6%9d%a5%e5%9c%a8%e5%b7%a5%e4%bd%9c%e3%80%8d%0atsdb-cj%20%e6%98%af%e5%9f%ba%e4%ba%8e%20badger-cj%20%e7%9a%84%e5%b5%8c%e5%85%a5%e5%bc%8f%e6%97%b6%e5%ba%8f%e6%95%b0%e6%8d%ae%e5%ba%93%ef%bc%8c%0a%e4%b9%9f%e6%98%af%e5%bf%86%e6%97%b6%e5%a1%94%20%e5%88%86%e5%b1%82%e8%ae%b0%e5%bf%86%e7%9a%84%e5%ad%98%e5%82%a8%e5%ba%95%e5%ba%a7%20%e2%80%a6" data-title=" QQ">
         <i class="icon icon-qq"></i>
       </a>
     </li>
