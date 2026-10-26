@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>把模型变成 Agent 的那层脚手架：atelier | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">把模型变成 Agent 的那层脚手架：atelier</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">把模型变成 Agent 的那层脚手架：atelier</h1>
+    <h5 class="subtitle">
+      <time datetime="2026-10-26T10:00:00&#43;08:00" itemprop="datePublished" class="page-time">2026-10-26</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e5%85%88%e8%af%b4%e6%b8%85%e6%a5%9aharness%e6%98%af%e4%bb%80%e4%b9%88">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">一、先说清楚「Harness」是什么</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%8c%e9%97%ae%e9%a2%98%e4%b8%80%e6%8e%a8%e7%90%86%e5%be%aa%e7%8e%af">
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">二、问题一：推理循环</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e6%8f%92%e8%af%9d%e4%b8%80%e4%b8%aa%e5%ae%b9%e6%98%93%e5%81%9a%e9%94%99%e7%9a%84%e8%af%ad%e4%b9%89">
+    <span class="post-toc-number">2.1.</span> <span class="post-toc-text">插话：一个容易做错的语义</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%89%e9%97%ae%e9%a2%98%e4%ba%8c%e4%b8%8a%e4%b8%8b%e6%96%87%e7%ae%a1%e7%90%86">
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">三、问题二：上下文管理</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#31-%e9%98%88%e5%80%bc%e6%80%8e%e4%b9%88%e7%ae%97">
+    <span class="post-toc-number">3.1.</span> <span class="post-toc-text">3.1 阈值怎么算</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#32-%e5%9b%9b%e5%b1%82%e5%ba%94%e5%af%b9">
+    <span class="post-toc-number">3.2.</span> <span class="post-toc-text">3.2 四层应对</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%9b%9b%e9%97%ae%e9%a2%98%e4%b8%89%e5%b7%a5%e5%85%b7%e7%b3%bb%e7%bb%9f">
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">四、问题三：工具系统</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#41-%e4%b8%89%e5%b1%82%e6%9d%a5%e6%ba%90">
+    <span class="post-toc-number">4.1.</span> <span class="post-toc-text">4.1 三层来源</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#42-%e5%b7%a5%e5%85%b7%e6%b3%a8%e5%86%8c%e8%a1%a8%e5%88%86%e4%b8%a4%e5%b1%82">
+    <span class="post-toc-number">4.2.</span> <span class="post-toc-text">4.2 工具注册表分两层</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#43-%e5%b7%a5%e5%85%b7%e5%a3%b0%e6%98%8e%e5%bd%b1%e5%93%8d%e7%bc%93%e5%ad%98">
+    <span class="post-toc-number">4.3.</span> <span class="post-toc-text">4.3 工具声明影响缓存</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%94%e9%97%ae%e9%a2%98%e5%9b%9b%e4%bf%a1%e4%bb%bb%e4%b8%8e%e6%9d%83%e9%99%90">
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">五、问题四：信任与权限</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#51-%e4%b8%89%e6%80%81%e5%88%a4%e5%ae%9a">
+    <span class="post-toc-number">5.1.</span> <span class="post-toc-text">5.1 三态判定</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#52-%e4%bf%a1%e4%bb%bb%e6%98%af%e7%9b%ae%e5%bd%95%e7%ba%a7%e7%9a%84">
+    <span class="post-toc-number">5.2.</span> <span class="post-toc-text">5.2 信任是「目录级」的</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#53-undecided-%e6%97%b6%e5%8f%91%e7%bb%93%e6%9e%84%e5%8c%96%e5%ae%a1%e6%89%b9">
+    <span class="post-toc-number">5.3.</span> <span class="post-toc-text">5.3 Undecided 时发结构化审批</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#54-%e9%97%b8%e9%97%a8%e5%8f%af%e6%9b%bf%e6%8d%a2">
+    <span class="post-toc-number">5.4.</span> <span class="post-toc-text">5.4 闸门可替换</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%85%ad%e9%97%ae%e9%a2%98%e4%ba%94%e4%bc%9a%e8%af%9d">
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">六、问题五：会话</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#61-%e6%a0%91%e4%b8%8d%e6%98%af%e7%ba%bf%e6%80%a7">
+    <span class="post-toc-number">6.1.</span> <span class="post-toc-text">6.1 树，不是线性</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#62-%e6%b6%88%e6%81%af%e7%b1%bb%e5%9e%8b">
+    <span class="post-toc-number">6.2.</span> <span class="post-toc-text">6.2 消息类型</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#63-%e5%ad%98%e5%82%a8%e5%8f%af%e6%8d%a2">
+    <span class="post-toc-number">6.3.</span> <span class="post-toc-text">6.3 存储可换</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%83%e9%97%ae%e9%a2%98%e5%85%ad%e5%a4%9a%e5%8d%8f%e8%ae%ae%e6%8e%a5%e5%85%a5">
+    <span class="post-toc-number">7.</span> <span class="post-toc-text">七、问题六：多协议接入</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%85%ab%e8%a3%85%e9%85%8d%e9%9d%a217-%e4%b8%aa%e5%8f%af%e6%b3%a8%e5%85%a5%e7%82%b9">
+    <span class="post-toc-number">8.</span> <span class="post-toc-text">八、装配面：17 个可注入点</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b9%9d%e5%8f%96%e8%88%8d%e5%ae%83%e4%b8%8d%e5%81%9a%e7%9a%84%e4%ba%8b">
+    <span class="post-toc-number">9.</span> <span class="post-toc-text">九、取舍：它不做的事</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%8d%81%e8%a7%84%e6%a8%a1%e4%b8%8e%e7%8e%b0%e7%8a%b6">
+    <span class="post-toc-number">10.</span> <span class="post-toc-text">十、规模与现状</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%8d%81%e4%b8%80%e5%b0%8f%e7%bb%93">
+    <span class="post-toc-number">11.</span> <span class="post-toc-text">十一、小结</span>
+  </a>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-atelier-Agent-Harness" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">把模型变成 Agent 的那层脚手架：atelier</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2026-10-26T10:00:00&#43;08:00" itemprop="datePublished">2026-10-26</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <p align="center"><strong>atelier 设计笔记 · 一</strong></p>
+<p align="center"><em>把模型变成 Agent，中间差着一层</em></p>
+<blockquote>
+<p>atelier 是一个纯仓颉实现的 <strong>Agent Harness</strong>——按它自己的说法，<br>
+「把模型变成 Agent 的那层脚手架」。三个成员合计 <strong>45860 行</strong>（不含测试）、<br>
+<strong>2058 个测试用例</strong>。</p>
+<p>本文讲它要解决什么问题、怎么解决，以及为此付出的取舍。</p>
+<p>它的底座是 <a href="/2026/10/10/badger-cj-porting-notes/">badger-cj</a>
+（存储）与<br>
+<a href="/2026/09/09/chronomem-oom-hunt/">mcp-cj / json-rpc</a>
+（协议），<br>
+下游有世界树、星痕等产品；<a href="/2026/10/16/time-layered-memory-tower/">忆时塔</a>
+<br>
+是它在记忆方向的一个应用。</p>
+</blockquote>
+<h2 id="一先说清楚harness是什么"><a href="#一先说清楚harness是什么" class="headerlink" title="一、先说清楚「Harness」是什么"></a>一、先说清楚「Harness」是什么</h2>
+<p>这个词不常用，容易和框架、SDK、运行时混在一起。区别在最下：</p>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th>干什么</th>
+					<th>例子</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>API 客户端</strong></td>
+					<td>把请求发出去、把响应收回来</td>
+					<td>各家 SDK 的 <code>chat()</code></td>
+			</tr>
+			<tr>
+					<td><strong>编排框架</strong></td>
+					<td>按你的图去调多个步骤</td>
+					<td>LangGraph、工作流引擎</td>
+			</tr>
+			<tr>
+					<td><strong>Agent Harness</strong></td>
+					<td>把一个<strong>模型</strong>变成一个<strong>能自主干活的 Agent</strong></td>
+					<td>Claude Code、Codex CLI、atelier</td>
+			</tr>
+	</tbody>
+</table>
+<p>关键差别在最后一行：<strong>harness 不替你决定做什么，但它提供「自主干活」所需的全部机制</strong>。</p>
+<p>一个裸模型做不到这些事，而一个 Agent 必须做：</p>
+<ul>
+<li>多轮自我驱动（想 → 调工具 → 看结果 → 再想）</li>
+<li>上下文管理（对话越来越长，窗口装不下怎么办）</li>
+<li>工具注册与调用（模型怎么知道有哪些工具、怎么调、结果怎么回灌）</li>
+<li>权限判定（模型想执行一条命令，该不该放行）</li>
+<li>会话持久化（这次聊的，下次要能接着聊）</li>
+<li>多协议接入（同一个 Agent，被不同宿主拉起来）</li>
+</ul>
+<p><strong>这六件事就是 atelier 的全部内容。</strong> 下面一件件看。</p>
+<h2 id="二问题一推理循环"><a href="#二问题一推理循环" class="headerlink" title="二、问题一：推理循环"></a>二、问题一：推理循环</h2>
+<p>Agent 的本质是一个循环：</p>
+<pre tabindex="0"><code>想 → 调工具 → 观察结果 → 再想
+   → …… → 给答案
+</code></pre><p>看起来简单，但工程上有一堆细节：</p>
+<ul>
+<li><strong>什么时候该停？</strong> 模型可能一直调工具不停</li>
+<li><strong>工具批次怎么执行？</strong> 一批 5 个工具，串行还是并行</li>
+<li><strong>中途被打断怎么办？</strong> 用户想插话</li>
+<li><strong>预算耗尽怎么办？</strong> 工具调用次数有上限</li>
+</ul>
+<p>atelier 的循环是 <code>AgentRuntime</code>，主循环在 1.1.0 之后从 548 行整理到 270 行。它抽出七个阶段：</p>
+<table>
+	<thead>
+			<tr>
+					<th>阶段</th>
+					<th>职责</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>openTurn</code></td>
+					<td>回合开场、处理插话、归档</td>
+			</tr>
+			<tr>
+					<td><code>compactBeforeRequest</code></td>
+					<td>请求前的上下文压缩</td>
+			</tr>
+			<tr>
+					<td><code>invokeProvider</code></td>
+					<td>调模型 + 超窗恢复</td>
+			</tr>
+			<tr>
+					<td><code>executeToolBatch</code></td>
+					<td>批量执行工具、回写结果</td>
+			</tr>
+			<tr>
+					<td><code>admitToolCall</code></td>
+					<td>工具准入判定（三分支）</td>
+			</tr>
+			<tr>
+					<td><code>admitAfterHooks</code></td>
+					<td>钩子裁决</td>
+			</tr>
+			<tr>
+					<td><code>admitByAsking</code></td>
+					<td>需要人工确认时发起提问</td>
+			</tr>
+	</tbody>
+</table>
+<blockquote>
+<p>这个拆分本身有个教训：最初想按「阶段类」拆文件，撞墙两次；<br>
+后来先理清控制流再拆，才对。<strong>拆分的前提是想清楚顺序，不是想清楚分几块。</strong></p>
+</blockquote>
+<h3 id="插话一个容易做错的语义"><a href="#插话一个容易做错的语义" class="headerlink" title="插话：一个容易做错的语义"></a>插话：一个容易做错的语义</h3>
+<p>用户在一轮对话进行中补充一句，怎么处理？三个选项：</p>
+<table>
+	<thead>
+			<tr>
+					<th>方案</th>
+					<th>行为</th>
+					<th>问题</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>A. 打断当前工具</td>
+					<td>立刻停下</td>
+					<td>工具可能执行到一半，留下半写状态</td>
+			</tr>
+			<tr>
+					<td><strong>B. 排队，下一次模型调用可见</strong></td>
+					<td>当前工具跑完再带上</td>
+					<td><strong>选了这个</strong></td>
+			</tr>
+			<tr>
+					<td>C. 丢弃</td>
+					<td>报错「上一轮仍在进行中」</td>
+					<td>用户体验差</td>
+			</tr>
+	</tbody>
+</table>
+<p>atelier 选 B，并且加了一个细节：插入时<strong>带标注</strong>。</p>
+<p>因为模型默认把「最后一条用户消息」当最新指令，裸插一句「还有 X 吗」会被理解成推翻了原任务。加上标注（类似 <code>[用户中途补充]</code>）才不会有歧义。</p>
+<h2 id="三问题二上下文管理"><a href="#三问题二上下文管理" class="headerlink" title="三、问题二：上下文管理"></a>三、问题二：上下文管理</h2>
+<p>对话越聊越长，窗口装不下。atelier 的做法是一套阈值 + 四层应对。</p>
+<h3 id="31-阈值怎么算"><a href="#31-阈值怎么算" class="headerlink" title="3.1 阈值怎么算"></a>3.1 阈值怎么算</h3>
+<pre tabindex="0"><code>触发阈值 = min(窗口 × 0.8,
+              窗口 − 输出预留
+              − headroom)
+</code></pre><table>
+	<thead>
+			<tr>
+					<th>参数</th>
+					<th>默认</th>
+					<th>作用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>thresholdRatio</code></td>
+					<td>0.8</td>
+					<td>阈值占窗口的比例</td>
+			</tr>
+			<tr>
+					<td><code>headroomTokens</code></td>
+					<td>65536</td>
+					<td>输出预留之外的额外余量（估算误差、图片、工具声明）</td>
+			</tr>
+			<tr>
+					<td><code>retainRatio</code></td>
+					<td>0.16</td>
+					<td>逐字保留的近期历史占比</td>
+			</tr>
+			<tr>
+					<td><code>maxOverflowRetries</code></td>
+					<td>1</td>
+					<td>已溢出后的重试次数</td>
+			</tr>
+	</tbody>
+</table>
+<p>取值来自 dsh 的经验口径，不是拍的。</p>
+<h3 id="32-四层应对"><a href="#32-四层应对" class="headerlink" title="3.2 四层应对"></a>3.2 四层应对</h3>
+<p>按「侵入性从小到大」排：</p>
+<table>
+	<thead>
+			<tr>
+					<th>层</th>
+					<th>做法</th>
+					<th>什么时候用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>1. 工具结果修剪</strong></td>
+					<td>超长工具输出留头 4096 码点 + 标记 + 尾 1024</td>
+					<td>每次请求前</td>
+			</tr>
+			<tr>
+					<td><strong>2. 摘要压缩</strong></td>
+					<td>头部历史压成一条 <code>CompactionMessage</code></td>
+					<td>超过阈值时</td>
+			</tr>
+			<tr>
+					<td><strong>3. 超窗恢复</strong></td>
+					<td>已确定溢出 → 强制压缩后重试</td>
+					<td>模型报超窗时</td>
+			</tr>
+			<tr>
+					<td><strong>4. 手动 <code>/compact</code></strong></td>
+					<td>用户主动触发</td>
+					<td>想省 token 或清理混乱上下文</td>
+			</tr>
+	</tbody>
+</table>
+<p>几个实现细节值得说：</p>
+<p><strong>摘要复用主对话前缀。</strong> 摘要不是独立请求，而是把主对话的前缀拿来做，这样<strong>能吃 provider 的缓存</strong>（同一前缀第二次调用便宜）。</p>
+<p><strong>用量优先，估算兜底。</strong> 优先用 provider 返回的 usage；没有就用本地估算。</p>
+<p><strong>压缩可替换。</strong> <code>compactor</code> 是 <code>HarnessSpec</code> 的一个字段，默认 <code>BasicCompactor</code>（摘要 + 切点替换），想换策略就注入自己的实现——<strong>不把「压不压、怎么压」写死在内核里</strong>。</p>
+<h2 id="四问题三工具系统"><a href="#四问题三工具系统" class="headerlink" title="四、问题三：工具系统"></a>四、问题三：工具系统</h2>
+<p>工具是 Agent 的手脚。atelier 的工具层有三个要点。</p>
+<h3 id="41-三层来源"><a href="#41-三层来源" class="headerlink" title="4.1 三层来源"></a>4.1 三层来源</h3>
+<table>
+	<thead>
+			<tr>
+					<th>来源</th>
+					<th>怎么来</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>内置工具</strong></td>
+					<td>框架自带（读文件、执行命令等）</td>
+			</tr>
+			<tr>
+					<td><strong>MCP 工具</strong></td>
+					<td>通过 <code>ystyle::mcp</code> 接入任意 MCP 服务器（stdio / Streamable HTTP）</td>
+			</tr>
+			<tr>
+					<td><strong>Agent-as-Tool</strong></td>
+					<td>把另一个 Agent 当工具用（子 Agent 委派）</td>
+			</tr>
+	</tbody>
+</table>
+<p>前两种是常规做法，<strong>第三种比较特别</strong>：子 Agent 有独立的上下文，父 Agent 调它就像调一个函数，只拿到结果不共享上下文。</p>
+<h3 id="42-工具注册表分两层"><a href="#42-工具注册表分两层" class="headerlink" title="4.2 工具注册表分两层"></a>4.2 工具注册表分两层</h3>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">HarnessSpec {
+    // 根表：全局可见
+    tools: ToolRegistry
+}
+</code></pre><p>运行时还会叠加一层 <code>ToolRegistry.derived</code>——<strong>run 作用域的工具落在这里，run 结束即弃</strong>。</p>
+<p>这个设计解决了一个真实问题：如果 run 级工具写进根表，两个并发会话会互相看见对方的工具，可能按别人的工作目录过信任闸门。</p>
+<h3 id="43-工具声明影响缓存"><a href="#43-工具声明影响缓存" class="headerlink" title="4.3 工具声明影响缓存"></a>4.3 工具声明影响缓存</h3>
+<p>一个容易忽略的点：<strong>工具列表的顺序会毁掉提示词前缀缓存</strong>。</p>
+<p>如果每次请求工具声明的顺序都不同，provider 侧的前缀缓存就失效了。所以工具声明要稳定排序——这是 <code>B3</code> 那条待办里记的（一行改动，直接影响成本和延迟）。</p>
+<h2 id="五问题四信任与权限"><a href="#五问题四信任与权限" class="headerlink" title="五、问题四：信任与权限"></a>五、问题四：信任与权限</h2>
+<p>模型想执行一条命令，该不该放行？这是 Agent 最危险的地方。</p>
+<h3 id="51-三态判定"><a href="#51-三态判定" class="headerlink" title="5.1 三态判定"></a>5.1 三态判定</h3>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">public enum TrustState {
+    | Undecided    // 没决定过
+    | Trusted      // 信任这个目录
+    | Untrusted    // 明确不信任
+}
+</code></pre><p>判定时按优先级查三层：</p>
+<pre tabindex="0"><code>per-session 覆盖（含父目录）
+  → sessionTrusts（无会话上下文的回退）
+    → states（目录级持久信任）
+</code></pre><h3 id="52-信任是目录级的"><a href="#52-信任是目录级的" class="headerlink" title="5.2 信任是「目录级」的"></a>5.2 信任是「目录级」的</h3>
+<p>不是按命令、也不是按工具，而是按<strong>目录</strong>。理由很实际：</p>
+<blockquote>
+<p>你信任一个项目目录，意味着「在这个目录里跑工具是安全的」——<br>
+这符合人的直觉，也比逐条命令审批省事。</p>
+</blockquote>
+<h3 id="53-undecided-时发结构化审批"><a href="#53-undecided-时发结构化审批" class="headerlink" title="5.3 Undecided 时发结构化审批"></a>5.3 <code>Undecided</code> 时发结构化审批</h3>
+<p>关键设计：<code>Undecided</code> 不是「拒绝」，而是<strong>发起提问</strong>。</p>
+<pre tabindex="0"><code>模型要执行 rm -rf build/
+  → 目录未决定 → 发审批请求
+  → 用户选：允许本次 / 总是允许 / 拒绝
+</code></pre><p>而且这个提问是<strong>统一的提问原语</strong>：审批、单选、多选、表单都走同一个 <code>UserRequest → UserAnswer</code> 通道。四个宿主（TUI / ACP / AG-UI / HTTP）各自接线，一行核心代码不用改。</p>
+<h3 id="54-闸门可替换"><a href="#54-闸门可替换" class="headerlink" title="5.4 闸门可替换"></a>5.4 闸门可替换</h3>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">type TrustGate =
+    (Tool, String, String)
+    -&gt; TrustDecision
+</code></pre><p>单方法、无状态 —— 所以用<strong>函数类型</strong>而不是 interface。宿主想换策略，注入一个函数就行，不必写类。</p>
+<h2 id="六问题五会话"><a href="#六问题五会话" class="headerlink" title="六、问题五：会话"></a>六、问题五：会话</h2>
+<h3 id="61-树不是线性"><a href="#61-树不是线性" class="headerlink" title="6.1 树，不是线性"></a>6.1 树，不是线性</h3>
+<p>会话不是一条消息列表，而是一棵树：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">public struct Entry {
+    let id: String
+    // 关键：指向父节点
+    let parentId: Option&lt;String&gt;
+    let timestamp: Int64
+    let message: Message
+}
+</code></pre><p><code>parentId</code> 让会话可以 <strong>fork / clone</strong>：</p>
+<pre tabindex="0"><code>        user: 实现一个功能
+              │
+      ┌───────┴───────┐
+   assistant A     assistant B
+      │                 │
+   （分支 1）         （分支 2）
+</code></pre><p>同一个起点，两条分支各自演进。想回到某个节点重新试另一条路，不需要重放历史。</p>
+<h3 id="62-消息类型"><a href="#62-消息类型" class="headerlink" title="6.2 消息类型"></a>6.2 消息类型</h3>
+<table>
+	<thead>
+			<tr>
+					<th>类型</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>UserMessage</code></td>
+					<td>用户输入</td>
+			</tr>
+			<tr>
+					<td><code>AssistantMessage</code></td>
+					<td>模型输出（含工具调用）</td>
+			</tr>
+			<tr>
+					<td><code>ToolResultMessage</code></td>
+					<td>工具结果</td>
+			</tr>
+			<tr>
+					<td><code>CompactionMessage</code></td>
+					<td><strong>压缩产物</strong>（摘要）</td>
+			</tr>
+			<tr>
+					<td><code>ArchiveMessage</code></td>
+					<td>归档标记</td>
+			</tr>
+	</tbody>
+</table>
+<p>后两种是「非对话消息」——它们不占据对话语义位置，但必须在历史里可寻址。</p>
+<h3 id="63-存储可换"><a href="#63-存储可换" class="headerlink" title="6.3 存储可换"></a>6.3 存储可换</h3>
+<p><code>store: SessionStore</code> 是装配字段。默认 <code>MemorySessionStore</code>，也可以换成基于 storm-cj 的持久化实现（JSONL / 表存储）。</p>
+<h2 id="七问题六多协议接入"><a href="#七问题六多协议接入" class="headerlink" title="七、问题六：多协议接入"></a>七、问题六：多协议接入</h2>
+<p>同一个 Agent，要被不同宿主拉起来。atelier 内置了三种协议适配：</p>
+<table>
+	<thead>
+			<tr>
+					<th>协议</th>
+					<th>用途</th>
+					<th>方向</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>ACP</strong></td>
+					<td>Agent Client Protocol，被 Zed / opencode 拉起</td>
+					<td>Agent 侧、Client 侧</td>
+			</tr>
+			<tr>
+					<td><strong>A2A</strong></td>
+					<td>Agent2Agent，Agent 之间互相调用</td>
+					<td>双向（暴露自己 / 接入远端）</td>
+			</tr>
+			<tr>
+					<td><strong>AG-UI</strong></td>
+					<td>前端 UI 协议</td>
+					<td>事件映射</td>
+			</tr>
+	</tbody>
+</table>
+<p>这不是「顺手支持」，而是<strong>同一套事件的不同投影</strong>：</p>
+<pre tabindex="0"><code>        内核事件（AgentEvent）
+                │
+     ┌──────────┼──────────┐
+     ▼          ▼          ▼
+   ACP        A2A       AG-UI
+  (stdio)   (JSON-RPC)  (SSE)
+</code></pre><p>内核只产生<strong>事实</strong>，各协议适配层决定怎么投影。这样做的好处是：<strong>新增一个协议不用动内核</strong>。</p>
+<h2 id="八装配面17-个可注入点"><a href="#八装配面17-个可注入点" class="headerlink" title="八、装配面：17 个可注入点"></a>八、装配面：17 个可注入点</h2>
+<p>这是 atelier 最核心的设计。整个框架的能力都收在一个 <code>HarnessSpec</code> 里：</p>
+<table>
+	<thead>
+			<tr>
+					<th>类别</th>
+					<th>字段</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>工具</td>
+					<td><code>tools</code></td>
+			</tr>
+			<tr>
+					<td>模型</td>
+					<td><code>providers</code> <code>models</code> <code>middlewares</code></td>
+			</tr>
+			<tr>
+					<td>会话</td>
+					<td><code>store</code></td>
+			</tr>
+			<tr>
+					<td>信任</td>
+					<td><code>trust</code> <code>trustGate</code></td>
+			</tr>
+			<tr>
+					<td>扩展</td>
+					<td><code>skills</code> <code>agents</code> <code>hooks</code> <code>contributors</code></td>
+			</tr>
+			<tr>
+					<td>外部</td>
+					<td><code>mcp</code></td>
+			</tr>
+			<tr>
+					<td>交互</td>
+					<td><code>ask</code></td>
+			</tr>
+			<tr>
+					<td>内核策略</td>
+					<td><code>compactor</code> <code>loopFactory</code> <code>statusRegistry</code> <code>eventBus</code></td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>每一项都有默认值，也都可以替换。</strong> 装一个默认 spec 就能跑：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">let h = Harness.open()
+</code></pre><p>想定制就传自己的：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">let spec = HarnessSpec.default()
+    .withCompactor(MyCompactor())
+    .withTrustGate(myGate)
+let h = Harness.open(spec)
+</code></pre><p>这个设计的价值在「<strong>内核策略也可替换</strong>」——压缩策略、循环实现、状态持有者都能换，意味着 atelier 不是「一套写死的实现」，而是「一组约定的接口 + 一份默认实现」。</p>
+<h2 id="九取舍它不做的事"><a href="#九取舍它不做的事" class="headerlink" title="九、取舍：它不做的事"></a>九、取舍：它不做的事</h2>
+<p>诚实说清楚边界：</p>
+<table>
+	<thead>
+			<tr>
+					<th>不做</th>
+					<th>原因</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>不做可视化编排</td>
+					<td>它是 harness，不是工作流引擎——用代码或 TOML 定义 Agent</td>
+			</tr>
+			<tr>
+					<td>不做模型训练 / 微调</td>
+					<td>只消费 provider</td>
+			</tr>
+			<tr>
+					<td>不做多机分布式</td>
+					<td>单进程定位</td>
+			</tr>
+			<tr>
+					<td>不做提示词市场</td>
+					<td>Skills 是机制，内容由用户提供</td>
+			</tr>
+	</tbody>
+</table>
+<p>还有一个更微妙的：</p>
+<p><strong>它不假装自己是「框架」。</strong> README 里的措辞是「<strong>成品工坊</strong>而非<strong>编排框架</strong>」——区别在于：框架要求你按它的抽象去描述你的应用，工坊只给你可挂载的零件。</p>
+<h2 id="十规模与现状"><a href="#十规模与现状" class="headerlink" title="十、规模与现状"></a>十、规模与现状</h2>
+<table>
+	<thead>
+			<tr>
+					<th>项</th>
+					<th>数值</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>全仓（三个成员）</td>
+					<td><strong>45860 行</strong>（不含测试）</td>
+			</tr>
+			<tr>
+					<td>核心库 <code>atelier</code></td>
+					<td>16270 行 / 89 个文件</td>
+			</tr>
+			<tr>
+					<td>服务库 <code>server</code></td>
+					<td>3276 行 / 9 个文件</td>
+			</tr>
+			<tr>
+					<td>终端产品 <code>cli</code></td>
+					<td>3396 行 / 11 个文件</td>
+			</tr>
+			<tr>
+					<td>测试</td>
+					<td>2058 个用例（162 个测试文件）</td>
+			</tr>
+			<tr>
+					<td>模块</td>
+					<td>15 个包（agent 5550 行、tool 2386 行、context 1663 行……）</td>
+			</tr>
+			<tr>
+					<td>成员</td>
+					<td>3 个（核心库 <code>atelier</code> + 服务库 <code>server</code> + 终端产品 <code>cli</code>）</td>
+			</tr>
+			<tr>
+					<td>版本</td>
+					<td>0.1.x，中心仓可装</td>
+			</tr>
+	</tbody>
+</table>
+<p>配套的下游产品有世界树（插件化宿主）、星痕（状态看板）、Lumine 等——<strong>它们是真在用的</strong>，这也是 atelier 迭代快的原因：需求来自真实产品，不是想象。</p>
+<h2 id="十一小结"><a href="#十一小结" class="headerlink" title="十一、小结"></a>十一、小结</h2>
+<p>回到开头那六个问题：</p>
+<table>
+	<thead>
+			<tr>
+					<th>问题</th>
+					<th>atelier 的答案</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>推理循环</td>
+					<td><code>AgentRuntime</code>，七阶段拆分、插话排队不打断</td>
+			</tr>
+			<tr>
+					<td>上下文管理</td>
+					<td>阈值 + 四层应对（修剪/摘要/恢复/手动）</td>
+			</tr>
+			<tr>
+					<td>工具系统</td>
+					<td>三层来源、根表 + run 派生表</td>
+			</tr>
+			<tr>
+					<td>信任</td>
+					<td>目录级三态 + 结构化审批 + 可替换闸门</td>
+			</tr>
+			<tr>
+					<td>会话</td>
+					<td><code>parentId</code> 树、可 fork、存储可换</td>
+			</tr>
+			<tr>
+					<td>多协议</td>
+					<td>内核出事实，适配层各自投影</td>
+			</tr>
+	</tbody>
+</table>
+<p>而把它们串起来的是那个 <strong>17 个注入点的装配面</strong>——「哪些能换」就是这个框架的边界，「默认值是什么」就是它的主张。</p>
+<blockquote>
+<p>下一篇会讲它踩过的坑：包括「加一层抽象往往是错的直觉」、<br>
+「flaky 比明确失败更危险」，以及一次把 548 行循环拆成 270 行的过程。</p>
+</blockquote>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2026-10-26T10:00:00&#43;08:00" itemprop="dateUpdated">2026-10-26 10:00:00</time>
+          </span><br>
+          本文链接：<a href="/2026/10/26/atelier-agent-harness/" target="_blank" rel="external">https://ystyle.top/2026/10/26/atelier-agent-harness/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/atelier/">atelier</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Agent/">Agent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Harness/">Harness</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LLM/">LLM</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f26%2fatelier-agent-harness%2f&title=%e3%80%8a%e6%8a%8a%e6%a8%a1%e5%9e%8b%e5%8f%98%e6%88%90%20Agent%20%e7%9a%84%e9%82%a3%e5%b1%82%e8%84%9a%e6%89%8b%e6%9e%b6%ef%bc%9aatelier%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f26%2fatelier-agent-harness%2f&title=%e3%80%8a%e6%8a%8a%e6%a8%a1%e5%9e%8b%e5%8f%98%e6%88%90%20Agent%20%e7%9a%84%e9%82%a3%e5%b1%82%e8%84%9a%e6%89%8b%e6%9e%b6%ef%bc%9aatelier%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=atelier%20%e8%ae%be%e8%ae%a1%e7%ac%94%e8%ae%b0%20%c2%b7%20%e4%b8%80%0a%e6%8a%8a%e6%a8%a1%e5%9e%8b%e5%8f%98%e6%88%90%20Agent%ef%bc%8c%e4%b8%ad%e9%97%b4%e5%b7%ae%e7%9d%80%e4%b8%80%e5%b1%82%0aatelier%20%e6%98%af%e4%b8%80%e4%b8%aa%e7%ba%af%e4%bb%93%e9%a2%89%e5%ae%9e%e7%8e%b0%e7%9a%84%20Agent%20Harness%e2%80%94%e2%80%94%e6%8c%89%e5%ae%83%e8%87%aa%e5%b7%b1%e7%9a%84%e8%af%b4%e6%b3%95%ef%bc%8c%0a%e3%80%8c%e6%8a%8a%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f26%2fatelier-agent-harness%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e6%8a%8a%e6%a8%a1%e5%9e%8b%e5%8f%98%e6%88%90%20Agent%20%e7%9a%84%e9%82%a3%e5%b1%82%e8%84%9a%e6%89%8b%e6%9e%b6%ef%bc%9aatelier%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f26%2fatelier-agent-harness%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f26%2fatelier-agent-harness%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2026/10/22/holt-cj-graph-db/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">holt-cj 1.1.0：从 720 行长到 3300 行的图数据库</h4>
+        </a>
+      </div>
+      
+      
+    </nav>
+    
+
+    
+    
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+  </article>
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f26%2fatelier-agent-harness%2f&title=%e3%80%8a%e6%8a%8a%e6%a8%a1%e5%9e%8b%e5%8f%98%e6%88%90%20Agent%20%e7%9a%84%e9%82%a3%e5%b1%82%e8%84%9a%e6%89%8b%e6%9e%b6%ef%bc%9aatelier%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f26%2fatelier-agent-harness%2f&title=%e3%80%8a%e6%8a%8a%e6%a8%a1%e5%9e%8b%e5%8f%98%e6%88%90%20Agent%20%e7%9a%84%e9%82%a3%e5%b1%82%e8%84%9a%e6%89%8b%e6%9e%b6%ef%bc%9aatelier%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=atelier%20%e8%ae%be%e8%ae%a1%e7%ac%94%e8%ae%b0%20%c2%b7%20%e4%b8%80%0a%e6%8a%8a%e6%a8%a1%e5%9e%8b%e5%8f%98%e6%88%90%20Agent%ef%bc%8c%e4%b8%ad%e9%97%b4%e5%b7%ae%e7%9d%80%e4%b8%80%e5%b1%82%0aatelier%20%e6%98%af%e4%b8%80%e4%b8%aa%e7%ba%af%e4%bb%93%e9%a2%89%e5%ae%9e%e7%8e%b0%e7%9a%84%20Agent%20Harness%e2%80%94%e2%80%94%e6%8c%89%e5%ae%83%e8%87%aa%e5%b7%b1%e7%9a%84%e8%af%b4%e6%b3%95%ef%bc%8c%0a%e3%80%8c%e6%8a%8a%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f10%2f26%2fatelier-agent-harness%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e6%8a%8a%e6%a8%a1%e5%9e%8b%e5%8f%98%e6%88%90%20Agent%20%e7%9a%84%e9%82%a3%e5%b1%82%e8%84%9a%e6%89%8b%e6%9e%b6%ef%bc%9aatelier%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f10%2f26%2fatelier-agent-harness%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f10%2f26%2fatelier-agent-harness%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2026/10/26/atelier-agent-harness/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+</body>
+</html>

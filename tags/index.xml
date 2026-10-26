@@ -10,14 +10,42 @@
 		
 		
 		
-			<lastBuildDate>Thu, 22 Oct 2026 15:30:00 +0800</lastBuildDate>
+			<lastBuildDate>Mon, 26 Oct 2026 10:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/index.xml" rel="self" type="application/rss+xml" />
 			<item>
+				<title>Agent</title>
+				<link>https://ystyle.top/tags/Agent/</link>
+				<pubDate>Mon, 26 Oct 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/Agent/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>atelier</title>
+				<link>https://ystyle.top/tags/atelier/</link>
+				<pubDate>Mon, 26 Oct 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/atelier/</guid>
+				<description></description>
+			</item>
+			<item>
 				<title>Cangjie</title>
 				<link>https://ystyle.top/tags/Cangjie/</link>
-				<pubDate>Thu, 22 Oct 2026 10:00:00 +0800</pubDate>
+				<pubDate>Mon, 26 Oct 2026 10:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/tags/Cangjie/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Harness</title>
+				<link>https://ystyle.top/tags/Harness/</link>
+				<pubDate>Mon, 26 Oct 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/Harness/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>LLM</title>
+				<link>https://ystyle.top/tags/LLM/</link>
+				<pubDate>Mon, 26 Oct 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/LLM/</guid>
 				<description></description>
 			</item>
 			<item>
@@ -28,10 +56,10 @@
 				<description></description>
 			</item>
 			<item>
-				<title>Redis</title>
-				<link>https://ystyle.top/tags/Redis/</link>
+				<title>redis</title>
+				<link>https://ystyle.top/tags/redis/</link>
 				<pubDate>Thu, 22 Oct 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/Redis/</guid>
+				<guid>https://ystyle.top/tags/redis/</guid>
 				<description></description>
 			</item>
 			<item>
@@ -123,34 +151,6 @@
 				<link>https://ystyle.top/tags/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</link>
 				<pubDate>Fri, 16 Oct 2026 10:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/tags/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>忆时塔</title>
-				<link>https://ystyle.top/tags/%E5%BF%86%E6%97%B6%E5%A1%94/</link>
-				<pubDate>Fri, 16 Oct 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/%E5%BF%86%E6%97%B6%E5%A1%94/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>mmap-cj</title>
-				<link>https://ystyle.top/tags/mmap-cj/</link>
-				<pubDate>Thu, 15 Oct 2026 11:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/mmap-cj/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>跨平台</title>
-				<link>https://ystyle.top/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/</link>
-				<pubDate>Thu, 15 Oct 2026 11:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>入门</title>
-				<link>https://ystyle.top/tags/%E5%85%A5%E9%97%A8/</link>
-				<pubDate>Thu, 15 Oct 2026 11:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/%E5%85%A5%E9%97%A8/</guid>
 				<description></description>
 			</item>
 	</channel>

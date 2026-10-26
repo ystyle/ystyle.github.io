@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Thu, 22 Oct 2026 15:30:00 +0800</lastBuildDate>
+			<lastBuildDate>Mon, 26 Oct 2026 10:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>把模型变成 Agent 的那层脚手架：atelier</title>
+				<link>https://ystyle.top/2026/10/26/atelier-agent-harness/</link>
+				<pubDate>Mon, 26 Oct 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/26/atelier-agent-harness/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;atelier 设计笔记 · 一&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;把模型变成 Agent，中间差着一层&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;atelier 是一个纯仓颉实现的 &lt;strong&gt;Agent Harness&lt;/strong&gt;——按它自己的说法，&lt;br&gt;&#xA;「把模型变成 Agent 的那层脚手架」。三个成员合计 &lt;strong&gt;45860 行&lt;/strong&gt;（不含测试）、&lt;br&gt;&#xA;&lt;strong&gt;2058 个测试用例&lt;/strong&gt;。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>holt-cj 1.1.0：从 720 行长到 3300 行的图数据库</title>
 				<link>https://ystyle.top/2026/10/22/holt-cj-graph-db/</link>
@@ -145,13 +152,6 @@
 				<pubDate>Sat, 27 Dec 2025 15:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/2025/12/27/matebookpro-run-cangjie-compiler/</guid>
 				<description>&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://dll.ystyle.top/images/2025-12/5e398f57bb264562850d933612e65a3d.png&#34; alt=&#34;使用示例&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;使用示例&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&lt;h2 id=&#34;准备工作&#34;&gt;&lt;a href=&#34;#准备工作&#34; class=&#34;headerlink&#34; title=&#34;准备工作&#34;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;在鸿蒙PC上使用应用商店安装CodeArts IDE&lt;/li&gt;&#xA;&lt;li&gt;下载仓颉编译器每日构建版本: &lt;a href=&#34;https://gitcode.com/Cangjie/nightly_build/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;cangjie-sdk-ohos-aarch64-1.1.0-alpha.2025xxxxxxxxxxxxx.tar.gz&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;从CodeArts-IDE提取签名工具&#34;&gt;&lt;a href=&#34;#从CodeArts-IDE提取签名工具&#34; class=&#34;headerlink&#34; title=&#34;从CodeArts IDE提取签名工具&#34;&gt;&lt;/a&gt;从CodeArts IDE提取签名工具&lt;/h2&gt;&#xA;&lt;p&gt;新方法，直接在应用商店安装： &lt;code&gt;DevBox&lt;/code&gt;， 然后在HisShell就可以直接使用 &lt;code&gt;binary-sign-tool&lt;/code&gt;了&lt;/p&gt;</description>
-			</item>
-			<item>
-				<title>鸿蒙pc上Vite 7 &#43; Rollup原生模块问题的解决方案</title>
-				<link>https://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/</link>
-				<pubDate>Mon, 08 Dec 2025 21:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/2025/12/08/matebookpro-run-vite7-vue-rollup/</guid>
-				<description>&lt;h2 id=&#34;环境信息&#34;&gt;&lt;a href=&#34;#环境信息&#34; class=&#34;headerlink&#34; title=&#34;环境信息&#34;&gt;&lt;/a&gt;环境信息&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;操作系统&lt;/strong&gt;：HarmonyOS HongMeng Kernel 1.11.0 (OpenHarmony)&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Node.js版本&lt;/strong&gt;：22.7.0&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Vite版本&lt;/strong&gt;：7.2.6&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Rollup版本&lt;/strong&gt;：4.53.3&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;项目类型&lt;/strong&gt;：Vue 3 + TypeScript + Vite&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;问题描述&#34;&gt;&lt;a href=&#34;#问题描述&#34; class=&#34;headerlink&#34; title=&#34;问题描述&#34;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&#xA;&lt;p&gt;在鸿蒙系统上运行&lt;code&gt;npm run dev&lt;/code&gt;时出现以下错误：&lt;/p&gt;</description>
 			</item>
 	</channel>
 </rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>LLM on 东方星痕</title>
+		<link>https://ystyle.top/tags/LLM/</link>
+		<description>Recent content in LLM on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Mon, 26 Oct 2026 10:00:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/LLM/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>把模型变成 Agent 的那层脚手架：atelier</title>
+				<link>https://ystyle.top/2026/10/26/atelier-agent-harness/</link>
+				<pubDate>Mon, 26 Oct 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/26/atelier-agent-harness/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;atelier 设计笔记 · 一&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;把模型变成 Agent，中间差着一层&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;atelier 是一个纯仓颉实现的 &lt;strong&gt;Agent Harness&lt;/strong&gt;——按它自己的说法，&lt;br&gt;&#xA;「把模型变成 Agent 的那层脚手架」。三个成员合计 &lt;strong&gt;45860 行&lt;/strong&gt;（不含测试）、&lt;br&gt;&#xA;&lt;strong&gt;2058 个测试用例&lt;/strong&gt;。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

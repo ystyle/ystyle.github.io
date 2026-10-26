@@ -151,6 +151,32 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-Webpack-项目中使用fetch-js" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2016-02-01T11:36:09&#43;08:00" itemprop="datePublished">2016-02-01</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2016/02/01/webpack-xiang-mu-zhong-shi-yong-fetch-js/">Webpack 项目中使用fetch.js</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          安装依赖 npm i imports-loader exports-loader --save-dev npm i whatwg-fetch --save 方法一: webpack配置 修改webpack.config.js 文件
+plugins: [ new webpack.ProvidePlugin({ &#39;fetch&#39;: &#39;imports?this=&gt;global!exports?global.fetch!whatwg-fetch&#39; }), ], 方法二: import 在需要使用的文件中import
+
+          <a href="/2016/02/01/webpack-xiang-mu-zhong-shi-yong-fetch-js/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nodejs/">Nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fetch/">fetch</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-Windows-JDK-版本管理器-jvms-0-0-2-发布" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2015-12-03T11:57:21&#43;08:00" itemprop="datePublished">2015-12-03</time>
@@ -199,7 +225,7 @@ jvms下载地址 本软件源于 nvm-windows 这对JDK不同版本之间切换�
         </div>
         <div class="post-footer">
           
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li></ul>
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
           
         </div>
       </article>
@@ -225,7 +251,7 @@ mkdir/data/docker/redis/ wget https://raw.githubusercontent.com/antirez/redis/3.
         </div>
         <div class="post-footer">
           
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
           
         </div>
       </article>
@@ -387,33 +413,6 @@ schema:可选,表示Schema名称,默认为Schema(&quot;&quot;).
         <div class="post-footer">
           
           <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GIT/">GIT</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-ActiveMQ-入门" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2015-07-30T23:34:38&#43;08:00" itemprop="datePublished">2015-07-30</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2015/07/30/activemq-ru-men/">ActiveMQ 入门</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-          ActiveMQ 入门 下载与安装 官方下载地址 解压，运行bin/win[32|64]/activemq[.bat] 启动服务
-环境信息 控制台: http://localhost:8161 默认端口:8161
-服务地址:
-
-          <a href="/2015/07/30/activemq-ru-men/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nodejs/">Nodejs</a></li></ul>
           
         </div>
       </article>
