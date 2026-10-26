@@ -151,6 +151,30 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-maven-deploy-部署jar到私服" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2016-10-27T17:11:51&#43;08:00" itemprop="datePublished">2016-10-27</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2016/10/27/maven-deploy-bu-shu-jardao-si-fu/">maven deploy 部署jar到私服</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          修改maven settings.xml文件 &lt;servers&gt; &lt;server&gt; &lt;id&gt;private-nexus-library-releases&lt;/id&gt; &lt;username&gt;username&lt;/username&gt; &lt;password&gt;password&lt;/password&gt; &lt;!---nexus私服的用户名和密码 ----&gt; &lt;/server&gt; &lt;server&gt; &lt;id&gt;private-nexus-library-snapshots&lt;/id&gt; &lt;username&gt;username&lt;/username&gt; &lt;password&gt;password&lt;/password&gt; &lt;/server&gt; &lt;/servers&gt; 修改项目pom文件 &lt;!--发布--&gt; &lt;distributionManagement&gt; &lt;repository&gt; &lt;id&gt;private-nexus-library-releases&lt;/id&gt; &lt;name&gt;private-nexus-library-releases&lt;/name&gt; &lt;url&gt;http://host:port/maven-web/repositories/releases/&lt;/url&gt; &lt;!--- url可以在nexus私服repositories列表看到 ----&gt; &lt;/repository&gt; &lt;snapshotRepository&gt; &lt;id&gt;private-nexus-library-snapshots&lt;/id&gt; &lt;name&gt;private-nexus-library-snapshots&lt;/name&gt; &lt;url&gt;http://host:port/maven-web/repositories/snapshots/&lt;/url&gt; &lt;/snapshotRepository&gt; &lt;/distributionManagement&gt; 注意事项 server 的 id 要与 repository 的 id 保持一致。 nexus私用不能解析parent.version 中的${}表达式, 要写常量. 否则会导致deploy失败. 
+          <a href="/2016/10/27/maven-deploy-bu-shu-jardao-si-fu/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/">Maven</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nexus/">Nexus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deploy/">Deploy</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-我Github的star项目列表" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2016-09-14T06:32:49&#43;08:00" itemprop="datePublished">2016-09-14</time>
@@ -378,33 +402,6 @@ etc服务器: 192.168.99.100:2379 swarm manage: 192.168.99.101:3376 swarm-node1:
         <div class="post-footer">
           
           <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swarm/">swarm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/etcd/">etcd</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-使用hadoop-中文分词统计小说里的用词频率" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2016-02-22T14:24:16&#43;08:00" itemprop="datePublished">2016-02-22</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2016/02/22/shi-yong-hadoop-zhong-wen-fen-ci-tong-ji-xiao-shuo-li-de-yong-ci-pin-lu/">使用hadoop&#43;中文分词统计小说里的用词频率</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-          使用hadoop+中文分词统计小说里的用词频率 事情是这样的, 某小说贴吧吧友开玩笑说 某作者最常使用的词语是xxxx , 然后就突发奇想地想用工具分析一下
-环境 系统: ArchLinux
-软件: hadoop 2.7
-准备 下载hadoop: 下载地址 
-          <a href="/2016/02/22/shi-yong-hadoop-zhong-wen-fen-ci-tong-ji-xiao-shuo-li-de-yong-ci-pin-lu/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hadoop/">hadoop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
           
         </div>
       </article>

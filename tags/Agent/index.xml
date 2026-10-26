@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Mon, 26 Oct 2026 10:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Mon, 26 Oct 2026 11:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/Agent/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>atelier 是被这些错误判断磨出来的</title>
+				<link>https://ystyle.top/2026/10/26/atelier-lessons-in-corrections/</link>
+				<pubDate>Mon, 26 Oct 2026 11:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/26/atelier-lessons-in-corrections/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;atelier 设计笔记 · 二&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;设计文档里不会写的那些判断失误&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://ystyle.top/2026/10/26/atelier-agent-harness/&#34;&gt;上一篇&lt;/a&gt;&#xA;讲 atelier 长什么样。&lt;br&gt;&#xA;这篇讲它是怎么长成这样的——&lt;strong&gt;包括三次判断被自己推翻&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;素材来自项目的工作日志与代码注释。凡是文中引用的教训，代码里都留着对应痕迹。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>把模型变成 Agent 的那层脚手架：atelier</title>
 				<link>https://ystyle.top/2026/10/26/atelier-agent-harness/</link>

@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Mon, 26 Oct 2026 10:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Mon, 26 Oct 2026 11:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>atelier 是被这些错误判断磨出来的</title>
+				<link>https://ystyle.top/2026/10/26/atelier-lessons-in-corrections/</link>
+				<pubDate>Mon, 26 Oct 2026 11:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/26/atelier-lessons-in-corrections/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;atelier 设计笔记 · 二&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;设计文档里不会写的那些判断失误&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://ystyle.top/2026/10/26/atelier-agent-harness/&#34;&gt;上一篇&lt;/a&gt;&#xA;讲 atelier 长什么样。&lt;br&gt;&#xA;这篇讲它是怎么长成这样的——&lt;strong&gt;包括三次判断被自己推翻&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;素材来自项目的工作日志与代码注释。凡是文中引用的教训，代码里都留着对应痕迹。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>把模型变成 Agent 的那层脚手架：atelier</title>
 				<link>https://ystyle.top/2026/10/26/atelier-agent-harness/</link>
@@ -145,13 +152,6 @@
 				<pubDate>Sat, 27 Dec 2025 19:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/2025/12/27/matebookpro-port-nvim-deps/</guid>
 				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;本文记录将Neovim编辑器移植到HarmonyOS PC过程中，对11个核心依赖库的适配实战经验，涵盖平台差异分析、API限制处理、构建系统改造等关键问题。&lt;/p&gt;</description>
-			</item>
-			<item>
-				<title>鸿蒙PC Matebook Pro上安装仓颉编译器每日构建版</title>
-				<link>https://ystyle.top/2025/12/27/matebookpro-run-cangjie-compiler/</link>
-				<pubDate>Sat, 27 Dec 2025 15:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/2025/12/27/matebookpro-run-cangjie-compiler/</guid>
-				<description>&lt;figure class=&#34;image-bubble&#34;&gt;&#xA;  &lt;div class=&#34;img-lightbox&#34;&gt;&#xA;    &lt;div class=&#34;overlay&#34;&gt;&lt;/div&gt;&#xA;    &lt;img src=&#34;https://dll.ystyle.top/images/2025-12/5e398f57bb264562850d933612e65a3d.png&#34; alt=&#34;使用示例&#34;&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div class=&#34;image-caption&#34;&gt;使用示例&lt;/div&gt;&#xA;&lt;/figure&gt;&#xA;&lt;h2 id=&#34;准备工作&#34;&gt;&lt;a href=&#34;#准备工作&#34; class=&#34;headerlink&#34; title=&#34;准备工作&#34;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;在鸿蒙PC上使用应用商店安装CodeArts IDE&lt;/li&gt;&#xA;&lt;li&gt;下载仓颉编译器每日构建版本: &lt;a href=&#34;https://gitcode.com/Cangjie/nightly_build/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;cangjie-sdk-ohos-aarch64-1.1.0-alpha.2025xxxxxxxxxxxxx.tar.gz&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;从CodeArts-IDE提取签名工具&#34;&gt;&lt;a href=&#34;#从CodeArts-IDE提取签名工具&#34; class=&#34;headerlink&#34; title=&#34;从CodeArts IDE提取签名工具&#34;&gt;&lt;/a&gt;从CodeArts IDE提取签名工具&lt;/h2&gt;&#xA;&lt;p&gt;新方法，直接在应用商店安装： &lt;code&gt;DevBox&lt;/code&gt;， 然后在HisShell就可以直接使用 &lt;code&gt;binary-sign-tool&lt;/code&gt;了&lt;/p&gt;</description>
 			</item>
 	</channel>
 </rss>
