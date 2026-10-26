@@ -43,8 +43,8 @@
 &lt;p align=&#34;center&#34;&gt;&lt;em&gt;把模型变成 Agent，中间差着一层&lt;/em&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;atelier 是一个纯仓颉实现的 &lt;strong&gt;Agent Harness&lt;/strong&gt;——按它自己的说法，&lt;br&gt;
-「把模型变成 Agent 的那层脚手架」。三个成员合计 &lt;strong&gt;45860 行&lt;/strong&gt;（不含测试）、&lt;br&gt;
-&lt;strong&gt;2058 个测试用例&lt;/strong&gt;。&lt;/p&gt;</summary>
+「把模型变成 Agent 的那层脚手架」。三个成员合计 &lt;strong&gt;22947 行&lt;/strong&gt;（不含测试）、&lt;br&gt;
+&lt;strong&gt;1029 个测试用例&lt;/strong&gt;。&lt;/p&gt;</summary>
     <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
     <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
     <category term="atelier" scheme="https://ystyle.top/tags/atelier/"/>
@@ -90,7 +90,7 @@
     <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
     <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
     <category term="sunku" scheme="https://ystyle.top/tags/sunku/"/>
-    <category term="Redis" scheme="https://ystyle.top/tags/Redis/"/>
+    <category term="redis" scheme="https://ystyle.top/tags/redis/"/>
     <category term="缓存" scheme="https://ystyle.top/tags/%E7%BC%93%E5%AD%98/"/>
     <category term="数据库" scheme="https://ystyle.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     

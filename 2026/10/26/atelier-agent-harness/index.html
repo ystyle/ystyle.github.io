@@ -421,9 +421,12 @@
 <p align="center"><em>把模型变成 Agent，中间差着一层</em></p>
 <blockquote>
 <p>atelier 是一个纯仓颉实现的 <strong>Agent Harness</strong>——按它自己的说法，<br>
-「把模型变成 Agent 的那层脚手架」。三个成员合计 <strong>45860 行</strong>（不含测试）、<br>
-<strong>2058 个测试用例</strong>。</p>
+「把模型变成 Agent 的那层脚手架」。三个成员合计 <strong>22947 行</strong>（不含测试）、<br>
+<strong>1029 个测试用例</strong>。</p>
 <p>本文讲它要解决什么问题、怎么解决，以及为此付出的取舍。</p>
+<p><strong>只想先跑起来</strong>：看<a href="/2026/10/26/atelier-getting-started/">第三篇《atelier 怎么用》</a>
+——<br>
+定位、装配、三条命令、配置文件，以及第一次跑会撞到什么。</p>
 <p>它的底座是 <a href="/2026/10/10/badger-cj-porting-notes/">badger-cj</a>
 （存储）与<br>
 <a href="/2026/09/09/chronomem-oom-hunt/">mcp-cj / json-rpc</a>
@@ -887,7 +890,7 @@ let h = Harness.open(spec)
 	<tbody>
 			<tr>
 					<td>全仓（三个成员）</td>
-					<td><strong>45860 行</strong>（不含测试）</td>
+					<td><strong>22947 行</strong>（不含测试）</td>
 			</tr>
 			<tr>
 					<td>核心库 <code>atelier</code></td>
@@ -903,7 +906,7 @@ let h = Harness.open(spec)
 			</tr>
 			<tr>
 					<td>测试</td>
-					<td>2058 个用例（162 个测试文件）</td>
+					<td>1029 个用例（81 个测试文件，另有 22011 行测试代码）</td>
 			</tr>
 			<tr>
 					<td>模块</td>

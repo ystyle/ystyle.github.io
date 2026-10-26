@@ -491,9 +491,11 @@
 讲 atelier 长什么样。<br>
 这篇讲它是怎么长成这样的——<strong>包括三次判断被自己推翻</strong>。</p>
 <p>本文的依据全部来自代码注释与提交记录。凡是文中提到的教训，代码里都留着对应痕迹。</p>
+<p>还没装上手？先看<a href="/2026/10/26/atelier-getting-started/">第三篇《atelier 怎么用》</a>
+。</p>
 </blockquote>
 <h2 id="一先看结论"><a href="#一先看结论" class="headerlink" title="一、先看结论"></a>一、先看结论</h2>
-<p>atelier 现在有 2058 个测试用例、15 个包。但真正塑造它的是几个<strong>错误判断</strong>：</p>
+<p>atelier 现在有 1029 个测试用例、15 个包。但真正塑造它的是几个<strong>错误判断</strong>：</p>
 <table>
 	<thead>
 			<tr>
@@ -801,7 +803,7 @@ internal class RunScope {
 <p><strong>这大概是「错误判断」最大的价值</strong>：它不只是一次修正，还会变成一个别人绕不过去的约束。</p>
 <h2 id="九小结"><a href="#九小结" class="headerlink" title="九、小结"></a>九、小结</h2>
 <ul>
-<li>atelier 有 <strong>2058 个测试</strong>，但塑造它的不是这些测试，而是<strong>几次把自己说服的过程推翻</strong></li>
+<li>atelier 有 <strong>1029 个测试</strong>，但塑造它的不是这些测试，而是<strong>几次把自己说服的过程推翻</strong></li>
 <li>三次自我纠正：抽象零消费者、正交维度误合并、静默丢弃造成的行为差异</li>
 <li>548 行拆分的<strong>顺序</strong>比<strong>切法</strong>更重要：先理控制流，再想文件</li>
 <li>flaky 比明确失败更危险；恒真的假用例比 flaky 更糟</li>
