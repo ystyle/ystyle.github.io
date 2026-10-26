@@ -176,6 +176,28 @@
     <span class="post-toc-number">1.1.</span> <span class="post-toc-text">什么时候该用它</span>
   </a>
   
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-4">
+  
+  <a class="post-toc-link" href="#%e5%9c%ba%e6%99%af%e4%b8%80%e7%bb%99%e5%b7%b2%e6%9c%89%e4%ba%a7%e5%93%81%e5%8a%a0%e4%b8%80%e4%b8%aa-agent">
+    <span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">场景一：给已有产品加一个 Agent</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-4">
+  
+  <a class="post-toc-link" href="#%e5%9c%ba%e6%99%af%e4%ba%8c%e7%9b%b4%e6%8e%a5%e5%9f%ba%e4%ba%8e-agent-%e5%81%9a%e4%b8%80%e4%b8%aa%e6%96%b0%e4%ba%a7%e5%93%81">
+    <span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">场景二：直接基于 Agent 做一个新产品</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
 </li>
 
     
@@ -438,7 +460,23 @@
 </ul>
 <p>README 里的一句话很适合概括：它是<strong>成品工坊</strong>而非<strong>编排框架</strong>。框架要求你按它的抽象描述应用，工坊只给你可挂载的零件。</p>
 <h3 id="什么时候该用它"><a href="#什么时候该用它" class="headerlink" title="什么时候该用它"></a>什么时候该用它</h3>
-<p>适合：</p>
+<p>它最实用的价值是<strong>省掉「自建 Agent」那一整套模块</strong>。落到具体场景，有两种，方向相反但都成立：</p>
+<h4 id="场景一给已有产品加一个-agent"><a href="#场景一给已有产品加一个-agent" class="headerlink" title="场景一：给已有产品加一个 Agent"></a>场景一：给已有产品加一个 Agent</h4>
+<p>你已经有产品，现在想让它能自己干活——用户在对话框里说一句，程序自己去读文件、查数据、跑命令、改东西。</p>
+<p>这种需求你希望<strong>接一个现成的运行时</strong>，而不是从零写循环、压缩和工具调度。</p>
+<h4 id="场景二直接基于-agent-做一个新产品"><a href="#场景二直接基于-agent-做一个新产品" class="headerlink" title="场景二：直接基于 Agent 做一个新产品"></a>场景二：直接基于 Agent 做一个新产品</h4>
+<p>反过来，Agent 本身就是产品的核心。这时候自研的代价更明显：<strong>循环、上下文压缩、工具系统、权限判定、会话持久化、多协议接入</strong>——这六块每一个都要做，做完还得让它们互相配合。一个人做半年可能还在调「为什么压缩之后会话接不上」。</p>
+<p>基于现成 harness 起步，等于这六块直接跳过去，你的时间花在<strong>产品真正不一样的地方</strong>。</p>
+<blockquote>
+<p>这两个场景在 Node 体系里都有人这么做：<a href="https://github.com/earendil-works/pi" target="_blank" rel="noopener">Pi</a>
+<br>
+自称「minimal, extensible agent harness」，提供 <code>createAgentSession()</code> 这样的 SDK，<br>
+既能嵌进既有应用，也有人直接拿它做起产品。仓颉体系里对应的就是 atelier。</p>
+<p>两者不是巧合地像，而是<strong>同一个问题的同一个形状</strong>：模型本身只会「说下一段话」，<br>
+要让它变成一个会读文件、会跑命令、知道什么时候该停的 Agent，中间那层机制得有人实现。<br>
+差别在生态——Pi 的扩展点全是 TypeScript，atelier 的全是仓颉接口。</p>
+</blockquote>
+<p>除这两个主场景之外，适合的还有：</p>
 <ul>
 <li>想要一个<strong>能自己调工具干活</strong>的 Agent，而不是一问一答</li>
 <li>已经在仓颉生态里（它的存储、协议层都是仓颉项目）</li>
@@ -450,7 +488,7 @@
 <li>只想调一次模型 API —— 直接用 provider 包更轻</li>
 <li>要做<strong>可视化编排</strong>、DAG 工作流 —— 那是工作流引擎的事</li>
 <li>要多机分布式 —— 它明确是单进程定位</li>
-<li>主力语言不是仓颉 —— 它的所有扩展点都是仓颉接口</li>
+<li>主力语言不是仓颉，也没有跨语言调用需求 —— 用 Pi 那类方案更省事</li>
 </ul>
 <h3 id="它为什么值得单独做一个"><a href="#它为什么值得单独做一个" class="headerlink" title="它为什么值得单独做一个"></a>它为什么值得单独做一个</h3>
 <p>仓颉生态里没有现成的。而「把模型变成 Agent」这件事的难点不在调 API，在于那六个机制（循环、上下文、工具、权限、会话、协议）<strong>每个都有大量细节</strong>，且细节之间互相影响——比如工具顺序会影响缓存命中率，压缩时机影响会话能不能续上。</p>
