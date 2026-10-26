@@ -14,14 +14,14 @@ tags:
   - 排查实录
 ---
 
-<p align="center"><strong>atelier 设计笔记 · 二</strong></p>
+<p align="center"><strong>atelier 源码拆解 · 二</strong></p>
 
-<p align="center"><em>设计文档里不会写的那些判断失误</em></p>
+<p align="center"><em>代码注释里留下的那些判断失误</em></p>
 
 > [上一篇](/2026/10/26/atelier-agent-harness/)讲 atelier 长什么样。
 > 这篇讲它是怎么长成这样的——**包括三次判断被自己推翻**。
 >
-> 素材来自项目的工作日志与代码注释。凡是文中引用的教训，代码里都留着对应痕迹。
+> 本文的依据全部来自代码注释与提交记录。凡是文中提到的教训，代码里都留着对应痕迹。
 
 ## 一、先看结论
 
@@ -44,7 +44,7 @@ atelier 现在有 2058 个测试用例、15 个包。但真正塑造它的是几
 主循环跑完，需要一个「结果摘要」给宿主看。我设计了 `RunProjection`：
 
 ```cangjie
-// 设计稿（已被删除）
+// 已经删掉的结构体，这里只留个样子
 struct RunProjection {
     let status: String
     let turns: Int64
@@ -70,7 +70,7 @@ struct RunProjection {
 
 用这个判据重新看，`RunProjection` 和 `outcomeOf` 一行都删不掉任何东西——它们是纯粹的负担。
 
-> 这条教训后来写进了工作日志：**「加一层抽象」和「统一判据」往往都是错的直觉。**
+> 于是留下一条通用判据：**「加一层抽象」和「统一判据」往往都是错的直觉。**
 
 ## 三、第二次自我纠正：两个正交维度不能合并
 
