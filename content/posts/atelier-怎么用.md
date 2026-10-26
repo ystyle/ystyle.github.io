@@ -1,8 +1,8 @@
 ---
 title: "atelier 怎么用：三种形态、四个概念、一条最短路径"
 subtitle: 从零装到跑起来，以及它凭什么跟别的 Agent 方案不一样
-date: 2026-10-26 17:30:00
-lastmod: 2026-10-26 17:30:00
+date: 2026-10-26 17:00:00
+lastmod: 2026-10-26 17:00:00
 slug: atelier-getting-started
 categories:
   - 软件
