@@ -151,6 +151,30 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-sequelize-js-生成DDL语句预览" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2016-11-30T14:26:26&#43;08:00" itemprop="datePublished">2016-11-30</time>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2016/11/30/sequelize-js-sheng-cheng-ddlyu-ju-yu-lan/">sequelize.js 生成DDL语句预览</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+           因为想做一个直接生成建表语句的工具。 又不想连接到数据库(懒得让数据库一直启动着)
+看了下sequelize.js的测试代码， 找到了以下方法可以实现
+
+          <a href="/2016/11/30/sequelize-js-sheng-cheng-ddlyu-ju-yu-lan/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nodejs/">Nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sequelize/">sequelize</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-Nodejs-yarn换淘宝源" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2016-10-30T18:36:19&#43;08:00" itemprop="datePublished">2016-10-30</time>
@@ -374,33 +398,6 @@ JDK版本管理工具 安装gradle 下载gradle : (若安装过idea之类的工�
         <div class="post-footer">
           
           <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vbox/">vbox</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RemixOS/">RemixOS</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-docker-swarm-集群" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2016-03-18T23:22:51&#43;08:00" itemprop="datePublished">2016-03-18</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2016/03/18/docker-swarm-ji-qun/">docker &#43; swarm 集群</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-          token方式 以虚拟机方式搭建集群练练手
-安装swarm docker run --rm swarm create 6a2d606bb3155b4428d0dc483cff6800 创建Docker虚拟机 docker-machine.exe create -d virtualbox swarm-master docker-machine.exe create -d virtualbox swarm-node1 docker-machine.exe create -d virtualbox swarm-node2 搭建swarm集群 创建swarm-master
-eval $(docker-machine.exe env swarm-master) docker run -d -p 3376:3376 -t \ -v /var/lib/boot2docker:/carts:ro swarm manage \ -H 0.0.0.0:3376 \ --tlsverify --tlscacert=/certs/ca.pem \ --tlscert=/certs/server.pem \ --tlskey=/certs/server-key.pem \ token://6a2d606bb3155b4428d0dc483cff6800 docker run -d swarm join --addr=$(docker-machine.exe ip swarm-master):2376 token://6a2d606bb3155b4428d0dc483cff6800 创建swarm-node
-
-          <a href="/2016/03/18/docker-swarm-ji-qun/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swarm/">swarm</a></li></ul>
           
         </div>
       </article>

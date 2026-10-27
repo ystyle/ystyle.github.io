@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>QQ on 东方星痕</title>
+		<link>https://ystyle.top/tags/QQ/</link>
+		<description>Recent content in QQ on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Wed, 28 Oct 2026 01:55:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/QQ/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>给 DeepSeek Harness 接上 QQ：一只会记住你的鲸鱼娘</title>
+				<link>https://ystyle.top/2026/10/28/dsh-im-qq-whale-girl/</link>
+				<pubDate>Wed, 28 Oct 2026 01:55:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/10/28/dsh-im-qq-whale-girl/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;dsh-im + QQ 官方机器人 + 忆时塔 + 鲸鱼娘人设&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;四个现成的东西拼起来，得到一个会在 QQ 里跟你拌嘴、还真的记得你的 AI&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这篇讲的是&lt;strong&gt;怎么拼&lt;/strong&gt;，不是怎么从零写。&lt;br&gt;&#xA;四块零件都已经是成品：&lt;code&gt;@xmanrui/dsh-im&lt;/code&gt;（IM 桥）、QQ 官方机器人平台、忆时塔（分层时间记忆 MCP）、以及一份鲸鱼娘人设。&lt;br&gt;&#xA;真正需要动脑的地方只有一个：&lt;strong&gt;怎么让人设不崩，同时让记忆不丢&lt;/strong&gt;。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

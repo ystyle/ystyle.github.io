@@ -10,14 +10,49 @@
 		
 		
 		
-			<lastBuildDate>Mon, 26 Oct 2026 17:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Wed, 28 Oct 2026 01:55:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>Agent</title>
 				<link>https://ystyle.top/tags/Agent/</link>
-				<pubDate>Mon, 26 Oct 2026 17:00:00 +0800</pubDate>
+				<pubDate>Wed, 28 Oct 2026 01:55:00 +0800</pubDate>
 				<guid>https://ystyle.top/tags/Agent/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>dsh</title>
+				<link>https://ystyle.top/tags/dsh/</link>
+				<pubDate>Wed, 28 Oct 2026 01:55:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/dsh/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>MCP</title>
+				<link>https://ystyle.top/tags/MCP/</link>
+				<pubDate>Wed, 28 Oct 2026 01:55:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/MCP/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>QQ</title>
+				<link>https://ystyle.top/tags/QQ/</link>
+				<pubDate>Wed, 28 Oct 2026 01:55:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/QQ/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>人设</title>
+				<link>https://ystyle.top/tags/%E4%BA%BA%E8%AE%BE/</link>
+				<pubDate>Wed, 28 Oct 2026 01:55:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/%E4%BA%BA%E8%AE%BE/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>忆时塔</title>
+				<link>https://ystyle.top/tags/%E5%BF%86%E6%97%B6%E5%A1%94/</link>
+				<pubDate>Wed, 28 Oct 2026 01:55:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/%E5%BF%86%E6%97%B6%E5%A1%94/</guid>
 				<description></description>
 			</item>
 			<item>
@@ -116,41 +151,6 @@
 				<link>https://ystyle.top/tags/bstorm/</link>
 				<pubDate>Mon, 19 Oct 2026 10:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/tags/bstorm/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>索引</title>
-				<link>https://ystyle.top/tags/%E7%B4%A2%E5%BC%95/</link>
-				<pubDate>Mon, 19 Oct 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/%E7%B4%A2%E5%BC%95/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>性能优化</title>
-				<link>https://ystyle.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
-				<pubDate>Mon, 19 Oct 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Agent记忆</title>
-				<link>https://ystyle.top/tags/Agent%E8%AE%B0%E5%BF%86/</link>
-				<pubDate>Fri, 16 Oct 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/Agent%E8%AE%B0%E5%BF%86/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>chronomem</title>
-				<link>https://ystyle.top/tags/chronomem/</link>
-				<pubDate>Fri, 16 Oct 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/chronomem/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>MCP</title>
-				<link>https://ystyle.top/tags/MCP/</link>
-				<pubDate>Fri, 16 Oct 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/MCP/</guid>
 				<description></description>
 			</item>
 	</channel>

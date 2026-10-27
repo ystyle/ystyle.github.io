@@ -4,12 +4,34 @@
   <subtitle>请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="https://ystyle.top/"/>
-  <updated>2026-10-26T09:00:00.000Z</updated>
+  <updated>2026-10-27T17:55:00.000Z</updated>
   <id>https://ystyle.top/</id>
   <author>
     <name>YSTYLE</name>
   </author>
   <generator uri="https://gohugo.io/">Hugo</generator>
+  <entry>
+    <title>给 DeepSeek Harness 接上 QQ：一只会记住你的鲸鱼娘</title>
+    <link href="https://ystyle.top/2026/10/28/dsh-im-qq-whale-girl/"/>
+    <id>https://ystyle.top/2026/10/28/dsh-im-qq-whale-girl/</id>
+    <published>2026-10-27T17:55:00.000Z</published>
+    <updated>2026-10-27T17:55:00.000Z</updated>
+    
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;dsh-im + QQ 官方机器人 + 忆时塔 + 鲸鱼娘人设&lt;/strong&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;em&gt;四个现成的东西拼起来，得到一个会在 QQ 里跟你拌嘴、还真的记得你的 AI&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这篇讲的是&lt;strong&gt;怎么拼&lt;/strong&gt;，不是怎么从零写。&lt;br&gt;
+四块零件都已经是成品：&lt;code&gt;@xmanrui/dsh-im&lt;/code&gt;（IM 桥）、QQ 官方机器人平台、忆时塔（分层时间记忆 MCP）、以及一份鲸鱼娘人设。&lt;br&gt;
+真正需要动脑的地方只有一个：&lt;strong&gt;怎么让人设不崩，同时让记忆不丢&lt;/strong&gt;。&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="dsh" scheme="https://ystyle.top/tags/dsh/"/>
+    <category term="QQ" scheme="https://ystyle.top/tags/QQ/"/>
+    <category term="MCP" scheme="https://ystyle.top/tags/MCP/"/>
+    <category term="忆时塔" scheme="https://ystyle.top/tags/%E5%BF%86%E6%97%B6%E5%A1%94/"/>
+    <category term="人设" scheme="https://ystyle.top/tags/%E4%BA%BA%E8%AE%BE/"/>
+    <category term="Agent" scheme="https://ystyle.top/tags/Agent/"/>
+    
+  </entry>
   <entry>
     <title>atelier 怎么用：三种形态、四个概念、一条最短路径</title>
     <link href="https://ystyle.top/2026/10/26/atelier-getting-started/"/>
@@ -413,22 +435,6 @@
     <category term="badger-cj" scheme="https://ystyle.top/tags/badger-cj/"/>
     <category term="json-rpc" scheme="https://ystyle.top/tags/json-rpc/"/>
     <category term="排查实录" scheme="https://ystyle.top/tags/%E6%8E%92%E6%9F%A5%E5%AE%9E%E5%BD%95/"/>
-    
-  </entry>
-  <entry>
-    <title>戴森球与光伏文明：一个被忽略的最优解</title>
-    <link href="https://ystyle.top/2026/09/06/dyson-sphere-and-photovoltaic-civilization/"/>
-    <id>https://ystyle.top/2026/09/06/dyson-sphere-and-photovoltaic-civilization/</id>
-    <published>2026-09-06T01:30:00.000Z</published>
-    <updated>2026-09-06T01:30:00.000Z</updated>
-    
-    <summary type="html">&lt;h2 id=&#34;引言：悖论的另一面&#34;&gt;&lt;a href=&#34;#引言：悖论的另一面&#34; class=&#34;headerlink&#34; title=&#34;引言：悖论的另一面&#34;&gt;&lt;/a&gt;引言：悖论的另一面&lt;/h2&gt;
-&lt;p&gt;在关于费米悖论的无数讨论中，有一个流传甚广的说辞：&lt;strong&gt;“能造戴森球的文明不需要它，需要它的文明造不出来。”&lt;/strong&gt; 这句话听起来深刻，却长期缺乏令人信服的底层逻辑。我们习惯了将“高级能源”与“核聚变”“反物质”绑定，却极少停下来思考一个问题——&lt;/p&gt;</summary>
-    <category term="思考" scheme="https://ystyle.top/categories/%E6%80%9D%E8%80%83/"/>
-    <category term="科幻" scheme="https://ystyle.top/tags/%E7%A7%91%E5%B9%BB/"/>
-    <category term="戴森球" scheme="https://ystyle.top/tags/%E6%88%B4%E6%A3%AE%E7%90%83/"/>
-    <category term="核取变" scheme="https://ystyle.top/tags/%E6%A0%B8%E5%8F%96%E5%8F%98/"/>
-    <category term="太空城" scheme="https://ystyle.top/tags/%E5%A4%AA%E7%A9%BA%E5%9F%8E/"/>
     
   </entry>
 </feed>
