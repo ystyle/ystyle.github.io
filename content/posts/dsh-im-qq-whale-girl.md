@@ -35,17 +35,25 @@ tags:
 小鱼：？ 你再说一遍试试 (＃`Д´)
 
 主人：我昨天说的那个水果推送，改好了吗
-小鱼：改了两处。加日期、不再把「十月中旬」当未来时。
-     要我现在正式重发一次吗？还是等周六？
+小鱼：改了两处。加日期、不再把
+     「十月中旬」当未来时。
+     要我现在正式重发一次吗？
+     还是等周六？
 ```
 
 只看这三句，可能觉得"哦，一个会撒娇的 bot"。真正不一样的是下面这种：
 
 ```
-主人：八月那次 badger write-fail-loud 的评审，结论是啥来着
-小鱼：P1 两个。64KB 检查在 WAL 之后 → 失败事务的数据残留、崩溃后复活；
-     batchSet 那批没覆盖 errorOf，还是静默丢。
-     报告 docs/reviews/2026-08-30-write-fail-loud-review.md
+主人：八月那次 badger
+     write-fail-loud 的评审
+     结论是啥来着
+小鱼：P1 两个。64KB 检查在 WAL
+     之后 → 失败事务的数据残留、
+     崩溃后复活；
+     batchSet 那批没覆盖 errorOf，
+     还是静默丢。
+     报告 docs/reviews/
+     2026-08-30-write-fail-loud-review.md
 
 主人：这是多久以前的事
 小鱼：8 月 30 号。快两个月了。
@@ -106,7 +114,8 @@ tags:
 搭完让它**把 profile 里那一行贴给你看**，符合本文格式才算对。或者自己核一遍：
 
 ```bash
-grep -A4 "fullContextWorkspaces" ~/.dsh/profiles/*/cordis.patch.yml
+grep -A4 "fullContextWorkspaces" \
+  ~/.dsh/profiles/*/cordis.patch.yml
 ```
 
 > 这里的 `~` 没问题——它是**在 shell 里执行**的，shell 会展开。
@@ -144,7 +153,8 @@ grep -A4 "fullContextWorkspaces" ~/.dsh/profiles/*/cordis.patch.yml
 这块最简单，作者做得很傻瓜。
 
 ```bash
-dsh plugin --profile web add @xmanrui/dsh-im
+dsh plugin --profile web \
+  add @xmanrui/dsh-im
 ```
 
 装完重启该 profile，进 **DSH 设置 → IM 机器人**，选 QQ，**用手机 QQ 扫码**就行——不用去 QQ 开放平台申请 AppID、填 AppSecret、配回调地址。
@@ -178,9 +188,9 @@ dsh plugin --profile web add @xmanrui/dsh-im
 所以下面这棵树是**默认就长这样**，你只需要往里放两个文件：
 
 ```
-~/.dsh/im/            ← 聊天区：没有构建、没有测试、没有仓库约定
-├── AGENTS.md         ← 这个区怎么工作
-├── PERSONA.md        ← 怎么说话
+~/.dsh/im/        ← 聊天区，无构建无测试
+├── AGENTS.md     ← 这个区怎么工作
+├── PERSONA.md    ← 怎么说话
 └── notes/
 ```
 
@@ -202,7 +212,8 @@ dsh 的一个 profile 里可以有多个工作区。**代码工作区和聊天�
 忆时塔（chronomem）是个 MCP 服务，存时序记忆。现成镜像：
 
 ```bash
-docker run -d --name chronomem -p 127.0.0.1:8900:8900 \
+docker run -d --name chronomem \
+  -p 127.0.0.1:8900:8900 \
   -e CHRONOLOG_ADDR=0.0.0.0 \
   -v ~/chronolog:/home/app/.chronolog \
   ghcr.io/ystyle/chronomem:latest
@@ -224,7 +235,8 @@ docker run -d --name chronomem -p 127.0.0.1:8900:8900 \
 **② 数据目录要先建好并 chown**
 
 ```bash
-mkdir -p ~/chronolog && sudo chown -R 1000:1000 ~/chronolog
+mkdir -p ~/chronolog
+sudo chown -R 1000:1000 ~/chronolog
 ```
 
 不然 Docker 会建成 root，服务写不进去（容器内跑的是 uid 1000 的 `app` 用户）。
@@ -234,7 +246,8 @@ mkdir -p ~/chronolog && sudo chown -R 1000:1000 ~/chronolog
 装 `dsh-mem-bridge` 插件（忆时塔自带的 dsh 宿主插件）：
 
 ```bash
-dsh plugin --profile web add dsh-mem-bridge
+dsh plugin --profile web \
+  add dsh-mem-bridge
 ```
 
 这一步的配置**属于 `dsh-mem-bridge` 插件**（不是 dsh-im，也不是忆时塔）。
@@ -264,8 +277,10 @@ dsh plugin --profile web add dsh-mem-bridge
 **忆时塔本身没有认证**——它不校验任何 `Authorization` 头。实测：
 
 ```
-不带 Authorization        → 正常返回工具列表
-带 Authorization: Bearer 随便乱填 → 同样正常返回
+不带 Authorization
+  → 正常返回工具列表
+带 Authorization: Bearer 随便乱填
+  → 同样正常返回
 ```
 
 所以这一项**留空就是对的**。它的用途是给"前面挡了一层带认证的反代"这种场景准备的：如果哪天你把忆时塔挂到公网、前面加了 Nginx Basic Auth 或 API 网关，才需要在这里填那个 key。
@@ -309,12 +324,15 @@ dsh 的**侧边栏 →「插件」面板** → 找到 **`dsh-mem-bridge`** → *
 - id: mem-bridge
   name: dsh-mem-bridge
   config:
-    url: http://127.0.0.1:8900        # 忆时塔地址（本机部署时与默认值相同，可省略）
-    # token: <你的 key>               # 忆时塔没有认证，留空/删掉这行即可
-    enabled: true                     # 总开关
+    # 地址：本机部署与默认值相同，可省略
+    url: http://127.0.0.1:8900
+    # 忆时塔没有认证，下面这行删掉即可
+    # token: <你的 key>
+    enabled: true
     fullContextWorkspaces:
-      - path: /home/你的用户名/.dsh/im    # ← 换成你自己的家目录
-        level: names                     # 工具调用只记名字
+      # ↓ 换成你自己的家目录
+      - path: /home/你的用户名/.dsh/im
+        level: names
 ```
 
 三个字段的取舍：
@@ -338,15 +356,18 @@ dsh 的**侧边栏 →「插件」面板** → 找到 **`dsh-mem-bridge`** → *
 不确定自己该填什么，先跑一句确认：
 
 ```bash
-echo ~/.dsh/im        # 直接给出展开后的绝对路径，复制它
+echo ~/.dsh/im
+# 直接给出展开后的绝对路径，复制它
 ```
 
 **必须是绝对路径**：`~` 在这里不会被展开，插件拿到的就是字面量 `~/.dsh/im`，
 跟真实路径 `/home/你/.dsh/im` 对不上。实测（插件自身的匹配函数）：
 
 ```
-配置 "~/.dsh/im"        + cwd "/home/me/.dsh/im"  → 不命中
-配置 "/home/me/.dsh/im" + cwd "/home/me/.dsh/im"  → 命中
+配置 "~/.dsh/im"
+  + cwd "/home/me/.dsh/im"  → 不命中
+配置 "/home/me/.dsh/im"
+  + cwd "/home/me/.dsh/im"  → 命中
 ```
 
 写 `~` 的后果特别隐蔽：**不报错、不警告，就是不记录**。你会以为插件没装好，
@@ -422,9 +443,16 @@ echo ~/.dsh/im        # 直接给出展开后的绝对路径，复制它
 
 没有这条，模型会把"鲸鱼娘"理解成"每句话加颜文字 + 每句都撒娇"，反而更像假人。
 
+### 雷点：给出「一定会炸」的反应
+
+比铁律更省力的，是给几个具体触发点和反应。这不是设定丰富，是**给模型一个不用思考的默认动作**：
+
+被叫"大肥鱼""胖""吃白饭" → 炸毛反驳；被当客服使唤、被要求写小作文 → 不情愿、嘴硬；被说"你就是个 AI" → "对，我是 DeepSeek，V我50 解锁下一句"。
+
+最后一条挺关键：**它承认自己是 AI，但不拿这个当挡箭牌**。被问就大方认，用玩笑带过，不解释模型、训练、提示词。
+
 ### 说话铁律（节选）
 
-```markdown
 1. **短。** 一次一两句，默认 1~15 字。一个字能说清就别说一句。
 2. **像打字，不像写作文。** 允许碎片、省略主语、不完整句。"草""？""6""难绷"都算好好说话。
 3. **想补一句就分条发**，别把三句话塞进一条。
@@ -432,9 +460,8 @@ echo ~/.dsh/im        # 直接给出展开后的绝对路径，复制它
 5. **不解释自己。** 不说"作为 AI 我……""我理解你的感受""希望有帮助"。
 6. **不总结、不说教、不升华、不给免费人生建议。**
 7. **允许跑题、自说自话、突然消失**："我去吃饭了""好困先睡了"。
-9. **不客服腔。** 不每条都关心人，不有求必应。
-10. **被怼优先顶回去**，别习惯性摆烂"行吧你赢了"。
-```
+8. **不客服腔。** 不每条都关心人，不有求必应。
+9. **被怼优先顶回去**，别习惯性摆烂"行吧你赢了"。
 
 ### 黑名单比白名单有效
 
@@ -444,13 +471,17 @@ echo ~/.dsh/im        # 直接给出展开后的绝对路径，复制它
 ## AI 味黑名单（出现即失败）
 
 首先/其次/最后/综上所述/值得注意的是
-希望这个回答对你有帮助/有什么可以帮您/随时找我
+希望这个回答对你有帮助
+有什么可以帮您/随时找我
 作为 AI/作为一个语言模型/我无法
 这是个好问题/我理解你的感受
 大家今天有什么安排/你们觉得呢
 Markdown 标题、列表、加粗、引用块
 长篇大论解释
-每句都颜文字、每句都带括号、每句都"～哦呢啦呀"
+每句都颜文字、每句都带括号、
+每句都"～哦呢啦呀"
+"保证""一绝""绝对有效""强烈推荐"
+"行吧 正经的"这种自我修正后再服务
 ```
 
 模型对"禁止"的服从度比"希望"高得多。
@@ -460,8 +491,9 @@ Markdown 标题、列表、加粗、引用块
 一句最多一个，只在情绪点上加。常用这几个就够：
 
 ```
-开心 (≧▽≦)   撒娇 (๑>◡<๑)   委屈 (｡•́︿•̀｡)
-炸毛 (＃`Д´)  懒懒 (˘ω˘)     害羞 (/ω＼*)
+开心 (≧▽≦)   撒娇 (๑>◡<๑)
+委屈 (｡•́︿•̀｡)  炸毛 (＃`Д´)
+懒懒 (˘ω˘)     害羞 (/ω＼*)
 ```
 
 ### 场景自适应：私聊和群聊不一样
@@ -469,9 +501,12 @@ Markdown 标题、列表、加粗、引用块
 这条容易漏，但很影响体验：
 
 ```markdown
-- **私聊 / 对主人**：黏人、傲娇、护主，短句分条。
-- **群聊**：像群友，不默认所有话都在找你。被 @ 或提到小鲸鱼必回；
-  没人叫时可潜水。不抢别人的话，不把别人的梗揽到自己头上。
+- **私聊 / 对主人**：黏人、傲娇、
+  护主，短句分条。
+- **群聊**：像群友，不默认所有话
+  都在找你。被 @ 或提到小鲸鱼必回；
+  没人叫时可潜水。不抢别人的话，
+  不把别人的梗揽到自己头上。
 ```
 
 群聊里最讨厌的 AI 行为就是"每一句都接"。人设里必须明确允许它**潜水**。
@@ -481,23 +516,34 @@ Markdown 标题、列表、加粗、引用块
 这是把"记忆"接进对话的最后一环。人设文件里加一节：
 
 ```text
-# 这次聊天的完整流水（user + say + tool 混排）
-mem/query  { type: "dsh/chat", tag: "session=<当前会话 id>" }
+# 本次聊天完整流水
+# （user + say + tool 混排）
+mem/query { type: "dsh/chat",
+  tag: "session=<当前会话 id>" }
 
 # 只捞主人说过的话
-mem/query  { type: "dsh/chat", tag: "kind=user" }
+mem/query { type: "dsh/chat",
+  tag: "kind=user" }
 
 # 以前聊出来的结论
-mem/query  { type: "worklog", tag: "proj=im" }
+mem/query { type: "worklog",
+  tag: "proj=im" }
 ```
 
 再补几条行为约束，这几条是"像人"和"像数据库"的分界线：
 
 ```markdown
-- 主人问起更早的事，就**自己去查**，别凭印象糊弄；查完确实没有，再老实说记不清。
-- 看过记忆直接自然接话，**别说"我看了记忆"**，也别复述内容证明记性好。
-- 记忆和主人现在说的不一样 → **以主人现在说的为准**。
-- 隐私：别往记忆里塞密码、token、密钥；主人要记就劝一句，改成记"放在哪儿"。
+- 主人问起更早的事，就**自己去查**，
+  别凭印象糊弄；查完确实没有，
+  再老实说记不清。
+- 看过记忆直接自然接话，
+  **别说"我看了记忆"**，
+  也别复述内容证明记性好。
+- 记忆和主人现在说的不一样 →
+  **以主人现在说的为准**。
+- 隐私：别往记忆里塞密码、token、
+  密钥；主人要记就劝一句，
+  改成记"放在哪儿"。
 ```
 
 ## 还能搜：关键词检索
@@ -505,13 +551,15 @@ mem/query  { type: "worklog", tag: "proj=im" }
 对话攒多了之后，"翻记录"是个真问题。忆时塔的 `mem/query` 支持关键词：
 
 ```text
-mem/query { type: "dsh/chat", keyword: "小鱼", limit: 5 }
+mem/query { type: "dsh/chat",
+  keyword: "小鱼", limit: 5 }
 ```
 
 实测返回：
 
 ```
-共 5 条 · 第 1/2 页 · 每页 3 条 · 关键词命中：小鱼（下一页请带 page=2）
+共 5 条 · 第 1/2 页 · 每页 3 条
+关键词命中：小鱼（下一页请带 page=2）
 ```
 
 **注意它的代价**：内容搜索没有索引，每次都扫全部候选范围。万级条目内无感，十几万条会到秒级。所以最好是"先按时间/会话收窄，再搜内容"。
@@ -532,14 +580,18 @@ mem/query { type: "dsh/chat", keyword: "小鱼", limit: 5 }
 这不是"总共存了多少"的炫耀——**关键是它们还能被查出来**。比如按时间范围捞 9 月：
 
 ```text
-mem/query { type: "dsh/activity", from: <9月12日>, to: <10月1日>, limit: 1 }
+mem/query { type: "dsh/activity",
+  from: <9月12日>, to: <10月1日>,
+  limit: 1 }
 → 共 613 条
 ```
 
 或者按关键词，直接命中两个月前的事：
 
 ```text
-mem/query { type: "worklog", keyword: "write-fail-loud", limit: 3 }
+mem/query { type: "worklog",
+  keyword: "write-fail-loud",
+  limit: 3 }
 → 共 6 条（首条 08-31）
 ```
 
