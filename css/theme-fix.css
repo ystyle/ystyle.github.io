@@ -1,0 +1,51 @@
+/*
+ * indigo 主题的结构性修复
+ * =====================================
+ *
+ * 与 Chroma 相关的代码块问题在 chroma-fix.css 里；这里只处理主题自身的布局缺陷，
+ * 都是「复用主题 CSS 但 DOM 场景超出它当初设想」导致的。
+ */
+
+
+/*
+ * 一、长目录看不全、且无法滚动
+ * -------------------------------------
+ *
+ * 主题给 TOC 的原设计是：
+ *
+ *   .post-toc-wrap        { position: fixed; overflow-x: hidden; width: 20%; }
+ *   .post-toc-wrap.fixed  { top: 76px; bottom: 140px; overflow-y: auto; }
+ *
+ * 也就是说 —— 只有进入 .fixed 状态，盒子才有 top/bottom 构成的高度约束；
+ * 未进入时它虽然已经 position:fixed，却没有高度上限，高度由内容撑开。
+ *
+ * 标题少的文章看不出问题。标题一多（例如 40+ 条），盒子height 会远远超过视口，
+ * 下半截直接落到屏幕外；而此时 clientHeight == scrollHeight，
+ * 虽然 overflow-y 已被 overflow-x:hidden 逼成 auto，也没有内容可滚。
+ *
+ * 修法：未固定状态也加一条视口上限，并显式允许纵向滚动。
+ * 260px = banner 最小高度 210 + .body-wrap 上内边距 30 + 20px 呼吸空间。
+ */
+.post-toc-wrap {
+  max-height: calc(100vh - 260px);
+  overflow-y: auto;
+}
+
+/* .fixed 状态下高度由 top/bottom 决定（视口高 - 76 - 140），不要让上限再插一脚 */
+.post-toc-wrap.fixed {
+  max-height: none;
+}
+
+/* 目录滚动条收窄一点，避免在窄侧栏里显得笨重 */
+.post-toc-wrap::-webkit-scrollbar {
+  width: 4px;
+}
+
+.post-toc-wrap::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 2px;
+}
+
+.post-toc-wrap::-webkit-scrollbar-track {
+  background: transparent;
+}
