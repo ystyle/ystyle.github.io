@@ -32,7 +32,18 @@
                 y: y
             };
         },
-        docEl = !!navigator.userAgent.match(/firefox/i) || navigator.msPointerEnabled ? d.documentElement : body;
+        /*
+         * 滚动容器要先认准，否则 TOC 的 .fixed / 高亮全都不会生效。
+         *
+         * 原来写的是「非 Firefox 取 body」：这在旧浏览器/怪异模式下成立，
+         * 但现代浏览器标准模式下滚动容器是 <html>，body.scrollTop 恒为 0。
+         * 结果是 toc.fixed()、toc.actived()、fixedHeader()、toggleGotop()
+         * 拿到的 top 永远是 0 —— 目录的 .fixed 类从不添加，长目录直接溢出屏幕
+         * 且无法滚动，滚动高亮也一直停在第一条。
+         *
+         * scrollingElement 会返回当前文档真正的滚动元素（标准模式即 documentElement）。
+         */
+        docEl = d.scrollingElement || d.documentElement || body;
 
     var Blog = {
         goTop: function (end) {
@@ -111,8 +122,31 @@
             // 防御：正文里的裸 HTML 标题（如 <h1 align="center">…</h1>）不会生成 id，
             // 此时 TOC 中不存在对应链接，直接取 .parentNode 会抛 TypeError 并中断整个 IIFE，
             // 于是 load / DOMContentLoaded 监听器注册不上，.fade 永远拿不到 .in，正文 opacity 保持 0。
+            //
+            // 另一个坑：TOC 的 href 会被模板/URL 规范化做百分号编码（中文变成 %e6%91%98%e8%a6%81），
+            // 直接用 a[href="#<中文 id>"] 永远匹配不到，高亮就一直是空的。
+            // 所以这里按「逐个比对，原样或解码后相等即命中」来查，不依赖编码形式。
+            var findTocLink = function (id) {
+                if (!id) return null;
+
+                var links = toc.querySelectorAll('a[href^="#"]');
+
+                for (var i = 0; i < links.length; i++) {
+                    var raw = links[i].getAttribute('href').slice(1);
+                    var decoded = raw;
+
+                    try {
+                        decoded = decodeURIComponent(raw);
+                    } catch (e) { }
+
+                    if (raw === id || decoded === id) return links[i];
+                }
+
+                return null;
+            };
+
             var setActive = function (id) {
-                var link = id ? toc.querySelector('a[href="#' + id + '"]') : null;
+                var link = findTocLink(id);
                 var current = toc.querySelector('li.active');
 
                 if (current) current.classList.remove('active');

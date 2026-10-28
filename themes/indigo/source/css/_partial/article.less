@@ -14,10 +14,19 @@
     position: fixed;
     overflow-x: hidden;
     width: 20%;
+
+    // 未进入 .fixed 状态时，盒子只有 position:fixed 而没有高度约束：
+    // 标题多的文章会让目录高度远超视口，下半截落到屏幕外；
+    // 此时 clientHeight == scrollHeight，overflow-y 也无法滚动。
+    // 因此补一条视口上限并显式允许纵向滚动（.fixed 状态的高度由 top/bottom 决定）。
+    max-height: ~"calc(100vh - 260px)";
+    overflow-y: auto;
+
     &.fixed {
         top: @headerH + 20px;
         bottom: 140px;
         overflow-y: auto;
+        max-height: none;
     }
 
     ol,
