@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
   {{/* 修正 Chroma 与主题 CSS 的结构冲突（代码块被裁切），详见该文件注释 */}}
   <link rel="stylesheet" href="{{ "css/chroma-fix.css" | relURL }}">
+  {{/* 修正主题自身的布局缺陷（长目录溢出且不可滚动），详见该文件注释 */}}
+  <link rel="stylesheet" href="{{ "css/theme-fix.css" | relURL }}">
 </head>
 <body>
   {{/* #loading 是顶部进度条。.active 由 main.js 在 window load 时移除，
