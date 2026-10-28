@@ -1,0 +1,36 @@
+{{/*
+  标签页动态标题 —— 对应 Hexo 主题的 layout/_partial/plugins/dynamic-title.ejs，
+  由 _config.yml 的 title_change 控制（原站已开启，迁移时漏掉了）。
+  切走标签页时换成「离开」文案，切回来 2 秒后恢复原标题。
+
+  文案通过 data-* 传递，而不是直接拼进 JS 字符串字面量：
+  「欢迎回来╮(╯▽╰)╭」这类内容内联进 <script> 要处理引号与转义，
+  交给 HTML 属性转义、再由 JS 读 attribute 最稳妥。
+*/}}
+{{- with site.Params.titleChangeLeave }}
+<template id="title-change"
+          data-normal="{{ site.Params.titleChangeNormal }}"
+          data-leave="{{ . }}"></template>
+<script>
+(function () {
+  var el = document.getElementById('title-change');
+  if (!el) return;
+
+  var LEAVE = el.getAttribute('data-leave');
+  var NORMAL = el.getAttribute('data-normal');
+  var OriginTitile = document.title, titleTime;
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      document.title = LEAVE;
+      clearTimeout(titleTime);
+    } else {
+      document.title = NORMAL;
+      titleTime = setTimeout(function () {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+})();
+</script>
+{{- end }}

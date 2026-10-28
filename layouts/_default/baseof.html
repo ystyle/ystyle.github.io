@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="{{ "css/chroma-fix.css" | relURL }}">
   {{/* 修正主题自身的布局缺陷（长目录溢出且不可滚动），详见该文件注释 */}}
   <link rel="stylesheet" href="{{ "css/theme-fix.css" | relURL }}">
+  {{/* 统计 + SEO：百度统计 / 百度自动推送。迁移时整块漏掉了，见 partial 内注释。
+       Hexo 原站放在 head.ejs 里，这里保持一致。 */}}
+  {{ partial "analytics.html" . }}
 </head>
 <body>
   {{/* #loading 是顶部进度条。.active 由 main.js 在 window load 时移除，
@@ -59,5 +62,8 @@
     } catch (e) { /* 忽略：仅影响二维码显示 */ }
   })();
   </script>
+
+  {{/* 标签页动态标题（切走换文案）。Hexo 的 script.ejs 里它排在最后，这里同样放末尾。 */}}
+  {{ partial "dynamic-title.html" . }}
 </body>
 </html>

@@ -1,0 +1,36 @@
+{{/*
+  统计与 SEO 脚本 —— 对应 Hexo 主题的 layout/_partial/plugins/baidu.ejs。
+
+  原主题靠 themes/indigo/_config.yml 的两个开关控制：
+      baidu_tongji: <key>    → 百度统计
+      baidu_push:   true     → 百度自动推送
+
+  迁移时这一块整体漏掉了（旧站 public/index.html 里能查到 hm.js 与
+  linksubmit/push.js，Hugo 这边一处都没有）。这里改成 hugo.toml 的
+  [params]（baiduTongji / baiduPush），值留空或 false 即不输出，
+  与原主题的 if 判断等价。
+
+  原站用的是协议相对地址 //hm.baidu.com/…，这里写死 https://，
+  避免在非 http(s) 场景下解析失败。
+*/}}
+{{- with site.Params.baiduTongji }}
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="https://hm.baidu.com/hm.js?{{ . }}"></script>
+<!-- End Baidu Tongji -->
+{{- end }}
+{{- if site.Params.baiduPush }}
+<!-- Baidu Push -->
+<script>
+(function () {
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  bp.src = curProtocol === 'https'
+    ? 'https://zz.bdstatic.com/linksubmit/push.js'
+    : 'http://push.zhanzhang.baidu.com/push.js';
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+{{- end }}

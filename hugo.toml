@@ -112,6 +112,18 @@ disablePathToLower = true
   # 开启分享（会写入 BLOG.SHARE，main.js 据此初始化分享弹窗与浮动按钮）
   share = true
 
+  # 百度统计（沿用 Hexo 主题 _config.yml 的 baidu_tongji）
+  # 留空即不输出，等价于原主题的 if (theme.baidu_tongji)
+  baiduTongji = "10658703a526f24446a8cbedef8d287f"
+
+  # 百度自动推送（沿用 Hexo 主题的 baidu_push: true）
+  baiduPush = true
+
+  # 标签页标题：切走时换成 leave，切回来 2 秒后恢复原标题
+  # 对应 Hexo 主题的 title_change（{ normal, leave }）
+  titleChangeNormal = "欢迎回来╮(╯▽╰)╭"
+  titleChangeLeave  = "东方星痕的博客"
+
 # 评论：gitalk，与原站同一套配置
 # ⚠️ client_secret 是明文（原站也如此，公开仓库可见），建议轮换或改用 giscus
 [params.gitalk]
