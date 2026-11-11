@@ -171,6 +171,35 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-uhp-cj-协议实现" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2026-11-11T10:00:00&#43;08:00" itemprop="datePublished">2026-11-11</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2026/11/11/uhp-cj-protocol-implementation/">uhp-cj：把 Agent harness 变成共享基础设施</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          uhp-cj 实现笔记
+协议不是文档，是一堆互相打架的条款
+这篇讲的是怎么实现一个别人定的协议。
+客户端接一个 Agent 很容易；难的是让一个服务端「说得对、答得对」，
+而且这份「对」不是你说了算——有一套别人的检查在等着你。
+
+          <a href="/2026/11/11/uhp-cj-protocol-implementation/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UHP/">UHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Agent/">Agent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Harness/">Harness</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%8F%E8%AE%AE/">协议</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-atelier-怎么用" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2026-10-26T17:00:00&#43;08:00" itemprop="datePublished">2026-10-26</time>
@@ -309,7 +338,7 @@ sunku-cj 是仓颉生态里的「Redis 兼容本地 KV 数据库」，架在 bad
         </div>
         <div class="post-footer">
           
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sunku/">sunku</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/">缓存</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul>
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sunku/">sunku</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/">缓存</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul>
           
         </div>
       </article>
@@ -430,35 +459,6 @@ atomgit.com/ystyle/chronomem （bench/ 与 bench/results/）。
         <div class="post-footer">
           
           <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MCP/">MCP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BF%86%E6%97%B6%E5%A1%94/">忆时塔</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Agent%E8%AE%B0%E5%BF%86/">Agent记忆</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/chronomem/">chronomem</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-仓颉跨平台入门" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2026-10-15T11:00:00&#43;08:00" itemprop="datePublished">2026-10-15</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2026/10/15/cangjie-multiplatform-from-zero/">一段代码，两个系统：仓颉怎么处理「跨平台」这件事</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-          写给第一次接触「跨平台」的仓颉学习者
-从「为什么要跨平台」讲到亲手跑通一个例子
-Cangjie · 入门 · 跨平台
-这篇不假设你学过任何其他编程语言，也不假设你懂操作系统内部。
-如果你刚学仓颉，听到「跨平台」「条件编译」「common/specific」这些词一头雾水——这篇就是给你的。我们从一个最朴素的问题开始：同一段代码，为什么不能在所有电脑上跑？
-
-          <a href="/2026/10/15/cangjie-multiplatform-from-zero/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/">跨平台</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mmap-cj/">mmap-cj</a></li></ul>
           
         </div>
       </article>

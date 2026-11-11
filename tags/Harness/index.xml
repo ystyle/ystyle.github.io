@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Mon, 26 Oct 2026 17:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Wed, 11 Nov 2026 10:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/Harness/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>uhp-cj：把 Agent harness 变成共享基础设施</title>
+				<link>https://ystyle.top/2026/11/11/uhp-cj-protocol-implementation/</link>
+				<pubDate>Wed, 11 Nov 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/11/11/uhp-cj-protocol-implementation/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;uhp-cj 实现笔记&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;协议不是文档，是一堆互相打架的条款&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这篇讲的是&lt;strong&gt;怎么实现一个别人定的协议&lt;/strong&gt;。&lt;br&gt;&#xA;客户端接一个 Agent 很容易；难的是让一个服务端「说得对、答得对」，&lt;br&gt;&#xA;而且这份「对」不是你说了算——有一套别人的检查在等着你。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>atelier 怎么用：三种形态、四个概念、一条最短路径</title>
 				<link>https://ystyle.top/2026/10/26/atelier-getting-started/</link>

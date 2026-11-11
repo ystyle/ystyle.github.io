@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>uhp-cj：把 Agent harness 变成共享基础设施 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
+  
+  <link rel="stylesheet" href="/css/theme-fix.css">
+  
+  
+
+<script>var _hmt = _hmt || []</script>
+<script async src="https://hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+
+
+<script>
+(function () {
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  bp.src = curProtocol === 'https'
+    ? 'https://zz.bdstatic.com/linksubmit/push.js'
+    : 'http://push.zhanzhang.baidu.com/push.js';
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">uhp-cj：把 Agent harness 变成共享基础设施</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">uhp-cj：把 Agent harness 变成共享基础设施</h1>
+    <h5 class="subtitle">
+      <time datetime="2026-11-11T10:00:00&#43;08:00" itemprop="datePublished" class="page-time">2026-11-11</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e5%9b%9b%e4%b8%aa-harness%e5%9b%9b%e4%b8%aa%e6%8e%a5%e5%8f%a3">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">一、四个 harness，四个接口</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%8c%e9%82%a3-a2a-%e5%91%a2">
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">二、那 A2A 呢</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e4%b8%aa%e5%85%b7%e4%bd%93%e7%9a%84%e4%be%8b%e5%ad%90">
+    <span class="post-toc-number">2.1.</span> <span class="post-toc-text">一个具体的例子</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%8d%e6%98%af%e5%8f%96%e4%bb%a3">
+    <span class="post-toc-number">2.2.</span> <span class="post-toc-text">不是取代</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%89%e5%8d%8f%e8%ae%ae%e8%a7%84%e5%ae%9a%e4%ba%86%e4%b8%89%e4%bb%b6%e4%ba%8b%e6%88%91%e5%8f%aa%e5%81%9a%e4%b8%a4%e4%bb%b6">
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">三、协议规定了三件事，我只做两件</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e8%a7%84%e6%a8%a1">
+    <span class="post-toc-number">3.1.</span> <span class="post-toc-text">规模</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%9b%9b%e4%b8%80%e4%b8%aa%e5%8d%8f%e8%ae%ae%e6%9c%89%e5%87%a0%e4%bb%bd%e6%9d%a5%e6%ba%90">
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">四、一个协议有几份来源</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%be%8b%e5%ad%90%e4%b8%80event-%e5%88%b0%e5%ba%95%e6%98%af%e4%b8%8d%e6%98%af%e8%81%94%e5%90%88%e7%b1%bb%e5%9e%8b">
+    <span class="post-toc-number">4.1.</span> <span class="post-toc-text">例子一：Event 到底是不是联合类型</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%be%8b%e5%ad%90%e4%ba%8c%e4%b8%80%e4%b8%aa%e5%a4%b4%e5%86%99%e5%9c%a8%e5%93%aa%e4%ba%9b%e5%93%8d%e5%ba%94%e4%b8%8a">
+    <span class="post-toc-number">4.2.</span> <span class="post-toc-text">例子二：一个头，写在哪些响应上</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%be%8b%e5%ad%90%e4%b8%89%e5%8f%96%e6%b6%88%e6%b2%a1%e6%9c%89%e8%87%aa%e5%b7%b1%e7%9a%84%e4%ba%8b%e4%bb%b6">
+    <span class="post-toc-number">4.3.</span> <span class="post-toc-text">例子三：取消没有自己的事件</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%9430-%e6%9d%a1%e5%88%a4%e5%ae%9a">
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">五、30 条判定</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%89%e6%9d%a1%e5%bd%b1%e5%93%8d%e8%a1%8c%e4%b8%ba%e7%9a%84%e5%88%a4%e5%ae%9a">
+    <span class="post-toc-number">5.1.</span> <span class="post-toc-text">三条影响行为的判定</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%85%ad%e4%b8%80%e5%8d%8a%e7%9a%84%e4%bb%a3%e7%a0%81%e6%98%af%e7%b1%bb%e5%9e%8b%e8%80%8c%e7%b1%bb%e5%9e%8b%e6%98%af%e7%94%9f%e6%88%90%e7%9a%84">
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">六、一半的代码是类型，而类型是生成的</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%be%9d%e8%b5%96%e6%96%b9%e5%90%91%e4%b9%9f%e6%98%af%e7%a1%ac%e8%a7%84%e5%88%99">
+    <span class="post-toc-number">6.1.</span> <span class="post-toc-text">依赖方向也是硬规则</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%83104-%e9%a1%b9%e6%a3%80%e6%9f%a5">
+    <span class="post-toc-number">7.</span> <span class="post-toc-text">七、104 项检查</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e8%bf%99%e4%b8%aa%e6%95%b0%e5%ad%97%e5%80%bc%e5%be%97%e7%9c%8b">
+    <span class="post-toc-number">7.1.</span> <span class="post-toc-text">为什么这个数字值得看</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e4%b8%aa%e8%a2%ab%e6%8b%a6%e4%b8%8b%e6%9d%a5%e7%9a%84%e4%bd%8e%e7%ba%a7%e9%94%99%e8%af%af">
+    <span class="post-toc-number">7.2.</span> <span class="post-toc-text">一个被拦下来的低级错误</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%85%ab%e6%8e%a5%e7%9c%9f%e5%ae%9e-harness%e6%96%87%e6%a1%a3%e5%92%8c%e5%ae%9e%e6%b5%8b%e4%b8%8d%e4%b8%80%e6%a0%b7">
+    <span class="post-toc-number">8.</span> <span class="post-toc-text">八、接真实 harness：文档和实测不一样</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e4%b8%aa%e6%84%8f%e5%a4%96%e7%9a%84%e5%af%b9%e7%a7%b0">
+    <span class="post-toc-number">8.1.</span> <span class="post-toc-text">一个意外的对称</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e6%96%87%e6%a1%a3%e8%af%b4%e7%9a%84%e5%92%8c%e5%ae%9e%e9%99%85%e8%b7%91%e7%9a%84">
+    <span class="post-toc-number">8.2.</span> <span class="post-toc-text">文档说的，和实际跑的</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e9%a1%ba%e5%b8%a6%e4%b8%80%e4%b8%aa%e8%af%ad%e8%a8%80%e5%b1%82%e9%9d%a2%e7%9a%84%e5%9d%91">
+    <span class="post-toc-number">8.3.</span> <span class="post-toc-text">顺带一个语言层面的坑</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b9%9duhp-server%e4%bb%8e%e9%9b%b6%e4%bb%b6%e5%88%b0%e6%88%90%e5%93%81">
+    <span class="post-toc-number">9.</span> <span class="post-toc-text">九、uhp-server：从零件到成品</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%89%e7%a7%8d-kind%e4%b8%80%e6%9d%a1%e8%a3%85%e9%85%8d%e7%ba%bf">
+    <span class="post-toc-number">9.1.</span> <span class="post-toc-text">三种 kind，一条装配线</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%90%af%e5%8a%a8%e4%b8%a5%e8%bf%9e%e6%8e%a5%e6%87%92">
+    <span class="post-toc-number">9.2.</span> <span class="post-toc-text">启动严，连接懒</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%bc%9a%e8%af%9d%e5%9b%9e%e6%94%b6%e6%98%af%e6%88%91%e7%9a%84%e8%b4%a3%e4%bb%bb%e5%9b%a0%e4%b8%ba%e8%a7%84%e8%8c%83%e6%b2%a1%e8%af%b4">
+    <span class="post-toc-number">9.3.</span> <span class="post-toc-text">会话回收是我的责任，因为规范没说</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e4%b8%aa%e7%9c%8b%e4%b8%8d%e5%88%b0%e6%97%a5%e5%bf%97%e7%9a%84%e5%9d%91">
+    <span class="post-toc-number">9.4.</span> <span class="post-toc-text">一个「看不到日志」的坑</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#p1%e6%8b%86%e6%88%90%e6%8f%92%e4%bb%b6%e8%bf%9b%e7%a8%8b%e4%bb%a5%e5%8f%8a%e6%8b%86%e5%ae%8c%e7%9a%84%e6%96%b0%e6%88%90%e6%9c%ac">
+    <span class="post-toc-number">9.5.</span> <span class="post-toc-text">P1：拆成插件进程，以及拆完的新成本</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e6%88%90%e5%93%81%e5%8f%8d%e8%bf%87%e6%9d%a5%e6%94%b9%e9%9b%b6%e4%bb%b6">
+    <span class="post-toc-number">9.6.</span> <span class="post-toc-text">成品反过来改零件</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%8d%81%e8%be%b9%e7%95%8c%e4%b8%8e%e9%99%90%e5%88%b6">
+    <span class="post-toc-number">10.</span> <span class="post-toc-text">十、边界与限制</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e8%87%aa%e7%94%b1%e8%a2%ab%e9%99%90%e5%88%b6%e5%9c%a8%e5%93%aa%e5%84%bf">
+    <span class="post-toc-number">10.1.</span> <span class="post-toc-text">自由被限制在哪儿</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%8d%81%e4%b8%80%e5%b0%8f%e7%bb%93">
+    <span class="post-toc-number">11.</span> <span class="post-toc-text">十一、小结</span>
+  </a>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-uhp-cj-协议实现" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">uhp-cj：把 Agent harness 变成共享基础设施</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2026-11-11T10:00:00&#43;08:00" itemprop="datePublished">2026-11-11</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <p align="center"><strong>uhp-cj 实现笔记</strong></p>
+<p align="center"><em>协议不是文档，是一堆互相打架的条款</em></p>
+<blockquote>
+<p>这篇讲的是<strong>怎么实现一个别人定的协议</strong>。<br>
+客户端接一个 Agent 很容易；难的是让一个服务端「说得对、答得对」，<br>
+而且这份「对」不是你说了算——有一套别人的检查在等着你。</p>
+</blockquote>
+<h2 id="一四个-harness四个接口"><a href="#一四个-harness四个接口" class="headerlink" title="一、四个 harness，四个接口"></a>一、四个 harness，四个接口</h2>
+<p><code>opencode</code>、<code>dsh</code>、<code>pi</code>、<code>claude-code</code>——这四个东西都能干活，而且都能通过命令行或 HTTP 被驱动。但它们各自的接口不同：opencode 有 <code>opencode serve</code> 的 HTTP API，dsh 和 pi 走 ACP，claude-code 又有自己的一套。</p>
+<p>如果你的产品要同时用它们（或者只是想让用户自己挑一个），就要写四份适配、维护四套错误处理、四套流式解析。换一个新 harness，再来一遍。</p>
+<p>这就是 UHP 想解决的事：<strong>定义一套「怎么通过 HTTP 驱动一个完整 agent harness」的标准</strong>，让客户端只面对一个接口。</p>
+<p>协议本身是公开的，<a href="https://unifiedharnessprotocol.org/spec/2026-10-19" target="_blank" rel="noopener">unifiedharnessprotocol.org</a>
+，当前版本 <code>2026-10-19</code>。本文讲它的仓颉实现 <strong>uhp-cj</strong>：一份规格从文档变成可运行的服务端，中间要经过什么。</p>
+<h2 id="二那-a2a-呢"><a href="#二那-a2a-呢" class="headerlink" title="二、那 A2A 呢"></a>二、那 A2A 呢</h2>
+<p>看到「Agent 协议」这几个字，第一个问题是：A2A 不是也在做这事吗？</p>
+<p>不是。它们连的是系统里不同的两段。</p>
+<p>UHP 的<a href="https://github.com/HarnessRouter/harnessrouter/blob/main/protocol/ECOSYSTEM.md" target="_blank" rel="noopener">生态文档</a>
+把几个协议各自的位置列清楚了（这份是信息性的，不属于规范本身）：</p>
+<table>
+	<thead>
+			<tr>
+					<th>协议</th>
+					<th>连谁和谁</th>
+					<th>边界</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>MCP</strong></td>
+					<td>agent ↔ 工具、数据</td>
+					<td>agent 能调什么</td>
+			</tr>
+			<tr>
+					<td><strong>A2A</strong></td>
+					<td>agent ↔ agent</td>
+					<td>发现能力、委派工作、交换结果</td>
+			</tr>
+			<tr>
+					<td><strong>ACP</strong></td>
+					<td>编辑器 ↔ coding agent</td>
+					<td>一次编码会话的交互</td>
+			</tr>
+			<tr>
+					<td><strong>AG-UI</strong></td>
+					<td>agent ↔ 前端</td>
+					<td>展示与用户交互</td>
+			</tr>
+			<tr>
+					<td><strong>UHP</strong></td>
+					<td><strong>产品 ↔ 完整 harness</strong></td>
+					<td>任务、会话、流式、文件、产物</td>
+			</tr>
+	</tbody>
+</table>
+<p>A2A 那段原文是这么写的（译）：</p>
+<blockquote>
+<p>A2A 连接 agent，让它们能发现彼此的能力、委派工作、交换结果。<br>
+它的边界是 <strong>agent 之间的协作</strong>，而不是<strong>一个产品去挑选并驱动一个 harness</strong>。</p>
+</blockquote>
+<p>差别在这句「挑选并驱动」上。A2A 假设两端都是 agent，它们协商着干活；UHP 假设一端是产品，另一端是<strong>一个可以被指派任务、然后交回结果的盒子</strong>——盒子里面是怎么组织的，产品不管。</p>
+<h3 id="一个具体的例子"><a href="#一个具体的例子" class="headerlink" title="一个具体的例子"></a>一个具体的例子</h3>
+<p>DeepSeek 在 10 月底公开了一个叫 <a href="https://github.com/DeepSeek-ai/dsh-superagent-prototype" target="_blank" rel="noopener">Super-agent</a>
+ 的架构：Router / Worker 两层。上层 Router 做分解、分发、汇总、协调，下层多个 Worker 执行，各自上下文隔离，Worker 不直接跟人说话，只向 Router 汇报。</p>
+<p>现在问一句：<strong>Router 和 Worker 之间该用什么？</strong></p>
+<p>如果按 A2A 来接，Router 面对的是 N 个 agent：它得知道每个 agent 能干哪类活、支持什么能力、怎么委派。这在 A2A 的假设里是合理的——因为 A2A 就是给「agent 之间协作」用的。</p>
+<p>但 Router 真正需要的不是这个。它需要的是：</p>
+<table>
+	<thead>
+			<tr>
+					<th>Router 要什么</th>
+					<th>UHP 里对应什么</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>派一个任务过去，拿回结果</td>
+					<td><code>POST /v1/responses</code> + 终态</td>
+			</tr>
+			<tr>
+					<td>任务得有状态：跑完、失败、取消、要人拍板</td>
+					<td>任务状态机（<code>cancelled</code> 是独立终态）</td>
+			</tr>
+			<tr>
+					<td>Worker 之间不能串味</td>
+					<td>会话隔离 + <code>session_busy</code>（同会话第二个请求 409）</td>
+			</tr>
+			<tr>
+					<td>拿了什么产物</td>
+					<td>文件登记与下载</td>
+			</tr>
+			<tr>
+					<td>执行到一半要问人</td>
+					<td><code>input_request</code> + 下一轮续跑</td>
+			</tr>
+			<tr>
+					<td>这个 Worker 现在能不能用</td>
+					<td><code>GET /v1/harnesses</code> 与能力声明</td>
+			</tr>
+	</tbody>
+</table>
+<p>这些全是「产品驱动 harness」要的东西，正好是 UHP 的协议面。</p>
+<p>更关键的是最后一点：<strong>Worker 内部怎么组队，Router 不应该感知</strong>。Super-agent 的 Worker 内部还可以再开 Subagent、或者本身就是一个 Agent Team——官方说法是这些<strong>对 Router 层保持透明</strong>。</p>
+<p>UHP 的措辞几乎一样：客户端只管派任务，<strong>harness 自己拥有 agent 循环和工具</strong>。</p>
+<blockquote>
+<p>所以这一层用 UHP，是因为它的边界刚好画在 Router 和 Worker 之间：<br>
+Router 是「产品」的角色，Worker 是「harness」的角色。<br>
+A2A 的边界在别处——它在 Worker 之间、或者跨组织的 agent 协作那一段才最贴。</p>
+</blockquote>
+<h3 id="不是取代"><a href="#不是取代" class="headerlink" title="不是取代"></a>不是取代</h3>
+<p>这两个协议不冲突，可以叠。UHP 自己的例子就是：一个 ACP 适配器可以坐在 UHP 边界后面——UHP 服务端去拉起 agent 自己的 ACP 服务器。同理，需要跨组织协作时，那些 agent 之间可以用 A2A 说话，而产品侧仍然通过 UHP 驱动自己的 harness。</p>
+<p>选哪个取决于<strong>你画的那条线在系统里的位置</strong>，不是哪个协议更新。</p>
+<h2 id="三协议规定了三件事我只做两件"><a href="#三协议规定了三件事我只做两件" class="headerlink" title="三、协议规定了三件事，我只做两件"></a>三、协议规定了三件事，我只做两件</h2>
+<p>UHP 的规格里写清了它管什么：</p>
+<table>
+	<thead>
+			<tr>
+					<th>管不管</th>
+					<th>内容</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>管</strong></td>
+					<td>协议面：对象、端点、状态机、能力、错误模型、事件流</td>
+			</tr>
+			<tr>
+					<td><strong>管</strong></td>
+					<td>服务端骨架：谁能做什么、什么时候拒绝、什么状态不可回退</td>
+			</tr>
+			<tr>
+					<td><strong>不管</strong></td>
+					<td>执行：真正的 agent 循环、模型调用、工具执行、沙箱</td>
+			</tr>
+	</tbody>
+</table>
+<p>前两件是「协议语义」，第三件是「干活」。uhp-cj 只做前两件，第三件通过一个接口接进来：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">public interface HarnessDriver {
+    func base(): String
+    func baseLabel(): String
+    func models(): Array&lt;Model&gt;
+    func capabilities():
+        HarnessCapabilities
+    func run(ctx: TurnContext,
+        sink: TurnSink,
+        cancel: CancelToken): TurnOutcome
+}
+</code></pre><p>一句话说清边界：<strong>SDK 负责「说得对、答得对」，不负责「干得好」。</strong></p>
+<p>所以这个库里没有容器编排、没有模型 SDK、没有 HTTP 客户端去调某个 agent——那些是消费方的事。<code>run</code> 是唯一的接缝，实现它就把任意 agent 接到了协议上。</p>
+<h3 id="规模"><a href="#规模" class="headerlink" title="规模"></a>规模</h3>
+<table>
+	<thead>
+			<tr>
+					<th>成员</th>
+					<th>代码</th>
+					<th>文件</th>
+					<th>测试</th>
+					<th>依赖</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>uhp</code>（SDK）</td>
+					<td>14337 行</td>
+					<td>38</td>
+					<td>142</td>
+					<td><strong>零第三方</strong></td>
+			</tr>
+			<tr>
+					<td><code>uhp-opencode</code></td>
+					<td>970 行</td>
+					<td>7</td>
+					<td>11</td>
+					<td>仅 uhp</td>
+			</tr>
+			<tr>
+					<td><code>uhp-acp</code></td>
+					<td>970 行</td>
+					<td>5</td>
+					<td>14</td>
+					<td>uhp + acp + jsonrpc + jsonvalue</td>
+			</tr>
+			<tr>
+					<td><code>uhp-server</code>（成品）</td>
+					<td>419 行</td>
+					<td>2</td>
+					<td>2</td>
+					<td>uhp + 适配器</td>
+			</tr>
+	</tbody>
+</table>
+<p>SDK 的 <code>[dependencies]</code> 是空的——只依赖 stdx。这是个有意的取舍：<strong>协议实现不该把第三方库的版本问题带给下游</strong>。</p>
+<p>两个适配器恰好都是 970 行，但构成完全相反（后面会讲）。而最后的成品服务只有 419 行——这个数字本身说明分包分对了：<strong>协议、适配、装配三件事被切开了，最后拼起来的那层就薄</strong>。</p>
+<h2 id="四一个协议有几份来源"><a href="#四一个协议有几份来源" class="headerlink" title="四、一个协议有几份来源"></a>四、一个协议有几份来源</h2>
+<p>我以为「实现一个协议」= 读规格 → 写代码 → 对着规格检查。实际不是。</p>
+<p>UHP 的内容分散在<strong>三份来源</strong>里，而它们并<strong>不总一致</strong>：</p>
+<table>
+	<thead>
+			<tr>
+					<th>来源</th>
+					<th>权威范围</th>
+					<th>形态</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>prose</strong></td>
+					<td>行为</td>
+					<td>13 章正文，讲「什么时候该怎样」</td>
+			</tr>
+			<tr>
+					<td><strong>openapi.yaml</strong></td>
+					<td>结构</td>
+					<td>端点、字段、状态码</td>
+			</tr>
+			<tr>
+					<td><strong>schema.json</strong></td>
+					<td>交叉校验</td>
+					<td>只有 <code>$defs</code>，没有端点信封</td>
+			</tr>
+	</tbody>
+</table>
+<p>外加<strong>第四样东西</strong>：官方一致性套件。它不是来源，是判据——而且它是唯一算数的判据。</p>
+<p>于是问题变成：三份来源打架的时候听谁的？</p>
+<h3 id="例子一event-到底是不是联合类型"><a href="#例子一event-到底是不是联合类型" class="headerlink" title="例子一：Event 到底是不是联合类型"></a>例子一：Event 到底是不是联合类型</h3>
+<p>prose 说事件是按 <code>type</code> 区分的 discriminated union。听起来很标准。</p>
+<p>但 openapi 生成的制品里，<code>Event.type</code> 只是一个<strong>自由字符串</strong> + 18 个 example，没有 <code>oneOf</code>。schema 也就无法约束它。</p>
+<p>那按哪个写？</p>
+<ul>
+<li>按 prose 写成封闭联合 → 将来协议加一种事件，你的实现直接解析失败</li>
+<li>按制品写成自由字符串 → 又对不上 prose 的语义</li>
+</ul>
+<p>最后的手写联合是 <strong>18 个变体 + 一个 <code>Unknown</code> 兜底</strong>。未知事件必须能被解析、能原样转发，不能崩。</p>
+<h3 id="例子二一个头写在哪些响应上"><a href="#例子二一个头写在哪些响应上" class="headerlink" title="例子二：一个头，写在哪些响应上"></a>例子二：一个头，写在哪些响应上</h3>
+<p><code>UHP-Version</code> 头，openapi 只声明在<strong>成功响应</strong>上。</p>
+<p>prose 说：每个响应，含错误响应。</p>
+<p>听谁的？答案在套件里——<strong>V-01</strong> 检查项就在测错误响应有没有这个头。</p>
+<p>所以：按 prose，<code>writeJson</code> 和 <code>writeError</code> 统一补头。</p>
+<p>这个例子说明了一件事：<strong>三份来源打架时，真正的裁判是套件</strong>。prose 说得再清楚，套件不测就等于没有约束；openapi 没声明，不代表可以不写。</p>
+<h3 id="例子三取消没有自己的事件"><a href="#例子三取消没有自己的事件" class="headerlink" title="例子三：取消没有自己的事件"></a>例子三：取消没有自己的事件</h3>
+<p>取消是个独立的终态，但事件类型是<strong>封闭集合</strong>——里面没有 <code>response.cancelled</code>。</p>
+<p>所以要发 <code>response.failed</code>，然后靠 <code>response.status = &quot;cancelled&quot;</code> 表达「这是取消，不是失败」。</p>
+<p><strong>状态是权威，事件类型只是外壳。</strong></p>
+<h2 id="五30-条判定"><a href="#五30-条判定" class="headerlink" title="五、30 条判定"></a>五、30 条判定</h2>
+<p>上面三个例子不是特例。实现下来，这类需要「停下来想清楚听谁的」的地方有 <strong>30 条</strong>。</p>
+<p>仓库里有一份 <code>docs/spec-conflicts.md</code> 专门记这个：</p>
+<table>
+	<thead>
+			<tr>
+					<th>组</th>
+					<th>条数</th>
+					<th>内容</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>A · 结构类</td>
+					<td>6</td>
+					<td>schema / openapi 表达不了的</td>
+			</tr>
+			<tr>
+					<td>B · 行为类</td>
+					<td>13</td>
+					<td>prose 要求，openapi/schema 缺失或相反</td>
+			</tr>
+			<tr>
+					<td>C · 可选能力</td>
+					<td>11</td>
+					<td>插件、环境、记忆这些章节的细节</td>
+			</tr>
+			<tr>
+					<td>D · 文档纪律</td>
+					<td>3 条</td>
+					<td>不算判定，是维护这张表本身的规矩</td>
+			</tr>
+	</tbody>
+</table>
+<p>三组加起来 30 条。这份表有一条自我约束，我觉得比表本身更值得说：</p>
+<blockquote>
+<p>每一条都要能被执行（有代码或测试指向它），否则只是注释。</p>
+</blockquote>
+<p>于是每条都得写清三样：<strong>判定、落地位置、套件锚点</strong>。比如：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B5. Response 的 error/usage/store/
+</span></span><span style="display:flex;"><span>    metadata/previous_response_id
+</span></span><span style="display:flex;"><span>    必须写 null
+</span></span><span style="display:flex;"><span>冲突：schema 说可选；prose 要求键存在
+</span></span><span style="display:flex;"><span>判定：生成器 ALWAYS_EMIT_NULL 名单
+</span></span><span style="display:flex;"><span>落地：tools/gen_types.py
+</span></span></code></pre></div><p>注意最后那个「套件锚点」——每一条都要指出<strong>哪一项检查在守它</strong>。指不出来的，就说明它其实没人验证，那迟早会退回去。</p>
+<p>这个做法带来一个副作用：<strong><code>spec-conflicts.md</code> 不是设计文档，是测试的反向索引</strong>。改代码前先查它，改完对着锚点跑那一项。</p>
+<p>D 组那三条规矩里，第一条最容易被违反：<strong>skip 从不等于 pass</strong>。一致性报告里 <code>conformant</code> 要求 skip 数为 0，本仓三档都是零 skip。套件的检查项有依赖关系（前面挂了后面会 skip），所以「49 通过 1 跳过」看起来像 98% 通过，实际是有一项没跑。</p>
+<h3 id="三条影响行为的判定"><a href="#三条影响行为的判定" class="headerlink" title="三条影响行为的判定"></a>三条影响行为的判定</h3>
+<p><strong>「保留字段」要接受、忽略、可观测</strong></p>
+<p>请求里有 <code>tools</code>、<code>include</code> 这类字段，本实现不执行它们。但「不执行」不等于「当没看见」——</p>
+<p>正确做法是三件事都做：接受请求、不执行、把忽略掉的字段名写进 <code>metadata.ignored_fields</code>。</p>
+<p>只做前两件，客户端会以为自己的参数生效了。这是「静默失效」的另一种形态：<strong>你没做，但你也没说</strong>。</p>
+<p><strong>secret 的答案不能出现在任何客户端可读的位置</strong></p>
+<p>提问（<code>ask_user</code>）可能涉及密钥。答案只进 <code>TurnContext.answers</code>，<code>input_items</code> 里对 secret 类型的答案直接省略。</p>
+<p><strong>未 build 的环境必须在任务开始前拒绝</strong></p>
+<p>不能在跑了一半之后才发现环境没准备好——那时已经消耗了模型调用，而且状态机已经进入 running，拒绝起来很别扭。</p>
+<h2 id="六一半的代码是类型而类型是生成的"><a href="#六一半的代码是类型而类型是生成的" class="headerlink" title="六、一半的代码是类型，而类型是生成的"></a>六、一半的代码是类型，而类型是生成的</h2>
+<p>看一下 SDK 内部的分布：</p>
+<table>
+	<thead>
+			<tr>
+					<th>包</th>
+					<th>行数</th>
+					<th>干什么</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>types</code></td>
+					<td>7077</td>
+					<td>协议对象、编解码</td>
+			</tr>
+			<tr>
+					<td><code>server</code></td>
+					<td>6381</td>
+					<td>引擎、路由、状态机、SSE</td>
+			</tr>
+			<tr>
+					<td><code>client</code></td>
+					<td>471</td>
+					<td>发现、协商、流式消费</td>
+			</tr>
+			<tr>
+					<td><code>transport</code></td>
+					<td>400</td>
+					<td>stdx.net.http 适配、SSE 解析</td>
+			</tr>
+	</tbody>
+</table>
+<p><code>types</code> 占了<strong>将近一半</strong>。这大概是协议实现的共性：<strong>大部分工作量是把协议说清楚</strong>，而不是让它动起来。</p>
+<p>所以能不能生成？</p>
+<p>能，但只能生成一部分。<code>tools/gen_types.py</code> 读 openapi 产出 <strong>90 个类 + 2 个枚举</strong>。剩下的必须手写：</p>
+<table>
+	<thead>
+			<tr>
+					<th>手写什么</th>
+					<th>为什么生成不出来</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>UhpEvent</code> 联合（18 变体）</td>
+					<td>制品里没有 <code>oneOf</code>，schema 表达不了</td>
+			</tr>
+			<tr>
+					<td>13 个端点信封</td>
+					<td>schema.json 只有 <code>$defs</code>，信封在 openapi 里是 inline</td>
+			</tr>
+			<tr>
+					<td><code>ErrorEnvelope</code></td>
+					<td>6 种 type、49 个 code、「哪种可重试」属于行为语义</td>
+			</tr>
+			<tr>
+					<td><code>Capabilities</code></td>
+					<td>16 个布尔必须全写、缺省 false，<code>Option&lt;Bool&gt;</code> 会诱导出第三态</td>
+			</tr>
+	</tbody>
+</table>
+<p>生成物有文件头标记，<strong>只允许生成器写</strong>。CI 里加了一道 <code>--check</code>：重新生成后逐字节比对，不一致就红。</p>
+<p>这道闸门值不值得？值得——它挡住了「手工改了生成文件、下次生成被覆盖」这种最难查的问题。</p>
+<h3 id="依赖方向也是硬规则"><a href="#依赖方向也是硬规则" class="headerlink" title="依赖方向也是硬规则"></a>依赖方向也是硬规则</h3>
+<pre tabindex="0"><code>types  ← 不许 import 传输层
+  ↑
+transport  ← 只有 IO
+  ↑
+client / server  ← 协议语义
+</code></pre><p><code>types</code> 里出现一行 <code>import stdx.net.http</code> 就是错的。理由很实际：类型层要能被任何传输复用，而一旦它认识了 HTTP，将来加一种传输就得改它。</p>
+<p>这条规则写在评审清单里，不是靠自觉。</p>
+<h2 id="七104-项检查"><a href="#七104-项检查" class="headerlink" title="七、104 项检查"></a>七、104 项检查</h2>
+<p>回到那个「唯一算数的判据」。</p>
+<p>一致性套件是官方仓库里的一个 Python 包，跑起来很简单：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>uhp-conformance <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  --base-url https://your-server <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  --api-key <span style="color:#0a3069">&#34;</span><span style="color:#953800">$UHP_API_KEY</span><span style="color:#0a3069">&#34;</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  --class full <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  --json report.json
+</span></span></code></pre></div><p><code>--class</code> 有三档，<strong>累进</strong>：</p>
+<table>
+	<thead>
+			<tr>
+					<th>档</th>
+					<th>检查项</th>
+					<th>覆盖什么</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>core</code></td>
+					<td>41</td>
+					<td>发现、harness 列表、跑任务、取消、流式、错误</td>
+			</tr>
+			<tr>
+					<td><code>extended</code></td>
+					<td>50</td>
+					<td>core + 会话列举与并发</td>
+			</tr>
+			<tr>
+					<td><code>full</code></td>
+					<td>104</td>
+					<td>extended + 文件、插件、环境、记忆、分享</td>
+			</tr>
+	</tbody>
+</table>
+<p>uhp-cj 的三份报告都在仓库里（<code>docs/conformance/*.json</code>）：</p>
+<pre tabindex="0"><code>core      41/41   conformant: true
+extended  50/50   conformant: true
+full     104/104  conformant: true
+</code></pre><h3 id="为什么这个数字值得看"><a href="#为什么这个数字值得看" class="headerlink" title="为什么这个数字值得看"></a>为什么这个数字值得看</h3>
+<p>因为规则写得很死。套件文档的原话（译）：</p>
+<blockquote>
+<p>通过这套件就是「UHP conformant」的定义。不是实现了端点，不是自我评估，也不是大部分通过。套件在这个仓库里，它通过 HTTP 跑在任意服务端上，<strong>任何人都能拿它去测任何人的实现</strong>。</p>
+</blockquote>
+<p>三句话里有两句在堵后门：</p>
+<ul>
+<li>「不是自我评估」——所以仓库里那份 JSON 不是我说了算，别人可以重跑</li>
+<li>「任何人都能测任何人的」——所以「兼容 UHP」是个可以被证伪的主张</li>
+</ul>
+<p>这对实现者是压力，但对使用者是好消息：<strong>你不需要相信我，你只需要跑一遍。</strong></p>
+<h3 id="一个被拦下来的低级错误"><a href="#一个被拦下来的低级错误" class="headerlink" title="一个被拦下来的低级错误"></a>一个被拦下来的低级错误</h3>
+<p>为了跑一致性测试，需要一个「被测系统」——一个能起服务、能被套件打的样例程序。很自然地，我把它放在了 <code>src/examples/</code> 里。</p>
+<p>发版审核没过。原因是那个目录会<strong>进制品</strong>，而里面的代码在监听端口、驱动子进程。</p>
+<p>改成独立项目（path 依赖 SDK）之后就好了，同时 SDK 制品也加了排除规则：只保留库源码 + README + LICENSE + cjpm.toml。</p>
+<blockquote>
+<p>这不是「协议实现」的问题，是「发一个库」的问题：<br>
+<strong>测试用的程序不该跟着库一起发出去</strong>，尤其当它会开端口和起进程时。</p>
+</blockquote>
+<h2 id="八接真实-harness文档和实测不一样"><a href="#八接真实-harness文档和实测不一样" class="headerlink" title="八、接真实 harness：文档和实测不一样"></a>八、接真实 harness：文档和实测不一样</h2>
+<p>协议实现完了，还得证明它真能驱动东西。两个适配器分别接了 opencode 和 ACP。</p>
+<h3 id="一个意外的对称"><a href="#一个意外的对称" class="headerlink" title="一个意外的对称"></a>一个意外的对称</h3>
+<p>两个适配器都是 970 行，但钱花在了不同地方：</p>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th><code>uhp-opencode</code></th>
+					<th><code>uhp-acp</code></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>driver</td>
+					<td>528 行</td>
+					<td>804 行</td>
+			</tr>
+			<tr>
+					<td>传输</td>
+					<td>HTTP + SSE 自己写（379 行）</td>
+					<td>复用 <code>acp</code> 包</td>
+			</tr>
+			<tr>
+					<td>依赖</td>
+					<td>仅 uhp</td>
+					<td>uhp + acp + jsonrpc + jsonvalue</td>
+			</tr>
+	</tbody>
+</table>
+<p>opencode 有 HTTP 文档但仓颉生态没有现成客户端，所以得自己写 HTTP 调用和 SSE 解析；ACP 有现成的 <code>acp</code> 包，省了传输，但协议回调更多，driver 就更长。</p>
+<p><strong>总成本差不多，只是分布在不同的地方。</strong></p>
+<h3 id="文档说的和实际跑的"><a href="#文档说的和实际跑的" class="headerlink" title="文档说的，和实际跑的"></a>文档说的，和实际跑的</h3>
+<p>ACP 规格只保证「会话可以共存」，<strong>不保证单连接内能并发跑回合</strong>。所以「支持并发」不是默认假设，得逐个实测。</p>
+<p>实测下来是这样的（<code>uhp-acp/docs/support.md</code>，2026-11-11）：</p>
+<table>
+	<thead>
+			<tr>
+					<th>harness</th>
+					<th>多会话</th>
+					<th>回合并发</th>
+					<th><code>session/close</code></th>
+					<th><code>session/list</code></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>opencode（<code>opencode acp</code>）</td>
+					<td>✅ 实测</td>
+					<td>✅ 实测</td>
+					<td>✅ 实测</td>
+					<td>✅ 实测</td>
+			</tr>
+			<tr>
+					<td>DSH（<code>dsh --profile acp</code>）</td>
+					<td>✅ 文档</td>
+					<td>✅ 文档</td>
+					<td>✅ 文档</td>
+					<td>✅ 文档</td>
+			</tr>
+			<tr>
+					<td>pi + <code>pi-acp</code> 0.1.8</td>
+					<td>✅ 实测</td>
+					<td>✅ 实测</td>
+					<td>✅ 实测</td>
+					<td>✅ 实测</td>
+			</tr>
+	</tbody>
+</table>
+<p>opencode 的并发实测数据：两个任务<strong>交错</strong>执行，总耗时 4.6 秒，而不是串行的两倍。这才能说它真并发。</p>
+<p><strong>「文档」和「实测」是两列。</strong> 仓库里的规矩更硬：</p>
+<blockquote>
+<p>没实测过的先当不支持。</p>
+</blockquote>
+<p>所以代码里有个 <code>sessionMode</code> 开关：</p>
+<table>
+	<thead>
+			<tr>
+					<th>模式</th>
+					<th>行为</th>
+					<th>什么时候用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>Serial</code>（默认）</td>
+					<td>一个 driver 一次跑一路回合，并发调用排队</td>
+					<td>任何 ACP agent</td>
+			</tr>
+			<tr>
+					<td><code>Parallel</code></td>
+					<td>不同会话的回合真并发，同会话仍串行</td>
+					<td>已确认支持的 agent</td>
+			</tr>
+	</tbody>
+</table>
+<p>默认 <code>Serial</code>。要开 <code>Parallel</code>，你得先在表里证明它行。</p>
+<blockquote>
+<p>为什么默认保守：并发跑错的风险不是变慢，是<strong>任务交错污染</strong>——<br>
+你会在别人的会话里看到自己任务的输出，而且很难复现。</p>
+</blockquote>
+<h3 id="顺带一个语言层面的坑"><a href="#顺带一个语言层面的坑" class="headerlink" title="顺带一个语言层面的坑"></a>顺带一个语言层面的坑</h3>
+<p>仓颉的 <code>match</code> 有个陷阱：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// 这样写，第一个分支永远命中
+match (s) {
+    // 被当成变量绑定
+    case SOME_CONST =&gt; ...
+    case &#34;other&#34; =&gt; ...
+}
+</code></pre><p><code>public const String</code> 在 <code>case</code> 里会被解释成<strong>变量绑定</strong>，不是常量比较。所以那段代码看起来在分派字符串，实际永远走第一个分支，而且不报错。</p>
+<p>修法是：字符串判别一律用 <code>if (s == SOME_CONST)</code>，<code>match</code> 只留给枚举和模式匹配。</p>
+<p>这个坑的可怕之处在于——<strong>它不报错，只是悄悄走错分支</strong>。测试能抓到，但只有你真的测了那个分支才行。</p>
+<h2 id="九uhp-server从零件到成品"><a href="#九uhp-server从零件到成品" class="headerlink" title="九、uhp-server：从零件到成品"></a>九、uhp-server：从零件到成品</h2>
+<p>协议实现是「零件」，但没人会为了跑一个 Agent 去写装配代码。所以还需要一个成品：<strong>一个进程、一个端口，背后挂 N 个 harness</strong>。</p>
+<p><code>uhp-server</code> 只有 419 行，因为它把活都留给了 SDK：</p>
+<table>
+	<thead>
+			<tr>
+					<th>它做</th>
+					<th>它不做</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>装配 <code>Engine</code> + <code>UhpHttpServer</code>、读 TOML、管 token、管 harness 生命周期</td>
+					<td>协议实现（在 SDK 里）</td>
+			</tr>
+			<tr>
+					<td>按 <code>kind</code> 选适配器</td>
+					<td>agent 循环、模型调用（在 harness 自己的进程里）</td>
+			</tr>
+			<tr>
+					<td>出部署产物：单二进制、Docker、配置样例</td>
+					<td>客户端逻辑（消费方自己持有）</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="三种-kind一条装配线"><a href="#三种-kind一条装配线" class="headerlink" title="三种 kind，一条装配线"></a>三种 kind，一条装配线</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#1f2328">[[</span><span style="color:#1f2328">harnesses</span><span style="color:#1f2328">]]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">id</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;oc&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">kind</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;opencode&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">base_url</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;http://127.0.0.1:4096&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[[</span><span style="color:#1f2328">harnesses</span><span style="color:#1f2328">]]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">id</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;echo&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">kind</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;scripted&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">reply</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;ok&#34;</span>
+</span></span></code></pre></div><p><code>kind = &quot;acp&quot;</code> 会拉起子进程（dsh、pi、opencode acp 都是这一种），<code>kind = &quot;opencode&quot;</code> 连一个已经跑着的 <code>opencode serve</code>，<code>kind = &quot;scripted&quot;</code> 是自检用的假 harness。</p>
+<p><code>scripted</code> 看着像个玩具，实际是部署时最常用的一个：</p>
+<p><strong>部署验证不依赖任何凭据和模型。</strong> 改完配置、起服务、打一发 scripted 任务，能通就说明链路是好的。没有它，每次验证都要烧 token，而且模型不稳时你分不清是网络问题还是服务问题。</p>
+<h3 id="启动严连接懒"><a href="#启动严连接懒" class="headerlink" title="启动严，连接懒"></a>启动严，连接懒</h3>
+<p>两件事看起来矛盾，实际是分工：</p>
+<table>
+	<thead>
+			<tr>
+					<th>环节</th>
+					<th>策略</th>
+					<th>为什么</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>读配置</td>
+					<td><strong>fail fast</strong></td>
+					<td>未知 <code>kind</code>、缺 <code>command</code>、重复 <code>id</code>、空 token 表 → 直接启动失败</td>
+			</tr>
+			<tr>
+					<td>连后端</td>
+					<td><strong>惰性</strong></td>
+					<td>ACP 适配器到第一个任务才拉起子进程</td>
+			</tr>
+	</tbody>
+</table>
+<p>启动就失败是好事，因为配置错误是最容易犯的错：你写错一个 kind，服务照常起来，然后第一个任务 500——你会在协议层找半天。</p>
+<p>但连后端不能急。一个 harness 暂时没起，不该导致整个服务拒绝启动——<strong>否则重启顺序就成了运维问题</strong>。</p>
+<h3 id="会话回收是我的责任因为规范没说"><a href="#会话回收是我的责任因为规范没说" class="headerlink" title="会话回收是我的责任，因为规范没说"></a>会话回收是我的责任，因为规范没说</h3>
+<p>UHP 规范里<strong>没有</strong> <code>DELETE /v1/sessions/{id}</code>。会话由服务端持有，按自己的策略回收。</p>
+<p>所以 P0 的约定是：会话与响应都在内存，<strong>重启即丢</strong>。协议不要求持久化，客户端把 404 当成「新会话」处理。</p>
+<p>但这里埋着一个后续要还的债：加会话 TTL 驱逐时，<strong>驱逐必须调 driver 的 <code>closeSession()</code></strong>。不调的话，服务端认为会话没了，而 ACP 那边的会话还挂在 agent 进程里——跑久了就是泄漏。</p>
+<h3 id="一个看不到日志的坑"><a href="#一个看不到日志的坑" class="headerlink" title="一个「看不到日志」的坑"></a>一个「看不到日志」的坑</h3>
+<p>这个跟协议没关系，但值得记。</p>
+<p><code>uhp-server</code> 的启动日志是显式 flush 的：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">func info(msg: String): Unit {
+    let out = getStdOut()
+    out.write(msg + &#34;\n&#34;)
+    out.flush()      // ← 这行不能省
+}
+</code></pre><p>原因：stdout 被重定向到文件或管道时（Docker、systemd、nohup）是<strong>块缓冲</strong>。进程被 SIGKILL 时缓冲区没刷，日志全丢——运维那边只能看到「服务没反应」，什么线索都没有。</p>
+<blockquote>
+<p>跟协议层的「静默失效」是同一类问题：<strong>你以为它在正常工作，其实是它说了但你没收到</strong>。</p>
+</blockquote>
+<h3 id="p1拆成插件进程以及拆完的新成本"><a href="#p1拆成插件进程以及拆完的新成本" class="headerlink" title="P1：拆成插件进程，以及拆完的新成本"></a>P1：拆成插件进程，以及拆完的新成本</h3>
+<p>P0 是单进程，适配器是进程内对象。P1 想拆成 cordis-cj 托管的插件进程——<strong>进程隔离、热卸载、崩溃自愈</strong>，而协议面与配置语义不变。</p>
+<p>为什么不一开始就拆？因为风险最大的部分是协议面，而<strong>适配器本身很薄</strong>：真正危险和重的 agent 已经在自己子进程里了。先把协议跑通，比先追求插件拓扑更划算。</p>
+<p>拆的时候有个隐藏成本必须提前算：</p>
+<p><code>run</code> 的流式增量（text / reasoning / toolCall / diff）是<strong>高频事件</strong>。拆进程后这些要走 IPC，而 cordis-cj 的设计目标是中低频控制面。所以不能一个 token 一次 IPC，得按 20–50ms 或若干 KB 批量上行。</p>
+<p><strong>进程隔离不是免费的，它把「函数调用」换成了「消息」</strong>，而消息的粒度要重新设计。</p>
+<h3 id="成品反过来改零件"><a href="#成品反过来改零件" class="headerlink" title="成品反过来改零件"></a>成品反过来改零件</h3>
+<p>写 server 的过程暴露了 SDK 的三个缺口：</p>
+<table>
+	<thead>
+			<tr>
+					<th>缺什么</th>
+					<th>为什么 server 需要它</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>生命周期接口 <code>close()</code> / <code>closeSession()</code></td>
+					<td>长跑要回收 harness 会话，现在 SPI 没有生命周期钩子</td>
+			</tr>
+			<tr>
+					<td>动态 harness 注册</td>
+					<td>插件装卸需要，<code>Engine</code> 的注册表现在是构造时固定的</td>
+			</tr>
+			<tr>
+					<td>客户端补齐 sessions / files / input_response</td>
+					<td>消费方（星痕）接入需要</td>
+			</tr>
+	</tbody>
+</table>
+<p>这三条都不是「协议没实现」，而是<strong>用起来才发现的形态问题</strong>。一致性套件测不出它们——套件只保证互操作，不保证好用。</p>
+<h2 id="十边界与限制"><a href="#十边界与限制" class="headerlink" title="十、边界与限制"></a>十、边界与限制</h2>
+<p>诚实列一下这实现做不到什么：</p>
+<table>
+	<thead>
+			<tr>
+					<th>限制</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>不做执行</td>
+					<td>模型调用、工具执行、沙箱都在 driver 那边</td>
+			</tr>
+			<tr>
+					<td>不做容灾</td>
+					<td>状态在内存，重启丢进行中的任务</td>
+			</tr>
+			<tr>
+					<td>不做多进程</td>
+					<td>P0 单进程；要横向扩展得自己加一层</td>
+			</tr>
+			<tr>
+					<td><code>harness_retirement</code> 未实现</td>
+					<td>删 harness 时<strong>保留</strong>会话，套件接受</td>
+			</tr>
+			<tr>
+					<td>响应级幂等未实现</td>
+					<td><code>harness_idempotency</code> 有，<code>idempotency</code>（响应级）没有</td>
+			</tr>
+			<tr>
+					<td><code>input_history</code> 未实现</td>
+					<td><code>input_items</code> 只含客户端提交的，不含 secret 答案</td>
+			</tr>
+	</tbody>
+</table>
+<p>最后三条不是「懒得做」，是<strong>协议允许不做</strong>——它们是可选能力，套件里有对应检查接受这个选择。</p>
+<blockquote>
+<p>这是分级协议的好处：<strong>你可以只做 core 就说自己合规</strong>，<br>
+而不是「没做全就是不合规」。</p>
+</blockquote>
+<h3 id="自由被限制在哪儿"><a href="#自由被限制在哪儿" class="headerlink" title="自由被限制在哪儿"></a>自由被限制在哪儿</h3>
+<p>为了「任何人都能测」，协议必须把话说死。话说死了，实现就没有发挥空间。</p>
+<p>比如记忆的 <code>content</code> 输入允许是字符串，但<strong>存储与输出永远是 parts 列表</strong>。你可能会想「那我存字符串也行吧」——不行，套件会打到。</p>
+<p>这类地方一开始会觉得别扭。但换个角度：它把实现者的自由限制在了<strong>不影响互操作</strong>的部分，剩下的随你怎么做。</p>
+<h2 id="十一小结"><a href="#十一小结" class="headerlink" title="十一、小结"></a>十一、小结</h2>
+<ul>
+<li><strong>协议不是文档，是一堆互相打架的条款</strong>。三份来源（prose / openapi / schema）各有权威范围，冲突时听套件的。</li>
+<li><strong>30 条判定，每条都要有落地位置和套件锚点</strong>。指不出锚点的那条只是注释，迟早退回去。</li>
+<li><strong>一半代码是类型，而类型只能生成一部分</strong>。90 个类 + 2 个枚举能生成，事件联合和错误封套必须手写。</li>
+<li><strong>104 项检查是可被第三方重跑的</strong>。「兼容」这话由别人说才算数。</li>
+<li><strong>并发不是默认假设</strong>。ACP 只说会话能共存，能不能并发得逐个实测，实测前一律 <code>Serial</code>。</li>
+<li><strong>两个 970 行的适配器，成本分布相反</strong>。接一个新 agent 的钱花在哪儿，取决于它有没有现成的协议库。</li>
+</ul>
+<p>如果要给一句话：<strong>实现别人的协议，大部分时间花在「想清楚它到底要什么」，而不是写代码。</strong></p>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2026-11-11T10:00:00&#43;08:00" itemprop="dateUpdated">2026-11-11 10:00:00</time>
+          </span><br>
+          本文链接：<a href="/2026/11/11/uhp-cj-protocol-implementation/" target="_blank" rel="external">https://ystyle.top/2026/11/11/uhp-cj-protocol-implementation/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UHP/">UHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Agent/">Agent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Harness/">Harness</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%8F%E8%AE%AE/">协议</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f11%2fuhp-cj-protocol-implementation%2f&title=%e3%80%8auhp-cj%ef%bc%9a%e6%8a%8a%20Agent%20harness%20%e5%8f%98%e6%88%90%e5%85%b1%e4%ba%ab%e5%9f%ba%e7%a1%80%e8%ae%be%e6%96%bd%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f11%2fuhp-cj-protocol-implementation%2f&title=%e3%80%8auhp-cj%ef%bc%9a%e6%8a%8a%20Agent%20harness%20%e5%8f%98%e6%88%90%e5%85%b1%e4%ba%ab%e5%9f%ba%e7%a1%80%e8%ae%be%e6%96%bd%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=uhp-cj%20%e5%ae%9e%e7%8e%b0%e7%ac%94%e8%ae%b0%0a%e5%8d%8f%e8%ae%ae%e4%b8%8d%e6%98%af%e6%96%87%e6%a1%a3%ef%bc%8c%e6%98%af%e4%b8%80%e5%a0%86%e4%ba%92%e7%9b%b8%e6%89%93%e6%9e%b6%e7%9a%84%e6%9d%a1%e6%ac%be%0a%e8%bf%99%e7%af%87%e8%ae%b2%e7%9a%84%e6%98%af%e6%80%8e%e4%b9%88%e5%ae%9e%e7%8e%b0%e4%b8%80%e4%b8%aa%e5%88%ab%e4%ba%ba%e5%ae%9a%e7%9a%84%e5%8d%8f%e8%ae%ae%e3%80%82%0a%e5%ae%a2%e6%88%b7%e7%ab%af%e6%8e%a5%e4%b8%80%e4%b8%aa%20Agent%20%e5%be%88%e5%ae%b9%e6%98%93%ef%bc%9b%e9%9a%be%e7%9a%84%e6%98%af%e8%ae%a9%e4%b8%80%e4%b8%aa%e6%9c%8d%e5%8a%a1%e7%ab%af%e3%80%8c%e8%af%b4%e5%be%97%e5%af%b9%e3%80%81%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f11%2f11%2fuhp-cj-protocol-implementation%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8auhp-cj%ef%bc%9a%e6%8a%8a%20Agent%20harness%20%e5%8f%98%e6%88%90%e5%85%b1%e4%ba%ab%e5%9f%ba%e7%a1%80%e8%ae%be%e6%96%bd%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f11%2f11%2fuhp-cj-protocol-implementation%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f11%2fuhp-cj-protocol-implementation%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2026/10/28/dsh-im-qq-whale-girl/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">给 DeepSeek Harness 接上 QQ：一只会记住你的鲸鱼娘</h4>
+        </a>
+      </div>
+      
+      
+    </nav>
+    
+
+    
+    
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+  </article>
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f11%2fuhp-cj-protocol-implementation%2f&title=%e3%80%8auhp-cj%ef%bc%9a%e6%8a%8a%20Agent%20harness%20%e5%8f%98%e6%88%90%e5%85%b1%e4%ba%ab%e5%9f%ba%e7%a1%80%e8%ae%be%e6%96%bd%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f11%2fuhp-cj-protocol-implementation%2f&title=%e3%80%8auhp-cj%ef%bc%9a%e6%8a%8a%20Agent%20harness%20%e5%8f%98%e6%88%90%e5%85%b1%e4%ba%ab%e5%9f%ba%e7%a1%80%e8%ae%be%e6%96%bd%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=uhp-cj%20%e5%ae%9e%e7%8e%b0%e7%ac%94%e8%ae%b0%0a%e5%8d%8f%e8%ae%ae%e4%b8%8d%e6%98%af%e6%96%87%e6%a1%a3%ef%bc%8c%e6%98%af%e4%b8%80%e5%a0%86%e4%ba%92%e7%9b%b8%e6%89%93%e6%9e%b6%e7%9a%84%e6%9d%a1%e6%ac%be%0a%e8%bf%99%e7%af%87%e8%ae%b2%e7%9a%84%e6%98%af%e6%80%8e%e4%b9%88%e5%ae%9e%e7%8e%b0%e4%b8%80%e4%b8%aa%e5%88%ab%e4%ba%ba%e5%ae%9a%e7%9a%84%e5%8d%8f%e8%ae%ae%e3%80%82%0a%e5%ae%a2%e6%88%b7%e7%ab%af%e6%8e%a5%e4%b8%80%e4%b8%aa%20Agent%20%e5%be%88%e5%ae%b9%e6%98%93%ef%bc%9b%e9%9a%be%e7%9a%84%e6%98%af%e8%ae%a9%e4%b8%80%e4%b8%aa%e6%9c%8d%e5%8a%a1%e7%ab%af%e3%80%8c%e8%af%b4%e5%be%97%e5%af%b9%e3%80%81%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f11%2f11%2fuhp-cj-protocol-implementation%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8auhp-cj%ef%bc%9a%e6%8a%8a%20Agent%20harness%20%e5%8f%98%e6%88%90%e5%85%b1%e4%ba%ab%e5%9f%ba%e7%a1%80%e8%ae%be%e6%96%bd%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f11%2f11%2fuhp-cj-protocol-implementation%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f11%2fuhp-cj-protocol-implementation%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2026/11/11/uhp-cj-protocol-implementation/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+
+  
+  
+<template id="title-change"
+          data-normal="欢迎回来╮(╯▽╰)╭"
+          data-leave="东方星痕的博客"></template>
+<script>
+(function () {
+  var el = document.getElementById('title-change');
+  if (!el) return;
+
+  var LEAVE = el.getAttribute('data-leave');
+  var NORMAL = el.getAttribute('data-normal');
+  var OriginTitile = document.title, titleTime;
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      document.title = LEAVE;
+      clearTimeout(titleTime);
+    } else {
+      document.title = NORMAL;
+      titleTime = setTimeout(function () {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Wed, 28 Oct 2026 01:55:00 +0800</lastBuildDate>
+			<lastBuildDate>Wed, 11 Nov 2026 10:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>uhp-cj：把 Agent harness 变成共享基础设施</title>
+				<link>https://ystyle.top/2026/11/11/uhp-cj-protocol-implementation/</link>
+				<pubDate>Wed, 11 Nov 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/11/11/uhp-cj-protocol-implementation/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;uhp-cj 实现笔记&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;协议不是文档，是一堆互相打架的条款&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这篇讲的是&lt;strong&gt;怎么实现一个别人定的协议&lt;/strong&gt;。&lt;br&gt;&#xA;客户端接一个 Agent 很容易；难的是让一个服务端「说得对、答得对」，&lt;br&gt;&#xA;而且这份「对」不是你说了算——有一套别人的检查在等着你。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>给 DeepSeek Harness 接上 QQ：一只会记住你的鲸鱼娘</title>
 				<link>https://ystyle.top/2026/10/28/dsh-im-qq-whale-girl/</link>
@@ -145,13 +152,6 @@
 				<pubDate>Fri, 03 Apr 2026 21:35:00 +0800</pubDate>
 				<guid>https://ystyle.top/2026/04/03/matebookpro-container-build-neovim/</guid>
 				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;本文记录在鸿蒙PC融合开发引擎的容器环境中，因glibc版本限制从源码编译Neovim和tree-sitter的完整过程，并配置AstroNvim作为开发环境。&lt;/p&gt;</description>
-			</item>
-			<item>
-				<title>鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式</title>
-				<link>https://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/</link>
-				<pubDate>Fri, 03 Apr 2026 21:30:00 +0800</pubDate>
-				<guid>https://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/</guid>
-				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;本文深入解析鸿蒙PC融合开发引擎的技术架构，揭示其如何通过StratoVirt虚拟化和OzoneC容器技术实现Linux应用兼容。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;背景&#34;&gt;&lt;a href=&#34;#背景&#34; class=&#34;headerlink&#34; title=&#34;背景&#34;&gt;&lt;/a&gt;背景&lt;/h2&gt;&#xA;&lt;p&gt;鸿蒙PC（HarmonyOS PC）采用了独特的架构设计来实现Linux应用兼容。作为用户，我在使用过程中发现系统提供了一个&amp;quot;融合开发引擎&amp;quot;功能，可以在其中运行openEuler环境。本文将解析这个融合开发引擎的技术架构。&lt;/p&gt;</description>
 			</item>
 	</channel>
 </rss>
