@@ -1,7 +1,7 @@
 ---
 title: 鸿蒙PC融合开发引擎架构解析：虚拟机与容器双模式
 date: 2026-04-03 21:30:00
-lastmod: 2026-04-03 21:30:00
+lastmod: 2026-11-12 18:10:00
 tags:
 - 鸿蒙
 - 鸿蒙PC
@@ -12,278 +12,175 @@ tags:
 categories: 软件
 slug: matebookpro-fusion-dev-engine-architecture
 ---
-> 本文深入解析鸿蒙PC融合开发引擎的技术架构，揭示其如何通过StratoVirt虚拟化和OzoneC容器技术实现Linux应用兼容。
+> 鸿蒙 PC 上那个能跑 Linux 的「融合开发引擎」，底下是虚拟机套容器。这篇是我怎么一步步探出来的。
 
-## 背景 {#背景}
+## 起因 {#起因}
 
-鸿蒙PC（HarmonyOS PC）采用了独特的架构设计来实现Linux应用兼容。作为用户，我在使用过程中发现系统提供了一个"融合开发引擎"功能，可以在其中运行openEuler环境。本文将解析这个融合开发引擎的技术架构。
+鸿蒙 PC 自带的开发环境里有个「融合开发引擎」，打开就能用 openEuler 的命令行。官方文档只说是「提供 Linux 兼容环境」，没讲怎么实现的。
 
-## 架构探秘 {#架构探秘}
+我想知道它到底跑在什么上面。原因很实际：**不清楚这一层是什么，就没法判断哪些东西能装、哪些装不了**。
 
-### 初次接触 {#初次接触}
+下面是我探测的过程，和我最后得出的结论。所有判断都有命令输出支撑，你可以自己复现。
 
-在鸿蒙PC的融合开发引擎环境中，我尝试运行各种Linux工具时发现：
+## 三条证据 {#三条证据}
 
-1. **文件系统特征**：使用overlay文件系统，路径包含`/var/lib/OzoneC/overlay2/`
-2. **进程信息**：cgroup显示典型的容器特征
-3. **内核版本**：Linux 6.6.0，带有特殊的init进程
-
-通过一系列探测，我逐渐揭示了其架构。
-
-### 架构层次 {#架构层次}
-
-经过分析，鸿蒙PC融合开发引擎采用的是**三层架构**：
-
-```
-鸿蒙PC（HarmonyOS 微内核）
-    ↓
-StratoVirt 虚拟机（运行Linux）
-    ↓
-OzoneC 容器（隔离Linux应用环境）
-    ↓
-用户环境（openEuler容器）
-```
-
-### 关键证据 {#关键证据}
-
-#### 1. 虚拟机特征 {#1-虚拟机特征}
+### 一、`/sys/firmware` 里有 QEMU 的痕迹 {#一sysfirmware里有qemu的痕迹}
 
 ```bash
-# 查看固件信息
 ls -la /sys/firmware/
-# 输出包含：qemu_fw_cfg - 这是QEMU/StratoVirt虚拟机的特征
+# 输出里有：qemu_fw_cfg
+```
 
-# 查看内核启动参数
+`qemu_fw_cfg` 是 QEMU 的固件配置接口。它出现在这里，说明当前这个「环境」跑在一台虚拟机里，不是宿主机本身。
+
+### 二、内核启动参数指向一个鸿蒙自己的 init {#二内核启动参数}
+
+```bash
 cat /proc/cmdline
-# 输出：console=hvc0 root=/dev/vda ro reboot=k panic=1 init=/usr/sbin/HSLd
-# - hvc0是virtio虚拟机控制台
-# - /dev/vda是虚拟块设备
-# - init=/usr/sbin/HSLd是HarmonyOS Linux兼容层的初始化程序
+# console=hvc0 root=/dev/vda ro reboot=k panic=1 init=/usr/sbin/HSLd
 ```
 
-#### 2. 容器特征 {#2-容器特征}
+四个信息点：
+
+- `console=hvc0` —— virtio 控制台，虚拟机才有的设备
+- `root=/dev/vda` —— 根文件系统在虚拟块设备上
+- `panic=1` —— 内核 panic 后 1 秒重启
+- **`init=/usr/sbin/HSLd`** —— 启动的不是 systemd，而是 `HSLd`（HarmonyOS Linux daemon）
+
+最后这条是关键：**鸿蒙在 Linux 内核启动后接管了一部分初始化工作**，不是丢一个通用发行版进去就完事。
+
+### 三、根文件系统是 overlay，路径里有 OzoneC {#三根文件系统}
 
 ```bash
-# 查看挂载信息
-cat /proc/mounts
-# 输出：
-overlay / overlay rw,dirsync,nodev,relatime,
-lowerdir=/var/lib/OzoneC/overlay2/rgm_openEuler/lower,
-upperdir=/var/lib/ozonec/bundle/openeuler2203fgjM0CXQxp5yLHfFZOK/diff,
-workdir=/var/lib/ozonec/bundle/openeuler2203fgjM0CXQxp5yLHfFZOK/work
-
-# 这表明：
-# - 使用overlay2存储驱动
-# - OzoneC是容器运行时
-# - openEuler是容器镜像
+cat /proc/mounts | head -3
+# overlay / overlay rw,dirsync,nodev,relatime,
+#   lowerdir=/var/lib/OzoneC/overlay2/rgm_openEuler/lower,
+#   upperdir=/var/lib/ozonec/bundle/openeuler2203.../diff,
+#   workdir=/var/lib/ozonec/bundle/openeuler2203.../work
 ```
 
-#### 3. 内核分析 {#3-内核分析}
+三个结论：
 
-```bash
-# 查看内核版本
-uname -a
-# Linux localhost 6.6.0 aarch64
+- 根文件系统是 **overlay**（分层镜像），不是直接挂一块盘
+- 路径里的 `OzoneC` 是容器运行时（后面会说它是什么）
+- `lower` 层叫 `rgm_openEuler`，说明底层镜像是 openEuler
 
-# 查看CPU信息
-cat /proc/cpuinfo
-# CPU implementer: 0x41 (ARM)
-# CPU architecture: 8
-# 没有hypervisor标志，因为运行在虚拟机中
+`lowerdir` 只读、`upperdir` 可写——这正是容器镜像的标准分层。所以你在这个环境里装的东西都落在 `upperdir`，**删容器就没了**。
+
+### 拼起来是什么 {#拼起来是什么}
+
+三条证据指向同一个结构：
+
+```
+鸿蒙 PC（微内核）
+  └─ StratoVirt 虚拟机（跑 Linux 6.6 内核）
+       └─ OzoneC 容器（openEuler 用户空间）
+            └─ 你看到的命令行
 ```
 
-## StratoVirt：企业级虚拟化平台 {#StratoVirt：企业级虚拟化平台}
+虚拟机负责「跑 Linux」这件事本身，容器负责「隔离不同应用环境」。两层叠起来。
 
-### 项目介绍 {#项目介绍}
+## StratoVirt 是什么 {#stratovirt是什么}
 
-StratoVirt是计算产业中面向云数据中心的企业级虚拟化平台，实现了一套架构统一支持虚拟机、容器、Serverless三种场景。在鸿蒙PC上，它作为Linux兼容的基础设施。
+华为开源的轻量虚拟机，Rust 写的，属于 openEuler 项目。
 
-### 关键特性 {#关键特性}
+它对标的是 QEMU，但**只做云和边缘场景需要的那部分**——不做完整的 PC 硬件模拟，所以启动快、内存占用小。
 
-1. **轻量低噪**：高效的虚拟化实现
-2. **软硬协同**：充分利用硬件特性
-3. **Rust语言级安全**：内存安全的实现
-4. **架构统一**：支持多种场景
+鸿蒙 PC 选它，大概有两个原因：
 
-### 运行模式 {#运行模式}
+1. **Rust 写的**：内存安全漏洞少。虚拟机跑在内核下面，出问题影响面大
+2. **轻**：桌面设备上不能为了「兼容 Linux」吃掉几个 G 内存
 
-StratoVirt支持两种机型：
+它有两种机型：
 
-**microvm机型**（轻量级）：
 ```bash
-./stratovirt \
-    -machine microvm \
+# microvm：精简机型，启动最快
+./stratovirt -machine microvm \
     -kernel /path/to/kernel \
     -append "console=ttyAMA0 root=/dev/vda" \
     -drive file=/path/to/rootfs,id=rootfs \
     -device virtio-blk-device,drive=rootfs \
     -serial stdio
-```
 
-**标准机型**（完整功能）：
-```bash
-./stratovirt \
-    -machine virt \
+# virt：标准机型，设备更全
+./stratovirt -machine virt \
     -kernel /path/to/kernel \
     -drive file=/path/to/firmware,if=pflash \
     -device virtio-blk-pci,drive=rootfs \
     -serial stdio
 ```
 
-## OzoneC：容器运行时 {#OzoneC：容器运行时}
+鸿蒙 PC 上跑的是哪一种，我没法直接确认（看不到虚拟机启动命令）。但从 `hvc0` 和 `virtio-blk-device`（非 PCI）看，**更像 microvm**。
 
-### 项目定位 {#项目定位}
+## OzoneC 是什么 {#ozonec是什么}
 
-OzoneC是StratoVirt项目内置的OCI容器运行时，使用Rust语言实现。从源码和挂载路径`/var/lib/OzoneC/overlay2/`可以确认其使用。
+StratoVirt 项目里的容器运行时，也是 Rust 写的，符合 OCI 标准。
 
-### 技术特点 {#技术特点}
-
-OzoneC是一个完整的OCI runtime实现：
-
-- **开发团队**：Huawei StratoVirt Team
-- **实现语言**：Rust（内存安全）
-- **标准兼容**：完全符合OCI runtime-spec
-- **支持命令**：create, start, state, kill, delete, exec
-
-### 核心功能 {#核心功能}
+命令和 docker 那套对得上：
 
 ```bash
-# OCI标准命令
-ozonec create  <container-id>  # 创建容器
-ozonec start   <container-id>  # 启动容器
-ozonec state   <container-id>  # 查询状态
-ozonec kill    <container-id>  # 终止容器
-ozonec delete  <container-id>  # 删除容器
-
-# 扩展命令
-ozonec exec    <container-id>  # 在容器中执行命令
+ozonec create  <container-id>   # 创建
+ozonec start   <container-id>   # 启动
+ozonec state   <container-id>   # 查状态
+ozonec kill    <container-id>   # 终止
+ozonec delete  <container-id>   # 删除
+ozonec exec    <container-id>   # 在容器里执行命令
 ```
 
-### 架构优势 {#架构优势}
+**为什么虚拟机里还要再套一层容器？**
 
-1. **Rust实现**：内存安全、无数据竞争
-2. **轻量级**：专为虚拟机场景优化
-3. **原生集成**：与StratoVirt紧密配合
-4. **OCI兼容**：支持标准容器镜像
+如果只跑虚拟机，那整个 Linux 环境是一个整体：你在里面装的东西、跑的进程，全混在一起。想要第二个干净环境，就得再起一台虚拟机，成本高。
 
-### 与StratoVirt的协作 {#与StratoVirt的协作}
+套一层容器之后，多个开发环境可以共用同一个 Linux 内核，各自有独立的文件系统。
 
-OzoneC在StratoVirt虚拟机内部运行，形成双重隔离：
+代价是**容器共享内核**，所以内核相关的操作做不了——下面会讲。
 
-1. **虚拟机级隔离**：StratoVirt提供硬件级隔离
-2. **容器级隔离**：OzoneC提供应用级隔离
+## 这套设计的代价 {#这套设计的代价}
 
-这种设计兼顾了安全性和性能，且OzoneC作为StratoVirt的子项目，实现了无缝集成。
+我在实际使用里撞到三条限制：
 
-## 融合开发引擎的工作原理 {#融合开发引擎的工作原理}
+| 限制 | 表现 | 能不能绕 |
+| --- | --- | --- |
+| 换不了内核 | 虚拟机内核固定在 6.6.0，容器跟着它 | 不能 |
+| glibc 版本受限 | 要用某个软件，它要求的 glibc 比容器里的新 | 能，见下 |
+| 装不了内核模块 | `insmod` 之类直接失败 | 不能 |
 
-### 启动流程 {#启动流程}
+第二条最常撞。三个绕过办法：
 
-1. **鸿蒙PC启动**：微内核系统初始化
-2. **StratoVirt启动**：创建Linux虚拟机
-3. **HSLd初始化**：HarmonyOS Linux Layer daemon启动
-4. **OzoneC运行**：创建openEuler容器
-5. **用户环境**：提供Shell和开发工具
+**从源码编译** —— 用容器自带的 glibc 编译你需要的软件。适合开源、依赖不复杂的项目。
 
-### Linux兼容层（HSLd） {#Linux兼容层（HSLd）}
+**静态链接** —— 编译时把库都塞进二进制，摆脱对系统 glibc 的依赖。缺点是这个二进制会变大，而且有些库静态链接很麻烦。
 
-`init=/usr/sbin/HSLd`参数表明使用了HarmonyOS Linux Layer daemon：
+**隔离环境** —— conda、nix 这类工具能自己管依赖和解释器，不碰系统 glibc。适合 Python 生态，其他语言要看情况。
 
-- 负责Linux系统服务的初始化
-- 提供鸿蒙与Linux的交互接口
-- 管理Linux应用的生命周期
+## 和 WSL 的差别 {#和wsl的差别}
 
-### 容器环境 {#容器环境}
+两件事都是「Windows/Linux 桌面里跑 Linux」，但底层不一样：
 
-openEuler容器提供：
+| | 鸿蒙融合开发引擎 | WSL2 |
+| --- | --- | --- |
+| 层次 | 虚拟机 + 容器 | 虚拟机（单层） |
+| 内核 | Linux 6.6.0 | 微软自编译内核 |
+| 容器 | OzoneC | Docker（另装） |
+| 镜像来源 | 鸿蒙生态预置 | Docker Hub |
 
-- 完整的Linux用户空间
-- RPM包管理（dnf/yum）
-- 开发工具链（gcc、make等）
-- 运行时环境（Python、Node.js等）
+**多一层容器**意味着可以同时有多个隔离环境，这是 WSL2 默认没有的（WSL2 要自己装 Docker）。
 
-## 技术优势 {#技术优势}
+但镜像来源是鸿蒙预置的，不像 Docker Hub 那样想拉什么拉什么。
 
-### 1. 安全隔离 {#1-安全隔离}
+## 实际怎么用 {#实际怎么用}
 
-- 虚拟机隔离防止Linux应用影响鸿蒙系统
-- 容器隔离防止不同Linux应用相互影响
-- 多层防御，安全可靠
+知道结构之后，几个判断就清楚了：
 
-### 2. 性能优化 {#2-性能优化}
+**当普通 Linux 用**：装包（`dnf`）、跑服务（nginx/redis）、编译代码，都没问题。它就是个 openEuler。
 
-- StratoVirt使用Rust实现，内存安全且高效
-- virtio设备提供高性能I/O
-- overlay文件系统减少存储开销
+**数据要往外存**：容器删了 `upperdir` 就没了，重要文件放在宿主机目录，通过挂载点访问。
 
-### 3. 灵活部署 {#3-灵活部署}
+**别指望改内核**：想调内核参数、装内核模块、换内核版本，这条路上没有出口。
 
-- 支持不同Linux发行版容器
-- 可以定制开发环境
-- 快速部署和销毁
+**glibc 冲突先想静态链接**：实在不行再上 conda/nix，别去动系统库——动了整个环境可能起不来。
 
-## 实际应用 {#实际应用}
+## 参考资料 {#参考资料}
 
-### 开发环境 {#开发环境}
-
-在融合开发引擎中，开发者可以：
-
-- 使用完整的Linux开发工具链
-- 运行服务器软件（nginx、redis等）
-- 编译Linux应用程序
-- 使用容器技术部署应用
-
-### 使用限制 {#使用限制}
-
-由于容器共享宿主机内核：
-
-- **无法更换内核版本**：虚拟机内核固定
-- **glibc版本受限**：容器使用虚拟机的glibc
-- **内核模块不可加载**：无内核权限
-
-### 解决方案 {#解决方案}
-
-对于glibc版本问题，可以：
-
-1. **从源码编译**：使用当前glibc编译应用
-2. **使用静态链接**：避免依赖系统库
-3. **使用隔离环境**：conda、nix等提供独立环境
-
-## 与传统方案的对比 {#与传统方案的对比}
-
-### 对比WSL {#对比WSL}
-
-| 特性 | 鸿蒙融合开发引擎 | WSL2 |
-|------|------------------|------|
-| 架构 | 虚拟机+容器 | 虻拟机 |
-| 内核 | Linux 6.6 | Linux 5.x |
-| 容器支持 | OzoneC | Docker |
-| 镜像管理 | 鸿蒙生态 | Docker生态 |
-| 安全隔离 | 双层隔离 | 单层隔离 |
-
-### 对比传统虚拟机 {#对比传统虚拟机}
-
-| 特性 | StratoVirt | QEMU/KVM |
-|------|-----------|----------|
-| 实现语言 | Rust | C |
-| 内存安全 | 语言级 | 需要编码规范 |
-| 启动速度 | 快速 | 传统 |
-| 容器集成 | OzoneC | 需额外配置 |
-
-## 总结 {#总结}
-
-鸿蒙PC融合开发引擎通过StratoVirt虚拟化和OzoneC容器技术，巧妙地实现了Linux应用兼容：
-
-1. **微内核架构**：鸿蒙保持自身特性
-2. **虚拟化隔离**：StratoVirt运行Linux
-3. **容器管理**：OzoneC提供应用环境
-4. **双层隔离**：安全性和性能兼顾
-
-这种架构设计体现了鸿蒙生态的创新思路，既保持了鸿蒙的微内核优势，又通过虚拟化和容器技术实现了Linux兼容，为开发者提供了熟悉的工作环境。
-
----
-
-**参考资料**：
-- StratoVirt项目：[https://gitcode.com/openeuler/stratovirt](https://gitcode.com/openeuler/stratovirt)
-- OzoneC源码：StratoVirt项目的`ozonec/`目录
-- openEuler官网：[https://openeuler.org](https://openeuler.org)
+- [StratoVirt 源码](https://gitcode.com/openeuler/stratovirt)（OzoneC 在 `ozonec/` 目录下）
+- [openEuler 官网](https://openeuler.org)
