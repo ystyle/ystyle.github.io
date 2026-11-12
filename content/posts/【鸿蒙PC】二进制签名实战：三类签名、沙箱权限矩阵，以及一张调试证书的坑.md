@@ -1,7 +1,7 @@
 ---
 title: "【鸿蒙PC】二进制签名实战：三类签名、沙箱权限矩阵，以及一张调试证书的坑"
 date: 2026-09-22T20:30:00+08:00
-lastmod: 2026-09-22T20:30:00+08:00
+lastmod: 2026-11-12 18:20:00
 draft: false
 author: "ystyle"
 summary: "鸿蒙 PC 上二进制必须合法签名才能加载运行。本文把官方给出的三类签名规则、应用拉起二进制的沙箱权限矩阵整理成表，再补上我们在 MateBook Pro（OpenHarmony-7.0.0.105）上实测出的五种组合结果——包括一张 DevEco 自动签名调试证书被内核 fs-verity 拒掉的完整证据链，以及换成自申请调试证书后立刻能跑的对照实验。结论已确认：IDE 自动签名生成的调试证书不能用于二进制签名。"
@@ -12,23 +12,19 @@ slug: matebookpro-binrary-debug-sign
 ---
 
 
-## 摘要
+> 签名工具报成功，程序还是跑不起来。原因不在命令，在证书——IDE 自动签发的那张，内核不认。
 
-鸿蒙 PC（2in1）和手机一样，**只允许合法签名的二进制程序加载和运行**——这是为了识别开发者身份、保障程序完整性。但对刚从 Linux 迁移过来的命令行工具来说，这条规则的具体边界并不直观：
+鸿蒙 PC（2in1）和手机一样，只允许合法签名的二进制加载和运行，目的是识别开发者身份、保证程序完整性。这条规则对刚从 Linux 迁过来的命令行工具来说，边界并不直观：交叉编译出来的 ELF 直接 `./tool` 会报什么错，错误码背后是谁在拦，自签名和调试证书签名差在哪，为什么“能跑”和“能声明权限”是两件事。
 
-- 交叉编译出来的 ELF 直接 `./tool` 会报什么错？错误码背后是谁在拦？
-- 自签名（adhoc）和调试证书签名到底差在哪？为什么"能跑"和"能声明权限"是两件事？
-- 签名成功 ≠ 能运行。我们在实测中遇到的现象是：`binary-sign-tool` 报 `write code sign data success`，但执行时 `Operation not permitted`，**内核日志里才看得到真正原因**。
+官方给了三类签名的规则和一张应用拉起二进制时的沙箱权限矩阵，但都停在规则层面。我在 MateBook Pro 上把五种签名组合逐条试了一遍，中间撞到最骗人的一个现象：`binary-sign-tool` 报 `write code sign data success`，执行时却是 `Operation not permitted`，真正的原因只写在内核 `kmsg` 日志里。
 
-本文分两部分：先把华为开发者支持给出的**官方规则**（三类签名对比、应用拉起二进制的强弱沙箱权限矩阵、调试证书签名流程）整理成可查的表；再给出我们在 HUAWEI MateBook Pro（`HAD-W24 7.0.0.105` / `OpenHarmony-7.0.0.105` / API 26 / 2in1）上的**实测结果**——五种签名组合逐一验证，并用内核 `kmsg` 日志定位到一张调试证书失败的真实原因，最终确认**这张由 IDE 自动签名生成的调试证书不能用于二进制签名**。
-
-一句话结论：**自签名（adhoc）能跑但不能声明权限；调试证书签名能用，但必须用"自己申请的"那张证书——DevEco Studio（IDE）自动签名生成的调试证书不能用，它签出来的二进制会被内核的 PKCS7 校验拒掉。**
+结论是：自签名（adhoc）能跑但不能声明权限；调试证书签名能用，但必须用自己申请的那张——DevEco Studio 自动签名生成的调试证书签出来的二进制，会被内核的 PKCS7 校验拒掉。
 
 ---
 
 ## 1. 官方规则：三类签名
 
-### 1.1 三种签名类型的区别
+### 1.1 三种签名的区别：证书、分发范围、权限声明
 
 | 类型 | 证书 | 分发范围 | 可执行程序声明权限 | 典型场景 |
 |---|---|---|---|---|
@@ -38,14 +34,14 @@ slug: matebookpro-binrary-debug-sign
 
 两条容易被忽略的细节：
 
-1. **"调试证书签名的二进制可执行程序可以声明权限，但共享库不支持声明权限"**——如果你签的是 `.so`，权限段是无效的。
-2. **自签名的二进制（adhoc）权限策略段运行过程不会生效**，也就是说：`-selfSign 1` 签出来的程序，写多少 `requestPermissions` 都没用。
+1. **调试证书签名的二进制可以声明权限，但共享库不行**——签的是 `.so` 的话，权限段无效。
+2. **adhoc 签名的权限策略段在运行时不生效**——`-selfSign 1` 签出来的程序，写多少 `requestPermissions` 都没用。
 
-> 个人开发者目前基本拿不到"二进制证书"，所以本文的实践集中在**自签名**与**调试证书签名**两条路上。
+> 个人开发者目前基本拿不到“二进制证书”，所以本文的实践集中在**自签名**与**调试证书签名**两条路上。
 
-### 1.2 应用拉起二进制：强弱沙箱权限矩阵
+### 1.2 应用拉起二进制时的沙箱权限矩阵
 
-官方的"强/弱沙箱"定义：
+官方对强、弱沙箱的定义：
 
 - **弱沙箱应用**：具备 `ohos.permission.CUSTOM_SANDBOX`
 - **强沙箱应用**：不具备该权限
@@ -59,19 +55,21 @@ slug: matebookpro-binrary-debug-sign
 
 读法：**弱沙箱应用怎样都能拉起独立二进制；强沙箱应用必须申请 `ALLOW_EXTERNAL_NATIVE_CODE`，而且即便如此也拉不起 adhoc bin。**
 
-### 1.3 官方重要说明里最该记住的一条
+### 1.3 IDE 编出来的二进制是 adhoc，不是 debug
 
 > 使用 DevEco Studio 的 clang 编译的二进制属于**自签名场景**，二进制类型是 `adhoc bin` 而不是 `debug bin`
 > （`debug bin` 必须使用调试证书签名）。如果二进制类型是 `adhoc bin`，需要申请弱沙箱权限
 > `ohos.permission.CUSTOM_SANDBOX`，该权限为 **ACL 权限**。
 
-也就是说：**交叉编译出来的产物默认是 adhoc**。要让它变成 `debug bin`（可声明权限、受限分发），必须补一步调试证书签名。
+交叉编译出来的产物默认就是 `adhoc bin`。要让它变成 `debug bin`（可声明权限、受限分发），得补一步调试证书签名。
 
 ---
 
-## 2. 调试证书签名：完整流程
+## 2. 用调试证书签一个二进制
 
-### 2.1 签名命令
+### 2.1 官方参数表与实测能用的那条命令
+
+官方给出的参数表，引号里是各参数的占位说明：
 
 ```bash
 ./binary-sign-tool sign \
@@ -86,7 +84,7 @@ slug: matebookpro-binrary-debug-sign
   -moduleFile "权限声明等信息（json 文件）"
 ```
 
-实测可用的完整命令（鸿蒙 PC 本机，用 SDK 自带的 **aarch64 原生** `binary-sign-tool`）：
+实测能跑的是下面这条，鸿蒙 PC 本机，用 SDK 自带的 **aarch64 原生** `binary-sign-tool`：
 
 ```bash
 SDK=~/.local/opt/deveco_tools/sdk/default/openharmony
@@ -108,7 +106,7 @@ chmod 755 tool     # ← 见 2.3，必须
 
 输出里会打印 `.permission` 段内容、证书链（叶子 → 中间 CA → 根 CA）与有效期。
 
-### 2.2 权限策略段 `module.json`
+### 2.2 权限段 module.json：device-ids 必须填
 
 ```json5
 {
@@ -138,17 +136,17 @@ hdc shell bm get --udid
 > 日志是 `[VerityHdcStatusAndDeviceId]:[FAILED] verity deviceId for debug signer: udid not in module.json`。
 > 填对了则是 `[SUCCESS] debug cert with valid udid`——**这一步过了，后面的失败就跟 UDID 无关了**。
 
-### 2.3 签名后必须 `chmod +x`
+### 2.3 签完得自己加执行位，工具不会替你加
 
 `binary-sign-tool` 是**往预先存在的 `outFile` 里写**，文件权限位沿用旧文件。如果 `outFile` 是
 `cp` 出来的（源文件本来没有执行位），签完仍然不可执行，运行时报的是 `Permission denied`
-——很容易被误判成"签名没用"。
+——很容易被误判成“签名没用”。
 
 ```bash
 chmod 755 tool && ./tool --version
 ```
 
-### 2.4 顺带一提：签名口令可能是密文
+### 2.4 DevEco 写进 build-profile.json5 的口令是密文
 
 DevEco 自动签名写进 `build-profile.json5` 的 `storePassword` / `keyPassword` 并不是明文，而是一串
 `00000019...` 形式的加密 blob（hvigor 的 `DecipherUtil` 加密）。它的结构是：
@@ -160,29 +158,31 @@ blob = [4B BE e][IV][密文][16B GCM tag]，其中 IV 长度 = len(blob) - 4 - e
 ```
 
 `material/` 目录就在 p12 旁边（`fd/` 三个文件 + `ac/` 盐 + `ce/` 加密的根密钥）。
-如果只是想在脚本里复用 DevEco 的签名物料，按这个流程解一下即可；不打算复用的话，直接用自己申请的
+想在脚本里复用 DevEco 的签名物料，按这个流程解一下即可；不打算复用的话，直接用自己申请的
 调试证书更省事。
 
 ---
 
-## 3. 本机实测：五种组合的结果
+## 3. 五种组合的实测结果
 
 测试对象统一是一份 `eza`（aarch64 musl 动态 ELF，PIE），设备是 HUAWEI MateBook Pro
 （`HAD-W24 7.0.0.105(SP10C00E100R13P5)` / `OpenHarmony-7.0.0.105` / API 26 / 2in1），
 开发者选项已开启，调试 HAP 可正常安装。文件都放在家目录（`/storage/Users/currentUser`，
-注意这是 **hmdfs**）。签名工具为 SDK 自带的 aarch64 原生版（本机 JVM 起不来，
-`Failed to mark memory page as executable`，官方 `hap-sign-tool.jar` 用不了）。
+注意这是 **hmdfs**）。签名工具用 SDK 自带的 aarch64 原生版——本机 JVM 起不来，报
+`Failed to mark memory page as executable`，官方 `hap-sign-tool.jar` 用不了。
 
 | # | 签名方式 | `.permission` 段 | 结果 |
 |---|---|---|---|
-| 1 | `-selfSign 1`（adhoc，自签名） | 无 | ✅ **可执行**（补 `chmod +x` 后） |
-| 2 | 二进制证书（叶子 `…,DevID`） | 无 | ✅ **可执行** |
+| 1 | `-selfSign 1`（adhoc，自签名） | 无 | ✅ 可执行（补 `chmod +x` 后） |
+| 2 | 二进制证书（叶子 `…,DevID`） | 无 | ✅ 可执行 |
 | 3 | 调试证书（**DevEco 自动签名**下发，叶子 `…,Development`） | 无 | ❌ `udid not in module.json` |
 | 4 | 同上 + `-moduleFile`（填了本机 UDID） | 有 | ❌ `Operation not permitted`（EPERM） |
-| 5 | 调试证书（**自己申请**的通用测试证书，叶子 `…,Development`） + `-moduleFile` | 有 | ✅ **可执行** |
-| — | 第 4 组放到 `/data/local/tmp` | 有 | ❌ `Permission denied`（另一条原因，见 3.3） |
+| 5 | 调试证书（**自己申请**的通用测试证书，叶子 `…,Development`） + `-moduleFile` | 有 | ✅ 可执行 |
+| — | 第 4 组放到 `/data/local/tmp` | 有 | ❌ `Permission denied`（另一条原因，见 3.4） |
 
 ### 3.1 第 4 组为什么失败：应用侧日志只给了半句话
+
+第 3 组没带 `-moduleFile`，`.permission` 段是空的，报 `udid not in module.json`；补上 UDID 变成第 4 组，错误换成了 `Operation not permitted`——说明 UDID 那一关已经过了，卡在更后面。应用侧日志是这样的：
 
 ```text
 I code_protect/BSS: [VerityHdcStatusAndDeviceId]:[SUCCESS] debug cert with valid udid
@@ -191,7 +191,8 @@ E code_protect/CODE_SIGN: [EnableCodeSignForFile]:Enable fs-verity failed, errno
 E code_protect/BSS: [BinSec][svc:certmgr][EnforceCodeSign]:enforce codeSign failed. ret: -768
 ```
 
-`errno = 129` 是 `EKEYREJECTED`——"key was rejected"。**光看这里会以为是自己签名姿势不对，或者文件系统不支持。**
+`errno = 129` 是 `EKEYREJECTED`，“key was rejected”。只看这一层，能猜的方向有两个：签名命令的
+用法不对，或者文件系统不支持。往下看内核日志，两个都不是。
 
 ### 3.2 真正的答案在内核日志里
 
@@ -206,12 +207,11 @@ E code_protect/BSS: [BinSec][svc:certmgr][EnforceCodeSign]:enforce codeSign fail
 <2> [fs_security_verity:1572] fsverity: fsverity_ioctl_enable_code_sign failed, err=E_HM_KEYREJECTED, file:eza.signed
 ```
 
-**内核在 fs-verity 的 code-sign 流程里验 PKCS7 签名链失败**（`PKCS7_signatureVerify`），
-于是 `E_HM_KEYREJECTED`，`code_protect` 判定强制验签失败，`exec` 返回 EPERM。
+内核在 fs-verity 的 code-sign 流程里验 PKCS7 签名链失败（`PKCS7_signatureVerify`），于是返回
+`E_HM_KEYREJECTED`，`code_protect` 判定强制验签失败，`exec` 返回 EPERM。所以问题既不在文件系统，
+也不在路径或权限，而是**这张证书签出来的签名内核不认**。
 
-也就是说：**这不是文件系统问题，也不是路径/权限问题，而是这张证书签出来的签名内核不认。**
-
-### 3.3 换成"自己申请的"调试证书，立刻就能跑
+### 3.3 换成“自己申请的”调试证书，立刻就能跑
 
 同样一台机器、同一个 `module.json`、同一份 `eza`，只把证书换成**自己申请的通用测试证书**
 （叶子同样是 `…,Development`，签发者同样是 Huawei CBG Developer Relations CA G2），
@@ -224,13 +224,13 @@ v0.23.4 [-git]
 ```
 
 两张证书的链结构、扩展（`keyUsage` / `extendedKeyUsage=codeSigning` / `basicConstraints` 等）
-完全一致，差别只在叶子证书本身。**结论：DevEco Studio（IDE）自动签名生成的调试证书不能用于二进制签名**——
+完全一致，差别只在叶子证书本身。所以 **DevEco Studio（IDE）自动签名生成的调试证书不能用于二进制签名**：
 它签出来的 ELF 过不了内核 fs-verity 的 PKCS7 校验这一关（见 3.2 的 `PKCS7_signatureVerify`）。
-这个判断的依据是：同一台设备、同一份 `module.json`、同一个文件路径、同一个文件内容，
-唯一变化的就是证书，结果就从 `EPERM` 变成可执行——**变量只有一个，原因就只可能在证书本身**。
-二进制签名请改用自己申请的调试证书。
 
-### 3.4 `/data/local/tmp` 那条是另一个问题
+判断依据是变量只动了一个：同一台设备、同一份 `module.json`、同一个文件路径、同一个文件内容，
+只有证书换了，结果就从 `EPERM` 变成可执行。二进制签名请改用自己申请的调试证书。
+
+### 3.4 `/data/local/tmp` 跑不了，是 SELinux label 的事
 
 同一份签名产物放到 `/data/local/tmp`（`/data` 是 hmfs，与家目录的 hmdfs 不同），
 报的是 `Permission denied`：
@@ -240,14 +240,14 @@ E code_protect/BSS: [BinSec][svc:kmgr][Read]:read failed. ret: -1, msg: Permissi
 ```
 
 文件属性是 `-rwxr-xr-x shell shell u:object_r:data_local_tmp:s0`，把目录权限从 `0771` 放宽到
-`0755` 也无效——`code_protect` 的 BSS 读不了这个 SELinux label。**结论：能跑的位置是普通目录
-（家目录即可），`/data/local/tmp` 反而跑不了。** 这一点和 Android/OpenHarmony 的传统印象是相反的。
+`0755` 也无效——`code_protect` 的 BSS 读不了这个 SELinux label。能跑的位置是普通目录
+（家目录即可），`/data/local/tmp` 反而跑不了。这一点和 Android/OpenHarmony 的传统印象是相反的。
 
 ---
 
-## 4. 排查工具箱
+## 4. 出问题时的取证流程
 
-出问题时的完整取证流程（也是给华为提工单时他们要的那套）：
+这套流程是提工单时对方要的，出问题时按顺序跑一遍：
 
 ```bash
 hdc shell
@@ -278,10 +278,10 @@ hdc file recv /data/local/tmp/hilog-export.tar.gz .
 
 ---
 
-## 5. 踩坑清单（TL;DR）
+## 5. 八条容易踩的坑
 
 1. **签名 ≠ 能跑**：`write code sign data success` 只代表段写进去了，能不能加载由 `code_protect` + 内核判定，证据在 hilog/kmsg 里。
-2. **`errno 129 / E_HM_KEYREJECTED` 别往文件系统上想**，先看 kmsg 里的 `fsverity certchain` 一行——大概率是证书链/签名问题。
+2. **`errno 129` / `E_HM_KEYREJECTED` 别往文件系统上想**，先看 kmsg 里的 `fsverity certchain` 一行——大概率是证书链/签名问题。
 3. **调试证书必须用自己申请的那张**；IDE（DevEco Studio）自动签名生成的调试证书不能用，会被内核拒。
 4. **`.permission` 段（含 `device-ids`）是调试证书签名的必填项**，缺了就是 `udid not in module.json`。
 5. **签名后 `chmod +x`**：工具沿用 `outFile` 的旧权限位，不会自动加执行位。
@@ -291,7 +291,7 @@ hdc file recv /data/local/tmp/hilog-export.tar.gz .
 
 ---
 
-## 6. 结论与建议
+## 6. 按场景选签名
 
 | 场景 | 推荐做法 |
 |---|---|
@@ -300,12 +300,8 @@ hdc file recv /data/local/tmp/hilog-export.tar.gz .
 | 要分发到大量设备/用户 | 需要二进制证书（面向华为认证开发者），个人开发者目前不适用 |
 | 要在应用里拉起 | 注意第 1.2 节的沙箱权限矩阵；长期方案是 HNP 打包安装 |
 
-已经确认的一条结论，和仍然待明确的一个问题：
-
-1. **已确认：IDE（DevEco Studio）自动签名生成的调试证书不能用于二进制签名。** 它签出的 ELF 会在内核
-   fs-verity 的 `PKCS7_signatureVerify` 处被拒（`E_HM_KEYREJECTED`），换成自己申请的调试证书即可通过。
-   两组实验之间变量只有"证书"一个，所以可以断定原因出在证书本身，与 `module.json`、路径、文件系统无关。
-2. **仍待明确**：`/data/local/tmp` 因为 SELinux label 不能被 `code_protect` 读取，官方推荐的"临时二进制存放位置"到底是哪？
+还有一条没搞清楚：`/data/local/tmp` 因为 SELinux label 不能被 `code_protect` 读取，那官方推荐的
+“临时二进制存放位置”到底是哪？这一条我手上没有答案。
 
 ---
 
@@ -337,11 +333,11 @@ hdc shell "hilog -k on; hilog -w start -t kmsg"
 hdc shell "hilog -t kmsg" | grep -E "fsverity|hmcrypt"
 ```
 
-> 说明：本文的官方规则部分整理自华为开发者支持在工单中的回复与《调试证书签名》文档；
-> 实测部分全部来自 HUAWEI MateBook Pro（`OpenHarmony-7.0.0.105`，API 26，2in1）上的真实操作，
+> 说明：官方规则部分整理自华为开发者支持在工单中的回复与《调试证书签名》文档；
+> 实测部分全部来自 HUAWEI MateBook Pro（`OpenHarmony-7.0.0.105`，API 26，2in1）上的操作，
 > 日志均为原文摘录（已隐去 UDID 与口令）。
 
 > 续篇：[《二进制签名解析：自签名、调试证书、二进制证书到底差在哪》](/2026/10/13/harmonyos-pc-binary-sign-types/)——
 > 从 OpenHarmony 源码里把三种签名的结构性差异讲清楚（`signature` 字段填什么、内核信任表怎么匹配、`ownerid` 怎么归类）。
 >
-> 只想快速决定"我该用哪种签名"，看这篇就够：[《二进制签名入门：证书从哪来、能要什么权限、该用哪一个》](/2026/10/13/harmonyos-pc-binary-sign-basics/)。
+> 只想快速决定“我该用哪种签名”，看这篇就够：[《二进制签名入门：证书从哪来、能要什么权限、该用哪一个》](/2026/10/13/harmonyos-pc-binary-sign-basics/)。
