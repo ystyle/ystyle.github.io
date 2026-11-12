@@ -160,12 +160,12 @@ echo ':box64:M::\x7fELF\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\
 ## 真正编译：`hvigorw assembleHap` {#编译项目}
 
 ```bash
-# 配置环境变量
+# 配置环境变量（写进 ~/.zshrc 就不用每次 export）
 export DEVECO_SDK_HOME="/opt/command-line-tools/sdk"
-export DEVECO_NODE_HOME="$HOME/.local/share/fnm/node-versions/v24.14.1/installation"
+export DEVECO_NODE_HOME="$HOME/.local/share/fnm/node-versions/v24.14.1/installation"  # 见「换掉 SDK 自带的 node」
 export OHPM_HOME="/opt/command-line-tools"
 export PATH="/opt/command-line-tools/bin:$PATH"
-export BOX64_LD_LIBRARY_PATH="/opt/x86_64-sysroot/lib64:/opt/x86_64-sysroot/usr/lib64:/opt/x86_64-sdk-libs"
+export BOX64_LD_LIBRARY_PATH="/opt/x86_64-sysroot/lib64:/opt/x86_64-sysroot/usr/lib64:/opt/x86_64-sdk-libs"  # wrapper 里是同一份
 
 # 编译
 cd ohos_project
@@ -272,15 +272,4 @@ box64 的库搜索路径由 `BOX64_LD_LIBRARY_PATH` 控制，不是 `LD_LIBRARY_
 
 ---
 
-**环境变量配置（~/.zshrc）参考**：
-
-```bash
-# HarmonyOS SDK
-export DEVECO_SDK_HOME="/opt/command-line-tools/sdk"
-export DEVECO_NODE_HOME="$HOME/.local/share/fnm/node-versions/v24.14.1/installation"
-export OHPM_HOME="/opt/command-line-tools"
-export PATH="/opt/command-line-tools/bin:$PATH"
-
-# box64
-export BOX64_LD_LIBRARY_PATH="/opt/x86_64-sysroot/lib64:/opt/x86_64-sysroot/usr/lib64:/opt/x86_64-sdk-libs"
-```
+上面「真正编译」那节列的几个环境变量，建议写进 `~/.zshrc`——每次开新 shell 手动 `export` 一遍很烦，而且漏设 `BOX64_LD_LIBRARY_PATH` 时报的是 glibc 找不到，不容易往这上面想。
