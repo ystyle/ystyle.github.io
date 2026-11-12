@@ -102,9 +102,9 @@ cjreg 的发布计划引擎：`analyze` 复用 cjdep 的拓扑排序能力，把
 每个计划项走一个六态状态机：
 
 ```
-pending → running → waiting_index → completed
-              ↓
-        failed（带原因）/ skipped（人工跳过）
+pending → running → waiting_index
+   ↓         ↓            ↓
+        completed / failed / skipped
 ```
 
 `waiting_index` 这一态是必须的：**版本出现且 sha256 一致才算完成**。索引先到的「假完成」被挡掉。
