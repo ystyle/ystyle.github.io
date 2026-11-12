@@ -79,8 +79,8 @@ cjreg 站着的不是第三方生态，是我这两年攒下来的几个仓颉�
 | --- | --- | --- | --- |
 | **badger-cj** | 17271 行 | LSM KV，移植自 Go BadgerDB | bstorm |
 | **bstorm** | 3734 行 | JSON 文档库 + 二级索引 | cjreg 存储层 |
-| **tachyon** | 4410 行 | HTTP 内核，fasthttp 风格，零分配 | tang |
-| **tang** | 10208 行 | Web 框架，受 Fiber 启发 | cjreg 服务层 |
+| **tachyon** | 4410 行 | HTTP 内核，fasthttp 风格，每请求 0 分配 | tang |
+| **tang** | 10208 行 | Web 框架，受 Fiber 启发，**零 stdx 依赖** | cjreg 服务层 |
 | **cjxt** | 22997 行 | 服务端驱动 UI + WebSocket 补丁 | cjreg 页面层 |
 | **gjson** | 3649 行 | JSON 路径取值（不反序列化） | 发布协议解析 |
 | **tar-cj** | 1682 行 | TAR 归档，移植自 Go archive/tar | 制品内容提取 |
@@ -95,13 +95,23 @@ cjreg 站着的不是第三方生态，是我这两年攒下来的几个仓颉�
 | --- | --- | --- |
 | **badger-cj** | std 没有嵌入式存储引擎。移植 Go BadgerDB v4，LSM 树 + 事务 + 压缩 | `badgercj` 2.3.0 |
 | **bstorm** | badger-cj 只是 KV，没有「按字段查」。加了二级索引、`@Model`/`@Index` 宏 | `bstorm` 2.1.0 |
-| **tachyon** | std 没有 HTTP 服务器。零分配解析，只依赖标准库 | `tachyon` 0.2.1 |
-| **tang** | tachyon 是内核，还得有路由、中间件、参数绑定 | `tang` 1.0.6 |
+| **tachyon** | std 核心库没有 HTTP 服务器（stdx 有，但我们选了不用，见下） | `tachyon` 0.2.1 |
+| **tang** | tachyon 是内核，还得有路由、中间件、参数绑定 | `tang` 2.1.1 |
 | **cjxt** | 想要「零 JS」的 Web 端，就得自己做服务端渲染 + 增量补丁 | `cjxt` 1.5.1 |
 | **gjson** | 发布协议里要在不反序列化的情况下取 JSON 字段 | `gjson` 1.2.2 |
 | **tar-cj** | `.cjp` 制品是 gzip + tar，发布和回源都要从里面取 README | `ystyle::tar` 1.1.0 |
 
 每一层都是下一层的前提。写到 cjreg 的时候，这些已经齐了，所以这个项目本身只有 31 个生产文件——**复杂度被下推到库层了**。
+
+### 一个刻意的选择：不用 stdx 的 HTTP
+
+仓颉的 stdx 里有 `stdx.net.http`，但 tang 和 tachyon 都**不依赖它**。
+
+原因是下游成本：stdx 需要单独配 `CANGJIE_STDX_PATH`，而且版本要和仓颉版本对齐。用它做底层意味着**每个使用者都得先配好 stdx 环境**，否则构建不起来。
+
+自己实现 HTTP/1.1，代价是要写解析器、WebSocket 握手（RFC 6455）、SHA-1 和 Base64。收益是：**任何仓颉工程 `cjpm add tang` 就能跑，不用管 stdx**。
+
+现在 tachyon 做到了每请求 0 字节分配（实测 112 B 是 std 的 `SocketImpl.write` 里一个捕获闭包，不在 tachyon 层）。
 
 ### 一个副作用：测试堆的坑
 
