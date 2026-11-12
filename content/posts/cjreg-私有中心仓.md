@@ -91,15 +91,17 @@ cjreg 站着的不是第三方生态，是我这两年攒下来的几个仓颉�
 
 不是不想用现成的，是当时没有。仓颉生态还年轻，轮子得一个个造：
 
-| 库 | 为什么需要它 | 中心仓 |
+| 库 | 为什么需要它 | 中心仓包名 |
 | --- | --- | --- |
-| **badger-cj** | std 没有嵌入式存储引擎。移植 Go BadgerDB v4，LSM 树 + 事务 + 压缩 | `badgercj` 2.3.0 |
-| **bstorm** | badger-cj 只是 KV，没有「按字段查」。加了二级索引、`@Model`/`@Index` 宏 | `bstorm` 2.1.0 |
-| **tachyon** | std 核心库没有 HTTP 服务器（stdx 有，但我们选了不用，见下） | `tachyon` 0.2.1 |
-| **tang** | tachyon 是内核，还得有路由、中间件、参数绑定 | `tang` 2.1.1 |
-| **cjxt** | 想要「零 JS」的 Web 端，就得自己做服务端渲染 + 增量补丁 | `cjxt` 1.5.1 |
-| **gjson** | 发布协议里要在不反序列化的情况下取 JSON 字段 | `gjson` 1.2.2 |
-| **tar-cj** | `.cjp` 制品是 gzip + tar，发布和回源都要从里面取 README | `ystyle::tar` 1.1.0 |
+| **badger-cj** | std 没有嵌入式存储引擎。移植 Go BadgerDB v4，LSM 树 + 事务 + 压缩 | `badgercj` |
+| **bstorm** | badger-cj 只是 KV，没有「按字段查」。加了二级索引、`@Model`/`@Index` 宏 | `bstorm` |
+| **tachyon** | std 核心库没有 HTTP 服务器（stdx 有，但我们选了不用，见下） | `tachyon` |
+| **tang** | tachyon 是内核，还得有路由、中间件、参数绑定 | `tang` |
+| **cjxt** | 想要「零 JS」的 Web 端，就得自己做服务端渲染 + 增量补丁 | `cjxt` |
+| **gjson** | 发布协议里要在不反序列化的情况下取 JSON 字段 | `gjson` |
+| **tar-cj** | `.cjp` 制品是 gzip + tar，发布和回源都要从里面取 README | `ystyle::tar` |
+
+七个包都在中心仓可装，版本以 `pkg.cangjie-lang.cn` 上的为准。
 
 每一层都是下一层的前提。写到 cjreg 的时候，这些已经齐了，所以这个项目本身只有 31 个生产文件——**复杂度被下推到库层了**。
 
