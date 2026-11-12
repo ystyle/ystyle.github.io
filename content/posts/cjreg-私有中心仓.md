@@ -75,37 +75,29 @@ docker run -d -p 8060:8060 \
 
 ## 底下是一整套自己写的库
 
-cjreg 站着的不是第三方生态，是我这两年攒下来的几个仓颉库。**它们全部由我一个人写、全部在中心仓可装。**
+cjreg 站着的不是第三方生态，是我这两年攒下来的七个仓颉库。**全部由我一个人写、全部在中心仓可装。**
 
-| 库 | 规模 | 角色 | 上面架着谁 |
+| 库 | 规模 | 为什么需要它 | 包名 |
 | --- | --- | --- | --- |
-| **badger-cj** | 17271 行 | LSM KV，移植自 Go BadgerDB | bstorm |
-| **bstorm** | 3734 行 | JSON 文档库 + 二级索引 | cjreg 存储层 |
-| **tachyon** | 4410 行 | HTTP 内核，fasthttp 风格，每请求 0 分配 | tang |
-| **tang** | 10208 行 | Web 框架，受 Fiber 启发，**零 stdx 依赖** | cjreg 服务层 |
-| **cjxt** | 22997 行 | 服务端驱动 UI + WebSocket 补丁 | cjreg 页面层 |
-| **gjson** | 3649 行 | JSON 路径取值（不反序列化） | 发布协议解析 |
-| **tar-cj** | 1682 行 | TAR 归档，移植自 Go archive/tar | 制品内容提取 |
+| **badger-cj** | 17271 行 | std 没有嵌入式存储引擎。移植 Go BadgerDB v4：LSM 树、事务、压缩 | `badgercj` |
+| **bstorm** | 3734 行 | badger-cj 只是 KV，没有「按字段查」。加了二级索引和 `@Model`/`@Index` 宏 | `bstorm` |
+| **tachyon** | 4410 行 | std 核心库没有 HTTP 服务器（stdx 有，但选了不用，见下） | `tachyon` |
+| **tang** | 10208 行 | tachyon 是内核，还得有路由、中间件、参数绑定 | `tang` |
+| **cjxt** | 22997 行 | 想做到「写界面不写 JS」，就得自己做服务端渲染 + 增量补丁 | `cjxt` |
+| **gjson** | 3649 行 | 发布协议要在不反序列化的情况下取 JSON 字段 | `gjson` |
+| **tar-cj** | 1682 行 | `.cjp` 制品是 gzip + tar，发布和回源都要从里面取 README | `ystyle::tar` |
 
-合计六万四千多行，cjreg 的 31 个生产文件站在上面。
+依赖是两段链条加三个配件：
 
-### 为什么这些得自己写
+```
+badger-cj → bstorm        存储层
+tachyon   → tang          服务层
+cjxt / gjson / tar-cj     页面、协议、制品
+```
 
-不是不想用现成的，是当时没有。仓颉生态还年轻，轮子得一个个造：
+合计六万四千多行。写到 cjreg 的时候这些已经齐了，所以这个项目本身只有 31 个生产文件——**复杂度被下推到库层了**。
 
-| 库 | 为什么需要它 | 中心仓包名 |
-| --- | --- | --- |
-| **badger-cj** | std 没有嵌入式存储引擎。移植 Go BadgerDB v4，LSM 树 + 事务 + 压缩 | `badgercj` |
-| **bstorm** | badger-cj 只是 KV，没有「按字段查」。加了二级索引、`@Model`/`@Index` 宏 | `bstorm` |
-| **tachyon** | std 核心库没有 HTTP 服务器（stdx 有，但我们选了不用，见下） | `tachyon` |
-| **tang** | tachyon 是内核，还得有路由、中间件、参数绑定 | `tang` |
-| **cjxt** | 想做到「写界面不写 JS」，就得自己做服务端渲染 + 增量补丁 | `cjxt` |
-| **gjson** | 发布协议里要在不反序列化的情况下取 JSON 字段 | `gjson` |
-| **tar-cj** | `.cjp` 制品是 gzip + tar，发布和回源都要从里面取 README | `ystyle::tar` |
-
-七个包都在中心仓可装，版本以 `pkg.cangjie-lang.cn` 上的为准。
-
-每一层都是下一层的前提。写到 cjreg 的时候，这些已经齐了，所以这个项目本身只有 31 个生产文件——**复杂度被下推到库层了**。
+版本以 `pkg.cangjie-lang.cn` 上的为准。
 
 ### 一个刻意的选择：不用 stdx 的 HTTP
 
