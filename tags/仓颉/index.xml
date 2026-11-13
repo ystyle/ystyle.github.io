@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Sat, 27 Dec 2025 15:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Fri, 13 Nov 2026 10:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/%E4%BB%93%E9%A2%89/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>cjreg：用仓颉写一个私有中心仓，Web 界面不用写一行 JS</title>
+				<link>https://ystyle.top/2026/11/13/cjreg-private-registry/</link>
+				<pubDate>Fri, 13 Nov 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/11/13/cjreg-private-registry/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;cjreg · 仓颉私有中心仓与多仓体系&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;官方仓缺的那一半，由它承接&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;「仓颉生态创新开发挑战赛」技术课题作品，获优秀奖。&lt;br&gt;&#xA;仓库 &lt;a href=&#34;https://atomgit.com/ystyle/cjreg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;atomgit.com/ystyle/cjreg&lt;/a&gt;&#xA;，MIT。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;官方中心仓很好但它不解决这三件事&#34;&gt;&lt;a href=&#34;#官方中心仓很好但它不解决这三件事&#34; class=&#34;headerlink&#34; title=&#34;官方中心仓很好，但它不解决这三件事&#34;&gt;&lt;/a&gt;官方中心仓很好，但它不解决这三件事&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;内网或离线环境没有仓。&lt;/strong&gt; 中心仓在公网。流水线和构建机在网内，断网时得带着依赖跑。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>鸿蒙PC Matebook Pro上安装仓颉编译器每日构建版</title>
 				<link>https://ystyle.top/2025/12/27/matebookpro-run-cangjie-compiler/</link>

@@ -195,16 +195,16 @@
   
   <li class="post-toc-item post-toc-level-2">
   
-  <a class="post-toc-link" href="#1-%e5%85%88%e7%9c%8b%e7%ad%be%e5%90%8d%e4%ba%a7%e7%89%a9%e4%b8%80%e4%b8%aa%e4%b8%89%e6%ae%b5%e5%bc%8f%e7%9a%84-elf">
-    <span class="post-toc-number">2.</span> <span class="post-toc-text">1. 先看签名产物：一个三段式的 ELF</span>
+  <a class="post-toc-link" href="#%e7%ad%be%e5%90%8d%e4%ba%a7%e7%89%a9%e4%b8%80%e4%b8%aa%e4%b8%89%e6%ae%b5%e5%bc%8f%e7%9a%84-elf">
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">签名产物：一个三段式的 ELF</span>
   </a>
   
   <ol class="post-toc-child">
     
     <li class="post-toc-item post-toc-level-3">
   
-  <a class="post-toc-link" href="#11-codesign-%e6%ae%b5%e9%95%bf%e4%bb%80%e4%b9%88%e6%a0%b7">
-    <span class="post-toc-number">2.1.</span> <span class="post-toc-text">1.1 .codesign 段长什么样</span>
+  <a class="post-toc-link" href="#codesign-%e6%ae%b5%e7%9a%84%e5%b8%83%e5%b1%80">
+    <span class="post-toc-number">2.1.</span> <span class="post-toc-text">.codesign 段的布局</span>
   </a>
   
 </li>
@@ -212,8 +212,8 @@
     
     <li class="post-toc-item post-toc-level-3">
   
-  <a class="post-toc-link" href="#12-%e4%b8%a4%e6%9d%a1%e5%af%b9%e9%bd%90%e7%ba%a6%e6%9d%9f%e8%83%bd%e8%a7%a3%e9%87%8a%e4%b8%a4%e4%b8%aa%e5%b8%b8%e8%a7%81%e7%8e%b0%e8%b1%a1">
-    <span class="post-toc-number">2.2.</span> <span class="post-toc-text">1.2 两条对齐约束（能解释两个常见现象）</span>
+  <a class="post-toc-link" href="#%e4%b8%a4%e6%9d%a1%e5%af%b9%e9%bd%90%e7%ba%a6%e6%9d%9f%e8%a7%a3%e9%87%8a%e4%ba%86%e4%b8%a4%e4%b8%aa%e7%8e%b0%e8%b1%a1">
+    <span class="post-toc-number">2.2.</span> <span class="post-toc-text">两条对齐约束，解释了两个现象</span>
   </a>
   
 </li>
@@ -226,16 +226,16 @@
   
   <li class="post-toc-item post-toc-level-2">
   
-  <a class="post-toc-link" href="#2-%e4%b8%89%e7%a7%8d%e7%ad%be%e5%90%8d--%e5%90%8c%e4%b8%80%e4%b8%aa%e5%ad%97%e6%ae%b5%e7%9a%84%e4%b8%89%e7%a7%8d%e5%a1%ab%e6%b3%95">
-    <span class="post-toc-number">3.</span> <span class="post-toc-text">2. 三种签名 = 同一个字段的三种填法</span>
+  <a class="post-toc-link" href="#%e4%b8%89%e7%a7%8d%e7%ad%be%e5%90%8d%e6%98%af%e5%90%8c%e4%b8%80%e4%b8%aa%e5%ad%97%e6%ae%b5%e7%9a%84%e4%b8%89%e7%a7%8d%e5%a1%ab%e6%b3%95">
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">三种签名，是同一个字段的三种填法</span>
   </a>
   
   <ol class="post-toc-child">
     
     <li class="post-toc-item post-toc-level-3">
   
-  <a class="post-toc-link" href="#21-%e4%b8%a4%e7%a7%8d%e8%af%81%e4%b9%a6%e7%ad%be%e5%90%8d%e5%b7%a5%e5%85%b7%e5%b1%82%e9%9d%a2%e6%b2%a1%e6%9c%89%e5%8c%ba%e5%88%ab">
-    <span class="post-toc-number">3.1.</span> <span class="post-toc-text">2.1 两种证书签名，工具层面没有区别</span>
+  <a class="post-toc-link" href="#%e5%9c%a8%e7%ad%be%e5%90%8d%e5%b7%a5%e5%85%b7%e7%9c%bc%e9%87%8c%e4%b8%a4%e7%a7%8d%e8%af%81%e4%b9%a6%e7%ad%be%e5%90%8d%e6%98%af%e5%90%8c%e4%b8%80%e4%b8%aa%e5%8a%a8%e4%bd%9c">
+    <span class="post-toc-number">3.1.</span> <span class="post-toc-text">在签名工具眼里，两种证书签名是同一个动作</span>
   </a>
   
 </li>
@@ -243,8 +243,8 @@
     
     <li class="post-toc-item post-toc-level-3">
   
-  <a class="post-toc-link" href="#22-flags-%e4%bd%8d%e8%b0%81%e5%9c%a8%e6%a0%87%e8%ae%b0%e8%ba%ab%e4%bb%bd">
-    <span class="post-toc-number">3.2.</span> <span class="post-toc-text">2.2 flags 位：谁在标记身份</span>
+  <a class="post-toc-link" href="#flags-%e7%9a%84%e5%8f%a6%e5%a4%96%e4%b8%a4%e4%b8%aa%e4%bd%8d%e7%94%b1%e8%ae%be%e5%a4%87%e4%be%a7%e8%ae%be%e7%bd%ae">
+    <span class="post-toc-number">3.2.</span> <span class="post-toc-text">flags 的另外两个位由设备侧设置</span>
   </a>
   
 </li>
@@ -257,16 +257,16 @@
   
   <li class="post-toc-item post-toc-level-2">
   
-  <a class="post-toc-link" href="#3-%e8%bf%90%e8%a1%8c%e6%97%b6%e8%b0%81%e5%9c%a8%e6%8b%a6exec--fs-verity--%e4%bf%a1%e4%bb%bb%e8%a1%a8">
-    <span class="post-toc-number">4.</span> <span class="post-toc-text">3. 运行时谁在拦：exec → fs-verity → 信任表</span>
+  <a class="post-toc-link" href="#%e8%bf%90%e8%a1%8c%e6%97%b6%e8%b0%81%e5%9c%a8%e6%8b%a6exec--fs-verity--%e4%bf%a1%e4%bb%bb%e8%a1%a8">
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">运行时谁在拦：exec → fs-verity → 信任表</span>
   </a>
   
   <ol class="post-toc-child">
     
     <li class="post-toc-item post-toc-level-3">
   
-  <a class="post-toc-link" href="#31-%e5%86%85%e6%a0%b8%e9%82%a3%e6%ae%b5%e7%9a%84%e5%88%a4%e5%ae%9a%e9%80%bb%e8%be%91">
-    <span class="post-toc-number">4.1.</span> <span class="post-toc-text">3.1 内核那段的判定逻辑</span>
+  <a class="post-toc-link" href="#%e5%86%85%e6%a0%b8%e9%87%8c%e7%9a%84%e5%88%a4%e5%ae%9a%e5%88%86%e6%94%af">
+    <span class="post-toc-number">4.1.</span> <span class="post-toc-text">内核里的判定分支</span>
   </a>
   
 </li>
@@ -274,8 +274,8 @@
     
     <li class="post-toc-item post-toc-level-3">
   
-  <a class="post-toc-link" href="#32-%e9%aa%8c%e5%ae%8c%e4%b9%8b%e5%90%8e%e7%bb%99%e6%96%87%e4%bb%b6%e8%b4%b4%e4%b8%80%e4%b8%aa%e8%ba%ab%e4%bb%bd%e6%a0%87%e7%ad%be">
-    <span class="post-toc-number">4.2.</span> <span class="post-toc-text">3.2 验完之后：给文件贴一个身份标签</span>
+  <a class="post-toc-link" href="#%e9%aa%8c%e5%ae%8c%e4%b9%8b%e5%90%8e%e6%96%87%e4%bb%b6%e8%a2%ab%e6%89%93%e4%b8%8a-ownerid">
+    <span class="post-toc-number">4.2.</span> <span class="post-toc-text">验完之后，文件被打上 ownerid</span>
   </a>
   
 </li>
@@ -288,8 +288,8 @@
   
   <li class="post-toc-item post-toc-level-2">
   
-  <a class="post-toc-link" href="#4-%e4%b8%89%e7%a7%8d%e7%ad%be%e5%90%8d%e6%ad%a3%e9%9d%a2%e5%af%b9%e7%85%a7">
-    <span class="post-toc-number">5.</span> <span class="post-toc-text">4. 三种签名正面对照</span>
+  <a class="post-toc-link" href="#%e4%b8%89%e7%a7%8d%e7%ad%be%e5%90%8d%e6%ad%a3%e9%9d%a2%e5%af%b9%e7%85%a7">
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">三种签名正面对照</span>
   </a>
   
 </li>
@@ -297,48 +297,8 @@
   
   <li class="post-toc-item post-toc-level-2">
   
-  <a class="post-toc-link" href="#5-%e4%b8%89%e4%b8%aa%e4%b8%ba%e4%bb%80%e4%b9%88">
-    <span class="post-toc-number">6.</span> <span class="post-toc-text">5. 三个&quot;为什么&quot;</span>
-  </a>
-  
-  <ol class="post-toc-child">
-    
-    <li class="post-toc-item post-toc-level-3">
-  
-  <a class="post-toc-link" href="#51-%e4%b8%ba%e4%bb%80%e4%b9%88-adhoc-%e8%83%bd%e8%b7%91%e5%8d%b4%e4%b8%8d%e8%83%bd%e5%a3%b0%e6%98%8e%e6%9d%83%e9%99%90">
-    <span class="post-toc-number">6.1.</span> <span class="post-toc-text">5.1 为什么 adhoc 能跑，却不能声明权限</span>
-  </a>
-  
-</li>
-
-    
-    <li class="post-toc-item post-toc-level-3">
-  
-  <a class="post-toc-link" href="#52-%e4%b8%ba%e4%bb%80%e4%b9%88%e8%b0%83%e8%af%95%e8%af%81%e4%b9%a6%e8%a6%81%e6%b1%82%e5%bc%80%e5%8f%91%e8%80%85%e6%a8%a1%e5%bc%8f--%e7%bb%91%e5%ae%9a-udid">
-    <span class="post-toc-number">6.2.</span> <span class="post-toc-text">5.2 为什么调试证书要求开发者模式 + 绑定 UDID</span>
-  </a>
-  
-</li>
-
-    
-    <li class="post-toc-item post-toc-level-3">
-  
-  <a class="post-toc-link" href="#53-%e4%b8%ba%e4%bb%80%e4%b9%88%e8%b0%83%e8%af%95%e8%af%81%e4%b9%a6%e7%ad%be%e7%9a%84%e5%85%b1%e4%ba%ab%e5%ba%93%e4%b8%8d%e8%83%bd%e5%a3%b0%e6%98%8e%e6%9d%83%e9%99%90">
-    <span class="post-toc-number">6.3.</span> <span class="post-toc-text">5.3 为什么调试证书签的共享库不能声明权限</span>
-  </a>
-  
-</li>
-
-    
-  </ol>
-  
-</li>
-
-  
-  <li class="post-toc-item post-toc-level-2">
-  
-  <a class="post-toc-link" href="#6-%e7%ad%be%e5%90%8d%e4%b9%8b%e5%a4%96%e8%bf%98%e6%9c%89%e7%ac%ac%e4%ba%8c%e9%81%93%e9%97%a8%e6%b2%99%e7%ae%b1%e7%9f%a9%e9%98%b5">
-    <span class="post-toc-number">7.</span> <span class="post-toc-text">6. 签名之外还有第二道门：沙箱矩阵</span>
+  <a class="post-toc-link" href="#%e4%b8%ba%e4%bb%80%e4%b9%88-adhoc-%e8%83%bd%e8%b7%91%e5%8d%b4%e4%b8%8d%e8%83%bd%e5%a3%b0%e6%98%8e%e6%9d%83%e9%99%90">
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">为什么 adhoc 能跑，却不能声明权限</span>
   </a>
   
 </li>
@@ -346,8 +306,8 @@
   
   <li class="post-toc-item post-toc-level-2">
   
-  <a class="post-toc-link" href="#7-%e5%92%8c-macos-%e5%af%b9%e7%85%a7%e4%b8%80%e4%b8%8b">
-    <span class="post-toc-number">8.</span> <span class="post-toc-text">7. 和 macOS 对照一下</span>
+  <a class="post-toc-link" href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e8%b0%83%e8%af%95%e8%af%81%e4%b9%a6%e8%a6%81%e6%b1%82%e5%bc%80%e5%8f%91%e8%80%85%e6%a8%a1%e5%bc%8f--%e7%bb%91%e5%ae%9a-udid">
+    <span class="post-toc-number">7.</span> <span class="post-toc-text">为什么调试证书要求开发者模式 + 绑定 UDID</span>
   </a>
   
 </li>
@@ -355,8 +315,35 @@
   
   <li class="post-toc-item post-toc-level-2">
   
-  <a class="post-toc-link" href="#8-%e6%80%8e%e4%b9%88%e9%80%89">
-    <span class="post-toc-number">9.</span> <span class="post-toc-text">8. 怎么选</span>
+  <a class="post-toc-link" href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e8%b0%83%e8%af%95%e8%af%81%e4%b9%a6%e7%ad%be%e7%9a%84%e5%85%b1%e4%ba%ab%e5%ba%93%e4%b8%8d%e8%83%bd%e5%a3%b0%e6%98%8e%e6%9d%83%e9%99%90">
+    <span class="post-toc-number">8.</span> <span class="post-toc-text">为什么调试证书签的共享库不能声明权限</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e7%ad%be%e5%90%8d%e4%b9%8b%e5%a4%96%e8%bf%98%e6%9c%89%e7%ac%ac%e4%ba%8c%e9%81%93%e9%97%a8%e6%b2%99%e7%ae%b1%e7%9f%a9%e9%98%b5">
+    <span class="post-toc-number">9.</span> <span class="post-toc-text">签名之外还有第二道门：沙箱矩阵</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%92%8c-macos-%e5%af%b9%e7%85%a7%e4%b8%80%e4%b8%8b">
+    <span class="post-toc-number">10.</span> <span class="post-toc-text">和 macOS 对照一下</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%bb%80%e4%b9%88%e5%9c%ba%e6%99%af%e7%94%a8%e5%93%aa%e7%a7%8d">
+    <span class="post-toc-number">11.</span> <span class="post-toc-text">什么场景用哪种</span>
   </a>
   
 </li>
@@ -365,7 +352,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e9%99%84%e5%bd%95%e5%91%bd%e4%bb%a4%e9%80%9f%e6%9f%a5">
-    <span class="post-toc-number">10.</span> <span class="post-toc-text">附录：命令速查</span>
+    <span class="post-toc-number">12.</span> <span class="post-toc-text">附录：命令速查</span>
   </a>
   
 </li>
@@ -374,7 +361,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99">
-    <span class="post-toc-number">11.</span> <span class="post-toc-text">参考资料</span>
+    <span class="post-toc-number">13.</span> <span class="post-toc-text">参考资料</span>
   </a>
   
 </li>
@@ -401,22 +388,18 @@
       <div class="post-content" id="post-content" itemprop="postContent">
         <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2>
 <p>上一篇<a href="/2026/09/22/matebookpro-binrary-debug-sign/">《二进制签名实战：三类签名、沙箱权限矩阵，以及一张调试证书的坑》</a>
-是踩坑视角：怎么签、报什么错、日志去哪看。这一篇换个角度，只回答一个问题——<strong>这三种签名，本质上差在哪？</strong></p>
-<p>官方文档把它们并列成三张表（签名类型对比、沙箱权限矩阵、调试证书签名流程），照着做没问题，但表格是<strong>结果</strong>，不是<strong>原因</strong>。它会告诉你&quot;自签名不能声明权限&quot;，不会告诉你为什么不能。而&quot;为什么&quot;这件事，答案在开源实现里躺着。</p>
-<p>把 OpenHarmony 的 <code>security_code_signature</code>、<code>developtools_hapsigner</code> 和内核 <code>kernel_linux_common_modules/code_sign</code> 三个仓对着读完，结论比想象的干净：</p>
-<blockquote>
-<p><strong>三种签名不是三个开关，而是同一个数据结构上「signature 字段填什么」的三种取值。</strong></p>
-</blockquote>
+是踩坑视角：怎么签、报什么错、日志去哪看。这一篇只回答一个问题：<strong>这三种签名，本质上差在哪？</strong></p>
+<p>官方文档把它们并列成三张表（签名类型对比、沙箱权限矩阵、调试证书签名流程），照着做没问题，但表格是<strong>结果</strong>，不是<strong>原因</strong>。它告诉你&quot;自签名不能声明权限&quot;，不告诉你为什么不能。</p>
+<p>把 OpenHarmony 的 <code>security_code_signature</code>、<code>developtools_hapsigner</code> 和内核 <code>kernel_linux_common_modules/code_sign</code> 三个仓对着读完：</p>
 <p>一句话结论：<strong>三种签名共用同一个 <code>.codesign</code> 段、同一个 fs-verity 描述符、同一个 0x3 版本号，区别只在 <code>signature</code> 字段——填描述符自己的摘要就是自签名，填调试证书链签出的 PKCS7 就是调试证书签名，填二进制证书链签出的 PKCS7 就是二进制证书签名。权限、分发范围、设备要求上的所有差异，都是从这一个字段推出来的。</strong></p>
 <blockquote>
-<p>阅读约定：文中标注 <strong>【源码】</strong> 的结论读自 OpenHarmony 开源仓，标注 <strong>【官方】</strong> 的引自华为文档与工单回复，其余是我们的解释。<br>
+<p>阅读约定：文中标注 <strong>【源码】</strong> 的结论读自 OpenHarmony 开源仓，标注 <strong>【官方】</strong> 的引自华为文档与工单回复，其余是我的解释。<br>
 实测环境与上篇一致：HUAWEI MateBook Pro（<code>OpenHarmony-7.0.0.105</code> / API 26 / 2in1）。</p>
 <p>如果你还没确定自己该用哪种签名，先看这一篇：<a href="/2026/10/13/harmonyos-pc-binary-sign-basics/">《二进制签名入门：证书从哪来、能要什么权限、该用哪一个》</a>
 。<br>
 本文是它的&quot;为什么&quot;。</p>
 </blockquote>
-<hr>
-<h2 id="1-先看签名产物一个三段式的-elf"><a href="#1-先看签名产物一个三段式的-elf" class="headerlink" title="1. 先看签名产物：一个三段式的 ELF"></a>1. 先看签名产物：一个三段式的 ELF</h2>
+<h2 id="签名产物一个三段式的-elf"><a href="#签名产物一个三段式的-elf" class="headerlink" title="签名产物：一个三段式的 ELF"></a>签名产物：一个三段式的 ELF</h2>
 <p>签名工具往 ELF 里加的不是一段而是最多三段。段名是源码里的常量 <strong>【源码】</strong>（<code>developtools_hapsigner/binary_sign_tool/common/include/constant.h</code>）：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#cf222e">const</span> std<span style="color:#0550ae">::</span>string CODE_SIGN_SEC_NAME <span style="color:#0550ae">=</span> <span style="color:#0a3069">&#34;.codesign&#34;</span><span style="color:#1f2328">;</span>     <span style="color:#57606a">// 代码签名块
 </span></span></span><span style="display:flex;"><span><span style="color:#cf222e">const</span> std<span style="color:#0550ae">::</span>string PROFILE_SEC_NAME   <span style="color:#0550ae">=</span> <span style="color:#0a3069">&#34;.profile&#34;</span><span style="color:#1f2328">;</span>      <span style="color:#57606a">// Provision Profile（p7b）
@@ -452,7 +435,7 @@
 	</tbody>
 </table>
 <p><code>display-sign</code> 打印的就是这里的权限段与证书链。<strong>三种签名的差别，全在 <code>.codesign</code> 里。</strong></p>
-<h3 id="11-codesign-段长什么样"><a href="#11-codesign-段长什么样" class="headerlink" title="1.1 .codesign 段长什么样"></a>1.1 <code>.codesign</code> 段长什么样</h3>
+<h3 id="codesign-段的布局"><a href="#codesign-段的布局" class="headerlink" title=".codesign 段的布局"></a><code>.codesign</code> 段的布局</h3>
 <p>内核侧的结构注释写得很清楚 <strong>【源码】</strong>（<code>kernel_linux_common_modules/code_sign/code_sign_elf.h</code>）：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>+-------------------------------------------------+
 </span></span><span style="display:flex;"><span>|       |type              (4 bytes)| code signing|
@@ -563,7 +546,7 @@
 			<tr>
 					<td><code>flags</code></td>
 					<td>4</td>
-					<td>见第 2.2 节</td>
+					<td>见下文 <code>flags</code> 一节</td>
 					<td>—</td>
 			</tr>
 			<tr>
@@ -580,7 +563,7 @@
 			</tr>
 	</tbody>
 </table>
-<h3 id="12-两条对齐约束能解释两个常见现象"><a href="#12-两条对齐约束能解释两个常见现象" class="headerlink" title="1.2 两条对齐约束（能解释两个常见现象）"></a>1.2 两条对齐约束（能解释两个常见现象）</h3>
+<h3 id="两条对齐约束解释了两个现象"><a href="#两条对齐约束解释了两个现象" class="headerlink" title="两条对齐约束，解释了两个现象"></a>两条对齐约束，解释了两个现象</h3>
 <p><code>ElfCodeSignBlock::ParseSignBlock</code> 里有两条硬校验 <strong>【源码】</strong>：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span>secOff <span style="color:#0550ae">%</span> PAGE_SIZE <span style="color:#0550ae">!=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span> <span style="color:#57606a">/* codesign section offset is not aligned */</span> <span style="color:#1f2328">}</span>
 </span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span>csBlockSize <span style="color:#0550ae">==</span> <span style="color:#0550ae">0</span> <span style="color:#0550ae">||</span> csBlockSize <span style="color:#0550ae">%</span> PAGE_SIZE <span style="color:#0550ae">!=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span> <span style="color:#57606a">/* SECTION_SIZE */</span> <span style="color:#1f2328">}</span>
@@ -594,9 +577,8 @@
 <p>顺带一条社区经验 <strong>【源码·他人实证】</strong>：预构建的 <code>.so</code> 从构建机复制到另一台设备后可能不被接受，即便它带着看起来完好的 <code>.codesign</code>；标准解是 <code>llvm-objcopy --remove-section .codesign</code> → 重新 <code>binary-sign-tool sign -selfSign 1</code> → 恢复权限位。参见 <a href="https://gitcode.com/OpenHarmonyPCDeveloper/build_in_harmonyos/issues/3349" target="_blank" rel="noopener">build_in_harmonyos issue #3349</a>
 。</p>
 </blockquote>
-<hr>
-<h2 id="2-三种签名--同一个字段的三种填法"><a href="#2-三种签名--同一个字段的三种填法" class="headerlink" title="2. 三种签名 = 同一个字段的三种填法"></a>2. 三种签名 = 同一个字段的三种填法</h2>
-<p>这是全文的核心。签名工具的 <code>CodeSigning::GetElfCodeSignBlock</code> 一共就干四件事 <strong>【源码】</strong>（<code>developtools_hapsigner/binary_sign_tool/codesigning/sign/src/code_signing.cpp</code>）：</p>
+<h2 id="三种签名是同一个字段的三种填法"><a href="#三种签名是同一个字段的三种填法" class="headerlink" title="三种签名，是同一个字段的三种填法"></a>三种签名，是同一个字段的三种填法</h2>
+<p>签名工具的 <code>CodeSigning::GetElfCodeSignBlock</code> 一共就干四件事 <strong>【源码】</strong>（<code>developtools_hapsigner/binary_sign_tool/codesigning/sign/src/code_signing.cpp</code>）：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#cf222e">int</span> FLAG_SELF_SIGN <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span> <span style="color:#0550ae">&lt;&lt;</span> <span style="color:#0550ae">4</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#cf222e">int</span> flags <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span>
@@ -620,7 +602,7 @@
 </span></span><span style="display:flex;"><span>          <span style="color:#1f2328">.</span>SetFlags<span style="color:#1f2328">(</span>flags<span style="color:#1f2328">).</span>SetCsVersion<span style="color:#1f2328">(</span><span style="color:#0550ae">0x3</span><span style="color:#1f2328">);</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a">// 4) 描述符 + 签名写进 .codesign
-</span></span></span></code></pre></div><p><strong>第 2 步就是全部的秘密。</strong> 自签名分支填进去的是 <code>GetDescriptorDigest()</code>——描述符<strong>自己算自己</strong>得到的一个摘要，不是任何第三方签出来的东西。而证书分支填进去的是用证书链对描述符做的 PKCS7 签名，且把叶子证书的 <strong>OU（organizationalUnitName）</strong> 作为 <code>ownerid</code> 一并塞进了 PKCS7。</p>
+</span></span></span></code></pre></div><p>第 2 步里的分支是唯一的岔路口。自签名填进去的是 <code>GetDescriptorDigest()</code>——描述符<strong>自己算自己</strong>得到的摘要，不是任何第三方签出来的东西；证书分支填进去的是用证书链对这个描述符做的 PKCS7 签名，并且把叶子证书的 <strong>OU（organizationalUnitName）</strong> 作为 <code>ownerid</code> 一并塞进了 PKCS7。</p>
 <p>&ldquo;被签对象&quot;到底是什么，内核头文件里定义得很精确 <strong>【源码】</strong>（<code>kernel_linux_5.10/include/linux/code_sign.h</code>）：</p>
 <blockquote>
 <p>The file measurement is the hash of this structure excluding the signature and with the <code>sig_size</code> field set to 0, while version is replaced by code sign version.</p>
@@ -647,15 +629,15 @@
 			</tr>
 	</tbody>
 </table>
-<p><strong>三种签名的全部差异，就压缩在&quot;自证&quot;与&quot;他证&quot;这两个词之间。</strong> 自证只能回答&quot;文件还是原来那份吗&rdquo;，他证才能回答&quot;这是谁签的&quot;。</p>
-<h3 id="21-两种证书签名工具层面没有区别"><a href="#21-两种证书签名工具层面没有区别" class="headerlink" title="2.1 两种证书签名，工具层面没有区别"></a>2.1 两种证书签名，工具层面没有区别</h3>
+<p>签名到这里就分成两种：<strong>自证</strong>和<strong>他证</strong>。自证只能回答&quot;文件还是原来那份吗&rdquo;，他证才能回答&quot;这是谁签的&quot;。</p>
+<h3 id="在签名工具眼里两种证书签名是同一个动作"><a href="#在签名工具眼里两种证书签名是同一个动作" class="headerlink" title="在签名工具眼里，两种证书签名是同一个动作"></a>在签名工具眼里，两种证书签名是同一个动作</h3>
 <p>源码里 <code>m_selfSign</code> 是个 <code>bool</code>，<strong>没有第三个分支</strong>。也就是说：</p>
 <ul>
-<li><strong>调试证书签名</strong>和<strong>二进制证书签名在签名工具眼里是同一个动作</strong>——都是&quot;用某张证书链 + 私钥对描述符做 PKCS7&quot;；</li>
+<li><strong>调试证书签名</strong>和<strong>二进制证书签名</strong>在签名工具眼里是同一个动作——都是&quot;用某张证书链 + 私钥对描述符做 PKCS7&quot;；</li>
 <li>区别不在工具，在<strong>你递进去的是哪张证书</strong>，以及<strong>内核对这张证书所在的信任表怎么看</strong>。</li>
 </ul>
-<p>这一点很重要：它意味着你无法通过&quot;换一个命令行参数&quot;把调试签名变成正式签名，两者是同一条代码路径的两种输入。</p>
-<h3 id="22-flags-位谁在标记身份"><a href="#22-flags-位谁在标记身份" class="headerlink" title="2.2 flags 位：谁在标记身份"></a>2.2 <code>flags</code> 位：谁在标记身份</h3>
+<p>所以你没法通过&quot;换一个命令行参数&quot;把调试签名变成正式签名——两者是同一条代码路径的两种输入。</p>
+<h3 id="flags-的另外两个位由设备侧设置"><a href="#flags-的另外两个位由设备侧设置" class="headerlink" title="flags 的另外两个位由设备侧设置"></a><code>flags</code> 的另外两个位由设备侧设置</h3>
 <p><code>flags</code> 字段里的位是分开的 <strong>【源码】</strong>：</p>
 <table>
 	<thead>
@@ -691,8 +673,7 @@
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span>flag <span style="color:#0550ae">&amp;</span> IS_LOCAL_HSP_PLUGIN<span style="color:#1f2328">)</span>   <span style="color:#1f2328">{</span> arg<span style="color:#1f2328">.</span>flags <span style="color:#0550ae">|=</span> BINARY_CERT_FLAGS<span style="color:#1f2328">;</span> <span style="color:#1f2328">}</span>
 </span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span>flag <span style="color:#0550ae">&amp;</span> IS_SIDE_LOADING_APP<span style="color:#1f2328">)</span>   <span style="color:#1f2328">{</span> arg<span style="color:#1f2328">.</span>flags <span style="color:#0550ae">|=</span> SIDE_LOADING_FLAGS<span style="color:#1f2328">;</span> <span style="color:#1f2328">}</span>
 </span></span></code></pre></div><p>所以对<strong>独立 ELF 二进制</strong>来说，签名工具只会动 bit 4；bit 5/6 是应用内嵌原生库场景下的身份标记。这个区别在排查时有用：手搓的独立二进制不该看到 bit 5/6 被置位——那说明产物是在被包进 HSP/应用之后（或由设备侧）重新打过标的。</p>
-<hr>
-<h2 id="3-运行时谁在拦exec--fs-verity--信任表"><a href="#3-运行时谁在拦exec--fs-verity--信任表" class="headerlink" title="3. 运行时谁在拦：exec → fs-verity → 信任表"></a>3. 运行时谁在拦：exec → fs-verity → 信任表</h2>
+<h2 id="运行时谁在拦exec--fs-verity--信任表"><a href="#运行时谁在拦exec--fs-verity--信任表" class="headerlink" title="运行时谁在拦：exec → fs-verity → 信任表"></a>运行时谁在拦：exec → fs-verity → 信任表</h2>
 <p>签完只是把数据写进去了，能不能跑是另一回事。执行一个二进制的判定链大致是：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>exec()
 </span></span><span style="display:flex;"><span>  └─ code_protect（用户态服务，日志 TAG：CODE_SIGN / BSS）
@@ -704,7 +685,7 @@
 </span></span><span style="display:flex;"><span>                 ├─ 按 dataSize/rootHash/salt 算并比对 Merkle 树      ← 完整性
 </span></span><span style="display:flex;"><span>                 └─ code_sign_verify_certchain(PKCS7)                ← 来源
 </span></span><span style="display:flex;"><span>                      └─ hmcrypt_rnd: PKCS7_signatureVerify
-</span></span></code></pre></div><h3 id="31-内核那段的判定逻辑"><a href="#31-内核那段的判定逻辑" class="headerlink" title="3.1 内核那段的判定逻辑"></a>3.1 内核那段的判定逻辑</h3>
+</span></span></code></pre></div><h3 id="内核里的判定分支"><a href="#内核里的判定分支" class="headerlink" title="内核里的判定分支"></a>内核里的判定分支</h3>
 <p><code>code_sign_verify_certchain</code> 的分支不多，但每一个都对应一条官方规则 <strong>【源码】</strong>（<code>kernel_linux_common_modules/code_sign/verify_cert_chain.c</code>）：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>pkcs7 <span style="color:#0550ae">=</span> <span style="color:#6639ba">pkcs7_parse_message</span><span style="color:#1f2328">(</span>raw_pkcs7<span style="color:#1f2328">,</span> pkcs7_len<span style="color:#1f2328">);</span>
 </span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#0550ae">!</span>pkcs7<span style="color:#0550ae">-&gt;</span>signed_infos<span style="color:#1f2328">)</span>  <span style="color:#cf222e">goto</span> untrusted<span style="color:#1f2328">;</span>
@@ -727,7 +708,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#57606a">/* 校验链深度不超过 source-&gt;max_path_depth */</span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></div><p>三行关键结论，前两行读代码就能定，第三行最值得记住：</p>
+</span></span></code></pre></div><p>三条结论里，前两行读代码就能定，第三行对应官方文档那句&quot;运行时要求设备处于开发者模式&quot;：</p>
 <table>
 	<thead>
 			<tr>
@@ -750,7 +731,7 @@
 			</tr>
 	</tbody>
 </table>
-<p>第三行是这节的重点：官方文档说&quot;运行时要求设备处于开发者模式&rdquo;，读起来像一条策略约定；源码里它的实际形态是<strong>调试信任表是否参与匹配的开关</strong>——开发者模式一关，调试证书签的二进制就直接落到 <code>untrusted</code>。</p>
+<p>官方文档说&quot;运行时要求设备处于开发者模式&rdquo;，读起来像一条策略约定；源码里它的实际形态是<strong>调试信任表是否参与匹配的开关</strong>——开发者模式一关，调试证书签的二进制就直接落到 <code>untrusted</code>。</p>
 <blockquote>
 <p><strong>一条边界说明。</strong> 上面这些 <code>path_type</code> 是一组枚举：发行侧 <code>RELEASE_CODE_START(0x0) … RELEASE_CODE_END(0x5)</code>，<br>
 调试侧 <code>DEBUG_CODE_START(0x100) … DEBUG_CODE_END(0x106)</code>，另有 <code>MAY_LOCAL_CODE = 0x201</code>。<br>
@@ -759,7 +740,7 @@
 这一条与&quot;adhoc 和二进制证书签的 ELF 在我们的设备上都能跑&quot;并不完全吻合——可能是开源仓 <code>master</code><br>
 与设备实际发行版本之间的差异，也可能实际走的是另一条校验路径。<strong>这里只陈述观察，不下结论。</strong></p>
 </blockquote>
-<h3 id="32-验完之后给文件贴一个身份标签"><a href="#32-验完之后给文件贴一个身份标签" class="headerlink" title="3.2 验完之后：给文件贴一个身份标签"></a>3.2 验完之后：给文件贴一个身份标签</h3>
+<h3 id="验完之后文件被打上-ownerid"><a href="#验完之后文件被打上-ownerid" class="headerlink" title="验完之后，文件被打上 ownerid"></a>验完之后，文件被打上 <code>ownerid</code></h3>
 <p>过了信任表校验，内核会给文件打上 <code>ownerid</code> <strong>【源码】</strong>（<code>code_sign_ext.h</code> / <code>verify_cert_chain.c</code>）：</p>
 <table>
 	<thead>
@@ -797,14 +778,13 @@
 			</tr>
 	</tbody>
 </table>
-<p>而 <code>ownerid</code> 的原始来源，就是第 2 节里那句 <code>GetOwnerIdFromCert</code> 取到的<strong>叶子证书 OU</strong> <strong>【源码】</strong>：</p>
+<p>而 <code>ownerid</code> 的原始来源，就是前面 <code>GetElfCodeSignBlock</code> 里那句 <code>GetOwnerIdFromCert</code> 取到的<strong>叶子证书 OU</strong> <strong>【源码】</strong>：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>VerifyCertOpensslUtils<span style="color:#0550ae">::</span>GetTextFromX509Name<span style="color:#1f2328">(</span>subject<span style="color:#1f2328">,</span> NID_organizationalUnitName<span style="color:#1f2328">,</span> ownerID<span style="color:#1f2328">);</span>
 </span></span></code></pre></div><blockquote>
-<p>从这里就能看出内核对&quot;身份&quot;的依赖有多深：<strong>整条权限体系的地基是&quot;这个文件是谁签的&quot;</strong>，而这个&quot;谁&quot;最终落在证书的一个字符串字段上。</p>
+<p><strong>整条权限体系都挂在&quot;这个文件是谁签的&quot;上</strong>，而这个&quot;谁&quot;最终落在证书的一个字符串字段里。</p>
 </blockquote>
-<hr>
-<h2 id="4-三种签名正面对照"><a href="#4-三种签名正面对照" class="headerlink" title="4. 三种签名正面对照"></a>4. 三种签名正面对照</h2>
-<p>现在可以正面回答了。左边是你能观察到的差异，右边是它在源码里的来源：</p>
+<h2 id="三种签名正面对照"><a href="#三种签名正面对照" class="headerlink" title="三种签名正面对照"></a>三种签名正面对照</h2>
+<p>现在可以正面回答了。下表每一行是一个能观察到的差异，每一列是一种签名：</p>
 <table>
 	<thead>
 			<tr>
@@ -883,34 +863,31 @@
 			</tr>
 	</tbody>
 </table>
-<p><strong>把这张表从上往下读一遍会发现：除了第一行，其余每一行都是第一行的推论。</strong></p>
-<hr>
-<h2 id="5-三个为什么"><a href="#5-三个为什么" class="headerlink" title="5. 三个&#34;为什么&#34;"></a>5. 三个&quot;为什么&quot;</h2>
-<h3 id="51-为什么-adhoc-能跑却不能声明权限"><a href="#51-为什么-adhoc-能跑却不能声明权限" class="headerlink" title="5.1 为什么 adhoc 能跑，却不能声明权限"></a>5.1 为什么 adhoc 能跑，却不能声明权限</h3>
+<p>这张表从上往下读，除了第一行，其余每一行都能从第一行推出来。</p>
+<h2 id="为什么-adhoc-能跑却不能声明权限"><a href="#为什么-adhoc-能跑却不能声明权限" class="headerlink" title="为什么 adhoc 能跑，却不能声明权限"></a>为什么 adhoc 能跑，却不能声明权限</h2>
 <p>因为<strong>完整性和来源是两件事</strong>，而 adhoc 只解决了前一件。</p>
 <p><code>signature</code> 字段填的是描述符自身的摘要，它能证明的只有一件事：<em>&ldquo;这份文件从签名那一刻起，一个字节都没被改过。&rdquo;</em> 它证明不了&quot;这是谁签的&quot;——因为这个摘要不是任何主体签出来的，<strong>没有一个可以为之背书的身份</strong>。</p>
 <p>而权限授予的对象恰恰是身份。回头看签名工具那段代码就很直白：自签名分支里<strong>根本没有证书参与</strong>，产出的也不是 PKCS7，只是一个自证的摘要。既然&quot;签发者&quot;这个信息从一开始就不存在，运行时自然也换不出任何身份——你不是&quot;某个被信任的签发者&quot;，只是&quot;一个自我校验通过的 ELF 文件&quot;。</p>
 <blockquote>
 <p>⚠️ 顺带纠一个常见误解：<strong>自签名不绑定设备。</strong> <code>.codesign</code> 段里只有文件自身的大小、<br>
 merkle 根哈希和摘要，<strong>没有任何设备标识</strong>，所以产物可以拷到别的鸿蒙 PC 上直接运行。<br>
-绑定设备的是<strong>调试证书</strong>——它走 <code>device-ids</code> 里的 UDID 白名单（见 5.2）。<br>
+绑定设备的是<strong>调试证书</strong>——它走 <code>device-ids</code> 里的 UDID 白名单（见下一节）。<br>
 也就是说 adhoc 的&quot;弱&quot;在于<strong>没有身份</strong>，而不是&quot;只在这台机器上有效&quot;。</p>
 </blockquote>
 <p>所以 <strong>【官方】</strong>&ldquo;自签名的二进制（adhoc）权限策略段运行过程不会生效&quot;这句话要这么理解：<strong>不是策略段没写进去，而是没有一个主体来认领它。</strong> 你就算把 <code>-moduleFile</code> 传进去、<code>.permission</code> 段也确实被写进了 ELF，运行时依然不会有任何权限上身。</p>
-<h3 id="52-为什么调试证书要求开发者模式--绑定-udid"><a href="#52-为什么调试证书要求开发者模式--绑定-udid" class="headerlink" title="5.2 为什么调试证书要求开发者模式 + 绑定 UDID"></a>5.2 为什么调试证书要求开发者模式 + 绑定 UDID</h3>
+<h2 id="为什么调试证书要求开发者模式--绑定-udid"><a href="#为什么调试证书要求开发者模式--绑定-udid" class="headerlink" title="为什么调试证书要求开发者模式 + 绑定 UDID"></a>为什么调试证书要求开发者模式 + 绑定 UDID</h2>
 <p>这两条是同一个设计意图的<strong>两道锁</strong>：把&quot;开发期凭证&quot;的影响半径压到开发者自己的机器上。</p>
 <ul>
 <li><strong>UDID 锁</strong>：<code>.permission</code> 里必须写明 <code>debug-info.device-ids</code>，运行前由 <code>VerityHdcStatusAndDeviceId</code> 校验。缺了就是 <code>[FAILED] verity deviceId for debug signer: udid not in module.json</code>。这一道锁管的是<strong>哪些设备</strong>。</li>
-<li><strong>开发者模式锁</strong>：第 3.1 节那行 <code>if (is_dev_mode)</code>。这一道锁管的是<strong>什么状态</strong>——同一台列在白名单里的设备，关掉开发者模式同样跑不了。<br>
+<li><strong>开发者模式锁</strong>：前面 <code>code_sign_verify_certchain</code> 里那行 <code>if (is_dev_mode)</code>。这一道锁管的是<strong>什么状态</strong>——同一台列在白名单里的设备，关掉开发者模式同样跑不了。<br>
 （另一个源码观察：内核 <code>code_sign_elf.c</code> 的 <code>elf_file_enable_fs_verity</code> 第一步就检查开发者模式，<code>!= STATE_ON</code> 直接返回 <code>-EINVAL</code>——这条路径与开发者模式是硬绑定的，不是建议。）</li>
 </ul>
 <p>这是典型的<strong>能力与约束对偶</strong>：既然调试证书被授予了&quot;声明权限&quot;的能力，就必然要限制它能传播到哪里，否则调试证书就等价于正式证书了。二进制证书没有这两道锁，代价是它几乎拿不到。</p>
-<h3 id="53-为什么调试证书签的共享库不能声明权限"><a href="#53-为什么调试证书签的共享库不能声明权限" class="headerlink" title="5.3 为什么调试证书签的共享库不能声明权限"></a>5.3 为什么调试证书签的共享库不能声明权限</h3>
-<p>这条是 <strong>【官方】</strong> 明写的，但文档只给了结论、没给理由。下面这段是我们的解释，不是源码事实：</p>
+<h2 id="为什么调试证书签的共享库不能声明权限"><a href="#为什么调试证书签的共享库不能声明权限" class="headerlink" title="为什么调试证书签的共享库不能声明权限"></a>为什么调试证书签的共享库不能声明权限</h2>
+<p>这条是 <strong>【官方】</strong> 明写的，但文档只给了结论、没给理由。下面这段是我的解释，不是源码事实：</p>
 <p>权限的主体是<strong>进程/应用</strong>，而不是文件。<code>.so</code> 被 <code>dlopen</code> 进某个宿主进程之后，它在内核眼里并不是一个可以独立承担权限的实体——它藉由宿主进程的身份运行。所以&quot;给一个 <code>.so</code> 授予权限&quot;这件事本身缺少可挂靠的授权对象。</p>
-<p>反过来说，<strong>可执行程序拥有自己的进程，因此拥有可被授权的身份</strong>。这正好解释了为什么官方把这条单独拎出来强调：它不是一个容易忽略的细节，而是一条结构性限制。</p>
-<hr>
-<h2 id="6-签名之外还有第二道门沙箱矩阵"><a href="#6-签名之外还有第二道门沙箱矩阵" class="headerlink" title="6. 签名之外还有第二道门：沙箱矩阵"></a>6. 签名之外还有第二道门：沙箱矩阵</h2>
+<p>反过来说，<strong>可执行程序拥有自己的进程，因此拥有可被授权的身份</strong>。官方把这条单独拎出来强调，原因也在这里：它属于结构性限制。</p>
+<h2 id="签名之外还有第二道门沙箱矩阵"><a href="#签名之外还有第二道门沙箱矩阵" class="headerlink" title="签名之外还有第二道门：沙箱矩阵"></a>签名之外还有第二道门：沙箱矩阵</h2>
 <p>签名决定&quot;这个文件的身份是否可信&rdquo;，沙箱决定&quot;这个文件能不能被某个应用拉起来&quot;。两者是独立的两道关。</p>
 <p>官方的强/弱沙箱定义 <strong>【官方】</strong>：</p>
 <ul>
@@ -958,7 +935,7 @@ merkle 根哈希和摘要，<strong>没有任何设备标识</strong>，所以�
 			</tr>
 	</tbody>
 </table>
-<p>这张表要和第 2 节的结论连起来读才有意思：</p>
+<p>这张表和前面&quot;自证 / 他证&quot;那条结论连起来看：</p>
 <ul>
 <li><strong>弱沙箱应用怎样都能拉起独立二进制</strong>——它本来就拿到了 <code>CUSTOM_SANDBOX</code>（一条 ACL 权限），等于自带&quot;允许外部原生代码&quot;的身份；</li>
 <li><strong>强沙箱应用必须申请 <code>ALLOW_EXTERNAL_NATIVE_CODE</code>，而且即便如此也拉不起 adhoc bin</strong>——因为 adhoc 没有身份，无法参与&quot;这个二进制是谁给的、能不能信&quot;的判断。</li>
@@ -974,9 +951,8 @@ merkle 根哈希和摘要，<strong>没有任何设备标识</strong>，所以�
 </span></span><span style="display:flex;"><span>llvm-readelf -S my_program      <span style="color:#57606a"># 末尾能看到 .codesign 段</span>
 </span></span></code></pre></div><p>不过它默认没开（macOS 上 lld 是默认开的），而且链接期没有证书参与，所以产物仍然落在<strong>自签名</strong>路径上。</p>
 </blockquote>
-<hr>
-<h2 id="7-和-macos-对照一下"><a href="#7-和-macos-对照一下" class="headerlink" title="7. 和 macOS 对照一下"></a>7. 和 macOS 对照一下</h2>
-<p>这套机制在设计上和 macOS 的代码签名是同构的，对照着看会快很多：</p>
+<h2 id="和-macos-对照一下"><a href="#和-macos-对照一下" class="headerlink" title="和 macOS 对照一下"></a>和 macOS 对照一下</h2>
+<p>这套机制在设计上和 macOS 的代码签名是同构的，对照着看容易理解：</p>
 <table>
 	<thead>
 			<tr>
@@ -1029,9 +1005,14 @@ merkle 根哈希和摘要，<strong>没有任何设备标识</strong>，所以�
 	</tbody>
 </table>
 <p>差异最大的一格是&quot;链接期签名&quot;：macOS 上 lld 默认就打 adhoc 签名，所以开发者几乎对签名无感；鸿蒙这边同一个能力存在但<strong>默认关闭</strong>，于是每个人都得显式补一步。</p>
-<p>还有一点值得说清楚：<strong>这套验签机制在开源仓里有完整实现，但&quot;是否强制校验&quot;取决于设备与发行版配置。</strong> 在鸿蒙 PC（2in1）上它是强制的——不签名就是 <code>Permission denied</code>，没有商量余地。</p>
-<hr>
-<h2 id="8-怎么选"><a href="#8-怎么选" class="headerlink" title="8. 怎么选"></a>8. 怎么选</h2>
+<p><strong>这套验签机制在开源仓里有完整实现，但&quot;是否强制校验&quot;取决于设备与发行版配置。</strong> 在鸿蒙 PC（2in1）上它是强制的——不签名就是 <code>Permission denied</code>，没有商量余地。</p>
+<h2 id="什么场景用哪种"><a href="#什么场景用哪种" class="headerlink" title="什么场景用哪种"></a>什么场景用哪种</h2>
+<p>选择其实只取决于两件事，前面几节都已经给出了答案：</p>
+<ul>
+<li><strong>权限要靠身份换。</strong> <code>signature</code> 里没有证书，就没有主体能把权限授给你，所以只要涉及声明权限，自签名就直接出局。</li>
+<li><strong>身份能管到哪，看你打算给谁跑。</strong> 调试证书的身份只在 <code>device-ids</code> 列出的设备上、且开发者模式开着时成立；要跨出这个范围公开发布，就只剩二进制证书，而它要华为认证。</li>
+</ul>
+<p>对应到具体场景：</p>
 <table>
 	<thead>
 			<tr>
@@ -1053,7 +1034,7 @@ merkle 根哈希和摘要，<strong>没有任何设备标识</strong>，所以�
 			</tr>
 			<tr>
 					<td>要在应用里被拉起</td>
-					<td>看第 6 节矩阵</td>
+					<td>看上面那张沙箱矩阵</td>
 					<td>注意交叉编译产物默认是 <code>adhoc bin</code></td>
 			</tr>
 			<tr>
@@ -1072,10 +1053,9 @@ merkle 根哈希和摘要，<strong>没有任何设备标识</strong>，所以�
 <ol>
 <li><strong>二进制签名一定要用自己申请的调试证书。</strong> DevEco Studio 自动签名生成的那张不能用——它签出的 ELF 会在内核 <code>PKCS7_signatureVerify</code> 处被拒，详见<a href="/2026/09/22/matebookpro-binrary-debug-sign/">上一篇</a>
 的完整证据链。</li>
-<li><strong><code>.so</code> 别指望声明权限</strong>，第 5.3 节那条是结构性限制。</li>
+<li><strong><code>.so</code> 别指望声明权限</strong>，前面讲共享库那条是结构性限制。</li>
 <li><strong>签名 ≠ 能跑</strong>：<code>write code sign data success</code> 只代表数据写进去了，判定发生在运行时的 <code>code_protect</code> + 内核里，证据在 <code>hilog</code> / <code>kmsg</code>。</li>
 </ol>
-<hr>
 <h2 id="附录命令速查"><a href="#附录命令速查" class="headerlink" title="附录：命令速查"></a>附录：命令速查</h2>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># ---- 自签名（adhoc）----</span>
 </span></span><span style="display:flex;"><span>binary-sign-tool sign -inFile tool -outFile tool.signed -selfSign <span style="color:#0550ae">1</span>
@@ -1104,8 +1084,7 @@ merkle 根哈希和摘要，<strong>没有任何设备标识</strong>，所以�
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># ---- 打开内核日志后再复现（原因证据在这里）----</span>
 </span></span><span style="display:flex;"><span>hdc shell <span style="color:#0a3069">&#34;hilog -k on; hilog -w start -t kmsg&#34;</span>
 </span></span><span style="display:flex;"><span>hdc shell <span style="color:#0a3069">&#34;hilog -t kmsg&#34;</span> <span style="color:#1f2328">|</span> grep -E <span style="color:#0a3069">&#34;fsverity|hmcrypt&#34;</span>
-</span></span></code></pre></div><hr>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2>
+</span></span></code></pre></div><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2>
 <ul>
 <li>华为《二进制签名工具》官方文档：<a href="https://developer.huawei.com/consumer/cn/doc/harmonyOS-guides/binary-sign-tool" target="_blank" rel="noopener">developer.huawei.com/consumer/cn/doc/harmonyOS-guides/binary-sign-tool</a>
 </li>
@@ -1122,7 +1101,7 @@ merkle 根哈希和摘要，<strong>没有任何设备标识</strong>，所以�
 </ul>
 <blockquote>
 <p>说明：本文标注 <strong>【源码】</strong> 的结论读自上述开源仓（<code>master</code> 分支），标注 <strong>【官方】</strong> 的引自华为开发者文档与工单回复，<br>
-其余为我们的解释，可能有误，欢迎指正。实测环境为 HUAWEI MateBook Pro（<code>OpenHarmony-7.0.0.105</code>，API 26，2in1）。</p>
+其余为我的解释，可能有误，欢迎指正。实测环境为 HUAWEI MateBook Pro（<code>OpenHarmony-7.0.0.105</code>，API 26，2in1）。</p>
 </blockquote>
 
       </div>
@@ -1130,7 +1109,7 @@ merkle 根哈希和摘要，<strong>没有任何设备标识</strong>，所以�
       <blockquote class="post-copyright">
         <div class="content">
           <span class="post-time">
-            Last updated: <time datetime="2026-10-13T16:30:00&#43;08:00" itemprop="dateUpdated">2026-10-13 16:30:00</time>
+            Last updated: <time datetime="2026-11-12T18:20:00&#43;08:00" itemprop="dateUpdated">2026-11-12 18:20:00</time>
           </span><br>
           本文链接：<a href="/2026/10/13/harmonyos-pc-binary-sign-types/" target="_blank" rel="external">https://ystyle.top/2026/10/13/harmonyos-pc-binary-sign-types/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
         </div>

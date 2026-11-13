@@ -10,7 +10,7 @@
 		
 		
 		
-			<lastBuildDate>Fri, 03 Apr 2026 21:30:00 +0800</lastBuildDate>
+			<lastBuildDate>Thu, 12 Nov 2026 18:20:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/StratoVirt/index.xml" rel="self" type="application/rss+xml" />
 			<item>
@@ -18,7 +18,7 @@
 				<link>https://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/</link>
 				<pubDate>Fri, 03 Apr 2026 21:30:00 +0800</pubDate>
 				<guid>https://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/</guid>
-				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;本文深入解析鸿蒙PC融合开发引擎的技术架构，揭示其如何通过StratoVirt虚拟化和OzoneC容器技术实现Linux应用兼容。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;背景&#34;&gt;&lt;a href=&#34;#背景&#34; class=&#34;headerlink&#34; title=&#34;背景&#34;&gt;&lt;/a&gt;背景&lt;/h2&gt;&#xA;&lt;p&gt;鸿蒙PC（HarmonyOS PC）采用了独特的架构设计来实现Linux应用兼容。作为用户，我在使用过程中发现系统提供了一个&amp;quot;融合开发引擎&amp;quot;功能，可以在其中运行openEuler环境。本文将解析这个融合开发引擎的技术架构。&lt;/p&gt;</description>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;鸿蒙 PC 上那个能跑 Linux 的「融合开发引擎」，底下是虚拟机套容器。这篇是我怎么一步步探出来的。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;起因&#34;&gt;&lt;a href=&#34;#起因&#34; class=&#34;headerlink&#34; title=&#34;起因&#34;&gt;&lt;/a&gt;起因&lt;/h2&gt;&#xA;&lt;p&gt;鸿蒙 PC 自带的开发环境里有个「融合开发引擎」，打开就能用 openEuler 的命令行。官方文档只说是「提供 Linux 兼容环境」，没讲怎么实现的。&lt;/p&gt;</description>
 			</item>
 	</channel>
 </rss>

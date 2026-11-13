@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>cjreg：用仓颉写一个私有中心仓，Web 界面不用写一行 JS | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
+  
+  <link rel="stylesheet" href="/css/theme-fix.css">
+  
+  
+
+<script>var _hmt = _hmt || []</script>
+<script async src="https://hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+
+
+<script>
+(function () {
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  bp.src = curProtocol === 'https'
+    ? 'https://zz.bdstatic.com/linksubmit/push.js'
+    : 'http://push.zhanzhang.baidu.com/push.js';
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">cjreg：用仓颉写一个私有中心仓，Web 界面不用写一行 JS</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">cjreg：用仓颉写一个私有中心仓，Web 界面不用写一行 JS</h1>
+    <h5 class="subtitle">
+      <time datetime="2026-11-13T10:00:00&#43;08:00" itemprop="datePublished" class="page-time">2026-11-13</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%ae%98%e6%96%b9%e4%b8%ad%e5%bf%83%e4%bb%93%e5%be%88%e5%a5%bd%e4%bd%86%e5%ae%83%e4%b8%8d%e8%a7%a3%e5%86%b3%e8%bf%99%e4%b8%89%e4%bb%b6%e4%ba%8b">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">官方中心仓很好，但它不解决这三件事</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%ae%83%e9%95%bf%e4%bb%80%e4%b9%88%e6%a0%b7">
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">它长什么样</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e4%b8%aa%e5%ae%b9%e6%98%93%e8%a2%ab%e5%bf%bd%e7%95%a5%e7%9a%84%e7%82%b9web-%e7%ab%af%e4%b9%9f%e6%98%af%e4%bb%93%e9%a2%89">
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">一个容易被忽略的点：Web 端也是仓颉</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e6%a0%b8%e5%bf%83%e8%83%bd%e5%8a%9b%e5%9b%9b%e4%bb%b6%e4%ba%8b">
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">核心能力：四件事</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e5%a4%9a%e4%bb%93%e4%b8%80%e4%b8%aa%e5%ae%9e%e4%be%8b%e5%af%b9%e6%8e%a5%e5%a4%9a%e4%b8%aa%e4%bb%93">
+    <span class="post-toc-number">4.1.</span> <span class="post-toc-text">一、多仓：一个实例对接多个仓</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%ba%8c%e5%a4%9a%e4%bb%93%e6%9f%a5%e6%89%be%e5%85%88%e6%9f%a5%e5%93%aa%e4%b8%aa%e4%bb%93">
+    <span class="post-toc-number">4.2.</span> <span class="post-toc-text">二、多仓查找：先查哪个仓</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%89%e5%8f%91%e5%b8%83%e8%ae%a1%e5%88%92%e6%8c%89%e6%8b%93%e6%89%91%e9%a1%ba%e5%ba%8f%e5%8f%91%e5%85%ad%e6%80%81%e5%8f%af%e8%a7%86">
+    <span class="post-toc-number">4.3.</span> <span class="post-toc-text">三、发布计划：按拓扑顺序发，六态可视</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%9b%9b%e5%9b%a2%e9%98%9f%e4%b8%8e%e6%9d%83%e9%99%90%e6%8c%89%e5%9b%a2%e9%98%9f%e6%8e%88%e6%9d%83%e4%b8%8d%e6%8c%89%e4%ba%ba">
+    <span class="post-toc-number">4.4.</span> <span class="post-toc-text">四、团队与权限：按团队授权，不按人</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%ba%94%e4%b8%89%e7%ba%a7%e5%88%a0%e9%99%a4%e4%b8%8e%e5%ae%a1%e8%ae%a1%e5%8f%91%e9%94%99%e4%ba%86%e8%83%bd%e6%94%b6%e5%9b%9e%e6%9d%a5">
+    <span class="post-toc-number">4.5.</span> <span class="post-toc-text">五、三级删除与审计：发错了能收回来</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e6%a0%b8%e5%bf%83%e9%9a%be%e7%82%b9%e6%b5%81%e5%bc%8f%e5%8f%91%e5%b8%83">
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">核心难点：流式发布</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e8%b4%a8%e9%87%8f%e4%b8%8e%e6%80%a7%e8%83%bd">
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">质量与性能</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e6%b5%8b%e8%af%95">
+    <span class="post-toc-number">6.1.</span> <span class="post-toc-text">测试</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e6%80%a7%e8%83%bd">
+    <span class="post-toc-number">6.2.</span> <span class="post-toc-text">性能</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e8%b8%a9%e8%bf%87%e7%9a%84%e4%ba%94%e4%b8%aa%e5%9d%91">
+    <span class="post-toc-number">7.</span> <span class="post-toc-text">踩过的五个坑</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%ae%83%e4%b8%8d%e5%81%9a%e4%bb%80%e4%b9%88">
+    <span class="post-toc-number">8.</span> <span class="post-toc-text">它不做什么</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e8%b0%81%e4%bc%9a%e7%94%a8%e5%be%97%e4%b8%8a">
+    <span class="post-toc-number">9.</span> <span class="post-toc-text">谁会用得上</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%ba%95%e4%b8%8b%e6%98%af%e4%b8%80%e6%95%b4%e5%a5%97%e8%87%aa%e5%b7%b1%e5%86%99%e7%9a%84%e5%ba%93">
+    <span class="post-toc-number">10.</span> <span class="post-toc-text">底下是一整套自己写的库</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e4%b8%aa%e5%88%bb%e6%84%8f%e7%9a%84%e9%80%89%e6%8b%a9%e4%b8%8d%e7%94%a8-stdx-%e7%9a%84-http">
+    <span class="post-toc-number">10.1.</span> <span class="post-toc-text">一个刻意的选择：不用 stdx 的 HTTP</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e9%a1%ba%e6%89%8b%e5%a1%ab%e7%9a%84%e4%b8%80%e4%b8%aa%e5%9d%91%e6%b5%8b%e8%af%95%e5%a0%86">
+    <span class="post-toc-number">10.2.</span> <span class="post-toc-text">顺手填的一个坑：测试堆</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-cjreg-私有中心仓" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">cjreg：用仓颉写一个私有中心仓，Web 界面不用写一行 JS</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2026-11-13T10:00:00&#43;08:00" itemprop="datePublished">2026-11-13</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <p align="center"><strong>cjreg · 仓颉私有中心仓与多仓体系</strong></p>
+<p align="center"><em>官方仓缺的那一半，由它承接</em></p>
+<blockquote>
+<p>「仓颉生态创新开发挑战赛」技术课题作品，获优秀奖。<br>
+仓库 <a href="https://atomgit.com/ystyle/cjreg" target="_blank" rel="noopener">atomgit.com/ystyle/cjreg</a>
+，MIT。</p>
+</blockquote>
+<h2 id="官方中心仓很好但它不解决这三件事"><a href="#官方中心仓很好但它不解决这三件事" class="headerlink" title="官方中心仓很好，但它不解决这三件事"></a>官方中心仓很好，但它不解决这三件事</h2>
+<p><strong>内网或离线环境没有仓。</strong> 中心仓在公网。流水线和构建机在网内，断网时得带着依赖跑。</p>
+<p><strong>发布不可逆，同步不可控。</strong> 版本发上去删不掉、覆盖不了；索引同步快的时候几十秒，慢的话几十分钟到几天。中途失败了只能等，邮件沟通一来一回又是几天。</p>
+<p><strong>团队需要自己的仓和预演位。</strong> 预发布、内部包、灰度版本，这些不该进公共仓。</p>
+<p>cjreg 是这三件事的答案：一个可以自己部署的仓颉包仓库，<strong>与官方中心仓协议互通</strong>——客户端 <code>cjpm</code> 一行不改，改的只是 <code>cangjie-repo.toml</code> 里的地址。</p>
+<p>不是替代官方仓，是补位。官方仓照常用，缺的那一半由私有仓接住。</p>
+<h2 id="它长什么样"><a href="#它长什么样" class="headerlink" title="它长什么样"></a>它长什么样</h2>
+<pre tabindex="0"><code>cjreg（单个静态可执行文件）
+  ├─ HTTP 服务：发布/下载/索引/管理 API
+  ├─ Web 门户 + 后台（cjxt 服务端渲染）
+  └─ 数据：cjreg.db + blobs/
+</code></pre><p>三条命令跑起来：</p>
+<pre tabindex="0"><code>cjreg init
+cjreg serve
+cjreg admin
+</code></pre><p><code>init</code> 建库、建首个管理员、挂上官方上游；<code>serve</code> 起 HTTP 服务；<code>admin</code> 处理用户和仓库同步。起来之后有门户（包列表、搜索）和管理后台（用户、权限、上游、审计）。</p>
+<p>或者一条 compose：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d -p 8060:8060 <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -v /path/to/data:/data <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  ghcr.io/ystyle/cjreg
+</span></span></code></pre></div><p>数据全在挂载目录里（<code>cjreg.db</code> + <code>blobs/</code> + 配置），<strong>备份就是打包这个目录</strong>，恢复就是解回去。</p>
+<h2 id="一个容易被忽略的点web-端也是仓颉"><a href="#一个容易被忽略的点web-端也是仓颉" class="headerlink" title="一个容易被忽略的点：Web 端也是仓颉"></a>一个容易被忽略的点：Web 端也是仓颉</h2>
+<p>管理界面没用 Vue 也没用 React，用的是 <strong>cjxt</strong>——一个服务端驱动 UI 的仓颉框架。服务端直接产出 HTML 和增量 patch，浏览器只跑一段很小的运行时。</p>
+<p>结果是：<strong>写界面不用写一行 JS，也没有 Node、没有 npm、没有前端构建链。</strong> 整个 Web 控制台跟服务端一起打成一个静态二进制。</p>
+<p>浏览器端当然还是要点 JS 的——<code>cangjie-ui.js</code> 加一个浮层定位库，一共约 100 KB，负责把服务端发来的 patch 应用到 DOM。但那 100 KB 是框架自带的，你写页面时碰不到。</p>
+<p>这不是技术炫技，是部署形态的问题：运维拿到的是一个文件，没有 Node 版本、没有 npm 依赖、没有前端构建产物。<code>Dockerfile.build</code> 是多阶段的，评审或使用者不需要本地装任何工具链就能构建出来。</p>
+<h2 id="核心能力四件事"><a href="#核心能力四件事" class="headerlink" title="核心能力：四件事"></a>核心能力：四件事</h2>
+<h3 id="一多仓一个实例对接多个仓"><a href="#一多仓一个实例对接多个仓" class="headerlink" title="一、多仓：一个实例对接多个仓"></a>一、多仓：一个实例对接多个仓</h3>
+<p>官方仓、团队内部仓、某个镜像仓可以同时挂。查包时按优先级找，找到就停——内部包能覆盖同名官方包，<code>cjpm</code> 客户端一行不用改。</p>
+<p>上游在管理后台加，<strong>存数据库表，不用改配置文件</strong>。每个上游带几个开关：</p>
+<table>
+	<thead>
+			<tr>
+					<th>字段</th>
+					<th>作用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>priority</code></td>
+					<td>查找顺序，数字小的优先</td>
+			</tr>
+			<tr>
+					<td><code>proxyEnabled</code></td>
+					<td>读路径：允许回源到这个上游</td>
+			</tr>
+			<tr>
+					<td><code>asTarget</code></td>
+					<td>写路径：允许把包推到这里</td>
+			</tr>
+			<tr>
+					<td><code>cacheTtl</code></td>
+					<td>索引缓存时长，默认 86400 秒</td>
+			</tr>
+	</tbody>
+</table>
+<p>读写分离是重点：可以配一个只读的镜像仓，也可以配一个只写的预演仓，互不影响。</p>
+<h3 id="二多仓查找先查哪个仓"><a href="#二多仓查找先查哪个仓" class="headerlink" title="二、多仓查找：先查哪个仓"></a>二、多仓查找：先查哪个仓</h3>
+<p>一个包进来，按上游优先级依次查索引，第一个命中的就是它：</p>
+<pre tabindex="0"><code>resolve(name, org, version):
+  按 priority 排上游
+  依次查 index → 命中即返回
+  都没命中 → 404
+</code></pre><p>切仓就是改 <code>cangjie-repo.toml</code> 里的地址，然后 <code>cjpm clean &amp;&amp; cjpm update</code> 刷缓存。客户端不知道背后挂了几个仓。</p>
+<p>管理后台里有个解析诊断：给定包名和版本，它按当前配置走一遍，告诉你命中了哪个上游、候选链是什么、卡在哪。</p>
+<h3 id="三发布计划按拓扑顺序发六态可视"><a href="#三发布计划按拓扑顺序发六态可视" class="headerlink" title="三、发布计划：按拓扑顺序发，六态可视"></a>三、发布计划：按拓扑顺序发，六态可视</h3>
+<p>跨团队发布最烦的是顺序——先发底层库再发上层库，否则解析失败。这套以前靠人肉梳理。</p>
+<p><code>analyze</code> 把待发的一批包分成四类：<strong>待发 / 可选 / 已存在 / 冲突</strong>。<code>execute</code> 按依赖拓扑顺序推送到目标上游（拓扑排序能力复用 cjdep）。</p>
+<p>每个计划项走一个六态状态机：</p>
+<pre tabindex="0"><code>pending → running → waiting_index
+   ↓         ↓            ↓
+        completed / failed / skipped
+</code></pre><p><code>waiting_index</code> 这一态是必须的：<strong>版本出现且 sha256 一致才算完成</strong>。索引先到的「假完成」会被挡掉。</p>
+<p>进度实时推（SSE），中断后计划保持 <code>pending</code>，不会假装在跑。</p>
+<h3 id="四团队与权限按团队授权不按人"><a href="#四团队与权限按团队授权不按人" class="headerlink" title="四、团队与权限：按团队授权，不按人"></a>四、团队与权限：按团队授权，不按人</h3>
+<p>企业里发版权限一般不给个人，给团队。</p>
+<p>cjreg 的模型是：<strong>团队 = 权限单元</strong>。一个团队关联若干组织或包，成员继承团队那一档权限。三档权限：</p>
+<table>
+	<thead>
+			<tr>
+					<th>级别</th>
+					<th>能做什么</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>read</code></td>
+					<td>读取关联的包</td>
+			</tr>
+			<tr>
+					<td><code>write</code></td>
+					<td>发布新版本</td>
+			</tr>
+			<tr>
+					<td><code>overwrite</code></td>
+					<td>覆盖已存在的同版本（sha 不同的情况）</td>
+			</tr>
+	</tbody>
+</table>
+<p>有效权限取个人路径和团队路径里较高的那个：</p>
+<pre tabindex="0"><code>有效权限 = max(个人路径, 团队路径)
+
+个人路径：包是自己首发的 → 按 publisher
+团队路径：团队成员 + 团队关联了该组织或包
+         → 取命中团队里最高那档
+</code></pre><p>三个细节值得说。</p>
+<p><strong>覆盖权在团队手里，不在发布者手里。</strong> 同版本不同 sha 想覆盖，需要团队的 <code>overwrite</code> 权限——首发者自己也没有。这条是有意的：覆盖会影响所有用这个版本的人。</p>
+<p><strong>新包认领有前提。</strong> 命名空间没被任何团队纳管时，有有效发布 token 就能认领，首发者自动成为 publisher。一旦这个组织或包名被团队关联了（纳管），就得有 <code>write</code> 才能发。</p>
+<p><strong>组织匹配不做模糊。</strong> <code>org</code> 是空串表示「无组织」，内部关联 ID 是 <code>0</code>；<code>org</code> 非空但没在组织表里登记过，关联 ID 是 <code>-1</code>，<strong>不匹配任何团队</strong>——这样「关联了无组织」的团队不会越权到任意未登记组织。</p>
+<p>这些都在管理后台点鼠标完成：建团队、调权限级别、把团队关联到组织或包。成员在自己的门户里能看到所属团队、权限级别和关联的资源。</p>
+<h3 id="五三级删除与审计发错了能收回来"><a href="#五三级删除与审计发错了能收回来" class="headerlink" title="五、三级删除与审计：发错了能收回来"></a>五、三级删除与审计：发错了能收回来</h3>
+<p>包、版本、文件三层分别可删，删之前检查引用。仓库最怕误删——删了别人就构建不过。</p>
+<p>谁在什么时候发了什么、删了什么，都写审计日志。内部仓通常给一个团队用，出问题要能回溯。</p>
+<pre tabindex="0"><code>cjreg admin delete-user --username &lt;u&gt;
+</code></pre><p>对方是团队 owner 时，会先拦下来要求转让——不然团队就成了孤儿。</p>
+<p>可见性跟着权限走：退出团队之后，这个团队关联的包就看不到了。不做历史遗留读取是有意的——私有仓的边界应该和当前权限一致。</p>
+<h2 id="核心难点流式发布"><a href="#核心难点流式发布" class="headerlink" title="核心难点：流式发布"></a>核心难点：流式发布</h2>
+<p>最大的问题是内存。</p>
+<p>整包驻留内存时，峰值大约是包体的 2–3 倍。默认 256 MB 堆上限下，发一个 100 MB 的包就失败——而企业内部的工具包和资源包，上百兆很常见。</p>
+<p>做法是把发布链路全程改成流式：</p>
+<ol>
+<li>按段解析头，拿到长度与校验</li>
+<li>边读边算 sha256，不缓存整包</li>
+<li>写临时文件 → 校验 → <code>rename</code> 原子落盘</li>
+</ol>
+<p>下载和回源同理：handler 直接 <code>body(stream)</code>，回源边收边落盘。</p>
+<p><strong>结果是内存与包体彻底解耦</strong>：2 MiB、32 MiB、200 MiB 三档发布，进程 VmHWM 都是 291 MiB。</p>
+<h2 id="质量与性能"><a href="#质量与性能" class="headerlink" title="质量与性能"></a>质量与性能</h2>
+<p>没有一个数字是估的，全部有脚本可复现。</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3>
+<table>
+	<thead>
+			<tr>
+					<th>项</th>
+					<th>值</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>单元测试</td>
+					<td><strong>1002 个用例，全绿</strong></td>
+			</tr>
+			<tr>
+					<td>行覆盖率</td>
+					<td><strong>91.3%</strong>（11241 / 12312 行，90 个源文件）</td>
+			</tr>
+			<tr>
+					<td>双仓 e2e</td>
+					<td>9 步（发布 6 包 → 拓扑推送 → 公开 API → 上游连通 → 三级删除 → 组织 CRUD）</td>
+			</tr>
+			<tr>
+					<td>CI</td>
+					<td>六步（构建 / 单测 / 覆盖率 / e2e / 文档站 / 容器冒烟）</td>
+			</tr>
+	</tbody>
+</table>
+<p>1002 个用例不全是纯逻辑单测，还包括进程内 HTTP 夹具（真服务 + 真 client）和页面渲染断言。</p>
+<h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3>
+<p>单机 loopback 冒烟基准。<strong>上游用桩服务隔离</strong>——真实中心仓有频率限制且网络会抖动，直接打会让数据完全不可信（实测会引入约 470 ms 的往返与重试）。<code>bench.sh</code> 在测量前会硬校验：只要还有官方上游开着代理就直接终止。</p>
+<table>
+	<thead>
+			<tr>
+					<th>维度</th>
+					<th>结果</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>索引：回源 → 本地命中</td>
+					<td>p50 <strong>16.16 ms → 2.74 ms（5.9×）</strong>，桩计数证明重查轮零回源</td>
+			</tr>
+			<tr>
+					<td>发布吞吐</td>
+					<td>2 MiB 74 MiB/s；32 MiB 278 MiB/s；<strong>200 MiB 324 MiB/s</strong></td>
+			</tr>
+			<tr>
+					<td>发布内存</td>
+					<td>三档 VmHWM <strong>恒定 291 MiB</strong></td>
+			</tr>
+			<tr>
+					<td>并发（索引命中态）</td>
+					<td>1/4/16/64 VU → 88 / 294 / <strong>414</strong> / 356 req/s，拐点在 16–64 之间</td>
+			</tr>
+			<tr>
+					<td>启动 → 可服务</td>
+					<td><strong>0.27 s</strong></td>
+			</tr>
+			<tr>
+					<td>SIGTERM 关闭</td>
+					<td>0.03 s（exit 0）</td>
+			</tr>
+	</tbody>
+</table>
+<p>口径说明：单机 loopback、页缓存热、所有「回源」都指向本地桩服务。<strong>这是服务端自身开销的测量，不是容量规划数字。</strong></p>
+<h2 id="踩过的五个坑"><a href="#踩过的五个坑" class="headerlink" title="踩过的五个坑"></a>踩过的五个坑</h2>
+<p>这个项目不是从零开始——在此之前我用 Go + Vue3 写过一版 <code>cjrepo</code>（83 commits），验证了「私有仓 + 官方协议互通」这个产品形态。用仓颉重写时，由于有 Go 版做对照，这些坑暴露得比较快：</p>
+<p><strong>一、官方索引的 <code>index-version</code> 是字符串，不是数字。</strong></p>
+<p><code>&quot;1&quot;</code> 不是 <code>1</code>。按 <code>Int64</code> 读会抛异常，整行解析失败，索引直接空。</p>
+<p><strong>二、<code>cjpm</code> 的 <code>meta-data.json</code> 是 pretty 多行 JSON。</strong></p>
+<p>按 NDJSON 逐行解析必然失败。中心仓的索引确实是 NDJSON 格式，但 meta 文件不是。</p>
+<p><strong>三、<code>sha256sum</code> 和 <code>dependencies</code> 在嵌套的 index 对象里。</strong></p>
+<p>不在顶层，要往下钻一层。</p>
+<p><strong>四、bstorm 的几个持久化细节。</strong></p>
+<p>重新打开需要 reindex；跨进程的 <code>nextId</code> 要恢复；<code>init</code> 必须 close 落盘才算数。</p>
+<p><strong>五、<code>StringReader</code> 读二进制制品会报 UTF-8 错。</strong></p>
+<p>下载二进制包时不能当文本读，得改成 <code>readStreamToBytes</code>。</p>
+<p>前三个是同一个教训：<strong>别照着文档实现，照着真实产物实现</strong>。文档写的是「应该是什么」，中心仓里躺的是「实际是什么」。</p>
+<h2 id="它不做什么"><a href="#它不做什么" class="headerlink" title="它不做什么"></a>它不做什么</h2>
+<p>写清楚边界比列功能有用：</p>
+<table>
+	<thead>
+			<tr>
+					<th>不做</th>
+					<th>原因</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>不替代官方中心仓</td>
+					<td>定位就是补位，两者并存</td>
+			</tr>
+			<tr>
+					<td>不做公网 SaaS 托管</td>
+					<td>私有仓的价值在私有</td>
+			</tr>
+			<tr>
+					<td>不做包的签名与验签</td>
+					<td>官方仓的信任链，私有仓不越权</td>
+			</tr>
+			<tr>
+					<td>不做依赖漏洞扫描</td>
+					<td>那是另一类工具</td>
+			</tr>
+	</tbody>
+</table>
+<p>完整的未实现清单在仓库 <code>docs/finals-submission.md</code> §4.5。</p>
+<h2 id="谁会用得上"><a href="#谁会用得上" class="headerlink" title="谁会用得上"></a>谁会用得上</h2>
+<p>四种场景：</p>
+<p><strong>内网常驻私有仓</strong> —— 流水线和构建机在网内，发布、拉依赖、取 Token 全在本地完成。</p>
+<p><strong>预演仓</strong> —— 发布不可逆，先在私有仓预演。管理员直通 overwrite，同版本可以反复发。</p>
+<p><strong>多仓体系</strong> —— 一个实例对接多个仓，版本对照告诉你目标仓有没有、要不要发。</p>
+<p><strong>CI 与工具链集成</strong> —— 公开只读 API 取包索引与统计，<code>cjpm</code> 客户端无需改造。</p>
+<hr>
+<p>如果你也在用仓颉，并且碰到过「内部包没地方放」「断网了构建不了」这类问题，可以试试。</p>
+<p>有问题直接在 AtomGit 提 issue，或者到这里说一声也行。</p>
+<h2 id="底下是一整套自己写的库"><a href="#底下是一整套自己写的库" class="headerlink" title="底下是一整套自己写的库"></a>底下是一整套自己写的库</h2>
+<p>cjreg 站着的不是第三方生态，是我这两年攒下来的七个仓颉库。<strong>全部由我一个人写、全部在中心仓可装。</strong></p>
+<table>
+	<thead>
+			<tr>
+					<th>库</th>
+					<th>规模</th>
+					<th>为什么需要它</th>
+					<th>包名</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>badger-cj</strong></td>
+					<td>17271 行</td>
+					<td>std 没有嵌入式存储引擎。移植 Go BadgerDB v4：LSM 树、事务、压缩</td>
+					<td><code>badgercj</code></td>
+			</tr>
+			<tr>
+					<td><strong>bstorm</strong></td>
+					<td>3734 行</td>
+					<td>badger-cj 只是 KV，没有「按字段查」。加了二级索引和 <code>@Model</code>/<code>@Index</code> 宏</td>
+					<td><code>bstorm</code></td>
+			</tr>
+			<tr>
+					<td><strong>tachyon</strong></td>
+					<td>4410 行</td>
+					<td>std 核心库没有 HTTP 服务器（stdx 有，但选了不用，见下）</td>
+					<td><code>tachyon</code></td>
+			</tr>
+			<tr>
+					<td><strong>tang</strong></td>
+					<td>10208 行</td>
+					<td>tachyon 是内核，还得有路由、中间件、参数绑定</td>
+					<td><code>tang</code></td>
+			</tr>
+			<tr>
+					<td><strong>cjxt</strong></td>
+					<td>22997 行</td>
+					<td>想做到「写界面不写 JS」，就得自己做服务端渲染 + 增量补丁</td>
+					<td><code>cjxt</code></td>
+			</tr>
+			<tr>
+					<td><strong>gjson</strong></td>
+					<td>3649 行</td>
+					<td>发布协议要在不反序列化的情况下取 JSON 字段</td>
+					<td><code>gjson</code></td>
+			</tr>
+			<tr>
+					<td><strong>tar-cj</strong></td>
+					<td>1682 行</td>
+					<td><code>.cjp</code> 制品是 gzip + tar，发布和回源都要从里面取 README</td>
+					<td><code>ystyle::tar</code></td>
+			</tr>
+	</tbody>
+</table>
+<p>依赖是两段链条加三个配件：</p>
+<pre tabindex="0"><code>badger-cj → bstorm        存储层
+tachyon   → tang          服务层
+cjxt / gjson / tar-cj     页面、协议、制品
+</code></pre><p>合计六万四千多行。写到 cjreg 的时候这些已经齐了，所以这个项目本身只有 31 个生产文件——<strong>复杂度被下推到库层了</strong>。</p>
+<p>版本以 <code>pkg.cangjie-lang.cn</code> 上的为准。</p>
+<h3 id="一个刻意的选择不用-stdx-的-http"><a href="#一个刻意的选择不用-stdx-的-http" class="headerlink" title="一个刻意的选择：不用 stdx 的 HTTP"></a>一个刻意的选择：不用 stdx 的 HTTP</h3>
+<p>仓颉的 stdx 里有 <code>stdx.net.http</code>，但 tang 和 tachyon 都<strong>不依赖它</strong>。</p>
+<p>原因是下游成本：stdx 需要单独配 <code>CANGJIE_STDX_PATH</code>，而且版本要和仓颉版本对齐。用它做底层意味着<strong>每个使用者都得先配好 stdx 环境</strong>，否则构建不起来。</p>
+<p>自己实现 HTTP/1.1，代价是要写解析器、WebSocket 握手（RFC 6455）、SHA-1 和 Base64。收益是：<strong>任何仓颉工程 <code>cjpm add tang</code> 就能跑，不用管 stdx</strong>。</p>
+<p>现在 tachyon 做到了每请求 0 字节分配（实测 112 B 是 std 的 <code>SocketImpl.write</code> 里一个捕获闭包，不在 tachyon 层）。</p>
+<h3 id="顺手填的一个坑测试堆"><a href="#顺手填的一个坑测试堆" class="headerlink" title="顺手填的一个坑：测试堆"></a>顺手填的一个坑：测试堆</h3>
+<p>这七个库撑起 cjreg 的时候，也带来一个额外的麻烦，已经解决了。</p>
+<p>bstorm 每个用例建一个内存态 Storm，Badger 打开即预分配 skiplist Segment（约 17 万个原子对象 + 1.3 MB 连续数组）。单测进程累计下来，在默认 256 MB 堆下会随机触发分配失败。</p>
+<p>症状很有欺骗性：<strong>全量跑间歇失败、单独跑全绿，而且每次挂的用例都不一样。</strong></p>
+<p>实测默认堆连跑 3 次全挂，换 8 GB 连跑 2 次全绿，才确认是堆的问题而不是某个用例写错了。</p>
+<p>修法是在 <code>cjpm.toml</code> 里把测试进程的堆固定调大。<strong>现在 <code>cjpm test</code> 开箱就是稳定的，不用使用者额外配环境。</strong></p>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2026-11-13T10:00:00&#43;08:00" itemprop="dateUpdated">2026-11-13 10:00:00</time>
+          </span><br>
+          本文链接：<a href="/2026/11/13/cjreg-private-registry/" target="_blank" rel="external">https://ystyle.top/2026/11/13/cjreg-private-registry/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%93%E9%A2%89/">仓颉</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cjreg/">cjreg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%AD%E5%BF%83%E4%BB%93/">中心仓</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bstorm/">bstorm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cjxt/">cjxt</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f13%2fcjreg-private-registry%2f&title=%e3%80%8acjreg%ef%bc%9a%e7%94%a8%e4%bb%93%e9%a2%89%e5%86%99%e4%b8%80%e4%b8%aa%e7%a7%81%e6%9c%89%e4%b8%ad%e5%bf%83%e4%bb%93%ef%bc%8cWeb%20%e7%95%8c%e9%9d%a2%e4%b8%8d%e7%94%a8%e5%86%99%e4%b8%80%e8%a1%8c%20JS%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f13%2fcjreg-private-registry%2f&title=%e3%80%8acjreg%ef%bc%9a%e7%94%a8%e4%bb%93%e9%a2%89%e5%86%99%e4%b8%80%e4%b8%aa%e7%a7%81%e6%9c%89%e4%b8%ad%e5%bf%83%e4%bb%93%ef%bc%8cWeb%20%e7%95%8c%e9%9d%a2%e4%b8%8d%e7%94%a8%e5%86%99%e4%b8%80%e8%a1%8c%20JS%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=cjreg%20%c2%b7%20%e4%bb%93%e9%a2%89%e7%a7%81%e6%9c%89%e4%b8%ad%e5%bf%83%e4%bb%93%e4%b8%8e%e5%a4%9a%e4%bb%93%e4%bd%93%e7%b3%bb%0a%e5%ae%98%e6%96%b9%e4%bb%93%e7%bc%ba%e7%9a%84%e9%82%a3%e4%b8%80%e5%8d%8a%ef%bc%8c%e7%94%b1%e5%ae%83%e6%89%bf%e6%8e%a5%0a%e3%80%8c%e4%bb%93%e9%a2%89%e7%94%9f%e6%80%81%e5%88%9b%e6%96%b0%e5%bc%80%e5%8f%91%e6%8c%91%e6%88%98%e8%b5%9b%e3%80%8d%e6%8a%80%e6%9c%af%e8%af%be%e9%a2%98%e4%bd%9c%e5%93%81%ef%bc%8c%e8%8e%b7%e4%bc%98%e7%a7%80%e5%a5%96%e3%80%82%0a%e4%bb%93%e5%ba%93%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f11%2f13%2fcjreg-private-registry%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8acjreg%ef%bc%9a%e7%94%a8%e4%bb%93%e9%a2%89%e5%86%99%e4%b8%80%e4%b8%aa%e7%a7%81%e6%9c%89%e4%b8%ad%e5%bf%83%e4%bb%93%ef%bc%8cWeb%20%e7%95%8c%e9%9d%a2%e4%b8%8d%e7%94%a8%e5%86%99%e4%b8%80%e8%a1%8c%20JS%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f11%2f13%2fcjreg-private-registry%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f13%2fcjreg-private-registry%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2026/11/12/cordis-cj-plugin-isolation/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">cordis-cj：静态语言怎么做出能卸载的插件</h4>
+        </a>
+      </div>
+      
+      
+    </nav>
+    
+
+    
+    
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+  </article>
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f13%2fcjreg-private-registry%2f&title=%e3%80%8acjreg%ef%bc%9a%e7%94%a8%e4%bb%93%e9%a2%89%e5%86%99%e4%b8%80%e4%b8%aa%e7%a7%81%e6%9c%89%e4%b8%ad%e5%bf%83%e4%bb%93%ef%bc%8cWeb%20%e7%95%8c%e9%9d%a2%e4%b8%8d%e7%94%a8%e5%86%99%e4%b8%80%e8%a1%8c%20JS%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f13%2fcjreg-private-registry%2f&title=%e3%80%8acjreg%ef%bc%9a%e7%94%a8%e4%bb%93%e9%a2%89%e5%86%99%e4%b8%80%e4%b8%aa%e7%a7%81%e6%9c%89%e4%b8%ad%e5%bf%83%e4%bb%93%ef%bc%8cWeb%20%e7%95%8c%e9%9d%a2%e4%b8%8d%e7%94%a8%e5%86%99%e4%b8%80%e8%a1%8c%20JS%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=cjreg%20%c2%b7%20%e4%bb%93%e9%a2%89%e7%a7%81%e6%9c%89%e4%b8%ad%e5%bf%83%e4%bb%93%e4%b8%8e%e5%a4%9a%e4%bb%93%e4%bd%93%e7%b3%bb%0a%e5%ae%98%e6%96%b9%e4%bb%93%e7%bc%ba%e7%9a%84%e9%82%a3%e4%b8%80%e5%8d%8a%ef%bc%8c%e7%94%b1%e5%ae%83%e6%89%bf%e6%8e%a5%0a%e3%80%8c%e4%bb%93%e9%a2%89%e7%94%9f%e6%80%81%e5%88%9b%e6%96%b0%e5%bc%80%e5%8f%91%e6%8c%91%e6%88%98%e8%b5%9b%e3%80%8d%e6%8a%80%e6%9c%af%e8%af%be%e9%a2%98%e4%bd%9c%e5%93%81%ef%bc%8c%e8%8e%b7%e4%bc%98%e7%a7%80%e5%a5%96%e3%80%82%0a%e4%bb%93%e5%ba%93%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f11%2f13%2fcjreg-private-registry%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8acjreg%ef%bc%9a%e7%94%a8%e4%bb%93%e9%a2%89%e5%86%99%e4%b8%80%e4%b8%aa%e7%a7%81%e6%9c%89%e4%b8%ad%e5%bf%83%e4%bb%93%ef%bc%8cWeb%20%e7%95%8c%e9%9d%a2%e4%b8%8d%e7%94%a8%e5%86%99%e4%b8%80%e8%a1%8c%20JS%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f11%2f13%2fcjreg-private-registry%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f13%2fcjreg-private-registry%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2026/11/13/cjreg-private-registry/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+
+  
+  
+<template id="title-change"
+          data-normal="欢迎回来╮(╯▽╰)╭"
+          data-leave="东方星痕的博客"></template>
+<script>
+(function () {
+  var el = document.getElementById('title-change');
+  if (!el) return;
+
+  var LEAVE = el.getAttribute('data-leave');
+  var NORMAL = el.getAttribute('data-normal');
+  var OriginTitile = document.title, titleTime;
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      document.title = LEAVE;
+      clearTimeout(titleTime);
+    } else {
+      document.title = NORMAL;
+      titleTime = setTimeout(function () {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

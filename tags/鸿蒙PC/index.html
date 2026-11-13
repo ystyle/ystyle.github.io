@@ -255,7 +255,8 @@
         </h3>
         <div class="post-content" id="post-content" itemprop="postContent">
           
-           本文记录在鸿蒙PC融合开发引擎的openEuler aarch64容器中，通过box64模拟x86_64兼容层，运行鸿蒙命令行工具编译HAP的完整过程。
+           鸿蒙 PC 的融合开发引擎给的是一个 aarch64 的 openEuler 容器，而鸿蒙官方命令行工具只发 x86_64 版。这篇是怎么在容器里把这套工具跑起来、最后编出 HAP 的。
+为什么不能直接跑 鸿蒙 PC（HarmonyOS PC）的融合开发引擎提供的是 openEuler aarch64 容器环境，但鸿蒙官方命令行工具（command-line-tools）只有 x86_64 版本。要在 aarch64 上编译鸿蒙项目，有两种方案：
 
           <a href="/2026/06/30/matebookpro-box64-harmony-sdk/" class="post-more waves-effect waves-button">Continue reading...</a>
         </div>
@@ -280,7 +281,7 @@
         </h3>
         <div class="post-content" id="post-content" itemprop="postContent">
           
-           本文记录在鸿蒙PC融合开发引擎的容器环境中，因glibc版本限制从源码编译Neovim和tree-sitter的完整过程，并配置AstroNvim作为开发环境。
+           鸿蒙 PC 融合开发引擎的 openEuler 容器里，glibc 是 2.38；nvim-treesitter 下载的预编译 tree-sitter 要 2.39，装解析器直接报错。这篇是绕开的办法：自己编译 tree-sitter CLI 和 Neovim，再接上 AstroNvim。
 
           <a href="/2026/04/03/matebookpro-container-build-neovim/" class="post-more waves-effect waves-button">Continue reading...</a>
         </div>
@@ -305,8 +306,8 @@
         </h3>
         <div class="post-content" id="post-content" itemprop="postContent">
           
-           本文深入解析鸿蒙PC融合开发引擎的技术架构，揭示其如何通过StratoVirt虚拟化和OzoneC容器技术实现Linux应用兼容。
-背景 鸿蒙PC（HarmonyOS PC）采用了独特的架构设计来实现Linux应用兼容。作为用户，我在使用过程中发现系统提供了一个&quot;融合开发引擎&quot;功能，可以在其中运行openEuler环境。本文将解析这个融合开发引擎的技术架构。
+           鸿蒙 PC 上那个能跑 Linux 的「融合开发引擎」，底下是虚拟机套容器。这篇是我怎么一步步探出来的。
+起因 鸿蒙 PC 自带的开发环境里有个「融合开发引擎」，打开就能用 openEuler 的命令行。官方文档只说是「提供 Linux 兼容环境」，没讲怎么实现的。
 
           <a href="/2026/04/03/matebookpro-fusion-dev-engine-architecture/" class="post-more waves-effect waves-button">Continue reading...</a>
         </div>

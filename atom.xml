@@ -4,12 +4,59 @@
   <subtitle>请你给我力量，给我方向， 用风一样的翅膀，更用力的飞翔.</subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="https://ystyle.top/"/>
-  <updated>2026-11-11T02:00:00.000Z</updated>
+  <updated>2026-11-13T02:00:00.000Z</updated>
   <id>https://ystyle.top/</id>
   <author>
     <name>YSTYLE</name>
   </author>
   <generator uri="https://gohugo.io/">Hugo</generator>
+  <entry>
+    <title>cjreg：用仓颉写一个私有中心仓，Web 界面不用写一行 JS</title>
+    <link href="https://ystyle.top/2026/11/13/cjreg-private-registry/"/>
+    <id>https://ystyle.top/2026/11/13/cjreg-private-registry/</id>
+    <published>2026-11-13T02:00:00.000Z</published>
+    <updated>2026-11-13T02:00:00.000Z</updated>
+    
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;cjreg · 仓颉私有中心仓与多仓体系&lt;/strong&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;em&gt;官方仓缺的那一半，由它承接&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;「仓颉生态创新开发挑战赛」技术课题作品，获优秀奖。&lt;br&gt;
+仓库 &lt;a href=&#34;https://atomgit.com/ystyle/cjreg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;atomgit.com/ystyle/cjreg&lt;/a&gt;
+，MIT。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;官方中心仓很好但它不解决这三件事&#34;&gt;&lt;a href=&#34;#官方中心仓很好但它不解决这三件事&#34; class=&#34;headerlink&#34; title=&#34;官方中心仓很好，但它不解决这三件事&#34;&gt;&lt;/a&gt;官方中心仓很好，但它不解决这三件事&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;内网或离线环境没有仓。&lt;/strong&gt; 中心仓在公网。流水线和构建机在网内，断网时得带着依赖跑。&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="仓颉" scheme="https://ystyle.top/tags/%E4%BB%93%E9%A2%89/"/>
+    <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
+    <category term="cjreg" scheme="https://ystyle.top/tags/cjreg/"/>
+    <category term="中心仓" scheme="https://ystyle.top/tags/%E4%B8%AD%E5%BF%83%E4%BB%93/"/>
+    <category term="bstorm" scheme="https://ystyle.top/tags/bstorm/"/>
+    <category term="cjxt" scheme="https://ystyle.top/tags/cjxt/"/>
+    
+  </entry>
+  <entry>
+    <title>cordis-cj：静态语言怎么做出能卸载的插件</title>
+    <link href="https://ystyle.top/2026/11/12/cordis-cj-plugin-isolation/"/>
+    <id>https://ystyle.top/2026/11/12/cordis-cj-plugin-isolation/</id>
+    <published>2026-11-12T02:00:00.000Z</published>
+    <updated>2026-11-12T02:00:00.000Z</updated>
+    
+    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;cordis-cj 源码拆解&lt;/strong&gt;&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;em&gt;卸载这件事，静态语言从根上就做不了&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;动态语言的插件系统可以「加载 → 卸载 → 再加载」，&lt;br&gt;
+静态语言不行——不是实现得不够好，是运行时结构不允许。&lt;br&gt;
+这篇讲 &lt;a href=&#34;https://atomgit.com/ystyle/cordis-cj&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;cordis-cj&lt;/a&gt;
+ 绕开这个限制的办法，以及绕开之后要付的账。&lt;/p&gt;</summary>
+    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
+    <category term="cordis" scheme="https://ystyle.top/tags/cordis/"/>
+    <category term="插件系统" scheme="https://ystyle.top/tags/%E6%8F%92%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
+    <category term="进程隔离" scheme="https://ystyle.top/tags/%E8%BF%9B%E7%A8%8B%E9%9A%94%E7%A6%BB/"/>
+    <category term="架构" scheme="https://ystyle.top/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
   <entry>
     <title>uhp-cj：把 Agent harness 变成共享基础设施</title>
     <link href="https://ystyle.top/2026/11/11/uhp-cj-protocol-implementation/"/>
@@ -157,7 +204,7 @@
     <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
     <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
     <category term="sunku" scheme="https://ystyle.top/tags/sunku/"/>
-    <category term="Redis" scheme="https://ystyle.top/tags/Redis/"/>
+    <category term="redis" scheme="https://ystyle.top/tags/redis/"/>
     <category term="缓存" scheme="https://ystyle.top/tags/%E7%BC%93%E5%AD%98/"/>
     <category term="数据库" scheme="https://ystyle.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
@@ -318,7 +365,7 @@
     <link href="https://ystyle.top/2026/10/13/harmonyos-pc-binary-sign-types/"/>
     <id>https://ystyle.top/2026/10/13/harmonyos-pc-binary-sign-types/</id>
     <published>2026-10-13T08:30:00.000Z</published>
-    <updated>2026-10-13T08:30:00.000Z</updated>
+    <updated>2026-11-12T10:20:00.000Z</updated>
     
     <summary type="html">鸿蒙 PC 上不给二进制签名就跑不起来，但官方文档把「自签名 / 调试证书签名 / 二进制证书签名」并列成三张对照表之后，反而更难看清它们到底是不是三种不同的东西。本文从开源实现里读回来一份答案：三种签名共用同一个 .codesign 段、同一个 fs-verity 描述符结构，区别只在 signature 字段里填什么、以及内核对它的信任等级。权限、分发范围、设备要求上的全部差异，都是从这一个字段推出来的。</summary>
     <category term="鸿蒙PC" scheme="https://ystyle.top/categories/%E9%B8%BF%E8%92%99PC/"/>
@@ -396,44 +443,6 @@
     <category term="数据库" scheme="https://ystyle.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     <category term="LSM-Tree" scheme="https://ystyle.top/tags/LSM-Tree/"/>
     <category term="移植" scheme="https://ystyle.top/tags/%E7%A7%BB%E6%A4%8D/"/>
-    
-  </entry>
-  <entry>
-    <title>把 BadgerDB 移植到仓颉（一）：没有裸指针怎么做无锁跳表</title>
-    <link href="https://ystyle.top/2026/10/10/badger-cj-porting-notes/"/>
-    <id>https://ystyle.top/2026/10/10/badger-cj-porting-notes/</id>
-    <published>2026-10-10T02:00:00.000Z</published>
-    <updated>2026-10-10T02:00:00.000Z</updated>
-    
-    <summary type="html">&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;从 Go 移植 BadgerDB 到仓颉（一）&lt;/strong&gt;&lt;/p&gt;
-&lt;p align=&#34;center&#34;&gt;&lt;em&gt;仓颉没有裸指针，于是我把节点指针换成了数组下标&lt;/em&gt;&lt;/p&gt;
-&lt;p align=&#34;center&#34;&gt;&lt;code&gt;Cangjie&lt;/code&gt; · &lt;code&gt;LSM-Tree&lt;/code&gt; · &lt;code&gt;badger-cj&lt;/code&gt; · &lt;code&gt;移植&lt;/code&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;这是系列第一篇，讲&lt;strong&gt;怎么把它写出来&lt;/strong&gt;：语言差异怎么绕、以及怎么用。&lt;br&gt;
-后续三篇分别讲优化与误判、基准复核、以及怎样测才算数。&lt;/p&gt;</summary>
-    <category term="软件" scheme="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/"/>
-    <category term="Cangjie" scheme="https://ystyle.top/tags/Cangjie/"/>
-    <category term="badger-cj" scheme="https://ystyle.top/tags/badger-cj/"/>
-    <category term="数据库" scheme="https://ystyle.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    <category term="LSM-Tree" scheme="https://ystyle.top/tags/LSM-Tree/"/>
-    <category term="移植" scheme="https://ystyle.top/tags/%E7%A7%BB%E6%A4%8D/"/>
-    
-  </entry>
-  <entry>
-    <title>【鸿蒙PC】二进制签名实战：三类签名、沙箱权限矩阵，以及一张调试证书的坑</title>
-    <link href="https://ystyle.top/2026/09/22/matebookpro-binrary-debug-sign/"/>
-    <id>https://ystyle.top/2026/09/22/matebookpro-binrary-debug-sign/</id>
-    <published>2026-09-22T12:30:00.000Z</published>
-    <updated>2026-09-22T12:30:00.000Z</updated>
-    
-    <summary type="html">鸿蒙 PC 上二进制必须合法签名才能加载运行。本文把官方给出的三类签名规则、应用拉起二进制的沙箱权限矩阵整理成表，再补上我们在 MateBook Pro（OpenHarmony-7.0.0.105）上实测出的五种组合结果——包括一张 DevEco 自动签名调试证书被内核 fs-verity 拒掉的完整证据链，以及换成自申请调试证书后立刻能跑的对照实验。结论已确认：IDE 自动签名生成的调试证书不能用于二进制签名。</summary>
-    <category term="鸿蒙PC" scheme="https://ystyle.top/categories/%E9%B8%BF%E8%92%99PC/"/>
-    <category term="HarmonyOS" scheme="https://ystyle.top/tags/HarmonyOS/"/>
-    <category term="OpenHarmony" scheme="https://ystyle.top/tags/OpenHarmony/"/>
-    <category term="鸿蒙PC" scheme="https://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/"/>
-    <category term="二进制签名" scheme="https://ystyle.top/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%AD%BE%E5%90%8D/"/>
-    <category term="HNP" scheme="https://ystyle.top/tags/HNP/"/>
-    <category term="code_sign" scheme="https://ystyle.top/tags/code_sign/"/>
     
   </entry>
 </feed>

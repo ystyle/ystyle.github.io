@@ -10,21 +10,84 @@
 		
 		
 		
-			<lastBuildDate>Wed, 11 Nov 2026 10:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Fri, 13 Nov 2026 10:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/index.xml" rel="self" type="application/rss+xml" />
 			<item>
-				<title>Agent</title>
-				<link>https://ystyle.top/tags/Agent/</link>
-				<pubDate>Wed, 11 Nov 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/Agent/</guid>
+				<title>bstorm</title>
+				<link>https://ystyle.top/tags/bstorm/</link>
+				<pubDate>Fri, 13 Nov 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/bstorm/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Cangjie</title>
 				<link>https://ystyle.top/tags/Cangjie/</link>
-				<pubDate>Wed, 11 Nov 2026 10:00:00 +0800</pubDate>
+				<pubDate>Fri, 13 Nov 2026 10:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/tags/Cangjie/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>cjreg</title>
+				<link>https://ystyle.top/tags/cjreg/</link>
+				<pubDate>Fri, 13 Nov 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/cjreg/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>cjxt</title>
+				<link>https://ystyle.top/tags/cjxt/</link>
+				<pubDate>Fri, 13 Nov 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/cjxt/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>仓颉</title>
+				<link>https://ystyle.top/tags/%E4%BB%93%E9%A2%89/</link>
+				<pubDate>Fri, 13 Nov 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/%E4%BB%93%E9%A2%89/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>中心仓</title>
+				<link>https://ystyle.top/tags/%E4%B8%AD%E5%BF%83%E4%BB%93/</link>
+				<pubDate>Fri, 13 Nov 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/%E4%B8%AD%E5%BF%83%E4%BB%93/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>cordis</title>
+				<link>https://ystyle.top/tags/cordis/</link>
+				<pubDate>Thu, 12 Nov 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/cordis/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>插件系统</title>
+				<link>https://ystyle.top/tags/%E6%8F%92%E4%BB%B6%E7%B3%BB%E7%BB%9F/</link>
+				<pubDate>Thu, 12 Nov 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/%E6%8F%92%E4%BB%B6%E7%B3%BB%E7%BB%9F/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>架构</title>
+				<link>https://ystyle.top/tags/%E6%9E%B6%E6%9E%84/</link>
+				<pubDate>Thu, 12 Nov 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/%E6%9E%B6%E6%9E%84/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>进程隔离</title>
+				<link>https://ystyle.top/tags/%E8%BF%9B%E7%A8%8B%E9%9A%94%E7%A6%BB/</link>
+				<pubDate>Thu, 12 Nov 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/%E8%BF%9B%E7%A8%8B%E9%9A%94%E7%A6%BB/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Agent</title>
+				<link>https://ystyle.top/tags/Agent/</link>
+				<pubDate>Wed, 11 Nov 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/Agent/</guid>
 				<description></description>
 			</item>
 			<item>
@@ -88,69 +151,6 @@
 				<link>https://ystyle.top/tags/atelier/</link>
 				<pubDate>Mon, 26 Oct 2026 17:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/tags/atelier/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>入门</title>
-				<link>https://ystyle.top/tags/%E5%85%A5%E9%97%A8/</link>
-				<pubDate>Mon, 26 Oct 2026 17:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/%E5%85%A5%E9%97%A8/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>排查实录</title>
-				<link>https://ystyle.top/tags/%E6%8E%92%E6%9F%A5%E5%AE%9E%E5%BD%95/</link>
-				<pubDate>Mon, 26 Oct 2026 11:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/%E6%8E%92%E6%9F%A5%E5%AE%9E%E5%BD%95/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>LLM</title>
-				<link>https://ystyle.top/tags/LLM/</link>
-				<pubDate>Mon, 26 Oct 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/LLM/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>holt</title>
-				<link>https://ystyle.top/tags/holt/</link>
-				<pubDate>Thu, 22 Oct 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/holt/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Redis</title>
-				<link>https://ystyle.top/tags/Redis/</link>
-				<pubDate>Thu, 22 Oct 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/Redis/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>sunku</title>
-				<link>https://ystyle.top/tags/sunku/</link>
-				<pubDate>Thu, 22 Oct 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/sunku/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>缓存</title>
-				<link>https://ystyle.top/tags/%E7%BC%93%E5%AD%98/</link>
-				<pubDate>Thu, 22 Oct 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/%E7%BC%93%E5%AD%98/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>数据库</title>
-				<link>https://ystyle.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
-				<pubDate>Thu, 22 Oct 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>图数据库</title>
-				<link>https://ystyle.top/tags/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
-				<pubDate>Thu, 22 Oct 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
 				<description></description>
 			</item>
 	</channel>

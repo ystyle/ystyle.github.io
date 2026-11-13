@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>cordis-cj：静态语言怎么做出能卸载的插件 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
+  
+  <link rel="stylesheet" href="/css/theme-fix.css">
+  
+  
+
+<script>var _hmt = _hmt || []</script>
+<script async src="https://hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+
+
+<script>
+(function () {
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  bp.src = curProtocol === 'https'
+    ? 'https://zz.bdstatic.com/linksubmit/push.js'
+    : 'http://push.zhanzhang.baidu.com/push.js';
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">cordis-cj：静态语言怎么做出能卸载的插件</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">cordis-cj：静态语言怎么做出能卸载的插件</h1>
+    <h5 class="subtitle">
+      <time datetime="2026-11-12T10:00:00&#43;08:00" itemprop="datePublished" class="page-time">2026-11-12</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e5%8d%b8%e8%bd%bd%e4%b8%8d%e6%8e%89%e7%9a%84%e4%b8%9c%e8%a5%bf">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">一、卸载不掉的东西</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%8c%e5%8d%b8%e8%bd%bd--%e6%9d%80%e8%bf%9b%e7%a8%8b">
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">二、卸载 = 杀进程</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%89%e4%bb%a3%e4%bb%b7%e5%9c%a8%e4%b8%89%e5%a4%84">
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">三、代价在三处</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e6%8f%a1%e6%89%8b">
+    <span class="post-toc-number">3.1.</span> <span class="post-toc-text">一、握手</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%ba%8c%e5%ba%8f%e5%88%97%e5%8c%96">
+    <span class="post-toc-number">3.2.</span> <span class="post-toc-text">二、序列化</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e4%b8%89%e5%90%af%e5%8a%a8%e9%a1%ba%e5%ba%8f">
+    <span class="post-toc-number">3.3.</span> <span class="post-toc-text">三、启动顺序</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%9b%9b%e6%8a%8a-ipc-%e8%97%8f%e8%b5%b7%e6%9d%a5">
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">四、把 IPC 藏起来</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e5%8f%8c%e4%bc%a0%e8%be%93%e6%8f%92%e4%bb%b6%e6%97%a0%e6%84%9f">
+    <span class="post-toc-number">4.1.</span> <span class="post-toc-text">双传输，插件无感</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%94%e8%b0%83%e5%92%8c%e5%99%a8%e9%85%8d%e7%bd%ae%e8%af%b4%e4%ba%86%e7%ae%97">
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">五、调和器：配置说了算</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%85%ad%e4%b8%80%e4%b8%aa%e5%b7%a5%e5%85%b7%e9%93%be%e5%b1%82%e9%9d%a2%e7%9a%84%e5%9d%91">
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">六、一个工具链层面的坑</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%83%e8%bf%98%e6%9c%89%e4%b8%80%e6%9d%a1%e8%b7%af%e7%94%a8%e8%84%9a%e6%9c%ac%e5%86%99%e6%8f%92%e4%bb%b6">
+    <span class="post-toc-number">7.</span> <span class="post-toc-text">七、还有一条路：用脚本写插件</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%85%ab%e8%be%b9%e7%95%8c">
+    <span class="post-toc-number">8.</span> <span class="post-toc-text">八、边界</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b9%9d%e5%b0%8f%e7%bb%93">
+    <span class="post-toc-number">9.</span> <span class="post-toc-text">九、小结</span>
+  </a>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-cordis-cj-插件隔离" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">cordis-cj：静态语言怎么做出能卸载的插件</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2026-11-12T10:00:00&#43;08:00" itemprop="datePublished">2026-11-12</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <p align="center"><strong>cordis-cj 源码拆解</strong></p>
+<p align="center"><em>卸载这件事，静态语言从根上就做不了</em></p>
+<blockquote>
+<p>动态语言的插件系统可以「加载 → 卸载 → 再加载」，<br>
+静态语言不行——不是实现得不够好，是运行时结构不允许。<br>
+这篇讲 <a href="https://atomgit.com/ystyle/cordis-cj" target="_blank" rel="noopener">cordis-cj</a>
+ 绕开这个限制的办法，以及绕开之后要付的账。</p>
+</blockquote>
+<h2 id="一卸载不掉的东西"><a href="#一卸载不掉的东西" class="headerlink" title="一、卸载不掉的东西"></a>一、卸载不掉的东西</h2>
+<p>先看问题。</p>
+<p>JavaScript 里卸载一个模块，做法是删掉缓存里的引用，让 GC 回收。Node 的 <code>require.cache</code> 就是干这个的。</p>
+<p>仓颉不行。它编译成<strong>静态机器码</strong>，模块加载后，里面的<strong>全局变量、静态初始化、注册表都落在进程内存里</strong>。你就算把代码段「卸掉」，那些数据还在——而且没有任何机制能安全地把它们重置回初始状态。</p>
+<p>这不是仓颉独有的问题。C 的 <code>dlopen</code>/<code>dlclose</code> 在理论和实践之间差着一大截：POSIX 标准里 <code>dlclose</code> 甚至<strong>允许什么都不做</strong>；GNU ld 的文档明说，带 <code>UNIQUE</code> 符号或 <code>dlopen</code> 了带 TLS 的库时，<code>dlclose</code> 之后那个 handle 依然有效。</p>
+<blockquote>
+<p>换句话说：<strong>「卸载」在原生程序里本来就只是个建议，不是承诺。</strong></p>
+</blockquote>
+<p>所以静态语言写插件系统，最后都撞同一面墙。撞法有两种：</p>
+<table>
+	<thead>
+			<tr>
+					<th>做法</th>
+					<th>代价</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>假装能卸载（重置状态）</td>
+					<td>要穷举所有全局状态，漏一个就是幽灵 bug</td>
+			</tr>
+			<tr>
+					<td>干脆不能卸载（只重启进程）</td>
+					<td>每次改插件都要重启宿主，热更新没了</td>
+			</tr>
+	</tbody>
+</table>
+<p>cordis-cj 选了第三条：<strong>插件不跑在宿主进程里</strong>。</p>
+<h2 id="二卸载--杀进程"><a href="#二卸载--杀进程" class="headerlink" title="二、卸载 = 杀进程"></a>二、卸载 = 杀进程</h2>
+<p>思路很直接：如果「卸载」的定义是「让这些代码和数据彻底消失」，那唯一可靠的方式是让<strong>承载它们的东西</strong>消失。</p>
+<p>进程。<code>kill</code> 之后操作系统回收它的全部内存、文件描述符、线程——不需要插件配合，不会漏。</p>
+<p>于是架构变成两层：</p>
+<pre tabindex="0"><code>宿主进程（微内核，永不卸载）
+  ├─ 调和器：读配置、算 diff
+  └─ 进程管理：拉起 / 杀掉 / 探活
+        │  stdio 管道 / Unix socket
+        ▼
+插件 A          插件 B          插件 C
+（各自独立，崩溃不影响别人）
+</code></pre><p>这个方案解决了三件事，而且都不需要插件作者操心：</p>
+<ul>
+<li><strong>资源回收</strong>：<code>kill</code> 就是全部回收，不依赖插件写 <code>dispose</code></li>
+<li><strong>故障隔离</strong>：一个插件崩了，宿主和别的插件都不知道</li>
+<li><strong>崩溃自愈</strong>：宿主探活失败就重启，状态从配置文件重建</li>
+</ul>
+<p>但天下没有白拿的好处。<strong>跨进程之后，一次函数调用变成了消息往返。</strong></p>
+<h2 id="三代价在三处"><a href="#三代价在三处" class="headerlink" title="三、代价在三处"></a>三、代价在三处</h2>
+<p>拆进程的账，主要记在三个地方。</p>
+<h3 id="一握手"><a href="#一握手" class="headerlink" title="一、握手"></a>一、握手</h3>
+<p>插件不能一启动就开始干活——它得先告诉宿主「我是谁、我提供哪些服务」，宿主才能把它接入路由表。</p>
+<p>所以每个插件启动后第一件事是<strong>握手</strong>：</p>
+<pre tabindex="0"><code>插件 → 宿主：
+initialize(name, provides)
+宿主 → 插件：ok，登记到 serviceIndex
+插件 → 宿主：provide(&#34;echo&#34;, undo_id=uuid)
+宿主：登记服务，记住 undo_id
+</code></pre><p>这个 <code>undo_id</code> 不是随便加的。它对应<strong>可逆效果</strong>（revertible effects）：注册一个服务时，同时给出「怎么撤销这次注册」。宿主执行 <code>dispose(undo_id)</code> 时，插件按记录撤销——而不是插件自己猜要清理什么。</p>
+<blockquote>
+<p>这个设计来自北大和 DeepSeek-AI 的一篇论文，cordis-cj 按它的语义实现。<br>
+要点是：<strong>副作用在发生时就把「撤销方式」记下来</strong>，而不是事后靠人回忆。</p>
+</blockquote>
+<h3 id="二序列化"><a href="#二序列化" class="headerlink" title="二、序列化"></a>二、序列化</h3>
+<p>跨进程只能传字节。所以每个调用都要走 <code>JsonValue</code>。</p>
+<p>这件事如果让插件作者手写，插件系统就没法用了：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// 每天写一百遍这种东西，谁都不想用
+let args = ArrayList&lt;JsonValue&gt;()
+args.add(JsonValue.Number(2.0))
+args.add(JsonValue.Number(3.0))
+let result = ctx.invoke(
+    &#34;calc&#34;, &#34;add&#34;, args)
+let n = match (result) {
+    case JsonValue.Number(v) =&gt; v
+    case _ =&gt; 0.0
+}
+</code></pre><p>所以 cordis-cj 提供了泛型版本，把序列化藏在类型后面：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// 业务代码只认仓颉类型，序列化是框架的事
+let sum = ctx.invoke&lt;AddRequest, Int64&gt;(
+    &#34;calc&#34;, &#34;add&#34;, [AddRequest(2, 3)])
+</code></pre><p><code>AddRequest</code> 实现 <code>JsonSerializable</code>，<code>Int64</code> 实现反序列化——框架在中间做转换，业务代码里看不到 <code>JsonValue</code>。</p>
+<h3 id="三启动顺序"><a href="#三启动顺序" class="headerlink" title="三、启动顺序"></a>三、启动顺序</h3>
+<p>服务有依赖。插件 B 要用插件 A 提供的 <code>db</code> 服务，就必须后启动。</p>
+<p>这件事不能靠配置里的书写顺序——那太脆弱了。所以调和器按 <strong><code>inject</code> / <code>provide</code> 声明做拓扑排序</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#1f2328">[[</span><span style="color:#1f2328">plugins</span><span style="color:#1f2328">]]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">id</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;db&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">provide</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;db&#34;</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[[</span><span style="color:#1f2328">plugins</span><span style="color:#1f2328">]]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">id</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;cache&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">provide</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;cache&#34;</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">inject</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;db&#34;</span><span style="color:#1f2328">]</span>      <span style="color:#57606a"># 得等 db 起来</span>
+</span></span></code></pre></div><p>声明了 <code>inject</code>，宿主自然会把它排在提供者后面。<strong>配置里不用写顺序，写依赖。</strong></p>
+<h2 id="四把-ipc-藏起来"><a href="#四把-ipc-藏起来" class="headerlink" title="四、把 IPC 藏起来"></a>四、把 IPC 藏起来</h2>
+<p>到这里，插件作者要面对的东西还是很多：写 <code>main</code>、处理握手、注册服务、解析参数……</p>
+<p>cordis-cj 用宏把这层削掉了。一个完整的插件长这样：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">@Plugin[]
+public class MyPlugin {
+    @Provide[&#34;echo&#34;]
+    public func echo(
+        args: Array&lt;JsonValue&gt;)
+        : JsonValue {
+        if (args.size &gt; 0) { args[0] }
+        else { JsonValue.Null }
+    }
+}
+</code></pre><p><code>@Plugin[]</code> 自动生成 <code>main</code> 函数、握手流程、服务注册、<code>invoke</code> 路由分发。<code>@Provide[&quot;echo&quot;]</code> 声明这个方法对外是 <code>echo</code> 服务。</p>
+<p><strong>插件作者看到的是一个普通类，不是一套 RPC 脚手架。</strong></p>
+<p>不过宏不是唯一的路。README 里给了两种写法：</p>
+<table>
+	<thead>
+			<tr>
+					<th>写法</th>
+					<th>适合谁</th>
+					<th>代价</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>宏（<code>@Plugin</code>）</td>
+					<td>框架内置插件</td>
+					<td>宏包必须与调用方<strong>同模块</strong>（见后文）</td>
+			</tr>
+			<tr>
+					<td>显式 API（<code>PluginRuntime.run</code>）</td>
+					<td>外部插件作者</td>
+					<td>手写 <code>main</code>，但不受宏的跨模块限制</td>
+			</tr>
+	</tbody>
+</table>
+<p>「两种写法」不是偷懒，是<strong>在工具链缺陷面前留了退路</strong>。这个后面会讲。</p>
+<h3 id="双传输插件无感"><a href="#双传输插件无感" class="headerlink" title="双传输，插件无感"></a>双传输，插件无感</h3>
+<p>进程间通信有两种方式，cordis-cj 都支持：</p>
+<table>
+	<thead>
+			<tr>
+					<th>传输</th>
+					<th>帧格式</th>
+					<th>适用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>stdio</code>（默认）</td>
+					<td>换行分帧</td>
+					<td>简单，管道天然有序</td>
+			</tr>
+			<tr>
+					<td><code>uds</code></td>
+					<td>Content-Length 分帧</td>
+					<td>Unix socket，能传更复杂的东西</td>
+			</tr>
+	</tbody>
+</table>
+<p>切换靠配置里的一个字段。插件侧<strong>完全不用改</strong>：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">main(): Int64 {
+    PluginRuntime.run(&#34;my-plugin&#34;, [],
+        [&#34;echo&#34;], handler)
+    return 0
+}
+</code></pre><p><code>run()</code> 内部会自己看命令行有没有 <code>--uds &lt;path&gt;</code>，有就走 UDS，没有就 stdio。所以同一份插件代码两种模式都能跑。</p>
+<blockquote>
+<p>这个细节值得说：<strong>传输模式是部署决定，不该污染插件代码</strong>。<br>
+如果插件得知道自己跑在哪种传输上，那换传输就等于改所有插件。</p>
+</blockquote>
+<h2 id="五调和器配置说了算"><a href="#五调和器配置说了算" class="headerlink" title="五、调和器：配置说了算"></a>五、调和器：配置说了算</h2>
+<p>剩下最后一件事：怎么让「期望状态」和「实际状态」对上。</p>
+<p>cordis-cj 用的是声明式调和——你只写「该有哪些插件」，不写「怎么启动」：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#1f2328">interval</span> <span style="color:#1f2328">=</span> <span style="color:#0550ae">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">transport</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;stdio&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[[</span><span style="color:#1f2328">plugins</span><span style="color:#1f2328">]]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">id</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;my-plugin&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">source</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;./target/release/bin/my_plugin&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">provide</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;echo&#34;</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">enabled</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span>
+</span></span></code></pre></div><p>宿主每 5 秒跑一轮，做四件事：</p>
+<pre tabindex="0"><code>读配置 → 算 diff → 拓扑排序
+→ 启动新的 → 先加后删 → 崩溃自愈
+</code></pre><p>几个设计细节：</p>
+<p><strong>「先加后删」不是随意定的。</strong> 如果要换一个插件的版本，先杀旧的再起新的，中间会有一段服务不可用；先起新的再杀旧的，切换是平滑的。代价是短时间内两套并存，所以只在<strong>服务不冲突</strong>时成立。</p>
+<p><strong>探活是独立的。</strong> 每 30 秒 ping 一次，超时就重启。这跟调和周期分开——配置 5 秒一轮是为了响应变化，探活 30 秒一轮是为了发现假死。</p>
+<p><strong>崩溃自愈不消耗人。</strong> 插件崩了不需要运维介入，下一轮调和就会把它拉起来。</p>
+<blockquote>
+<p>这套东西的哲学是：<strong>人只维护「想要什么」，机器负责「怎么达到」。</strong><br>
+配置写错时宿主会报错，但配置漂移（有人手动杀了进程）会被自动纠正。</p>
+</blockquote>
+<h2 id="六一个工具链层面的坑"><a href="#六一个工具链层面的坑" class="headerlink" title="六、一个工具链层面的坑"></a>六、一个工具链层面的坑</h2>
+<p>写宏的时候撞了一个 cjpm 的问题，值得单独记：<strong>带 <code>organization</code> 的宏包，跨模块依赖时宏不会链接到调用方</strong>。</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// cordis_plugin 模块里的宏包
+macro package ystyle::cordis_plugin.macros
+
+public macro Plugin(
+    attr: Tokens, input: Tokens): Tokens {
+    ...
+}
+</code></pre><p>独立模块的调用方 <code>import ystyle::cordis_plugin.macros.Plugin</code> 之后：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// 报错：undeclared identifier &#39;plugin&#39;
+@Plugin[]
+public class SimplePlugin {}
+</code></pre><p>编译不通过。<strong>把 cjpm.toml 里的 <code>organization</code> 去掉，立刻就好了。</strong></p>
+<p>这个坑的麻烦之处在于：报错信息（<code>undeclared identifier</code>）<strong>完全不指向真实原因</strong>。你会以为是宏写得不对、导入写错了、语法有问题——实际上是包管理器没把宏的 <code>.so</code> 传下去。</p>
+<p>排查花了多久不重要，重要的是<strong>结论落在了文档里</strong>：<code>cordis_plugin.macros</code> 和调用方必须同模块。于是才有了前面那个「两种写法」的设计——宏给内置插件用，外部插件走显式 API。</p>
+<blockquote>
+<p>一个工具链的缺陷，最终变成了一个 API 的形状。</p>
+</blockquote>
+<h2 id="七还有一条路用脚本写插件"><a href="#七还有一条路用脚本写插件" class="headerlink" title="七、还有一条路：用脚本写插件"></a>七、还有一条路：用脚本写插件</h2>
+<p>进程隔离的另一个好处是：<strong>插件进程里跑什么，宿主管不着。</strong></p>
+<p>所以 cordis-cj 支持 xisp 脚本插件——插件不是编译好的二进制，而是一个 Lisp 脚本：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#953800">define</span> <span style="color:#1f2328">(</span><span style="color:#953800">echo</span> <span style="color:#953800">args</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">(</span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">&gt;</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">length</span> <span style="color:#953800">args</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">(</span><span style="color:#6639ba">car</span> <span style="color:#953800">args</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#032f62">&#39;null</span><span style="color:#1f2328">))</span>
+</span></span></code></pre></div><p><code>cordis_xisp</code> 运行时把宿主能力注入脚本环境（<code>cordis::*</code> 命名空间），脚本直接调用 <code>provide</code> / <code>invoke</code> / <code>log</code>。</p>
+<p>这条路的代价是性能（解释执行），好处是<strong>改插件不用重新编译</strong>。对一个热更新场景，这个交换很划算。</p>
+<h2 id="八边界"><a href="#八边界" class="headerlink" title="八、边界"></a>八、边界</h2>
+<p>诚实说一下这套东西做不到什么：</p>
+<table>
+	<thead>
+			<tr>
+					<th>限制</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>不做跨机</td>
+					<td>进程隔离只在一个机器上；跨机得自己加网络层</td>
+			</tr>
+			<tr>
+					<td>插件只增不热改</td>
+					<td>改插件代码要换二进制 + 重启该插件（调和器能做，但不是热补丁）</td>
+			</tr>
+			<tr>
+					<td>序列化有成本</td>
+					<td>大对象跨进程传会慢，设计服务接口时要考虑粒度</td>
+			</tr>
+			<tr>
+					<td>微内核不卸载</td>
+					<td>宿主进程本身是单体，它崩了整个都崩</td>
+			</tr>
+			<tr>
+					<td>宏有跨模块限制</td>
+					<td>见上节；外部插件只能走显式 API</td>
+			</tr>
+	</tbody>
+</table>
+<p>最后一条值得展开：<strong>架构上的「可卸载」不等于「随时能改」</strong>。</p>
+<p>进程隔离让你能安全地<strong>停止</strong>一个插件，但要让新版本生效，还是得换文件、重启进程。这跟某些动态语言那种「运行时热替换类定义」完全是两回事。</p>
+<h2 id="九小结"><a href="#九小结" class="headerlink" title="九、小结"></a>九、小结</h2>
+<ul>
+<li><strong>静态语言不能卸载模块</strong>，这是运行时结构决定的，不是实现问题。<code>dlclose</code> 在原生程序里本来就只是个建议。</li>
+<li><strong>绕开的办法是换承载物</strong>：插件跑在独立进程里，卸载就是杀进程，资源回收交给操作系统。</li>
+<li><strong>代价在握手、序列化、依赖顺序</strong>三处。前两个用宏和泛型 API 藏起来，第三个用声明式依赖（<code>inject</code>/<code>provide</code>）自动解决。</li>
+<li><strong>可逆效果</strong>：服务注册时就把撤销方式记下来（<code>undo_id</code>），而不是事后猜。</li>
+<li><strong>调和器让运维只写期望</strong>：5 秒一轮 diff，探活 30 秒一轮，崩溃自愈不惊动人。</li>
+<li><strong>工具链缺陷会改变 API 形状</strong>。宏的跨模块问题没有「修好」，而是变成了两套写法并存。</li>
+</ul>
+<p>如果只能记一句：<strong>当语言不给你某件事时，先想清楚「不给你」是在哪一层——如果在运行时，就换个承载它的东西。</strong></p>
+<blockquote>
+<p>这个项目的插件语义对标 <a href="https://github.com/shigma/cordis" target="_blank" rel="noopener">Cordis</a>
+（DeepSeek Harness 的插件框架），<br>
+理论依据来自《Revertible Effects and Reactive Coeffects》。<br>
+它的下游用途之一，是把 agent 适配器从宿主进程里拆出去——<br>
+也就是 <a href="/2026/11/11/uhp-cj-protocol-implementation/">uhp-cj</a>
+ 那个服务端将来要做的事。</p>
+</blockquote>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2026-11-12T10:00:00&#43;08:00" itemprop="dateUpdated">2026-11-12 10:00:00</time>
+          </span><br>
+          本文链接：<a href="/2026/11/12/cordis-cj-plugin-isolation/" target="_blank" rel="external">https://ystyle.top/2026/11/12/cordis-cj-plugin-isolation/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cordis/">cordis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8F%92%E4%BB%B6%E7%B3%BB%E7%BB%9F/">插件系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B%E9%9A%94%E7%A6%BB/">进程隔离</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/">架构</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f12%2fcordis-cj-plugin-isolation%2f&title=%e3%80%8acordis-cj%ef%bc%9a%e9%9d%99%e6%80%81%e8%af%ad%e8%a8%80%e6%80%8e%e4%b9%88%e5%81%9a%e5%87%ba%e8%83%bd%e5%8d%b8%e8%bd%bd%e7%9a%84%e6%8f%92%e4%bb%b6%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f12%2fcordis-cj-plugin-isolation%2f&title=%e3%80%8acordis-cj%ef%bc%9a%e9%9d%99%e6%80%81%e8%af%ad%e8%a8%80%e6%80%8e%e4%b9%88%e5%81%9a%e5%87%ba%e8%83%bd%e5%8d%b8%e8%bd%bd%e7%9a%84%e6%8f%92%e4%bb%b6%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=cordis-cj%20%e6%ba%90%e7%a0%81%e6%8b%86%e8%a7%a3%0a%e5%8d%b8%e8%bd%bd%e8%bf%99%e4%bb%b6%e4%ba%8b%ef%bc%8c%e9%9d%99%e6%80%81%e8%af%ad%e8%a8%80%e4%bb%8e%e6%a0%b9%e4%b8%8a%e5%b0%b1%e5%81%9a%e4%b8%8d%e4%ba%86%0a%e5%8a%a8%e6%80%81%e8%af%ad%e8%a8%80%e7%9a%84%e6%8f%92%e4%bb%b6%e7%b3%bb%e7%bb%9f%e5%8f%af%e4%bb%a5%e3%80%8c%e5%8a%a0%e8%bd%bd%20%e2%86%92%20%e5%8d%b8%e8%bd%bd%20%e2%86%92%20%e5%86%8d%e5%8a%a0%e8%bd%bd%e3%80%8d%ef%bc%8c%0a%e9%9d%99%e6%80%81%e8%af%ad%e8%a8%80%e4%b8%8d%e8%a1%8c%e2%80%94%e2%80%94%e4%b8%8d%e6%98%af%e5%ae%9e%e7%8e%b0%e5%be%97%e4%b8%8d%e5%a4%9f%e5%a5%bd%ef%bc%8c%e6%98%af%e8%bf%90%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f11%2f12%2fcordis-cj-plugin-isolation%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8acordis-cj%ef%bc%9a%e9%9d%99%e6%80%81%e8%af%ad%e8%a8%80%e6%80%8e%e4%b9%88%e5%81%9a%e5%87%ba%e8%83%bd%e5%8d%b8%e8%bd%bd%e7%9a%84%e6%8f%92%e4%bb%b6%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f11%2f12%2fcordis-cj-plugin-isolation%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f12%2fcordis-cj-plugin-isolation%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2026/11/11/uhp-cj-protocol-implementation/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">uhp-cj：把 Agent harness 变成共享基础设施</h4>
+        </a>
+      </div>
+      
+      
+      <div class="waves-block waves-effect next">
+        <a href="/2026/11/13/cjreg-private-registry/" id="post-next" class="post-nav-link">
+          <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+          <h4 class="title">cjreg：用仓颉写一个私有中心仓，Web 界面不用写一行 JS</h4>
+        </a>
+      </div>
+      
+    </nav>
+    
+
+    
+    
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+  </article>
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f12%2fcordis-cj-plugin-isolation%2f&title=%e3%80%8acordis-cj%ef%bc%9a%e9%9d%99%e6%80%81%e8%af%ad%e8%a8%80%e6%80%8e%e4%b9%88%e5%81%9a%e5%87%ba%e8%83%bd%e5%8d%b8%e8%bd%bd%e7%9a%84%e6%8f%92%e4%bb%b6%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f12%2fcordis-cj-plugin-isolation%2f&title=%e3%80%8acordis-cj%ef%bc%9a%e9%9d%99%e6%80%81%e8%af%ad%e8%a8%80%e6%80%8e%e4%b9%88%e5%81%9a%e5%87%ba%e8%83%bd%e5%8d%b8%e8%bd%bd%e7%9a%84%e6%8f%92%e4%bb%b6%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=cordis-cj%20%e6%ba%90%e7%a0%81%e6%8b%86%e8%a7%a3%0a%e5%8d%b8%e8%bd%bd%e8%bf%99%e4%bb%b6%e4%ba%8b%ef%bc%8c%e9%9d%99%e6%80%81%e8%af%ad%e8%a8%80%e4%bb%8e%e6%a0%b9%e4%b8%8a%e5%b0%b1%e5%81%9a%e4%b8%8d%e4%ba%86%0a%e5%8a%a8%e6%80%81%e8%af%ad%e8%a8%80%e7%9a%84%e6%8f%92%e4%bb%b6%e7%b3%bb%e7%bb%9f%e5%8f%af%e4%bb%a5%e3%80%8c%e5%8a%a0%e8%bd%bd%20%e2%86%92%20%e5%8d%b8%e8%bd%bd%20%e2%86%92%20%e5%86%8d%e5%8a%a0%e8%bd%bd%e3%80%8d%ef%bc%8c%0a%e9%9d%99%e6%80%81%e8%af%ad%e8%a8%80%e4%b8%8d%e8%a1%8c%e2%80%94%e2%80%94%e4%b8%8d%e6%98%af%e5%ae%9e%e7%8e%b0%e5%be%97%e4%b8%8d%e5%a4%9f%e5%a5%bd%ef%bc%8c%e6%98%af%e8%bf%90%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f11%2f12%2fcordis-cj-plugin-isolation%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8acordis-cj%ef%bc%9a%e9%9d%99%e6%80%81%e8%af%ad%e8%a8%80%e6%80%8e%e4%b9%88%e5%81%9a%e5%87%ba%e8%83%bd%e5%8d%b8%e8%bd%bd%e7%9a%84%e6%8f%92%e4%bb%b6%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f11%2f12%2fcordis-cj-plugin-isolation%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f12%2fcordis-cj-plugin-isolation%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2026/11/12/cordis-cj-plugin-isolation/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+
+  
+  
+<template id="title-change"
+          data-normal="欢迎回来╮(╯▽╰)╭"
+          data-leave="东方星痕的博客"></template>
+<script>
+(function () {
+  var el = document.getElementById('title-change');
+  if (!el) return;
+
+  var LEAVE = el.getAttribute('data-leave');
+  var NORMAL = el.getAttribute('data-normal');
+  var OriginTitile = document.title, titleTime;
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      document.title = LEAVE;
+      clearTimeout(titleTime);
+    } else {
+      document.title = NORMAL;
+      titleTime = setTimeout(function () {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

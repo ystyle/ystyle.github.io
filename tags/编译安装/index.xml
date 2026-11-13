@@ -10,7 +10,7 @@
 		
 		
 		
-			<lastBuildDate>Fri, 03 Apr 2026 21:35:00 +0800</lastBuildDate>
+			<lastBuildDate>Thu, 12 Nov 2026 18:20:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/index.xml" rel="self" type="application/rss+xml" />
 			<item>
@@ -18,7 +18,7 @@
 				<link>https://ystyle.top/2026/04/03/matebookpro-container-build-neovim/</link>
 				<pubDate>Fri, 03 Apr 2026 21:35:00 +0800</pubDate>
 				<guid>https://ystyle.top/2026/04/03/matebookpro-container-build-neovim/</guid>
-				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;本文记录在鸿蒙PC融合开发引擎的容器环境中，因glibc版本限制从源码编译Neovim和tree-sitter的完整过程，并配置AstroNvim作为开发环境。&lt;/p&gt;</description>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;鸿蒙 PC 融合开发引擎的 openEuler 容器里，glibc 是 2.38；nvim-treesitter 下载的预编译 tree-sitter 要 2.39，装解析器直接报错。这篇是绕开的办法：自己编译 tree-sitter CLI 和 Neovim，再接上 AstroNvim。&lt;/p&gt;</description>
 			</item>
 	</channel>
 </rss>

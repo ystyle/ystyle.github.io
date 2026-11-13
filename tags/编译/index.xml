@@ -10,7 +10,7 @@
 		
 		
 		
-			<lastBuildDate>Tue, 30 Jun 2026 22:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Thu, 12 Nov 2026 18:20:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/%E7%BC%96%E8%AF%91/index.xml" rel="self" type="application/rss+xml" />
 			<item>
@@ -18,7 +18,7 @@
 				<link>https://ystyle.top/2026/06/30/matebookpro-box64-harmony-sdk/</link>
 				<pubDate>Tue, 30 Jun 2026 22:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/2026/06/30/matebookpro-box64-harmony-sdk/</guid>
-				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;本文记录在鸿蒙PC融合开发引擎的openEuler aarch64容器中，通过box64模拟x86_64兼容层，运行鸿蒙命令行工具编译HAP的完整过程。&lt;/p&gt;</description>
+				<description>&lt;blockquote&gt;&#xA;&lt;p&gt;鸿蒙 PC 的融合开发引擎给的是一个 aarch64 的 openEuler 容器，而鸿蒙官方命令行工具只发 x86_64 版。这篇是怎么在容器里把这套工具跑起来、最后编出 HAP 的。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;背景&#34;&gt;&lt;a href=&#34;#背景&#34; class=&#34;headerlink&#34; title=&#34;为什么不能直接跑&#34;&gt;&lt;/a&gt;为什么不能直接跑&lt;/h2&gt;&#xA;&lt;p&gt;鸿蒙 PC（HarmonyOS PC）的融合开发引擎提供的是 openEuler aarch64 容器环境，但鸿蒙官方命令行工具（command-line-tools）只有 x86_64 版本。要在 aarch64 上编译鸿蒙项目，有两种方案：&lt;/p&gt;</description>
 			</item>
 	</channel>
 </rss>

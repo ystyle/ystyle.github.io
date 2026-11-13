@@ -187,7 +187,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af">
-    <span class="post-toc-number">1.</span> <span class="post-toc-text">问题背景</span>
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">装插件时报的那一行错</span>
   </a>
   
   <ol class="post-toc-child">
@@ -195,7 +195,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#glibc%e7%89%88%e6%9c%ac%e5%86%b2%e7%aa%81">
-    <span class="post-toc-number">1.1.</span> <span class="post-toc-text">glibc版本冲突</span>
+    <span class="post-toc-number">1.1.</span> <span class="post-toc-text">触发点是 nvim-treesitter 装解析器</span>
   </a>
   
 </li>
@@ -204,7 +204,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e7%89%88%e6%9c%ac%e6%a3%80%e6%9f%a5">
-    <span class="post-toc-number">1.2.</span> <span class="post-toc-text">版本检查</span>
+    <span class="post-toc-number">1.2.</span> <span class="post-toc-text">容器里的 glibc 是 2.38</span>
   </a>
   
 </li>
@@ -213,7 +213,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e6%a0%b9%e6%9c%ac%e5%8e%9f%e5%9b%a0">
-    <span class="post-toc-number">1.3.</span> <span class="post-toc-text">根本原因</span>
+    <span class="post-toc-number">1.3.</span> <span class="post-toc-text">升级 glibc 这条路走不通</span>
   </a>
   
 </li>
@@ -227,7 +227,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88%e6%80%bb%e8%a7%88">
-    <span class="post-toc-number">2.</span> <span class="post-toc-text">解决方案总览</span>
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">整条链路五步</span>
   </a>
   
 </li>
@@ -236,7 +236,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e4%b8%80%e3%80%81%e5%ae%89%e8%a3%85%e7%bc%96%e8%af%91%e4%be%9d%e8%b5%96">
-    <span class="post-toc-number">3.</span> <span class="post-toc-text">一、安装编译依赖</span>
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">一、装 cmake 和 ninja</span>
   </a>
   
   <ol class="post-toc-child">
@@ -244,7 +244,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e5%9f%ba%e7%a1%80%e5%b7%a5%e5%85%b7">
-    <span class="post-toc-number">3.1.</span> <span class="post-toc-text">基础工具</span>
+    <span class="post-toc-number">3.1.</span> <span class="post-toc-text">cmake 和 ninja 一起装</span>
   </a>
   
 </li>
@@ -253,7 +253,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e5%85%b6%e4%bb%96%e4%be%9d%e8%b5%96">
-    <span class="post-toc-number">3.2.</span> <span class="post-toc-text">其他依赖</span>
+    <span class="post-toc-number">3.2.</span> <span class="post-toc-text">gcc 和 make 镜像里自带</span>
   </a>
   
 </li>
@@ -267,7 +267,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e4%ba%8c%e3%80%81%e5%ae%89%e8%a3%85Rust%e5%b7%a5%e5%85%b7%e9%93%be">
-    <span class="post-toc-number">4.</span> <span class="post-toc-text">二、安装Rust工具链</span>
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">二、装 Rust：先有 cargo 才编得了 tree-sitter</span>
   </a>
   
 </li>
@@ -276,7 +276,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e4%b8%89%e3%80%81%e7%bc%96%e8%af%91tree-sitter-CLI">
-    <span class="post-toc-number">5.</span> <span class="post-toc-text">三、编译tree-sitter CLI</span>
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">三、自己编一份 tree-sitter CLI</span>
   </a>
   
   <ol class="post-toc-child">
@@ -284,7 +284,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e8%8e%b7%e5%8f%96%e6%ba%90%e7%a0%81">
-    <span class="post-toc-number">5.1.</span> <span class="post-toc-text">获取源码</span>
+    <span class="post-toc-number">5.1.</span> <span class="post-toc-text">拉 v0.24.1 的源码</span>
   </a>
   
 </li>
@@ -293,7 +293,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e7%bc%96%e8%af%91">
-    <span class="post-toc-number">5.2.</span> <span class="post-toc-text">编译</span>
+    <span class="post-toc-number">5.2.</span> <span class="post-toc-text">cargo build &ndash;release</span>
   </a>
   
 </li>
@@ -302,7 +302,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e5%ae%89%e8%a3%85">
-    <span class="post-toc-number">5.3.</span> <span class="post-toc-text">安装</span>
+    <span class="post-toc-number">5.3.</span> <span class="post-toc-text">装到哪：系统路径还是 mason 目录</span>
   </a>
   
 </li>
@@ -316,7 +316,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e5%9b%9b%e3%80%81%e7%bc%96%e8%af%91Neovim">
-    <span class="post-toc-number">6.</span> <span class="post-toc-text">四、编译Neovim</span>
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">四、编译 Neovim</span>
   </a>
   
   <ol class="post-toc-child">
@@ -324,7 +324,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e8%8e%b7%e5%8f%96%e6%ba%90%e7%a0%81-1">
-    <span class="post-toc-number">6.1.</span> <span class="post-toc-text">获取源码</span>
+    <span class="post-toc-number">6.1.</span> <span class="post-toc-text">先看要编哪个版本</span>
   </a>
   
 </li>
@@ -333,7 +333,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e7%bc%96%e8%af%91-1">
-    <span class="post-toc-number">6.2.</span> <span class="post-toc-text">编译</span>
+    <span class="post-toc-number">6.2.</span> <span class="post-toc-text">make CMAKE_BUILD_TYPE=Release</span>
   </a>
   
 </li>
@@ -342,7 +342,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e5%ae%89%e8%a3%85-1">
-    <span class="post-toc-number">6.3.</span> <span class="post-toc-text">安装</span>
+    <span class="post-toc-number">6.3.</span> <span class="post-toc-text">sudo make install，再验证版本</span>
   </a>
   
 </li>
@@ -351,7 +351,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e7%bc%96%e8%af%91%e8%be%93%e5%87%ba%e4%bd%8d%e7%bd%ae">
-    <span class="post-toc-number">6.4.</span> <span class="post-toc-text">编译输出位置</span>
+    <span class="post-toc-number">6.4.</span> <span class="post-toc-text">产物就在 build/bin 下</span>
   </a>
   
 </li>
@@ -365,7 +365,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e4%ba%94%e3%80%81%e9%85%8d%e7%bd%aeAstroNvim">
-    <span class="post-toc-number">7.</span> <span class="post-toc-text">五、配置AstroNvim</span>
+    <span class="post-toc-number">7.</span> <span class="post-toc-text">五、接上 AstroNvim</span>
   </a>
   
   <ol class="post-toc-child">
@@ -373,7 +373,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e5%a4%87%e4%bb%bd%e7%8e%b0%e6%9c%89%e9%85%8d%e7%bd%ae">
-    <span class="post-toc-number">7.1.</span> <span class="post-toc-text">备份现有配置</span>
+    <span class="post-toc-number">7.1.</span> <span class="post-toc-text">先把旧配置挪走</span>
   </a>
   
 </li>
@@ -382,7 +382,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e5%ae%89%e8%a3%85AstroNvim">
-    <span class="post-toc-number">7.2.</span> <span class="post-toc-text">安装AstroNvim</span>
+    <span class="post-toc-number">7.2.</span> <span class="post-toc-text">克隆配置，复制出 user.lua</span>
   </a>
   
 </li>
@@ -391,7 +391,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e9%a6%96%e6%ac%a1%e5%90%af%e5%8a%a8">
-    <span class="post-toc-number">7.3.</span> <span class="post-toc-text">首次启动</span>
+    <span class="post-toc-number">7.3.</span> <span class="post-toc-text">第一次启动会自己装插件</span>
   </a>
   
 </li>
@@ -400,7 +400,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e8%87%aa%e5%ae%9a%e4%b9%89%e9%85%8d%e7%bd%ae">
-    <span class="post-toc-number">7.4.</span> <span class="post-toc-text">自定义配置</span>
+    <span class="post-toc-number">7.4.</span> <span class="post-toc-text">user.lua 里改什么</span>
   </a>
   
 </li>
@@ -409,7 +409,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e5%ae%89%e8%a3%85LSP%e5%92%8c%e5%b7%a5%e5%85%b7">
-    <span class="post-toc-number">7.5.</span> <span class="post-toc-text">安装LSP和工具</span>
+    <span class="post-toc-number">7.5.</span> <span class="post-toc-text">LSP 和工具为什么得单独装</span>
   </a>
   
 </li>
@@ -423,7 +423,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e5%85%ad%e3%80%81%e9%aa%8c%e8%af%81tree-sitter%e5%b7%a5%e4%bd%9c">
-    <span class="post-toc-number">8.</span> <span class="post-toc-text">六、验证tree-sitter工作</span>
+    <span class="post-toc-number">8.</span> <span class="post-toc-text">六、确认解析器是用新 CLI 编的</span>
   </a>
   
   <ol class="post-toc-child">
@@ -431,7 +431,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e5%ae%89%e8%a3%85%e8%a7%a3%e6%9e%90%e5%99%a8">
-    <span class="post-toc-number">8.1.</span> <span class="post-toc-text">安装解析器</span>
+    <span class="post-toc-number">8.1.</span> <span class="post-toc-text">先看有哪些解析器</span>
   </a>
   
 </li>
@@ -440,7 +440,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e6%a3%80%e6%9f%a5%e7%8a%b6%e6%80%81">
-    <span class="post-toc-number">8.2.</span> <span class="post-toc-text">检查状态</span>
+    <span class="post-toc-number">8.2.</span> <span class="post-toc-text">装完核对状态</span>
   </a>
   
 </li>
@@ -454,7 +454,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e4%b8%83%e3%80%81%e6%80%bb%e7%bb%93">
-    <span class="post-toc-number">9.</span> <span class="post-toc-text">七、总结</span>
+    <span class="post-toc-number">9.</span> <span class="post-toc-text">七、版本清单和踩过的坑</span>
   </a>
   
   <ol class="post-toc-child">
@@ -462,7 +462,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e7%bc%96%e8%af%91%e6%b8%85%e5%8d%95">
-    <span class="post-toc-number">9.1.</span> <span class="post-toc-text">编译清单</span>
+    <span class="post-toc-number">9.1.</span> <span class="post-toc-text">装完的版本</span>
   </a>
   
 </li>
@@ -471,7 +471,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e5%85%b3%e9%94%ae%e7%82%b9">
-    <span class="post-toc-number">9.2.</span> <span class="post-toc-text">关键点</span>
+    <span class="post-toc-number">9.2.</span> <span class="post-toc-text">顺序为什么不能换</span>
   </a>
   
 </li>
@@ -480,7 +480,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e6%80%a7%e8%83%bd%e8%a1%a8%e7%8e%b0">
-    <span class="post-toc-number">9.3.</span> <span class="post-toc-text">性能表现</span>
+    <span class="post-toc-number">9.3.</span> <span class="post-toc-text">用起来怎么样</span>
   </a>
   
 </li>
@@ -489,7 +489,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e9%81%bf%e5%9d%91%e6%8c%87%e5%8d%97">
-    <span class="post-toc-number">9.4.</span> <span class="post-toc-text">避坑指南</span>
+    <span class="post-toc-number">9.4.</span> <span class="post-toc-text">三个容易踩的坑</span>
   </a>
   
 </li>
@@ -503,7 +503,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e5%85%ab%e3%80%81%e6%b8%85%e7%90%86%e6%9e%84%e5%bb%ba%e6%96%87%e4%bb%b6">
-    <span class="post-toc-number">10.</span> <span class="post-toc-text">八、清理构建文件</span>
+    <span class="post-toc-number">10.</span> <span class="post-toc-text">八、源码目录留不留</span>
   </a>
   
 </li>
@@ -512,7 +512,16 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e4%b9%9d%e3%80%81%e5%90%8e%e7%bb%ad%e5%8d%87%e7%ba%a7">
-    <span class="post-toc-number">11.</span> <span class="post-toc-text">九、后续升级</span>
+    <span class="post-toc-number">11.</span> <span class="post-toc-text">九、以后升级</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%ba%90">
+    <span class="post-toc-number">12.</span> <span class="post-toc-text">参考资源</span>
   </a>
   
 </li>
@@ -538,43 +547,49 @@
 
       <div class="post-content" id="post-content" itemprop="postContent">
         <blockquote>
-<p>本文记录在鸿蒙PC融合开发引擎的容器环境中，因glibc版本限制从源码编译Neovim和tree-sitter的完整过程，并配置AstroNvim作为开发环境。</p>
+<p>鸿蒙 PC 融合开发引擎的 openEuler 容器里，glibc 是 2.38；nvim-treesitter 下载的预编译 tree-sitter 要 2.39，装解析器直接报错。这篇是绕开的办法：自己编译 tree-sitter CLI 和 Neovim，再接上 AstroNvim。</p>
 </blockquote>
-<h2 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h2>
-<h3 id="glibc版本冲突"><a href="#glibc版本冲突" class="headerlink" title="glibc版本冲突"></a>glibc版本冲突</h3>
-<p>在鸿蒙PC融合开发引擎的openEuler容器中，尝试安装nvim-treesitter插件时遇到错误：</p>
+<h2 id="问题背景"><a href="#问题背景" class="headerlink" title="装插件时报的那一行错"></a>装插件时报的那一行错</h2>
+<h3 id="glibc版本冲突"><a href="#glibc版本冲突" class="headerlink" title="触发点是 nvim-treesitter 装解析器"></a>触发点是 nvim-treesitter 装解析器</h3>
+<p>在鸿蒙 PC 融合开发引擎的 openEuler 容器里，装 nvim-treesitter 后第一次触发 tree-sitter 构建就停了：</p>
 <pre tabindex="0"><code>[nvim-treesitter/install/c] error: Error during &#34;tree-sitter build&#34;: 
 tree-sitter: /usr/lib64/libc.so.6: version `GLIBC_2.39&#39; not found (required by tree-sitter)
-</code></pre><h3 id="版本检查"><a href="#版本检查" class="headerlink" title="版本检查"></a>版本检查</h3>
+</code></pre><p>报错的是 <code>tree-sitter</code> 这个可执行文件本身，不是编出来的解析器。nvim-treesitter 动手前要先调它，这一步就没起来。</p>
+<h3 id="版本检查"><a href="#版本检查" class="headerlink" title="容器里的 glibc 是 2.38"></a>容器里的 glibc 是 2.38</h3>
+<p>查一下版本就知道差在哪：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ldd --version
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># 输出：ldd (GNU libc) 2.38</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>cat /etc/os-release
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># NAME=&#34;openEuler&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># VERSION=&#34;24.03 (LTS-SP1)&#34;</span>
-</span></span></code></pre></div><p>openEuler 24.03 SP1的glibc是2.38，而nvim-treesitter下载的预编译tree-sitter CLI需要glibc 2.39。</p>
-<h3 id="根本原因"><a href="#根本原因" class="headerlink" title="根本原因"></a>根本原因</h3>
-<p>容器环境共享虚拟机内核，无法升级glibc。解决方案是<strong>从源码编译所有组件</strong>，使用当前系统的glibc版本。</p>
-<h2 id="解决方案总览"><a href="#解决方案总览" class="headerlink" title="解决方案总览"></a>解决方案总览</h2>
+</span></span></code></pre></div><p>openEuler 24.03 SP1 的 glibc 是 2.38，预编译的 tree-sitter CLI 要 2.39，差一个小版本。</p>
+<h3 id="根本原因"><a href="#根本原因" class="headerlink" title="升级 glibc 这条路走不通"></a>升级 glibc 这条路走不通</h3>
+<p>容器共享虚拟机内核，容器里的 glibc 跟着镜像走，没法就地升。能改的只有另一边：把要用的组件按容器自带的 glibc 自己编一遍。</p>
+<h2 id="解决方案总览"><a href="#解决方案总览" class="headerlink" title="整条链路五步"></a>整条链路五步</h2>
 <pre tabindex="0"><code>1. 安装编译依赖
 2. 安装Rust工具链（编译tree-sitter CLI需要）
 3. 从源码编译tree-sitter CLI
 4. 从源码编译Neovim
 5. 配置AstroNvim
-</code></pre><h2 id="一、安装编译依赖"><a href="#一、安装编译依赖" class="headerlink" title="一、安装编译依赖"></a>一、安装编译依赖</h2>
-<h3 id="基础工具"><a href="#基础工具" class="headerlink" title="基础工具"></a>基础工具</h3>
+</code></pre><p>五步之间是顺序依赖，原因写在第七节。</p>
+<h2 id="一、安装编译依赖"><a href="#一、安装编译依赖" class="headerlink" title="一、装 cmake 和 ninja"></a>一、装 cmake 和 ninja</h2>
+<h3 id="基础工具"><a href="#基础工具" class="headerlink" title="cmake 和 ninja 一起装"></a>cmake 和 ninja 一起装</h3>
+<p>在哪个目录执行都行，装的是系统包：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 安装cmake和ninja</span>
 </span></span><span style="display:flex;"><span>sudo dnf install -y cmake ninja-build
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># 验证安装</span>
 </span></span><span style="display:flex;"><span>cmake --version
 </span></span><span style="display:flex;"><span>ninja --version
-</span></span></code></pre></div><h3 id="其他依赖"><a href="#其他依赖" class="headerlink" title="其他依赖"></a>其他依赖</h3>
+</span></span></code></pre></div><p><code>make CMAKE_BUILD_TYPE=Release</code> 底下调的是 CMake，ninja 是它可用的构建后端。<code>dnf</code> 拉不到包，先确认容器里能出网。</p>
+<h3 id="其他依赖"><a href="#其他依赖" class="headerlink" title="gcc 和 make 镜像里自带"></a>gcc 和 make 镜像里自带</h3>
+<p>这个镜像里 gcc 和 make 都已经有了，确认版本就行，缺了再补：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># gcc、make等已预装</span>
 </span></span><span style="display:flex;"><span>gcc --version
 </span></span><span style="display:flex;"><span>make --version
-</span></span></code></pre></div><h2 id="二、安装Rust工具链"><a href="#二、安装Rust工具链" class="headerlink" title="二、安装Rust工具链"></a>二、安装Rust工具链</h2>
-<p>tree-sitter CLI使用Rust编写，需要先安装Rust：</p>
+</span></span></code></pre></div><h2 id="二、安装Rust工具链"><a href="#二、安装Rust工具链" class="headerlink" title="二、装 Rust：先有 cargo 才编得了 tree-sitter"></a>二、装 Rust：先有 cargo 才编得了 tree-sitter</h2>
+<p>用 rustup 装到用户目录，不碰系统包：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 设置代理（可选）</span>
 </span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">https_proxy</span><span style="color:#0550ae">=</span>http://192.168.3.6:1080
 </span></span><span style="display:flex;"><span>
@@ -587,19 +602,22 @@ tree-sitter: /usr/lib64/libc.so.6: version `GLIBC_2.39&#39; not found (required 
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># 验证</span>
 </span></span><span style="display:flex;"><span>cargo --version
 </span></span><span style="display:flex;"><span>rustc --version
-</span></span></code></pre></div><h2 id="三、编译tree-sitter-CLI"><a href="#三、编译tree-sitter-CLI" class="headerlink" title="三、编译tree-sitter CLI"></a>三、编译tree-sitter CLI</h2>
-<h3 id="获取源码"><a href="#获取源码" class="headerlink" title="获取源码"></a>获取源码</h3>
+</span></span></code></pre></div><p><code>sh -s -- -y</code> 让安装脚本不提问，装到 <code>~/.cargo</code>；两条 <code>--version</code> 有输出，说明 <code>~/.cargo/bin</code> 进了 PATH。</p>
+<p><code>source ~/.cargo/env</code> 只对当前 shell 有效，换窗口要再 source 一次；漏了的话 <code>cargo build</code> 报的是找不到 <code>cargo</code>。</p>
+<h2 id="三、编译tree-sitter-CLI"><a href="#三、编译tree-sitter-CLI" class="headerlink" title="三、自己编一份 tree-sitter CLI"></a>三、自己编一份 tree-sitter CLI</h2>
+<h3 id="获取源码"><a href="#获取源码" class="headerlink" title="拉 v0.24.1 的源码"></a>拉 v0.24.1 的源码</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">https_proxy</span><span style="color:#0550ae">=</span>http://192.168.3.6:1080
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># 克隆tree-sitter CLI（使用稳定版本v0.24.1）</span>
 </span></span><span style="display:flex;"><span>git clone --depth <span style="color:#0550ae">1</span> --branch v0.24.1 <span style="color:#0a3069">\
 </span></span></span><span style="display:flex;"><span>    https://github.com/tree-sitter/tree-sitter.git <span style="color:#0a3069">\
 </span></span></span><span style="display:flex;"><span>    ~/tree-sitter-cli
-</span></span></code></pre></div><h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3>
+</span></span></code></pre></div><p><code>--branch</code> 钉的是 tag <code>v0.24.1</code>，<code>--depth 1</code> 只带一个提交。拉不动先看 <code>https_proxy</code>。</p>
+<h3 id="编译"><a href="#编译" class="headerlink" title="cargo build –release"></a>cargo build &ndash;release</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6639ba">cd</span> ~/tree-sitter-cli
 </span></span><span style="display:flex;"><span>cargo build --release
-</span></span></code></pre></div><p>编译过程约需1-2分钟。</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3>
+</span></span></code></pre></div><p>约 1-2 分钟。<strong>必须在 <code>~/tree-sitter-cli</code> 里执行</strong>：<code>cargo</code> 靠当前目录的 <code>Cargo.toml</code> 找项目，在别处跑会说找不到清单文件；产物在 <code>target/release/</code>。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="装到哪：系统路径还是 mason 目录"></a>装到哪：系统路径还是 mason 目录</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 系统安装</span>
 </span></span><span style="display:flex;"><span>sudo cp ~/tree-sitter-cli/target/release/tree-sitter /usr/local/bin/
 </span></span><span style="display:flex;"><span>
@@ -610,8 +628,11 @@ tree-sitter: /usr/lib64/libc.so.6: version `GLIBC_2.39&#39; not found (required 
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># 验证</span>
 </span></span><span style="display:flex;"><span>tree-sitter --version
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># 输出：tree-sitter 0.24.1</span>
-</span></span></code></pre></div><h2 id="四、编译Neovim"><a href="#四、编译Neovim" class="headerlink" title="四、编译Neovim"></a>四、编译Neovim</h2>
-<h3 id="获取源码-1"><a href="#获取源码-1" class="headerlink" title="获取源码"></a>获取源码</h3>
+</span></span></code></pre></div><p>两条 <code>cp</code> 放的不是一个地方：<code>/usr/local/bin</code> 那份是系统级，shell 里直接敲 <code>tree-sitter</code> 就能用；mason 目录那份才是 nvim-treesitter 在 Neovim 里调的，要换的是它。</p>
+<p>mason 这条路有个前提：<code>nvim</code> 和 mason 先装过 <code>tree-sitter-cli</code>，目录才存在。这时候还没装（第五节才装 AstroNvim）就先跳过，装完回来补。</p>
+<p><code>tree-sitter --version</code> 打出 <code>0.24.1</code>，说明 <code>/usr/local/bin</code> 这份是好的；Neovim 里还报 glibc 错，就是 mason 那份没换。</p>
+<h2 id="四、编译Neovim"><a href="#四、编译Neovim" class="headerlink" title="四、编译 Neovim"></a>四、编译 Neovim</h2>
+<h3 id="获取源码-1"><a href="#获取源码-1" class="headerlink" title="先看要编哪个版本"></a>先看要编哪个版本</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">https_proxy</span><span style="color:#0550ae">=</span>http://192.168.3.6:1080
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># 查看最新版本</span>
@@ -622,11 +643,13 @@ tree-sitter: /usr/lib64/libc.so.6: version `GLIBC_2.39&#39; not found (required 
 </span></span><span style="display:flex;"><span>git clone --depth <span style="color:#0550ae">1</span> --branch v0.12.0 <span style="color:#0a3069">\
 </span></span></span><span style="display:flex;"><span>    https://github.com/neovim/neovim.git <span style="color:#0a3069">\
 </span></span></span><span style="display:flex;"><span>    ~/neovim
-</span></span></code></pre></div><h3 id="编译-1"><a href="#编译-1" class="headerlink" title="编译"></a>编译</h3>
+</span></span></code></pre></div><p>第一条 <code>git ls-remote</code> 只列远端 tag，不落盘：<code>grep -v '\^{}'</code> 去掉 peeled 引用，<code>grep 'v0\.1[0-2]'</code> 只留 v0.10 到 v0.12，<code>tail -5</code> 取最后五条。第二条才真正拉代码。</p>
+<h3 id="编译-1"><a href="#编译-1" class="headerlink" title="make CMAKE_BUILD_TYPE=Release"></a>make CMAKE_BUILD_TYPE=Release</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6639ba">cd</span> ~/neovim
 </span></span><span style="display:flex;"><span>make <span style="color:#953800">CMAKE_BUILD_TYPE</span><span style="color:#0550ae">=</span>Release
-</span></span></code></pre></div><p>编译过程约需3-5分钟，会自动下载并编译所有依赖。</p>
-<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3>
+</span></span></code></pre></div><p>约 3-5 分钟，中间会自动下载并编译依赖。</p>
+<p><strong>这一步要联网</strong>：前面几个 <code>export https_proxy</code> 只对当时的 shell 有效，换过窗口就在这里重新设一次。</p>
+<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="sudo make install，再验证版本"></a>sudo make install，再验证版本</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo make install
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># 验证</span>
@@ -635,27 +658,32 @@ tree-sitter: /usr/lib64/libc.so.6: version `GLIBC_2.39&#39; not found (required 
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># NVIM v0.12.0</span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># Build type: Release</span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># LuaJIT 2.1.1774638290</span>
-</span></span></code></pre></div><h3 id="编译输出位置"><a href="#编译输出位置" class="headerlink" title="编译输出位置"></a>编译输出位置</h3>
+</span></span></code></pre></div><p><code>make install</code> 往 <code>/usr/local/bin</code> 和运行时目录写文件，所以要 sudo。<code>nvim --version</code> 打出 <code>NVIM v0.12.0</code>、<code>Build type: Release</code> 就对了；还是老版本就先 <code>which nvim</code>。</p>
+<h3 id="编译输出位置"><a href="#编译输出位置" class="headerlink" title="产物就在 build/bin 下"></a>产物就在 build/bin 下</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls ~/neovim/build/bin/nvim
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># -rwxr-xr-x 1 user user 10346568 ... nvim</span>
-</span></span></code></pre></div><h2 id="五、配置AstroNvim"><a href="#五、配置AstroNvim" class="headerlink" title="五、配置AstroNvim"></a>五、配置AstroNvim</h2>
-<p>AstroNvim是一个预配置的Neovim发行版，提供完整的IDE体验。</p>
-<h3 id="备份现有配置"><a href="#备份现有配置" class="headerlink" title="备份现有配置"></a>备份现有配置</h3>
+</span></span></code></pre></div><p><code>sudo make install</code> 之前它就存在，可以直接拿去跑。</p>
+<h2 id="五、配置AstroNvim"><a href="#五、配置AstroNvim" class="headerlink" title="五、接上 AstroNvim"></a>五、接上 AstroNvim</h2>
+<p>AstroNvim 是别人维护好的一套 Neovim 配置，颜色方案、选项、插件、LSP 行为都在 <code>user.lua</code> 里配。它不含 Neovim，靠上一步装好的 <code>nvim</code>；插件和 LSP 也不在仓库里，首次启动才下。</p>
+<h3 id="备份现有配置"><a href="#备份现有配置" class="headerlink" title="先把旧配置挪走"></a>先把旧配置挪走</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 备份旧配置</span>
 </span></span><span style="display:flex;"><span>mv ~/.config/nvim ~/.config/nvim.bak
 </span></span><span style="display:flex;"><span>mv ~/.local/share/nvim ~/.local/share/nvim.bak
 </span></span><span style="display:flex;"><span>mv ~/.local/state/nvim ~/.local/state/nvim.bak
-</span></span></code></pre></div><h3 id="安装AstroNvim"><a href="#安装AstroNvim" class="headerlink" title="安装AstroNvim"></a>安装AstroNvim</h3>
+</span></span></code></pre></div><p>三个目录各管一件事：<code>~/.config/nvim</code> 是配置，<code>~/.local/share/nvim</code> 是插件和 mason 装的工具，<code>~/.local/state/nvim</code> 是运行时状态。</p>
+<p>第二条会把 <code>mason</code> 目录一起挪走。前面替换过 mason 那份 tree-sitter 的，装完 AstroNvim 要再补一次（见第七节）。</p>
+<h3 id="安装AstroNvim"><a href="#安装AstroNvim" class="headerlink" title="克隆配置，复制出 user.lua"></a>克隆配置，复制出 user.lua</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 克隆AstroNvim配置</span>
 </span></span><span style="display:flex;"><span>git clone --depth <span style="color:#0550ae">1</span> https://github.com/AstroNvim/AstroNvim <span style="color:#0a3069">\
 </span></span></span><span style="display:flex;"><span>    ~/.config/nvim
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># 复制默认用户配置模板</span>
 </span></span><span style="display:flex;"><span>cp ~/.config/nvim/lua/user_template.lua ~/.config/nvim/lua/user.lua
-</span></span></code></pre></div><h3 id="首次启动"><a href="#首次启动" class="headerlink" title="首次启动"></a>首次启动</h3>
+</span></span></code></pre></div><p>配置目录必须叫 <code>~/.config/nvim</code>，Neovim 启动只认这个位置；<code>user.lua</code> 是从模板复制出来的，你改的东西写在这里，仓库更新盖不掉。</p>
+<h3 id="首次启动"><a href="#首次启动" class="headerlink" title="第一次启动会自己装插件"></a>第一次启动会自己装插件</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nvim
-</span></span></code></pre></div><p>首次启动会自动安装所有插件和tree-sitter解析器。由于我们已编译了tree-sitter CLI，treesitter安装不会出现glibc错误。</p>
-<h3 id="自定义配置"><a href="#自定义配置" class="headerlink" title="自定义配置"></a>自定义配置</h3>
+</span></span></code></pre></div><p>插件不在仓库里，首次启动才去下，要等，也要网络。前面编的 tree-sitter CLI 就是给这一刻用的：解析器要现场编译，调的是它，不会再出 glibc 错。</p>
+<h3 id="自定义配置"><a href="#自定义配置" class="headerlink" title="user.lua 里改什么"></a>user.lua 里改什么</h3>
 <p>编辑 <code>~/.config/nvim/lua/user.lua</code>：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#cf222e">return</span> <span style="color:#1f2328">{</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#57606a">-- 自定义颜色方案</span>
@@ -684,17 +712,20 @@ tree-sitter: /usr/lib64/libc.so.6: version `GLIBC_2.39&#39; not found (required 
 </span></span><span style="display:flex;"><span>    <span style="color:#1f2328">},</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#1f2328">},</span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></div><h3 id="安装LSP和工具"><a href="#安装LSP和工具" class="headerlink" title="安装LSP和工具"></a>安装LSP和工具</h3>
-<p>在Neovim中运行：</p>
+</span></span></code></pre></div><p>四块内容：颜色方案、编辑器选项、额外插件、LSP 行为。<code>format_on_save = true</code> 是保存时自动格式化，得先有格式化工具，后面 <code>:MasonInstall prettier</code> 装的就是它。</p>
+<h3 id="安装LSP和工具"><a href="#安装LSP和工具" class="headerlink" title="LSP 和工具为什么得单独装"></a>LSP 和工具为什么得单独装</h3>
+<p>在 Neovim 里执行：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">LspInstall</span> <span style="color:#1f2328">python</span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">LspInstall</span> <span style="color:#1f2328">lua_ls</span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstall</span> <span style="color:#1f2328">python</span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstall</span> <span style="color:#1f2328">lua</span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">MasonInstall</span> <span style="color:#1f2328">prettier</span>
-</span></span></code></pre></div><h2 id="六、验证tree-sitter工作"><a href="#六、验证tree-sitter工作" class="headerlink" title="六、验证tree-sitter工作"></a>六、验证tree-sitter工作</h2>
-<h3 id="安装解析器"><a href="#安装解析器" class="headerlink" title="安装解析器"></a>安装解析器</h3>
+</span></span></code></pre></div><p><code>:LspInstall</code> 装 LSP 服务器本体，<code>:MasonInstall prettier</code> 装格式化工具，都是独立的外部可执行文件，落在 <code>~/.local/share/nvim/mason/packages/</code> 下——和第三节替换的 tree-sitter 是同一个目录。AstroNvim 只负责把它们接到 Neovim 上，程序本身不替你下载，这几条得自己跑。</p>
+<p><code>:TSInstall</code> 走的是另一套：解析器归 nvim-treesitter 管，负责语法高亮；LSP 负责补全和诊断。</p>
+<h2 id="六、验证tree-sitter工作"><a href="#六、验证tree-sitter工作" class="headerlink" title="六、确认解析器是用新 CLI 编的"></a>六、确认解析器是用新 CLI 编的</h2>
+<h3 id="安装解析器"><a href="#安装解析器" class="headerlink" title="先看有哪些解析器"></a>先看有哪些解析器</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstallInfo</span>
-</span></span></code></pre></div><p>查看可用的解析器，选择需要的安装：</p>
+</span></span></code></pre></div><p>列表里能看到装没装、要不要编，挑需要的装：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstall</span> <span style="color:#1f2328">vimdoc</span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstall</span> <span style="color:#1f2328">lua</span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstall</span> <span style="color:#1f2328">python</span>
@@ -703,11 +734,12 @@ tree-sitter: /usr/lib64/libc.so.6: version `GLIBC_2.39&#39; not found (required 
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstall</span> <span style="color:#1f2328">css</span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstall</span> <span style="color:#1f2328">json</span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstall</span> <span style="color:#1f2328">markdown</span>
-</span></span></code></pre></div><h3 id="检查状态"><a href="#检查状态" class="headerlink" title="检查状态"></a>检查状态</h3>
+</span></span></code></pre></div><h3 id="检查状态"><a href="#检查状态" class="headerlink" title="装完核对状态"></a>装完核对状态</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#1f2328">:</span><span style="color:#1f2328">TSInstallInfo</span>
 </span></span></code></pre></div><p>所有解析器应显示为 <code>✓ installed</code>。</p>
-<h2 id="七、总结"><a href="#七、总结" class="headerlink" title="七、总结"></a>七、总结</h2>
-<h3 id="编译清单"><a href="#编译清单" class="headerlink" title="编译清单"></a>编译清单</h3>
+<p>这一步不报 <code>GLIBC_2.39</code>，说明 nvim-treesitter 调的是你编的 tree-sitter；没到 <code>✓ installed</code> 的重跑对应 <code>:TSInstall</code>，报错会直接打出来。</p>
+<h2 id="七、总结"><a href="#七、总结" class="headerlink" title="七、版本清单和踩过的坑"></a>七、版本清单和踩过的坑</h2>
+<h3 id="编译清单"><a href="#编译清单" class="headerlink" title="装完的版本"></a>装完的版本</h3>
 <table>
 	<thead>
 			<tr>
@@ -749,48 +781,45 @@ tree-sitter: /usr/lib64/libc.so.6: version `GLIBC_2.39&#39; not found (required 
 			</tr>
 	</tbody>
 </table>
-<h3 id="关键点"><a href="#关键点" class="headerlink" title="关键点"></a>关键点</h3>
+<p>cmake 和 ninja 用 dnf 装，Rust 用 rustup 装，tree-sitter CLI 和 Neovim 自己编，AstroNvim 是 clone 下来的配置。</p>
+<h3 id="关键点"><a href="#关键点" class="headerlink" title="顺序为什么不能换"></a>顺序为什么不能换</h3>
+<p>三条依赖决定顺序：</p>
 <ol>
-<li><strong>glibc兼容</strong>：从源码编译确保使用当前glibc</li>
-<li><strong>Rust依赖</strong>：tree-sitter CLI需要Rust编译</li>
-<li><strong>完整流程</strong>：依赖 → Rust → tree-sitter → Neovim → AstroNvim</li>
+<li><strong>tree-sitter CLI 是 Rust 项目</strong>：没有 <code>cargo</code> 就没有 <code>cargo build --release</code>。</li>
+<li><strong>解析器要等首次启动才编</strong>：Neovim 和 AstroNvim 就位后，<code>nvim</code> 第一次启动才去调 CLI 编解析器，所以 CLI 得赶在这次启动之前装好。</li>
+<li><strong>AstroNvim 只是配置</strong>：<code>git clone</code> 到 <code>~/.config/nvim</code> 就算装好，插件、解析器、LSP 都是启动之后才下载。</li>
 </ol>
-<h3 id="性能表现"><a href="#性能表现" class="headerlink" title="性能表现"></a>性能表现</h3>
-<p>编译的Neovim在openEuler容器中运行流畅：</p>
-<ul>
-<li>启动速度：&lt; 100ms</li>
-<li>LSP响应：快速</li>
-<li>Treesitter高亮：正常</li>
-<li>插件生态：完整支持</li>
-</ul>
-<h3 id="避坑指南"><a href="#避坑指南" class="headerlink" title="避坑指南"></a>避坑指南</h3>
+<p>顺序反了，每一步都要回头补前一步的活。</p>
+<h3 id="性能表现"><a href="#性能表现" class="headerlink" title="用起来怎么样"></a>用起来怎么样</h3>
+<p>编出来的 Neovim 在 openEuler 容器里没有卡顿：启动在 100ms 以内，LSP 响应快，treesitter 高亮正常，插件生态完整可用。</p>
+<h3 id="避坑指南"><a href="#避坑指南" class="headerlink" title="三个容易踩的坑"></a>三个容易踩的坑</h3>
 <ol>
-<li><strong>不要使用预编译tree-sitter</strong>：mason下载的预编译版本glibc不兼容</li>
-<li><strong>记得替换mason的tree-sitter</strong>：否则nvim-treesitter仍会使用预编译版本</li>
-<li><strong>使用稳定版本</strong>：避免main分支的不稳定性</li>
+<li><strong>别用 mason 下载的预编译 tree-sitter</strong>：它要的 glibc 比容器里的新，一装解析器就报 <code>GLIBC_2.39' not found</code>。</li>
+<li><strong>替换 mason 那份要补在最后</strong>：<code>~/.local/share/nvim/mason/packages/tree-sitter-cli/tree-sitter-linux-arm64</code> 得等 mason 装过才存在，而第五节的 <code>mv</code> 会把 <code>~/.local/share/nvim</code> 整个挪走。顺序是「装完 AstroNvim → 首次启动 → 再 <code>cp</code> 一次」。</li>
+<li><strong>版本按 tag 钉住</strong>：v0.24.1 和 v0.12.0，别跟 main 分支。</li>
 </ol>
-<h2 id="八、清理构建文件"><a href="#八、清理构建文件" class="headerlink" title="八、清理构建文件"></a>八、清理构建文件</h2>
-<p>编译完成后可以清理源码：</p>
+<h2 id="八、清理构建文件"><a href="#八、清理构建文件" class="headerlink" title="八、源码目录留不留"></a>八、源码目录留不留</h2>
+<p>想省空间可以删：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 可选：保留源码用于后续升级</span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># 或删除以节省空间</span>
 </span></span><span style="display:flex;"><span>rm -rf ~/tree-sitter-cli
 </span></span><span style="display:flex;"><span>rm -rf ~/neovim
-</span></span></code></pre></div><p>建议保留源码目录，方便后续版本升级。</p>
-<h2 id="九、后续升级"><a href="#九、后续升级" class="headerlink" title="九、后续升级"></a>九、后续升级</h2>
-<p>升级Neovim：</p>
+</span></span></code></pre></div><p>但下一节的升级要用这两个目录，删了得重新 clone，留着更省事。</p>
+<h2 id="九、后续升级"><a href="#九、后续升级" class="headerlink" title="九、以后升级"></a>九、以后升级</h2>
+<p>升级 Neovim：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6639ba">cd</span> ~/neovim
 </span></span><span style="display:flex;"><span>git fetch --tags
 </span></span><span style="display:flex;"><span>git checkout v0.13.0  <span style="color:#57606a"># 假设新版本</span>
 </span></span><span style="display:flex;"><span>make <span style="color:#953800">CMAKE_BUILD_TYPE</span><span style="color:#0550ae">=</span>Release
 </span></span><span style="display:flex;"><span>sudo make install
-</span></span></code></pre></div><p>升级tree-sitter：</p>
+</span></span></code></pre></div><p>升级 tree-sitter：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6639ba">cd</span> ~/tree-sitter-cli
 </span></span><span style="display:flex;"><span>git fetch --tags
 </span></span><span style="display:flex;"><span>git checkout v0.25.0  <span style="color:#57606a"># 假设新版本</span>
 </span></span><span style="display:flex;"><span>cargo build --release
 </span></span><span style="display:flex;"><span>sudo cp target/release/tree-sitter /usr/local/bin/
-</span></span></code></pre></div><hr>
-<p><strong>参考资源</strong>：</p>
+</span></span></code></pre></div><p>两条 <code>git checkout</code> 的版本号是占位的，先 <code>git fetch --tags</code> 看实际有哪些 tag。升级 tree-sitter 那段只 <code>cp</code> 到 <code>/usr/local/bin</code>，mason 那份要一起换就按第三节再来一遍。</p>
+<h2 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h2>
 <ul>
 <li>Neovim官网：<a href="https://neovim.io" target="_blank" rel="noopener">https://neovim.io</a>
 </li>
@@ -807,7 +836,7 @@ tree-sitter: /usr/lib64/libc.so.6: version `GLIBC_2.39&#39; not found (required 
       <blockquote class="post-copyright">
         <div class="content">
           <span class="post-time">
-            Last updated: <time datetime="2026-04-03T21:35:00&#43;08:00" itemprop="dateUpdated">2026-04-03 21:35:00</time>
+            Last updated: <time datetime="2026-11-12T18:20:00&#43;08:00" itemprop="dateUpdated">2026-11-12 18:20:00</time>
           </span><br>
           本文链接：<a href="/2026/04/03/matebookpro-container-build-neovim/" target="_blank" rel="external">https://ystyle.top/2026/04/03/matebookpro-container-build-neovim/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
         </div>
@@ -840,7 +869,7 @@ tree-sitter: /usr/lib64/libc.so.6: version `GLIBC_2.39&#39; not found (required 
       </a>
     </li>
     <li>
-      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f04%2f03%2fmatebookpro-container-build-neovim%2f&title=%e3%80%8a%e9%b8%bf%e8%92%99PC%e8%9e%8d%e5%90%88%e5%bc%80%e5%8f%91%e5%bc%95%e6%93%8e%e4%b8%ad%e7%bc%96%e8%af%91%e5%ae%89%e8%a3%85Neovim%e4%b8%8eAstroNvim%e9%85%8d%e7%bd%ae%e6%8c%87%e5%8d%97%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%20%e6%9c%ac%e6%96%87%e8%ae%b0%e5%bd%95%e5%9c%a8%e9%b8%bf%e8%92%99PC%e8%9e%8d%e5%90%88%e5%bc%80%e5%8f%91%e5%bc%95%e6%93%8e%e7%9a%84%e5%ae%b9%e5%99%a8%e7%8e%af%e5%a2%83%e4%b8%ad%ef%bc%8c%e5%9b%a0glibc%e7%89%88%e6%9c%ac%e9%99%90%e5%88%b6%e4%bb%8e%e6%ba%90%e7%a0%81%e7%bc%96%e8%af%91Neovim%e5%92%8ctree-sitter%e7%9a%84%e5%ae%8c%e6%95%b4%e8%bf%87%e7%a8%8b%ef%bc%8c%e5%b9%b6%e9%85%8d%e7%bd%aeAstroNvim%e4%bd%9c%e4%b8%ba%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83%20%e2%80%a6" data-title=" QQ">
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f04%2f03%2fmatebookpro-container-build-neovim%2f&title=%e3%80%8a%e9%b8%bf%e8%92%99PC%e8%9e%8d%e5%90%88%e5%bc%80%e5%8f%91%e5%bc%95%e6%93%8e%e4%b8%ad%e7%bc%96%e8%af%91%e5%ae%89%e8%a3%85Neovim%e4%b8%8eAstroNvim%e9%85%8d%e7%bd%ae%e6%8c%87%e5%8d%97%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%20%e9%b8%bf%e8%92%99%20PC%20%e8%9e%8d%e5%90%88%e5%bc%80%e5%8f%91%e5%bc%95%e6%93%8e%e7%9a%84%20openEuler%20%e5%ae%b9%e5%99%a8%e9%87%8c%ef%bc%8cglibc%20%e6%98%af%202.38%ef%bc%9bnvim-treesitter%20%e4%b8%8b%e8%bd%bd%e7%9a%84%e9%a2%84%e7%bc%96%e8%af%91%20tree-sitter%20%e8%a6%81%20%e2%80%a6" data-title=" QQ">
         <i class="icon icon-qq"></i>
       </a>
     </li>
@@ -964,7 +993,7 @@ tree-sitter: /usr/lib64/libc.so.6: version `GLIBC_2.39&#39; not found (required 
       </a>
     </li>
     <li>
-      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f04%2f03%2fmatebookpro-container-build-neovim%2f&title=%e3%80%8a%e9%b8%bf%e8%92%99PC%e8%9e%8d%e5%90%88%e5%bc%80%e5%8f%91%e5%bc%95%e6%93%8e%e4%b8%ad%e7%bc%96%e8%af%91%e5%ae%89%e8%a3%85Neovim%e4%b8%8eAstroNvim%e9%85%8d%e7%bd%ae%e6%8c%87%e5%8d%97%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%20%e6%9c%ac%e6%96%87%e8%ae%b0%e5%bd%95%e5%9c%a8%e9%b8%bf%e8%92%99PC%e8%9e%8d%e5%90%88%e5%bc%80%e5%8f%91%e5%bc%95%e6%93%8e%e7%9a%84%e5%ae%b9%e5%99%a8%e7%8e%af%e5%a2%83%e4%b8%ad%ef%bc%8c%e5%9b%a0glibc%e7%89%88%e6%9c%ac%e9%99%90%e5%88%b6%e4%bb%8e%e6%ba%90%e7%a0%81%e7%bc%96%e8%af%91Neovim%e5%92%8ctree-sitter%e7%9a%84%e5%ae%8c%e6%95%b4%e8%bf%87%e7%a8%8b%ef%bc%8c%e5%b9%b6%e9%85%8d%e7%bd%aeAstroNvim%e4%bd%9c%e4%b8%ba%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83%20%e2%80%a6" data-title=" QQ">
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f04%2f03%2fmatebookpro-container-build-neovim%2f&title=%e3%80%8a%e9%b8%bf%e8%92%99PC%e8%9e%8d%e5%90%88%e5%bc%80%e5%8f%91%e5%bc%95%e6%93%8e%e4%b8%ad%e7%bc%96%e8%af%91%e5%ae%89%e8%a3%85Neovim%e4%b8%8eAstroNvim%e9%85%8d%e7%bd%ae%e6%8c%87%e5%8d%97%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%20%e9%b8%bf%e8%92%99%20PC%20%e8%9e%8d%e5%90%88%e5%bc%80%e5%8f%91%e5%bc%95%e6%93%8e%e7%9a%84%20openEuler%20%e5%ae%b9%e5%99%a8%e9%87%8c%ef%bc%8cglibc%20%e6%98%af%202.38%ef%bc%9bnvim-treesitter%20%e4%b8%8b%e8%bd%bd%e7%9a%84%e9%a2%84%e7%bc%96%e8%af%91%20tree-sitter%20%e8%a6%81%20%e2%80%a6" data-title=" QQ">
         <i class="icon icon-qq"></i>
       </a>
     </li>

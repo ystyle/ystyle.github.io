@@ -187,7 +187,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e8%83%8c%e6%99%af">
-    <span class="post-toc-number">1.</span> <span class="post-toc-text">背景</span>
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">为什么不能直接跑</span>
   </a>
   
 </li>
@@ -196,7 +196,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e7%8e%af%e5%a2%83%e8%af%b4%e6%98%8e">
-    <span class="post-toc-number">2.</span> <span class="post-toc-text">环境说明</span>
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">跑通时的环境</span>
   </a>
   
 </li>
@@ -205,7 +205,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e5%ae%89%e8%a3%85box64">
-    <span class="post-toc-number">3.</span> <span class="post-toc-text">安装box64</span>
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">用 Nix 装 box64</span>
   </a>
   
 </li>
@@ -214,7 +214,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e5%87%86%e5%a4%87x86-64%e7%b3%bb%e7%bb%9f%e5%ba%93">
-    <span class="post-toc-number">4.</span> <span class="post-toc-text">准备x86_64系统库</span>
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">缺 x86_64 的 glibc 和 libstdc++：去 x86_64 仓库拆 rpm</span>
   </a>
   
 </li>
@@ -223,7 +223,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#SDK%e9%83%a8%e7%bd%b2">
-    <span class="post-toc-number">5.</span> <span class="post-toc-text">SDK部署</span>
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">SDK 解到 /opt，先把属主改回来</span>
   </a>
   
 </li>
@@ -232,7 +232,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#Node-js%e9%85%8d%e7%bd%ae">
-    <span class="post-toc-number">6.</span> <span class="post-toc-text">Node.js配置</span>
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">换掉 SDK 自带的 x86_64 node</span>
   </a>
   
 </li>
@@ -241,7 +241,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#box64%e9%85%8d%e7%bd%ae">
-    <span class="post-toc-number">7.</span> <span class="post-toc-text">box64配置</span>
+    <span class="post-toc-number">7.</span> <span class="post-toc-text">配置 box64：库路径和自动调用</span>
   </a>
   
   <ol class="post-toc-child">
@@ -249,7 +249,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e6%94%b6%e9%9b%86x86-64%e5%ba%93">
-    <span class="post-toc-number">7.1.</span> <span class="post-toc-text">收集x86_64库</span>
+    <span class="post-toc-number">7.1.</span> <span class="post-toc-text">把 SDK 里散落的 x86_64 .so 收进一个目录</span>
   </a>
   
 </li>
@@ -258,7 +258,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e6%b3%a8%e5%86%8cbinfmt-misc">
-    <span class="post-toc-number">7.2.</span> <span class="post-toc-text">注册binfmt_misc</span>
+    <span class="post-toc-number">7.2.</span> <span class="post-toc-text">注册 binfmt_misc，让 x86_64 二进制自动走 box64</span>
   </a>
   
 </li>
@@ -272,7 +272,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e7%bc%96%e8%af%91%e9%a1%b9%e7%9b%ae">
-    <span class="post-toc-number">8.</span> <span class="post-toc-text">编译项目</span>
+    <span class="post-toc-number">8.</span> <span class="post-toc-text">真正编译：hvigorw assembleHap</span>
   </a>
   
   <ol class="post-toc-child">
@@ -280,7 +280,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e7%bc%96%e8%af%91%e6%b5%81%e7%a8%8b%e8%af%a6%e8%a7%a3">
-    <span class="post-toc-number">8.1.</span> <span class="post-toc-text">编译流程详解</span>
+    <span class="post-toc-number">8.1.</span> <span class="post-toc-text">一次编译里哪几步过 box64</span>
   </a>
   
 </li>
@@ -289,7 +289,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e6%b7%bb%e5%8a%a0HNP%ef%bc%88Native-Plugin%ef%bc%89">
-    <span class="post-toc-number">8.2.</span> <span class="post-toc-text">添加HNP（Native Plugin）</span>
+    <span class="post-toc-number">8.2.</span> <span class="post-toc-text">unsigned HAP 里没有 HNP，得手动塞进去</span>
   </a>
   
 </li>
@@ -298,7 +298,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#%e7%bc%96%e8%af%91%e7%bb%93%e6%9e%9c">
-    <span class="post-toc-number">8.3.</span> <span class="post-toc-text">编译结果</span>
+    <span class="post-toc-number">8.3.</span> <span class="post-toc-text">产物在哪</span>
   </a>
   
 </li>
@@ -312,7 +312,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e9%81%bf%e5%9d%91%e6%8c%87%e5%8d%97">
-    <span class="post-toc-number">9.</span> <span class="post-toc-text">避坑指南</span>
+    <span class="post-toc-number">9.</span> <span class="post-toc-text">撞过的四个坑</span>
   </a>
   
   <ol class="post-toc-child">
@@ -320,7 +320,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#1-%e5%ba%93%e4%be%9d%e8%b5%96%e9%93%be">
-    <span class="post-toc-number">9.1.</span> <span class="post-toc-text">1. 库依赖链</span>
+    <span class="post-toc-number">9.1.</span> <span class="post-toc-text">一、资源编译报 Cannot dlopen，缺的是整条 OpenGL/X11 链</span>
   </a>
   
 </li>
@@ -329,7 +329,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#2-Java%e7%bc%ba%e5%a4%b1">
-    <span class="post-toc-number">9.2.</span> <span class="post-toc-text">2. Java缺失</span>
+    <span class="post-toc-number">9.2.</span> <span class="post-toc-text">二、打包阶段报 spawn java ENOENT：容器里没有 Java</span>
   </a>
   
 </li>
@@ -338,7 +338,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#3-%e7%ad%be%e5%90%8d%e8%af%81%e4%b9%a6">
-    <span class="post-toc-number">9.3.</span> <span class="post-toc-text">3. 签名证书</span>
+    <span class="post-toc-number">9.3.</span> <span class="post-toc-text">三、签名要证书，三条路挑一条</span>
   </a>
   
 </li>
@@ -347,7 +347,7 @@
     <li class="post-toc-item post-toc-level-3">
   
   <a class="post-toc-link" href="#4-%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f">
-    <span class="post-toc-number">9.4.</span> <span class="post-toc-text">4. 环境变量</span>
+    <span class="post-toc-number">9.4.</span> <span class="post-toc-text">四、box64 认 BOX64_LD_LIBRARY_PATH，不认 LD_LIBRARY_PATH</span>
   </a>
   
 </li>
@@ -361,7 +361,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e6%80%a7%e8%83%bd">
-    <span class="post-toc-number">10.</span> <span class="post-toc-text">性能</span>
+    <span class="post-toc-number">10.</span> <span class="post-toc-text">实际跑起来的速度</span>
   </a>
   
 </li>
@@ -370,7 +370,7 @@
   <li class="post-toc-item post-toc-level-2">
   
   <a class="post-toc-link" href="#%e6%80%bb%e7%bb%93">
-    <span class="post-toc-number">11.</span> <span class="post-toc-text">总结</span>
+    <span class="post-toc-number">11.</span> <span class="post-toc-text">跑完之后还剩什么手工活</span>
   </a>
   
 </li>
@@ -396,23 +396,43 @@
 
       <div class="post-content" id="post-content" itemprop="postContent">
         <blockquote>
-<p>本文记录在鸿蒙PC融合开发引擎的openEuler aarch64容器中，通过box64模拟x86_64兼容层，运行鸿蒙命令行工具编译HAP的完整过程。</p>
+<p>鸿蒙 PC 的融合开发引擎给的是一个 aarch64 的 openEuler 容器，而鸿蒙官方命令行工具只发 x86_64 版。这篇是怎么在容器里把这套工具跑起来、最后编出 HAP 的。</p>
 </blockquote>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2>
-<p>鸿蒙PC（HarmonyOS PC）的融合开发引擎提供的是openEuler aarch64容器环境，但鸿蒙官方命令行工具（command-line-tools）只有x86_64版本。要在aarch64上编译鸿蒙项目，有两种方案：</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="为什么不能直接跑"></a>为什么不能直接跑</h2>
+<p>鸿蒙 PC（HarmonyOS PC）的融合开发引擎提供的是 openEuler aarch64 容器环境，但鸿蒙官方命令行工具（command-line-tools）只有 x86_64 版本。要在 aarch64 上编译鸿蒙项目，有两种方案：</p>
 <ol>
-<li><strong>QEMU用户态模拟</strong>：完整模拟x86_64，可靠但性能损失大</li>
-<li><strong>box64</strong>：轻量级x86_64兼容层，仅转换二进制指令，性能损失小</li>
+<li><strong>QEMU 用户态模拟</strong>：完整模拟 x86_64，可靠但性能损失大</li>
+<li><strong>box64</strong>：轻量级 x86_64 兼容层，只转换二进制指令，性能损失小</li>
 </ol>
-<p>经过测试，box64配合正确的x86_64系统库可以顺利完成编译。</p>
-<h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2>
-<ul>
-<li>系统：openEuler 24.03 SP1 (aarch64)</li>
-<li>CPU：ARM64 Cortex-A53</li>
-<li>box64版本：0.4.2</li>
-<li>SDK版本：command-line-tools-linux-x64-6.1.1.290 (API 24)</li>
-</ul>
-<h2 id="安装box64"><a href="#安装box64" class="headerlink" title="安装box64"></a>安装box64</h2>
+<p>装 box64 本身只要两三行命令，麻烦的是它要的 x86_64 系统库——容器没有多架构支持，这些库得自己从 x86_64 仓库拆出来。试下来，box64 配合正确的 x86_64 系统库可以顺利完成编译。</p>
+<h2 id="环境说明"><a href="#环境说明" class="headerlink" title="跑通时的环境"></a>跑通时的环境</h2>
+<table>
+	<thead>
+			<tr>
+					<th>项</th>
+					<th>值</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>系统</td>
+					<td>openEuler 24.03 SP1 (aarch64)</td>
+			</tr>
+			<tr>
+					<td>CPU</td>
+					<td>ARM64 Cortex-A53</td>
+			</tr>
+			<tr>
+					<td>box64 版本</td>
+					<td>0.4.2</td>
+			</tr>
+			<tr>
+					<td>SDK 版本</td>
+					<td>command-line-tools-linux-x64-6.1.1.290 (API 24)</td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="安装box64"><a href="#安装box64" class="headerlink" title="用 Nix 装 box64"></a>用 Nix 装 box64</h2>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 通过Nix安装</span>
 </span></span><span style="display:flex;"><span><span style="color:#6639ba">source</span> ~/.nix-profile/etc/profile.d/nix.sh
 </span></span><span style="display:flex;"><span>nix profile install nixpkgs#box64
@@ -420,8 +440,9 @@
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># 验证</span>
 </span></span><span style="display:flex;"><span>box64 --version
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># Box64 arm64 v0.4.2</span>
-</span></span></code></pre></div><h2 id="准备x86-64系统库"><a href="#准备x86-64系统库" class="headerlink" title="准备x86_64系统库"></a>准备x86_64系统库</h2>
-<p>box64运行x86_64二进制需要对应的系统库。由于openEuler aarch64没有多架构支持，需要从openEuler x86_64仓库手动下载并提取。</p>
+</span></span></code></pre></div><p>看到 <code>Box64 arm64 v0.4.2</code> 就算装好了。Nix 把可执行文件放在 <code>~/.nix-profile/bin/box64</code>，后面 wrapper 里 <code>exec</code> 的就是这个路径——profile 换位置，wrapper 也得跟着改。</p>
+<h2 id="准备x86-64系统库"><a href="#准备x86-64系统库" class="headerlink" title="缺 x86_64 的 glibc 和 libstdc++：去 x86_64 仓库拆 rpm"></a>缺 x86_64 的 glibc 和 libstdc++：去 x86_64 仓库拆 rpm</h2>
+<p>box64 运行 x86_64 二进制需要对应的系统库。openEuler aarch64 没有多架构支持，装不了 x86_64 的包，只能从 openEuler x86_64 仓库手动下载 rpm 再提取。</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 创建目录</span>
 </span></span><span style="display:flex;"><span>mkdir -p /tmp/x86_64-libs <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#6639ba">cd</span> /tmp/x86_64-libs
 </span></span><span style="display:flex;"><span>
@@ -433,13 +454,14 @@
 </span></span><span style="display:flex;"><span>  <span style="color:#953800">url</span><span style="color:#0550ae">=</span><span style="color:#cf222e">$(</span>curl -sL <span style="color:#0a3069">&#34;</span><span style="color:#953800">$base</span><span style="color:#0a3069">/&#34;</span> <span style="color:#1f2328">|</span> grep -oP <span style="color:#0a3069">&#34;href=\&#34;</span><span style="color:#0a3069">${</span><span style="color:#953800">pkg</span><span style="color:#0a3069">}</span><span style="color:#0a3069">[^\&#34;]*x86_64\.rpm\&#34;&#34;</span> <span style="color:#1f2328">|</span> head -1 <span style="color:#1f2328">|</span> sed <span style="color:#0a3069">&#39;s/href=&#34;//;s/&#34;//&#39;</span><span style="color:#cf222e">)</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#0550ae">[</span> -n <span style="color:#0a3069">&#34;</span><span style="color:#953800">$url</span><span style="color:#0a3069">&#34;</span> <span style="color:#0550ae">]</span> <span style="color:#0550ae">&amp;&amp;</span> curl -sLO <span style="color:#0a3069">&#34;</span><span style="color:#953800">$base</span><span style="color:#0a3069">/</span><span style="color:#953800">$url</span><span style="color:#0a3069">&#34;</span> <span style="color:#0550ae">&amp;&amp;</span> rpm2cpio <span style="color:#0a3069">&#34;</span><span style="color:#0a3069">${</span><span style="color:#953800">pkg</span><span style="color:#0a3069">}</span><span style="color:#0a3069">.rpm&#34;</span> <span style="color:#1f2328">|</span> cpio -idm
 </span></span><span style="display:flex;"><span><span style="color:#cf222e">done</span>
-</span></span></code></pre></div><p>提取的库文件会分布在 <code>lib64/</code> 和 <code>usr/lib64/</code> 等目录中，后续统一配置到box64的库搜索路径。</p>
-<h2 id="SDK部署"><a href="#SDK部署" class="headerlink" title="SDK部署"></a>SDK部署</h2>
+</span></span></code></pre></div><p><code>rpm2cpio | cpio -idm</code> 是就地解包，文件落在当前目录下的 <code>lib64/</code>、<code>usr/lib64/</code> 等目录里。这些库后面要进 box64 的搜索路径。</p>
+<h2 id="SDK部署"><a href="#SDK部署" class="headerlink" title="SDK 解到 /opt，先把属主改回来"></a>SDK 解到 /opt，先把属主改回来</h2>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 解压到/opt</span>
 </span></span><span style="display:flex;"><span>sudo mkdir -p /opt/command-line-tools
 </span></span><span style="display:flex;"><span>sudo unzip command-line-tools-linux-x64-6.1.1.290.zip -d /opt/
 </span></span><span style="display:flex;"><span>sudo chown -R user:user /opt/command-line-tools
-</span></span></code></pre></div><p>SDK目录结构：</p>
+</span></span></code></pre></div><p>解压用了 <code>sudo</code>，解出来的文件属主是 root，紧跟的 <code>chown</code> 把权限交回普通用户；不然后面跑构建写不动。</p>
+<p>SDK 目录结构：</p>
 <pre tabindex="0"><code>/opt/command-line-tools/
 ├── bin/              # ohpm, hvigorw, hstack, codelinter
 ├── ohpm/             # 包管理器
@@ -449,15 +471,17 @@
 │   ├── hms/          # HMS SDK
 │   └── sdk-pkg.json
 └── tool/node/        # 自带x86_64 node（不使用）
-</code></pre><h2 id="Node-js配置"><a href="#Node-js配置" class="headerlink" title="Node.js配置"></a>Node.js配置</h2>
-<p>SDK自带的node是x86_64版本，使用fnm安装原生aarch64版本替代：</p>
+</code></pre><h2 id="Node-js配置"><a href="#Node-js配置" class="headerlink" title="换掉 SDK 自带的 x86_64 node"></a>换掉 SDK 自带的 x86_64 node</h2>
+<p>SDK 自带的 node 是 x86_64 版本。hvigor 和 ohpm 都是 Node 程序，用它跑，每轮构建都要过一遍 box64；换成 fnm 装的原生 aarch64 版本就没这层开销：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>fnm install <span style="color:#0550ae">24</span>
 </span></span><span style="display:flex;"><span>fnm default <span style="color:#0550ae">24</span>
-</span></span></code></pre></div><p>在 <code>~/.zshrc</code> 中设置 <code>DEVECO_NODE_HOME</code> 指向fnm的node：</p>
+</span></span></code></pre></div><p>然后在 <code>~/.zshrc</code> 里让 <code>DEVECO_NODE_HOME</code> 指过去：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">DEVECO_NODE_HOME</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;</span><span style="color:#953800">$HOME</span><span style="color:#0a3069">/.local/share/fnm/node-versions/v24.14.1/installation&#34;</span>
-</span></span></code></pre></div><h2 id="box64配置"><a href="#box64配置" class="headerlink" title="box64配置"></a>box64配置</h2>
-<h3 id="收集x86-64库"><a href="#收集x86-64库" class="headerlink" title="收集x86_64库"></a>收集x86_64库</h3>
-<p>SDK中包含了大量x86_64动态库，需要统一收集到一个目录：</p>
+</span></span></code></pre></div><p>这里写死的是带补丁号的目录（<code>v24.14.1</code>），<code>fnm install 24</code> 装的却是 24 这一系列里的某个具体版本。对不上，路径就是空的，等于没设。</p>
+<h2 id="box64配置"><a href="#box64配置" class="headerlink" title="配置 box64：库路径和自动调用"></a>配置 box64：库路径和自动调用</h2>
+<p>box64 装好了还差两件事：让它找得到那些 x86_64 的 .so，以及让系统知道遇到 x86_64 的可执行文件该交给谁。</p>
+<h3 id="收集x86-64库"><a href="#收集x86-64库" class="headerlink" title="把 SDK 里散落的 x86_64 .so 收进一个目录"></a>把 SDK 里散落的 x86_64 .so 收进一个目录</h3>
+<p>SDK 里带了不少 x86_64 动态库，散在各个子目录下，需要统一收进一个目录：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir -p /opt/x86_64-sdk-libs
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># SDK中所有x86_64的.so</span>
@@ -469,8 +493,9 @@
 </span></span><span style="display:flex;"><span>cp -n /tmp/x86_64-libs/usr/lib64/libGL* /opt/x86_64-sdk-libs/
 </span></span><span style="display:flex;"><span>cp -n /tmp/x86_64-libs/usr/lib64/libX* /opt/x86_64-sdk-libs/
 </span></span><span style="display:flex;"><span>cp -n /tmp/x86_64-libs/usr/lib64/libxcb* /opt/x86_64-sdk-libs/
-</span></span></code></pre></div><h3 id="注册binfmt-misc"><a href="#注册binfmt-misc" class="headerlink" title="注册binfmt_misc"></a>注册binfmt_misc</h3>
-<p>通过binfmt_misc让系统自动识别x86_64二进制并调用box64：</p>
+</span></span></code></pre></div><p><code>find</code> 那一段用 <code>file</code> 逐个判断，只留识别成 x86-64 的——SDK 里混着 aarch64 的二进制，不筛会拿到错架构的库。后面三个 <code>cp -n</code> 补的是 openEuler x86_64 仓库里的 OpenGL/X11 库，<code>-n</code> 表示同名文件已存在就不覆盖，所以 SDK 自带的版本优先。库是按文件名压平收进去的，不同目录下的同名 .so 只留一个。</p>
+<h3 id="注册binfmt-misc"><a href="#注册binfmt-misc" class="headerlink" title="注册 binfmt_misc，让 x86_64 二进制自动走 box64"></a>注册 binfmt_misc，让 x86_64 二进制自动走 box64</h3>
+<p>库齐了，还得让这些 x86_64 程序能被直接执行。这件事交给 binfmt_misc：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 挂载</span>
 </span></span><span style="display:flex;"><span>sudo mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
 </span></span><span style="display:flex;"><span>
@@ -486,60 +511,64 @@
 </span></span><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#39;:box64:M::\x7fELF\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x3e\x00:\
 </span></span></span><span style="display:flex;"><span><span style="color:#0a3069">\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:\
 </span></span></span><span style="display:flex;"><span><span style="color:#0a3069">/usr/local/bin/box64-wrapper:F&#39;</span> <span style="color:#1f2328">|</span> sudo tee /proc/sys/fs/binfmt_misc/register
-</span></span></code></pre></div><h2 id="编译项目"><a href="#编译项目" class="headerlink" title="编译项目"></a>编译项目</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 配置环境变量</span>
+</span></span></code></pre></div><p>那串字节是 ELF 头的前 20 个字节和对应的 mask，<code>\x3e</code> 是 x86_64 的机器类型号：只有 x86_64 的二进制会被拦下来，aarch64 的程序（比如 fnm 装的 node）照常直接执行。wrapper 存在的理由是 binfmt_misc 直接 exec，没有别的地方能替程序设环境变量，只能由 wrapper 先把库路径导出，再交给 box64。注册项写在 <code>/proc</code> 里，不在磁盘上，容器重建之后要重新挂载、重新注册。</p>
+<h2 id="编译项目"><a href="#编译项目" class="headerlink" title="真正编译：hvigorw assembleHap"></a>真正编译：<code>hvigorw assembleHap</code></h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># 配置环境变量（写进 ~/.zshrc 就不用每次 export）</span>
 </span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">DEVECO_SDK_HOME</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/opt/command-line-tools/sdk&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">DEVECO_NODE_HOME</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;</span><span style="color:#953800">$HOME</span><span style="color:#0a3069">/.local/share/fnm/node-versions/v24.14.1/installation&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">DEVECO_NODE_HOME</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;</span><span style="color:#953800">$HOME</span><span style="color:#0a3069">/.local/share/fnm/node-versions/v24.14.1/installation&#34;</span>  <span style="color:#57606a"># 见「换掉 SDK 自带的 node」</span>
 </span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">OHPM_HOME</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/opt/command-line-tools&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">PATH</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/opt/command-line-tools/bin:</span><span style="color:#953800">$PATH</span><span style="color:#0a3069">&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">BOX64_LD_LIBRARY_PATH</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/opt/x86_64-sysroot/lib64:/opt/x86_64-sysroot/usr/lib64:/opt/x86_64-sdk-libs&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">BOX64_LD_LIBRARY_PATH</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/opt/x86_64-sysroot/lib64:/opt/x86_64-sysroot/usr/lib64:/opt/x86_64-sdk-libs&#34;</span>  <span style="color:#57606a"># wrapper 里是同一份</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># 编译</span>
 </span></span><span style="display:flex;"><span><span style="color:#6639ba">cd</span> ohos_project
 </span></span><span style="display:flex;"><span>hvigorw assembleHap --no-daemon
-</span></span></code></pre></div><h3 id="编译流程详解"><a href="#编译流程详解" class="headerlink" title="编译流程详解"></a>编译流程详解</h3>
+</span></span></code></pre></div><p><code>DEVECO_SDK_HOME</code>、<code>OHPM_HOME</code>、<code>DEVECO_NODE_HOME</code> 分别给出 SDK、ohpm 和 node 的位置，<code>PATH</code> 里加上 <code>bin</code> 才能直接在项目目录里敲 <code>hvigorw</code>。末尾的 <code>BOX64_LD_LIBRARY_PATH</code> 和 wrapper 里设的是同一份路径：wrapper 管被 binfmt_misc 拦下的程序，shell 里这份管手动调 <code>box64</code>。</p>
+<h3 id="编译流程详解"><a href="#编译流程详解" class="headerlink" title="一次编译里哪几步过 box64"></a>一次编译里哪几步过 box64</h3>
 <p>编译过程依次执行以下任务：</p>
 <ol>
 <li>
 <p><strong>CompileResource</strong> — 编译资源文件</p>
 <ul>
-<li>使用<code>restool</code>处理图片等资源</li>
-<li>需要box64 + x86_64的libGL/libX11库支持</li>
+<li>使用 <code>restool</code> 处理图片等资源</li>
+<li>需要 box64 + x86_64 的 libGL/libX11 库支持</li>
 <li>依赖链：restool → dlopen(libimage_transcoder_shared.so) → libskia_canvaskit.so → libGL.so.1 → libGLX → libX11 → libxcb → libXau</li>
 </ul>
 </li>
 <li>
-<p><strong>CompileArkTS</strong> — 编译ArkTS代码</p>
+<p><strong>CompileArkTS</strong> — 编译 ArkTS 代码</p>
 <ul>
-<li>使用Node.js（原生aarch64，不需要转换）</li>
-<li>性能良好，无需box64介入</li>
+<li>使用 Node.js（原生 aarch64，不需要转换）</li>
+<li>不走 box64，性能良好</li>
 </ul>
 </li>
 <li>
-<p><strong>PackageHap</strong> — 打包HAP</p>
+<p><strong>PackageHap</strong> — 打包 HAP</p>
 <ul>
-<li>需要Java 17支持</li>
+<li>需要 Java 17 支持</li>
 </ul>
 </li>
 <li>
 <p><strong>SignHap</strong> — 签名（可选）</p>
 <ul>
-<li>需要宿主机开发环境中的签名证书（.p12文件）</li>
-<li>可先生成unsigned HAP，后续通过DevEco Studio签名</li>
+<li>需要宿主机开发环境中的签名证书（.p12 文件）</li>
+<li>可先生成 unsigned HAP，后续通过 DevEco Studio 签名</li>
 </ul>
 </li>
 </ol>
-<h3 id="添加HNP（Native-Plugin）"><a href="#添加HNP（Native-Plugin）" class="headerlink" title="添加HNP（Native Plugin）"></a>添加HNP（Native Plugin）</h3>
-<p>编译生成的unsigned HAP默认不包含HNP。需要手动添加：</p>
+<p>四个任务里只有第一步过 box64：ArkTS 编译走原生 node，打包走原生 Java。资源编译挂掉通常是 <code>Cannot dlopen</code>；打包阶段报 <code>spawn java ENOENT</code>，就是没装 Java。</p>
+<h3 id="添加HNP（Native-Plugin）"><a href="#添加HNP（Native-Plugin）" class="headerlink" title="unsigned HAP 里没有 HNP，得手动塞进去"></a>unsigned HAP 里没有 HNP，得手动塞进去</h3>
+<p>编译生成的 unsigned HAP 默认不包含 HNP，需要手动添加：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6639ba">cd</span> ohos_project
 </span></span><span style="display:flex;"><span>zip -r entry/build/default/outputs/default/entry-default-unsigned.hap <span style="color:#0a3069">\
 </span></span></span><span style="display:flex;"><span>  hnp/arm64-v8a/neovim.hnp
-</span></span></code></pre></div><h3 id="编译结果"><a href="#编译结果" class="headerlink" title="编译结果"></a>编译结果</h3>
-<p>unsigned HAP生成位置：</p>
+</span></span></code></pre></div><p><code>zip -r</code> 是往已有的 hap 包里追加，所以这一步得等 <code>assembleHap</code> 跑完之后再做。</p>
+<h3 id="编译结果"><a href="#编译结果" class="headerlink" title="产物在哪"></a>产物在哪</h3>
+<p>unsigned HAP 生成位置：</p>
 <pre tabindex="0"><code>entry/build/default/outputs/default/entry-default-unsigned.hap
-</code></pre><h2 id="避坑指南"><a href="#避坑指南" class="headerlink" title="避坑指南"></a>避坑指南</h2>
-<h3 id="1-库依赖链"><a href="#1-库依赖链" class="headerlink" title="1. 库依赖链"></a>1. 库依赖链</h3>
-<p>编译资源时需要完整的OpenGL/X11库依赖链：</p>
+</code></pre><h2 id="避坑指南"><a href="#避坑指南" class="headerlink" title="撞过的四个坑"></a>撞过的四个坑</h2>
+<h3 id="1-库依赖链"><a href="#1-库依赖链" class="headerlink" title="一、资源编译报 Cannot dlopen，缺的是整条 OpenGL/X11 链"></a>一、资源编译报 <code>Cannot dlopen</code>，缺的是整条 OpenGL/X11 链</h3>
+<p>编译资源时需要完整的 OpenGL/X11 库依赖链：</p>
 <pre tabindex="0"><code>libimage_transcoder_shared.so
   → libskia_canvaskit.so
       → libGL.so.1
@@ -552,52 +581,37 @@
       → libjsoncpp.so
       → libsec_shared.so
       → libstdc++.so.6
-</code></pre><p>任何一个缺失都会导致 <code>Cannot dlopen</code> 错误。</p>
-<h3 id="2-Java缺失"><a href="#2-Java缺失" class="headerlink" title="2. Java缺失"></a>2. Java缺失</h3>
+</code></pre><p>这条链上任何一个缺失都报 <code>Cannot dlopen</code>，得顺着链一段段对过去。</p>
+<h3 id="2-Java缺失"><a href="#2-Java缺失" class="headerlink" title="二、打包阶段报 spawn java ENOENT：容器里没有 Java"></a>二、打包阶段报 <code>spawn java ENOENT</code>：容器里没有 Java</h3>
 <p>如果遇到 <code>spawn java ENOENT</code> 错误：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf install -y java-17-openjdk
-</span></span></code></pre></div><h3 id="3-签名证书"><a href="#3-签名证书" class="headerlink" title="3. 签名证书"></a>3. 签名证书</h3>
-<p>编译时的签名步骤会读取 <code>build-profile.json5</code> 中的证书路径。如果证书在宿主机上，可以：</p>
+</span></span></code></pre></div><h3 id="3-签名证书"><a href="#3-签名证书" class="headerlink" title="三、签名要证书，三条路挑一条"></a>三、签名要证书，三条路挑一条</h3>
+<p>编译时的签名步骤会读取 <code>build-profile.json5</code> 里的证书路径。证书在宿主机上时，可以：</p>
 <ul>
-<li>跳过签名，使用unsigned HAP</li>
-<li>或将证书文件复制到容器内对应路径</li>
-<li>或修改 <code>build-profile.json5</code> 中的 <code>signingConfigs</code> 配置</li>
+<li>跳过签名，用 unsigned HAP：测试够用</li>
+<li>把证书复制到容器内对应路径：位置要跟配置里写的一致</li>
+<li>改 <code>signingConfigs</code>：指向容器里能访问的地方</li>
 </ul>
-<h3 id="4-环境变量"><a href="#4-环境变量" class="headerlink" title="4. 环境变量"></a>4. 环境变量</h3>
-<p>box64的库搜索通过 <code>BOX64_LD_LIBRARY_PATH</code> 控制，不是 <code>LD_LIBRARY_PATH</code>。如果binfmt_misc注册成功，每次执行x86_64二进制时wrapper脚本会自动设置该变量。</p>
-<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2>
-<p>box64在编译场景下的性能表现：</p>
+<h3 id="4-环境变量"><a href="#4-环境变量" class="headerlink" title="四、box64 认 BOX64_LD_LIBRARY_PATH，不认 LD_LIBRARY_PATH"></a>四、box64 认 <code>BOX64_LD_LIBRARY_PATH</code>，不认 <code>LD_LIBRARY_PATH</code></h3>
+<p>box64 的库搜索路径由 <code>BOX64_LD_LIBRARY_PATH</code> 控制，不是 <code>LD_LIBRARY_PATH</code>——只设后者，box64 不会去那些目录找库。binfmt_misc 注册成功时，每次执行 x86_64 二进制都由 wrapper 设好这个变量；手动调 <code>box64</code> 时得自己在 shell 里设。</p>
+<h2 id="性能"><a href="#性能" class="headerlink" title="实际跑起来的速度"></a>实际跑起来的速度</h2>
 <ul>
-<li>资源编译（restool）：约2-3秒（需要box64转换）</li>
-<li>ArkTS编译（Node.js）：原生aarch64，无损失</li>
-<li>HAP打包（Java）：原生aarch64，无损失</li>
+<li>资源编译（restool）：约2-3秒（需要 box64 转换）</li>
+<li>ArkTS 编译（Node.js）：原生 aarch64，无损失</li>
+<li>HAP 打包（Java）：原生 aarch64，无损失</li>
 </ul>
-<p>相比QEMU用户态模拟，box64的启动速度和执行效率都要快得多，适合SDK场景。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
-<p>通过box64 + binfmt_misc的组合，可以在鸿蒙PC的aarch64容器中顺利运行x86_64的鸿蒙命令行工具，完成HAP的编译。关键点在于：</p>
-<ol>
-<li><strong>box64配合binfmt_misc</strong>：自动识别x86_64二进制，无需手动调用</li>
-<li><strong>完整的x86_64系统库</strong>：OpenGL/X11库链是资源编译的必需依赖</li>
-<li><strong>原生Node.js</strong>：SDK的核心构建工具（hvigor）基于Node.js，使用fnm安装aarch64版本即可</li>
-<li><strong>签名分离</strong>：编译和签名可以分开处理，unsigned HAP也可用于测试</li>
-</ol>
+<p>相比 QEMU 用户态模拟，box64 的启动速度和执行效率都要快得多。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="跑完之后还剩什么手工活"></a>跑完之后还剩什么手工活</h2>
+<p>拿到的是 <code>entry-default-unsigned.hap</code>。剩下两件手工活：HNP 要自己 <code>zip</code> 进包里，签名要么在容器里备好证书，要么回 DevEco Studio 做。这两步和 box64 没关系，box64 只负责把 x86_64 的工具跑起来。</p>
 <hr>
-<p><strong>环境变量配置（~/.zshrc）参考</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># HarmonyOS SDK</span>
-</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">DEVECO_SDK_HOME</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/opt/command-line-tools/sdk&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">DEVECO_NODE_HOME</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;</span><span style="color:#953800">$HOME</span><span style="color:#0a3069">/.local/share/fnm/node-versions/v24.14.1/installation&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">OHPM_HOME</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/opt/command-line-tools&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">PATH</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/opt/command-line-tools/bin:</span><span style="color:#953800">$PATH</span><span style="color:#0a3069">&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a"># box64</span>
-</span></span><span style="display:flex;"><span><span style="color:#6639ba">export</span> <span style="color:#953800">BOX64_LD_LIBRARY_PATH</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/opt/x86_64-sysroot/lib64:/opt/x86_64-sysroot/usr/lib64:/opt/x86_64-sdk-libs&#34;</span>
-</span></span></code></pre></div>
+<p>上面「真正编译」那节列的几个环境变量，建议写进 <code>~/.zshrc</code>——每次开新 shell 手动 <code>export</code> 一遍很烦，而且漏设 <code>BOX64_LD_LIBRARY_PATH</code> 时报的是 glibc 找不到，不容易往这上面想。</p>
+
       </div>
 
       <blockquote class="post-copyright">
         <div class="content">
           <span class="post-time">
-            Last updated: <time datetime="2026-06-30T22:00:00&#43;08:00" itemprop="dateUpdated">2026-06-30 22:00:00</time>
+            Last updated: <time datetime="2026-11-12T18:20:00&#43;08:00" itemprop="dateUpdated">2026-11-12 18:20:00</time>
           </span><br>
           本文链接：<a href="/2026/06/30/matebookpro-box64-harmony-sdk/" target="_blank" rel="external">https://ystyle.top/2026/06/30/matebookpro-box64-harmony-sdk/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
         </div>
@@ -630,7 +644,7 @@
       </a>
     </li>
     <li>
-      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f06%2f30%2fmatebookpro-box64-harmony-sdk%2f&title=%e3%80%8a%e9%b8%bf%e8%92%99PC%e4%b8%8a%e4%bd%bf%e7%94%a8box64%e8%bf%90%e8%a1%8cx86_64%e9%b8%bf%e8%92%99SDK%e7%bc%96%e8%af%91HAP%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%20%e6%9c%ac%e6%96%87%e8%ae%b0%e5%bd%95%e5%9c%a8%e9%b8%bf%e8%92%99PC%e8%9e%8d%e5%90%88%e5%bc%80%e5%8f%91%e5%bc%95%e6%93%8e%e7%9a%84openEuler%20aarch64%e5%ae%b9%e5%99%a8%e4%b8%ad%ef%bc%8c%e9%80%9a%e8%bf%87box64%e6%a8%a1%e6%8b%9fx86_64%e5%85%bc%e5%ae%b9%e5%b1%82%ef%bc%8c%e8%bf%90%e8%a1%8c%e9%b8%bf%e8%92%99%e5%91%bd%e4%bb%a4%e8%a1%8c%e5%b7%a5%e5%85%b7%e7%bc%96%e8%af%91HAP%e7%9a%84%e5%ae%8c%e6%95%b4%e8%bf%87%e7%a8%8b%e3%80%82%0a" data-title=" QQ">
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f06%2f30%2fmatebookpro-box64-harmony-sdk%2f&title=%e3%80%8a%e9%b8%bf%e8%92%99PC%e4%b8%8a%e4%bd%bf%e7%94%a8box64%e8%bf%90%e8%a1%8cx86_64%e9%b8%bf%e8%92%99SDK%e7%bc%96%e8%af%91HAP%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%20%e9%b8%bf%e8%92%99%20PC%20%e7%9a%84%e8%9e%8d%e5%90%88%e5%bc%80%e5%8f%91%e5%bc%95%e6%93%8e%e7%bb%99%e7%9a%84%e6%98%af%e4%b8%80%e4%b8%aa%20aarch64%20%e7%9a%84%20openEuler%20%e5%ae%b9%e5%99%a8%ef%bc%8c%e8%80%8c%e9%b8%bf%e8%92%99%e5%ae%98%e6%96%b9%e5%91%bd%e4%bb%a4%e8%a1%8c%e5%b7%a5%e5%85%b7%e5%8f%aa%e5%8f%91%20x86_64%20%e7%89%88%e3%80%82%e8%bf%99%e7%af%87%e6%98%af%e6%80%8e%e4%b9%88%e5%9c%a8%e5%ae%b9%e5%99%a8%e9%87%8c%e6%8a%8a%e8%bf%99%e5%a5%97%e5%b7%a5%e5%85%b7%e8%b7%91%20%e2%80%a6" data-title=" QQ">
         <i class="icon icon-qq"></i>
       </a>
     </li>
@@ -754,7 +768,7 @@
       </a>
     </li>
     <li>
-      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f06%2f30%2fmatebookpro-box64-harmony-sdk%2f&title=%e3%80%8a%e9%b8%bf%e8%92%99PC%e4%b8%8a%e4%bd%bf%e7%94%a8box64%e8%bf%90%e8%a1%8cx86_64%e9%b8%bf%e8%92%99SDK%e7%bc%96%e8%af%91HAP%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%20%e6%9c%ac%e6%96%87%e8%ae%b0%e5%bd%95%e5%9c%a8%e9%b8%bf%e8%92%99PC%e8%9e%8d%e5%90%88%e5%bc%80%e5%8f%91%e5%bc%95%e6%93%8e%e7%9a%84openEuler%20aarch64%e5%ae%b9%e5%99%a8%e4%b8%ad%ef%bc%8c%e9%80%9a%e8%bf%87box64%e6%a8%a1%e6%8b%9fx86_64%e5%85%bc%e5%ae%b9%e5%b1%82%ef%bc%8c%e8%bf%90%e8%a1%8c%e9%b8%bf%e8%92%99%e5%91%bd%e4%bb%a4%e8%a1%8c%e5%b7%a5%e5%85%b7%e7%bc%96%e8%af%91HAP%e7%9a%84%e5%ae%8c%e6%95%b4%e8%bf%87%e7%a8%8b%e3%80%82%0a" data-title=" QQ">
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f06%2f30%2fmatebookpro-box64-harmony-sdk%2f&title=%e3%80%8a%e9%b8%bf%e8%92%99PC%e4%b8%8a%e4%bd%bf%e7%94%a8box64%e8%bf%90%e8%a1%8cx86_64%e9%b8%bf%e8%92%99SDK%e7%bc%96%e8%af%91HAP%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%20%e9%b8%bf%e8%92%99%20PC%20%e7%9a%84%e8%9e%8d%e5%90%88%e5%bc%80%e5%8f%91%e5%bc%95%e6%93%8e%e7%bb%99%e7%9a%84%e6%98%af%e4%b8%80%e4%b8%aa%20aarch64%20%e7%9a%84%20openEuler%20%e5%ae%b9%e5%99%a8%ef%bc%8c%e8%80%8c%e9%b8%bf%e8%92%99%e5%ae%98%e6%96%b9%e5%91%bd%e4%bb%a4%e8%a1%8c%e5%b7%a5%e5%85%b7%e5%8f%aa%e5%8f%91%20x86_64%20%e7%89%88%e3%80%82%e8%bf%99%e7%af%87%e6%98%af%e6%80%8e%e4%b9%88%e5%9c%a8%e5%ae%b9%e5%99%a8%e9%87%8c%e6%8a%8a%e8%bf%99%e5%a5%97%e5%b7%a5%e5%85%b7%e8%b7%91%20%e2%80%a6" data-title=" QQ">
         <i class="icon icon-qq"></i>
       </a>
     </li>

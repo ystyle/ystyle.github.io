@@ -173,6 +173,59 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-仓颉版BadgerDB移植记-1-无锁跳表" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2026-10-10T10:00:00&#43;08:00" itemprop="datePublished">2026-10-10</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2026/10/10/badger-cj-porting-notes/">把 BadgerDB 移植到仓颉（一）：没有裸指针怎么做无锁跳表</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          从 Go 移植 BadgerDB 到仓颉（一）
+仓颉没有裸指针，于是我把节点指针换成了数组下标
+Cangjie · LSM-Tree · badger-cj · 移植
+这是系列第一篇，讲怎么把它写出来：语言差异怎么绕、以及怎么用。
+后续三篇分别讲优化与误判、基准复核、以及怎样测才算数。
+
+          <a href="/2026/10/10/badger-cj-porting-notes/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/badger-cj/">badger-cj</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LSM-Tree/">LSM-Tree</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%BB%E6%A4%8D/">移植</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
+      <article id="post-【鸿蒙PC】二进制签名实战：三类签名、沙箱权限矩阵，以及一张调试证书的坑" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2026-09-22T20:30:00&#43;08:00" itemprop="datePublished">2026-09-22</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E9%B8%BF%E8%92%99PC/">鸿蒙PC</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2026/09/22/matebookpro-binrary-debug-sign/">【鸿蒙PC】二进制签名实战：三类签名、沙箱权限矩阵，以及一张调试证书的坑</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          鸿蒙 PC 上二进制必须合法签名才能加载运行。本文把官方给出的三类签名规则、应用拉起二进制的沙箱权限矩阵整理成表，再补上我们在 MateBook Pro（OpenHarmony-7.0.0.105）上实测出的五种组合结果——包括一张 DevEco 自动签名调试证书被内核 fs-verity 拒掉的完整证据链，以及换成自申请调试证书后立刻能跑的对照实验。结论已确认：IDE 自动签名生成的调试证书不能用于二进制签名。
+          <a href="/2026/09/22/matebookpro-binrary-debug-sign/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HarmonyOS/">HarmonyOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenHarmony/">OpenHarmony</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%B8%BF%E8%92%99PC/">鸿蒙PC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%AD%BE%E5%90%8D/">二进制签名</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HNP/">HNP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/code_sign/">code_sign</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-chronomem-oom-hunt" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2026-09-09T23:30:00&#43;08:00" itemprop="datePublished">2026-09-09</time>
@@ -239,7 +292,8 @@
         </h3>
         <div class="post-content" id="post-content" itemprop="postContent">
           
-           本文记录在鸿蒙PC融合开发引擎的openEuler aarch64容器中，通过box64模拟x86_64兼容层，运行鸿蒙命令行工具编译HAP的完整过程。
+           鸿蒙 PC 的融合开发引擎给的是一个 aarch64 的 openEuler 容器，而鸿蒙官方命令行工具只发 x86_64 版。这篇是怎么在容器里把这套工具跑起来、最后编出 HAP 的。
+为什么不能直接跑 鸿蒙 PC（HarmonyOS PC）的融合开发引擎提供的是 openEuler aarch64 容器环境，但鸿蒙官方命令行工具（command-line-tools）只有 x86_64 版本。要在 aarch64 上编译鸿蒙项目，有两种方案：
 
           <a href="/2026/06/30/matebookpro-box64-harmony-sdk/" class="post-more waves-effect waves-button">Continue reading...</a>
         </div>
@@ -290,7 +344,7 @@
         </h3>
         <div class="post-content" id="post-content" itemprop="postContent">
           
-           本文记录在鸿蒙PC融合开发引擎的容器环境中，因glibc版本限制从源码编译Neovim和tree-sitter的完整过程，并配置AstroNvim作为开发环境。
+           鸿蒙 PC 融合开发引擎的 openEuler 容器里，glibc 是 2.38；nvim-treesitter 下载的预编译 tree-sitter 要 2.39，装解析器直接报错。这篇是绕开的办法：自己编译 tree-sitter CLI 和 Neovim，再接上 AstroNvim。
 
           <a href="/2026/04/03/matebookpro-container-build-neovim/" class="post-more waves-effect waves-button">Continue reading...</a>
         </div>
@@ -315,8 +369,8 @@
         </h3>
         <div class="post-content" id="post-content" itemprop="postContent">
           
-           本文深入解析鸿蒙PC融合开发引擎的技术架构，揭示其如何通过StratoVirt虚拟化和OzoneC容器技术实现Linux应用兼容。
-背景 鸿蒙PC（HarmonyOS PC）采用了独特的架构设计来实现Linux应用兼容。作为用户，我在使用过程中发现系统提供了一个&quot;融合开发引擎&quot;功能，可以在其中运行openEuler环境。本文将解析这个融合开发引擎的技术架构。
+           鸿蒙 PC 上那个能跑 Linux 的「融合开发引擎」，底下是虚拟机套容器。这篇是我怎么一步步探出来的。
+起因 鸿蒙 PC 自带的开发环境里有个「融合开发引擎」，打开就能用 openEuler 的命令行。官方文档只说是「提供 Linux 兼容环境」，没讲怎么实现的。
 
           <a href="/2026/04/03/matebookpro-fusion-dev-engine-architecture/" class="post-more waves-effect waves-button">Continue reading...</a>
         </div>
@@ -377,56 +431,6 @@
         <div class="post-footer">
           
           <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%B8%BF%E8%92%99/">鸿蒙</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%B8%BF%E8%92%99PC/">鸿蒙PC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GIT/">GIT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/matebook-pro/">matebook-pro</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-Neovim移植鸿蒙PC：三方库适配实战与挑战解析" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2025-12-27T19:00:00&#43;08:00" itemprop="datePublished">2025-12-27</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2025/12/27/matebookpro-port-nvim-deps/">Neovim移植鸿蒙PC：三方库适配实战与挑战解析</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-           本文记录将Neovim编辑器移植到HarmonyOS PC过程中，对11个核心依赖库的适配实战经验，涵盖平台差异分析、API限制处理、构建系统改造等关键问题。
-
-          <a href="/2025/12/27/matebookpro-port-nvim-deps/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%B8%BF%E8%92%99/">鸿蒙</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%B8%BF%E8%92%99PC/">鸿蒙PC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/neovim/">neovim</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/livub/">livub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/luajit/">luajit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/matebook-pro/">matebook-pro</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-鸿蒙PC Matebook Pro上安装仓颉编译器每日构建版" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2025-12-27T15:00:00&#43;08:00" itemprop="datePublished">2025-12-27</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2025/12/27/matebookpro-run-cangjie-compiler/">鸿蒙PC Matebook Pro上安装仓颉编译器每日构建版</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-           使用示例 准备工作 在鸿蒙PC上使用应用商店安装CodeArts IDE 下载仓颉编译器每日构建版本: cangjie-sdk-ohos-aarch64-1.1.0-alpha.2025xxxxxxxxxxxxx.tar.gz 从CodeArts IDE提取签名工具 新方法，直接在应用商店安装： DevBox， 然后在HisShell就可以直接使用 binary-sign-tool了
-
-          <a href="/2025/12/27/matebookpro-run-cangjie-compiler/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%B8%BF%E8%92%99/">鸿蒙</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%B8%BF%E8%92%99PC/">鸿蒙PC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%93%E9%A2%89/">仓颉</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cangjie-lang/">cangjie-lang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/matebook-pro/">matebook-pro</a></li></ul>
           
         </div>
       </article>

@@ -2,10 +2,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://ystyle.top/tags/Agent/</loc>
-    <lastmod>2026-11-11T10:00:00+08:00</lastmod>
+    <loc>https://ystyle.top/tags/bstorm/</loc>
+    <lastmod>2026-11-13T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/Cangjie/</loc>
+    <lastmod>2026-11-13T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/cjreg/</loc>
+    <lastmod>2026-11-13T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/2026/11/13/cjreg-private-registry/</loc>
+    <lastmod>2026-11-13T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/cjxt/</loc>
+    <lastmod>2026-11-13T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/%E4%BB%93%E9%A2%89/</loc>
+    <lastmod>2026-11-13T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/</loc>
+    <lastmod>2026-11-13T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/</loc>
+    <lastmod>2026-11-13T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/%E4%B8%AD%E5%BF%83%E4%BB%93/</loc>
+    <lastmod>2026-11-13T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/cordis/</loc>
+    <lastmod>2026-11-12T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/2026/11/12/cordis-cj-plugin-isolation/</loc>
+    <lastmod>2026-11-12T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/%E6%8F%92%E4%BB%B6%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2026-11-12T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/%E6%9E%B6%E6%9E%84/</loc>
+    <lastmod>2026-11-12T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/%E8%BF%9B%E7%A8%8B%E9%9A%94%E7%A6%BB/</loc>
+    <lastmod>2026-11-12T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/Agent/</loc>
     <lastmod>2026-11-11T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/Harness/</loc>
@@ -15,12 +54,6 @@
     <lastmod>2026-11-11T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/2026/11/11/uhp-cj-protocol-implementation/</loc>
-    <lastmod>2026-11-11T10:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://ystyle.top/</loc>
-    <lastmod>2026-11-11T10:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/</loc>
     <lastmod>2026-11-11T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/%E5%8D%8F%E8%AE%AE/</loc>
@@ -71,7 +104,7 @@
     <loc>https://ystyle.top/2026/10/22/holt-cj-graph-db/</loc>
     <lastmod>2026-10-22T15:30:00+08:00</lastmod>
   </url><url>
-    <loc>https://ystyle.top/tags/Redis/</loc>
+    <loc>https://ystyle.top/tags/redis/</loc>
     <lastmod>2026-10-22T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/sunku/</loc>
@@ -94,9 +127,6 @@
   </url><url>
     <loc>https://ystyle.top/2026/10/19/tsdb-silent-failures/</loc>
     <lastmod>2026-10-19T11:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://ystyle.top/tags/bstorm/</loc>
-    <lastmod>2026-10-19T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/2026/10/19/bstorm-index-tradeoff/</loc>
     <lastmod>2026-10-19T10:00:00+08:00</lastmod>
@@ -141,31 +171,31 @@
     <lastmod>2026-10-13T16:40:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/code_sign/</loc>
-    <lastmod>2026-10-13T16:40:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/HarmonyOS/</loc>
-    <lastmod>2026-10-13T16:40:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/HNP/</loc>
-    <lastmod>2026-10-13T16:40:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/OpenHarmony/</loc>
-    <lastmod>2026-10-13T16:40:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%AD%BE%E5%90%8D/</loc>
-    <lastmod>2026-10-13T16:40:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/categories/%E9%B8%BF%E8%92%99PC/</loc>
-    <lastmod>2026-10-13T16:40:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/%E9%B8%BF%E8%92%99PC/</loc>
-    <lastmod>2026-10-13T16:40:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/2026/10/13/harmonyos-pc-binary-sign-types/</loc>
-    <lastmod>2026-10-13T16:30:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/fs-verity/</loc>
-    <lastmod>2026-10-13T16:30:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/badger-cj/</loc>
     <lastmod>2026-10-13T10:00:00+08:00</lastmod>
@@ -189,7 +219,7 @@
     <lastmod>2026-10-10T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/2026/09/22/matebookpro-binrary-debug-sign/</loc>
-    <lastmod>2026-09-22T20:30:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/json-rpc/</loc>
     <lastmod>2026-09-09T23:30:00+08:00</lastmod>
@@ -216,31 +246,31 @@
     <lastmod>2026-09-06T09:30:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/box64/</loc>
-    <lastmod>2026-06-30T22:00:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/HAP/</loc>
-    <lastmod>2026-06-30T22:00:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/matebook-pro/</loc>
-    <lastmod>2026-06-30T22:00:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/SDK/</loc>
-    <lastmod>2026-06-30T22:00:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/%E7%BC%96%E8%AF%91/</loc>
-    <lastmod>2026-06-30T22:00:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/%E9%B8%BF%E8%92%99/</loc>
-    <lastmod>2026-06-30T22:00:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/2026/06/30/matebookpro-box64-harmony-sdk/</loc>
-    <lastmod>2026-06-30T22:00:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/AstroNvim/</loc>
-    <lastmod>2026-04-03T23:30:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/neovim/</loc>
-    <lastmod>2026-04-03T23:30:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/openEuler/</loc>
     <lastmod>2026-04-03T23:30:00+08:00</lastmod>
@@ -252,25 +282,25 @@
     <lastmod>2026-04-03T23:30:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/tree-sitter/</loc>
-    <lastmod>2026-04-03T21:35:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/</loc>
-    <lastmod>2026-04-03T21:35:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/2026/04/03/matebookpro-container-build-neovim/</loc>
-    <lastmod>2026-04-03T21:35:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/OzoneC/</loc>
-    <lastmod>2026-04-03T21:30:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/StratoVirt/</loc>
-    <lastmod>2026-04-03T21:30:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/2026/04/03/matebookpro-fusion-dev-engine-architecture/</loc>
-    <lastmod>2026-04-03T21:30:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/%E8%9E%8D%E5%90%88%E5%BC%80%E5%8F%91%E5%BC%95%E6%93%8E/</loc>
-    <lastmod>2026-04-03T21:30:00+08:00</lastmod>
+    <lastmod>2026-11-12T18:20:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/Abandoned/</loc>
     <lastmod>2026-03-19T20:00:00+08:00</lastmod>
@@ -300,9 +330,6 @@
     <lastmod>2025-12-27T19:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/cangjie-lang/</loc>
-    <lastmod>2025-12-27T15:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://ystyle.top/tags/%E4%BB%93%E9%A2%89/</loc>
     <lastmod>2025-12-27T15:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/2025/12/27/matebookpro-run-cangjie-compiler/</loc>
