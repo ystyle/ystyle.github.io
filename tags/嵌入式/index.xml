@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>嵌入式 on 东方星痕</title>
+		<link>https://ystyle.top/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/</link>
+		<description>Recent content in 嵌入式 on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Sat, 14 Nov 2026 10:00:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>一块 LSM 地基，五个可嵌入数据库</title>
+				<link>https://ystyle.top/2026/11/14/cangjie-embedded-databases/</link>
+				<pubDate>Sat, 14 Nov 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/11/14/cangjie-embedded-databases/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;仓颉可嵌入数据库总览&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;Key 设计就是数据模型&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;仓颉生态里现在有五个可嵌入数据库：KV、文档、缓存、时序、图。&lt;br&gt;&#xA;它们共用同一块 LSM 地基——&lt;strong&gt;所以真正不同的地方，只有 key 怎么排&lt;/strong&gt;。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

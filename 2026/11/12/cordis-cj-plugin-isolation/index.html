@@ -212,8 +212,8 @@
     
     <li class="post-toc-item post-toc-level-3">
   
-  <a class="post-toc-link" href="#%e4%b8%80%e6%8f%a1%e6%89%8b">
-    <span class="post-toc-number">3.1.</span> <span class="post-toc-text">一、握手</span>
+  <a class="post-toc-link" href="#%e6%8f%a1%e6%89%8b">
+    <span class="post-toc-number">3.1.</span> <span class="post-toc-text">握手</span>
   </a>
   
 </li>
@@ -221,8 +221,8 @@
     
     <li class="post-toc-item post-toc-level-3">
   
-  <a class="post-toc-link" href="#%e4%ba%8c%e5%ba%8f%e5%88%97%e5%8c%96">
-    <span class="post-toc-number">3.2.</span> <span class="post-toc-text">二、序列化</span>
+  <a class="post-toc-link" href="#%e5%ba%8f%e5%88%97%e5%8c%96">
+    <span class="post-toc-number">3.2.</span> <span class="post-toc-text">序列化</span>
   </a>
   
 </li>
@@ -230,8 +230,8 @@
     
     <li class="post-toc-item post-toc-level-3">
   
-  <a class="post-toc-link" href="#%e4%b8%89%e5%90%af%e5%8a%a8%e9%a1%ba%e5%ba%8f">
-    <span class="post-toc-number">3.3.</span> <span class="post-toc-text">三、启动顺序</span>
+  <a class="post-toc-link" href="#%e5%90%af%e5%8a%a8%e9%a1%ba%e5%ba%8f">
+    <span class="post-toc-number">3.3.</span> <span class="post-toc-text">启动顺序</span>
   </a>
   
 </li>
@@ -337,7 +337,6 @@
  绕开这个限制的办法，以及绕开之后要付的账。</p>
 </blockquote>
 <h2 id="一卸载不掉的东西"><a href="#一卸载不掉的东西" class="headerlink" title="一、卸载不掉的东西"></a>一、卸载不掉的东西</h2>
-<p>先看问题。</p>
 <p>JavaScript 里卸载一个模块，做法是删掉缓存里的引用，让 GC 回收。Node 的 <code>require.cache</code> 就是干这个的。</p>
 <p>仓颉不行。它编译成<strong>静态机器码</strong>，模块加载后，里面的<strong>全局变量、静态初始化、注册表都落在进程内存里</strong>。你就算把代码段「卸掉」，那些数据还在——而且没有任何机制能安全地把它们重置回初始状态。</p>
 <p>这不是仓颉独有的问题。C 的 <code>dlopen</code>/<code>dlclose</code> 在理论和实践之间差着一大截：POSIX 标准里 <code>dlclose</code> 甚至<strong>允许什么都不做</strong>；GNU ld 的文档明说，带 <code>UNIQUE</code> 符号或 <code>dlopen</code> 了带 TLS 的库时，<code>dlclose</code> 之后那个 handle 依然有效。</p>
@@ -384,7 +383,7 @@
 <p>但天下没有白拿的好处。<strong>跨进程之后，一次函数调用变成了消息往返。</strong></p>
 <h2 id="三代价在三处"><a href="#三代价在三处" class="headerlink" title="三、代价在三处"></a>三、代价在三处</h2>
 <p>拆进程的账，主要记在三个地方。</p>
-<h3 id="一握手"><a href="#一握手" class="headerlink" title="一、握手"></a>一、握手</h3>
+<h3 id="握手"><a href="#握手" class="headerlink" title="握手"></a>握手</h3>
 <p>插件不能一启动就开始干活——它得先告诉宿主「我是谁、我提供哪些服务」，宿主才能把它接入路由表。</p>
 <p>所以每个插件启动后第一件事是<strong>握手</strong>：</p>
 <pre tabindex="0"><code>插件 → 宿主：
@@ -397,7 +396,7 @@ initialize(name, provides)
 <p>这个设计来自北大和 DeepSeek-AI 的一篇论文，cordis-cj 按它的语义实现。<br>
 要点是：<strong>副作用在发生时就把「撤销方式」记下来</strong>，而不是事后靠人回忆。</p>
 </blockquote>
-<h3 id="二序列化"><a href="#二序列化" class="headerlink" title="二、序列化"></a>二、序列化</h3>
+<h3 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h3>
 <p>跨进程只能传字节。所以每个调用都要走 <code>JsonValue</code>。</p>
 <p>这件事如果让插件作者手写，插件系统就没法用了：</p>
 <pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// 每天写一百遍这种东西，谁都不想用
@@ -415,7 +414,7 @@ let n = match (result) {
 let sum = ctx.invoke&lt;AddRequest, Int64&gt;(
     &#34;calc&#34;, &#34;add&#34;, [AddRequest(2, 3)])
 </code></pre><p><code>AddRequest</code> 实现 <code>JsonSerializable</code>，<code>Int64</code> 实现反序列化——框架在中间做转换，业务代码里看不到 <code>JsonValue</code>。</p>
-<h3 id="三启动顺序"><a href="#三启动顺序" class="headerlink" title="三、启动顺序"></a>三、启动顺序</h3>
+<h3 id="启动顺序"><a href="#启动顺序" class="headerlink" title="启动顺序"></a>启动顺序</h3>
 <p>服务有依赖。插件 B 要用插件 A 提供的 <code>db</code> 服务，就必须后启动。</p>
 <p>这件事不能靠配置里的书写顺序——那太脆弱了。所以调和器按 <strong><code>inject</code> / <code>provide</code> 声明做拓扑排序</strong>：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#1f2328">[[</span><span style="color:#1f2328">plugins</span><span style="color:#1f2328">]]</span>
@@ -464,7 +463,7 @@ public class MyPlugin {
 			</tr>
 	</tbody>
 </table>
-<p>「两种写法」不是偷懒，是<strong>在工具链缺陷面前留了退路</strong>。这个后面会讲。</p>
+<p><strong>两种写法是给工具链缺陷留的退路</strong>，后面会讲。</p>
 <h3 id="双传输插件无感"><a href="#双传输插件无感" class="headerlink" title="双传输，插件无感"></a>双传输，插件无感</h3>
 <p>进程间通信有两种方式，cordis-cj 都支持：</p>
 <table>
@@ -496,7 +495,7 @@ public class MyPlugin {
 }
 </code></pre><p><code>run()</code> 内部会自己看命令行有没有 <code>--uds &lt;path&gt;</code>，有就走 UDS，没有就 stdio。所以同一份插件代码两种模式都能跑。</p>
 <blockquote>
-<p>这个细节值得说：<strong>传输模式是部署决定，不该污染插件代码</strong>。<br>
+<p><strong>传输模式是部署决定，不该污染插件代码</strong>。<br>
 如果插件得知道自己跑在哪种传输上，那换传输就等于改所有插件。</p>
 </blockquote>
 <h2 id="五调和器配置说了算"><a href="#五调和器配置说了算" class="headerlink" title="五、调和器：配置说了算"></a>五、调和器：配置说了算</h2>
@@ -514,7 +513,7 @@ public class MyPlugin {
 <pre tabindex="0"><code>读配置 → 算 diff → 拓扑排序
 → 启动新的 → 先加后删 → 崩溃自愈
 </code></pre><p>几个设计细节：</p>
-<p><strong>「先加后删」不是随意定的。</strong> 如果要换一个插件的版本，先杀旧的再起新的，中间会有一段服务不可用；先起新的再杀旧的，切换是平滑的。代价是短时间内两套并存，所以只在<strong>服务不冲突</strong>时成立。</p>
+<p><strong>「先加后删」有代价。</strong> 如果要换一个插件的版本，先杀旧的再起新的，中间会有一段服务不可用；先起新的再杀旧的，切换是平滑的。代价是短时间内两套并存，所以只在<strong>服务不冲突</strong>时成立。</p>
 <p><strong>探活是独立的。</strong> 每 30 秒 ping 一次，超时就重启。这跟调和周期分开——配置 5 秒一轮是为了响应变化，探活 30 秒一轮是为了发现假死。</p>
 <p><strong>崩溃自愈不消耗人。</strong> 插件崩了不需要运维介入，下一轮调和就会把它拉起来。</p>
 <blockquote>
@@ -536,7 +535,7 @@ public macro Plugin(
 public class SimplePlugin {}
 </code></pre><p>编译不通过。<strong>把 cjpm.toml 里的 <code>organization</code> 去掉，立刻就好了。</strong></p>
 <p>这个坑的麻烦之处在于：报错信息（<code>undeclared identifier</code>）<strong>完全不指向真实原因</strong>。你会以为是宏写得不对、导入写错了、语法有问题——实际上是包管理器没把宏的 <code>.so</code> 传下去。</p>
-<p>排查花了多久不重要，重要的是<strong>结论落在了文档里</strong>：<code>cordis_plugin.macros</code> 和调用方必须同模块。于是才有了前面那个「两种写法」的设计——宏给内置插件用，外部插件走显式 API。</p>
+<p>排查了很久才定位到，<strong>结论写进了 README</strong>：<code>cordis_plugin.macros</code> 和调用方必须同模块。于是才有了前面那个「两种写法」的设计——宏给内置插件用，外部插件走显式 API。</p>
 <blockquote>
 <p>一个工具链的缺陷，最终变成了一个 API 的形状。</p>
 </blockquote>
@@ -550,7 +549,7 @@ public class SimplePlugin {}
 </span></span></code></pre></div><p><code>cordis_xisp</code> 运行时把宿主能力注入脚本环境（<code>cordis::*</code> 命名空间），脚本直接调用 <code>provide</code> / <code>invoke</code> / <code>log</code>。</p>
 <p>这条路的代价是性能（解释执行），好处是<strong>改插件不用重新编译</strong>。对一个热更新场景，这个交换很划算。</p>
 <h2 id="八边界"><a href="#八边界" class="headerlink" title="八、边界"></a>八、边界</h2>
-<p>诚实说一下这套东西做不到什么：</p>
+<p>这套东西做不到这些：</p>
 <table>
 	<thead>
 			<tr>

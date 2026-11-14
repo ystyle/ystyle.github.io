@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>一块 LSM 地基，五个可嵌入数据库 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
+  
+  <link rel="stylesheet" href="/css/theme-fix.css">
+  
+  
+
+<script>var _hmt = _hmt || []</script>
+<script async src="https://hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+
+
+<script>
+(function () {
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  bp.src = curProtocol === 'https'
+    ? 'https://zz.bdstatic.com/linksubmit/push.js'
+    : 'http://push.zhanzhang.baidu.com/push.js';
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">一块 LSM 地基，五个可嵌入数据库</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">一块 LSM 地基，五个可嵌入数据库</h1>
+    <h5 class="subtitle">
+      <time datetime="2026-11-14T10:00:00&#43;08:00" itemprop="datePublished" class="page-time">2026-11-14</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e4%ba%94%e4%b8%aa%e5%ba%93%e4%b8%80%e5%bc%a0%e8%a1%a8">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">一、五个库，一张表</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%8c%e4%b8%ba%e4%bb%80%e4%b9%88%e5%85%b1%e7%94%a8%e4%b8%80%e5%9d%97%e5%9c%b0%e5%9f%ba">
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">二、为什么共用一块地基</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%89%e5%b7%ae%e5%88%ab%e5%85%a8%e5%9c%a8-key">
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">三、差别全在 key</span>
+  </a>
+  
+  <ol class="post-toc-child">
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#badger-cj%e8%ae%a9%e7%94%a8%e6%88%b7%e8%87%aa%e5%b7%b1%e5%ae%9a">
+    <span class="post-toc-number">3.1.</span> <span class="post-toc-text">badger-cj：让用户自己定</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#storm-cjjson-%e6%96%87%e6%a1%a3%e6%95%b0%e6%8d%ae%e5%ba%93%e5%b8%a6%e4%b8%80%e5%a5%97-orm-%e9%a3%8e%e6%a0%bc%e7%9a%84%e5%ae%8f">
+    <span class="post-toc-number">3.2.</span> <span class="post-toc-text">storm-cj：JSON 文档数据库，带一套 ORM 风格的宏</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#sunku-cjkey-%e5%b0%b1%e6%98%af-redis-%e7%9a%84-key">
+    <span class="post-toc-number">3.3.</span> <span class="post-toc-text">sunku-cj：key 就是 Redis 的 key</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#tsdb-cj%e5%ae%9a%e9%95%bf%e8%a1%a5%e9%9b%b6%e8%ae%a9%e5%ad%97%e8%8a%82%e5%ba%8f%e7%ad%89%e4%ba%8e%e6%97%b6%e9%97%b4%e5%ba%8f">
+    <span class="post-toc-number">3.4.</span> <span class="post-toc-text">tsdb-cj：定长补零，让字节序等于时间序</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#holt-cj%e9%82%bb%e6%8e%a5%e8%be%b9%e5%b8%a6%e8%b0%93%e8%af%8d%e6%ae%b5">
+    <span class="post-toc-number">3.5.</span> <span class="post-toc-text">holt-cj：邻接边带谓词段</span>
+  </a>
+  
+</li>
+
+    
+    <li class="post-toc-item post-toc-level-3">
+  
+  <a class="post-toc-link" href="#%e6%94%be%e5%9c%a8%e4%b8%80%e8%b5%b7%e7%9c%8b">
+    <span class="post-toc-number">3.6.</span> <span class="post-toc-text">放在一起看</span>
+  </a>
+  
+</li>
+
+    
+  </ol>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%9b%9b%e5%8f%af%e5%b5%8c%e5%85%a5%e6%84%8f%e5%91%b3%e7%9d%80%e4%bb%80%e4%b9%88">
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">四、可嵌入意味着什么</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%ba%94%e6%80%8e%e4%b9%88%e9%80%89">
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">五、怎么选</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%85%ad%e5%90%84%e8%87%aa%e7%9a%84%e6%b7%b1%e6%b0%b4%e5%8c%ba">
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">六、各自的深水区</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%83%e5%b0%8f%e7%bb%93">
+    <span class="post-toc-number">7.</span> <span class="post-toc-text">七、小结</span>
+  </a>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-仓颉可嵌入数据库总览" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">一块 LSM 地基，五个可嵌入数据库</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2026-11-14T10:00:00&#43;08:00" itemprop="datePublished">2026-11-14</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <p align="center"><strong>仓颉可嵌入数据库总览</strong></p>
+<p align="center"><em>Key 设计就是数据模型</em></p>
+<blockquote>
+<p>仓颉生态里现在有五个可嵌入数据库：KV、文档、缓存、时序、图。<br>
+它们共用同一块 LSM 地基——<strong>所以真正不同的地方，只有 key 怎么排</strong>。</p>
+<p>这篇把五个放在一起看，讲它们各自怎么用 key 表达自己的数据模型，以及可嵌入这件事的代价。</p>
+</blockquote>
+<h2 id="一五个库一张表"><a href="#一五个库一张表" class="headerlink" title="一、五个库，一张表"></a>一、五个库，一张表</h2>
+<table>
+	<thead>
+			<tr>
+					<th>库</th>
+					<th>代码 / 测试</th>
+					<th>数据模型</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>badger-cj</td>
+					<td>17271 / 574</td>
+					<td>LSM KV</td>
+			</tr>
+			<tr>
+					<td>storm-cj</td>
+					<td>4263 / 150</td>
+					<td>JSON 文档 + ORM</td>
+			</tr>
+			<tr>
+					<td>sunku-cj</td>
+					<td>3008 / 142</td>
+					<td>Redis 语义 KV</td>
+			</tr>
+			<tr>
+					<td>tsdb-cj</td>
+					<td>4108 / 251</td>
+					<td>时序</td>
+			</tr>
+			<tr>
+					<td>holt-cj</td>
+					<td>3273 / 103</td>
+					<td>图</td>
+			</tr>
+	</tbody>
+</table>
+<p>合计约 <strong>3.2 万行、1200 个测试</strong>，全部在中心仓可装（包名分别是<br>
+<code>badgercj</code> / <code>bstorm</code> / <code>sunku</code> / <code>tsdb</code> / <code>holt</code>，其中 <code>holt</code> 在 <code>ystyle</code> 组织下）。</p>
+<p>除了 badger-cj 本身，<strong>另外四个都依赖它</strong>：</p>
+<pre tabindex="0"><code>storm  sunku  tsdb  holt
+  │      │     │     │
+  └──────┴─────┴─────┘
+            │
+       badger-cj（LSM KV）
+            │
+      mmap-cj（跨平台 mmap）
+</code></pre><p>这不是偶然。下面说为什么。</p>
+<h2 id="二为什么共用一块地基"><a href="#二为什么共用一块地基" class="headerlink" title="二、为什么共用一块地基"></a>二、为什么共用一块地基</h2>
+<p>写数据库最容易犯的错，是<strong>从存储引擎开始写</strong>。</p>
+<p>因为存储引擎的难点和数据库的难点不在同一个地方。存储引擎要解决的是顺序写、compaction、崩溃恢复、空间回收——这些东西写了两年可能还不够稳。而数据库要解决的是数据模型、索引、查询——这才是用户能感知到的部分。</p>
+<p>badger-cj 已经把那 1.7 万行的硬活干完了（它是 Go BadgerDB v4 的移植）：LSM 树、SSTable 格式、WAL/VLog、事务、压缩。所以另外四个库可以直接从「key 和 value 怎么摆」开始想。</p>
+<blockquote>
+<p>这是分层的实际好处：<strong>上层库的代码量都在 3000~4000 行</strong>，<br>
+因为最贵的那部分被复用了。对比一下 badger-cj 自己 17271 行。</p>
+</blockquote>
+<h2 id="三差别全在-key"><a href="#三差别全在-key" class="headerlink" title="三、差别全在 key"></a>三、差别全在 key</h2>
+<p>这是本文想说的一件事：<strong>在 KV 之上做数据模型，本质上就是设计 key 的排列方式。</strong></p>
+<p>同一个 <code>get/put/scan</code> 接口，key 怎么排，就决定了你能高效回答什么问题。</p>
+<h3 id="badger-cj让用户自己定"><a href="#badger-cj让用户自己定" class="headerlink" title="badger-cj：让用户自己定"></a>badger-cj：让用户自己定</h3>
+<p>最底层的 badger-cj 不管 key 长什么样，它只保证<strong>字节序</strong>：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">txn.set(strb(&#34;user:1001&#34;), value)
+// 前缀扫描：user:1001 开头的全部
+let opt = IteratorOptions(
+    prefix: strb(&#34;user:1001&#34;))
+let iter = txn.newIterator(opt: opt)
+</code></pre><p><code>IteratorOptions(prefix:)</code> 这个能力是后面所有库的基础——<strong>它让「按前缀扫一段连续区间」变成 O(区间长度)，而不是全表过一遍</strong>。</p>
+<p>所以每个上层库的第一件事，都是设计一套能靠前缀切分区间的 key 编码。</p>
+<h3 id="storm-cjjson-文档数据库带一套-orm-风格的宏"><a href="#storm-cjjson-文档数据库带一套-orm-风格的宏" class="headerlink" title="storm-cj：JSON 文档数据库，带一套 ORM 风格的宏"></a>storm-cj：JSON 文档数据库，带一套 ORM 风格的宏</h3>
+<p>storm 的定位是「对象直接存进去」。写一个类，标上 <code>@Model</code> 和 <code>@Id</code>，字段上标 <code>@Index</code>，<code>save</code> 就是存文档、<code>query</code> 就是查文档——不用建表，不用写映射代码。</p>
+<p>它存的是 JSON 原文，没有固定 Schema；查询走底下的 gjson，按路径解析、只读目标字段，不把整条记录反序列化。</p>
+<p>文档数据库要回答两类问题：按主键取一行、按某个字段查一批行。</p>
+<p>主键好办——<code>表名:主键</code> 就够了。麻烦的是第二类：<code>phone = 138xxx</code> 这种查询，如果没有索引就得扫全表。</p>
+<p>所以 storm 在写入时<strong>额外写一份索引 key</strong>：</p>
+<pre tabindex="0"><code>主数据    &lt;表&gt;:&lt;主键&gt;       → 整行 JSON
+索引      &lt;表&gt;:idx:&lt;字段&gt;:
+          &lt;值&gt;:&lt;主键&gt;       → 空
+唯一索引  &lt;表&gt;:uniq:
+          &lt;字段&gt;:&lt;值&gt;       → 主键
+</code></pre><p>查 <code>phone = 138xxx</code> 时，扫 <code>user:idx:phone:138xxx:</code> 前缀拿到主键，再逐个回表。</p>
+<p>代价是写入放大——<strong>一行数据变成三四个 key</strong>。这就是为什么索引之后写入从 21k/s 掉到 11.5k/s（这笔记在<a href="/2026/10/19/bstorm-index-tradeoff/">索引代价那篇</a>
+里）。</p>
+<p>而它的一个反直觉结论是：<strong>范围查询不该走索引</strong>。LSM 上，散乱主键回表的随机读比顺序扫还慢。所以 <code>range(30-60)</code> 最终走的是覆盖索引计数 + 流式扫描。</p>
+<h3 id="sunku-cjkey-就是-redis-的-key"><a href="#sunku-cjkey-就是-redis-的-key" class="headerlink" title="sunku-cj：key 就是 Redis 的 key"></a>sunku-cj：key 就是 Redis 的 key</h3>
+<p>缓存库的 API 是 Redis 命令，所以 key 的语义被 Redis 定死了——<code>SET name Alice</code> 里的 <code>name</code> 就是 key。</p>
+<p>但 Redis 有五大数据类型，每种的数据结构不同。sunku 的做法是用<strong>类型前缀区分</strong>：</p>
+<pre tabindex="0"><code>str:&lt;key&gt;     → 字符串值
+hash:&lt;key&gt;    → 整个 hash（字段表序列化）
+list:&lt;key&gt;    → 列表
+zset:&lt;key&gt;    → 有序集合
+</code></pre><p>同一份 KV 接口撑起五种类型，靠的是<strong>序列化整个容器</strong>，而不是像 Redis 那样每种类型一套底层结构。</p>
+<p>这个取舍的后果很明确：<strong>小容器很好，大容器会痛</strong>。一个 10 万成员的 hash，每次 <code>hset</code> 都要读出来改完写回去。Redis 用字典结构，改一个字段是 O(1)。</p>
+<p>sunku 的定位因此是<strong>进程内的小缓存</strong>，不是 Redis 的替代品。</p>
+<h3 id="tsdb-cj定长补零让字节序等于时间序"><a href="#tsdb-cj定长补零让字节序等于时间序" class="headerlink" title="tsdb-cj：定长补零，让字节序等于时间序"></a>tsdb-cj：定长补零，让字节序等于时间序</h3>
+<p>时序库是五个里面最需要琢磨 key 的。</p>
+<p>因为它的核心查询是「某个 series 在某段时间内」——这要求 key 按时间天然有序。而 LSM 只认字节序。</p>
+<p>于是时间戳必须<strong>定长补零</strong>：</p>
+<pre tabindex="0"><code>点 key     s:&lt;series&gt;:&lt;ts 20 位&gt;
+           :&lt;seq 20 位&gt;
+倒排索引   __idx:&lt;series&gt;:&lt;tag&gt;
+           :&lt;val&gt;:&lt;ts&gt;:&lt;seq&gt;
+</code></pre><p>补零到 20 位之后，<code>1699999999999</code> 这种数字的<strong>字典序等于数值序</strong>，前缀扫描就自动按时间走了。</p>
+<p>这里还有个细节：<strong>时间不是主键</strong>。点的身份是 <code>(series, ts, seq)</code> 三元组——同一毫秒写多个点，靠 <code>seq</code> 区分。所以 key 里 <code>ts</code> 和 <code>seq</code> 都要补零。</p>
+<blockquote>
+<p>这是 LSM 上做时序的通用手法。代价是 key 变长（每个点多了二十几个字节），<br>
+收益是分页 seek 可以直接跳到位置，不用从头过。</p>
+</blockquote>
+<p>后来一次事故也和这套编码有关：v0.2.0 的 <code>seq</code> 是变长的，导致 key 字节序<strong>不严格等于</strong>逻辑序，同毫秒多点的顺序会错。v0.3.0 改成定长，并且<strong>不兼容旧库</strong>——存量数据得走一次 <code>migrateToV2</code>。</p>
+<h3 id="holt-cj邻接边带谓词段"><a href="#holt-cj邻接边带谓词段" class="headerlink" title="holt-cj：邻接边带谓词段"></a>holt-cj：邻接边带谓词段</h3>
+<p>图库的关键是「从一个顶点出发，沿某类边跳过去」要快。</p>
+<p>最简单的做法是把邻接表序列化成一整个值：<code>v:1001 → { outgoing: [...] }</code>。但这样<strong>加一条边要读出整个邻接表、改完写回</strong>，度数一高就废了。</p>
+<p>holt 的做法是<strong>每条边一个 key</strong>：</p>
+<pre tabindex="0"><code>顶点       v:&lt;vid&gt;              → 顶点
+出边       eout:&lt;vid&gt;:&lt;label&gt;
+           :&lt;eid&gt;               → 边
+入边       ein:&lt;vid&gt;:&lt;label&gt;
+           :&lt;eid&gt;               → 边
+标签索引   vl:&lt;label&gt;:&lt;vid&gt;     → 空
+</code></pre><p>妙处在 <code>eout:&lt;vid&gt;:&lt;label&gt;:</code> 这段——<strong>把谓词（边的类型）编进 key 的第二段</strong>。</p>
+<p>于是「沿 <code>knows</code> 边找人」变成了扫 <code>eout:1001:knows:</code> 前缀，自动只拿到这一类边，不需要读出来再过滤。这就是所谓「带谓词段的邻接索引」。</p>
+<blockquote>
+<p>这个布局是 1.1.0 才有的。之前是 <code>eout:&lt;vid&gt;:&lt;eid&gt;</code>，<br>
+查某一类边得先扫全部再筛——<a href="/2026/10/22/holt-cj-graph-db/">1.1.0 重写那篇</a>
+里提过这个改动。</p>
+</blockquote>
+<h3 id="放在一起看"><a href="#放在一起看" class="headerlink" title="放在一起看"></a>放在一起看</h3>
+<p>五种模型，key 设计各解决一个问题：</p>
+<table>
+	<thead>
+			<tr>
+					<th>库</th>
+					<th>key 里编进了什么</th>
+					<th>换来什么</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>badger</td>
+					<td>什么都不管</td>
+					<td>最通用</td>
+			</tr>
+			<tr>
+					<td>storm</td>
+					<td>表 + 字段 + 值</td>
+					<td>二级索引查询</td>
+			</tr>
+			<tr>
+					<td>sunku</td>
+					<td>类型前缀</td>
+					<td>五种 Redis 数据类型共用一套存储</td>
+			</tr>
+			<tr>
+					<td>tsdb</td>
+					<td>时间戳（定长）</td>
+					<td>时间序扫描、分页 seek</td>
+			</tr>
+			<tr>
+					<td>holt</td>
+					<td>谓词</td>
+					<td>按边类型直接取邻接</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>共同点是：都把「最主要的查询条件」编进了 key 的位置，让前缀扫描替你做过滤。</strong></p>
+<p>这大概是在 KV 上做数据模型的唯一心法。</p>
+<h2 id="四可嵌入意味着什么"><a href="#四可嵌入意味着什么" class="headerlink" title="四、可嵌入意味着什么"></a>四、可嵌入意味着什么</h2>
+<p>五个库都是<strong>可嵌入</strong>的——它们不是服务，是库。调用方直接 <code>import</code>，数据在本地文件里，没有网络、没有进程间协议。</p>
+<table>
+	<thead>
+			<tr>
+					<th>好处</th>
+					<th>代价</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>零网络延迟（调用是函数调用）</td>
+					<td>只有一个进程能写（文件锁）</td>
+			</tr>
+			<tr>
+					<td>部署简单（不用起服务、配端口）</td>
+					<td>跨进程共享要靠调用方自己想办法</td>
+			</tr>
+			<tr>
+					<td>事务和业务代码在同一个进程里</td>
+					<td>崩了就一起崩，隔离性取决于上层的谨慎</td>
+			</tr>
+			<tr>
+					<td>没有 SQL 层，直接调 API</td>
+					<td>复杂查询得自己组合</td>
+			</tr>
+	</tbody>
+</table>
+<p>最后一条值得展开：<strong>没有 SQL 不是缺陷，是定位</strong>。</p>
+<p>这五个库都不提供 SQL。它们提供的是 fluent API：</p>
+<pre tabindex="0"><code class="language-cangjie" data-lang="cangjie">// storm：用宏声明索引，用 Query 组合条件
+@Index var city: String = &#34;&#34;
+let rows = storm.query&lt;User&gt;()
+    .filter(city == &#34;杭州&#34;)
+    .orderBy(age, desc: true)
+    .limit(20).run()
+</code></pre><p>要 SQL 就得上解析器、查询计划、优化器——那是另一个数量级的工作，而且跟「可嵌入」的定位冲突（SQL 的价值在跨系统通用，而可嵌入库的价值在零摩擦集成）。</p>
+<h2 id="五怎么选"><a href="#五怎么选" class="headerlink" title="五、怎么选"></a>五、怎么选</h2>
+<p>按数据形态选，不按「哪个更强大」选：</p>
+<table>
+	<thead>
+			<tr>
+					<th>你的数据长这样</th>
+					<th>用</th>
+					<th>为什么</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>就是 key → value，结构随业务变</td>
+					<td><strong>badger-cj</strong></td>
+					<td>最底层，零约束</td>
+			</tr>
+			<tr>
+					<td>有固定字段、要按字段查</td>
+					<td><strong>storm-cj</strong></td>
+					<td><code>@Index</code> 自动维护索引</td>
+			</tr>
+			<tr>
+					<td>想要 Redis 那套命令，但不想起服务</td>
+					<td><strong>sunku-cj</strong></td>
+					<td>命令兼容，进程内</td>
+			</tr>
+			<tr>
+					<td>按时间写、按时间窗读</td>
+					<td><strong>tsdb-cj</strong></td>
+					<td>时间窗物化 + 精确定位</td>
+			</tr>
+			<tr>
+					<td>实体之间有大量关系</td>
+					<td><strong>holt-cj</strong></td>
+					<td>邻接索引，按谓词跳</td>
+			</tr>
+	</tbody>
+</table>
+<p>还有三个组合用法值得提：</p>
+<p><strong>sunku 可以当 storm 的缓存层。</strong> 读多的场景，把热点行放进 sunku 内存表，miss 了再查 storm。两者都基于同一块 badger，不打架。</p>
+<p><strong>sunku 和 Redis 能叠成两级缓存。</strong> 命令是同一套，所以代码可以同构：进程内先问 sunku（纳秒级），miss 了再查 Redis（跨进程共享，毫秒级）。位置别放反——<strong>sunku 天生是 L1，Redis 才是 L2</strong>，反过来就变成用一个网络往返去换一个函数调用。</p>
+<p><strong>tsdb 是建在最上层的</strong>——它的定位就是给「按时间分层物化」这种场景用的（最开始服务对象是忆时塔的分层记忆）。</p>
+<h2 id="六各自的深水区"><a href="#六各自的深水区" class="headerlink" title="六、各自的深水区"></a>六、各自的深水区</h2>
+<p>这五个库每个都有绕过的坑，已经单独写过：</p>
+<ul>
+<li><strong><a href="/2026/10/10/badger-cj-porting-notes/">移植记（四篇）</a>
+</strong> — badger-cj：无锁跳表、性能与误判、基准审计、怎么测才算数</li>
+<li><strong><a href="/2026/10/19/bstorm-index-tradeoff/">索引的代价</a>
+</strong> — storm-cj：44 倍查询换来的写入腰斩，范围查询为什么不走索引</li>
+<li><strong><a href="/2026/10/19/tsdb-silent-failures/">四次静默失效</a>
+</strong> — tsdb-cj：代码能跑、测试能过、功能没生效</li>
+<li><strong><a href="/2026/10/22/sunku-cj-embedded-redis/">进程内的 Redis</a>
+</strong> — sunku-cj：命令同构，但架构位置不同</li>
+<li><strong><a href="/2026/10/22/holt-cj-graph-db/">一个小图库的边界</a>
+</strong> — holt-cj：四条限制写进 README</li>
+</ul>
+<h2 id="七小结"><a href="#七小结" class="headerlink" title="七、小结"></a>七、小结</h2>
+<ul>
+<li><strong>五个可嵌入数据库，共用一块 LSM 地基</strong>：badger-cj 负责存储引擎，其余四个只负责数据模型。</li>
+<li><strong>数据模型的差别在 key 的排列</strong>。分清主次查询条件，把它编进 key 的位置，让前缀扫描替你过滤。</li>
+<li><strong>定长与分段是两件常用武器</strong>：tsdb 用定长补零让字节序等于时间序；holt 把谓词编进 key 的第二段。</li>
+<li><strong>索引不是免费的</strong>。storm 写入掉一半就是代价，所以范围查询反而该走扫描。</li>
+<li><strong>可嵌入的代价是单写者和没有 SQL</strong>。这不是缺陷，是定位——它换来了零网络、零部署、事务与业务同进程。</li>
+</ul>
+<p>如果要一句话：<strong>在 KV 之上做数据库，你真正要设计的只有 key。</strong></p>
+<blockquote>
+<p>想先看一个跑起来的：<code>cjpm</code> 里加一行依赖就能用，</p>
+<pre tabindex="0"><code>&#34;badgercj&#34; = &#34;2.3.0&#34;
+</code></pre></blockquote>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2026-11-14T10:00:00&#43;08:00" itemprop="dateUpdated">2026-11-14 10:00:00</time>
+          </span><br>
+          本文链接：<a href="/2026/11/14/cangjie-embedded-databases/" target="_blank" rel="external">https://ystyle.top/2026/11/14/cangjie-embedded-databases/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LSM/">LSM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B4%A2%E5%BC%95/">索引</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f14%2fcangjie-embedded-databases%2f&title=%e3%80%8a%e4%b8%80%e5%9d%97%20LSM%20%e5%9c%b0%e5%9f%ba%ef%bc%8c%e4%ba%94%e4%b8%aa%e5%8f%af%e5%b5%8c%e5%85%a5%e6%95%b0%e6%8d%ae%e5%ba%93%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f14%2fcangjie-embedded-databases%2f&title=%e3%80%8a%e4%b8%80%e5%9d%97%20LSM%20%e5%9c%b0%e5%9f%ba%ef%bc%8c%e4%ba%94%e4%b8%aa%e5%8f%af%e5%b5%8c%e5%85%a5%e6%95%b0%e6%8d%ae%e5%ba%93%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e4%bb%93%e9%a2%89%e5%8f%af%e5%b5%8c%e5%85%a5%e6%95%b0%e6%8d%ae%e5%ba%93%e6%80%bb%e8%a7%88%0aKey%20%e8%ae%be%e8%ae%a1%e5%b0%b1%e6%98%af%e6%95%b0%e6%8d%ae%e6%a8%a1%e5%9e%8b%0a%e4%bb%93%e9%a2%89%e7%94%9f%e6%80%81%e9%87%8c%e7%8e%b0%e5%9c%a8%e6%9c%89%e4%ba%94%e4%b8%aa%e5%8f%af%e5%b5%8c%e5%85%a5%e6%95%b0%e6%8d%ae%e5%ba%93%ef%bc%9aKV%e3%80%81%e6%96%87%e6%a1%a3%e3%80%81%e7%bc%93%e5%ad%98%e3%80%81%e6%97%b6%e5%ba%8f%e3%80%81%e5%9b%be%e3%80%82%0a%e5%ae%83%e4%bb%ac%e5%85%b1%e7%94%a8%e5%90%8c%e4%b8%80%e5%9d%97%20LSM%20%e5%9c%b0%e5%9f%ba%e2%80%94%e2%80%94%e6%89%80%e4%bb%a5%e7%9c%9f%e6%ad%a3%e4%b8%8d%e5%90%8c%e7%9a%84%e5%9c%b0%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f11%2f14%2fcangjie-embedded-databases%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e4%b8%80%e5%9d%97%20LSM%20%e5%9c%b0%e5%9f%ba%ef%bc%8c%e4%ba%94%e4%b8%aa%e5%8f%af%e5%b5%8c%e5%85%a5%e6%95%b0%e6%8d%ae%e5%ba%93%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f11%2f14%2fcangjie-embedded-databases%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f14%2fcangjie-embedded-databases%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2026/11/13/cjreg-private-registry/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">cjreg：用仓颉写一个私有中心仓，Web 界面不用写一行 JS</h4>
+        </a>
+      </div>
+      
+      
+    </nav>
+    
+
+    
+    
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+  </article>
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f14%2fcangjie-embedded-databases%2f&title=%e3%80%8a%e4%b8%80%e5%9d%97%20LSM%20%e5%9c%b0%e5%9f%ba%ef%bc%8c%e4%ba%94%e4%b8%aa%e5%8f%af%e5%b5%8c%e5%85%a5%e6%95%b0%e6%8d%ae%e5%ba%93%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f14%2fcangjie-embedded-databases%2f&title=%e3%80%8a%e4%b8%80%e5%9d%97%20LSM%20%e5%9c%b0%e5%9f%ba%ef%bc%8c%e4%ba%94%e4%b8%aa%e5%8f%af%e5%b5%8c%e5%85%a5%e6%95%b0%e6%8d%ae%e5%ba%93%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%e4%bb%93%e9%a2%89%e5%8f%af%e5%b5%8c%e5%85%a5%e6%95%b0%e6%8d%ae%e5%ba%93%e6%80%bb%e8%a7%88%0aKey%20%e8%ae%be%e8%ae%a1%e5%b0%b1%e6%98%af%e6%95%b0%e6%8d%ae%e6%a8%a1%e5%9e%8b%0a%e4%bb%93%e9%a2%89%e7%94%9f%e6%80%81%e9%87%8c%e7%8e%b0%e5%9c%a8%e6%9c%89%e4%ba%94%e4%b8%aa%e5%8f%af%e5%b5%8c%e5%85%a5%e6%95%b0%e6%8d%ae%e5%ba%93%ef%bc%9aKV%e3%80%81%e6%96%87%e6%a1%a3%e3%80%81%e7%bc%93%e5%ad%98%e3%80%81%e6%97%b6%e5%ba%8f%e3%80%81%e5%9b%be%e3%80%82%0a%e5%ae%83%e4%bb%ac%e5%85%b1%e7%94%a8%e5%90%8c%e4%b8%80%e5%9d%97%20LSM%20%e5%9c%b0%e5%9f%ba%e2%80%94%e2%80%94%e6%89%80%e4%bb%a5%e7%9c%9f%e6%ad%a3%e4%b8%8d%e5%90%8c%e7%9a%84%e5%9c%b0%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f11%2f14%2fcangjie-embedded-databases%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e4%b8%80%e5%9d%97%20LSM%20%e5%9c%b0%e5%9f%ba%ef%bc%8c%e4%ba%94%e4%b8%aa%e5%8f%af%e5%b5%8c%e5%85%a5%e6%95%b0%e6%8d%ae%e5%ba%93%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f11%2f14%2fcangjie-embedded-databases%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f14%2fcangjie-embedded-databases%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2026/11/14/cangjie-embedded-databases/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+
+  
+  
+<template id="title-change"
+          data-normal="欢迎回来╮(╯▽╰)╭"
+          data-leave="东方星痕的博客"></template>
+<script>
+(function () {
+  var el = document.getElementById('title-change');
+  if (!el) return;
+
+  var LEAVE = el.getAttribute('data-leave');
+  var NORMAL = el.getAttribute('data-normal');
+  var OriginTitile = document.title, titleTime;
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      document.title = LEAVE;
+      clearTimeout(titleTime);
+    } else {
+      document.title = NORMAL;
+      titleTime = setTimeout(function () {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

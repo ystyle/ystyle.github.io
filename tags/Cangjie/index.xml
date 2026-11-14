@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Fri, 13 Nov 2026 10:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Sat, 14 Nov 2026 10:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/Cangjie/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>一块 LSM 地基，五个可嵌入数据库</title>
+				<link>https://ystyle.top/2026/11/14/cangjie-embedded-databases/</link>
+				<pubDate>Sat, 14 Nov 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/11/14/cangjie-embedded-databases/</guid>
+				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;仓颉可嵌入数据库总览&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;Key 设计就是数据模型&lt;/em&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;仓颉生态里现在有五个可嵌入数据库：KV、文档、缓存、时序、图。&lt;br&gt;&#xA;它们共用同一块 LSM 地基——&lt;strong&gt;所以真正不同的地方，只有 key 怎么排&lt;/strong&gt;。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>cjreg：用仓颉写一个私有中心仓，Web 界面不用写一行 JS</title>
 				<link>https://ystyle.top/2026/11/13/cjreg-private-registry/</link>
@@ -145,13 +152,6 @@
 				<pubDate>Wed, 09 Sep 2026 23:30:00 +0800</pubDate>
 				<guid>https://ystyle.top/2026/09/09/chronomem-oom-hunt/</guid>
 				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;一次横跨六个仓颉自研库的排查&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;从一条空 message 的异常，到 662 个 CLOSE_WAIT —— 长连接泄漏如何伪装成存储 OOM&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;code&gt;2026-08-19 → 2026-09-09&lt;/code&gt; · &lt;code&gt;Cangjie&lt;/code&gt; · &lt;code&gt;badger-cj&lt;/code&gt; · &lt;code&gt;mcp-cj&lt;/code&gt; · &lt;code&gt;json-rpc&lt;/code&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;一条空消息&#34;&gt;&lt;a href=&#34;#一条空消息&#34; class=&#34;headerlink&#34; title=&#34;一条空消息&#34;&gt;&lt;/a&gt;一条空消息&lt;/h2&gt;&#xA;&lt;p&gt;事情的开始，是一条几乎不包含任何信息的报错。&lt;/p&gt;&#xA;&lt;p&gt;我在本地跑着一个常驻的 MCP 服务——一个&lt;strong&gt;基于时序数据库、用于会话记录存储的记忆系统&lt;/strong&gt;（下面就叫它「线上这个服务」）。它会在后台定期执行维护任务。&lt;/p&gt;</description>
-			</item>
-			<item>
-				<title>仓颉语言 Neovim 开发环境配置指南</title>
-				<link>https://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/</link>
-				<pubDate>Fri, 03 Apr 2026 23:30:00 +0800</pubDate>
-				<guid>https://ystyle.top/2026/04/03/cangjie-neovim-dev-setup/</guid>
-				<description>&lt;p&gt;本文档介绍如何在 openEuler (aarch64) 系统上配置 Neovim (AstroNvim) 开发环境，用于仓颉语言开发。&lt;/p&gt;&#xA;&lt;h2 id=&#34;目录&#34;&gt;&lt;a href=&#34;#目录&#34; class=&#34;headerlink&#34; title=&#34;目录&#34;&gt;&lt;/a&gt;目录&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#%e7%b3%bb%e7%bb%9f%e8%a6%81%e6%b1%82&#34;&gt;系统要求&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#%e5%ae%89%e8%a3%85%e4%bb%93%e9%a2%89-sdk&#34;&gt;安装仓颉 SDK&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#%e5%ae%89%e8%a3%85-cangjie-stdx&#34;&gt;安装 Cangjie STDX&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f%e9%85%8d%e7%bd%ae&#34;&gt;环境变量配置&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#neovim-%e9%85%8d%e7%bd%ae&#34;&gt;Neovim 配置&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#%e5%b8%b8%e8%a7%81%e9%97%ae%e9%a2%98&#34;&gt;常见问题&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;系统要求&#34;&gt;&lt;a href=&#34;#系统要求&#34; class=&#34;headerlink&#34; title=&#34;系统要求&#34;&gt;&lt;/a&gt;系统要求&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;操作系统：openEuler 2403 SP1 (aarch64)&lt;/li&gt;&#xA;&lt;li&gt;GCC 版本：12.3.1 或更高&lt;/li&gt;&#xA;&lt;li&gt;Neovim 版本：0.9.0 或更高&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;安装仓颉-SDK&#34;&gt;&lt;a href=&#34;#安装仓颉-SDK&#34; class=&#34;headerlink&#34; title=&#34;安装仓颉 SDK&#34;&gt;&lt;/a&gt;安装仓颉 SDK&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;从官方渠道下载仓颉 SDK (aarch64 版本)&lt;/li&gt;&#xA;&lt;li&gt;解压到 &lt;code&gt;~/.config/cjvs/store/&lt;/code&gt; 目录&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;目录结构示例：&lt;/p&gt;</description>
 			</item>
 	</channel>
 </rss>
