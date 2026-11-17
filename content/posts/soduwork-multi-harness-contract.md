@@ -299,65 +299,23 @@ atelier 的启动方式是 `atelier acp`，对应写成：
 
 `acp_specs()` 就是直接读这三个字段（`hub-backend/app/agent_catalog.py:108`），没有写死在代码分支里。
 
-我照着这个思路真做了一遍：编译 atelier（`cjpm build`，44 MB 的 `cli.app`）、软链成 `atelier`、加 catalog 条目、重启。过程卡了三层，每层的原因都不一样。
+**我照着这个思路真做了一遍。** 编译 atelier（`cjpm build`，产出 44 MB 的 `cli.app`）、软链成 `atelier`、在 catalog 加一行、重启。
 
-**第一层，catalog 校验。** 加完条目 Hub 直接起不来：
-
-```
-ValueError: atelier: no reviewed managed installer is registered
-```
-
-`agent_catalog.py:86` 写着 `installer == "managed"` 只允许 opencode 用，其余必须走 `npm` 或 `manual`。我把 installer 改成 `manual` 就过了。
-
-**第二层，权限协商。** 底座在界面里出现了，写着「可用」，也真的被拉起来了——但 ACP 握手停在权限这一步：
+结论先说：**atelier 的 ACP 实现是合格的。** 我写了个最小的 ACP 客户端直接连它，三个请求全部走通：
 
 ```
-{"name":"AcpBridgeError","message":"ACCESS_POLICY_UNSUPPORTED:
- Agent did not advertise the requested permission mode"}
+initialize  → {"agentInfo":{"name":"atelier","version":"0.1.0"},"protocolVersion":1,
+               "sessionCapabilities":{"list":{},"delete":{},"resume":{},"close":{}}}
+session/new → {"sessionId":"sess_...","configOptions":[{"id":"model",
+               "currentValue":"opendesign-plugin/deepseek-v4.1-flash", ...}]}
+session/prompt → 10 × agent_message_chunk（流式逐字返回）→ {"stopReason":"end_turn"}
 ```
 
-`acp_access.py:420` 有一张硬编码的映射表，把 SoduWork 的 standard / readonly / full 翻译成各家自己的模式名：codex 是 `workspace-write`、qwen 是 `yolo`、dsh 是 `danger-full-access`……表里只有那五家。atelier 不在里面，自然选不出模式。
+模型名来自它自己的配置、流式正常、结束原因正常。这就是 ACP v1 Agent 侧该有的样子，任何支持 ACP 的宿主都能把它拉起来。
 
-把 catalog 里 atelier 的 `accessControl.supported` 改成 `false`（声明它不参与这套权限策略），这一步就跳过了。
+**但 SoduWork 这边还有一个我没解决的问题。** catalog 里加一条 ACP 条目之后，桌面端的执行底座选择器会从「Pi + OpenCode」塌陷成「只有 Pi」——新增的那条不可用是合理的，但已有的 OpenCode 也跟着消失了。把条目删掉、重启，两个又都回来。
 
-**第三层，模型名。** 这次 agent 真的跑起来了，请求也真的打到了模型网关上，然后网关回 400：
-
-```
-模型「deepseek-flash」现在用不了……当前能用的：
-opencode-zen/deepseek-v4.1-flash-free、opendesign-plugin/deepseek-v4.1-flash
-```
-
-`deepseek-flash` 不是我配的，是 atelier 内置 `AgentConfig.default()` 的默认模型。它的 `withEnvProvider` 只读 `OPENAI_BASE_URL` 和 `OPENAI_API_KEY`（`harness.cj:191`），不读模型名——所以我在 catalog 里写的 `OPENAI_MODEL` 映射被静默忽略了。
-
-**这一层用配置文件解掉了。** atelier 的 `cli/src/acp_cmd.cj:26` 有一段逻辑：如果 `~/.atelier.toml` 里没有名为 `default` 的 agent，就用内置的默认配置。所以自己写一个 `default` 就能覆盖：
-
-```toml
-[[agent]]
-name = "default"
-model = "opendesign-plugin/deepseek-v4.1-flash"
-provider = "default"
-
-[[provider]]
-name = "default"
-baseURL = "http://127.0.0.1:3425/v1"
-apiKey = "${OPENAI_API_KEY}"
-```
-
-`apiKey` 那行仍然引用环境变量，所以密钥还是 SoduWork 注入的，没有落到文件里。
-
-**第四层，网关凭据。** 换完配置，请求带着正确的模型名出去了，网关回了一个 409：
-
-![atelier 用配置的模型名发出请求，卡在网关凭据](/img/soduwork/11-atelier-attempt.png)
-
-```
-{"detail":"模型凭据已变化，请重新选择模型后继续"}
-```
-
-这次不是 atelier 的问题，是模型网关那边的凭据校验。到这儿我停手了——再往下就是网关自己的策略，跟"SoduWork 能不能接一个新底座"这个题目没关系了。
-
-四层走完，结论比一开始想的复杂：**「加一行 JSON」在每一层都不成立**，而且每层失败的原因完全不同——校验器白名单、代码里的权限映射、协议对方的默认配置优先级、网关凭据策略。这也解释了 SoduWork 那份映射表为什么不做成配置：每家底座的权限模式名字都不一样，猜不出来，只能一家家对。
-
-顺带说一句：第三层那种「宿主注入了但被对方内部默认值盖掉」的坑，是最难查的一类——日志上看是模型名不对，但你在宿主这边怎么改配置都没用。
+我复现了两次（两种不同的条目写法，其中一次完全照抄 `dsh` 的形状），单独报了 [#358](https://github.com/mdiri-ai/SoduWork/issues/358)，附了对照截图和代码位置。它不属于「多 harness 抽象」这条主线，但说明一件事：**抽象的边界条件，比抽象本身更容易出问题。**
 
 差别在抽象的中心。SoduWork 先定义十四项能力，再要求每个底座实现它们——这种结构适合管很多个来路不同的底座。atelier 先定义 Agent（TOML 或代码，运行时生效），再往上挂工具、Skill、MCP——这种结构适合把单个 Agent 做深。
 
