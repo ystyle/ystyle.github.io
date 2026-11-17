@@ -297,9 +297,43 @@ atelier 的启动方式是 `atelier acp`，对应写成：
 "runner": { "adapter": "acp", "bins": ["atelier"], "args": ["acp"] }
 ```
 
-`acp_specs()` 就是直接读这三个字段（`hub-backend/app/agent_catalog.py:108`），没有写死在代码分支里。所以「加一行」这句话是有依据的，不是估计。
+`acp_specs()` 就是直接读这三个字段（`hub-backend/app/agent_catalog.py:108`），没有写死在代码分支里。
 
-不过这一步我没实测跑通：atelier 需要先编译出二进制，这次测评的时间不够。配置层面能对上，实际跑起来还有多少坑我不清楚。
+我照着这个思路真做了一遍：编译 atelier（`cjpm build`，44 MB 的 `cli.app`）、软链成 `atelier`、加 catalog 条目、重启。过程卡了三层，每层的原因都不一样。
+
+**第一层，catalog 校验。** 加完条目 Hub 直接起不来：
+
+```
+ValueError: atelier: no reviewed managed installer is registered
+```
+
+`agent_catalog.py:86` 写着 `installer == "managed"` 只允许 opencode 用，其余必须走 `npm` 或 `manual`。我把 installer 改成 `manual` 就过了。
+
+**第二层，权限协商。** 底座在界面里出现了，写着「可用」，也真的被拉起来了——但 ACP 握手停在权限这一步：
+
+```
+{"name":"AcpBridgeError","message":"ACCESS_POLICY_UNSUPPORTED:
+ Agent did not advertise the requested permission mode"}
+```
+
+`acp_access.py:420` 有一张硬编码的映射表，把 SoduWork 的 standard / readonly / full 翻译成各家自己的模式名：codex 是 `workspace-write`、qwen 是 `yolo`、dsh 是 `danger-full-access`……表里只有那五家。atelier 不在里面，自然选不出模式。
+
+把 catalog 里 atelier 的 `accessControl.supported` 改成 `false`（声明它不参与这套权限策略），这一步就跳过了。
+
+**第三层，模型名。** 这次 agent 真的跑起来了，请求也真的打到了模型网关上，然后网关回 400：
+
+![atelier 被拉起来并发出请求，卡在模型名](/img/soduwork/11-atelier-attempt.png)
+
+```
+模型「deepseek-flash」现在用不了……当前能用的：
+opencode-zen/deepseek-v4.1-flash-free、opendesign-plugin/deepseek-v4.1-flash
+```
+
+atelier 的 `withEnvProvider` 只读 `OPENAI_BASE_URL` 和 `OPENAI_API_KEY`（`harness.cj:191`），模型名用它自己配置里的默认值。所以我在 catalog 里写的 `OPENAI_MODEL` 映射没被用上。
+
+到这里我停手了。三层都定位到了，但要真跑通还得让 atelier 支持从环境变量读模型名——那是改仓颉代码、重新编译的事，超出这次测评的范围。
+
+这趟没白走：**「加一行 JSON」这句话只在第一层成立。** 第二层的白名单写在 Python 里，第三层是协议另一方少实现了一个能力。也正因为这样，SoduWork 那份映射表不能做成配置——每家底座的权限模式名字都不一样，猜不出来，只能一家家对。
 
 差别在抽象的中心。SoduWork 先定义十四项能力，再要求每个底座实现它们——这种结构适合管很多个来路不同的底座。atelier 先定义 Agent（TOML 或代码，运行时生效），再往上挂工具、Skill、MCP——这种结构适合把单个 Agent 做深。
 
