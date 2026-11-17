@@ -322,18 +322,42 @@ ValueError: atelier: no reviewed managed installer is registered
 
 **第三层，模型名。** 这次 agent 真的跑起来了，请求也真的打到了模型网关上，然后网关回 400：
 
-![atelier 被拉起来并发出请求，卡在模型名](/img/soduwork/11-atelier-attempt.png)
-
 ```
 模型「deepseek-flash」现在用不了……当前能用的：
 opencode-zen/deepseek-v4.1-flash-free、opendesign-plugin/deepseek-v4.1-flash
 ```
 
-atelier 的 `withEnvProvider` 只读 `OPENAI_BASE_URL` 和 `OPENAI_API_KEY`（`harness.cj:191`），模型名用它自己配置里的默认值。所以我在 catalog 里写的 `OPENAI_MODEL` 映射没被用上。
+`deepseek-flash` 不是我配的，是 atelier 内置 `AgentConfig.default()` 的默认模型。它的 `withEnvProvider` 只读 `OPENAI_BASE_URL` 和 `OPENAI_API_KEY`（`harness.cj:191`），不读模型名——所以我在 catalog 里写的 `OPENAI_MODEL` 映射被静默忽略了。
 
-到这里我停手了。三层都定位到了，但要真跑通还得让 atelier 支持从环境变量读模型名——那是改仓颉代码、重新编译的事，超出这次测评的范围。
+**这一层用配置文件解掉了。** atelier 的 `cli/src/acp_cmd.cj:26` 有一段逻辑：如果 `~/.atelier.toml` 里没有名为 `default` 的 agent，就用内置的默认配置。所以自己写一个 `default` 就能覆盖：
 
-这趟没白走：**「加一行 JSON」这句话只在第一层成立。** 第二层的白名单写在 Python 里，第三层是协议另一方少实现了一个能力。也正因为这样，SoduWork 那份映射表不能做成配置——每家底座的权限模式名字都不一样，猜不出来，只能一家家对。
+```toml
+[[agent]]
+name = "default"
+model = "opendesign-plugin/deepseek-v4.1-flash"
+provider = "default"
+
+[[provider]]
+name = "default"
+baseURL = "http://127.0.0.1:3425/v1"
+apiKey = "${OPENAI_API_KEY}"
+```
+
+`apiKey` 那行仍然引用环境变量，所以密钥还是 SoduWork 注入的，没有落到文件里。
+
+**第四层，网关凭据。** 换完配置，请求带着正确的模型名出去了，网关回了一个 409：
+
+![atelier 用配置的模型名发出请求，卡在网关凭据](/img/soduwork/11-atelier-attempt.png)
+
+```
+{"detail":"模型凭据已变化，请重新选择模型后继续"}
+```
+
+这次不是 atelier 的问题，是模型网关那边的凭据校验。到这儿我停手了——再往下就是网关自己的策略，跟"SoduWork 能不能接一个新底座"这个题目没关系了。
+
+四层走完，结论比一开始想的复杂：**「加一行 JSON」在每一层都不成立**，而且每层失败的原因完全不同——校验器白名单、代码里的权限映射、协议对方的默认配置优先级、网关凭据策略。这也解释了 SoduWork 那份映射表为什么不做成配置：每家底座的权限模式名字都不一样，猜不出来，只能一家家对。
+
+顺带说一句：第三层那种「宿主注入了但被对方内部默认值盖掉」的坑，是最难查的一类——日志上看是模型名不对，但你在宿主这边怎么改配置都没用。
 
 差别在抽象的中心。SoduWork 先定义十四项能力，再要求每个底座实现它们——这种结构适合管很多个来路不同的底座。atelier 先定义 Agent（TOML 或代码，运行时生效），再往上挂工具、Skill、MCP——这种结构适合把单个 Agent 做深。
 
