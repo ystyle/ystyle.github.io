@@ -26,7 +26,7 @@ SoduWork 的 README 里有一句话：
 
 我自己的项目里写过 Agent harness，知道这件事的坑在哪——不同底座的差别不在“调用方式”，而在“它能提供什么”。有的能中途打断，有的能恢复会话，有的能列产出物，有的都不行。如果上层按“底座是谁”来分支，加第八个就要改八个地方。
 
-所以这次测评我选的是「源码解读」：先把它跑起来，让它自己读自己的源码写一份分析，再拿运行中的实际行为去核对。
+所以这次测评我选的是“源码解读”：先把它跑起来，让它自己读自己的源码写一份分析，再拿运行中的实际行为去核对。
 
 ## 装上、跑起来
 
@@ -50,7 +50,7 @@ Administrator: admin
 
 ![钥匙串缺失时的恢复页](/img/soduwork/02-keyring-recovery.png)
 
-这是我这台机器的问题：Arch Linux，没装 gnome-keyring。但它**不是一句“缺少依赖，请安装”就完了**——我去翻了代码，发现这里有个明确的设计决策。
+这是我这台机器的问题：Arch Linux，没装 gnome-keyring。但它不是一句“缺少依赖，请安装”就完了——我去翻了代码，发现这里有个明确的设计决策。
 
 `client/main/app-settings-store.cjs:47`：
 
@@ -109,13 +109,11 @@ Electron 在 Linux 上如果找不到钥匙串，会退化到 `basic_text` 后�
 
 **Agent 说的行号我也逐条核对过**：`contract.js` 的 7-22 是能力清单、24-31 是方法名映射、`registry.js` 的 86-91 抛 `CAPABILITY_UNAVAILABLE`。全对。
 
-这说明它不是在复述文档，是真的读了文件。下面是我按它给的线索去读的源码。
+下面是我按它给的线索去读的源码。
 
 ## 一份 JSON 定义七个底座
 
-先把这次读到的结构画出来，后面几节逐个拆：
-
-![SoduWork Agent 运行时分层：能力声明、两级传输、三层降级](/img/soduwork/07-architecture.png)
+![SoduWork Agent 运行时分层：能力声明、两级传输、三层降级](/img/soduwork/07-architecture-v2.png)
 
 上面这张图里的每个方块，下面都有对应的文件位置。
 
@@ -131,9 +129,7 @@ Electron 在 Linux 上如果找不到钥匙串，会退化到 `basic_text` 后�
 | `dsh` | runner | managed | DeepSeek Harness |
 | `kimi` | runner | managed | Kimi Code |
 
-两个字段值得看。
-
-**`transport` 分成 direct 和 runner。** 只有一个 direct，就是 Pi。`runtime-catalog.js:31` 把这条写死：
+**`transport` 分成 direct 和 runner。** 只有一个 direct，就是 Pi。`runtime-catalog.js:27` 把这条写死：
 
 ```js
 if (row.transport === 'direct' && row.id !== 'pi')
@@ -144,7 +140,7 @@ if (row.transport === 'direct' && row.id !== 'pi')
 
 **`modelMode` 只有 `codex` 是 account**，意思是这个底座用它自己账号里的模型，SoduWork 不管模型目录。其余六个是 managed：模型由 SoduWork 的模型目录统一提供，所以同一个底座可以配不同厂商的模型。
 
-这解决了我开头那个担心的一半：**新增第八个底座，只要它是 runner 类型，加一行 JSON 就够了**，不用碰 adapter。
+这解决了我开头那个担心的一半：**新增第八个底座，只要是 runner 类型，加一行 JSON 就能进 catalog，adapter 不用改。**
 
 ## 14 项能力，三级实现
 
@@ -171,7 +167,7 @@ const CAPABILITIES = Object.freeze({
 
 十四项，覆盖会话恢复、回合控制、产出物、审批、目标、附件、模型、技能、MCP、工作区。按语义分成四组看更清楚：
 
-![14 项能力地图：四组语义 + 6 项钉死方法名](/img/soduwork/09-capability-map.png)
+![14 项能力地图：四组语义 + 6 项钉死方法名](/img/soduwork/09-capability-map-v2.png)
 
 图里上色的六格是 `SESSION_METHOD_BY_CAPABILITY` 钉住的六项——声明了 `turn.cancel`，session 上就必须有 `cancel` 方法，名字不能自取。
 
@@ -198,7 +194,7 @@ const SESSION_METHOD_BY_CAPABILITY = Object.freeze({
 });
 ```
 
-声明了 `turn.cancel`，就必须有 `cancel` 方法，名字不能自取。声明和实现对不上，注册期就会失败，不会留到运行期。
+声明和实现对不上，注册期就会失败，不会留到运行期。
 
 ## 能力缺失怎么办：三层
 
@@ -219,7 +215,7 @@ throw new RuntimeContractError('CAPABILITY_UNAVAILABLE',
 
 **第三层，按消费方隔离。** `validateConsumer` 限定了三种消费方：`chat / goal / task`。同一个底座在对话场景能用的能力，在任务场景未必该用，所以租约里把 consumer 一起冻结。
 
-`session.resume` 声明了却没实现，**注册期就失败**，不会留到运行期才发现。理由很实在——会话恢复是“用户以为能恢复、结果恢复不了”最伤人的地方，早点炸比晚点炸好。
+`session.resume` 声明了却没实现，注册期就失败。理由很实在——会话恢复是“用户以为能恢复、结果恢复不了”最伤人的地方，早点炸比晚点炸好。
 
 ## Cordis 藏在文件后面
 
@@ -231,15 +227,15 @@ throw new RuntimeContractError('CAPABILITY_UNAVAILABLE',
 
 这个取舍我特别有共鸣。我自己用仓颉写过一版对标 Cordis 的插件框架（cordis-cj），当时也纠结过“框架 API 要不要直接暴露给插件作者”。结论一样：**第三方框架的 preview API 会变，而一旦它进入你的持久化结构或对外接口，改起来就是灾难。**
 
-「只做内部拼装」具体是做什么？整个文件 73 行，插件部分就是下面这一块：
+“只做内部拼装”具体是做什么？整个文件 73 行，插件部分就是下面这一块：
 
-![整个项目只注册一个 Cordis 插件](/img/soduwork/10-cordis-plugin.png)
+![整个项目只注册一个 Cordis 插件](/img/soduwork/10-cordis-plugin-v2.png)
 
 一个插件，名字叫 `soduwork-agent-runtime`，`provide` 一个服务 `soduWorkAgentRuntime`。`apply(ctx)` 里做三件事：查 ctx 上有没有别的 registry（有就抛 `RUNTIME_SERVICE_CONFLICT`）、把 registry 挂上去、返回一个函数。
 
-那个返回的函数是关键。它不是 ID，也不靠什么注册表回收——它是一层闭包，记住了「挂上去之前 `ctx.soduWorkAgentRuntime` 是什么值」。dispose 时只有当前值还是自己才动手：原本有值就恢复旧值，原本没有就 `delete`。
+那个返回的函数是关键。它不是 ID，也不靠什么注册表回收——它是一层闭包，记住了“挂上去之前 `ctx.soduWorkAgentRuntime` 是什么值」。dispose 时只有当前值还是自己才动手：原本有值就恢复旧值，原本没有就 `delete`。
 
-代价是要自己保证幂等，所以 `startCordisHost` 里用了一个 `disposed` 标志挡住重复调用。退出时也是先 `registry.dispose()` 再 `fiber.dispose()`——先把运行时不收掉，再卸载插件触发那个闭包。
+代价是要自己保证幂等，所以 `startCordisHost` 里用了一个 `disposed` 标志挡住重复调用。退出时也是先 `registry.dispose()` 再 `fiber.dispose()`——先把运行时服务收掉，再卸载插件触发那个闭包。
 
 外面看到的永远是 `registry`，看不到 context。
 
@@ -253,7 +249,7 @@ throw new RuntimeContractError('CAPABILITY_UNAVAILABLE',
 
 意思是：任务创建时，把当时的能力要求和验收标准**快照**下来。之后管理员改了底座目录，已经存在的任务不受影响。
 
-这条很重要。多底座产品的常见事故就是：某个底座今天升级了能力，昨天创建、还在跑的任务突然行为变了。快照把这个不确定性切断了。
+多底座产品的常见事故就是：某个底座今天升级了能力，昨天创建、还在跑的任务突然行为变了。快照把这个不确定性切断了。
 
 `hub-backend/app/services/approval_routing.py:40` 还有一条：
 
@@ -261,27 +257,27 @@ throw new RuntimeContractError('CAPABILITY_UNAVAILABLE',
 
 这里在做**职责分离**：AI 干的活不能算成人工，否则人就成了“自己审自己”。产品的核心承诺是“人签字才算完成”，如果签字的人恰好是执行的人，这个承诺就是空的。
 
-## 这套抽象的代价
+## 这套抽象的边界
 
-**一、能力级的抽象抹不平体验差异。** 两个底座都声明 `turn.steer`（回合中途改向），一个是真的立刻改，另一个是 queued 到下一个检查点才生效——能力 id 一样，感受完全不一样。`level` 只有三级，不足以表达这种粒度。
+**一、能力级的抽象抹不平体验差异。** 两个底座可以都声明 `turn.steer`（回合中途改向），实际行为却可能不同：一个立刻改，另一个排队到下一个检查点。能力 id 一样，感受完全不一样。`level` 的三级能表达“谁来负责实现”，表达不了这么细的粒度。
 
-**二、runner 那六个共用一套 adapter，出问题时不好定位。** 报错会说“某底座不支持某方法”，但底下是哪个进程、哪一层不支持，要自己往下挖。
+**二、runner 类型共用一套 adapter，收益和排查成本是一体的。** 六个底座走同一个入口，好处是新增底座不用写新的适配器；代价是出错时定位路径会长一些：报错只到“某底座不支持某方法”，底下是哪一层就要自己往下挖。
 
-**三、`supports` 目前没人调用。** Agent 自己发现的那条限制是真的：能力预检要靠业务侧接入，不是自动生效的。也就是说第一层防护现在是空的，实际生效的是第二层（错误码）和第三层（消费方隔离）。
+**三、`supports` 预检目前由业务侧接入。** 契约里留了这个接口，我在 `contract.js:142` 读过它的实现；不过这个目录里还没有调用点，所以预检这一层要各业务自己接上才生效，实际一直在起作用的是后两层（错误码 + 消费方隔离）。
 
-**四、我这次只跑通了 Pi。** 其余六个 runner 类型需要各自的运行环境，我没能在一次测评里全部验证。所以上面关于“六个共用 runner adapter”的结论来自代码和 catalog，不是来自六个的真实运行——这一点必须说清楚。
+**四、我这次只跑通了 Pi。** 其余六个 runner 类型需要各自的运行环境，我没能在一次测评里全部验证。所以上面关于“六个共用 runner adapter”的结论来自代码和 catalog，不是来自六个的真实运行。
 
-**五、交叉审查的前提是两个可用模型，我只有一个。** 产品最核心的承诺是“一个 harness 干活，另一个在同一套验收标准下审查”。我配的两个模型里有一个免费额度已用尽，只剩一个能用，所以这次只能做到单模型自审——同一个 agent 干活、同一个 agent 复查。流程跑得通，但“换一个模型能不能发现另一个模型的盲区”这个最有价值的部分我没有验证到。
+**五、交叉审查的前提是两个可用模型，我配的其中一个额度用完了。** 产品最核心的承诺是“一个 harness 干活，另一个在同一套验收标准下审查”。这次只剩一个能用的模型，所以只做到单模型自审——同一个 agent 干活、同一个 agent 复查。流程跑得通，但“换一个模型能不能发现另一个模型的盲区”这个最有价值的部分，我没验证到。
 
-这不算产品的问题，是我的环境限制。但它说明：**多 harness / 多模型不是锦上添花，是这套设计能不能成立的前提。**只有一个底座时，职责分离那层逻辑再严密，实际执行的仍是同一个主体。
+**多 harness / 多模型不是锦上添花，是这套设计能不能成立的前提。** 只有一个底座时，职责分离那层逻辑再严密，实际执行的仍是同一个主体。
 
 ## 和我自己那个 harness 比
 
 去年我写过 atelier（纯仓颉的 Agent harness，两万三千行）。读完 SoduWork 的运行时，我发现这两件事其实站在同一个协议的两端。
 
-![SoduWork 宿主侧与 atelier Agent 侧对照](/img/soduwork/08-vs-atelier.png)
+![SoduWork 宿主侧与 atelier Agent 侧对照](/img/soduwork/08-vs-atelier-v2.png)
 
-**atelier 实现的是“被宿主拉起”的那一侧。** 它的 README 写着：`atelier acp` 以 ACP v1 Agent 身份被 Zed / opencode 等宿主拉起（stdio）。而 SoduWork 的 runner 恰恰是通过 `acp_bridge.py` 去拉起外部 ACP Agent 的——六个 runner 底座的 `approval` 字段都标着 `native-acp`，只有 Pi 是 `tool-hook`。
+atelier 实现的是“被宿主拉起”的那一侧。它的 README 写着：`atelier acp` 以 ACP v1 Agent 身份被 Zed / opencode 等宿主拉起（stdio）。而 SoduWork 的 runner 恰恰是通过 `acp_bridge.py` 去拉起外部 ACP Agent 的——六个 runner 底座的 `approval` 字段都标着 `native-acp`，只有 Pi 是 `tool-hook`。
 
 **也就是说 atelier 已经满足被接成第八个底座的条件。** 我核对了两边的启动约定。
 
@@ -299,7 +295,7 @@ atelier 的启动方式是 `atelier acp`，对应写成：
 
 `acp_specs()` 就是直接读这三个字段（`hub-backend/app/agent_catalog.py:108`），没有写死在代码分支里。
 
-**我照着这个思路真做了一遍。** 编译 atelier（`cjpm build`，产出 44 MB 的 `cli.app`）、软链成 `atelier`、在 catalog 加一行、重启。
+我照着这个思路真做了一遍。编译 atelier（`cjpm build`，产出 44 MB 的 `cli.app`）、软链成 `atelier`、在 catalog 加一行、重启。
 
 结论先说：**atelier 的 ACP 实现是合格的。** 我写了个最小的 ACP 客户端直接连它，三个请求全部走通：
 
@@ -311,13 +307,24 @@ session/new → {"sessionId":"sess_...","configOptions":[{"id":"model",
 session/prompt → 10 × agent_message_chunk（流式逐字返回）→ {"stopReason":"end_turn"}
 ```
 
-模型名来自它自己的配置、流式正常、结束原因正常。这就是 ACP v1 Agent 侧该有的样子，任何支持 ACP 的宿主都能把它拉起来。
+模型名来自它自己的配置，流式正常，结束原因正常。这就是 ACP v1 Agent 侧该有的样子——只要宿主实现了 ACP 客户端，就能用它。
 
-**但 SoduWork 这边还有一个我没解决的问题。** catalog 里加一条 ACP 条目之后，桌面端的执行底座选择器会从「Pi + OpenCode」塌陷成「只有 Pi」——新增的那条不可用是合理的，但已有的 OpenCode 也跟着消失了。把条目删掉、重启，两个又都回来。
+我这边还有一步没走完。
 
-我复现了两次（两种不同的条目写法，其中一次完全照抄 `dsh` 的形状），单独报了 [#358](https://github.com/mdiri-ai/SoduWork/issues/358)，附了对照截图和代码位置。它不属于「多 harness 抽象」这条主线，但说明一件事：**抽象的边界条件，比抽象本身更容易出问题。**
+在 `agent_catalog.json` 里加一条指向**真实可执行文件**的 ACP 条目之后，桌面端的执行底座列表从「Pi + OpenCode」变成只有「Pi」。新条目自己没出现可以理解（桌面端还没有对应的适配器），但 OpenCode 跟着一起消失就说不通了。把条目删掉、重启，两个又都回来。
 
-差别在抽象的中心。SoduWork 先定义十四项能力，再要求每个底座实现它们——这种结构适合管很多个来路不同的底座。atelier 先定义 Agent（TOML 或代码，运行时生效），再往上挂工具、Skill、MCP——这种结构适合把单个 Agent 做深。
+中间我做过一次对照：把 `dsh` 那条**原样复制**一份，只改 id 和名字，`bins` 指向的 `dsh-acp` 本机并没有装——结果列表**正常**，还是 Pi + OpenCode。
+
+| 测试条目 | `bins` 指向 | 选择器 |
+| --- | --- | --- |
+| `dsh` 的复制（改了 id） | `dsh-acp`，未安装 | Pi + OpenCode |
+| `atelier` | `atelier`，已安装可执行 | 只有 Pi |
+
+所以触发条件不是“多了一条 catalog”，而是“多了一条**能真的跑起来**的”。这反过来指向一个更具体的猜测：探测时可能真的去启动它了，而 `atelier acp` 是个等 stdin 的常驻服务，不是跑一下就退出的那种。
+
+步骤、截图和这份对照都整理在 [#358](https://github.com/mdiri-ai/SoduWork/issues/358) 里。这属于适配层的细节，不影响“两边接口能对上”这个结论。
+
+SoduWork 先定义十四项能力，再要求每个底座实现它们——这种结构适合管很多个来路不同的底座。atelier 先定义 Agent（TOML 或代码，运行时生效），再往上挂工具、Skill、MCP——这种结构适合把单个 Agent 做深。
 
 两边回答的不是同一个问题：一个问“怎么管住七个不一样的东西”，一个问“怎么把一个东西做到能直接用”。
 
@@ -333,7 +340,7 @@ SoduWork 的答案是三件事叠起来：
 
 加上“任务快照”和“职责分离”两道后端保障，可用的抽象就成形了。
 
-真正让我意外的是那个 `basic_text` 的拒绝逻辑：**宁可启动不了，也不把凭据写明文**。这类取舍做过产品的人都知道有多难下决心。
+`basic_text` 那段拒绝逻辑是这次读代码最意外的地方：宁可启动不了，也不把凭据写明文。
 
 ---
 
