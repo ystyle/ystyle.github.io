@@ -169,7 +169,11 @@ const CAPABILITIES = Object.freeze({
 });
 ```
 
-十四项，覆盖会话恢复、回合控制、产出物、审批、目标、附件、模型、技能、MCP、工作区。
+十四项，覆盖会话恢复、回合控制、产出物、审批、目标、附件、模型、技能、MCP、工作区。按语义分成四组看更清楚：
+
+![14 项能力地图：四组语义 + 6 项钉死方法名](/img/soduwork/09-capability-map.png)
+
+图里上色的六格是 `SESSION_METHOD_BY_CAPABILITY` 钉住的六项——声明了 `turn.cancel`，session 上就必须有 `cancel` 方法，名字不能自取。
 
 关键是能力**不只是一个字符串**。每个能力声明还要求带 `level`：
 
