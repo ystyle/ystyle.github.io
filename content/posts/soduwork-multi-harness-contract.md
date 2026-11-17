@@ -231,7 +231,17 @@ throw new RuntimeContractError('CAPABILITY_UNAVAILABLE',
 
 这个取舍我特别有共鸣。我自己用仓颉写过一版对标 Cordis 的插件框架（cordis-cj），当时也纠结过“框架 API 要不要直接暴露给插件作者”。结论一样：**第三方框架的 preview API 会变，而一旦它进入你的持久化结构或对外接口，改起来就是灾难。**
 
-所以这里的做法是：Cordis 负责把 registry 挂到 context 上，退出时按 `undo_id` 撤销注册，仅此而已。外面看到的永远是 `registry`，看不到 context。
+「只做内部拼装」具体是做什么？整个文件 73 行，插件部分就是下面这一块：
+
+![整个项目只注册一个 Cordis 插件](/img/soduwork/10-cordis-plugin.png)
+
+一个插件，名字叫 `soduwork-agent-runtime`，`provide` 一个服务 `soduWorkAgentRuntime`。`apply(ctx)` 里做三件事：查 ctx 上有没有别的 registry（有就抛 `RUNTIME_SERVICE_CONFLICT`）、把 registry 挂上去、返回一个函数。
+
+那个返回的函数是关键。它不是 ID，也不靠什么注册表回收——它是一层闭包，记住了「挂上去之前 `ctx.soduWorkAgentRuntime` 是什么值」。dispose 时只有当前值还是自己才动手：原本有值就恢复旧值，原本没有就 `delete`。
+
+代价是要自己保证幂等，所以 `startCordisHost` 里用了一个 `disposed` 标志挡住重复调用。退出时也是先 `registry.dispose()` 再 `fiber.dispose()`——先把运行时不收掉，再卸载插件触发那个闭包。
+
+外面看到的永远是 `registry`，看不到 context。
 
 ## 后端还有两道
 
