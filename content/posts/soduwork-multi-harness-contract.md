@@ -269,7 +269,23 @@ throw new RuntimeContractError('CAPABILITY_UNAVAILABLE',
 
 **atelier 实现的是“被宿主拉起”的那一侧。** 它的 README 写着：`atelier acp` 以 ACP v1 Agent 身份被 Zed / opencode 等宿主拉起（stdio）。而 SoduWork 的 runner 恰恰是通过 `acp_bridge.py` 去拉起外部 ACP Agent 的——六个 runner 底座的 `approval` 字段都标着 `native-acp`，只有 Pi 是 `tool-hook`。
 
-**也就是说 atelier 已经满足被接成第八个底座的条件。** 按前面读到的 catalog 结构，加一行 runner 类型的条目、把启动命令指到 `atelier acp`，剩下的交给 acp_bridge。这一步我没在实际环境里验证过，但两边的接口是能对上的。
+**也就是说 atelier 已经满足被接成第八个底座的条件。** 我核对了两边的启动约定。
+
+SoduWork 的 ACP 底座在 catalog 里是这么描述的，抄 dsh 那一条：
+
+```json
+"runner": { "adapter": "acp", "bins": ["dsh-acp"], "args": [] }
+```
+
+atelier 的启动方式是 `atelier acp`，对应写成：
+
+```json
+"runner": { "adapter": "acp", "bins": ["atelier"], "args": ["acp"] }
+```
+
+`acp_specs()` 就是直接读这三个字段（`hub-backend/app/agent_catalog.py:108`），没有写死在代码分支里。所以「加一行」这句话是有依据的，不是估计。
+
+不过这一步我没实测跑通：atelier 需要先编译出二进制，这次测评的时间不够。配置层面能对上，实际跑起来还有多少坑我不清楚。
 
 差别在抽象的中心。SoduWork 先定义十四项能力，再要求每个底座实现它们——这种结构适合管很多个来路不同的底座。atelier 先定义 Agent（TOML 或代码，运行时生效），再往上挂工具、Skill、MCP——这种结构适合把单个 Agent 做深。
 
