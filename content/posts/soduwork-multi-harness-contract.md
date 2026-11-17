@@ -263,11 +263,17 @@ throw new RuntimeContractError('CAPABILITY_UNAVAILABLE',
 
 ## 和我自己那个 harness 比
 
-去年我写过 atelier（纯仓颉的 Agent harness，两万三千行），对比下来有两个差别。
+去年我写过 atelier（纯仓颉的 Agent harness，两万三千行）。读完 SoduWork 的运行时，我发现这两件事其实站在同一个协议的两端。
 
-**SoduWork 把“能力”当作第一等公民，atelier 把“会话”当作第一等公民。** atelier 的中心是 session，能力是 session 上的方法；SoduWork 反过来，先定义十四项能力，再要求 session 实现对应方法。后者更适合多底座，因为差异恰恰在能力层面。
+![SoduWork 宿主侧与 atelier Agent 侧对照](/img/soduwork/08-vs-atelier.png)
 
-**SoduWork 用 JSON 声明，atelier 用代码注册。** 声明式的好处是运维能改、能审计、改错能回滚；坏处是类型安全靠校验器手写（`validateAdapter` 那 40 行）。代码注册反过来。这里没有对错，取舍在“谁需要改这个配置”。
+**atelier 实现的是“被宿主拉起”的那一侧。** 它的 README 写着：`atelier acp` 以 ACP v1 Agent 身份被 Zed / opencode 等宿主拉起（stdio）。而 SoduWork 的 runner 恰恰是通过 `acp_bridge.py` 去拉起外部 ACP Agent 的——六个 runner 底座的 `approval` 字段都标着 `native-acp`，只有 Pi 是 `tool-hook`。
+
+**也就是说 atelier 已经满足被接成第八个底座的条件。** 按前面读到的 catalog 结构，加一行 runner 类型的条目、把启动命令指到 `atelier acp`，剩下的交给 acp_bridge。这一步我没在实际环境里验证过，但两边的接口是能对上的。
+
+差别在抽象的中心。SoduWork 先定义十四项能力，再要求每个底座实现它们——这种结构适合管很多个来路不同的底座。atelier 先定义 Agent（TOML 或代码，运行时生效），再往上挂工具、Skill、MCP——这种结构适合把单个 Agent 做深。
+
+两边回答的不是同一个问题：一个问“怎么管住七个不一样的东西”，一个问“怎么把一个东西做到能直接用”。
 
 ## 结论
 
