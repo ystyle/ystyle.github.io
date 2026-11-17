@@ -113,6 +113,12 @@ Electron 在 Linux 上如果找不到钥匙串，会退化到 `basic_text` 后�
 
 ## 一份 JSON 定义七个底座
 
+先把这次读到的结构画出来，后面几节逐个拆：
+
+![SoduWork Agent 运行时分层：能力声明、两级传输、三层降级](/img/soduwork/07-architecture.png)
+
+上面这张图里的每个方块，下面都有对应的文件位置。
+
 七个 harness 不是硬编码在代码里的，来自 `hub-backend/app/agent_catalog.json`：
 
 | id | transport | modelMode | 显示名 |
