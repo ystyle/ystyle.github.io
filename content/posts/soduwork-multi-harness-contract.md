@@ -340,6 +340,8 @@ session/prompt → 10 × agent_message_chunk（流式逐字返回）→ {"stopRe
 
 同一台机器、同一份 catalog，再打开新对话：执行底座列表变成 **Pi + OpenCode + Atelier**，选中 Atelier 发一句“用一句话介绍你自己”，**4 秒**返回。用量记录里 `agent_key` 写的是 `atelier`——这一轮确实是它干的。
 
+![选中 Atelier 发一句话，4 秒后返回；输入框右下角显示当前底座是 Atelier](/img/soduwork/11-atelier-run.png)
+
 一个细节：回答里它自称“我是 SoduWork 里的办公助理”，而我在 `~/.atelier.toml` 里给它写的系统提示是“你是一个简洁的助手，回答尽量短”。**宿主把自己的系统提示注入进了 ACP 会话**，覆盖了 Agent 自己的那份。这一段比任何架构图都更能说明两边谁在指挥谁。
 
 过程都留在 [#358](https://github.com/mdiri-ai/SoduWork/issues/358)。
