@@ -566,7 +566,7 @@ SoduWork needs a system password manager to store sign-in credentials securely.<
 <p><strong>一、能力级的抽象抹不平体验差异。</strong> 两个底座可以都声明 <code>turn.steer</code>（回合中途改向），实际行为却可能不同：一个立刻改，另一个排队到下一个检查点。能力 id 一样，感受完全不一样。<code>level</code> 的三级能表达“谁来负责实现”，表达不了这么细的粒度。</p>
 <p><strong>二、runner 类型共用一套 adapter，收益和排查成本是一体的。</strong> 六个底座走同一个入口，好处是新增底座不用写新的适配器；代价是出错时定位路径会长一些：报错只到“某底座不支持某方法”，底下是哪一层就要自己往下挖。</p>
 <p><strong>三、<code>supports</code> 预检目前由业务侧接入。</strong> 契约里留了这个接口，我在 <code>contract.js:142</code> 读过它的实现；不过这个目录里还没有调用点，所以预检这一层要各业务自己接上才生效，实际一直在起作用的是后两层（错误码 + 消费方隔离）。</p>
-<p><strong>四、我这次只跑通了 Pi。</strong> 其余六个 runner 类型需要各自的运行环境，我没能在一次测评里全部验证。所以上面关于“六个共用 runner adapter”的结论来自代码和 catalog，不是来自六个的真实运行。</p>
+<p><strong>四、真正跑过的只有 Pi 和 atelier。</strong> 其余五个 runner 类型需要各自的运行环境，我没能在一次测评里全部验证，所以 <code>runner-adapter</code> 对它们的结论来自代码和 catalog。atelier 是我临时加进 catalog 的第八个底座，下一节写了它怎么跑起来的。</p>
 <p><strong>五、交叉审查的前提是两个可用模型，我配的其中一个额度用完了。</strong> 产品最核心的承诺是“一个 harness 干活，另一个在同一套验收标准下审查”。这次只剩一个能用的模型，所以只做到单模型自审——同一个 agent 干活、同一个 agent 复查。流程跑得通，但“换一个模型能不能发现另一个模型的盲区”这个最有价值的部分，我没验证到。</p>
 <p><strong>多 harness / 多模型不是锦上添花，是这套设计能不能成立的前提。</strong> 只有一个底座时，职责分离那层逻辑再严密，实际执行的仍是同一个主体。</p>
 <h2 id="和我自己那个-harness-比"><a href="#和我自己那个-harness-比" class="headerlink" title="和我自己那个 harness 比"></a>和我自己那个 harness 比</h2>
@@ -583,9 +583,11 @@ SoduWork needs a system password manager to store sign-in credentials securely.<
 <p><strong>也就是说 atelier 已经满足被接成第八个底座的条件。</strong> 我核对了两边的启动约定。</p>
 <p>SoduWork 的 ACP 底座在 catalog 里是这么描述的，抄 dsh 那一条：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#0a3069">&#34;runner&#34;</span><span style="color:#f6f8fa;background-color:#82071e">:</span> <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;adapter&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;acp&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">&#34;bins&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;dsh-acp&#34;</span><span style="color:#1f2328">],</span> <span style="color:#0550ae">&#34;args&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[]</span> <span style="color:#1f2328">}</span>
-</span></span></code></pre></div><p>atelier 的启动方式是 <code>atelier acp</code>，对应写成：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#0a3069">&#34;runner&#34;</span><span style="color:#f6f8fa;background-color:#82071e">:</span> <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;adapter&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;acp&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">&#34;bins&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;atelier&#34;</span><span style="color:#1f2328">],</span> <span style="color:#0550ae">&#34;args&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;acp&#34;</span><span style="color:#1f2328">]</span> <span style="color:#1f2328">}</span>
-</span></span></code></pre></div><p><code>acp_specs()</code> 就是直接读这三个字段（<code>hub-backend/app/agent_catalog.py:108</code>），没有写死在代码分支里。</p>
+</span></span></code></pre></div><p>atelier 的启动方式是 <code>atelier acp &lt;agent&gt;</code>，对应写成：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#0a3069">&#34;runner&#34;</span><span style="color:#f6f8fa;background-color:#82071e">:</span> <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;adapter&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;acp&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">&#34;bins&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;atelier&#34;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#0550ae">&#34;args&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;acp&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;soduwork-probe&#34;</span><span style="color:#1f2328">]</span> <span style="color:#1f2328">}</span>
+</span></span></code></pre></div><p><code>args</code> 里那个 agent 名不能省。只写 <code>[&quot;acp&quot;]</code> 的话，atelier 会去找一个叫 <code>default</code> 的 provider，没配就报 <code>no provider named 'default'</code>——它不会回退到配置里唯一那一个。</p>
+<p><code>acp_specs()</code> 就是直接读这三个字段（<code>hub-backend/app/agent_catalog.py:108</code>），没有写死在代码分支里。</p>
 <p>我照着这个思路真做了一遍。编译 atelier（<code>cjpm build</code>，产出 44 MB 的 <code>cli.app</code>）、软链成 <code>atelier</code>、在 catalog 加一行、重启。</p>
 <p>结论先说：<strong>atelier 的 ACP 实现是合格的。</strong> 我写了个最小的 ACP 客户端直接连它，三个请求全部走通：</p>
 <pre tabindex="0"><code>initialize  → {&#34;agentInfo&#34;:{&#34;name&#34;:&#34;atelier&#34;,&#34;version&#34;:&#34;0.1.0&#34;},&#34;protocolVersion&#34;:1,
@@ -594,9 +596,9 @@ session/new → {&#34;sessionId&#34;:&#34;sess_...&#34;,&#34;configOptions&#34;:
                &#34;currentValue&#34;:&#34;opendesign-plugin/deepseek-v4.1-flash&#34;, ...}]}
 session/prompt → 10 × agent_message_chunk（流式逐字返回）→ {&#34;stopReason&#34;:&#34;end_turn&#34;}
 </code></pre><p>模型名来自它自己的配置，流式正常，结束原因正常。这就是 ACP v1 Agent 侧该有的样子——只要宿主实现了 ACP 客户端，就能用它。</p>
-<p>我这边还有一步没走完。</p>
-<p>在 <code>agent_catalog.json</code> 里加一条指向<strong>真实可执行文件</strong>的 ACP 条目之后，桌面端的执行底座列表从「Pi + OpenCode」变成只有「Pi」。新条目自己没出现可以理解（桌面端还没有对应的适配器），但 OpenCode 跟着一起消失就说不通了。把条目删掉、重启，两个又都回来。</p>
-<p>中间我做过一次对照：把 <code>dsh</code> 那条<strong>原样复制</strong>一份，只改 id 和名字，<code>bins</code> 指向的 <code>dsh-acp</code> 本机并没有装——结果列表<strong>正常</strong>，还是 Pi + OpenCode。</p>
+<p><strong>第一版加进去之后，选择器塌了。</strong></p>
+<p>在 <code>agent_catalog.json</code> 里加一条指向<strong>真实可执行文件</strong>的 ACP 条目之后，桌面端的执行底座列表从「Pi + OpenCode」变成只有「Pi」。新条目自己没出现可以理解，但 OpenCode 跟着一起消失就说不通了。把条目删掉、重启，两个又都回来。</p>
+<p>中间做过一次对照：把 <code>dsh</code> 那条<strong>原样复制</strong>一份，只改 id 和名字，<code>bins</code> 指向的 <code>dsh-acp</code> 本机并没有装——结果列表<strong>正常</strong>，还是 Pi + OpenCode。</p>
 <table>
 	<thead>
 			<tr>
@@ -618,9 +620,33 @@ session/prompt → 10 × agent_message_chunk（流式逐字返回）→ {&#34;st
 			</tr>
 	</tbody>
 </table>
-<p>所以触发条件不是“多了一条 catalog”，而是“多了一条<strong>能真的跑起来</strong>的”。这反过来指向一个更具体的猜测：探测时可能真的去启动它了，而 <code>atelier acp</code> 是个等 stdin 的常驻服务，不是跑一下就退出的那种。</p>
-<p>步骤、截图和这份对照都整理在 <a href="https://github.com/mdiri-ai/SoduWork/issues/358" target="_blank" rel="noopener">#358</a>
- 里。这属于适配层的细节，不影响“两边接口能对上”这个结论。</p>
+<p>所以触发条件不是“多了一条 catalog”，而是“多了一条<strong>能真的跑起来</strong>的”。</p>
+<p><strong>原因量出来是两个数字。</strong></p>
+<table>
+	<thead>
+			<tr>
+					<th>环节</th>
+					<th>耗时</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>runtime.detect</code> 探测这一行</td>
+					<td><strong>15.0 秒</strong>（撞上 RPC 上限，返回 <code>Runner request timed out</code>）</td>
+			</tr>
+			<tr>
+					<td>新对话面板的预算（<code>MODEL_WAIT_MS</code>）</td>
+					<td><strong>12.0 秒</strong></td>
+			</tr>
+	</tbody>
+</table>
+<p>探测一行就吃掉 15 秒，面板 12 秒就先放弃，回落到只有 Pi 的列表。OpenCode 本身是好的，它只是被同一个来不及的响应连累了。</p>
+<p>这跟“能不能接”无关，是“接进来之后它启动太慢”。atelier 当时跑一次 <code>--version</code> 要 8 秒，而且打印的是一屏用法说明、一个版本号都没有——探测想快也快不了。</p>
+<p><strong>修完就好了。</strong> 两边各改一处：维护者开了 PR 保留超时后到达的结果；atelier 把启动优化了，<code>--version</code> 从 8.2 秒降到 <strong>49 毫秒</strong>，并且开始打印版本号。</p>
+<p>同一台机器、同一份 catalog，再打开新对话：执行底座列表变成 <strong>Pi + OpenCode + Atelier</strong>，选中 Atelier 发一句“用一句话介绍你自己”，<strong>4 秒</strong>返回。用量记录里 <code>agent_key</code> 写的是 <code>atelier</code>——这一轮确实是它干的。</p>
+<p>一个细节：回答里它自称“我是 SoduWork 里的办公助理”，而我在 <code>~/.atelier.toml</code> 里给它写的系统提示是“你是一个简洁的助手，回答尽量短”。<strong>宿主把自己的系统提示注入进了 ACP 会话</strong>，覆盖了 Agent 自己的那份。这一段比任何架构图都更能说明两边谁在指挥谁。</p>
+<p>过程都留在 <a href="https://github.com/mdiri-ai/SoduWork/issues/358" target="_blank" rel="noopener">#358</a>
+。</p>
 <p>SoduWork 先定义十四项能力，再要求每个底座实现它们——这种结构适合管很多个来路不同的底座。atelier 先定义 Agent（TOML 或代码，运行时生效），再往上挂工具、Skill、MCP——这种结构适合把单个 Agent 做深。</p>
 <p>两边回答的不是同一个问题：一个问“怎么管住七个不一样的东西”，一个问“怎么把一个东西做到能直接用”。</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2>
@@ -632,12 +658,14 @@ session/prompt → 10 × agent_message_chunk（流式逐字返回）→ {&#34;st
 <li><strong>三层降级路径</strong>（预检 / 错误码 / 消费方隔离）让缺失变成可处理的情况</li>
 </ol>
 <p>加上“任务快照”和“职责分离”两道后端保障，可用的抽象就成形了。</p>
+<p><strong>最好的验证不是读代码，是把一个别人写的 harness 接进去跑一轮。</strong> 我接进去的那个底座，从加一行 catalog 到回出第一句话，一共 4 秒。中间卡住的地方不在协议，在一行探测的耗时。</p>
 <p><code>basic_text</code> 那段拒绝逻辑是这次读代码最意外的地方：宁可启动不了，也不把凭据写明文。</p>
 <hr>
 <p><strong>SoduWork 开源项目地址</strong>：<a href="https://github.com/mdiri-ai/SoduWork" target="_blank" rel="noopener">github.com/mdiri-ai/SoduWork</a>
 </p>
-<p>如果这篇对你有用，可以去项目点个 star 或 fork；我在测评过程中提的文档修正也在里面（<a href="https://github.com/mdiri-ai/SoduWork/pull/301" target="_blank" rel="noopener">PR #301</a>
-）。</p>
+<p>如果这篇对你有用，可以去项目点个 star 或 fork；我在测评过程中提的文档修正（<a href="https://github.com/mdiri-ai/SoduWork/pull/301" target="_blank" rel="noopener">PR #301</a>
+）和那次选择器坍塌的复现记录（<a href="https://github.com/mdiri-ai/SoduWork/issues/358" target="_blank" rel="noopener">issue #358</a>
+）也在里面。</p>
 
       </div>
 
