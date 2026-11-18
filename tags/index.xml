@@ -10,9 +10,44 @@
 		
 		
 		
-			<lastBuildDate>Sat, 14 Nov 2026 10:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Wed, 18 Nov 2026 10:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>ACP</title>
+				<link>https://ystyle.top/tags/ACP/</link>
+				<pubDate>Wed, 18 Nov 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/ACP/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Agent</title>
+				<link>https://ystyle.top/tags/Agent/</link>
+				<pubDate>Wed, 18 Nov 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/Agent/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>SoduWork</title>
+				<link>https://ystyle.top/tags/SoduWork/</link>
+				<pubDate>Wed, 18 Nov 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/SoduWork/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>架构</title>
+				<link>https://ystyle.top/tags/%E6%9E%B6%E6%9E%84/</link>
+				<pubDate>Wed, 18 Nov 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/%E6%9E%B6%E6%9E%84/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>源码解读</title>
+				<link>https://ystyle.top/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</link>
+				<pubDate>Wed, 18 Nov 2026 10:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</guid>
+				<description></description>
+			</item>
 			<item>
 				<title>Cangjie</title>
 				<link>https://ystyle.top/tags/Cangjie/</link>
@@ -98,24 +133,10 @@
 				<description></description>
 			</item>
 			<item>
-				<title>架构</title>
-				<link>https://ystyle.top/tags/%E6%9E%B6%E6%9E%84/</link>
-				<pubDate>Thu, 12 Nov 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/%E6%9E%B6%E6%9E%84/</guid>
-				<description></description>
-			</item>
-			<item>
 				<title>进程隔离</title>
 				<link>https://ystyle.top/tags/%E8%BF%9B%E7%A8%8B%E9%9A%94%E7%A6%BB/</link>
 				<pubDate>Thu, 12 Nov 2026 10:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/tags/%E8%BF%9B%E7%A8%8B%E9%9A%94%E7%A6%BB/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Agent</title>
-				<link>https://ystyle.top/tags/Agent/</link>
-				<pubDate>Wed, 11 Nov 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/Agent/</guid>
 				<description></description>
 			</item>
 			<item>
@@ -130,27 +151,6 @@
 				<link>https://ystyle.top/tags/UHP/</link>
 				<pubDate>Wed, 11 Nov 2026 10:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/tags/UHP/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>协议</title>
-				<link>https://ystyle.top/tags/%E5%8D%8F%E8%AE%AE/</link>
-				<pubDate>Wed, 11 Nov 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/%E5%8D%8F%E8%AE%AE/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>dsh</title>
-				<link>https://ystyle.top/tags/dsh/</link>
-				<pubDate>Wed, 28 Oct 2026 01:55:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/dsh/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>MCP</title>
-				<link>https://ystyle.top/tags/MCP/</link>
-				<pubDate>Wed, 28 Oct 2026 01:55:00 +0800</pubDate>
-				<guid>https://ystyle.top/tags/MCP/</guid>
 				<description></description>
 			</item>
 	</channel>

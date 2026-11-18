@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>七个 harness，一套契约：SoduWork 是怎么把不同 Agent 收进同一个抽象的 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
+  
+  <link rel="stylesheet" href="/css/theme-fix.css">
+  
+  
+
+<script>var _hmt = _hmt || []</script>
+<script async src="https://hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+
+
+<script>
+(function () {
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  bp.src = curProtocol === 'https'
+    ? 'https://zz.bdstatic.com/linksubmit/push.js'
+    : 'http://push.zhanzhang.baidu.com/push.js';
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">七个 harness，一套契约：SoduWork 是怎么把不同 Agent 收进同一个抽象的</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">七个 harness，一套契约：SoduWork 是怎么把不同 Agent 收进同一个抽象的</h1>
+    <h5 class="subtitle">
+      <time datetime="2026-11-18T10:00:00&#43;08:00" itemprop="datePublished" class="page-time">2026-11-18</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e6%88%91%e8%a6%81%e9%aa%8c%e8%af%81%e7%9a%84%e9%97%ae%e9%a2%98">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">我要验证的问题</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e8%a3%85%e4%b8%8a%e8%b7%91%e8%b5%b7%e6%9d%a5">
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">装上、跑起来</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e7%ac%ac%e4%b8%80%e4%b8%aa%e7%9c%9f%e5%ae%9e%e4%bb%bb%e5%8a%a1">
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">第一个真实任务</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e4%b8%80%e4%bb%bd-json-%e5%ae%9a%e4%b9%89%e4%b8%83%e4%b8%aa%e5%ba%95%e5%ba%a7">
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">一份 JSON 定义七个底座</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#14-%e9%a1%b9%e8%83%bd%e5%8a%9b%e4%b8%89%e7%ba%a7%e5%ae%9e%e7%8e%b0">
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">14 项能力，三级实现</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e8%83%bd%e5%8a%9b%e7%bc%ba%e5%a4%b1%e6%80%8e%e4%b9%88%e5%8a%9e%e4%b8%89%e5%b1%82">
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">能力缺失怎么办：三层</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#cordis-%e8%97%8f%e5%9c%a8%e6%96%87%e4%bb%b6%e5%90%8e%e9%9d%a2">
+    <span class="post-toc-number">7.</span> <span class="post-toc-text">Cordis 藏在文件后面</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%90%8e%e7%ab%af%e8%bf%98%e6%9c%89%e4%b8%a4%e9%81%93">
+    <span class="post-toc-number">8.</span> <span class="post-toc-text">后端还有两道</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e8%bf%99%e5%a5%97%e6%8a%bd%e8%b1%a1%e7%9a%84%e8%be%b9%e7%95%8c">
+    <span class="post-toc-number">9.</span> <span class="post-toc-text">这套抽象的边界</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%92%8c%e6%88%91%e8%87%aa%e5%b7%b1%e9%82%a3%e4%b8%aa-harness-%e6%af%94">
+    <span class="post-toc-number">10.</span> <span class="post-toc-text">和我自己那个 harness 比</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e7%bb%93%e8%ae%ba">
+    <span class="post-toc-number">11.</span> <span class="post-toc-text">结论</span>
+  </a>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-soduwork-multi-harness-contract" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">七个 harness，一套契约：SoduWork 是怎么把不同 Agent 收进同一个抽象的</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2026-11-18T10:00:00&#43;08:00" itemprop="datePublished">2026-11-18</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <blockquote>
+<p>这是我参加 SoduWork 项目测评写的文章。按活动要求，先在本机 Fork、安装、跑完一个真实任务，再带着运行中遇到的问题去读源码。文中所有行号都来自这次实际读的文件。</p>
+</blockquote>
+<h2 id="我要验证的问题"><a href="#我要验证的问题" class="headerlink" title="我要验证的问题"></a>我要验证的问题</h2>
+<p>SoduWork 的 README 里有一句话：</p>
+<blockquote>
+<p>Works with Pi · OpenCode · DeepSeek Harness · Qwen Code · Kimi Code · Codex Harness · Codex</p>
+</blockquote>
+<p>七个执行底座（harness）。做过类似产品的人看到这种列表会立刻想到一个问题：<strong>每家的 CLI 参数、交互方式、能做的事都不一样，怎么让上层代码不写七套分支？</strong></p>
+<p>我自己的项目里写过 Agent harness，知道这件事的坑在哪——不同底座的差别不在“调用方式”，而在“它能提供什么”。有的能中途打断，有的能恢复会话，有的能列产出物，有的都不行。如果上层按“底座是谁”来分支，加第八个就要改八个地方。</p>
+<p>所以这次测评我选的是“源码解读”：先把它跑起来，让它自己读自己的源码写一份分析，再拿运行中的实际行为去核对。</p>
+<h2 id="装上跑起来"><a href="#装上跑起来" class="headerlink" title="装上、跑起来"></a>装上、跑起来</h2>
+<p>Fork 到 <code>ystyle/SoduWork</code>，clone 下来 157 MB，Python 3.12+ 和 Node 22+ 这两个要求本机都满足。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sh start.sh --desktop
+</span></span></code></pre></div><p>第一次启动会自动装依赖、建库、拉起 Hub、开桌面端。等了大约两分钟，终端打出：</p>
+<pre tabindex="0"><code>SoduWork is ready: http://127.0.0.1:18989
+Administrator: admin
+</code></pre><p>然后桌面端没进登录页，而是弹出一个页面：</p>
+<blockquote>
+<p><strong>Unlock your system password manager</strong><br>
+SoduWork needs a system password manager to store sign-in credentials securely.</p>
+</blockquote>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/img/soduwork/02-keyring-recovery.png" alt="钥匙串缺失时的恢复页">
+  </div>
+  <div class="image-caption">钥匙串缺失时的恢复页</div>
+</figure>
+<p>这是我这台机器的问题：Arch Linux，没装 gnome-keyring。但它不是一句“缺少依赖，请安装”就完了——我去翻了代码，发现这里有个明确的设计决策。</p>
+<p><code>client/main/app-settings-store.cjs:47</code>：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#cf222e">function</span> <span style="color:#1f2328">secure</span><span style="color:#1f2328">()</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#0550ae">!</span><span style="color:#1f2328">deps</span><span style="color:#0550ae">?</span><span style="color:#1f2328">.</span><span style="color:#1f2328">safeStorage</span><span style="color:#0550ae">?</span><span style="color:#1f2328">.</span><span style="color:#1f2328">isEncryptionAvailable</span><span style="color:#1f2328">()</span> <span style="color:#0550ae">||</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">(</span><span style="color:#1f2328">process</span><span style="color:#1f2328">.</span><span style="color:#1f2328">platform</span> <span style="color:#0550ae">===</span> <span style="color:#0a3069">&#39;linux&#39;</span> <span style="color:#0550ae">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#1f2328">deps</span><span style="color:#1f2328">.</span><span style="color:#1f2328">safeStorage</span><span style="color:#1f2328">.</span><span style="color:#1f2328">getSelectedStorageBackend</span><span style="color:#0550ae">?</span><span style="color:#1f2328">.()</span> <span style="color:#0550ae">===</span> <span style="color:#0a3069">&#39;basic_text&#39;</span><span style="color:#1f2328">))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">throw</span> <span style="color:#6639ba">Error</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;系统安全存储不可用，无法读写应用凭据&#39;</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre></div><p>Electron 在 Linux 上如果找不到钥匙串，会退化到 <code>basic_text</code> 后端，也就是<strong>明文存储</strong>。这段代码的做法不是“那就先用明文吧”，而是<strong>直接拒绝</strong>。</p>
+<p>配合 <code>client/main/linux-startup.cjs</code> 里那段更早的逻辑——启动时如果识别不出桌面环境，就强制 <code>--password-store=gnome-libsecret</code>，注释写着 <strong>Never select the basic backend</strong>——可以确认：宁可不能用，也不把凭据写到明文里。</p>
+<p>代价是像我这样的环境直接卡死。装 gnome-keyring 之后（<code>sudo pacman -S gnome-keyring</code>），在同一次图形会话里重启，登录页正常出现。</p>
+<blockquote>
+<p>后来我在仓库里发现 issue #184 提的是同一个现象，就补了一节排查步骤提了 <a href="https://github.com/mdiri-ai/SoduWork/pull/301" target="_blank" rel="noopener">PR #301</a>
+。</p>
+</blockquote>
+<p>用 <code>admin</code> 和刚才设的密码登进去，主界面出来了：</p>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/img/soduwork/04-client-home.png" alt="登录后的桌面端：左侧导航，中间是任务输入框">
+  </div>
+  <div class="image-caption">登录后的桌面端：左侧导航，中间是任务输入框</div>
+</figure>
+<p>注意底部那一行：<code>默认工作区</code>、<code>完全访问</code>、模型名、<code>Pi</code>。这四样就是我这次要研究的对象——工作区给谁用、权限多大、哪个模型、哪个底座。</p>
+<h2 id="第一个真实任务"><a href="#第一个真实任务" class="headerlink" title="第一个真实任务"></a>第一个真实任务</h2>
+<p>管理后台配好模型服务（<code>能力配置 → 模型目录 → 接一个服务</code>，填 OpenAI 兼容地址和 Key，点「发现模型」自动拉到列表），桌面端就能用了。</p>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/img/soduwork/03-model-catalog.png" alt="模型目录：一个服务、两个模型">
+  </div>
+  <div class="image-caption">模型目录：一个服务、两个模型</div>
+</figure>
+<p>第一个任务我让它自我介绍，确认链路通：</p>
+<blockquote>
+<p>你好！我能帮你解答问题、阅读和分析文件与代码、执行命令、编写和修改文件，然后在获得你明确授权后，直接在你的工作目录中完成实际任务。</p>
+</blockquote>
+<p>第二个任务才是重点：<strong>让它读 SoduWork 自己的源码，写一份多 harness 抽象的说明</strong>。</p>
+<p>发任务之前我先问了一句“你能读到哪些文件”，因为我不确定它的工作区边界在哪。它的回答很具体：当前工作目录是 <code>~/.local/share/soduwork/source-service/workspaces/temp/chat-mwkezriq-yv9g</code>，目录是空的；权限上受运行用户约束，绝大多数位置可读，但<strong>行为上只读工作区或我明确指定的路径</strong>，不主动扫根目录。</p>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/img/soduwork/06-workspace-probe.png" alt="Agent 回答自己的工作目录与可读范围">
+  </div>
+  <div class="image-caption">Agent 回答自己的工作目录与可读范围</div>
+</figure>
+<p>它列了三个“已验证可访问的位置”，包括 <code>~/.agents/skills/</code> 和 <code>node_modules/@earendil-works/pi-coding-agent/docs</code>。说明它在回答之前真的去探了，不是照着系统提示念的。</p>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/img/soduwork/05-agent-output.png" alt="Agent 写出 harness-notes.md，右侧是文件预览">
+  </div>
+  <div class="image-caption">Agent 写出 harness-notes.md，右侧是文件预览</div>
+</figure>
+<p>它读了 <code>contract.js</code> 和 <code>registry.js</code>，产出 3937 字节的 <code>harness-notes.md</code>，结论是：</p>
+<blockquote>
+<p>多 harness 的共性被收成 14 项声明式能力，<code>contract.js</code> 负责校验、<code>registry.js</code> 负责按 id 存取，业务侧只认能力 id 而不认厂商。</p>
+</blockquote>
+<p>而且它主动标注了一条限制，这条是我读代码时漏掉的：</p>
+<blockquote>
+<p><code>supports</code> 在本目录内暂无调用者，意味着能力预检目前仍要由业务侧接入</p>
+</blockquote>
+<p>我 grep 验证了——<code>supports</code> 确实只在 <code>contract.js:142</code> 有定义，目录内没有调用点。</p>
+<p><strong>Agent 说的行号我也逐条核对过</strong>：<code>contract.js</code> 的 7-22 是能力清单、24-31 是方法名映射、<code>registry.js</code> 的 86-91 抛 <code>CAPABILITY_UNAVAILABLE</code>。全对。</p>
+<p>下面是我按它给的线索去读的源码。</p>
+<h2 id="一份-json-定义七个底座"><a href="#一份-json-定义七个底座" class="headerlink" title="一份 JSON 定义七个底座"></a>一份 JSON 定义七个底座</h2>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/img/soduwork/07-architecture-v2.png" alt="SoduWork Agent 运行时分层：能力声明、两级传输、三层降级">
+  </div>
+  <div class="image-caption">SoduWork Agent 运行时分层：能力声明、两级传输、三层降级</div>
+</figure>
+<p>上面这张图里的每个方块，下面都有对应的文件位置。</p>
+<p>七个 harness 不是硬编码在代码里的，来自 <code>hub-backend/app/agent_catalog.json</code>：</p>
+<table>
+	<thead>
+			<tr>
+					<th>id</th>
+					<th>transport</th>
+					<th>modelMode</th>
+					<th>显示名</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>pi</code></td>
+					<td><strong>direct</strong></td>
+					<td>managed</td>
+					<td>Pi</td>
+			</tr>
+			<tr>
+					<td><code>codex-harness</code></td>
+					<td>runner</td>
+					<td>managed</td>
+					<td>Codex Harness</td>
+			</tr>
+			<tr>
+					<td><code>opencode</code></td>
+					<td>runner</td>
+					<td>managed</td>
+					<td>OpenCode</td>
+			</tr>
+			<tr>
+					<td><code>codex</code></td>
+					<td>runner</td>
+					<td><strong>account</strong></td>
+					<td>Codex</td>
+			</tr>
+			<tr>
+					<td><code>qwen</code></td>
+					<td>runner</td>
+					<td>managed</td>
+					<td>Qwen Code</td>
+			</tr>
+			<tr>
+					<td><code>dsh</code></td>
+					<td>runner</td>
+					<td>managed</td>
+					<td>DeepSeek Harness</td>
+			</tr>
+			<tr>
+					<td><code>kimi</code></td>
+					<td>runner</td>
+					<td>managed</td>
+					<td>Kimi Code</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong><code>transport</code> 分成 direct 和 runner。</strong> 只有一个 direct，就是 Pi。<code>runtime-catalog.js:27</code> 把这条写死：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">row</span><span style="color:#1f2328">.</span><span style="color:#1f2328">transport</span> <span style="color:#0550ae">===</span> <span style="color:#0a3069">&#39;direct&#39;</span> <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#1f2328">row</span><span style="color:#1f2328">.</span><span style="color:#1f2328">id</span> <span style="color:#0550ae">!==</span> <span style="color:#0a3069">&#39;pi&#39;</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">invalid</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;Direct runtimes require a dedicated adapter: &#39;</span> <span style="color:#0550ae">+</span> <span style="color:#1f2328">row</span><span style="color:#1f2328">.</span><span style="color:#1f2328">id</span><span style="color:#1f2328">);</span>
+</span></span></code></pre></div><p>也就是说，只有 Pi 走本地进程直连，其余六个统一走 runner。代码里也确实只有两个 adapter 文件：<code>pi-adapter.js</code> 和 <code>runner-adapter.js</code>（后者 <code>ADAPTER_ID = 'codex-harness'</code>，但服务所有 runner 类型）。</p>
+<p><strong><code>modelMode</code> 只有 <code>codex</code> 是 account</strong>，意思是这个底座用它自己账号里的模型，SoduWork 不管模型目录。其余六个是 managed：模型由 SoduWork 的模型目录统一提供，所以同一个底座可以配不同厂商的模型。</p>
+<p>这解决了我开头那个担心的一半：<strong>新增第八个底座，只要是 runner 类型，加一行 JSON 就能进 catalog，adapter 不用改。</strong></p>
+<h2 id="14-项能力三级实现"><a href="#14-项能力三级实现" class="headerlink" title="14 项能力，三级实现"></a>14 项能力，三级实现</h2>
+<p>真正把差异吃掉的是 <code>client/main/agent-runtime/contract.js</code> 开头那张表：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">CAPABILITIES</span> <span style="color:#0550ae">=</span> <span style="color:#6639ba">Object</span><span style="color:#1f2328">.</span><span style="color:#1f2328">freeze</span><span style="color:#1f2328">({</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">SESSION_RESUME</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;session.resume&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">TURN_QUEUE</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;turn.queue&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">TURN_CANCEL</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;turn.cancel&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">TURN_PAUSE</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;turn.pause&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">TURN_STEER</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;turn.steer&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">ARTIFACT_LIST</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;artifact.list&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">APPROVAL_RESPOND</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;approval.respond&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">GOAL_CONTROL</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;goal.control&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">ATTACHMENTS</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;input.attachments&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">MODEL_SELECT</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;model.select&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">SKILLS</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;skills&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">MCP</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;mcp&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">WORKSPACE</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;workspace&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">NATIVE_EVENTS</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;runtime.native-events&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">});</span>
+</span></span></code></pre></div><p>十四项，覆盖会话恢复、回合控制、产出物、审批、目标、附件、模型、技能、MCP、工作区。按语义分成四组看更清楚：</p>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/img/soduwork/09-capability-map-v2.png" alt="14 项能力地图：四组语义 &#43; 6 项钉死方法名">
+  </div>
+  <div class="image-caption">14 项能力地图：四组语义 + 6 项钉死方法名</div>
+</figure>
+<p>图里上色的六格是 <code>SESSION_METHOD_BY_CAPABILITY</code> 钉住的六项——声明了 <code>turn.cancel</code>，session 上就必须有 <code>cancel</code> 方法，名字不能自取。</p>
+<p>关键是能力<strong>不只是一个字符串</strong>。每个能力声明还要求带 <code>level</code>：</p>
+<ul>
+<li><strong>native</strong> —— 底座自己实现</li>
+<li><strong>emulated</strong> —— 上层模拟</li>
+<li><strong>delegated</strong> —— 委托给子进程</li>
+</ul>
+<p>这一层是我觉得整个设计里最巧的地方。举个具体例子：某个底座本身不能暂停回合，但它支持取消——那 <code>turn.pause</code> 就可以声明成 emulated，上层用“记录当前进度 + 取消 + 之后重放”来模拟。<strong>调用方看到的仍然是 <code>turn.pause</code>，不需要知道底下是怎么做到的。</strong></p>
+<p>这就把“七个底座能做不同的事”收敛成了“每个底座声明了哪十四项、各自什么级别”。</p>
+<p>其中六项还被钉到固定方法名上（<code>contract.js:24-31</code>）：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">SESSION_METHOD_BY_CAPABILITY</span> <span style="color:#0550ae">=</span> <span style="color:#6639ba">Object</span><span style="color:#1f2328">.</span><span style="color:#1f2328">freeze</span><span style="color:#1f2328">({</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">[</span><span style="color:#1f2328">CAPABILITIES</span><span style="color:#1f2328">.</span><span style="color:#1f2328">TURN_CANCEL</span><span style="color:#1f2328">]</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;cancel&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">[</span><span style="color:#1f2328">CAPABILITIES</span><span style="color:#1f2328">.</span><span style="color:#1f2328">TURN_PAUSE</span><span style="color:#1f2328">]</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;pause&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">[</span><span style="color:#1f2328">CAPABILITIES</span><span style="color:#1f2328">.</span><span style="color:#1f2328">TURN_STEER</span><span style="color:#1f2328">]</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;steer&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">[</span><span style="color:#1f2328">CAPABILITIES</span><span style="color:#1f2328">.</span><span style="color:#1f2328">ARTIFACT_LIST</span><span style="color:#1f2328">]</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;artifacts&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">[</span><span style="color:#1f2328">CAPABILITIES</span><span style="color:#1f2328">.</span><span style="color:#1f2328">APPROVAL_RESPOND</span><span style="color:#1f2328">]</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;respondApproval&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">[</span><span style="color:#1f2328">CAPABILITIES</span><span style="color:#1f2328">.</span><span style="color:#1f2328">GOAL_CONTROL</span><span style="color:#1f2328">]</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;controlGoal&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">});</span>
+</span></span></code></pre></div><p>声明和实现对不上，注册期就会失败，不会留到运行期。</p>
+<h2 id="能力缺失怎么办三层"><a href="#能力缺失怎么办三层" class="headerlink" title="能力缺失怎么办：三层"></a>能力缺失怎么办：三层</h2>
+<p>底座之间必然有差异，所以一定有“某能力不可用”的路径。这套代码分三层处理。</p>
+<p><strong>第一层，先查再调。</strong> <code>supports(capabilities, id)</code> 做预检，据此决定要不要渲染某个按钮、要不要走恢复流程。</p>
+<p><strong>第二层，按错误码分支。</strong> 真调下去发现方法不存在时，<code>registry.js:86-91</code> 会抛一个带结构的错误：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#cf222e">throw</span> <span style="color:#cf222e">new</span> <span style="color:#1f2328">RuntimeContractError</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;CAPABILITY_UNAVAILABLE&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">lease</span><span style="color:#1f2328">.</span><span style="color:#1f2328">descriptor</span><span style="color:#1f2328">.</span><span style="color:#1f2328">displayName</span> <span style="color:#0550ae">+</span> <span style="color:#0a3069">&#39; does not support &#39;</span> <span style="color:#0550ae">+</span> <span style="color:#1f2328">method</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">adapterId</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">lease</span><span style="color:#1f2328">.</span><span style="color:#1f2328">descriptor</span><span style="color:#1f2328">.</span><span style="color:#1f2328">id</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">method</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">});</span>
+</span></span></code></pre></div><p>调用方按 <code>error.code</code> 降级，不靠匹配错误文案。这比“字符串里找关键词”可靠得多——文案一改就失效，错误码不会。</p>
+<p><strong>第三层，按消费方隔离。</strong> <code>validateConsumer</code> 限定了三种消费方：<code>chat / goal / task</code>。同一个底座在对话场景能用的能力，在任务场景未必该用，所以租约里把 consumer 一起冻结。</p>
+<p><code>session.resume</code> 声明了却没实现，注册期就失败。理由很实在——会话恢复是“用户以为能恢复、结果恢复不了”最伤人的地方，早点炸比晚点炸好。</p>
+<h2 id="cordis-藏在文件后面"><a href="#cordis-藏在文件后面" class="headerlink" title="Cordis 藏在文件后面"></a>Cordis 藏在文件后面</h2>
+<p><code>agent-runtime/cordis-host.js</code> 用 Cordis（一个 JS 插件框架）当组装内核，但文件开头有一句注释：</p>
+<blockquote>
+<p>Cordis is an assembly kernel, not SoduWork&rsquo;s public runtime contract. Keeping the plugin behind this file prevents Cordis preview APIs from leaking into the UI, Runner transport, adapters or persisted event schema.</p>
+</blockquote>
+<p>意思是 Cordis 只做内部拼装，不是对外契约：所有 Cordis 的东西都关在这一个文件里，不许泄漏到 UI、Runner 传输、adapter 和持久化的事件结构。</p>
+<p>这个取舍我特别有共鸣。我自己用仓颉写过一版对标 Cordis 的插件框架（cordis-cj），当时也纠结过“框架 API 要不要直接暴露给插件作者”。结论一样：<strong>第三方框架的 preview API 会变，而一旦它进入你的持久化结构或对外接口，改起来就是灾难。</strong></p>
+<p>“只做内部拼装”具体是做什么？整个文件 73 行，插件部分就是下面这一块：</p>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/img/soduwork/10-cordis-plugin-v2.png" alt="整个项目只注册一个 Cordis 插件">
+  </div>
+  <div class="image-caption">整个项目只注册一个 Cordis 插件</div>
+</figure>
+<p>一个插件，名字叫 <code>soduwork-agent-runtime</code>，<code>provide</code> 一个服务 <code>soduWorkAgentRuntime</code>。<code>apply(ctx)</code> 里做三件事：查 ctx 上有没有别的 registry（有就抛 <code>RUNTIME_SERVICE_CONFLICT</code>）、把 registry 挂上去、返回一个函数。</p>
+<p>那个返回的函数是关键。它不是 ID，也不靠什么注册表回收——它是一层闭包，记住了“挂上去之前 <code>ctx.soduWorkAgentRuntime</code> 是什么值」。dispose 时只有当前值还是自己才动手：原本有值就恢复旧值，原本没有就 <code>delete</code>。</p>
+<p>代价是要自己保证幂等，所以 <code>startCordisHost</code> 里用了一个 <code>disposed</code> 标志挡住重复调用。退出时也是先 <code>registry.dispose()</code> 再 <code>fiber.dispose()</code>——先把运行时服务收掉，再卸载插件触发那个闭包。</p>
+<p>外面看到的永远是 <code>registry</code>，看不到 context。</p>
+<h2 id="后端还有两道"><a href="#后端还有两道" class="headerlink" title="后端还有两道"></a>后端还有两道</h2>
+<p>前端的抽象解决“底座怎么统一”，后端解决“任务怎么不跑偏”。</p>
+<p><code>hub-backend/app/models.py:201</code> 有一句注释：</p>
+<blockquote>
+<p>Snapshot methods, capability requirements, and acceptance standards so catalog edits do not rewrite existing tasks.</p>
+</blockquote>
+<p>意思是：任务创建时，把当时的能力要求和验收标准<strong>快照</strong>下来。之后管理员改了底座目录，已经存在的任务不受影响。</p>
+<p>多底座产品的常见事故就是：某个底座今天升级了能力，昨天创建、还在跑的任务突然行为变了。快照把这个不确定性切断了。</p>
+<p><code>hub-backend/app/services/approval_routing.py:40</code> 还有一条：</p>
+<blockquote>
+<p>Without it, AI-produced work could be classified as manual work. That would incorrectly exclude the human reviewer through separation-of-duties checks.</p>
+</blockquote>
+<p>这里在做<strong>职责分离</strong>：AI 干的活不能算成人工，否则人就成了“自己审自己”。产品的核心承诺是“人签字才算完成”，如果签字的人恰好是执行的人，这个承诺就是空的。</p>
+<h2 id="这套抽象的边界"><a href="#这套抽象的边界" class="headerlink" title="这套抽象的边界"></a>这套抽象的边界</h2>
+<p><strong>一、能力级的抽象抹不平体验差异。</strong> 两个底座可以都声明 <code>turn.steer</code>（回合中途改向），实际行为却可能不同：一个立刻改，另一个排队到下一个检查点。能力 id 一样，感受完全不一样。<code>level</code> 的三级能表达“谁来负责实现”，表达不了这么细的粒度。</p>
+<p><strong>二、runner 类型共用一套 adapter，收益和排查成本是一体的。</strong> 六个底座走同一个入口，好处是新增底座不用写新的适配器；代价是出错时定位路径会长一些：报错只到“某底座不支持某方法”，底下是哪一层就要自己往下挖。</p>
+<p><strong>三、<code>supports</code> 预检目前由业务侧接入。</strong> 契约里留了这个接口，我在 <code>contract.js:142</code> 读过它的实现；不过这个目录里还没有调用点，所以预检这一层要各业务自己接上才生效，实际一直在起作用的是后两层（错误码 + 消费方隔离）。</p>
+<p><strong>四、我这次只跑通了 Pi。</strong> 其余六个 runner 类型需要各自的运行环境，我没能在一次测评里全部验证。所以上面关于“六个共用 runner adapter”的结论来自代码和 catalog，不是来自六个的真实运行。</p>
+<p><strong>五、交叉审查的前提是两个可用模型，我配的其中一个额度用完了。</strong> 产品最核心的承诺是“一个 harness 干活，另一个在同一套验收标准下审查”。这次只剩一个能用的模型，所以只做到单模型自审——同一个 agent 干活、同一个 agent 复查。流程跑得通，但“换一个模型能不能发现另一个模型的盲区”这个最有价值的部分，我没验证到。</p>
+<p><strong>多 harness / 多模型不是锦上添花，是这套设计能不能成立的前提。</strong> 只有一个底座时，职责分离那层逻辑再严密，实际执行的仍是同一个主体。</p>
+<h2 id="和我自己那个-harness-比"><a href="#和我自己那个-harness-比" class="headerlink" title="和我自己那个 harness 比"></a>和我自己那个 harness 比</h2>
+<p>去年我写过 atelier（纯仓颉的 Agent harness，两万三千行）。读完 SoduWork 的运行时，我发现这两件事其实站在同一个协议的两端。</p>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/img/soduwork/08-vs-atelier-v2.png" alt="SoduWork 宿主侧与 atelier Agent 侧对照">
+  </div>
+  <div class="image-caption">SoduWork 宿主侧与 atelier Agent 侧对照</div>
+</figure>
+<p>atelier 实现的是“被宿主拉起”的那一侧。它的 README 写着：<code>atelier acp</code> 以 ACP v1 Agent 身份被 Zed / opencode 等宿主拉起（stdio）。而 SoduWork 的 runner 恰恰是通过 <code>acp_bridge.py</code> 去拉起外部 ACP Agent 的——六个 runner 底座的 <code>approval</code> 字段都标着 <code>native-acp</code>，只有 Pi 是 <code>tool-hook</code>。</p>
+<p><strong>也就是说 atelier 已经满足被接成第八个底座的条件。</strong> 我核对了两边的启动约定。</p>
+<p>SoduWork 的 ACP 底座在 catalog 里是这么描述的，抄 dsh 那一条：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#0a3069">&#34;runner&#34;</span><span style="color:#f6f8fa;background-color:#82071e">:</span> <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;adapter&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;acp&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">&#34;bins&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;dsh-acp&#34;</span><span style="color:#1f2328">],</span> <span style="color:#0550ae">&#34;args&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[]</span> <span style="color:#1f2328">}</span>
+</span></span></code></pre></div><p>atelier 的启动方式是 <code>atelier acp</code>，对应写成：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#0a3069">&#34;runner&#34;</span><span style="color:#f6f8fa;background-color:#82071e">:</span> <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;adapter&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;acp&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">&#34;bins&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;atelier&#34;</span><span style="color:#1f2328">],</span> <span style="color:#0550ae">&#34;args&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;acp&#34;</span><span style="color:#1f2328">]</span> <span style="color:#1f2328">}</span>
+</span></span></code></pre></div><p><code>acp_specs()</code> 就是直接读这三个字段（<code>hub-backend/app/agent_catalog.py:108</code>），没有写死在代码分支里。</p>
+<p>我照着这个思路真做了一遍。编译 atelier（<code>cjpm build</code>，产出 44 MB 的 <code>cli.app</code>）、软链成 <code>atelier</code>、在 catalog 加一行、重启。</p>
+<p>结论先说：<strong>atelier 的 ACP 实现是合格的。</strong> 我写了个最小的 ACP 客户端直接连它，三个请求全部走通：</p>
+<pre tabindex="0"><code>initialize  → {&#34;agentInfo&#34;:{&#34;name&#34;:&#34;atelier&#34;,&#34;version&#34;:&#34;0.1.0&#34;},&#34;protocolVersion&#34;:1,
+               &#34;sessionCapabilities&#34;:{&#34;list&#34;:{},&#34;delete&#34;:{},&#34;resume&#34;:{},&#34;close&#34;:{}}}
+session/new → {&#34;sessionId&#34;:&#34;sess_...&#34;,&#34;configOptions&#34;:[{&#34;id&#34;:&#34;model&#34;,
+               &#34;currentValue&#34;:&#34;opendesign-plugin/deepseek-v4.1-flash&#34;, ...}]}
+session/prompt → 10 × agent_message_chunk（流式逐字返回）→ {&#34;stopReason&#34;:&#34;end_turn&#34;}
+</code></pre><p>模型名来自它自己的配置，流式正常，结束原因正常。这就是 ACP v1 Agent 侧该有的样子——只要宿主实现了 ACP 客户端，就能用它。</p>
+<p>我这边还有一步没走完。</p>
+<p>在 <code>agent_catalog.json</code> 里加一条指向<strong>真实可执行文件</strong>的 ACP 条目之后，桌面端的执行底座列表从「Pi + OpenCode」变成只有「Pi」。新条目自己没出现可以理解（桌面端还没有对应的适配器），但 OpenCode 跟着一起消失就说不通了。把条目删掉、重启，两个又都回来。</p>
+<p>中间我做过一次对照：把 <code>dsh</code> 那条<strong>原样复制</strong>一份，只改 id 和名字，<code>bins</code> 指向的 <code>dsh-acp</code> 本机并没有装——结果列表<strong>正常</strong>，还是 Pi + OpenCode。</p>
+<table>
+	<thead>
+			<tr>
+					<th>测试条目</th>
+					<th><code>bins</code> 指向</th>
+					<th>选择器</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>dsh</code> 的复制（改了 id）</td>
+					<td><code>dsh-acp</code>，未安装</td>
+					<td>Pi + OpenCode</td>
+			</tr>
+			<tr>
+					<td><code>atelier</code></td>
+					<td><code>atelier</code>，已安装可执行</td>
+					<td>只有 Pi</td>
+			</tr>
+	</tbody>
+</table>
+<p>所以触发条件不是“多了一条 catalog”，而是“多了一条<strong>能真的跑起来</strong>的”。这反过来指向一个更具体的猜测：探测时可能真的去启动它了，而 <code>atelier acp</code> 是个等 stdin 的常驻服务，不是跑一下就退出的那种。</p>
+<p>步骤、截图和这份对照都整理在 <a href="https://github.com/mdiri-ai/SoduWork/issues/358" target="_blank" rel="noopener">#358</a>
+ 里。这属于适配层的细节，不影响“两边接口能对上”这个结论。</p>
+<p>SoduWork 先定义十四项能力，再要求每个底座实现它们——这种结构适合管很多个来路不同的底座。atelier 先定义 Agent（TOML 或代码，运行时生效），再往上挂工具、Skill、MCP——这种结构适合把单个 Agent 做深。</p>
+<p>两边回答的不是同一个问题：一个问“怎么管住七个不一样的东西”，一个问“怎么把一个东西做到能直接用”。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2>
+<p>回到开头那个问题：七个 harness 怎么共用一个抽象。</p>
+<p>SoduWork 的答案是三件事叠起来：</p>
+<ol>
+<li><strong>一份 JSON 声明</strong>哪个底座走什么传输、模型谁管</li>
+<li><strong>十四项能力 + 三级实现级别</strong>把差异收敛成声明</li>
+<li><strong>三层降级路径</strong>（预检 / 错误码 / 消费方隔离）让缺失变成可处理的情况</li>
+</ol>
+<p>加上“任务快照”和“职责分离”两道后端保障，可用的抽象就成形了。</p>
+<p><code>basic_text</code> 那段拒绝逻辑是这次读代码最意外的地方：宁可启动不了，也不把凭据写明文。</p>
+<hr>
+<p><strong>SoduWork 开源项目地址</strong>：<a href="https://github.com/mdiri-ai/SoduWork" target="_blank" rel="noopener">github.com/mdiri-ai/SoduWork</a>
+</p>
+<p>如果这篇对你有用，可以去项目点个 star 或 fork；我在测评过程中提的文档修正也在里面（<a href="https://github.com/mdiri-ai/SoduWork/pull/301" target="_blank" rel="noopener">PR #301</a>
+）。</p>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2026-11-18T10:00:00&#43;08:00" itemprop="dateUpdated">2026-11-18 10:00:00</time>
+          </span><br>
+          本文链接：<a href="/2026/11/18/soduwork-multi-harness-contract/" target="_blank" rel="external">https://ystyle.top/2026/11/18/soduwork-multi-harness-contract/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SoduWork/">SoduWork</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Agent/">Agent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACP/">ACP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/">架构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/">源码解读</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f18%2fsoduwork-multi-harness-contract%2f&title=%e3%80%8a%e4%b8%83%e4%b8%aa%20harness%ef%bc%8c%e4%b8%80%e5%a5%97%e5%a5%91%e7%ba%a6%ef%bc%9aSoduWork%20%e6%98%af%e6%80%8e%e4%b9%88%e6%8a%8a%e4%b8%8d%e5%90%8c%20Agent%20%e6%94%b6%e8%bf%9b%e5%90%8c%e4%b8%80%e4%b8%aa%e6%8a%bd%e8%b1%a1%e7%9a%84%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f18%2fsoduwork-multi-harness-contract%2f&title=%e3%80%8a%e4%b8%83%e4%b8%aa%20harness%ef%bc%8c%e4%b8%80%e5%a5%97%e5%a5%91%e7%ba%a6%ef%bc%9aSoduWork%20%e6%98%af%e6%80%8e%e4%b9%88%e6%8a%8a%e4%b8%8d%e5%90%8c%20Agent%20%e6%94%b6%e8%bf%9b%e5%90%8c%e4%b8%80%e4%b8%aa%e6%8a%bd%e8%b1%a1%e7%9a%84%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%20%e8%bf%99%e6%98%af%e6%88%91%e5%8f%82%e5%8a%a0%20SoduWork%20%e9%a1%b9%e7%9b%ae%e6%b5%8b%e8%af%84%e5%86%99%e7%9a%84%e6%96%87%e7%ab%a0%e3%80%82%e6%8c%89%e6%b4%bb%e5%8a%a8%e8%a6%81%e6%b1%82%ef%bc%8c%e5%85%88%e5%9c%a8%e6%9c%ac%e6%9c%ba%20Fork%e3%80%81%e5%ae%89%e8%a3%85%e3%80%81%e8%b7%91%e5%ae%8c%e4%b8%80%e4%b8%aa%e7%9c%9f%e5%ae%9e%e4%bb%bb%e5%8a%a1%ef%bc%8c%e5%86%8d%e5%b8%a6%e7%9d%80%e8%bf%90%e8%a1%8c%e4%b8%ad%e9%81%87%e5%88%b0%e7%9a%84%e9%97%ae%e9%a2%98%e5%8e%bb%e8%af%bb%e6%ba%90%e7%a0%81%e3%80%82%e6%96%87%e4%b8%ad%e6%89%80%e6%9c%89%e8%a1%8c%e5%8f%b7%e9%83%bd%e6%9d%a5%e8%87%aa%e8%bf%99%e6%ac%a1%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f11%2f18%2fsoduwork-multi-harness-contract%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e4%b8%83%e4%b8%aa%20harness%ef%bc%8c%e4%b8%80%e5%a5%97%e5%a5%91%e7%ba%a6%ef%bc%9aSoduWork%20%e6%98%af%e6%80%8e%e4%b9%88%e6%8a%8a%e4%b8%8d%e5%90%8c%20Agent%20%e6%94%b6%e8%bf%9b%e5%90%8c%e4%b8%80%e4%b8%aa%e6%8a%bd%e8%b1%a1%e7%9a%84%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f11%2f18%2fsoduwork-multi-harness-contract%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f18%2fsoduwork-multi-harness-contract%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2026/11/14/cangjie-embedded-databases/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">一块 LSM 地基，五个可嵌入数据库</h4>
+        </a>
+      </div>
+      
+      
+    </nav>
+    
+
+    
+    
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+  </article>
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f18%2fsoduwork-multi-harness-contract%2f&title=%e3%80%8a%e4%b8%83%e4%b8%aa%20harness%ef%bc%8c%e4%b8%80%e5%a5%97%e5%a5%91%e7%ba%a6%ef%bc%9aSoduWork%20%e6%98%af%e6%80%8e%e4%b9%88%e6%8a%8a%e4%b8%8d%e5%90%8c%20Agent%20%e6%94%b6%e8%bf%9b%e5%90%8c%e4%b8%80%e4%b8%aa%e6%8a%bd%e8%b1%a1%e7%9a%84%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f18%2fsoduwork-multi-harness-contract%2f&title=%e3%80%8a%e4%b8%83%e4%b8%aa%20harness%ef%bc%8c%e4%b8%80%e5%a5%97%e5%a5%91%e7%ba%a6%ef%bc%9aSoduWork%20%e6%98%af%e6%80%8e%e4%b9%88%e6%8a%8a%e4%b8%8d%e5%90%8c%20Agent%20%e6%94%b6%e8%bf%9b%e5%90%8c%e4%b8%80%e4%b8%aa%e6%8a%bd%e8%b1%a1%e7%9a%84%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=%20%e8%bf%99%e6%98%af%e6%88%91%e5%8f%82%e5%8a%a0%20SoduWork%20%e9%a1%b9%e7%9b%ae%e6%b5%8b%e8%af%84%e5%86%99%e7%9a%84%e6%96%87%e7%ab%a0%e3%80%82%e6%8c%89%e6%b4%bb%e5%8a%a8%e8%a6%81%e6%b1%82%ef%bc%8c%e5%85%88%e5%9c%a8%e6%9c%ac%e6%9c%ba%20Fork%e3%80%81%e5%ae%89%e8%a3%85%e3%80%81%e8%b7%91%e5%ae%8c%e4%b8%80%e4%b8%aa%e7%9c%9f%e5%ae%9e%e4%bb%bb%e5%8a%a1%ef%bc%8c%e5%86%8d%e5%b8%a6%e7%9d%80%e8%bf%90%e8%a1%8c%e4%b8%ad%e9%81%87%e5%88%b0%e7%9a%84%e9%97%ae%e9%a2%98%e5%8e%bb%e8%af%bb%e6%ba%90%e7%a0%81%e3%80%82%e6%96%87%e4%b8%ad%e6%89%80%e6%9c%89%e8%a1%8c%e5%8f%b7%e9%83%bd%e6%9d%a5%e8%87%aa%e8%bf%99%e6%ac%a1%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f11%2f18%2fsoduwork-multi-harness-contract%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a%e4%b8%83%e4%b8%aa%20harness%ef%bc%8c%e4%b8%80%e5%a5%97%e5%a5%91%e7%ba%a6%ef%bc%9aSoduWork%20%e6%98%af%e6%80%8e%e4%b9%88%e6%8a%8a%e4%b8%8d%e5%90%8c%20Agent%20%e6%94%b6%e8%bf%9b%e5%90%8c%e4%b8%80%e4%b8%aa%e6%8a%bd%e8%b1%a1%e7%9a%84%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f11%2f18%2fsoduwork-multi-harness-contract%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f18%2fsoduwork-multi-harness-contract%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2026/11/18/soduwork-multi-harness-contract/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+
+  
+  
+<template id="title-change"
+          data-normal="欢迎回来╮(╯▽╰)╭"
+          data-leave="东方星痕的博客"></template>
+<script>
+(function () {
+  var el = document.getElementById('title-change');
+  if (!el) return;
+
+  var LEAVE = el.getAttribute('data-leave');
+  var NORMAL = el.getAttribute('data-normal');
+  var OriginTitile = document.title, titleTime;
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      document.title = LEAVE;
+      clearTimeout(titleTime);
+    } else {
+      document.title = NORMAL;
+      titleTime = setTimeout(function () {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
