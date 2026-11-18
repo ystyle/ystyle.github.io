@@ -644,6 +644,14 @@ session/prompt → 10 × agent_message_chunk（流式逐字返回）→ {&#34;st
 <p>这跟“能不能接”无关，是“接进来之后它启动太慢”。atelier 当时跑一次 <code>--version</code> 要 8 秒，而且打印的是一屏用法说明、一个版本号都没有——探测想快也快不了。</p>
 <p><strong>修完就好了。</strong> 两边各改一处：维护者开了 PR 保留超时后到达的结果；atelier 把启动优化了，<code>--version</code> 从 8.2 秒降到 <strong>49 毫秒</strong>，并且开始打印版本号。</p>
 <p>同一台机器、同一份 catalog，再打开新对话：执行底座列表变成 <strong>Pi + OpenCode + Atelier</strong>，选中 Atelier 发一句“用一句话介绍你自己”，<strong>4 秒</strong>返回。用量记录里 <code>agent_key</code> 写的是 <code>atelier</code>——这一轮确实是它干的。</p>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/img/soduwork/11-atelier-run.png" alt="选中 Atelier 发一句话，4 秒后返回；输入框右下角显示当前底座是 Atelier">
+  </div>
+  <div class="image-caption">选中 Atelier 发一句话，4 秒后返回；输入框右下角显示当前底座是 Atelier</div>
+</figure>
 <p>一个细节：回答里它自称“我是 SoduWork 里的办公助理”，而我在 <code>~/.atelier.toml</code> 里给它写的系统提示是“你是一个简洁的助手，回答尽量短”。<strong>宿主把自己的系统提示注入进了 ACP 会话</strong>，覆盖了 Agent 自己的那份。这一段比任何架构图都更能说明两边谁在指挥谁。</p>
 <p>过程都留在 <a href="https://github.com/mdiri-ai/SoduWork/issues/358" target="_blank" rel="noopener">#358</a>
 。</p>
