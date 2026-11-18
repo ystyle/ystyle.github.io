@@ -265,7 +265,7 @@ throw new RuntimeContractError('CAPABILITY_UNAVAILABLE',
 
 **三、`supports` 预检目前由业务侧接入。** 契约里留了这个接口，我在 `contract.js:142` 读过它的实现；不过这个目录里还没有调用点，所以预检这一层要各业务自己接上才生效，实际一直在起作用的是后两层（错误码 + 消费方隔离）。
 
-**四、我这次只跑通了 Pi。** 其余六个 runner 类型需要各自的运行环境，我没能在一次测评里全部验证。所以上面关于“六个共用 runner adapter”的结论来自代码和 catalog，不是来自六个的真实运行。
+**四、真正跑过的只有 Pi 和 atelier。** 其余五个 runner 类型需要各自的运行环境，我没能在一次测评里全部验证，所以 `runner-adapter` 对它们的结论来自代码和 catalog。atelier 是我临时加进 catalog 的第八个底座，下一节写了它怎么跑起来的。
 
 **五、交叉审查的前提是两个可用模型，我配的其中一个额度用完了。** 产品最核心的承诺是“一个 harness 干活，另一个在同一套验收标准下审查”。这次只剩一个能用的模型，所以只做到单模型自审——同一个 agent 干活、同一个 agent 复查。流程跑得通，但“换一个模型能不能发现另一个模型的盲区”这个最有价值的部分，我没验证到。
 
@@ -287,11 +287,14 @@ SoduWork 的 ACP 底座在 catalog 里是这么描述的，抄 dsh 那一条：
 "runner": { "adapter": "acp", "bins": ["dsh-acp"], "args": [] }
 ```
 
-atelier 的启动方式是 `atelier acp`，对应写成：
+atelier 的启动方式是 `atelier acp <agent>`，对应写成：
 
 ```json
-"runner": { "adapter": "acp", "bins": ["atelier"], "args": ["acp"] }
+"runner": { "adapter": "acp", "bins": ["atelier"],
+            "args": ["acp", "soduwork-probe"] }
 ```
+
+`args` 里那个 agent 名不能省。只写 `["acp"]` 的话，atelier 会去找一个叫 `default` 的 provider，没配就报 `no provider named 'default'`——它不会回退到配置里唯一那一个。
 
 `acp_specs()` 就是直接读这三个字段（`hub-backend/app/agent_catalog.py:108`），没有写死在代码分支里。
 
@@ -309,20 +312,37 @@ session/prompt → 10 × agent_message_chunk（流式逐字返回）→ {"stopRe
 
 模型名来自它自己的配置，流式正常，结束原因正常。这就是 ACP v1 Agent 侧该有的样子——只要宿主实现了 ACP 客户端，就能用它。
 
-我这边还有一步没走完。
+**第一版加进去之后，选择器塌了。**
 
-在 `agent_catalog.json` 里加一条指向**真实可执行文件**的 ACP 条目之后，桌面端的执行底座列表从「Pi + OpenCode」变成只有「Pi」。新条目自己没出现可以理解（桌面端还没有对应的适配器），但 OpenCode 跟着一起消失就说不通了。把条目删掉、重启，两个又都回来。
+在 `agent_catalog.json` 里加一条指向**真实可执行文件**的 ACP 条目之后，桌面端的执行底座列表从「Pi + OpenCode」变成只有「Pi」。新条目自己没出现可以理解，但 OpenCode 跟着一起消失就说不通了。把条目删掉、重启，两个又都回来。
 
-中间我做过一次对照：把 `dsh` 那条**原样复制**一份，只改 id 和名字，`bins` 指向的 `dsh-acp` 本机并没有装——结果列表**正常**，还是 Pi + OpenCode。
+中间做过一次对照：把 `dsh` 那条**原样复制**一份，只改 id 和名字，`bins` 指向的 `dsh-acp` 本机并没有装——结果列表**正常**，还是 Pi + OpenCode。
 
 | 测试条目 | `bins` 指向 | 选择器 |
 | --- | --- | --- |
 | `dsh` 的复制（改了 id） | `dsh-acp`，未安装 | Pi + OpenCode |
 | `atelier` | `atelier`，已安装可执行 | 只有 Pi |
 
-所以触发条件不是“多了一条 catalog”，而是“多了一条**能真的跑起来**的”。这反过来指向一个更具体的猜测：探测时可能真的去启动它了，而 `atelier acp` 是个等 stdin 的常驻服务，不是跑一下就退出的那种。
+所以触发条件不是“多了一条 catalog”，而是“多了一条**能真的跑起来**的”。
 
-步骤、截图和这份对照都整理在 [#358](https://github.com/mdiri-ai/SoduWork/issues/358) 里。这属于适配层的细节，不影响“两边接口能对上”这个结论。
+**原因量出来是两个数字。**
+
+| 环节 | 耗时 |
+| --- | --- |
+| `runtime.detect` 探测这一行 | **15.0 秒**（撞上 RPC 上限，返回 `Runner request timed out`） |
+| 新对话面板的预算（`MODEL_WAIT_MS`） | **12.0 秒** |
+
+探测一行就吃掉 15 秒，面板 12 秒就先放弃，回落到只有 Pi 的列表。OpenCode 本身是好的，它只是被同一个来不及的响应连累了。
+
+这跟“能不能接”无关，是“接进来之后它启动太慢”。atelier 当时跑一次 `--version` 要 8 秒，而且打印的是一屏用法说明、一个版本号都没有——探测想快也快不了。
+
+**修完就好了。** 两边各改一处：维护者开了 PR 保留超时后到达的结果；atelier 把启动优化了，`--version` 从 8.2 秒降到 **49 毫秒**，并且开始打印版本号。
+
+同一台机器、同一份 catalog，再打开新对话：执行底座列表变成 **Pi + OpenCode + Atelier**，选中 Atelier 发一句“用一句话介绍你自己”，**4 秒**返回。用量记录里 `agent_key` 写的是 `atelier`——这一轮确实是它干的。
+
+一个细节：回答里它自称“我是 SoduWork 里的办公助理”，而我在 `~/.atelier.toml` 里给它写的系统提示是“你是一个简洁的助手，回答尽量短”。**宿主把自己的系统提示注入进了 ACP 会话**，覆盖了 Agent 自己的那份。这一段比任何架构图都更能说明两边谁在指挥谁。
+
+过程都留在 [#358](https://github.com/mdiri-ai/SoduWork/issues/358)。
 
 SoduWork 先定义十四项能力，再要求每个底座实现它们——这种结构适合管很多个来路不同的底座。atelier 先定义 Agent（TOML 或代码，运行时生效），再往上挂工具、Skill、MCP——这种结构适合把单个 Agent 做深。
 
@@ -340,10 +360,12 @@ SoduWork 的答案是三件事叠起来：
 
 加上“任务快照”和“职责分离”两道后端保障，可用的抽象就成形了。
 
+**最好的验证不是读代码，是把一个别人写的 harness 接进去跑一轮。** 我接进去的那个底座，从加一行 catalog 到回出第一句话，一共 4 秒。中间卡住的地方不在协议，在一行探测的耗时。
+
 `basic_text` 那段拒绝逻辑是这次读代码最意外的地方：宁可启动不了，也不把凭据写明文。
 
 ---
 
 **SoduWork 开源项目地址**：[github.com/mdiri-ai/SoduWork](https://github.com/mdiri-ai/SoduWork)
 
-如果这篇对你有用，可以去项目点个 star 或 fork；我在测评过程中提的文档修正也在里面（[PR #301](https://github.com/mdiri-ai/SoduWork/pull/301)）。
+如果这篇对你有用，可以去项目点个 star 或 fork；我在测评过程中提的文档修正（[PR #301](https://github.com/mdiri-ai/SoduWork/pull/301)）和那次选择器坍塌的复现记录（[issue #358](https://github.com/mdiri-ai/SoduWork/issues/358)）也在里面。
