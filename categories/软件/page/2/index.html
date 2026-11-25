@@ -171,6 +171,35 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-holt-cj-一个小图库的边界" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2026-10-22T10:00:00&#43;08:00" itemprop="datePublished">2026-10-22</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2026/10/22/holt-cj-graph-db/">holt-cj 1.1.0：从 720 行长到 3300 行的图数据库</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          holt-cj 1.1.0 介绍
+能力补齐了，限制也写清楚了
+holt-cj 是基于 badger-cj 的嵌入式图数据库。
+这个库在 1.1.0 里做了一次大改：实现从 720 行长到 3273 行，
+补上了属性索引、变长遍历和图算法。本文按新版重写。
+
+          <a href="/2026/10/22/holt-cj-graph-db/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/holt/">holt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93/">图数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-sunku-cj-进程内的Redis" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2026-10-22T10:00:00&#43;08:00" itemprop="datePublished">2026-10-22</time>
@@ -192,7 +221,7 @@ sunku-cj 是仓颉生态里的「Redis 兼容本地 KV 数据库」，架在 bad
         </div>
         <div class="post-footer">
           
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sunku/">sunku</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/">缓存</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul>
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sunku/">sunku</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/">缓存</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul>
           
         </div>
       </article>
@@ -425,35 +454,6 @@ Cangjie · 基准测试 · badger-cj
 而且方向都是反的。
 
           <a href="/2026/10/12/badger-cj-benchmark-audit/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cangjie/">Cangjie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/badger-cj/">badger-cj</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LSM-Tree/">LSM-Tree</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%BB%E6%A4%8D/">移植</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-仓颉版BadgerDB移植记-2-优化与误判" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2026-10-11T10:00:00&#43;08:00" itemprop="datePublished">2026-10-11</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2026/10/11/badger-cj-perf-and-false-alarm/">把 BadgerDB 移植到仓颉（二）：十次优化与一次误判</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-          从 Go 移植 BadgerDB 到仓颉（二）
-十次优化，和一次「我以为是编译器 bug」的乌龙
-Cangjie · 性能优化 · badger-cj
-这是系列第二篇。第一篇讲无锁跳表的实现 ，
-本篇讲怎么把它调快，以及一个把我引向错误方向的排查。
-
-          <a href="/2026/10/11/badger-cj-perf-and-false-alarm/" class="post-more waves-effect waves-button">Continue reading...</a>
         </div>
         <div class="post-footer">
           
