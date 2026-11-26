@@ -1,8 +1,8 @@
 ---
 title: 59 万 QPS 的 HTTP 服务器：这 2 倍是换来的
 subtitle: 把 fasthttp 那套搬进仓颉之后，我重新跑了一遍对比
-date: 2026-11-26 11:00:00
-lastmod: 2026-11-26 11:00:00
+date: 2026-11-26 08:00:00
+lastmod: 2026-11-26 08:00:00
 slug: tachyon-vs-stdx-http
 categories:
 - 软件
