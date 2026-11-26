@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>59 万 QPS 的 HTTP 服务器：这 2 倍是换来的 | 东方星痕</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/css/chroma-fix.css">
+  
+  <link rel="stylesheet" href="/css/theme-fix.css">
+  
+  
+
+<script>var _hmt = _hmt || []</script>
+<script async src="https://hm.baidu.com/hm.js?10658703a526f24446a8cbedef8d287f"></script>
+
+
+<script>
+(function () {
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  bp.src = curProtocol === 'https'
+    ? 'https://zz.bdstatic.com/linksubmit/push.js'
+    : 'http://push.zhanzhang.baidu.com/push.js';
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+</head>
+<body>
+  
+  <div id="loading" class="active"></div>
+
+  
+
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="YSTYLE">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YSTYLE</h5>
+          <a class="mail" href="mailto:lxy5266@live.com">lxy5266@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/">
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/archives">
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/tags">
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/categories">
+            <i class="icon icon-lg icon-th-list"></i>
+            分类
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/ystyle" target="_blank">
+            <i class="icon icon-lg icon-github"></i>
+            项目
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/512308314" target="_blank">
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/atom.xml" target="_blank">
+            <i class="icon icon-lg icon-rss"></i>
+            订阅
+          </a>
+        </li>
+        
+        
+        
+        <li class="waves-block waves-effect">
+          <a href="/friends">
+            <i class="icon icon-lg icon-link"></i>
+            友链
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+
+  <main id="main">
+    
+    <header class="top-header" id="header">
+  <div class="flex-row">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+      <i class="icon icon-lg icon-navicon"></i>
+    </a>
+    <div class="flex-col header-title ellipsis">59 万 QPS 的 HTTP 服务器：这 2 倍是换来的</div>
+    <div class="search-wrap" id="search-wrap">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+        <i class="icon icon-lg icon-chevron-left"></i>
+      </a>
+      <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索">
+      <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+        <i class="icon icon-lg icon-search"></i>
+      </a>
+    </div>
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+      <i class="icon icon-lg icon-share-alt"></i>
+    </a>
+  </div>
+</header>
+
+<header class="content-header post-header">
+  <div class="container fade-scale in">
+    <h1 class="title">59 万 QPS 的 HTTP 服务器：这 2 倍是换来的</h1>
+    <h5 class="subtitle">
+      <time datetime="2026-11-26T08:00:00&#43;08:00" itemprop="datePublished" class="page-time">2026-11-26</time>
+      <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+    </h5>
+  </div>
+</header>
+
+    
+
+<div class="container body-wrap">
+  
+  <aside class="post-widget">
+    <nav class="post-toc-wrap" id="post-toc">
+      <h4>TOC</h4>
+      
+      
+
+
+
+  
+
+
+<ol class="post-toc">
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e5%85%88%e5%ae%9a%e4%b9%89%e4%bb%80%e4%b9%88%e5%8f%ab%e5%bf%ab">
+    <span class="post-toc-number">1.</span> <span class="post-toc-text">先定义什么叫“快”</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e6%80%8e%e4%b9%88%e6%b5%8b%e7%9a%84">
+    <span class="post-toc-number">2.</span> <span class="post-toc-text">怎么测的</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#2-%e5%80%8d%e8%8a%b1%e5%9c%a8%e5%93%aaapi-%e5%bd%a2%e7%8a%b6">
+    <span class="post-toc-number">3.</span> <span class="post-toc-text">2 倍花在哪：API 形状</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e9%82%a3%e5%89%a9%e4%b8%8b%e7%9a%84-112-%e5%ad%97%e8%8a%82">
+    <span class="post-toc-number">4.</span> <span class="post-toc-text">那剩下的 112 字节</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e8%bf%99%e7%bb%84%e6%95%b0%e5%ad%97%e8%83%bd%e6%8e%a8%e5%88%b0%e5%93%aa">
+    <span class="post-toc-number">5.</span> <span class="post-toc-text">这组数字能推到哪</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e6%8d%a2%e4%b8%aa%e7%8e%af%e5%a2%83%e5%86%8d%e6%b5%8b%e4%b8%80%e6%ac%a1">
+    <span class="post-toc-number">6.</span> <span class="post-toc-text">换个环境再测一次</span>
+  </a>
+  
+</li>
+
+  
+  <li class="post-toc-item post-toc-level-2">
+  
+  <a class="post-toc-link" href="#%e8%bf%99-2-%e5%80%8d%e6%98%af%e6%8d%a2%e6%9d%a5%e7%9a%84">
+    <span class="post-toc-number">7.</span> <span class="post-toc-text">这 2 倍是换来的</span>
+  </a>
+  
+</li>
+
+  
+</ol>
+
+
+    </nav>
+  </aside>
+  
+
+  <article class="post-article article-type-post fade in" id="post-tachyon-vs-stdx-http" itemprop="blogPost">
+    <div class="post-card">
+      <h1 class="post-card-title">59 万 QPS 的 HTTP 服务器：这 2 倍是换来的</h1>
+      <div class="post-meta">
+        <time class="post-time" datetime="2026-11-26T08:00:00&#43;08:00" itemprop="datePublished">2026-11-26</time>
+        
+        
+        <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        
+      </div>
+
+      <div class="post-content" id="post-content" itemprop="postContent">
+        <p>tachyon 是仓颉的一个 HTTP/1.1 服务端，设计照搬 Go 的 fasthttp：per-connection 复用、零拷贝视图、热路径不造 String。实现 19 个文件 4069 行，测试 21 个文件 86 个测试函数，只依赖标准库。</p>
+<p>和官方 <code>stdx.net.http</code> 比，同一台机器上的数字是这样：</p>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th style="text-align: right">QPS</th>
+					<th style="text-align: right">服务端 CPU/请求</th>
+					<th style="text-align: right">稳态 RSS</th>
+					<th style="text-align: right">p99</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>tachyon</td>
+					<td style="text-align: right"><strong>594,443</strong></td>
+					<td style="text-align: right"><strong>12.0 µs</strong></td>
+					<td style="text-align: right"><strong>31.9 MB</strong></td>
+					<td style="text-align: right">780–882 µs</td>
+			</tr>
+			<tr>
+					<td>stdx.net.http</td>
+					<td style="text-align: right">327,075</td>
+					<td style="text-align: right">25.4 µs</td>
+					<td style="text-align: right">294.8 MB</td>
+					<td style="text-align: right">1528–1691 µs</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>每请求 CPU 差 2.11 倍，稳态内存差 9.2 倍。</strong></p>
+<p>这组数字是这次在这台机器上重新跑出来的（AMD Ryzen 7 7840HS，16 线程）。</p>
+<p>而且这不是一组孤立的实验室数据：<code>tang</code> 2.x 已经把 HTTP 层整体换成了 tachyon——它自己的 README 记着同机实测吞吐 2.1 倍、每请求 CPU 约 1/2.2。那个项目是拿它在跑真实应用的。</p>
+<p>但光有数字说明不了什么。这篇想讲清楚两件事：<strong>这 2 倍到底花在哪</strong>，以及<strong>这个对比不证明什么</strong>。</p>
+<h2 id="先定义什么叫快"><a href="#先定义什么叫快" class="headerlink" title="先定义什么叫“快”"></a>先定义什么叫“快”</h2>
+<p>QPS 是最容易看懂、也最容易骗人的指标。压测器和被测服务在同一台机器上跑时，客户端自己也在吃 CPU，所以绝对 QPS 只能同机对比——换台机器、改个连接数，数字就变了。</p>
+<p>真正跨环境有意义的是<strong>每请求服务端 CPU</strong>：读 <code>/proc/&lt;pid&gt;/stat</code> 的 utime+stime 增量，除以这段时间完成的请求数。它不受客户端噪声影响。</p>
+<p>稳态 RSS 则回答另一个问题：这套设计<strong>每请求分配多少东西</strong>。同一个负载下，一边的堆停在 31.9 MB，另一边 294.8 MB，省下的不只是内存，还有 GC 的活。</p>
+<p>三个口径凑齐，才能说清一件事。我试过 <code>cjHeapSize=2g/8g</code> 和 <code>cjGCInterval</code>，两边 RSS 都没变——9 倍的差不是参数调出来的。</p>
+<h2 id="怎么测的"><a href="#怎么测的" class="headerlink" title="怎么测的"></a>怎么测的</h2>
+<p>压测器是自己写的一个 Go 工具，两边跑同一个二进制。同机、128 条长连接、10 秒、keep-alive，交替多轮取中位。</p>
+<p>两个 handler 对齐到最小：都只回 <code>200</code> 加一行文本；tachyon 那边还多写一个 <code>Content-Type</code> 头，对它不利。优化级别两边都是 <code>-O2</code>——cjpm 默认不开，不开的话这个对比没意义。</p>
+<h2 id="2-倍花在哪api-形状"><a href="#2-倍花在哪api-形状" class="headerlink" title="2 倍花在哪：API 形状"></a>2 倍花在哪：API 形状</h2>
+<p>两边都是仓颉，差的是<strong>API 形状决定了每请求分配多少东西</strong>。</p>
+
+<figure class="image-bubble">
+  <div class="img-lightbox">
+    <div class="overlay"></div>
+    <img src="/img/tachyon/01-shape.png" alt="同一次请求，stdx 与 tachyon 各做了什么" title="左边每请求新建一整棵对象图；右边连接级复用，HTTP 层自身 0 B">
+  </div>
+  <div class="image-caption">左边每请求新建一整棵对象图；右边连接级复用，HTTP 层自身 0 B</div>
+</figure>
+<p>拆开看三个具体决定：</p>
+<p><strong>一、对象模型 vs 连接级复用。</strong> stdx 的 <code>HttpRequest</code> / <code>HttpResponse</code> / <code>HttpContext</code> / header 表都是对象，每请求新建一棵；tachyon 一条连接一个 ctx，用完 reset，header 表按下标覆盖。</p>
+<p><strong>二、热路径不造 String。</strong> 仓颉的 <code>String</code> 是带 UTF-8 校验的堆对象。stdx 每请求要造十几个：每行 <code>readLine</code>、每个 header 名小写、date 的 <code>toString</code>、body 的 <code>toString</code>。tachyon 全程 <code>Bytes{buf, start, len}</code> 视图 + 索引对。</p>
+<p><strong>三、序列化直写缓冲。</strong> stdx 是 <code>StringBuilder → String → 拷贝进 socket 缓冲</code>；tachyon 直接写预分配缓冲的偏移，一次 <code>write</code> 出去。</p>
+<h2 id="那剩下的-112-字节"><a href="#那剩下的-112-字节" class="headerlink" title="那剩下的 112 字节"></a>那剩下的 112 字节</h2>
+<p>tachyon 的 HTTP 层是 <strong>0 B/请求</strong>，但整条链每请求仍有 112 B 分配。</p>
+<p>这 112 B 全部来自标准库的 socket：<code>read</code> 和 <code>write</code> <strong>每次调用固定约 56 B，与载荷大小无关</strong>——写 80 字节和写 1024 字节都是 56 B。一个来回 = 一次读 + 一次写，正好 112。</p>
+<p>对照组说明这不是语言的问题：空循环 0 B/op、普通函数调用 0 B/op、<code>Array</code> 切片 27 ns 且 0 B/op（是别名，不是深拷贝）。</p>
+<p>我原以为这 56 B 是数组切片造成的，量完才知道切片是 0 B/op，全部在 socket 里。下一篇细讲热路径上这几笔隐形开销。</p>
+<h2 id="这组数字能推到哪"><a href="#这组数字能推到哪" class="headerlink" title="这组数字能推到哪"></a>这组数字能推到哪</h2>
+<p><strong>一、没跑 profiler。</strong> 2.11 倍是端到端测出来的。上面每一条都是源码事实，但“哪一项占多少微秒”是推断，不是 profile 数据。</p>
+<p><strong>二、功能面不对等，是刻意的。</strong> tachyon 不做 HTTP/2、不做 TLS、没有 URL 对象模型（不解析 scheme/authority）、header 校验比 stdx 少。stdx 是通用 HTTP 实现，tachyon 只做 HTTP/1.1 服务端并把所有非必要工作砍掉。<strong>要求功能对等的场景，差距会缩小。</strong> 这正是 fasthttp 相对 Go net/http 的位置。</p>
+<p><strong>三、同机回环。</strong> 这一组的绝对值——59 万对 32.7 万——只在这台机器、这个连接数下成立，换台机器或改连接数就变。</p>
+<h2 id="换个环境再测一次"><a href="#换个环境再测一次" class="headerlink" title="换个环境再测一次"></a>换个环境再测一次</h2>
+<p>回环跑在理想条件下，所以又做了一组：<strong>Windows 客户端 → Linux 服务端，走局域网</strong>，压测工具换成 bombardier，每档 20 秒：</p>
+<table>
+	<thead>
+			<tr>
+					<th style="text-align: right">连接数</th>
+					<th style="text-align: right">tachyon 服务端 CPU/请求</th>
+					<th style="text-align: right">stdx 服务端 CPU/请求</th>
+					<th style="text-align: right">比值</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: right">128</td>
+					<td style="text-align: right">13.0 µs</td>
+					<td style="text-align: right">24.4 µs</td>
+					<td style="text-align: right">1.88</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">256</td>
+					<td style="text-align: right">13.6 µs</td>
+					<td style="text-align: right">23.7 µs</td>
+					<td style="text-align: right">1.74</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">512</td>
+					<td style="text-align: right">14.3 µs</td>
+					<td style="text-align: right">25.2 µs</td>
+					<td style="text-align: right">1.76</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">1024</td>
+					<td style="text-align: right">17.4 µs</td>
+					<td style="text-align: right">29.1 µs</td>
+					<td style="text-align: right">1.67</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>换了机器、换了网络、换了工具，比值落在 1.67–1.88</strong>，和回环那次的 2.11 是同一个量级。</p>
+<p>这组还带出另一件事：连接数往上加，stdx 的吞吐反而<strong>下降</strong>（18 万 → 17.7 万 → 17 万 → 15.2 万），延迟超线性上升。tachyon 也在降，但拐点更晚，绝对延迟始终约为它的一半。</p>
+<p>那 20 秒里 tachyon 只用了约 5/16 核。也就是说这组数字反映的是“局域网 + 单连接一次一个请求”下的上限——<strong>往返 1 ms 时，吞吐上限 ≈ 连接数 ÷ 往返延迟</strong>，所以加连接才涨；而每连接自身的开销从某个点开始反噬——stdx 的每连接成本更高，所以它在更早的档位就开始掉。测到这里已经不是压服务端 CPU 了——真要压出上限，得有 pipelining 或者更大的连接规模。</p>
+<h2 id="这-2-倍是换来的"><a href="#这-2-倍是换来的" class="headerlink" title="这 2 倍是换来的"></a>这 2 倍是换来的</h2>
+<p>tachyon 的每一处快，都能对应到一处“我不做这个”：没有 HTTP/2、没有 TLS、没有 URL 对象模型、header 校验比 stdx 少。</p>
+<p><code>tang</code> 2.0 就是拿这些换的——HTTP 层整体换掉、接受一次破坏性变更。</p>
+<hr>
+<p>仓库：<a href="https://atomgit.com/ystyle/tachyon" target="_blank" rel="noopener">atomgit.com/ystyle/tachyon</a>
+（GitHub 上有镜像），<code>ystyle::tachyon</code> 已上中心仓（最新 0.2.2）。复现命令、源码级对比、以及上面那组跨机数据都在 <code>docs/why-faster-than-stdx.md</code> 里。</p>
+
+      </div>
+
+      <blockquote class="post-copyright">
+        <div class="content">
+          <span class="post-time">
+            Last updated: <time datetime="2026-11-26T08:00:00&#43;08:00" itemprop="dateUpdated">2026-11-26 08:00:00</time>
+          </span><br>
+          本文链接：<a href="/2026/11/26/tachyon-vs-stdx-http/" target="_blank" rel="external">https://ystyle.top/2026/11/26/tachyon-vs-stdx-http/</a><br><span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </div>
+        <footer>
+          <a href="https://ystyle.top/">
+            <img src="/img/avatar.jpg" alt="YSTYLE">
+            YSTYLE
+          </a>
+        </footer>
+      </blockquote>
+
+      <div class="post-footer">
+        
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%93%E9%A2%89/">仓颉</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%A7%E8%83%BD/">性能</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/">基准测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tachyon/">tachyon</a></li></ul>
+        
+
+        
+        
+        <div class="page-share-wrap">
+          <div class="page-share" id="pageShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f26%2ftachyon-vs-stdx-http%2f&title=%e3%80%8a59%20%e4%b8%87%20QPS%20%e7%9a%84%20HTTP%20%e6%9c%8d%e5%8a%a1%e5%99%a8%ef%bc%9a%e8%bf%99%202%20%e5%80%8d%e6%98%af%e6%8d%a2%e6%9d%a5%e7%9a%84%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f26%2ftachyon-vs-stdx-http%2f&title=%e3%80%8a59%20%e4%b8%87%20QPS%20%e7%9a%84%20HTTP%20%e6%9c%8d%e5%8a%a1%e5%99%a8%ef%bc%9a%e8%bf%99%202%20%e5%80%8d%e6%98%af%e6%8d%a2%e6%9d%a5%e7%9a%84%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=tachyon%20%e6%98%af%e4%bb%93%e9%a2%89%e7%9a%84%e4%b8%80%e4%b8%aa%20HTTP%2f1.1%20%e6%9c%8d%e5%8a%a1%e7%ab%af%ef%bc%8c%e8%ae%be%e8%ae%a1%e7%85%a7%e6%90%ac%20Go%20%e7%9a%84%20fasthttp%ef%bc%9aper-connection%20%e5%a4%8d%e7%94%a8%e3%80%81%e9%9b%b6%e6%8b%b7%e8%b4%9d%e8%a7%86%e5%9b%be%e3%80%81%e7%83%ad%e8%b7%af%e5%be%84%e4%b8%8d%e9%80%a0%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f11%2f26%2ftachyon-vs-stdx-http%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a59%20%e4%b8%87%20QPS%20%e7%9a%84%20HTTP%20%e6%9c%8d%e5%8a%a1%e5%99%a8%ef%bc%9a%e8%bf%99%202%20%e5%80%8d%e6%98%af%e6%8d%a2%e6%9d%a5%e7%9a%84%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f11%2f26%2ftachyon-vs-stdx-http%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f26%2ftachyon-vs-stdx-http%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+          <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+            <i class="icon icon-share-alt icon-lg"></i>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    
+    
+    <nav class="post-nav flex-row flex-justify-between">
+      
+      <div class="waves-block waves-effect prev">
+        <a href="/2026/11/24/cangjie-pkg-index/" id="post-prev" class="post-nav-link">
+          <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 前一篇</div>
+          <h4 class="title">874 个仓颉包：谁在被依赖、谁还在发版、谁在背后</h4>
+        </a>
+      </div>
+      
+      
+    </nav>
+    
+
+    
+    
+
+<section class="comments" id="comments">
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="/css/gitalk.css">
+  <script src="/js/gitalk.min.js"></script>
+  <script>
+    var id = location.pathname
+    if (location.pathname.length > 50) {
+      id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+    }
+    const gitalk = new Gitalk({
+      clientID: '1f887c79a8b9b9fbec12',
+      clientSecret: '05033003da5f8a5809b903806420690a665b0ea0',
+      repo: 'ystyle.github.io',
+      owner: 'ystyle',
+      admin: ['ystyle'],
+      id: id,
+      title: document.title.split('|')[0],
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+</section>
+
+
+  </article>
+</div>
+
+    
+<footer class="footer">
+  <div class="bottom">
+    <p>
+      <span>Power by <a href="http://ystyle.top/" target="_blank">东方星痕</a></span>
+      <span>东方星痕 &copy; 2015 - 2026</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021106688号-1</a></span>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502002055" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="/img/record-icon.png" style="float:left;" alt="">
+          <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+            粤公网安备 44010502002055号
+          </p>
+        </a>
+      </div>
+    </p>
+  </div>
+</footer>
+
+  </main>
+
+  
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+  <div class="global-share" id="globalShare">
+  <ul class="reset share-icons">
+    <li>
+      <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f26%2ftachyon-vs-stdx-http%2f&title=%e3%80%8a59%20%e4%b8%87%20QPS%20%e7%9a%84%20HTTP%20%e6%9c%8d%e5%8a%a1%e5%99%a8%ef%bc%9a%e8%bf%99%202%20%e5%80%8d%e6%98%af%e6%8d%a2%e6%9d%a5%e7%9a%84%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&pic=https%3a%2f%2fystyle.top%2fimg%2favatar.jpg" data-title="微博">
+        <i class="icon icon-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+        <i class="icon icon-weixin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f26%2ftachyon-vs-stdx-http%2f&title=%e3%80%8a59%20%e4%b8%87%20QPS%20%e7%9a%84%20HTTP%20%e6%9c%8d%e5%8a%a1%e5%99%a8%ef%bc%9a%e8%bf%99%202%20%e5%80%8d%e6%98%af%e6%8d%a2%e6%9d%a5%e7%9a%84%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&source=tachyon%20%e6%98%af%e4%bb%93%e9%a2%89%e7%9a%84%e4%b8%80%e4%b8%aa%20HTTP%2f1.1%20%e6%9c%8d%e5%8a%a1%e7%ab%af%ef%bc%8c%e8%ae%be%e8%ae%a1%e7%85%a7%e6%90%ac%20Go%20%e7%9a%84%20fasthttp%ef%bc%9aper-connection%20%e5%a4%8d%e7%94%a8%e3%80%81%e9%9b%b6%e6%8b%b7%e8%b4%9d%e8%a7%86%e5%9b%be%e3%80%81%e7%83%ad%e8%b7%af%e5%be%84%e4%b8%8d%e9%80%a0%20%e2%80%a6" data-title=" QQ">
+        <i class="icon icon-qq"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fystyle.top%2f2026%2f11%2f26%2ftachyon-vs-stdx-http%2f" data-title=" Facebook">
+        <i class="icon icon-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=%e3%80%8a59%20%e4%b8%87%20QPS%20%e7%9a%84%20HTTP%20%e6%9c%8d%e5%8a%a1%e5%99%a8%ef%bc%9a%e8%bf%99%202%20%e5%80%8d%e6%98%af%e6%8d%a2%e6%9d%a5%e7%9a%84%e3%80%8b%20%e2%80%94%20%e4%b8%9c%e6%96%b9%e6%98%9f%e7%97%95&url=https%3a%2f%2fystyle.top%2f2026%2f11%2f26%2ftachyon-vs-stdx-http%2f&via=https%3a%2f%2fystyle.top%2f" data-title=" Twitter">
+        <i class="icon icon-twitter"></i>
+      </a>
+    </li>
+    <li>
+      
+      <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https%3a%2f%2fystyle.top%2f2026%2f11%2f26%2ftachyon-vs-stdx-http%2f" data-title=" Google+">
+        <i class="icon icon-google-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+  <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+  <p>扫一扫，分享到微信</p>
+  
+  <img src="" alt="微信分享二维码" id="wxShareQrcode" data-url="https://ystyle.top/2026/11/26/tachyon-vs-stdx-http/">
+</div>
+
+
+  
+<div class="search-panel" id="search-panel">
+  <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+  <a href="{path}" class="waves-block waves-effect">
+    <div class="title ellipsis" title="{title}">{title}</div>
+    <div class="flex-row flex-middle">
+      <div class="tags ellipsis">
+        {tags}
+      </div>
+      <time class="flex-col time">{date}</time>
+    </div>
+  </a>
+</li>
+</template>
+
+
+  
+  <script src="/js/waves.min.js"></script>
+  <script>
+  var BLOG = { ROOT: '\/', SHARE:  true , REWARD: false };
+  </script>
+  <script src="/js/main.min.js"></script>
+  
+  <script src="/js/search.min.js" defer></script>
+
+  
+  <script src="/js/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('wxShareQrcode');
+    if (!el || typeof qrcode !== 'function') return;
+    try {
+      var qr = qrcode(0, 'M');
+      qr.addData(el.getAttribute('data-url'));
+      qr.make();
+      el.src = qr.createDataURL(4, 8);
+    } catch (e) {   }
+  })();
+  </script>
+
+  
+  
+<template id="title-change"
+          data-normal="欢迎回来╮(╯▽╰)╭"
+          data-leave="东方星痕的博客"></template>
+<script>
+(function () {
+  var el = document.getElementById('title-change');
+  if (!el) return;
+
+  var LEAVE = el.getAttribute('data-leave');
+  var NORMAL = el.getAttribute('data-normal');
+  var OriginTitile = document.title, titleTime;
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      document.title = LEAVE;
+      clearTimeout(titleTime);
+    } else {
+      document.title = NORMAL;
+      titleTime = setTimeout(function () {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
