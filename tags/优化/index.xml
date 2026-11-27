@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>优化 on 东方星痕</title>
+		<link>https://ystyle.top/tags/%E4%BC%98%E5%8C%96/</link>
+		<description>Recent content in 优化 on 东方星痕</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 27 Nov 2026 08:00:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ystyle.top/tags/%E4%BC%98%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>仓颉热路径上，五笔悄悄吃掉性能的开销</title>
+				<link>https://ystyle.top/2026/11/27/cangjie-hot-path-costs/</link>
+				<pubDate>Fri, 27 Nov 2026 08:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/11/27/cangjie-hot-path-costs/</guid>
+				<description>&lt;p&gt;写 tachyon（一个 fasthttp 风格的仓颉 HTTP 服务端）时，性能不是“优化”出来的，是&lt;strong&gt;一笔一笔量出来、再一笔一笔砍掉&lt;/strong&gt;的。&lt;/p&gt;&#xA;&lt;p&gt;这篇记五笔账：四笔要躲，一笔量完发现不存在。都不大，但每一笔都在每次请求里重复发生。所有数字都是在这台机器上跑出来的（AMD Ryzen 7 7840HS，仓颉 1.2.x）。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

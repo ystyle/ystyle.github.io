@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Wed, 18 Nov 2026 10:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Fri, 27 Nov 2026 09:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/ACP/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>一条模型调用和一个 Agent 之间，差六块</title>
+				<link>https://ystyle.top/2026/11/27/cangjie-agent-ecosystem/</link>
+				<pubDate>Fri, 27 Nov 2026 09:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/11/27/cangjie-agent-ecosystem/</guid>
+				<description>&lt;p&gt;「让模型自己读文件、跑命令、改代码」——这句需求听起来简单，真做起来要先补六块：&lt;strong&gt;推理循环、上下文压缩、工具系统、权限判定、会话持久化、对外协议&lt;/strong&gt;。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>七个 harness，一套契约：SoduWork 是怎么把不同 Agent 收进同一个抽象的</title>
 				<link>https://ystyle.top/2026/11/18/soduwork-multi-harness-contract/</link>

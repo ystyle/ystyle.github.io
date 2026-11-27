@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Tue, 24 Nov 2026 10:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Fri, 27 Nov 2026 09:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/MCP/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>一条模型调用和一个 Agent 之间，差六块</title>
+				<link>https://ystyle.top/2026/11/27/cangjie-agent-ecosystem/</link>
+				<pubDate>Fri, 27 Nov 2026 09:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/11/27/cangjie-agent-ecosystem/</guid>
+				<description>&lt;p&gt;「让模型自己读文件、跑命令、改代码」——这句需求听起来简单，真做起来要先补六块：&lt;strong&gt;推理循环、上下文压缩、工具系统、权限判定、会话持久化、对外协议&lt;/strong&gt;。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>874 个仓颉包：谁在被依赖、谁还在发版、谁在背后</title>
 				<link>https://ystyle.top/2026/11/24/cangjie-pkg-index/</link>

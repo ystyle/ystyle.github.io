@@ -173,6 +173,60 @@
   <ul class="post-list">
     
     <li class="post-list-item fade in">
+      <article id="post-docker-swarm-etcd-集群搭建" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2016-03-18T23:16:21&#43;08:00" itemprop="datePublished">2016-03-18</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2016/03/18/docker-swarm-etcd-ji-qun-da-jian/">docker &#43; swarm &#43; etcd 集群搭建</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          安装Swarm集群 环境信息 服务器:
+192.168.99.100 centos-node1 192.168.99.101 centos-node2 192.168.99.102 centos-node3 集群信息:
+etc服务器: 192.168.99.100:2379 swarm manage: 192.168.99.101:3376 swarm-node1: 192.168.99.100:2375 swarm-node2: 192.168.99.101:2375 swarm-node3: 192.168.99.102:2375 准备 在所有的机器上安装dokcer 在centos-node1 上docker pull ystyle/etcd (官方的下载不了,自己做了个一样的) 在所有机器上dokcer pull swarm 以上三步可以用docker-machine完成 开放所有机器的2375端口, centos-node1的2379端口,centos-node2的3376端口 安装etcd k-v数据库 在centos-node1上执行:
+
+          <a href="/2016/03/18/docker-swarm-etcd-ji-qun-da-jian/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swarm/">swarm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/etcd/">etcd</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
+      <article id="post-使用hadoop-中文分词统计小说里的用词频率" class="article-card article-type-post" itemprop="blogPost">
+        <div class="post-meta">
+          <time class="post-time" datetime="2016-02-22T14:24:16&#43;08:00" itemprop="datePublished">2016-02-22</time>
+          
+          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
+          
+        </div>
+        <h3 class="post-title" itemprop="name">
+          <a class="post-title-link" href="/2016/02/22/shi-yong-hadoop-zhong-wen-fen-ci-tong-ji-xiao-shuo-li-de-yong-ci-pin-lu/">使用hadoop&#43;中文分词统计小说里的用词频率</a>
+        </h3>
+        <div class="post-content" id="post-content" itemprop="postContent">
+          
+          使用hadoop+中文分词统计小说里的用词频率 事情是这样的, 某小说贴吧吧友开玩笑说 某作者最常使用的词语是xxxx , 然后就突发奇想地想用工具分析一下
+环境 系统: ArchLinux
+软件: hadoop 2.7
+准备 下载hadoop: 下载地址 
+          <a href="/2016/02/22/shi-yong-hadoop-zhong-wen-fen-ci-tong-ji-xiao-shuo-li-de-yong-ci-pin-lu/" class="post-more waves-effect waves-button">Continue reading...</a>
+        </div>
+        <div class="post-footer">
+          
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hadoop/">hadoop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+          
+        </div>
+      </article>
+    </li>
+    
+    <li class="post-list-item fade in">
       <article id="post-Webpack-项目中使用fetch-js" class="article-card article-type-post" itemprop="blogPost">
         <div class="post-meta">
           <time class="post-time" datetime="2016-02-01T11:36:09&#43;08:00" itemprop="datePublished">2016-02-01</time>
@@ -247,7 +301,7 @@ jvms下载地址 本软件源于 nvm-windows 这对JDK不同版本之间切换�
         </div>
         <div class="post-footer">
           
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li></ul>
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
           
         </div>
       </article>
@@ -273,7 +327,7 @@ mkdir/data/docker/redis/ wget https://raw.githubusercontent.com/antirez/redis/3.
         </div>
         <div class="post-footer">
           
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
+          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
           
         </div>
       </article>
@@ -376,65 +430,6 @@ Tomcat
         <div class="post-footer">
           
           <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IDEA/">IDEA</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-JPA-Hibernate-注解" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2015-09-11T06:30:27&#43;08:00" itemprop="datePublished">2015-09-11</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2015/09/11/jpa-hibernate-zhu-jie/">JPA  Hibernate 注解</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-           @Entity(name=&ldquo;EntityName&rdquo;)
-必须,name为可选,对应数据库中一的个表
-@Table(name=&quot;&quot;,catalog=&quot;&quot;,schema=&quot;&quot;)
-可选,通常和@Entity配合使用,只能标注在实体的class定义处,表示实体对应的数据库表的信息
-name:可选,表示表的名称.默认地,表名和实体名称一致,只有在不一致的情况下才需要指定表名
-catalog:可选,表示Catalog名称,默认为Catalog(&quot;&quot;).
-schema:可选,表示Schema名称,默认为Schema(&quot;&quot;).
-
-          <a href="/2015/09/11/jpa-hibernate-zhu-jie/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-          
-        </div>
-      </article>
-    </li>
-    
-    <li class="post-list-item fade in">
-      <article id="post-Github协助工作流" class="article-card article-type-post" itemprop="blogPost">
-        <div class="post-meta">
-          <time class="post-time" datetime="2015-08-06T06:45:27&#43;08:00" itemprop="datePublished">2015-08-06</time>
-          
-          <ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
-          
-        </div>
-        <h3 class="post-title" itemprop="name">
-          <a class="post-title-link" href="/2015/08/06/githubxie-zhu-gong-zuo-liu/">Github协助工作流</a>
-        </h3>
-        <div class="post-content" id="post-content" itemprop="postContent">
-          
-          Github协助工作流 描述 给Github新手的一个简单的参与开源项目的方法
-准备工作 Git客户端: git-scm [常称git或 git bash]、github for windows Fork 项目 首先进入你要参与项目的首页, 网址类似这样的 https://github.com/${username}/${projectname}
-点击右上角的按钮 Fork
-现在你自己的仓库里就clone了一个和主项目一样的仓库
-
-          <a href="/2015/08/06/githubxie-zhu-gong-zuo-liu/" class="post-more waves-effect waves-button">Continue reading...</a>
-        </div>
-        <div class="post-footer">
-          
-          <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GIT/">GIT</a></li></ul>
           
         </div>
       </article>

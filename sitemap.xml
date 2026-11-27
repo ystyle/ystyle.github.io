@@ -2,50 +2,59 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://ystyle.top/2026/11/26/tachyon-vs-stdx-http/</loc>
-    <lastmod>2026-11-26T08:00:00+08:00</lastmod>
+    <loc>https://ystyle.top/tags/ACP/</loc>
+    <lastmod>2026-11-27T09:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://ystyle.top/tags/HTTP/</loc>
-    <lastmod>2026-11-26T08:00:00+08:00</lastmod>
+    <loc>https://ystyle.top/tags/Agent/</loc>
+    <lastmod>2026-11-27T09:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://ystyle.top/tags/tachyon/</loc>
-    <lastmod>2026-11-26T08:00:00+08:00</lastmod>
+    <loc>https://ystyle.top/tags/MCP/</loc>
+    <lastmod>2026-11-27T09:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/%E4%BB%93%E9%A2%89/</loc>
-    <lastmod>2026-11-26T08:00:00+08:00</lastmod>
+    <lastmod>2026-11-27T09:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/</loc>
+    <lastmod>2026-11-27T09:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/</loc>
+    <lastmod>2026-11-27T09:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/%E7%94%9F%E6%80%81/</loc>
+    <lastmod>2026-11-27T09:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/2026/11/27/cangjie-agent-ecosystem/</loc>
+    <lastmod>2026-11-27T09:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/HTTP/</loc>
+    <lastmod>2026-11-27T08:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/tachyon/</loc>
+    <lastmod>2026-11-27T08:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/2026/11/27/cangjie-hot-path-costs/</loc>
+    <lastmod>2026-11-27T08:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/%E6%80%A7%E8%83%BD/</loc>
+    <lastmod>2026-11-27T08:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/tags/%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2026-11-27T08:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ystyle.top/2026/11/26/tachyon-vs-stdx-http/</loc>
     <lastmod>2026-11-26T08:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</loc>
     <lastmod>2026-11-26T08:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/</loc>
-    <lastmod>2026-11-26T08:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://ystyle.top/tags/%E6%80%A7%E8%83%BD/</loc>
-    <lastmod>2026-11-26T08:00:00+08:00</lastmod>
-  </url><url>
     <loc>https://ystyle.top/2026/11/24/cangjie-pkg-index/</loc>
-    <lastmod>2026-11-24T10:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://ystyle.top/tags/MCP/</loc>
     <lastmod>2026-11-24T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/%E6%A6%9C%E5%8D%95/</loc>
     <lastmod>2026-11-24T10:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://ystyle.top/tags/%E7%94%9F%E6%80%81/</loc>
-    <lastmod>2026-11-24T10:00:00+08:00</lastmod>
-  </url><url>
     <loc>https://ystyle.top/tags/%E4%B8%AD%E5%BF%83%E4%BB%93/</loc>
     <lastmod>2026-11-24T10:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://ystyle.top/tags/ACP/</loc>
-    <lastmod>2026-11-18T10:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://ystyle.top/tags/Agent/</loc>
-    <lastmod>2026-11-18T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/SoduWork/</loc>
     <lastmod>2026-11-18T10:00:00+08:00</lastmod>
@@ -155,7 +164,7 @@
     <loc>https://ystyle.top/2026/10/22/holt-cj-graph-db/</loc>
     <lastmod>2026-10-22T15:30:00+08:00</lastmod>
   </url><url>
-    <loc>https://ystyle.top/tags/Redis/</loc>
+    <loc>https://ystyle.top/tags/redis/</loc>
     <lastmod>2026-10-22T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://ystyle.top/tags/sunku/</loc>

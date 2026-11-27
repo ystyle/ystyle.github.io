@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Thu, 26 Nov 2026 08:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Fri, 27 Nov 2026 08:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/tags/tachyon/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>仓颉热路径上，五笔悄悄吃掉性能的开销</title>
+				<link>https://ystyle.top/2026/11/27/cangjie-hot-path-costs/</link>
+				<pubDate>Fri, 27 Nov 2026 08:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/11/27/cangjie-hot-path-costs/</guid>
+				<description>&lt;p&gt;写 tachyon（一个 fasthttp 风格的仓颉 HTTP 服务端）时，性能不是“优化”出来的，是&lt;strong&gt;一笔一笔量出来、再一笔一笔砍掉&lt;/strong&gt;的。&lt;/p&gt;&#xA;&lt;p&gt;这篇记五笔账：四笔要躲，一笔量完发现不存在。都不大，但每一笔都在每次请求里重复发生。所有数字都是在这台机器上跑出来的（AMD Ryzen 7 7840HS，仓颉 1.2.x）。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>59 万 QPS 的 HTTP 服务器：这 2 倍是换来的</title>
 				<link>https://ystyle.top/2026/11/26/tachyon-vs-stdx-http/</link>

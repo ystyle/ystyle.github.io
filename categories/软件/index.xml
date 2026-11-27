@@ -10,9 +10,23 @@
 		
 		
 		
-			<lastBuildDate>Thu, 26 Nov 2026 08:00:00 +0800</lastBuildDate>
+			<lastBuildDate>Fri, 27 Nov 2026 09:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="https://ystyle.top/categories/%E8%BD%AF%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>一条模型调用和一个 Agent 之间，差六块</title>
+				<link>https://ystyle.top/2026/11/27/cangjie-agent-ecosystem/</link>
+				<pubDate>Fri, 27 Nov 2026 09:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/11/27/cangjie-agent-ecosystem/</guid>
+				<description>&lt;p&gt;「让模型自己读文件、跑命令、改代码」——这句需求听起来简单，真做起来要先补六块：&lt;strong&gt;推理循环、上下文压缩、工具系统、权限判定、会话持久化、对外协议&lt;/strong&gt;。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>仓颉热路径上，五笔悄悄吃掉性能的开销</title>
+				<link>https://ystyle.top/2026/11/27/cangjie-hot-path-costs/</link>
+				<pubDate>Fri, 27 Nov 2026 08:00:00 +0800</pubDate>
+				<guid>https://ystyle.top/2026/11/27/cangjie-hot-path-costs/</guid>
+				<description>&lt;p&gt;写 tachyon（一个 fasthttp 风格的仓颉 HTTP 服务端）时，性能不是“优化”出来的，是&lt;strong&gt;一笔一笔量出来、再一笔一笔砍掉&lt;/strong&gt;的。&lt;/p&gt;&#xA;&lt;p&gt;这篇记五笔账：四笔要躲，一笔量完发现不存在。都不大，但每一笔都在每次请求里重复发生。所有数字都是在这台机器上跑出来的（AMD Ryzen 7 7840HS，仓颉 1.2.x）。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>59 万 QPS 的 HTTP 服务器：这 2 倍是换来的</title>
 				<link>https://ystyle.top/2026/11/26/tachyon-vs-stdx-http/</link>
@@ -138,20 +152,6 @@
 				<pubDate>Thu, 15 Oct 2026 11:00:00 +0800</pubDate>
 				<guid>https://ystyle.top/2026/10/15/cangjie-multiplatform-from-zero/</guid>
 				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;写给第一次接触「跨平台」的仓颉学习者&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;从「为什么要跨平台」讲到亲手跑通一个例子&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;code&gt;Cangjie&lt;/code&gt; · &lt;code&gt;入门&lt;/code&gt; · &lt;code&gt;跨平台&lt;/code&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这篇不假设你学过任何其他编程语言，也不假设你懂操作系统内部。&lt;/p&gt;&#xA;&lt;p&gt;如果你刚学仓颉，听到「跨平台」「条件编译」「common/specific」这些词一头雾水——这篇就是给你的。我们从一个最朴素的问题开始：&lt;strong&gt;同一段代码，为什么不能在所有电脑上跑？&lt;/strong&gt;&lt;/p&gt;</description>
-			</item>
-			<item>
-				<title>Go 一行注释就能把整个文件绑到平台，仓颉为什么不行？</title>
-				<link>https://ystyle.top/2026/10/15/cangjie-multiplatform-for-go-devs/</link>
-				<pubDate>Thu, 15 Oct 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/2026/10/15/cangjie-multiplatform-for-go-devs/</guid>
-				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;从 Go 的 &lt;code&gt;//go:build&lt;/code&gt; 到仓颉的 &lt;code&gt;common&lt;/code&gt;/&lt;code&gt;specific&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;拆开「仓颉不能按文件分平台」这句话：它其实有三种粒度，以及一个真实项目绕的弯&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;code&gt;Cangjie&lt;/code&gt; · &lt;code&gt;Go&lt;/code&gt; · &lt;code&gt;跨平台&lt;/code&gt; · &lt;code&gt;mmap-cj&lt;/code&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;如果你写过 Go，多半见过 &lt;code&gt;src/net/fd_js.go&lt;/code&gt; 这类文件——开头一行 &lt;code&gt;//go:build js&lt;/code&gt;，整个文件就只属于 js 平台。转到仓颉之后你会发现：&lt;strong&gt;没有等价的一行注释&lt;/strong&gt;。&lt;/p&gt;</description>
-			</item>
-			<item>
-				<title>把 BadgerDB 移植到仓颉（四）：怎样测才算数</title>
-				<link>https://ystyle.top/2026/10/13/badger-cj-benchmark-method/</link>
-				<pubDate>Tue, 13 Oct 2026 10:00:00 +0800</pubDate>
-				<guid>https://ystyle.top/2026/10/13/badger-cj-benchmark-method/</guid>
-				<description>&lt;p align=&#34;center&#34;&gt;&lt;strong&gt;从 Go 移植 BadgerDB 到仓颉（四）&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;em&gt;四个方法学缺陷、Go 侧三个陷阱，与一套可核验的流程&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p align=&#34;center&#34;&gt;&lt;code&gt;Cangjie&lt;/code&gt; · &lt;code&gt;基准测试&lt;/code&gt; · &lt;code&gt;方法论&lt;/code&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这是系列最后一篇。第三篇讲了&lt;a href=&#34;https://ystyle.top/2026/10/12/badger-cj-benchmark-audit/&#34;&gt;三个被推翻的结论&lt;/a&gt;&#xA;，&lt;br&gt;&#xA;本篇追问：&lt;strong&gt;它们为什么会错&lt;/strong&gt;，以及怎样才能不再错。&lt;/p&gt;</description>
 			</item>
 	</channel>
 </rss>
